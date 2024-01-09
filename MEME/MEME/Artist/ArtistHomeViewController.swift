@@ -1,5 +1,5 @@
 //
-//  ViewController.swift
+//  ArtistHomeViewController.swift
 //  MEME
 //
 //  Created by 이동현 on 1/9/24.
@@ -7,13 +7,11 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ArtistHomeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+
     }
 
-
 }
-
