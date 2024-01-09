@@ -16,6 +16,12 @@
 		3142B9702B4CFFEE0066CD5A /* MEMETests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B96F2B4CFFEE0066CD5A /* MEMETests.swift */; };
 		3142B97A2B4CFFEE0066CD5A /* MEMEUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9792B4CFFEE0066CD5A /* MEMEUITests.swift */; };
 		3142B97C2B4CFFEE0066CD5A /* MEMEUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B97B2B4CFFEE0066CD5A /* MEMEUITestsLaunchTests.swift */; };
+		3142B98A2B4D019B0066CD5A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3142B9892B4D019B0066CD5A /* SnapKit */; };
+		3142B98D2B4D01A90066CD5A /* FSCalendar in Frameworks */ = {isa = PBXBuildFile; productRef = 3142B98C2B4D01A90066CD5A /* FSCalendar */; };
+		3142B9902B4D01C40066CD5A /* Moya in Frameworks */ = {isa = PBXBuildFile; productRef = 3142B98F2B4D01C40066CD5A /* Moya */; };
+		3142B9932B4D01DF0066CD5A /* KakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 3142B9922B4D01DF0066CD5A /* KakaoSDK */; };
+		3142B9952B4D01DF0066CD5A /* KakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 3142B9942B4D01DF0066CD5A /* KakaoSDKAuth */; };
+		3142B9972B4D01DF0066CD5A /* KakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 3142B9962B4D01DF0066CD5A /* KakaoSDKCommon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +62,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3142B98A2B4D019B0066CD5A /* SnapKit in Frameworks */,
+				3142B9932B4D01DF0066CD5A /* KakaoSDK in Frameworks */,
+				3142B98D2B4D01A90066CD5A /* FSCalendar in Frameworks */,
+				3142B9902B4D01C40066CD5A /* Moya in Frameworks */,
+				3142B9972B4D01DF0066CD5A /* KakaoSDKCommon in Frameworks */,
+				3142B9952B4D01DF0066CD5A /* KakaoSDKAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -143,6 +155,14 @@
 			dependencies = (
 			);
 			name = MEME;
+			packageProductDependencies = (
+				3142B9892B4D019B0066CD5A /* SnapKit */,
+				3142B98C2B4D01A90066CD5A /* FSCalendar */,
+				3142B98F2B4D01C40066CD5A /* Moya */,
+				3142B9922B4D01DF0066CD5A /* KakaoSDK */,
+				3142B9942B4D01DF0066CD5A /* KakaoSDKAuth */,
+				3142B9962B4D01DF0066CD5A /* KakaoSDKCommon */,
+			);
 			productName = MEME;
 			productReference = 3142B9552B4CFFED0066CD5A /* MEME.app */;
 			productType = "com.apple.product-type.application";
@@ -215,6 +235,12 @@
 				Base,
 			);
 			mainGroup = 3142B94C2B4CFFED0066CD5A;
+			packageReferences = (
+				3142B9882B4D019B0066CD5A /* XCRemoteSwiftPackageReference "SnapKit" */,
+				3142B98B2B4D01A90066CD5A /* XCRemoteSwiftPackageReference "FSCalendar" */,
+				3142B98E2B4D01C40066CD5A /* XCRemoteSwiftPackageReference "Moya" */,
+				3142B9912B4D01DF0066CD5A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
+			);
 			productRefGroup = 3142B9562B4CFFED0066CD5A /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -609,6 +635,74 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		3142B9882B4D019B0066CD5A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.7.0;
+			};
+		};
+		3142B98B2B4D01A90066CD5A /* XCRemoteSwiftPackageReference "FSCalendar" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/WenchaoD/FSCalendar.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.8.4;
+			};
+		};
+		3142B98E2B4D01C40066CD5A /* XCRemoteSwiftPackageReference "Moya" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Moya/Moya.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 15.0.3;
+			};
+		};
+		3142B9912B4D01DF0066CD5A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kakao/kakao-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.20.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3142B9892B4D019B0066CD5A /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3142B9882B4D019B0066CD5A /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
+		};
+		3142B98C2B4D01A90066CD5A /* FSCalendar */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3142B98B2B4D01A90066CD5A /* XCRemoteSwiftPackageReference "FSCalendar" */;
+			productName = FSCalendar;
+		};
+		3142B98F2B4D01C40066CD5A /* Moya */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3142B98E2B4D01C40066CD5A /* XCRemoteSwiftPackageReference "Moya" */;
+			productName = Moya;
+		};
+		3142B9922B4D01DF0066CD5A /* KakaoSDK */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3142B9912B4D01DF0066CD5A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDK;
+		};
+		3142B9942B4D01DF0066CD5A /* KakaoSDKAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3142B9912B4D01DF0066CD5A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKAuth;
+		};
+		3142B9962B4D01DF0066CD5A /* KakaoSDKCommon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3142B9912B4D01DF0066CD5A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */;
+			productName = KakaoSDKCommon;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3142B94D2B4CFFED0066CD5A /* Project object */;
 }
