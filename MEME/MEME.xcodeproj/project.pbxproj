@@ -122,7 +122,6 @@
 		314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		314F74F12B52DE1900CACF20 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		314F74F22B52DE1900CACF20 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
-
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -369,6 +368,56 @@
 				314F74EA2B52DE1900CACF20 /* Pretendard-Thin.otf */,
 			);
 			path = Font;
+		};
+		31C85EEE2B526B8F0064A6E7 /* TermsAgreement */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = TermsAgreement;
+			sourceTree = "<group>";
+		};
+		31C85EEF2B526B930064A6E7 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				3142B9A62B4D04CA0066CD5A /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		31C85EF02B526B9F0064A6E7 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		31C85EF12B526BDB0064A6E7 /* RoleSelection */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RoleSelection;
+			sourceTree = "<group>";
+		};
+		31C85EF22B526C140064A6E7 /* SetProfile */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SetProfile;
+			sourceTree = "<group>";
+		};
+		31C85EF32B526C200064A6E7 /* SetDetailInfo */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = SetDetailInfo;
+			sourceTree = "<group>";
+		};
+		31C85EF42B526C2E0064A6E7 /* RegistrationCompletion */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = RegistrationCompletion;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
