@@ -35,6 +35,7 @@
 		31C85EED2B526B780064A6E7 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */; };
 		31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */; };
 		31F6F8332B52AF8600EC621D /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */; };
+		31F6F8352B52B13E00EC621D /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F8342B52B13E00EC621D /* LoginViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -81,6 +82,7 @@
 		31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnBoardingViewController.xib; sourceTree = "<group>"; };
 		31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
+		31F6F8342B52B13E00EC621D /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -240,6 +242,7 @@
 			isa = PBXGroup;
 			children = (
 				3142B9A62B4D04CA0066CD5A /* LoginViewController.swift */,
+				31F6F8342B52B13E00EC621D /* LoginViewController.xib */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -408,6 +411,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31F6F8352B52B13E00EC621D /* LoginViewController.xib in Resources */,
 				31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */,
 				3142B9652B4CFFED0066CD5A /* LaunchScreen.storyboard in Resources */,
 				3142B9622B4CFFED0066CD5A /* Assets.xcassets in Resources */,
