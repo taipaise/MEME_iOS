@@ -425,6 +425,7 @@
 			children = (
 				31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */,
 				31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */,
+				31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
