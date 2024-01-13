@@ -11,6 +11,12 @@ final class ModelTabBarController: UITabBarController {
     
     private var tabs: [TabBarItemType: UIViewController] = [:]
     
+    var label: UILabel = {
+       let label = UILabel()
+        
+        return label
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
