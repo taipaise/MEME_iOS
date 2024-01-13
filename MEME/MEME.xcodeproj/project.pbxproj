@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		09275E822B518D150033EF34 /* ArtistHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09275E812B518D150033EF34 /* ArtistHomeViewController.xib */; };
+		09275E892B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09275E872B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift */; };
+		09275E8A2B528A610033EF34 /* ArtistReservationStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09275E882B528A610033EF34 /* ArtistReservationStatusTableViewCell.xib */; };
 		3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9582B4CFFED0066CD5A /* AppDelegate.swift */; };
 		3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B95A2B4CFFED0066CD5A /* SceneDelegate.swift */; };
 		3142B95D2B4CFFED0066CD5A /* ModelHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B95C2B4CFFED0066CD5A /* ModelHomeViewController.swift */; };
@@ -54,6 +56,8 @@
 
 /* Begin PBXFileReference section */
 		09275E812B518D150033EF34 /* ArtistHomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtistHomeViewController.xib; sourceTree = "<group>"; };
+		09275E872B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistReservationStatusTableViewCell.swift; sourceTree = "<group>"; };
+		09275E882B528A610033EF34 /* ArtistReservationStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtistReservationStatusTableViewCell.xib; sourceTree = "<group>"; };
 		3142B9552B4CFFED0066CD5A /* MEME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEME.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3142B9582B4CFFED0066CD5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3142B95A2B4CFFED0066CD5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -216,6 +220,8 @@
 				3142B9AE2B4D08380066CD5A /* ArtistHomeViewController.swift */,
 				3142B9B02B4D08480066CD5A /* ArtistReservationViewController.swift */,
 				09275E812B518D150033EF34 /* ArtistHomeViewController.xib */,
+				09275E872B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift */,
+				09275E882B528A610033EF34 /* ArtistReservationStatusTableViewCell.xib */,
 			);
 			path = Artist;
 			sourceTree = "<group>";
@@ -365,6 +371,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3142B9652B4CFFED0066CD5A /* LaunchScreen.storyboard in Resources */,
+				09275E8A2B528A610033EF34 /* ArtistReservationStatusTableViewCell.xib in Resources */,
 				3142B9622B4CFFED0066CD5A /* Assets.xcassets in Resources */,
 				09275E822B518D150033EF34 /* ArtistHomeViewController.xib in Resources */,
 			);
@@ -405,6 +412,7 @@
 				3142B99D2B4D021A0066CD5A /* UIView+.swift in Sources */,
 				3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */,
 				3142B9B12B4D08480066CD5A /* ArtistReservationViewController.swift in Sources */,
+				09275E892B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
