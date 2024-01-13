@@ -36,6 +36,10 @@
 		31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */; };
 		31F6F8332B52AF8600EC621D /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */; };
 		31F6F8352B52B13E00EC621D /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F8342B52B13E00EC621D /* LoginViewController.xib */; };
+		31F6F8382B52B2EE00EC621D /* TermsAgreement.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F8372B52B2EE00EC621D /* TermsAgreement.xib */; };
+		31F6F83A2B52B2FF00EC621D /* TermsAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8392B52B2FF00EC621D /* TermsAgreementViewController.swift */; };
+		31F6F83C2B52BCF600EC621D /* TermDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F83B2B52BCF600EC621D /* TermDetailViewController.swift */; };
+		31F6F83E2B52BD0D00EC621D /* TermDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F83D2B52BD0D00EC621D /* TermDetailViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -83,6 +87,10 @@
 		31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnBoardingViewController.xib; sourceTree = "<group>"; };
 		31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		31F6F8342B52B13E00EC621D /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		31F6F8372B52B2EE00EC621D /* TermsAgreement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAgreement.xib; sourceTree = "<group>"; };
+		31F6F8392B52B2FF00EC621D /* TermsAgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAgreementViewController.swift; sourceTree = "<group>"; };
+		31F6F83B2B52BCF600EC621D /* TermDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermDetailViewController.swift; sourceTree = "<group>"; };
+		31F6F83D2B52BD0D00EC621D /* TermDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermDetailViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +242,7 @@
 		31C85EEE2B526B8F0064A6E7 /* TermsAgreement */ = {
 			isa = PBXGroup;
 			children = (
+				31F6F8362B52B2D900EC621D /* Views */,
 			);
 			path = TermsAgreement;
 			sourceTree = "<group>";
@@ -289,6 +298,17 @@
 				31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */,
 				31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */,
 				31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		31F6F8362B52B2D900EC621D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				31F6F8372B52B2EE00EC621D /* TermsAgreement.xib */,
+				31F6F8392B52B2FF00EC621D /* TermsAgreementViewController.swift */,
+				31F6F83B2B52BCF600EC621D /* TermDetailViewController.swift */,
+				31F6F83D2B52BD0D00EC621D /* TermDetailViewController.xib */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -415,6 +435,8 @@
 				31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */,
 				3142B9652B4CFFED0066CD5A /* LaunchScreen.storyboard in Resources */,
 				3142B9622B4CFFED0066CD5A /* Assets.xcassets in Resources */,
+				31F6F8382B52B2EE00EC621D /* TermsAgreement.xib in Resources */,
+				31F6F83E2B52BD0D00EC621D /* TermDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,11 +462,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				3142B9A92B4D06310066CD5A /* ArtistTabBarController.swift in Sources */,
+				31F6F83A2B52B2FF00EC621D /* TermsAgreementViewController.swift in Sources */,
 				3142B9A72B4D04CA0066CD5A /* LoginViewController.swift in Sources */,
 				3142B95D2B4CFFED0066CD5A /* ModelHomeViewController.swift in Sources */,
 				31F6F8332B52AF8600EC621D /* OnboardingCollectionViewCell.swift in Sources */,
 				3142B9A42B4D03840066CD5A /* ModelTabBarController.swift in Sources */,
 				3142B9AD2B4D07640066CD5A /* ModelReservationViewController.swift in Sources */,
+				31F6F83C2B52BCF600EC621D /* TermDetailViewController.swift in Sources */,
 				3142B99B2B4D020E0066CD5A /* NSObject+.swift in Sources */,
 				3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */,
 				3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */,
