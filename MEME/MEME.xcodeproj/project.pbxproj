@@ -36,6 +36,8 @@
 		31BF22992B52CE670019F476 /* SetProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31BF22982B52CE670019F476 /* SetProfileViewController.xib */; };
 		31BF229B2B52D2830019F476 /* SetDetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BF229A2B52D2830019F476 /* SetDetailInfoViewController.swift */; };
 		31BF229D2B52D28A0019F476 /* SetDetailInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31BF229C2B52D28A0019F476 /* SetDetailInfoViewController.xib */; };
+		31BF229F2B52D6FE0019F476 /* RegistrationCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BF229E2B52D6FE0019F476 /* RegistrationCompletionViewController.swift */; };
+		31BF22A12B52D7030019F476 /* RegistrationCompletionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31BF22A02B52D7030019F476 /* RegistrationCompletionViewController.xib */; };
 		31C85EED2B526B780064A6E7 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */; };
 		31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */; };
 		31F6F8332B52AF8600EC621D /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */; };
@@ -95,6 +97,8 @@
 		31BF22982B52CE670019F476 /* SetProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetProfileViewController.xib; sourceTree = "<group>"; };
 		31BF229A2B52D2830019F476 /* SetDetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDetailInfoViewController.swift; sourceTree = "<group>"; };
 		31BF229C2B52D28A0019F476 /* SetDetailInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetDetailInfoViewController.xib; sourceTree = "<group>"; };
+		31BF229E2B52D6FE0019F476 /* RegistrationCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCompletionViewController.swift; sourceTree = "<group>"; };
+		31BF22A02B52D7030019F476 /* RegistrationCompletionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationCompletionViewController.xib; sourceTree = "<group>"; };
 		31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnBoardingViewController.xib; sourceTree = "<group>"; };
 		31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -312,6 +316,8 @@
 		31C85EF42B526C2E0064A6E7 /* RegistrationCompletion */ = {
 			isa = PBXGroup;
 			children = (
+				31BF229E2B52D6FE0019F476 /* RegistrationCompletionViewController.swift */,
+				31BF22A02B52D7030019F476 /* RegistrationCompletionViewController.xib */,
 			);
 			path = RegistrationCompletion;
 			sourceTree = "<group>";
@@ -456,6 +462,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				31F6F8442B52C0F300EC621D /* RoleSelectionViewController.xib in Resources */,
+				31BF22A12B52D7030019F476 /* RegistrationCompletionViewController.xib in Resources */,
 				31F6F8352B52B13E00EC621D /* LoginViewController.xib in Resources */,
 				31BF229D2B52D28A0019F476 /* SetDetailInfoViewController.xib in Resources */,
 				31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */,
@@ -506,6 +513,7 @@
 				31F6F8402B52C0DE00EC621D /* RoleSelectionViewController.swift in Sources */,
 				31C85EED2B526B780064A6E7 /* OnBoardingViewController.swift in Sources */,
 				3142B99F2B4D02300066CD5A /* UIFont+.swift in Sources */,
+				31BF229F2B52D6FE0019F476 /* RegistrationCompletionViewController.swift in Sources */,
 				31F6F8482B52C7B800EC621D /* NavigationBarView.swift in Sources */,
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,
 				3142B99D2B4D021A0066CD5A /* UIView+.swift in Sources */,
