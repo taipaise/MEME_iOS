@@ -34,6 +34,8 @@
 		3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9B32B4D089D0066CD5A /* TabBarItemType.swift */; };
 		31BF22972B52CE5D0019F476 /* SetProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BF22962B52CE5D0019F476 /* SetProfileViewController.swift */; };
 		31BF22992B52CE670019F476 /* SetProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31BF22982B52CE670019F476 /* SetProfileViewController.xib */; };
+		31BF229B2B52D2830019F476 /* SetDetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BF229A2B52D2830019F476 /* SetDetailInfoViewController.swift */; };
+		31BF229D2B52D28A0019F476 /* SetDetailInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31BF229C2B52D28A0019F476 /* SetDetailInfoViewController.xib */; };
 		31C85EED2B526B780064A6E7 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */; };
 		31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */; };
 		31F6F8332B52AF8600EC621D /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */; };
@@ -91,6 +93,8 @@
 		3142B9B32B4D089D0066CD5A /* TabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemType.swift; sourceTree = "<group>"; };
 		31BF22962B52CE5D0019F476 /* SetProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewController.swift; sourceTree = "<group>"; };
 		31BF22982B52CE670019F476 /* SetProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetProfileViewController.xib; sourceTree = "<group>"; };
+		31BF229A2B52D2830019F476 /* SetDetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDetailInfoViewController.swift; sourceTree = "<group>"; };
+		31BF229C2B52D28A0019F476 /* SetDetailInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetDetailInfoViewController.xib; sourceTree = "<group>"; };
 		31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnBoardingViewController.xib; sourceTree = "<group>"; };
 		31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -299,6 +303,8 @@
 		31C85EF32B526C200064A6E7 /* SetDetailInfo */ = {
 			isa = PBXGroup;
 			children = (
+				31BF229A2B52D2830019F476 /* SetDetailInfoViewController.swift */,
+				31BF229C2B52D28A0019F476 /* SetDetailInfoViewController.xib */,
 			);
 			path = SetDetailInfo;
 			sourceTree = "<group>";
@@ -451,6 +457,7 @@
 			files = (
 				31F6F8442B52C0F300EC621D /* RoleSelectionViewController.xib in Resources */,
 				31F6F8352B52B13E00EC621D /* LoginViewController.xib in Resources */,
+				31BF229D2B52D28A0019F476 /* SetDetailInfoViewController.xib in Resources */,
 				31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */,
 				3142B9652B4CFFED0066CD5A /* LaunchScreen.storyboard in Resources */,
 				3142B9622B4CFFED0066CD5A /* Assets.xcassets in Resources */,
@@ -494,6 +501,7 @@
 				3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */,
 				31BF22972B52CE5D0019F476 /* SetProfileViewController.swift in Sources */,
 				3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */,
+				31BF229B2B52D2830019F476 /* SetDetailInfoViewController.swift in Sources */,
 				3142B9AF2B4D08380066CD5A /* ArtistHomeViewController.swift in Sources */,
 				31F6F8402B52C0DE00EC621D /* RoleSelectionViewController.swift in Sources */,
 				31C85EED2B526B780064A6E7 /* OnBoardingViewController.swift in Sources */,
