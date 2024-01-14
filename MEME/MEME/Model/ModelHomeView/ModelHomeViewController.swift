@@ -10,6 +10,8 @@ import SnapKit
 
 final class ModelHomeViewController: UIViewController {
     // MARK: - Properties
+    let scrollView = UIScrollView()
+    let contentsView = UIView()
     var memeLogoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "memeLogo")
@@ -78,7 +80,7 @@ final class ModelHomeViewController: UIViewController {
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
-    var recomandArtistReservationCollectionView: UICollectionView!
+    var recomandReservationCollectionView: UICollectionView!
     var recomandHastyReservationMainLabel: UILabel = {
         let label = UILabel()
         label.text = "급하게 메이크업이 필요할 때"
@@ -97,90 +99,119 @@ final class ModelHomeViewController: UIViewController {
     var modelReservations: [ModelReservationModel]? {
         didSet { self.modelReservationCollectionView.reloadData() }
     }
+    var makeupCards: [MakeupCardModel]? {
+        didSet { self.recomandReservationCollectionView.reloadData() }
+    }
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
-        modelReservationCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
         setupReservationCollectionView()
         setupMakeupCardCollectionView()
+        setupHastyMakeupCardCollectionView()
         configureSubviews()
         makeConstraints()
     }
     // MARK: - configureSubviews
     func configureSubviews() {
-        view.addSubview(memeLogoImageView)
-        view.addSubview(alarmImageView)
-        view.addSubview(searchMakeup)
-        view.addSubview(modelWelcomeLabel)
-        view.addSubview(modelWelcomeGuideLabel)
-        view.addSubview(modelReservationCollectionView)
-        view.addSubview(recomandArtistReservationMainLabel)
-        view.addSubview(recomandArtistReservationSubLabel)
-        view.addSubview(recomandArtistReservationCollectionView)
-        view.addSubview(recomandHastyReservationMainLabel)
-        view.addSubview(recomandHastyReservationSubLabel)
-        view.addSubview(recomandHastyReservationCollectionView)
+        contentsView.addSubview(memeLogoImageView)
+        contentsView.addSubview(alarmImageView)
+        contentsView.addSubview(searchMakeup)
+        contentsView.addSubview(modelWelcomeLabel)
+        contentsView.addSubview(modelWelcomeGuideLabel)
+        contentsView.addSubview(modelReservationCollectionView)
+        contentsView.addSubview(recomandArtistReservationMainLabel)
+        contentsView.addSubview(recomandArtistReservationSubLabel)
+        contentsView.addSubview(recomandReservationCollectionView)
+        contentsView.addSubview(recomandHastyReservationMainLabel)
+        contentsView.addSubview(recomandHastyReservationSubLabel)
+        contentsView.addSubview(recomandHastyReservationCollectionView)
+        scrollView.addSubview(contentsView)
+        view.addSubview(scrollView)
     }
     
     // MARK: - makeConstraints
     func makeConstraints() {
+        scrollView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        contentsView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+            make.width.equalTo(scrollView)
+        }
+        
         memeLogoImageView.snp.makeConstraints {make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(10)
-            make.leading.equalToSuperview().offset(24)
+            make.top.equalTo(contentsView.snp.top).offset(10)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
             make.height.equalTo(42)
             make.width.equalTo(memeLogoImageView.snp.height).multipliedBy(67.0/42.0)
         }
         alarmImageView.snp.makeConstraints {make in
             make.centerY.equalTo(memeLogoImageView.snp.centerY)
-            make.trailing.equalToSuperview().offset(-24)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
             make.height.equalTo(22)
             make.width.equalTo(memeLogoImageView.snp.height).multipliedBy(6.0/7.0)
         }
         searchMakeup.snp.makeConstraints {make in
             make.top.equalTo(memeLogoImageView.snp.bottom).offset(27)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
             make.height.equalTo(41)
         }
         modelWelcomeLabel.snp.makeConstraints {make in
             make.top.equalTo(searchMakeup.snp.bottom).offset(33)
-            make.leading.equalToSuperview().offset(24)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
         modelWelcomeGuideLabel.snp.makeConstraints {make in
             make.top.equalTo(modelWelcomeLabel.snp.bottom)
-            make.leading.equalToSuperview().offset(24)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
         modelReservationCollectionView.snp.makeConstraints {make in
             make.top.equalTo(modelWelcomeLabel.snp.top).offset(71)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
-            make.height.equalTo(142)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+            make.height.equalTo(150)
         }
         recomandArtistReservationMainLabel.snp.makeConstraints {make in
             make.top.equalTo(modelReservationCollectionView.snp.bottom).offset(44)
-            make.leading.equalToSuperview().offset(24)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
         recomandArtistReservationSubLabel.snp.makeConstraints {make in
             make.top.equalTo(recomandArtistReservationMainLabel.snp.bottom).offset(7)
-            make.leading.equalToSuperview().offset(24)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
-        recomandArtistReservationCollectionView.snp.makeConstraints {make in
-            make.top.equalTo(recomandArtistReservationMainLabel.snp.bottom).offset(13)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
-            make.height.equalTo(225)
+        recomandReservationCollectionView.snp.makeConstraints {make in
+            make.top.equalTo(recomandArtistReservationSubLabel.snp.bottom).offset(13)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+            make.height.equalTo(260)
+        }
+        recomandHastyReservationMainLabel.snp.makeConstraints {make in
+            make.top.equalTo(recomandReservationCollectionView.snp.bottom).offset(24)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
+        }
+        recomandHastyReservationSubLabel.snp.makeConstraints {make in
+            make.top.equalTo(recomandHastyReservationMainLabel.snp.bottom).offset(7)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
+        }
+        recomandHastyReservationCollectionView.snp.makeConstraints {make in
+            make.top.equalTo(recomandHastyReservationSubLabel.snp.bottom).offset(13)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+            make.height.equalTo(260)
+            make.bottom.equalTo(contentsView.snp.bottom)
         }
         
     }
     
     //MARK: -Helpers
     private func setupReservationCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        modelReservationCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
         //delegate 연결
         modelReservationCollectionView.delegate = self
         modelReservationCollectionView.dataSource = self
@@ -190,14 +221,31 @@ final class ModelHomeViewController: UIViewController {
         
         modelReservationCollectionView.register(UINib(nibName: "ModelReservationConfirmViewCell", bundle: nil), forCellWithReuseIdentifier: ModelReservationConfirmViewCell.identifier)
     }
-    //MARK: -Helpers
+
     private func setupMakeupCardCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        recomandReservationCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+        
         //delegate 연결
-        recomandArtistReservationCollectionView.delegate = self
-        recomandArtistReservationCollectionView.dataSource = self
+        recomandReservationCollectionView.delegate = self
+        recomandReservationCollectionView.dataSource = self
         
         //cell 등록
-        modelReservationCollectionView.register(UINib(nibName: "SelectMakeupCardViewCell", bundle: nil), forCellWithReuseIdentifier: SelectMakeupCardViewCell.identifier)
+        recomandReservationCollectionView.register(UINib(nibName: "SelectMakeupCardViewCell", bundle: nil), forCellWithReuseIdentifier: SelectMakeupCardViewCell.identifier)
+    }
+
+    private func setupHastyMakeupCardCollectionView() {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        recomandHastyReservationCollectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
+    
+        //delegate 연결
+        recomandHastyReservationCollectionView.delegate = self
+        recomandHastyReservationCollectionView.dataSource = self
+    
+        //cell 등록
+        recomandHastyReservationCollectionView.register(UINib(nibName: "SelectMakeupCardViewCell", bundle: nil), forCellWithReuseIdentifier: SelectMakeupCardViewCell.identifier)
     }
 }
 
@@ -205,50 +253,94 @@ final class ModelHomeViewController: UIViewController {
 extension ModelHomeViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     //섹션의 갯수
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return 2
+        if collectionView == modelReservationCollectionView {
+            return 2
+            } else if collectionView == recomandReservationCollectionView {
+                return 1
+            } else if collectionView == recomandHastyReservationCollectionView {
+                return 1
+            }
+            return 0
     }
     
     //cell의 갯수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        switch section {
-        case 0:
-            return 1
-        default:
-            //+불러온 예약 데이터의 수 만큼 바꾸기
-            return modelReservations?.count ?? 0
-        }
+        if collectionView == modelReservationCollectionView {
+            switch section {
+            case 0:
+                return 1
+            default:
+                //+불러온 예약 데이터의 수 만큼 바꾸기
+                return modelReservations?.count ?? 3
+            }
+           } else if collectionView == recomandReservationCollectionView {
+               return makeupCards?.count ?? 3
+           } else if collectionView == recomandHastyReservationCollectionView {
+               return makeupCards?.count ?? 3
+           }
+           return 0
+        
     }
+    
     
     //cell 생성
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let section = indexPath.section
-        switch section {
-        case 0:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelNonReservationViewCell.identifier, for: indexPath) as? ModelNonReservationViewCell else {
+        if collectionView == modelReservationCollectionView {
+            let section = indexPath.section
+            switch section {
+            case 0:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelNonReservationViewCell.identifier, for: indexPath) as? ModelNonReservationViewCell else {
+                    fatalError("셀 타입 캐스팅 실패...")
+                }
+                return cell
+            default:
+                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.identifier, for: indexPath) as? ModelReservationConfirmViewCell else {
+                    fatalError("셀 타입 캐스팅 실패...")
+                }
+                let itemIndex = indexPath.item
+                
+                if let cellData = self.modelReservations {
+                    //cell에 데이터를 전달
+                }
+                return cell
+            }
+        } else if collectionView == recomandReservationCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectMakeupCardViewCell.identifier, for: indexPath) as? SelectMakeupCardViewCell else {
                 fatalError("셀 타입 캐스팅 실패...")
             }
             return cell
-        default:
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.identifier, for: indexPath) as? ModelReservationConfirmViewCell else {
+        } else if collectionView == recomandHastyReservationCollectionView {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectMakeupCardViewCell.identifier, for: indexPath) as? SelectMakeupCardViewCell else {
                 fatalError("셀 타입 캐스팅 실패...")
-            }
-            let itemIndex = indexPath.item
-            
-            if let cellData = self.modelReservations {
-                //cell에 데이터를 전달
             }
             return cell
         }
+        return UICollectionViewCell()
     }
 }
 
 extension ModelHomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(
-                width: collectionView.frame.width, height: collectionView.frame.height)
+        if collectionView == modelReservationCollectionView {
+            return CGSize(
+                width: collectionView.frame.width, height: 142)
+        } else if collectionView == recomandReservationCollectionView {
+            return CGSize(width: 154, height: 222)
+        } else if collectionView == recomandHastyReservationCollectionView {
+            return CGSize(width: 154, height: 222)
+        }
+        return CGSize(width: 0, height: 0)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView == modelReservationCollectionView {
+            return CGFloat(20)
+        }
+        else if collectionView == recomandReservationCollectionView {
+            return CGFloat(10)
+        }
+        else if collectionView == recomandHastyReservationCollectionView {
+            return CGFloat(10)
+        }
         return CGFloat(20)
     }
 }
