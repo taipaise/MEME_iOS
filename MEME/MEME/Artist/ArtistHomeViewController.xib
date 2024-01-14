@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="ArtistHomeProfileLabel" destination="Xfh-Hs-Rsa" id="IX8-ak-gov"/>
                 <outlet property="artistHomeProfileStatusView" destination="GEB-6g-fj9" id="tbU-Zx-aOT"/>
+                <outlet property="artistProfileImageView" destination="ybc-3K-yic" id="Fxd-EH-Git"/>
                 <outlet property="artistReservationStatusTableView" destination="PC2-xd-FKm" id="WTb-aA-Ljq"/>
                 <outlet property="completeButton" destination="hVT-zI-Qg7" id="IMQ-2R-Jux"/>
                 <outlet property="onComingButton" destination="HV8-3s-qt6" id="dk0-5v-Td3"/>
@@ -30,9 +31,35 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GEB-6g-fj9" userLabel="ArtistHomeProfileStatusView">
                             <rect key="frame" x="24" y="238" width="342" height="70"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="예약된 서비스명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyo-XT-Mnq">
+                                    <rect key="frame" x="14" y="24.666666666666686" width="107" height="21"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="15:00" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RbC-nP-PQW">
+                                    <rect key="frame" x="241" y="24.666666666666686" width="47" height="21"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <color key="textColor" systemColor="systemOrangeColor"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="예약" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="27q-PE-IJQ">
+                                    <rect key="frame" x="298" y="24.666666666666686" width="30" height="21"/>
+                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                    <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                            </subviews>
                             <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
+                                <constraint firstItem="RbC-nP-PQW" firstAttribute="centerY" secondItem="GEB-6g-fj9" secondAttribute="centerY" id="DZe-cJ-Vc6"/>
                                 <constraint firstAttribute="width" secondItem="GEB-6g-fj9" secondAttribute="height" multiplier="171:35" id="I43-Kk-5M3"/>
+                                <constraint firstItem="27q-PE-IJQ" firstAttribute="centerY" secondItem="GEB-6g-fj9" secondAttribute="centerY" id="QCt-TU-B9v"/>
+                                <constraint firstItem="27q-PE-IJQ" firstAttribute="leading" secondItem="RbC-nP-PQW" secondAttribute="trailing" constant="10" id="Y7A-ta-af1"/>
+                                <constraint firstItem="Wyo-XT-Mnq" firstAttribute="leading" secondItem="GEB-6g-fj9" secondAttribute="leading" constant="14" id="Ynz-KZ-FwW"/>
+                                <constraint firstItem="Wyo-XT-Mnq" firstAttribute="centerY" secondItem="GEB-6g-fj9" secondAttribute="centerY" id="bfD-dr-2zo"/>
+                                <constraint firstAttribute="trailing" secondItem="27q-PE-IJQ" secondAttribute="trailing" constant="14" id="lCI-xf-3ER"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" showsExpansionTextWhenTruncated="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfh-Hs-Rsa">
@@ -57,6 +84,7 @@
                         </imageView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7P8-Xz-33q">
                             <rect key="frame" x="317" y="55" width="49" height="34.333333333333343"/>
+                            <color key="tintColor" systemColor="systemOrangeColor"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" image="bell" catalog="system" title=""/>
                         </button>
@@ -89,25 +117,25 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HV8-3s-qt6">
-                            <rect key="frame" x="243" y="22" width="61" height="35"/>
+                            <rect key="frame" x="236.33333333333334" y="22" width="67.666666666666657" height="35"/>
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="예정" buttonSize="medium" titleAlignment="automatic">
-                                <imageReference key="image" image="chevron.down.circle.fill" catalog="system" symbolScale="small"/>
-                                <fontDescription key="titleFontDescription" type="system" pointSize="12"/>
+                                <imageReference key="image" image="chevron.down.circle" catalog="system" symbolScale="small"/>
+                                <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
                             </buttonConfiguration>
                         </button>
-                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PC2-xd-FKm">
-                            <rect key="frame" x="0.0" y="68" width="390" height="422"/>
+                        <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="PC2-xd-FKm">
+                            <rect key="frame" x="0.0" y="78" width="390" height="412"/>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         </tableView>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hVT-zI-Qg7">
-                            <rect key="frame" x="307" y="22" width="61" height="35"/>
+                            <rect key="frame" x="307" y="22" width="67.666666666666686" height="35"/>
                             <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title="완료" buttonSize="medium" titleAlignment="automatic">
                                 <imageReference key="image" image="chevron.down.circle.fill" catalog="system" symbolScale="small"/>
-                                <fontDescription key="titleFontDescription" type="system" pointSize="12"/>
+                                <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
                             </buttonConfiguration>
                         </button>
                     </subviews>
@@ -115,7 +143,7 @@
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="PC2-xd-FKm" secondAttribute="trailing" id="43t-4a-9h0"/>
                         <constraint firstItem="PC2-xd-FKm" firstAttribute="leading" secondItem="suX-I0-lZu" secondAttribute="leading" id="Jsr-Yf-c1R"/>
-                        <constraint firstItem="PC2-xd-FKm" firstAttribute="top" secondItem="suX-I0-lZu" secondAttribute="topMargin" constant="60" id="KOW-QU-Byu"/>
+                        <constraint firstItem="PC2-xd-FKm" firstAttribute="top" secondItem="suX-I0-lZu" secondAttribute="topMargin" constant="70" id="KOW-QU-Byu"/>
                         <constraint firstItem="LA3-5d-Nif" firstAttribute="leading" secondItem="suX-I0-lZu" secondAttribute="leading" constant="24" id="KjX-ch-6G4"/>
                         <constraint firstItem="hVT-zI-Qg7" firstAttribute="leading" secondItem="HV8-3s-qt6" secondAttribute="trailing" constant="3" id="YzI-re-t2c"/>
                         <constraint firstItem="LA3-5d-Nif" firstAttribute="top" secondItem="suX-I0-lZu" secondAttribute="top" constant="27" id="a7C-yO-SAT"/>
@@ -142,9 +170,13 @@
     </objects>
     <resources>
         <image name="bell" catalog="system" width="125" height="128"/>
+        <image name="chevron.down.circle" catalog="system" width="128" height="123"/>
         <image name="chevron.down.circle.fill" catalog="system" width="128" height="123"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemOrangeColor">
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>
