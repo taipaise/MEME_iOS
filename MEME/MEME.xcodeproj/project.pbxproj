@@ -7,6 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2D0A19012B4EC9A000C1CECA /* ModelReservationConfirmViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D0A19002B4EC9A000C1CECA /* ModelReservationConfirmViewCell.xib */; };
+		2D0A19032B4ECD3F00C1CECA /* ModelNonReservationViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D0A19022B4ECD3F00C1CECA /* ModelNonReservationViewCell.xib */; };
+		2D0A19052B4ED07B00C1CECA /* SelectMakeupCardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D0A19042B4ED07B00C1CECA /* SelectMakeupCardViewCell.xib */; };
+		2D0A190A2B4EEDB500C1CECA /* CategorySearchViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D0A19092B4EEDB500C1CECA /* CategorySearchViewCell.xib */; };
+		2D0A190E2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0A190D2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift */; };
+		2D0A19142B4F08DC00C1CECA /* ModelUserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0A19132B4F08DC00C1CECA /* ModelUserDataManager.swift */; };
+		2D62E23E2B5428CC004E8299 /* ModelNonReservationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E23D2B5428CC004E8299 /* ModelNonReservationViewCell.swift */; };
+		2D62E2412B542BD0004E8299 /* ModelUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2402B542BD0004E8299 /* ModelUserModel.swift */; };
+		2D62E2462B543653004E8299 /* ModelReservationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2452B543653004E8299 /* ModelReservationModel.swift */; };
+		2D62E2482B5436E7004E8299 /* ModelReservationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2472B5436E7004E8299 /* ModelReservationDataManager.swift */; };
+		2D62E24A2B5462B0004E8299 /* SelectMakeupCardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2492B5462B0004E8299 /* SelectMakeupCardViewCell.swift */; };
+		2D62E24F2B547D39004E8299 /* MakeupCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E24E2B547D39004E8299 /* MakeupCardModel.swift */; };
+		2D62E2512B548BAB004E8299 /* ModelSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2502B548BAB004E8299 /* ModelSearchViewController.swift */; };
+		2D62E2552B549407004E8299 /* CategorySearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2542B549407004E8299 /* CategorySearchViewCell.swift */; };
+		2D62E25B2B54A658004E8299 /* RecentSearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2592B54A658004E8299 /* RecentSearchViewCell.swift */; };
+		2D62E25C2B54A658004E8299 /* RecentSearchViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D62E25A2B54A658004E8299 /* RecentSearchViewCell.xib */; };
 		3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9582B4CFFED0066CD5A /* AppDelegate.swift */; };
 		3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B95A2B4CFFED0066CD5A /* SceneDelegate.swift */; };
 		3142B95D2B4CFFED0066CD5A /* ModelHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B95C2B4CFFED0066CD5A /* ModelHomeViewController.swift */; };
@@ -52,6 +68,22 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2D0A19002B4EC9A000C1CECA /* ModelReservationConfirmViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelReservationConfirmViewCell.xib; sourceTree = "<group>"; };
+		2D0A19022B4ECD3F00C1CECA /* ModelNonReservationViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelNonReservationViewCell.xib; sourceTree = "<group>"; };
+		2D0A19042B4ED07B00C1CECA /* SelectMakeupCardViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectMakeupCardViewCell.xib; sourceTree = "<group>"; };
+		2D0A19092B4EEDB500C1CECA /* CategorySearchViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategorySearchViewCell.xib; sourceTree = "<group>"; };
+		2D0A190D2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationConfirmViewCell.swift; sourceTree = "<group>"; };
+		2D0A19132B4F08DC00C1CECA /* ModelUserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelUserDataManager.swift; sourceTree = "<group>"; };
+		2D62E23D2B5428CC004E8299 /* ModelNonReservationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelNonReservationViewCell.swift; sourceTree = "<group>"; };
+		2D62E2402B542BD0004E8299 /* ModelUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelUserModel.swift; sourceTree = "<group>"; };
+		2D62E2452B543653004E8299 /* ModelReservationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationModel.swift; sourceTree = "<group>"; };
+		2D62E2472B5436E7004E8299 /* ModelReservationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationDataManager.swift; sourceTree = "<group>"; };
+		2D62E2492B5462B0004E8299 /* SelectMakeupCardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMakeupCardViewCell.swift; sourceTree = "<group>"; };
+		2D62E24E2B547D39004E8299 /* MakeupCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeupCardModel.swift; sourceTree = "<group>"; };
+		2D62E2502B548BAB004E8299 /* ModelSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSearchViewController.swift; sourceTree = "<group>"; };
+		2D62E2542B549407004E8299 /* CategorySearchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySearchViewCell.swift; sourceTree = "<group>"; };
+		2D62E2592B54A658004E8299 /* RecentSearchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchViewCell.swift; sourceTree = "<group>"; };
+		2D62E25A2B54A658004E8299 /* RecentSearchViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentSearchViewCell.xib; sourceTree = "<group>"; };
 		3142B9552B4CFFED0066CD5A /* MEME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEME.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3142B9582B4CFFED0066CD5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3142B95A2B4CFFED0066CD5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -117,6 +149,109 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2D0A19082B4ED53600C1CECA /* ModelHomeView */ = {
+			isa = PBXGroup;
+			children = (
+				2D62E23F2B542BA2004E8299 /* ModelUserData */,
+				2D62E2422B543591004E8299 /* ModelReservationData */,
+				2D62E23C2B54191C004E8299 /* MakeupCardData */,
+				2D62E2352B541798004E8299 /* SelectMakeupCardCell */,
+				2D62E2382B541818004E8299 /* ModelReservationCell */,
+				3142B95C2B4CFFED0066CD5A /* ModelHomeViewController.swift */,
+			);
+			path = ModelHomeView;
+			sourceTree = "<group>";
+		};
+		2D62E2352B541798004E8299 /* SelectMakeupCardCell */ = {
+			isa = PBXGroup;
+			children = (
+				2D62E2492B5462B0004E8299 /* SelectMakeupCardViewCell.swift */,
+				2D0A19042B4ED07B00C1CECA /* SelectMakeupCardViewCell.xib */,
+			);
+			path = SelectMakeupCardCell;
+			sourceTree = "<group>";
+		};
+		2D62E2362B5417AE004E8299 /* ModelReservationConfirmCell */ = {
+			isa = PBXGroup;
+			children = (
+				2D0A190D2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift */,
+				2D0A19002B4EC9A000C1CECA /* ModelReservationConfirmViewCell.xib */,
+			);
+			path = ModelReservationConfirmCell;
+			sourceTree = "<group>";
+		};
+		2D62E2382B541818004E8299 /* ModelReservationCell */ = {
+			isa = PBXGroup;
+			children = (
+				2D62E23B2B54185A004E8299 /* ModelNonReservationCell */,
+				2D62E2362B5417AE004E8299 /* ModelReservationConfirmCell */,
+			);
+			path = ModelReservationCell;
+			sourceTree = "<group>";
+		};
+		2D62E23B2B54185A004E8299 /* ModelNonReservationCell */ = {
+			isa = PBXGroup;
+			children = (
+				2D62E23D2B5428CC004E8299 /* ModelNonReservationViewCell.swift */,
+				2D0A19022B4ECD3F00C1CECA /* ModelNonReservationViewCell.xib */,
+			);
+			path = ModelNonReservationCell;
+			sourceTree = "<group>";
+		};
+		2D62E23C2B54191C004E8299 /* MakeupCardData */ = {
+			isa = PBXGroup;
+			children = (
+				2D62E24E2B547D39004E8299 /* MakeupCardModel.swift */,
+			);
+			path = MakeupCardData;
+			sourceTree = "<group>";
+		};
+		2D62E23F2B542BA2004E8299 /* ModelUserData */ = {
+			isa = PBXGroup;
+			children = (
+				2D62E2402B542BD0004E8299 /* ModelUserModel.swift */,
+				2D0A19132B4F08DC00C1CECA /* ModelUserDataManager.swift */,
+			);
+			path = ModelUserData;
+			sourceTree = "<group>";
+		};
+		2D62E2422B543591004E8299 /* ModelReservationData */ = {
+			isa = PBXGroup;
+			children = (
+				2D62E2452B543653004E8299 /* ModelReservationModel.swift */,
+				2D62E2472B5436E7004E8299 /* ModelReservationDataManager.swift */,
+			);
+			path = ModelReservationData;
+			sourceTree = "<group>";
+		};
+		2D62E2532B548BBA004E8299 /* ModelSearchView */ = {
+			isa = PBXGroup;
+			children = (
+				2D62E2582B54A60E004E8299 /* RecentSearchViewCell */,
+				2D62E2572B549491004E8299 /* CategorySearchViewCell */,
+				2D62E2502B548BAB004E8299 /* ModelSearchViewController.swift */,
+			);
+			path = ModelSearchView;
+			sourceTree = "<group>";
+		};
+		2D62E2572B549491004E8299 /* CategorySearchViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2D62E2542B549407004E8299 /* CategorySearchViewCell.swift */,
+				2D0A19092B4EEDB500C1CECA /* CategorySearchViewCell.xib */,
+			);
+			path = CategorySearchViewCell;
+			sourceTree = "<group>";
+		};
+		2D62E2582B54A60E004E8299 /* RecentSearchViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				2D62E2592B54A658004E8299 /* RecentSearchViewCell.swift */,
+				2D62E25A2B54A658004E8299 /* RecentSearchViewCell.xib */,
+			);
+			path = RecentSearchViewCell;
+			sourceTree = "<group>";
+		};
 		3142B94C2B4CFFED0066CD5A = {
 			isa = PBXGroup;
 			children = (
@@ -202,7 +337,8 @@
 		3142B9AA2B4D07170066CD5A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				3142B95C2B4CFFED0066CD5A /* ModelHomeViewController.swift */,
+				2D62E2532B548BBA004E8299 /* ModelSearchView */,
+				2D0A19082B4ED53600C1CECA /* ModelHomeView */,
 				3142B9AC2B4D07640066CD5A /* ModelReservationViewController.swift */,
 			);
 			path = Model;
@@ -362,7 +498,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				3142B9652B4CFFED0066CD5A /* LaunchScreen.storyboard in Resources */,
+				2D0A19052B4ED07B00C1CECA /* SelectMakeupCardViewCell.xib in Resources */,
+				2D0A19032B4ECD3F00C1CECA /* ModelNonReservationViewCell.xib in Resources */,
+				2D62E25C2B54A658004E8299 /* RecentSearchViewCell.xib in Resources */,
 				3142B9622B4CFFED0066CD5A /* Assets.xcassets in Resources */,
+				2D0A190A2B4EEDB500C1CECA /* CategorySearchViewCell.xib in Resources */,
+				2D0A19012B4EC9A000C1CECA /* ModelReservationConfirmViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,18 +529,29 @@
 			buildActionMask = 2147483647;
 			files = (
 				3142B9A92B4D06310066CD5A /* ArtistTabBarController.swift in Sources */,
+				2D62E23E2B5428CC004E8299 /* ModelNonReservationViewCell.swift in Sources */,
+				2D62E2482B5436E7004E8299 /* ModelReservationDataManager.swift in Sources */,
+				2D62E24A2B5462B0004E8299 /* SelectMakeupCardViewCell.swift in Sources */,
+				2D62E2552B549407004E8299 /* CategorySearchViewCell.swift in Sources */,
 				3142B9A72B4D04CA0066CD5A /* LoginViewController.swift in Sources */,
+				2D0A19142B4F08DC00C1CECA /* ModelUserDataManager.swift in Sources */,
 				3142B95D2B4CFFED0066CD5A /* ModelHomeViewController.swift in Sources */,
 				3142B9A42B4D03840066CD5A /* ModelTabBarController.swift in Sources */,
 				3142B9AD2B4D07640066CD5A /* ModelReservationViewController.swift in Sources */,
+				2D62E2412B542BD0004E8299 /* ModelUserModel.swift in Sources */,
 				3142B99B2B4D020E0066CD5A /* NSObject+.swift in Sources */,
 				3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */,
+				2D62E25B2B54A658004E8299 /* RecentSearchViewCell.swift in Sources */,
+				2D0A190E2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift in Sources */,
+				2D62E24F2B547D39004E8299 /* MakeupCardModel.swift in Sources */,
 				3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */,
+				2D62E2512B548BAB004E8299 /* ModelSearchViewController.swift in Sources */,
 				3142B9AF2B4D08380066CD5A /* ArtistHomeViewController.swift in Sources */,
 				3142B99F2B4D02300066CD5A /* UIFont+.swift in Sources */,
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,
 				3142B99D2B4D021A0066CD5A /* UIView+.swift in Sources */,
 				3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */,
+				2D62E2462B543653004E8299 /* ModelReservationModel.swift in Sources */,
 				3142B9B12B4D08480066CD5A /* ArtistReservationViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
