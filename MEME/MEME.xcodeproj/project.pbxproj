@@ -262,7 +262,7 @@
 				CC2F3AC62B54444E00508DA5 /* InfoTableViewCell.swift */,
 			);
 			path = MyPageInfo;
-    };
+    		};
     
 		314F74E92B52DDF200CACF20 /* Font */ = {
 			isa = PBXGroup;
@@ -278,7 +278,6 @@
 				314F74EA2B52DE1900CACF20 /* Pretendard-Thin.otf */,
 			);
 			path = Font;
-    };
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
