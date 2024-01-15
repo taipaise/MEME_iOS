@@ -32,6 +32,12 @@
 		3142B9AF2B4D08380066CD5A /* ArtistHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9AE2B4D08380066CD5A /* ArtistHomeViewController.swift */; };
 		3142B9B12B4D08480066CD5A /* ArtistReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9B02B4D08480066CD5A /* ArtistReservationViewController.swift */; };
 		3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9B32B4D089D0066CD5A /* TabBarItemType.swift */; };
+		CC2F3ABC2B5143FF00508DA5 /* ModelMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3ABB2B5143FF00508DA5 /* ModelMyPageViewController.swift */; };
+		CC2F3ABE2B514CDB00508DA5 /* ModelMyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3ABD2B514CDB00508DA5 /* ModelMyPageTableViewCell.swift */; };
+		CC2F3AC02B514EE900508DA5 /* ModelHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3ABF2B514EE900508DA5 /* ModelHeaderView.swift */; };
+		CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3AC12B54361100508DA5 /* MyPageInfoViewController.swift */; };
+		CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3AC42B5436B800508DA5 /* InfoHeaderView.swift */; };
+		CC2F3AC72B54444E00508DA5 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3AC62B54444E00508DA5 /* InfoTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -75,6 +81,12 @@
 		3142B9AE2B4D08380066CD5A /* ArtistHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistHomeViewController.swift; sourceTree = "<group>"; };
 		3142B9B02B4D08480066CD5A /* ArtistReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistReservationViewController.swift; sourceTree = "<group>"; };
 		3142B9B32B4D089D0066CD5A /* TabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemType.swift; sourceTree = "<group>"; };
+		CC2F3ABB2B5143FF00508DA5 /* ModelMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMyPageViewController.swift; sourceTree = "<group>"; };
+		CC2F3ABD2B514CDB00508DA5 /* ModelMyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMyPageTableViewCell.swift; sourceTree = "<group>"; };
+		CC2F3ABF2B514EE900508DA5 /* ModelHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHeaderView.swift; sourceTree = "<group>"; };
+		CC2F3AC12B54361100508DA5 /* MyPageInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageInfoViewController.swift; sourceTree = "<group>"; };
+		CC2F3AC42B5436B800508DA5 /* InfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoHeaderView.swift; sourceTree = "<group>"; };
+		CC2F3AC62B54444E00508DA5 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -192,6 +204,8 @@
 		3142B9AA2B4D07170066CD5A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CC2F3AC32B54362B00508DA5 /* MyPageInfo */,
+				CC2F3ABA2B4EAF8B00508DA5 /* MyPage */,
 				3142B95C2B4CFFED0066CD5A /* ModelHomeViewController.swift */,
 				3142B9AC2B4D07640066CD5A /* ModelReservationViewController.swift */,
 			);
@@ -215,6 +229,26 @@
 				3142B9B32B4D089D0066CD5A /* TabBarItemType.swift */,
 			);
 			path = TabBar;
+			sourceTree = "<group>";
+		};
+		CC2F3ABA2B4EAF8B00508DA5 /* MyPage */ = {
+			isa = PBXGroup;
+			children = (
+				CC2F3ABB2B5143FF00508DA5 /* ModelMyPageViewController.swift */,
+				CC2F3ABD2B514CDB00508DA5 /* ModelMyPageTableViewCell.swift */,
+				CC2F3ABF2B514EE900508DA5 /* ModelHeaderView.swift */,
+			);
+			path = MyPage;
+			sourceTree = "<group>";
+		};
+		CC2F3AC32B54362B00508DA5 /* MyPageInfo */ = {
+			isa = PBXGroup;
+			children = (
+				CC2F3AC12B54361100508DA5 /* MyPageInfoViewController.swift */,
+				CC2F3AC42B5436B800508DA5 /* InfoHeaderView.swift */,
+				CC2F3AC62B54444E00508DA5 /* InfoTableViewCell.swift */,
+			);
+			path = MyPageInfo;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,17 +396,23 @@
 			buildActionMask = 2147483647;
 			files = (
 				3142B9A92B4D06310066CD5A /* ArtistTabBarController.swift in Sources */,
+				CC2F3AC72B54444E00508DA5 /* InfoTableViewCell.swift in Sources */,
 				3142B9A72B4D04CA0066CD5A /* LoginViewController.swift in Sources */,
 				3142B95D2B4CFFED0066CD5A /* ModelHomeViewController.swift in Sources */,
 				3142B9A42B4D03840066CD5A /* ModelTabBarController.swift in Sources */,
+				CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */,
 				3142B9AD2B4D07640066CD5A /* ModelReservationViewController.swift in Sources */,
 				3142B99B2B4D020E0066CD5A /* NSObject+.swift in Sources */,
+				CC2F3AC02B514EE900508DA5 /* ModelHeaderView.swift in Sources */,
 				3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */,
 				3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */,
 				3142B9AF2B4D08380066CD5A /* ArtistHomeViewController.swift in Sources */,
 				3142B99F2B4D02300066CD5A /* UIFont+.swift in Sources */,
+				CC2F3ABE2B514CDB00508DA5 /* ModelMyPageTableViewCell.swift in Sources */,
+				CC2F3ABC2B5143FF00508DA5 /* ModelMyPageViewController.swift in Sources */,
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,
 				3142B99D2B4D021A0066CD5A /* UIView+.swift in Sources */,
+				CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */,
 				3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */,
 				3142B9B12B4D08480066CD5A /* ArtistReservationViewController.swift in Sources */,
 			);
@@ -561,7 +601,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = meme.MEME;
+				PRODUCT_BUNDLE_IDENTIFIER = umc.MEME;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
@@ -592,7 +632,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = meme.MEME;
+				PRODUCT_BUNDLE_IDENTIFIER = umc.MEME;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
 				SUPPORTS_MACCATALYST = NO;
