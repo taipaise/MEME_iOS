@@ -113,6 +113,7 @@ final class ModelHomeViewController: UIViewController {
         setupHastyMakeupCardCollectionView()
         configureSubviews()
         makeConstraints()
+        setupSearchBar()
     }
     // MARK: - configureSubviews
     func configureSubviews() {
@@ -204,6 +205,10 @@ final class ModelHomeViewController: UIViewController {
             make.bottom.equalTo(contentsView.snp.bottom)
         }
         
+    }
+    //MARK: -Actions
+    func setupSearchBar() {
+        searchMakeup.delegate = self
     }
     
     //MARK: -Helpers
@@ -342,6 +347,15 @@ extension ModelHomeViewController: UICollectionViewDelegateFlowLayout {
             return CGFloat(10)
         }
         return CGFloat(20)
+    }
+}
+
+//MARK: - UISearchBarDelegate
+extension ModelHomeViewController: UISearchBarDelegate {
+    func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
+        let searchVC = ModelSearchViewController()
+        self.navigationController?.pushViewController(searchVC, animated: true)
+        return false
     }
 }
 

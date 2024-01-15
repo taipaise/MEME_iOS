@@ -65,9 +65,9 @@ extension SceneDelegate {
             var isArtist: Bool = false
             
             if isArtist == true {
-                let mainVC = ModelHomeViewController(
-                    nibName: ModelHomeViewController.className,
-                    bundle: ModelHomeViewController.bundle
+                let mainVC = ArtistTabBarController(
+                    nibName: ArtistTabBarController.className,
+                    bundle: ArtistTabBarController.bundle
                 )
                 vc.viewControllers = [mainVC]
             } else {
