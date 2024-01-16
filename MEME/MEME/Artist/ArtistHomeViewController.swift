@@ -6,38 +6,15 @@
 //
 
 import UIKit
-import SnapKit
 
 class ArtistHomeViewController: UIViewController {
     @IBOutlet var artistHomeProfileStatusView: UIView!
     @IBOutlet var artistProfileImageView: UIImageView!
-    @IBOutlet var ArtistHomeProfileLabel: UILabel!
+    @IBOutlet var artistHomeProfileLabel: UILabel!
     
     @IBOutlet var onComingButton: UIButton!
     @IBOutlet var completeButton: UIButton!
     @IBOutlet var artistReservationStatusTableView: UITableView!
-    
-//    let reservationLabel1: UILabel = {
-//        let label = UILabel()
-//        
-//        label.text = "예약된 서비스명"
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
-//    let reservationLabel2: UILabel = {
-//        let label = UILabel()
-//        
-//        label.text = "13:00"
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
-//    let onComingReservationTimeLabel: UILabel = {
-//        let label = UILabel()
-//        
-//        label.text = "예약"
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
     
     // 더미 데이터
     private var makeUpNameArray : [String] = ["Makeup1","Makeup2","Makeup3"]
@@ -56,46 +33,34 @@ class ArtistHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        UISet()
+        tableViewConfigure()
+    }
+    private func UISet(){
         onComingButton.configuration?.imagePadding = CGFloat(8)
         completeButton.configuration?.imagePadding = CGFloat(8)
         
         artistHomeProfileStatusView.layer.cornerRadius = 10
         
-        ArtistHomeProfileLabel.text = "안녕하세요, 00님!\n내일 예약 " + String(tomorrowRes) + "건이 있어요."
-        ArtistHomeProfileLabel.font = UIFont(name: "Bold", size: 25)
-        ArtistHomeProfileLabel.textAlignment = .left
+        artistProfileImageView.layer.cornerRadius = artistProfileImageView.frame.height/2
+        artistProfileImageView.clipsToBounds = true
         
-        tableViewConfigure()
-        profileImageClickConfigure()
-//        addSubView()
+        artistHomeProfileLabel.text = "안녕하세요, 00님!\n내일 예약 " + String(tomorrowRes) + "건이 있어요."
+        artistHomeProfileLabel.font = UIFont.systemFont(ofSize: 20, weight: .semibold)
+        artistHomeProfileLabel.textAlignment = .left
     }
-    
-//    func addSubView(){
-//        if(isTodayReservation){
-//            artistHomeProfileStatusView.addSubview(reservationLabel1)
-//            artistHomeProfileStatusView.addSubview(reservationLabel2)
-//            artistHomeProfileStatusView.addSubview(onComingReservationTimeLabel)
-//        }else{
-//            artistHomeProfileStatusView.addSubview(<#T##view: UIView##UIView#>)
-//            artistHomeProfileStatusView.addSubview(<#T##view: UIView##UIView#>)
-//        }
-//    }
     
     private func tableViewConfigure(){
         artistReservationStatusTableView.delegate = self
         artistReservationStatusTableView.dataSource = self
         artistReservationStatusTableView.register(ArtistReservationStatusTableViewCell.nib(), forCellReuseIdentifier: ArtistReservationStatusTableViewCell.identifier)
     }
-    
-    private func profileImageClickConfigure(){
-        let profileImageBtn = UITapGestureRecognizer(target: self, action: #selector(profileImageClick))
-        artistProfileImageView.isUserInteractionEnabled = true
-        artistProfileImageView.addGestureRecognizer(profileImageBtn)
-    }
-    @objc func profileImageClick(sender : UITapGestureRecognizer){
-        // 프로필 관리 화면으로 화면 전환
-    }
 
+    @IBAction func profileImageTapped(_ sender: UIButton) {
+        let vc = ArtistProfilePreviewViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    
 }
 
 extension ArtistHomeViewController : UITableViewDelegate,UITableViewDataSource {

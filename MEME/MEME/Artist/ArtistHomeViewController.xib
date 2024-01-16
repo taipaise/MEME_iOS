@@ -12,7 +12,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArtistHomeViewController" customModule="MEME" customModuleProvider="target">
             <connections>
-                <outlet property="ArtistHomeProfileLabel" destination="Xfh-Hs-Rsa" id="IX8-ak-gov"/>
+                <outlet property="artistHomeProfileLabel" destination="Xfh-Hs-Rsa" id="IX8-ak-gov"/>
                 <outlet property="artistHomeProfileStatusView" destination="GEB-6g-fj9" id="tbU-Zx-aOT"/>
                 <outlet property="artistProfileImageView" destination="ybc-3K-yic" id="Fxd-EH-Git"/>
                 <outlet property="artistReservationStatusTableView" destination="PC2-xd-FKm" id="WTb-aA-Ljq"/>
@@ -68,14 +68,14 @@
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
                         </label>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ybc-3K-yic">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile1" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ybc-3K-yic">
                             <rect key="frame" x="35" y="135" width="75" height="75"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="75" id="AEV-KQ-LxO"/>
                                 <constraint firstAttribute="height" constant="75" id="ThO-yR-jfd"/>
                             </constraints>
                         </imageView>
-                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OfX-ow-fEr">
+                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Logo" adjustsImageSizeForAccessibilityContentSizeCategory="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OfX-ow-fEr">
                             <rect key="frame" x="25" y="42" width="67" height="42"/>
                             <constraints>
                                 <constraint firstAttribute="width" constant="67" id="KpN-ai-1G7"/>
@@ -88,6 +88,14 @@
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" image="bell" catalog="system" title=""/>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1XR-PP-nYu">
+                            <rect key="frame" x="35" y="135" width="75" height="75"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="plain"/>
+                            <connections>
+                                <action selector="profileImageTapped:" destination="-1" eventType="touchUpInside" id="svq-X8-Dot"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
@@ -95,15 +103,19 @@
                         <constraint firstItem="ybc-3K-yic" firstAttribute="leading" secondItem="nRp-5n-OCz" secondAttribute="leading" constant="35" id="3Eb-oA-zc6"/>
                         <constraint firstAttribute="bottom" secondItem="GEB-6g-fj9" secondAttribute="bottom" constant="12" id="7cU-f0-Ahk"/>
                         <constraint firstItem="OfX-ow-fEr" firstAttribute="leading" secondItem="nRp-5n-OCz" secondAttribute="leading" constant="25" id="FL1-VE-cOT"/>
+                        <constraint firstItem="1XR-PP-nYu" firstAttribute="width" secondItem="ybc-3K-yic" secondAttribute="width" id="GeU-fH-4iq"/>
                         <constraint firstItem="Xfh-Hs-Rsa" firstAttribute="leading" secondItem="nRp-5n-OCz" secondAttribute="leading" constant="136" id="LDX-EA-FHi"/>
                         <constraint firstItem="GEB-6g-fj9" firstAttribute="top" secondItem="Xfh-Hs-Rsa" secondAttribute="bottom" constant="33" id="LO7-tw-QBT"/>
                         <constraint firstItem="GEB-6g-fj9" firstAttribute="leading" secondItem="nRp-5n-OCz" secondAttribute="leading" constant="24" id="Oou-LY-F1q"/>
                         <constraint firstAttribute="trailing" secondItem="7P8-Xz-33q" secondAttribute="trailing" constant="24" id="ScO-14-3CW"/>
                         <constraint firstItem="7P8-Xz-33q" firstAttribute="top" secondItem="nRp-5n-OCz" secondAttribute="top" constant="55" id="Xk8-Ot-GiH"/>
+                        <constraint firstItem="1XR-PP-nYu" firstAttribute="height" secondItem="ybc-3K-yic" secondAttribute="height" id="ZUy-8x-rdD"/>
                         <constraint firstItem="OfX-ow-fEr" firstAttribute="top" secondItem="nRp-5n-OCz" secondAttribute="top" constant="42" id="cTU-eT-GuZ"/>
                         <constraint firstAttribute="trailing" secondItem="GEB-6g-fj9" secondAttribute="trailing" constant="24" id="hZr-CS-C3g"/>
                         <constraint firstAttribute="height" constant="320" id="iaY-Lw-gvj"/>
                         <constraint firstItem="Xfh-Hs-Rsa" firstAttribute="trailing" secondItem="GEB-6g-fj9" secondAttribute="trailing" id="ju1-Fk-eTp"/>
+                        <constraint firstItem="1XR-PP-nYu" firstAttribute="leading" secondItem="ybc-3K-yic" secondAttribute="leading" id="tcs-O4-qZq"/>
+                        <constraint firstItem="1XR-PP-nYu" firstAttribute="top" secondItem="ybc-3K-yic" secondAttribute="top" id="vo2-qf-A42"/>
                         <constraint firstItem="GEB-6g-fj9" firstAttribute="top" secondItem="ybc-3K-yic" secondAttribute="bottom" constant="28" id="ytJ-7D-ghQ"/>
                     </constraints>
                 </view>
@@ -169,6 +181,8 @@
         </view>
     </objects>
     <resources>
+        <image name="Logo" width="250" height="40"/>
+        <image name="Profile1" width="137.33332824707031" height="126.66666412353516"/>
         <image name="bell" catalog="system" width="125" height="128"/>
         <image name="chevron.down.circle" catalog="system" width="128" height="123"/>
         <image name="chevron.down.circle.fill" catalog="system" width="128" height="123"/>
@@ -176,7 +190,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

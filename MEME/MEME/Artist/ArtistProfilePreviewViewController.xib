@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArtistProfilePreviewViewController" customModule="MEME" customModuleProvider="target">
+            <connections>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="1200"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FMG-Kj-yZ8">
+                    <rect key="frame" x="23.999999999999996" y="59" width="39.666666666666657" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="FsO-XU-Gp9"/>
+                    </constraints>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system"/>
+                    <connections>
+                        <action selector="backButtonDidTap:" destination="-1" eventType="touchUpInside" id="FGz-DR-TWG"/>
+                    </connections>
+                </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="프로필" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85r-gq-lfr">
+                    <rect key="frame" x="170.66666666666666" y="67" width="52" height="24"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vqg-b1-lGJ">
+                    <rect key="frame" x="0.0" y="103" width="393" height="1097"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fcj-rp-LMj" userLabel="viewInScroll">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="1018"/>
+                            <color key="backgroundColor" systemColor="systemGray4Color"/>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="Fcj-rp-LMj" firstAttribute="trailing" secondItem="kqd-08-PiC" secondAttribute="trailing" id="0tO-63-Pi2"/>
+                        <constraint firstItem="Fcj-rp-LMj" firstAttribute="leading" secondItem="kqd-08-PiC" secondAttribute="leading" id="2pa-gd-Aa6"/>
+                        <constraint firstItem="Fcj-rp-LMj" firstAttribute="top" secondItem="kqd-08-PiC" secondAttribute="top" id="All-Jq-63z"/>
+                        <constraint firstItem="Fcj-rp-LMj" firstAttribute="bottom" secondItem="kqd-08-PiC" secondAttribute="bottom" constant="1000" id="TQ2-8T-VwY"/>
+                        <constraint firstItem="Fcj-rp-LMj" firstAttribute="width" secondItem="fLh-ZB-3WE" secondAttribute="width" id="YHi-Q0-1xb"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="kqd-08-PiC"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="fLh-ZB-3WE"/>
+                    <connections>
+                        <outlet property="delegate" destination="-1" id="fMj-vr-xhQ"/>
+                    </connections>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <constraints>
+                <constraint firstItem="FMG-Kj-yZ8" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="7wL-eq-joV"/>
+                <constraint firstItem="85r-gq-lfr" firstAttribute="centerY" secondItem="FMG-Kj-yZ8" secondAttribute="centerY" id="JNu-7Y-fgW"/>
+                <constraint firstItem="85r-gq-lfr" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="PRC-t8-x9A"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Fcj-rp-LMj" secondAttribute="bottom" constant="45" id="SOt-7m-YYs"/>
+                <constraint firstItem="vqg-b1-lGJ" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="YOe-qH-WN4"/>
+                <constraint firstItem="vqg-b1-lGJ" firstAttribute="top" secondItem="FMG-Kj-yZ8" secondAttribute="bottom" constant="4" id="dzO-Ze-1vi"/>
+                <constraint firstAttribute="bottom" secondItem="vqg-b1-lGJ" secondAttribute="bottom" id="pp0-u0-hsw"/>
+                <constraint firstItem="vqg-b1-lGJ" firstAttribute="trailing" secondItem="i5M-Pr-FkT" secondAttribute="trailing" id="vYp-ae-C3H"/>
+                <constraint firstItem="FMG-Kj-yZ8" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="yen-zr-lgV"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="46.564885496183201" y="159.85915492957747"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="chevron.backward" catalog="system" width="97" height="128"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGray4Color">
+            <color red="0.81960784313725488" green="0.81960784313725488" blue="0.83921568627450982" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
