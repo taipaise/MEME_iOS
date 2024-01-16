@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="OnBoardingViewController" customModule="MEME" customModuleProvider="target">
             <connections>
+                <outlet property="collectionView" destination="HHC-Uu-bPq" id="Aey-Mj-re7"/>
+                <outlet property="startButton" destination="eRR-Vz-N4C" id="g46-jg-9pi"/>
                 <outlet property="view" destination="iN0-l3-epB" id="gl5-OE-2DJ"/>
             </connections>
         </placeholder>
@@ -19,15 +21,8 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="MpU-I9-2VP" userLabel="Logo">
-                    <rect key="frame" x="24" y="72" width="57" height="30"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="30" id="7hi-O6-eBI"/>
-                        <constraint firstAttribute="width" constant="57" id="mLy-7j-gMB"/>
-                    </constraints>
-                </imageView>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="HHC-Uu-bPq">
-                    <rect key="frame" x="72" y="173" width="249" height="249"/>
+                    <rect key="frame" x="72" y="301.66666666666669" width="249" height="249.00000000000006"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="249" id="3W3-IO-gGS"/>
@@ -52,23 +47,26 @@
                     <constraints>
                         <constraint firstAttribute="height" constant="49" id="aqt-7W-FyZ"/>
                     </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="MEME 시작하기"/>
+                    <buttonConfiguration key="configuration" style="plain" title="메메 시작하기">
+                        <fontDescription key="titleFontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="startButtonTapped:" destination="-1" eventType="touchUpInside" id="JGk-pc-FBp"/>
+                    </connections>
                 </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="eRR-Vz-N4C" firstAttribute="top" secondItem="iiL-Bp-JNI" secondAttribute="bottom" constant="26" id="2Xb-RN-Et8"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="eRR-Vz-N4C" secondAttribute="bottom" constant="139" id="5xQ-Co-7Cz"/>
                 <constraint firstItem="iiL-Bp-JNI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="87T-h4-dzQ"/>
+                <constraint firstItem="HHC-Uu-bPq" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="FLh-rc-5bb"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="eRR-Vz-N4C" secondAttribute="trailing" constant="24" id="Tbn-Vf-6zG"/>
                 <constraint firstItem="eRR-Vz-N4C" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="X0N-Bs-sDo"/>
-                <constraint firstItem="MpU-I9-2VP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="13" id="gjb-YA-0D9"/>
-                <constraint firstItem="HHC-Uu-bPq" firstAttribute="top" secondItem="MpU-I9-2VP" secondAttribute="bottom" constant="71" id="j6P-Kp-VLg"/>
                 <constraint firstItem="HHC-Uu-bPq" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="ktr-GS-XpI"/>
-                <constraint firstItem="eRR-Vz-N4C" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="nGU-c1-nFY"/>
-                <constraint firstItem="MpU-I9-2VP" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="plU-hJ-H2T"/>
             </constraints>
             <point key="canvasLocation" x="132" y="-11"/>
         </view>

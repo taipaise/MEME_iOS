@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */; };
+		312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EE2B52DE1900CACF20 /* Pretendard-Light.otf */; };
+		312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EB2B52DE1900CACF20 /* Pretendard-Medium.otf */; };
+		312B304F2B550FF9008D17FC /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EF2B52DE1900CACF20 /* Pretendard-Bold.otf */; };
+		312B30502B550FF9008D17FC /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EC2B52DE1900CACF20 /* Pretendard-ExtraLight.otf */; };
+		312B30512B550FF9008D17FC /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F12B52DE1900CACF20 /* Pretendard-SemiBold.otf */; };
+		312B30522B550FF9008D17FC /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EA2B52DE1900CACF20 /* Pretendard-Thin.otf */; };
+		312B30532B550FF9008D17FC /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74ED2B52DE1900CACF20 /* Pretendard-ExtraBold.otf */; };
+		312B30542B550FF9008D17FC /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F22B52DE1900CACF20 /* Pretendard-Regular.otf */; };
 		3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9582B4CFFED0066CD5A /* AppDelegate.swift */; };
 		3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B95A2B4CFFED0066CD5A /* SceneDelegate.swift */; };
 		3142B95D2B4CFFED0066CD5A /* ModelHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B95C2B4CFFED0066CD5A /* ModelHomeViewController.swift */; };
@@ -32,6 +41,12 @@
 		3142B9AF2B4D08380066CD5A /* ArtistHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9AE2B4D08380066CD5A /* ArtistHomeViewController.swift */; };
 		3142B9B12B4D08480066CD5A /* ArtistReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9B02B4D08480066CD5A /* ArtistReservationViewController.swift */; };
 		3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9B32B4D089D0066CD5A /* TabBarItemType.swift */; };
+		318DD18D2B56DEF600C1DCAC /* RegisterProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318DD18C2B56DEF600C1DCAC /* RegisterProgressBar.swift */; };
+		318DD18F2B56DF0800C1DCAC /* RegisterProgressBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318DD18E2B56DF0800C1DCAC /* RegisterProgressBar.xib */; };
+		318DD1932B56E76600C1DCAC /* BusinessRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318DD1912B56E76600C1DCAC /* BusinessRegistrationViewController.swift */; };
+		318DD1942B56E76600C1DCAC /* BusinessRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318DD1922B56E76600C1DCAC /* BusinessRegistrationViewController.xib */; };
+		318DD1962B56ED6800C1DCAC /* DetailSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 318DD1952B56ED6800C1DCAC /* DetailSettingView.swift */; };
+		318DD19A2B56ED7B00C1DCAC /* DetailSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 318DD1992B56ED7B00C1DCAC /* DetailSettingView.xib */; };
 		31BF22972B52CE5D0019F476 /* SetProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BF22962B52CE5D0019F476 /* SetProfileViewController.swift */; };
 		31BF22992B52CE670019F476 /* SetProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31BF22982B52CE670019F476 /* SetProfileViewController.xib */; };
 		31BF229B2B52D2830019F476 /* SetDetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31BF229A2B52D2830019F476 /* SetDetailInfoViewController.swift */; };
@@ -42,13 +57,13 @@
 		31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */; };
 		31F6F8332B52AF8600EC621D /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */; };
 		31F6F8352B52B13E00EC621D /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F8342B52B13E00EC621D /* LoginViewController.xib */; };
-		31F6F8382B52B2EE00EC621D /* TermsAgreement.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F8372B52B2EE00EC621D /* TermsAgreement.xib */; };
+		31F6F8382B52B2EE00EC621D /* TermsAgreementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F8372B52B2EE00EC621D /* TermsAgreementViewController.xib */; };
 		31F6F83A2B52B2FF00EC621D /* TermsAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8392B52B2FF00EC621D /* TermsAgreementViewController.swift */; };
 		31F6F83C2B52BCF600EC621D /* TermDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F83B2B52BCF600EC621D /* TermDetailViewController.swift */; };
 		31F6F83E2B52BD0D00EC621D /* TermDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F83D2B52BD0D00EC621D /* TermDetailViewController.xib */; };
 		31F6F8402B52C0DE00EC621D /* RoleSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F83F2B52C0DE00EC621D /* RoleSelectionViewController.swift */; };
 		31F6F8442B52C0F300EC621D /* RoleSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F8432B52C0F300EC621D /* RoleSelectionViewController.xib */; };
-		31F6F8462B52C7A500EC621D /* NavigationBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F8452B52C7A500EC621D /* NavigationBar.xib */; };
+		31F6F8462B52C7A500EC621D /* NavigationBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F8452B52C7A500EC621D /* NavigationBarView.xib */; };
 		31F6F8482B52C7B800EC621D /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8472B52C7B800EC621D /* NavigationBarView.swift */; };
 /* End PBXBuildFile section */
 
@@ -93,7 +108,6 @@
 		3142B9AE2B4D08380066CD5A /* ArtistHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistHomeViewController.swift; sourceTree = "<group>"; };
 		3142B9B02B4D08480066CD5A /* ArtistReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistReservationViewController.swift; sourceTree = "<group>"; };
 		3142B9B32B4D089D0066CD5A /* TabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemType.swift; sourceTree = "<group>"; };
-
 		31BF22962B52CE5D0019F476 /* SetProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewController.swift; sourceTree = "<group>"; };
 		31BF22982B52CE670019F476 /* SetProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetProfileViewController.xib; sourceTree = "<group>"; };
 		31BF229A2B52D2830019F476 /* SetDetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDetailInfoViewController.swift; sourceTree = "<group>"; };
@@ -104,13 +118,13 @@
 		31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnBoardingViewController.xib; sourceTree = "<group>"; };
 		31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		31F6F8342B52B13E00EC621D /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
-		31F6F8372B52B2EE00EC621D /* TermsAgreement.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAgreement.xib; sourceTree = "<group>"; };
+		31F6F8372B52B2EE00EC621D /* TermsAgreementViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAgreementViewController.xib; sourceTree = "<group>"; };
 		31F6F8392B52B2FF00EC621D /* TermsAgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAgreementViewController.swift; sourceTree = "<group>"; };
 		31F6F83B2B52BCF600EC621D /* TermDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermDetailViewController.swift; sourceTree = "<group>"; };
 		31F6F83D2B52BD0D00EC621D /* TermDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermDetailViewController.xib; sourceTree = "<group>"; };
 		31F6F83F2B52C0DE00EC621D /* RoleSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectionViewController.swift; sourceTree = "<group>"; };
 		31F6F8432B52C0F300EC621D /* RoleSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoleSelectionViewController.xib; sourceTree = "<group>"; };
-		31F6F8452B52C7A500EC621D /* NavigationBar.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NavigationBar.xib; sourceTree = "<group>"; };
+		31F6F8452B52C7A500EC621D /* NavigationBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NavigationBarView.xib; sourceTree = "<group>"; };
 		31F6F8472B52C7B800EC621D /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 
 		314F74EA2B52DE1900CACF20 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
@@ -224,7 +238,7 @@
 			isa = PBXGroup;
 			children = (
 				3142B9A12B4D037C0066CD5A /* NavigationController.swift */,
-				31F6F8452B52C7A500EC621D /* NavigationBar.xib */,
+				31F6F8452B52C7A500EC621D /* NavigationBarView.xib */,
 				31F6F8472B52C7B800EC621D /* NavigationBarView.swift */,
 				3142B9B22B4D086B0066CD5A /* TabBar */,
 			);
@@ -234,6 +248,8 @@
 		3142B9A52B4D04BD0066CD5A /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				318DD1902B56E73F00C1DCAC /* BusinessRegstration */,
+				318DD18B2B56DEDE00C1DCAC /* Common */,
 				31C85EF42B526C2E0064A6E7 /* RegistrationCompletion */,
 				31C85EF32B526C200064A6E7 /* SetDetailInfo */,
 				31C85EF22B526C140064A6E7 /* SetProfile */,
@@ -347,7 +363,7 @@
 		31F6F8362B52B2D900EC621D /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				31F6F8372B52B2EE00EC621D /* TermsAgreement.xib */,
+				31F6F8372B52B2EE00EC621D /* TermsAgreementViewController.xib */,
 				31F6F8392B52B2FF00EC621D /* TermsAgreementViewController.swift */,
 				31F6F83B2B52BCF600EC621D /* TermDetailViewController.swift */,
 				31F6F83D2B52BD0D00EC621D /* TermDetailViewController.xib */,
@@ -548,17 +564,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */,
+				312B304F2B550FF9008D17FC /* Pretendard-Bold.otf in Resources */,
+				312B30502B550FF9008D17FC /* Pretendard-ExtraLight.otf in Resources */,
+				312B30532B550FF9008D17FC /* Pretendard-ExtraBold.otf in Resources */,
+				312B30522B550FF9008D17FC /* Pretendard-Thin.otf in Resources */,
 				31F6F8442B52C0F300EC621D /* RoleSelectionViewController.xib in Resources */,
+				318DD18F2B56DF0800C1DCAC /* RegisterProgressBar.xib in Resources */,
+				318DD1942B56E76600C1DCAC /* BusinessRegistrationViewController.xib in Resources */,
 				31BF22A12B52D7030019F476 /* RegistrationCompletionViewController.xib in Resources */,
 				31F6F8352B52B13E00EC621D /* LoginViewController.xib in Resources */,
 				31BF229D2B52D28A0019F476 /* SetDetailInfoViewController.xib in Resources */,
 				31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */,
 				3142B9652B4CFFED0066CD5A /* LaunchScreen.storyboard in Resources */,
+				312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */,
 				3142B9622B4CFFED0066CD5A /* Assets.xcassets in Resources */,
-				31F6F8382B52B2EE00EC621D /* TermsAgreement.xib in Resources */,
+				31F6F8382B52B2EE00EC621D /* TermsAgreementViewController.xib in Resources */,
 				31F6F83E2B52BD0D00EC621D /* TermDetailViewController.xib in Resources */,
 				31BF22992B52CE670019F476 /* SetProfileViewController.xib in Resources */,
-				31F6F8462B52C7A500EC621D /* NavigationBar.xib in Resources */,
+				312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */,
+				312B30542B550FF9008D17FC /* Pretendard-Regular.otf in Resources */,
+				31F6F8462B52C7A500EC621D /* NavigationBarView.xib in Resources */,
+				318DD19A2B56ED7B00C1DCAC /* DetailSettingView.xib in Resources */,
+				312B30512B550FF9008D17FC /* Pretendard-SemiBold.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -594,6 +622,7 @@
 				3142B99B2B4D020E0066CD5A /* NSObject+.swift in Sources */,
 				3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */,
 				31BF22972B52CE5D0019F476 /* SetProfileViewController.swift in Sources */,
+				318DD18D2B56DEF600C1DCAC /* RegisterProgressBar.swift in Sources */,
 				3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */,
 				31BF229B2B52D2830019F476 /* SetDetailInfoViewController.swift in Sources */,
 				3142B9AF2B4D08380066CD5A /* ArtistHomeViewController.swift in Sources */,
@@ -604,6 +633,8 @@
 				31F6F8482B52C7B800EC621D /* NavigationBarView.swift in Sources */,
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,
 				3142B99D2B4D021A0066CD5A /* UIView+.swift in Sources */,
+				318DD1962B56ED6800C1DCAC /* DetailSettingView.swift in Sources */,
+				318DD1932B56E76600C1DCAC /* BusinessRegistrationViewController.swift in Sources */,
 				3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */,
 				3142B9B12B4D08480066CD5A /* ArtistReservationViewController.swift in Sources */,
 			);
