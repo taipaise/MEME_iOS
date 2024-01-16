@@ -387,7 +387,7 @@
 		31C85EF02B526B9F0064A6E7 /* OnBoarding */ = {
 			isa = PBXGroup;
 			children = (
-				31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */,
+				31F6F8312B52AF2800EC621D /* Views */,
 			);
 			path = OnBoarding;
 			sourceTree = "<group>";
@@ -418,6 +418,15 @@
 			children = (
 			);
 			path = RegistrationCompletion;
+			sourceTree = "<group>";
+		};
+		31F6F8312B52AF2800EC621D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */,
+				31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
