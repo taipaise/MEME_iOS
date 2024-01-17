@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pretendard-Regular.otf">
+            <string>Pretendard-Regular</string>
+        </array>
+        <array key="Pretendard-SemiBold.otf">
+            <string>Pretendard-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BusinessRegistrationViewController" customModule="MEME" customModuleProvider="target">
+            <connections>
+                <outlet property="navigationBar" destination="fVJ-ep-xhf" id="RMN-Ti-sYb"/>
+                <outlet property="nextButton" destination="uTI-g8-wjt" id="bSC-KT-juM"/>
+                <outlet property="progressBar" destination="lK7-9K-8eC" id="nGE-du-of0"/>
+                <outlet property="textField" destination="ipt-18-QLJ" id="Tvf-JP-r0a"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fVJ-ep-xhf" customClass="NavigationBarView" customModule="MEME" customModuleProvider="target">
+                    <rect key="frame" x="0.0" y="59" width="393" height="48"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="48" id="7KU-K9-FcK"/>
+                    </constraints>
+                </view>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lK7-9K-8eC" customClass="RegisterProgressBar" customModule="MEME" customModuleProvider="target">
+                    <rect key="frame" x="21" y="109" width="351" height="3"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="3" id="wei-4k-pEq"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사업자 등록 번호를 입력해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7JI-O4-js5">
+                    <rect key="frame" x="23.999999999999986" y="157" width="235.66666666666663" height="21.666666666666657"/>
+                    <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="18"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="사업자 등록 번호를 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ipt-18-QLJ">
+                    <rect key="frame" x="24" y="234.66666666666666" width="345" height="17"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="17" id="A3v-79-CEK"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
+                    <textInputTraits key="textInputTraits"/>
+                </textField>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjc-02-cMo">
+                    <rect key="frame" x="24" y="259.66666666666669" width="345" height="1"/>
+                    <color key="backgroundColor" name="Gray500"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="1" id="oTG-kk-3I5"/>
+                    </constraints>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uTI-g8-wjt">
+                    <rect key="frame" x="24" y="760" width="345" height="49"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="49" id="gpp-ut-oAQ"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="Button">
+                        <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="1"/>
+                    </buttonConfiguration>
+                </button>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="7JI-O4-js5" firstAttribute="top" secondItem="lK7-9K-8eC" secondAttribute="bottom" constant="45" id="4ly-51-46P"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="ipt-18-QLJ" secondAttribute="trailing" constant="24" id="7Eu-1t-FYW"/>
+                <constraint firstItem="bjc-02-cMo" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Ieu-1h-Tm3"/>
+                <constraint firstItem="uTI-g8-wjt" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="Iix-ad-4qK"/>
+                <constraint firstItem="lK7-9K-8eC" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="21" id="OFN-HG-eUh"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="uTI-g8-wjt" secondAttribute="bottom" constant="9" id="W4F-QA-TEd"/>
+                <constraint firstItem="7JI-O4-js5" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="YpF-ZA-oX0"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="uTI-g8-wjt" secondAttribute="trailing" constant="24" id="b6H-qJ-k83"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="lK7-9K-8eC" secondAttribute="trailing" constant="21" id="gye-S5-ikG"/>
+                <constraint firstItem="ipt-18-QLJ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="h97-Vd-85H"/>
+                <constraint firstItem="fVJ-ep-xhf" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hYP-iW-jDJ"/>
+                <constraint firstItem="bjc-02-cMo" firstAttribute="top" secondItem="ipt-18-QLJ" secondAttribute="bottom" constant="8" id="jtI-DV-7EJ"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="bjc-02-cMo" secondAttribute="trailing" constant="24" id="k4h-Zj-FhR"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="fVJ-ep-xhf" secondAttribute="trailing" id="p9i-oJ-I2H"/>
+                <constraint firstItem="lK7-9K-8eC" firstAttribute="top" secondItem="fVJ-ep-xhf" secondAttribute="bottom" constant="2" id="pEW-sj-O9f"/>
+                <constraint firstItem="fVJ-ep-xhf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="pVm-XV-xGN"/>
+                <constraint firstItem="ipt-18-QLJ" firstAttribute="top" secondItem="7JI-O4-js5" secondAttribute="bottom" constant="56" id="sAH-y9-6rW"/>
+            </constraints>
+            <point key="canvasLocation" x="28" y="21"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="Gray500">
+            <color red="0.12941176470588237" green="0.12941176470588237" blue="0.12941176470588237" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

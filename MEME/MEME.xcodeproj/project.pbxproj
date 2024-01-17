@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */; };
+		312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EE2B52DE1900CACF20 /* Pretendard-Light.otf */; };
+		312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EB2B52DE1900CACF20 /* Pretendard-Medium.otf */; };
+		312B304F2B550FF9008D17FC /* Pretendard-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EF2B52DE1900CACF20 /* Pretendard-Bold.otf */; };
+		312B30502B550FF9008D17FC /* Pretendard-ExtraLight.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EC2B52DE1900CACF20 /* Pretendard-ExtraLight.otf */; };
+		312B30512B550FF9008D17FC /* Pretendard-SemiBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F12B52DE1900CACF20 /* Pretendard-SemiBold.otf */; };
+		312B30522B550FF9008D17FC /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EA2B52DE1900CACF20 /* Pretendard-Thin.otf */; };
+		312B30532B550FF9008D17FC /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74ED2B52DE1900CACF20 /* Pretendard-ExtraBold.otf */; };
+		312B30542B550FF9008D17FC /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F22B52DE1900CACF20 /* Pretendard-Regular.otf */; };
 		3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9582B4CFFED0066CD5A /* AppDelegate.swift */; };
 		3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B95A2B4CFFED0066CD5A /* SceneDelegate.swift */; };
 		3142B95D2B4CFFED0066CD5A /* ModelHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B95C2B4CFFED0066CD5A /* ModelHomeViewController.swift */; };
@@ -32,6 +41,32 @@
 		3142B9AF2B4D08380066CD5A /* ArtistHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9AE2B4D08380066CD5A /* ArtistHomeViewController.swift */; };
 		3142B9B12B4D08480066CD5A /* ArtistReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9B02B4D08480066CD5A /* ArtistReservationViewController.swift */; };
 		3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9B32B4D089D0066CD5A /* TabBarItemType.swift */; };
+		31B263432B57EDE300304FBE /* TermsAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2633F2B57EDE300304FBE /* TermsAgreementViewController.swift */; };
+		31B263442B57EDE300304FBE /* TermDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B263402B57EDE300304FBE /* TermDetailViewController.xib */; };
+		31B263452B57EDE300304FBE /* TermDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B263412B57EDE300304FBE /* TermDetailViewController.swift */; };
+		31B263462B57EDE300304FBE /* TermsAgreementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B263422B57EDE300304FBE /* TermsAgreementViewController.xib */; };
+		31B263482B57EE4800304FBE /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B263472B57EE4800304FBE /* LoginViewController.xib */; };
+		31B2634B2B57EE7100304FBE /* RoleSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B263492B57EE7100304FBE /* RoleSelectionViewController.xib */; };
+		31B2634C2B57EE7100304FBE /* RoleSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2634A2B57EE7100304FBE /* RoleSelectionViewController.swift */; };
+		31B2634F2B57EE7D00304FBE /* SetProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2634D2B57EE7D00304FBE /* SetProfileViewController.swift */; };
+		31B263502B57EE7D00304FBE /* SetProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B2634E2B57EE7D00304FBE /* SetProfileViewController.xib */; };
+		31B263532B57EE8600304FBE /* SetDetailInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B263512B57EE8600304FBE /* SetDetailInfoViewController.xib */; };
+		31B263542B57EE8600304FBE /* SetDetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B263522B57EE8600304FBE /* SetDetailInfoViewController.swift */; };
+		31B263572B57EE9500304FBE /* RegistrationCompletionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B263552B57EE9500304FBE /* RegistrationCompletionViewController.xib */; };
+		31B263582B57EE9500304FBE /* RegistrationCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B263562B57EE9500304FBE /* RegistrationCompletionViewController.swift */; };
+		31B263622B57EEBD00304FBE /* DetailSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2635A2B57EEBC00304FBE /* DetailSettingView.swift */; };
+		31B263652B57EEBD00304FBE /* RegisterProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2635D2B57EEBC00304FBE /* RegisterProgressBar.swift */; };
+		31B263662B57EEBD00304FBE /* DetailSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B2635E2B57EEBC00304FBE /* DetailSettingView.xib */; };
+		31B263672B57EEBD00304FBE /* RegisterProgressBar.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B2635F2B57EEBC00304FBE /* RegisterProgressBar.xib */; };
+		31B263682B57EEBD00304FBE /* DetailSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B263602B57EEBC00304FBE /* DetailSettingView.swift */; };
+		31B263692B57EEBD00304FBE /* RegisterProgressBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B263612B57EEBC00304FBE /* RegisterProgressBar.swift */; };
+		31B2636D2B57EECB00304FBE /* BusinessRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2636B2B57EECB00304FBE /* BusinessRegistrationViewController.swift */; };
+		31B2636E2B57EECB00304FBE /* BusinessRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B2636C2B57EECB00304FBE /* BusinessRegistrationViewController.xib */; };
+		31C85EED2B526B780064A6E7 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */; };
+		31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */; };
+		31F6F8332B52AF8600EC621D /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */; };
+		31F6F8462B52C7A500EC621D /* NavigationBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F8452B52C7A500EC621D /* NavigationBarView.xib */; };
+		31F6F8482B52C7B800EC621D /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8472B52C7B800EC621D /* NavigationBarView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -84,6 +119,47 @@
 		314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Black.otf"; sourceTree = "<group>"; };
 		314F74F12B52DE1900CACF20 /* Pretendard-SemiBold.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-SemiBold.otf"; sourceTree = "<group>"; };
 		314F74F22B52DE1900CACF20 /* Pretendard-Regular.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Regular.otf"; sourceTree = "<group>"; };
+		31B2633F2B57EDE300304FBE /* TermsAgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsAgreementViewController.swift; path = Views/TermsAgreementViewController.swift; sourceTree = "<group>"; };
+		31B263402B57EDE300304FBE /* TermDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TermDetailViewController.xib; path = Views/TermDetailViewController.xib; sourceTree = "<group>"; };
+		31B263412B57EDE300304FBE /* TermDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermDetailViewController.swift; path = Views/TermDetailViewController.swift; sourceTree = "<group>"; };
+		31B263422B57EDE300304FBE /* TermsAgreementViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TermsAgreementViewController.xib; path = Views/TermsAgreementViewController.xib; sourceTree = "<group>"; };
+		31B263472B57EE4800304FBE /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		31B263492B57EE7100304FBE /* RoleSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoleSelectionViewController.xib; sourceTree = "<group>"; };
+		31B2634A2B57EE7100304FBE /* RoleSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleSelectionViewController.swift; sourceTree = "<group>"; };
+		31B2634D2B57EE7D00304FBE /* SetProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetProfileViewController.swift; sourceTree = "<group>"; };
+		31B2634E2B57EE7D00304FBE /* SetProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetProfileViewController.xib; sourceTree = "<group>"; };
+		31B263512B57EE8600304FBE /* SetDetailInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetDetailInfoViewController.xib; sourceTree = "<group>"; };
+		31B263522B57EE8600304FBE /* SetDetailInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetDetailInfoViewController.swift; sourceTree = "<group>"; };
+		31B263552B57EE9500304FBE /* RegistrationCompletionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationCompletionViewController.xib; sourceTree = "<group>"; };
+		31B263562B57EE9500304FBE /* RegistrationCompletionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationCompletionViewController.swift; sourceTree = "<group>"; };
+		31B2635A2B57EEBC00304FBE /* DetailSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailSettingView.swift; sourceTree = "<group>"; };
+		31B2635B2B57EEBC00304FBE /* RegisterProgressBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegisterProgressBar.xib; sourceTree = "<group>"; };
+		31B2635C2B57EEBC00304FBE /* DetailSettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DetailSettingView.xib; sourceTree = "<group>"; };
+		31B2635D2B57EEBC00304FBE /* RegisterProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterProgressBar.swift; sourceTree = "<group>"; };
+		31B2635E2B57EEBC00304FBE /* DetailSettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = DetailSettingView.xib; path = Common/DetailSettingView.xib; sourceTree = "<group>"; };
+		31B2635F2B57EEBC00304FBE /* RegisterProgressBar.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = RegisterProgressBar.xib; path = Common/RegisterProgressBar.xib; sourceTree = "<group>"; };
+		31B263602B57EEBC00304FBE /* DetailSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DetailSettingView.swift; path = Common/DetailSettingView.swift; sourceTree = "<group>"; };
+		31B263612B57EEBC00304FBE /* RegisterProgressBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RegisterProgressBar.swift; path = Common/RegisterProgressBar.swift; sourceTree = "<group>"; };
+		31B2636B2B57EECB00304FBE /* BusinessRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessRegistrationViewController.swift; sourceTree = "<group>"; };
+		31B2636C2B57EECB00304FBE /* BusinessRegistrationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusinessRegistrationViewController.xib; sourceTree = "<group>"; };
+		31BF22962B52CE5D0019F476 /* SetProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewController.swift; sourceTree = "<group>"; };
+		31BF22982B52CE670019F476 /* SetProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetProfileViewController.xib; sourceTree = "<group>"; };
+		31BF229A2B52D2830019F476 /* SetDetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDetailInfoViewController.swift; sourceTree = "<group>"; };
+		31BF229C2B52D28A0019F476 /* SetDetailInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetDetailInfoViewController.xib; sourceTree = "<group>"; };
+		31BF229E2B52D6FE0019F476 /* RegistrationCompletionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationCompletionViewController.swift; sourceTree = "<group>"; };
+		31BF22A02B52D7030019F476 /* RegistrationCompletionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationCompletionViewController.xib; sourceTree = "<group>"; };
+		31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
+		31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnBoardingViewController.xib; sourceTree = "<group>"; };
+		31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
+		31F6F8342B52B13E00EC621D /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
+		31F6F8372B52B2EE00EC621D /* TermsAgreementViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAgreementViewController.xib; sourceTree = "<group>"; };
+		31F6F8392B52B2FF00EC621D /* TermsAgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsAgreementViewController.swift; sourceTree = "<group>"; };
+		31F6F83B2B52BCF600EC621D /* TermDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermDetailViewController.swift; sourceTree = "<group>"; };
+		31F6F83D2B52BD0D00EC621D /* TermDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermDetailViewController.xib; sourceTree = "<group>"; };
+		31F6F83F2B52C0DE00EC621D /* RoleSelectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectionViewController.swift; sourceTree = "<group>"; };
+		31F6F8432B52C0F300EC621D /* RoleSelectionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RoleSelectionViewController.xib; sourceTree = "<group>"; };
+		31F6F8452B52C7A500EC621D /* NavigationBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NavigationBarView.xib; sourceTree = "<group>"; };
+		31F6F8472B52C7B800EC621D /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -124,6 +200,7 @@
 				3142B96E2B4CFFEE0066CD5A /* MEMETests */,
 				3142B9782B4CFFEE0066CD5A /* MEMEUITests */,
 				3142B9562B4CFFED0066CD5A /* Products */,
+				31B2633E2B57ED1D00304FBE /* Recovered References */,
 			);
 			sourceTree = "<group>";
 		};
@@ -186,6 +263,8 @@
 			isa = PBXGroup;
 			children = (
 				3142B9A12B4D037C0066CD5A /* NavigationController.swift */,
+				31F6F8452B52C7A500EC621D /* NavigationBarView.xib */,
+				31F6F8472B52C7B800EC621D /* NavigationBarView.swift */,
 				3142B9B22B4D086B0066CD5A /* TabBar */,
 			);
 			path = Core;
@@ -194,7 +273,19 @@
 		3142B9A52B4D04BD0066CD5A /* Login */ = {
 			isa = PBXGroup;
 			children = (
-				3142B9A62B4D04CA0066CD5A /* LoginViewController.swift */,
+				31B2636A2B57EECB00304FBE /* BusinessRegstration */,
+				31B263592B57EEBC00304FBE /* Common */,
+				31B263602B57EEBC00304FBE /* DetailSettingView.swift */,
+				31B2635E2B57EEBC00304FBE /* DetailSettingView.xib */,
+				31B263612B57EEBC00304FBE /* RegisterProgressBar.swift */,
+				31B2635F2B57EEBC00304FBE /* RegisterProgressBar.xib */,
+				31C85EF42B526C2E0064A6E7 /* RegistrationCompletion */,
+				31C85EF32B526C200064A6E7 /* SetDetailInfo */,
+				31C85EF22B526C140064A6E7 /* SetProfile */,
+				31C85EF12B526BDB0064A6E7 /* RoleSelection */,
+				31C85EF02B526B9F0064A6E7 /* OnBoarding */,
+				31C85EEF2B526B930064A6E7 /* Login */,
+				31C85EEE2B526B8F0064A6E7 /* TermsAgreement */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -241,6 +332,120 @@
 				314F74EA2B52DE1900CACF20 /* Pretendard-Thin.otf */,
 			);
 			path = Font;
+			sourceTree = "<group>";
+		};
+		31B2633E2B57ED1D00304FBE /* Recovered References */ = {
+			isa = PBXGroup;
+			children = (
+				31F6F8392B52B2FF00EC621D /* TermsAgreementViewController.swift */,
+				31F6F83B2B52BCF600EC621D /* TermDetailViewController.swift */,
+				31BF22962B52CE5D0019F476 /* SetProfileViewController.swift */,
+				31BF229A2B52D2830019F476 /* SetDetailInfoViewController.swift */,
+				31F6F83F2B52C0DE00EC621D /* RoleSelectionViewController.swift */,
+				31BF229E2B52D6FE0019F476 /* RegistrationCompletionViewController.swift */,
+				31F6F8432B52C0F300EC621D /* RoleSelectionViewController.xib */,
+				31BF22A02B52D7030019F476 /* RegistrationCompletionViewController.xib */,
+				31F6F8342B52B13E00EC621D /* LoginViewController.xib */,
+				31BF229C2B52D28A0019F476 /* SetDetailInfoViewController.xib */,
+				31F6F8372B52B2EE00EC621D /* TermsAgreementViewController.xib */,
+				31F6F83D2B52BD0D00EC621D /* TermDetailViewController.xib */,
+				31BF22982B52CE670019F476 /* SetProfileViewController.xib */,
+			);
+			name = "Recovered References";
+			sourceTree = "<group>";
+		};
+		31B263592B57EEBC00304FBE /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				31B2635A2B57EEBC00304FBE /* DetailSettingView.swift */,
+				31B2635B2B57EEBC00304FBE /* RegisterProgressBar.xib */,
+				31B2635C2B57EEBC00304FBE /* DetailSettingView.xib */,
+				31B2635D2B57EEBC00304FBE /* RegisterProgressBar.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		31B2636A2B57EECB00304FBE /* BusinessRegstration */ = {
+			isa = PBXGroup;
+			children = (
+				31B2636B2B57EECB00304FBE /* BusinessRegistrationViewController.swift */,
+				31B2636C2B57EECB00304FBE /* BusinessRegistrationViewController.xib */,
+			);
+			path = BusinessRegstration;
+			sourceTree = "<group>";
+		};
+		31C85EEE2B526B8F0064A6E7 /* TermsAgreement */ = {
+			isa = PBXGroup;
+			children = (
+				31B263412B57EDE300304FBE /* TermDetailViewController.swift */,
+				31B263402B57EDE300304FBE /* TermDetailViewController.xib */,
+				31B2633F2B57EDE300304FBE /* TermsAgreementViewController.swift */,
+				31B263422B57EDE300304FBE /* TermsAgreementViewController.xib */,
+			);
+			path = TermsAgreement;
+			sourceTree = "<group>";
+		};
+		31C85EEF2B526B930064A6E7 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				31B263472B57EE4800304FBE /* LoginViewController.xib */,
+				3142B9A62B4D04CA0066CD5A /* LoginViewController.swift */,
+			);
+			path = Login;
+			sourceTree = "<group>";
+		};
+		31C85EF02B526B9F0064A6E7 /* OnBoarding */ = {
+			isa = PBXGroup;
+			children = (
+				31F6F8312B52AF2800EC621D /* Views */,
+			);
+			path = OnBoarding;
+			sourceTree = "<group>";
+		};
+		31C85EF12B526BDB0064A6E7 /* RoleSelection */ = {
+			isa = PBXGroup;
+			children = (
+				31B2634A2B57EE7100304FBE /* RoleSelectionViewController.swift */,
+				31B263492B57EE7100304FBE /* RoleSelectionViewController.xib */,
+			);
+			path = RoleSelection;
+			sourceTree = "<group>";
+		};
+		31C85EF22B526C140064A6E7 /* SetProfile */ = {
+			isa = PBXGroup;
+			children = (
+				31B2634D2B57EE7D00304FBE /* SetProfileViewController.swift */,
+				31B2634E2B57EE7D00304FBE /* SetProfileViewController.xib */,
+			);
+			path = SetProfile;
+			sourceTree = "<group>";
+		};
+		31C85EF32B526C200064A6E7 /* SetDetailInfo */ = {
+			isa = PBXGroup;
+			children = (
+				31B263522B57EE8600304FBE /* SetDetailInfoViewController.swift */,
+				31B263512B57EE8600304FBE /* SetDetailInfoViewController.xib */,
+			);
+			path = SetDetailInfo;
+			sourceTree = "<group>";
+		};
+		31C85EF42B526C2E0064A6E7 /* RegistrationCompletion */ = {
+			isa = PBXGroup;
+			children = (
+				31B263562B57EE9500304FBE /* RegistrationCompletionViewController.swift */,
+				31B263552B57EE9500304FBE /* RegistrationCompletionViewController.xib */,
+			);
+			path = RegistrationCompletion;
+			sourceTree = "<group>";
+		};
+		31F6F8312B52AF2800EC621D /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */,
+				31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */,
+				31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -361,8 +566,29 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31B263462B57EDE300304FBE /* TermsAgreementViewController.xib in Resources */,
+				312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */,
+				312B304F2B550FF9008D17FC /* Pretendard-Bold.otf in Resources */,
+				312B30502B550FF9008D17FC /* Pretendard-ExtraLight.otf in Resources */,
+				31B2636E2B57EECB00304FBE /* BusinessRegistrationViewController.xib in Resources */,
+				312B30532B550FF9008D17FC /* Pretendard-ExtraBold.otf in Resources */,
+				312B30522B550FF9008D17FC /* Pretendard-Thin.otf in Resources */,
+				31B263672B57EEBD00304FBE /* RegisterProgressBar.xib in Resources */,
+				31B263532B57EE8600304FBE /* SetDetailInfoViewController.xib in Resources */,
+				31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */,
 				3142B9652B4CFFED0066CD5A /* LaunchScreen.storyboard in Resources */,
+				31B2634B2B57EE7100304FBE /* RoleSelectionViewController.xib in Resources */,
+				312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */,
+				31B263662B57EEBD00304FBE /* DetailSettingView.xib in Resources */,
 				3142B9622B4CFFED0066CD5A /* Assets.xcassets in Resources */,
+				31B263502B57EE7D00304FBE /* SetProfileViewController.xib in Resources */,
+				31B263572B57EE9500304FBE /* RegistrationCompletionViewController.xib in Resources */,
+				312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */,
+				312B30542B550FF9008D17FC /* Pretendard-Regular.otf in Resources */,
+				31F6F8462B52C7A500EC621D /* NavigationBarView.xib in Resources */,
+				31B263482B57EE4800304FBE /* LoginViewController.xib in Resources */,
+				312B30512B550FF9008D17FC /* Pretendard-SemiBold.otf in Resources */,
+				31B263442B57EDE300304FBE /* TermDetailViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,17 +614,31 @@
 			buildActionMask = 2147483647;
 			files = (
 				3142B9A92B4D06310066CD5A /* ArtistTabBarController.swift in Sources */,
+				31B2634F2B57EE7D00304FBE /* SetProfileViewController.swift in Sources */,
 				3142B9A72B4D04CA0066CD5A /* LoginViewController.swift in Sources */,
 				3142B95D2B4CFFED0066CD5A /* ModelHomeViewController.swift in Sources */,
+				31F6F8332B52AF8600EC621D /* OnboardingCollectionViewCell.swift in Sources */,
 				3142B9A42B4D03840066CD5A /* ModelTabBarController.swift in Sources */,
 				3142B9AD2B4D07640066CD5A /* ModelReservationViewController.swift in Sources */,
+				31B2634C2B57EE7100304FBE /* RoleSelectionViewController.swift in Sources */,
+				31B263682B57EEBD00304FBE /* DetailSettingView.swift in Sources */,
 				3142B99B2B4D020E0066CD5A /* NSObject+.swift in Sources */,
 				3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */,
+				31B263432B57EDE300304FBE /* TermsAgreementViewController.swift in Sources */,
 				3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */,
 				3142B9AF2B4D08380066CD5A /* ArtistHomeViewController.swift in Sources */,
+				31B263652B57EEBD00304FBE /* RegisterProgressBar.swift in Sources */,
+				31C85EED2B526B780064A6E7 /* OnBoardingViewController.swift in Sources */,
 				3142B99F2B4D02300066CD5A /* UIFont+.swift in Sources */,
+				31B263692B57EEBD00304FBE /* RegisterProgressBar.swift in Sources */,
+				31B2636D2B57EECB00304FBE /* BusinessRegistrationViewController.swift in Sources */,
+				31F6F8482B52C7B800EC621D /* NavigationBarView.swift in Sources */,
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,
 				3142B99D2B4D021A0066CD5A /* UIView+.swift in Sources */,
+				31B263582B57EE9500304FBE /* RegistrationCompletionViewController.swift in Sources */,
+				31B263452B57EDE300304FBE /* TermDetailViewController.swift in Sources */,
+				31B263622B57EEBD00304FBE /* DetailSettingView.swift in Sources */,
+				31B263542B57EE8600304FBE /* SetDetailInfoViewController.swift in Sources */,
 				3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */,
 				3142B9B12B4D08480066CD5A /* ArtistReservationViewController.swift in Sources */,
 			);
