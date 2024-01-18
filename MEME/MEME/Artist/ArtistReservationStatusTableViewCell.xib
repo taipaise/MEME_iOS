@@ -75,6 +75,11 @@
                                     <constraint firstAttribute="height" constant="20" id="pf7-fh-eZF"/>
                                 </constraints>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PBl-NY-5DN">
+                                <rect key="frame" x="0.0" y="0.0" width="327" height="143"/>
+                                <state key="normal" title="Button"/>
+                                <buttonConfiguration key="configuration" style="plain"/>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -83,14 +88,18 @@
                             <constraint firstItem="LBT-XV-U2G" firstAttribute="centerY" secondItem="RbR-6l-SfT" secondAttribute="centerY" id="EpD-t6-Bjk"/>
                             <constraint firstItem="bNN-HK-oj5" firstAttribute="leading" secondItem="Fn7-bP-bym" secondAttribute="leading" id="FoG-Cy-bgZ"/>
                             <constraint firstAttribute="bottom" secondItem="ePq-ie-rot" secondAttribute="bottom" constant="20" id="Gfl-m7-3t8"/>
+                            <constraint firstItem="PBl-NY-5DN" firstAttribute="leading" secondItem="wfv-pA-ttP" secondAttribute="leading" id="ItA-z0-577"/>
                             <constraint firstItem="Fn7-bP-bym" firstAttribute="leading" secondItem="wfv-pA-ttP" secondAttribute="leading" constant="18" id="JeB-hv-pKW"/>
                             <constraint firstAttribute="bottom" secondItem="Fn7-bP-bym" secondAttribute="bottom" constant="54" id="MqU-Nl-hIp"/>
+                            <constraint firstItem="PBl-NY-5DN" firstAttribute="top" secondItem="wfv-pA-ttP" secondAttribute="top" id="MyC-En-o6q"/>
                             <constraint firstAttribute="trailing" secondItem="xwB-SG-BAb" secondAttribute="trailing" constant="18" id="NQr-ih-Oj9"/>
                             <constraint firstItem="WZx-Xc-qkH" firstAttribute="leading" secondItem="wfv-pA-ttP" secondAttribute="leading" constant="18" id="R6s-Ml-SaC"/>
                             <constraint firstItem="RbR-6l-SfT" firstAttribute="leading" secondItem="LBT-XV-U2G" secondAttribute="trailing" constant="3" id="aKH-r2-36K"/>
                             <constraint firstItem="xwB-SG-BAb" firstAttribute="centerY" secondItem="WZx-Xc-qkH" secondAttribute="centerY" id="bwz-nj-6n9"/>
                             <constraint firstItem="LBT-XV-U2G" firstAttribute="leading" secondItem="ePq-ie-rot" secondAttribute="trailing" constant="104" id="fSs-Z4-M4P"/>
                             <constraint firstItem="ePq-ie-rot" firstAttribute="leading" secondItem="bNN-HK-oj5" secondAttribute="trailing" constant="3" id="gE2-AF-9as"/>
+                            <constraint firstItem="PBl-NY-5DN" firstAttribute="height" secondItem="wfv-pA-ttP" secondAttribute="height" id="j5U-Sr-h6t"/>
+                            <constraint firstItem="PBl-NY-5DN" firstAttribute="width" secondItem="wfv-pA-ttP" secondAttribute="width" id="mIY-xF-XcG"/>
                             <constraint firstItem="WZx-Xc-qkH" firstAttribute="top" secondItem="wfv-pA-ttP" secondAttribute="top" constant="22" id="y8L-IP-nwl"/>
                         </constraints>
                     </view>
@@ -116,6 +125,7 @@
                 <outlet property="modelNameLabel" destination="Fn7-bP-bym" id="P1b-vn-9v2"/>
                 <outlet property="reservationDateLabel" destination="u07-yG-xRz" id="ALg-RD-ard"/>
                 <outlet property="reservationFrameView" destination="wfv-pA-ttP" id="SqW-S3-JA1"/>
+                <outlet property="reservationManageBtn" destination="PBl-NY-5DN" id="yFK-ra-Grm"/>
             </connections>
             <point key="canvasLocation" x="216.03053435114504" y="47.887323943661976"/>
         </tableViewCell>

@@ -12,6 +12,7 @@ class ArtistReservationStatusTableViewCell: UITableViewCell {
     @IBOutlet var reservationDateLabel: UILabel!
     @IBOutlet var makeUpNameLabel: UILabel!
     @IBOutlet var modelNameLabel: UILabel!
+    @IBOutlet var reservationManageBtn: UIButton!
     
     // 예정 완료 구분
     var isComplete : Bool = true
@@ -25,7 +26,6 @@ class ArtistReservationStatusTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        
         reservationFrameView.layer.cornerRadius = 10
         reservationFrameView.layer.shadowOpacity = 0.1
         reservationFrameView.layer.shadowRadius = 20

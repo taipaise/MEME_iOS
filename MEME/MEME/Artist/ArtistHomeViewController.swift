@@ -13,8 +13,6 @@ class ArtistHomeViewController: UIViewController {
     @IBOutlet var artistProfileImageView: UIImageView!
     @IBOutlet var artistHomeProfileLabel: UILabel!
     
-    @IBOutlet var onComingButton: UIButton!
-    @IBOutlet var completeButton: UIButton!
     @IBOutlet var artistReservationStatusTableView: UITableView!
     
     // 더미 데이터
@@ -47,9 +45,6 @@ class ArtistHomeViewController: UIViewController {
             artistHomeProfileStatusView.isHidden = true
         }
         
-        onComingButton.configuration?.imagePadding = CGFloat(8)
-        completeButton.configuration?.imagePadding = CGFloat(8)
-        
         artistHomeProfileStatusView.layer.cornerRadius = 10
         artistHomeProfileNoStatusView.layer.cornerRadius = 10
         artistProfileImageView.layer.cornerRadius = artistProfileImageView.frame.height/2
@@ -74,24 +69,40 @@ class ArtistHomeViewController: UIViewController {
     @IBAction func portfolioManageBtnTapped(_ sender: UIButton) {
         // 포트폴리오 관리 화면 전환
     }
+    @IBAction func entireReservationBtnTapped(_ sender: UIButton) {
+        let vc = EntireArtistReservationManageViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
+    @objc func reservationManagedBtnTapped(){
+        let vc = ArtistReservationSingleManageViewController()
+        self.navigationController?.pushViewController(vc, animated: true)
+    }
     
 }
 
 extension ArtistHomeViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return makeUpNameArray.count
+        if(makeUpNameArray.count>2)
+        {
+            return 2
+        }else{
+            return makeUpNameArray.count
+        }
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = artistReservationStatusTableView.dequeueReusableCell(withIdentifier: ArtistReservationStatusTableViewCell.identifier, for: indexPath) as! ArtistReservationStatusTableViewCell
-        cell.makeUpNameLabel.text = makeUpNameArray[indexPath.row]
-        cell.modelNameLabel.text = modelNameArray[indexPath.row]
-        cell.reservationDateLabel.text = reservationDateArray[indexPath.row]
-        return cell
+        let cell = artistReservationStatusTableView.dequeueReusableCell(withIdentifier: ArtistReservationStatusTableViewCell.identifier, for: indexPath) as? ArtistReservationStatusTableViewCell
+        cell?.makeUpNameLabel.text = makeUpNameArray[indexPath.row]
+        cell?.modelNameLabel.text = modelNameArray[indexPath.row]
+        cell?.reservationDateLabel.text = reservationDateArray[indexPath.row]
+        cell?.reservationManageBtn.addTarget(self, action: #selector(reservationManagedBtnTapped), for: .touchUpInside)
+        return cell ?? UITableViewCell()
     }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return CGFloat(192)
     }
+    
     
     
 }
