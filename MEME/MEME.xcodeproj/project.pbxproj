@@ -55,6 +55,14 @@
 		312B30522B550FF9008D17FC /* Pretendard-Thin.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EA2B52DE1900CACF20 /* Pretendard-Thin.otf */; };
 		312B30532B550FF9008D17FC /* Pretendard-ExtraBold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74ED2B52DE1900CACF20 /* Pretendard-ExtraBold.otf */; };
 		312B30542B550FF9008D17FC /* Pretendard-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F22B52DE1900CACF20 /* Pretendard-Regular.otf */; };
+		2D6F59AB2B5BD07500CA883A /* ModelReservationChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6F59A92B5BD07500CA883A /* ModelReservationChartTableViewCell.swift */; };
+		2D6F59AC2B5BD07500CA883A /* ModelReservationChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D6F59AA2B5BD07500CA883A /* ModelReservationChartTableViewCell.xib */; };
+		2D6F59AE2B5BF3A900CA883A /* ModelReservationChartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6F59AD2B5BF3A900CA883A /* ModelReservationChartTableViewController.swift */; };
+		2D6F59B12B5BF92600CA883A /* ModelReservationTypeViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6F59B02B5BF92600CA883A /* ModelReservationTypeViewCell.swift */; };
+		2D6F59B32B5C397400CA883A /* SortOptionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6F59B22B5C397400CA883A /* SortOptionsViewController.swift */; };
+		2D6F59B52B5C475800CA883A /* ModalPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6F59B42B5C475800CA883A /* ModalPresentationController.swift */; };
+		2D6F59B82B5C4FB100CA883A /* SortOptionIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6F59B72B5C4FB100CA883A /* SortOptionIconView.swift */; };
+		2D6F59BF2B5C7D3300CA883A /* ModelReservationTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6F59BE2B5C7D3300CA883A /* ModelReservationTypeButton.swift */; };
 		3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9582B4CFFED0066CD5A /* AppDelegate.swift */; };
 		3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B95A2B4CFFED0066CD5A /* SceneDelegate.swift */; };
 		3142B95D2B4CFFED0066CD5A /* ModelHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B95C2B4CFFED0066CD5A /* ModelHomeViewController.swift */; };
@@ -540,6 +548,7 @@
 				CC2F3ABA2B4EAF8B00508DA5 /* MyPage */,
 				3142B95C2B4CFFED0066CD5A /* ModelHomeViewController.swift */,
 				3142B9AC2B4D07640066CD5A /* ModelReservationViewController.swift */,
+				2D6F59A32B561D4700CA883A /* ModelReservationView */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -886,6 +895,7 @@
 				31B263482B57EE4800304FBE /* LoginViewController.xib in Resources */,
 				312B30512B550FF9008D17FC /* Pretendard-SemiBold.otf in Resources */,
 				31B263442B57EDE300304FBE /* TermDetailViewController.xib in Resources */,
+				2D6F59AC2B5BD07500CA883A /* ModelReservationChartTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -922,6 +932,8 @@
 				2D6F59B82B5C4FB100CA883A /* SortOptionIconView.swift in Sources */,
 				CC2F3AC72B54444E00508DA5 /* InfoTableViewCell.swift in Sources */,
 				31B2634F2B57EE7D00304FBE /* SetProfileViewController.swift in Sources */,
+				2D6F59B32B5C397400CA883A /* SortOptionsViewController.swift in Sources */,
+				2D6F59B82B5C4FB100CA883A /* SortOptionIconView.swift in Sources */,
 				3142B9A72B4D04CA0066CD5A /* LoginViewController.swift in Sources */,
 				2D0A19142B4F08DC00C1CECA /* ModelUserDataManager.swift in Sources */,
 				3142B95D2B4CFFED0066CD5A /* ModelHomeViewController.swift in Sources */,
@@ -929,6 +941,7 @@
 				3142B9A42B4D03840066CD5A /* ModelTabBarController.swift in Sources */,
 				2D6F59B12B5BF92600CA883A /* ModelReservationTypeViewCell.swift in Sources */,
 				CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */,
+				2D6F59B12B5BF92600CA883A /* ModelReservationTypeViewCell.swift in Sources */,
 				3142B9AD2B4D07640066CD5A /* ModelReservationViewController.swift in Sources */,
 				2D62E2412B542BD0004E8299 /* ModelUserModel.swift in Sources */,
 				31B2634C2B57EE7100304FBE /* RoleSelectionViewController.swift in Sources */,
@@ -947,6 +960,7 @@
 				2D6F59BF2B5C7D3300CA883A /* ModelReservationTypeButton.swift in Sources */,
 				31B263652B57EEBD00304FBE /* RegisterProgressBar.swift in Sources */,
 				31C85EED2B526B780064A6E7 /* OnBoardingViewController.swift in Sources */,
+				2D6F59BF2B5C7D3300CA883A /* ModelReservationTypeButton.swift in Sources */,
 				3142B99F2B4D02300066CD5A /* UIFont+.swift in Sources */,
 				094884D72B598E4800C233E0 /* EntireArtistReservationManageViewController.swift in Sources */,
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,

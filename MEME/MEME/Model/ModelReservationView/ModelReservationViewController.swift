@@ -120,10 +120,17 @@ class ModelReservationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
         
         configureSubviews()
         makeConstraints()
+    }
+
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let path = UIBezierPath(roundedRect: backgroundView.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 17, height: 17))
+        let maskLayer = CAShapeLayer()
+        maskLayer.path = path.cgPath
+        backgroundView.layer.mask = maskLayer
     }
     
     // MARK: - configureSubviews
@@ -232,5 +239,4 @@ class ModelReservationViewController: UIViewController {
             make.height.equalTo(1)
         }
     }
-    
 }
