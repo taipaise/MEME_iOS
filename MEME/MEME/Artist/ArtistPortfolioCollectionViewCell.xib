@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="ArtistPortfolioCollectionViewCell" id="gTV-IL-0wX" customClass="ArtistPortfolioCollectionViewCell" customModule="MEME" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="154" height="222"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="154" height="222"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTi-Ft-GxS">
+                        <rect key="frame" x="0.0" y="0.0" width="154" height="222"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Mou-Es-3WO">
+                                <rect key="frame" x="16" y="16" width="122" height="190.66666666666666"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JTc-te-oBJ">
+                                        <rect key="frame" x="0.0" y="0.0" width="122" height="122"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="122" id="11n-9p-aoq"/>
+                                            <constraint firstAttribute="width" secondItem="JTc-te-oBJ" secondAttribute="height" multiplier="1:1" id="bTo-sC-8QQ"/>
+                                        </constraints>
+                                    </imageView>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="데일리 메이크업" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MK5-Fw-nVt">
+                                        <rect key="frame" x="0.0" y="128" width="63.666666666666664" height="12"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="메이크업명" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwA-tP-ZRI">
+                                        <rect key="frame" x="0.0" y="146" width="69.333333333333329" height="19.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가격" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asv-aK-TqD">
+                                        <rect key="frame" x="0.0" y="171.33333333333334" width="28" height="19.333333333333343"/>
+                                        <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="222" id="l19-4r-DYy"/>
+                            <constraint firstAttribute="width" constant="154" id="yoQ-ic-hdO"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
+            <constraints>
+                <constraint firstItem="rTi-Ft-GxS" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Khr-UV-tPp"/>
+                <constraint firstAttribute="trailing" secondItem="rTi-Ft-GxS" secondAttribute="trailing" id="Nwd-gZ-Ml4"/>
+                <constraint firstItem="rTi-Ft-GxS" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="OfL-UJ-fVX"/>
+                <constraint firstAttribute="bottom" secondItem="rTi-Ft-GxS" secondAttribute="bottom" id="eUD-5l-mOG"/>
+            </constraints>
+            <connections>
+                <outlet property="portfolioImageView" destination="JTc-te-oBJ" id="a3j-SK-IVs"/>
+                <outlet property="portfolioMainLabel" destination="qwA-tP-ZRI" id="jf6-Rf-53g"/>
+                <outlet property="portfolioPriceLabel" destination="asv-aK-TqD" id="je9-Jv-yT3"/>
+                <outlet property="portfolioSubLabel" destination="MK5-Fw-nVt" id="TiG-xP-tE3"/>
+            </connections>
+            <point key="canvasLocation" x="14" y="-11"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>
