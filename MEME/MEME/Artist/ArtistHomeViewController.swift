@@ -32,10 +32,10 @@ class ArtistHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        UISet()
+        uiSet()
         tableViewConfigure()
     }
-    private func UISet(){
+    private func uiSet(){
         
         artistHomeProfileNoStatusView.isHidden = isTodayReservation
         artistHomeProfileStatusView.isHidden = !isTodayReservation
