@@ -24,12 +24,12 @@ class ArtistProfilePreviewViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        CollectionViewConfig()
+        collectionViewConfig()
         bottomBarView.layer.cornerRadius = 10
         
     }
     
-    private func CollectionViewConfig(){
+    private func collectionViewConfig(){
         makeupTagCollectionView.delegate = self
         makeupTagCollectionView.dataSource = self
         makeupTagCollectionView.register(UINib(nibName: "ArtistMakeupTagCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ArtistMakeupTagCollectionViewCell")
@@ -60,18 +60,18 @@ extension ArtistProfilePreviewViewController : UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if collectionView == makeupTagCollectionView{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArtistMakeupTagCollectionViewCell", for: indexPath) as? ArtistMakeupTagCollectionViewCell
-            cell?.makeupTagLabel.text = makeupTagArray[indexPath.row]
-            return cell ?? UICollectionViewCell()
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArtistMakeupTagCollectionViewCell", for: indexPath) as? ArtistMakeupTagCollectionViewCell else { return UICollectionViewCell() }
+            cell.makeupTagLabel.text = makeupTagArray[indexPath.row]
+            return cell
             
         }else if collectionView == portfolioCollectionView{
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArtistPortfolioCollectionViewCell", for: indexPath) as? ArtistPortfolioCollectionViewCell
-            cell?.portfolioMainLabel.text = makeUpNameArray[indexPath.row]
-            cell?.portfolioSubLabel.text = subtitleArray[indexPath.row]
-            cell?.portfolioPriceLabel.text = priceArray[indexPath.row]
-            cell?.portfolioImageView.image = UIImage(named: imageArray[indexPath.row])
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArtistPortfolioCollectionViewCell", for: indexPath) as? ArtistPortfolioCollectionViewCell else { return UICollectionViewCell() }
+            cell.portfolioMainLabel.text = makeUpNameArray[indexPath.row]
+            cell.portfolioSubLabel.text = subtitleArray[indexPath.row]
+            cell.portfolioPriceLabel.text = priceArray[indexPath.row]
+            cell.portfolioImageView.image = UIImage(named: imageArray[indexPath.row])
             
-            return cell ?? UICollectionViewCell()
+            return cell
         }
         return UICollectionViewCell()
     }
