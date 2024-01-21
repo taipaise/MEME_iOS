@@ -25,7 +25,7 @@ class ArtistReservationManageViewController: UIViewController {
         artistReservationTableView.dataSource = self
         artistReservationTableView.register(ArtistReservationStatusTableViewCell.nib(), forCellReuseIdentifier: ArtistReservationStatusTableViewCell.identifier)
     }
-    @objc func reservationManagedBtnTapped(){
+    @objc private func reservationManagedBtnTapped(){
         let vc = ArtistReservationSingleManageViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
@@ -40,12 +40,12 @@ extension ArtistReservationManageViewController : UITableViewDelegate, UITableVi
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = artistReservationTableView.dequeueReusableCell(withIdentifier: ArtistReservationStatusTableViewCell.identifier, for: indexPath) as? ArtistReservationStatusTableViewCell
-        cell?.makeUpNameLabel.text = makeUpNameArray[indexPath.row]
-        cell?.modelNameLabel.text = modelNameArray[indexPath.row]
-        cell?.reservationDateLabel.text = reservationDateArray[indexPath.row]
-        cell?.reservationManageBtn.addTarget(self, action: #selector(reservationManagedBtnTapped), for: .touchUpInside)
-        return cell ?? UITableViewCell()
+        guard let cell = artistReservationTableView.dequeueReusableCell(withIdentifier: ArtistReservationStatusTableViewCell.identifier, for: indexPath) as? ArtistReservationStatusTableViewCell else { return UITableViewCell() }
+        cell.makeUpNameLabel.text = makeUpNameArray[indexPath.row]
+        cell.modelNameLabel.text = modelNameArray[indexPath.row]
+        cell.reservationDateLabel.text = reservationDateArray[indexPath.row]
+        cell.reservationManageBtn.addTarget(self, action: #selector(reservationManagedBtnTapped), for: .touchUpInside)
+        return cell
 
     }
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
