@@ -297,6 +297,11 @@ extension ModelReservationChartViewController: UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
             return 141
     }
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+            let reservationVC = ModelReservationViewController()
+            // 전달할 데이터 추가
+            self.navigationController?.pushViewController(reservationVC, animated: true)
+        }
 
 }
 
