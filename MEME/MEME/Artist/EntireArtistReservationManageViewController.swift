@@ -12,6 +12,7 @@ class EntireArtistReservationManageViewController: UIViewController {
     @IBOutlet var onComingButton: UIButton!
     @IBOutlet var completeButton: UIButton!
     
+    @IBOutlet var bottomBarView: UIView!
     @IBOutlet var artistReservationTableView: UITableView!
     // 더미 데이터
     private var makeUpNameArray : [String] = ["메이크업1","메이크업2","메이크업3"]
@@ -20,7 +21,7 @@ class EntireArtistReservationManageViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        bottomBarView.layer.cornerRadius=10
         tableViewConfigure()
     }
     

@@ -10,6 +10,7 @@ import UIKit
 class ArtistProfilePreviewViewController: UIViewController {
     @IBOutlet var makeupTagCollectionView: UICollectionView!
     @IBOutlet var portfolioCollectionView: UICollectionView!
+    @IBOutlet var bottomBarView: UIView!
     
     // 더미데이터
     private var subtitleArray : [String] = ["데일리 메이크업","배우 메이크업","배우 메이크업"]
@@ -24,6 +25,7 @@ class ArtistProfilePreviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         CollectionViewConfig()
+        bottomBarView.layer.cornerRadius = 10
         
     }
     

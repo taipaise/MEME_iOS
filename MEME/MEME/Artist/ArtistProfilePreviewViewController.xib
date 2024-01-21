@@ -1,16 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pretendard-Regular.otf">
+            <string>Pretendard-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArtistProfilePreviewViewController" customModule="MEME" customModuleProvider="target">
             <connections>
+                <outlet property="bottomBarView" destination="SH9-3I-yiI" id="03m-kB-tvC"/>
                 <outlet property="makeupTagCollectionView" destination="vcY-Ph-GPi" id="OKh-fD-ocl"/>
                 <outlet property="portfolioCollectionView" destination="mhF-Kv-VXI" id="uoQ-Dm-wgr"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -43,7 +50,7 @@
                     <rect key="frame" x="0.0" y="103" width="393" height="897"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xRs-lC-waJ" userLabel="scrollViewFrame">
-                            <rect key="frame" x="0.0" y="0.0" width="393" height="900"/>
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="750"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="7UU-ER-NCG" userLabel="Profile Stack View">
                                     <rect key="frame" x="131" y="49" width="189.66666666666663" height="47.333333333333343"/>
@@ -210,6 +217,23 @@
                                         <constraint firstItem="8EA-bA-APM" firstAttribute="centerY" secondItem="Af8-df-FNx" secondAttribute="centerY" id="pyA-5Y-oe6"/>
                                     </constraints>
                                 </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SH9-3I-yiI">
+                                    <rect key="frame" x="24" y="815" width="345" height="48"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="프로필 수정은 마이페이지에서 가능해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQV-0D-PT0">
+                                            <rect key="frame" x="64.333333333333329" y="15.666666666666629" width="216.33333333333337" height="17"/>
+                                            <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
+                                            <color key="textColor" name="Gray100"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                    <color key="backgroundColor" name="Gray500"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="48" id="7RZ-nX-99Q"/>
+                                        <constraint firstItem="CQV-0D-PT0" firstAttribute="centerY" secondItem="SH9-3I-yiI" secondAttribute="centerY" id="HyH-L6-38c"/>
+                                        <constraint firstItem="CQV-0D-PT0" firstAttribute="centerX" secondItem="SH9-3I-yiI" secondAttribute="centerX" id="TAW-9Y-h6q"/>
+                                    </constraints>
+                                </view>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
@@ -225,14 +249,16 @@
                                 <constraint firstItem="xOG-ee-p86" firstAttribute="centerY" secondItem="YPE-Bm-hur" secondAttribute="centerY" id="C0f-55-zEo"/>
                                 <constraint firstItem="ZXL-uq-HGR" firstAttribute="trailing" secondItem="xOG-ee-p86" secondAttribute="trailing" id="FdF-Pq-l5U"/>
                                 <constraint firstItem="aMq-XP-Ztt" firstAttribute="top" secondItem="YPE-Bm-hur" secondAttribute="bottom" constant="53" id="HLJ-Jw-5zz"/>
+                                <constraint firstItem="SH9-3I-yiI" firstAttribute="leading" secondItem="xRs-lC-waJ" secondAttribute="leading" constant="24" id="L9b-Bf-xAn"/>
                                 <constraint firstItem="xOG-ee-p86" firstAttribute="leading" secondItem="wen-Ol-TRt" secondAttribute="trailing" constant="2" id="OE6-xO-tAf"/>
                                 <constraint firstItem="Lb8-s1-fYd" firstAttribute="leading" secondItem="xRs-lC-waJ" secondAttribute="leading" constant="24" id="OU1-zH-DHo"/>
+                                <constraint firstAttribute="trailing" secondItem="SH9-3I-yiI" secondAttribute="trailing" constant="24" id="OiD-Iz-q3k"/>
                                 <constraint firstItem="Lb8-s1-fYd" firstAttribute="top" secondItem="oxU-3v-uaS" secondAttribute="bottom" constant="15" id="QpQ-Td-Slg"/>
                                 <constraint firstItem="7UU-ER-NCG" firstAttribute="leading" secondItem="64T-mW-a4o" secondAttribute="trailing" constant="20" id="Stj-e8-1kq"/>
                                 <constraint firstItem="mhF-Kv-VXI" firstAttribute="leading" secondItem="vlh-A3-QkB" secondAttribute="leading" id="T0W-Zf-O2W"/>
                                 <constraint firstItem="7UU-ER-NCG" firstAttribute="centerY" secondItem="64T-mW-a4o" secondAttribute="centerY" id="Wge-jX-QDf"/>
                                 <constraint firstItem="mhF-Kv-VXI" firstAttribute="top" secondItem="vlh-A3-QkB" secondAttribute="bottom" constant="13" id="Wxe-C5-Bqk"/>
-                                <constraint firstAttribute="height" constant="900" id="Wz2-K8-7kS"/>
+                                <constraint firstAttribute="height" constant="750" id="Wz2-K8-7kS"/>
                                 <constraint firstItem="64T-mW-a4o" firstAttribute="top" secondItem="xRs-lC-waJ" secondAttribute="top" constant="29" id="YHY-hh-e9W"/>
                                 <constraint firstAttribute="trailing" secondItem="mhF-Kv-VXI" secondAttribute="trailing" id="cQQ-CI-Zxo"/>
                                 <constraint firstItem="I5A-1m-FnY" firstAttribute="centerY" secondItem="0Rz-8j-Yxo" secondAttribute="centerY" id="d0N-VQ-JLp"/>
@@ -276,6 +302,7 @@
                 <constraint firstItem="85r-gq-lfr" firstAttribute="centerX" secondItem="fnl-2z-Ty3" secondAttribute="centerX" id="PRC-t8-x9A"/>
                 <constraint firstItem="vqg-b1-lGJ" firstAttribute="top" secondItem="FMG-Kj-yZ8" secondAttribute="bottom" constant="4" id="dzO-Ze-1vi"/>
                 <constraint firstItem="vqg-b1-lGJ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="44" id="nPM-C6-zDD"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="SH9-3I-yiI" secondAttribute="bottom" id="pNB-pT-rcV"/>
                 <constraint firstItem="FMG-Kj-yZ8" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="yen-zr-lgV"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
@@ -285,6 +312,12 @@
     <resources>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <image name="logo" width="161.66667175292969" height="100.66666412353516"/>
+        <namedColor name="Gray100">
+            <color red="1" green="1" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Gray500">
+            <color red="0.12941176470588237" green="0.12941176470588237" blue="0.12941176470588237" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

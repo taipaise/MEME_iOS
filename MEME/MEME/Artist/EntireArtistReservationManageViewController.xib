@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
         <capability name="Image references" minToolsVersion="12.0"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -18,6 +19,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="EntireArtistReservationManageViewController" customModule="MEME" customModuleProvider="target">
             <connections>
                 <outlet property="artistReservationTableView" destination="J2H-OQ-N7U" id="1Vw-ra-Lzm"/>
+                <outlet property="bottomBarView" destination="l5b-O1-dI3" id="FxL-fu-4OI"/>
                 <outlet property="completeButton" destination="hmc-4P-csU" id="ET8-2z-i8a"/>
                 <outlet property="onComingButton" destination="DI4-QQ-Y5D" id="RjK-g3-fOd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -32,11 +34,28 @@
                     <rect key="frame" x="0.0" y="122" width="393" height="696"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="l5b-O1-dI3">
+                    <rect key="frame" x="24" y="770" width="345" height="48"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="예약 취소는 '예약 관리'에서 가능해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrb-Kg-r86">
+                            <rect key="frame" x="72.000000000000014" y="15.666666666666629" width="201.33333333333337" height="17"/>
+                            <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
+                            <color key="textColor" name="Gray100"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" name="Gray500"/>
+                    <constraints>
+                        <constraint firstItem="wrb-Kg-r86" firstAttribute="centerX" secondItem="l5b-O1-dI3" secondAttribute="centerX" id="ian-7A-wse"/>
+                        <constraint firstAttribute="height" constant="48" id="r18-Vq-5IC"/>
+                        <constraint firstItem="wrb-Kg-r86" firstAttribute="centerY" secondItem="l5b-O1-dI3" secondAttribute="centerY" id="x50-Mp-n5L"/>
+                    </constraints>
+                </view>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3uc-Pn-uKb">
                     <rect key="frame" x="0.0" y="59" width="393" height="48"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체 예약 보기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t4C-7f-sho">
-                            <rect key="frame" x="151" y="14" width="91" height="20"/>
+                            <rect key="frame" x="151" y="14.666666666666673" width="91" height="18.666666666666671"/>
                             <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -64,7 +83,7 @@
                     </constraints>
                 </view>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DI4-QQ-Y5D">
-                    <rect key="frame" x="231.33333333333334" y="96" width="66.666666666666657" height="29.333333333333329"/>
+                    <rect key="frame" x="232" y="95.333333333333329" width="66" height="29.333333333333329"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="예정" imagePadding="4" buttonSize="small" titleAlignment="automatic">
@@ -73,7 +92,7 @@
                     </buttonConfiguration>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hmc-4P-csU">
-                    <rect key="frame" x="298" y="96" width="66" height="29.333333333333329"/>
+                    <rect key="frame" x="298" y="95.333333333333329" width="66" height="29.333333333333329"/>
                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" title="완료" imagePadding="4" buttonSize="small" titleAlignment="automatic">
@@ -85,12 +104,15 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="l5b-O1-dI3" secondAttribute="bottom" id="0X7-ci-bQo"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="l5b-O1-dI3" secondAttribute="trailing" constant="24" id="3jT-1a-Pjr"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="J2H-OQ-N7U" secondAttribute="trailing" id="B1H-GH-yRN"/>
                 <constraint firstItem="J2H-OQ-N7U" firstAttribute="top" secondItem="3uc-Pn-uKb" secondAttribute="bottom" constant="15" id="I29-2U-Lq6"/>
                 <constraint firstItem="J2H-OQ-N7U" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="VP0-ZO-nMU"/>
                 <constraint firstItem="3uc-Pn-uKb" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Yad-im-0Mn"/>
                 <constraint firstItem="3uc-Pn-uKb" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="cfB-VO-K6W"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="J2H-OQ-N7U" secondAttribute="bottom" id="eEZ-Mc-Tci"/>
+                <constraint firstItem="l5b-O1-dI3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="fU6-of-0bS"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hmc-4P-csU" secondAttribute="trailing" constant="29" id="lJp-6J-Ea0"/>
                 <constraint firstItem="hmc-4P-csU" firstAttribute="top" secondItem="t4C-7f-sho" secondAttribute="bottom" constant="3" id="nDs-Kj-9M8"/>
                 <constraint firstItem="3uc-Pn-uKb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ndq-Q0-B5U"/>
@@ -104,6 +126,12 @@
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <image name="chevron.down.circle" catalog="system" width="128" height="123"/>
         <image name="chevron.down.circle.fill" catalog="system" width="128" height="123"/>
+        <namedColor name="Gray100">
+            <color red="1" green="1" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="Gray500">
+            <color red="0.12941176470588237" green="0.12941176470588237" blue="0.12941176470588237" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
