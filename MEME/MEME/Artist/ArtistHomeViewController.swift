@@ -37,13 +37,8 @@ class ArtistHomeViewController: UIViewController {
     }
     private func UISet(){
         
-        if isTodayReservation{
-            artistHomeProfileNoStatusView.isHidden = true
-            artistHomeProfileStatusView.isHidden = false
-        }else{
-            artistHomeProfileNoStatusView.isHidden = false
-            artistHomeProfileStatusView.isHidden = true
-        }
+        artistHomeProfileNoStatusView.isHidden = isTodayReservation
+        artistHomeProfileStatusView.isHidden = !isTodayReservation
         
         artistHomeProfileStatusView.layer.cornerRadius = 10
         artistHomeProfileNoStatusView.layer.cornerRadius = 10
