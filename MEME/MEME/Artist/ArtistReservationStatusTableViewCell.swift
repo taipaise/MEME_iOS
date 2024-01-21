@@ -26,13 +26,17 @@ class ArtistReservationStatusTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        uiSet()
+    }
+
+    private func uiSet() {
+        
         reservationFrameView.layer.cornerRadius = 10
         reservationFrameView.layer.shadowOpacity = 0.1
         reservationFrameView.layer.shadowRadius = 20
         reservationFrameView.layer.shadowOffset = CGSize(width: 8, height: 8)
         
         selectionStyle = .none
-    }
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
