@@ -56,19 +56,19 @@ class ArtistHomeViewController: UIViewController {
         artistReservationStatusTableView.register(ArtistReservationStatusTableViewCell.nib(), forCellReuseIdentifier: ArtistReservationStatusTableViewCell.identifier)
     }
 
-    @IBAction func profileImageTapped(_ sender: UIButton) {
+    @IBAction private func profileImageTapped(_ sender: UIButton) {
         let vc = ArtistProfilePreviewViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    @IBAction func portfolioManageBtnTapped(_ sender: UIButton) {
+    @IBAction private func portfolioManageBtnTapped(_ sender: UIButton) {
         // 포트폴리오 관리 화면 전환
     }
-    @IBAction func entireReservationBtnTapped(_ sender: UIButton) {
+    @IBAction private func entireReservationBtnTapped(_ sender: UIButton) {
         let vc = EntireArtistReservationManageViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
-    @objc func reservationManagedBtnTapped(){
+    @objc private func reservationManagedBtnTapped(){
         let vc = ArtistReservationSingleManageViewController()
         self.navigationController?.pushViewController(vc, animated: true)
     }
