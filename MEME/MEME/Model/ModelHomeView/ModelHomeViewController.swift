@@ -10,23 +10,23 @@ import SnapKit
 
 final class ModelHomeViewController: UIViewController {
     // MARK: - Properties
-    let scrollView = UIScrollView()
-    let contentsView = UIView()
-    var memeLogoImageView: UIImageView = {
+    private let scrollView = UIScrollView()
+    private let contentsView = UIView()
+    private var memeLogoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "memeLogo")
         imageView.contentMode = .scaleAspectFit
         
         return imageView
     }()
-    var alarmImageView: UIImageView = {
+    private var alarmImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "icon _bell")
         imageView.contentMode = .scaleAspectFit
         
         return imageView
     }()
-    let searchMakeup: UISearchBar = {
+    private let searchMakeup: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "원하는 메이크업을 검색해보세요."
         searchBar.backgroundColor = .white
@@ -51,7 +51,7 @@ final class ModelHomeViewController: UIViewController {
         return searchBar
     }()
 
-    var modelWelcomeLabel: UILabel = {
+    private var modelWelcomeLabel: UILabel = {
         let label = UILabel()
         label.text = "000 님, 환영합니다!"
         label.font = UIFont.boldSystemFont(ofSize: 18)
@@ -59,47 +59,47 @@ final class ModelHomeViewController: UIViewController {
         
         return label
     }()
-    var modelWelcomeGuideLabel: UILabel = {
+    private var modelWelcomeGuideLabel: UILabel = {
         let label = UILabel()
         label.text = "아티스트와의 약속 놓치지 마세요!"
         label.font = UIFont.boldSystemFont(ofSize: 18)
         
         return label
     }()
-    var modelReservationCollectionView: UICollectionView!
-    var recomandArtistReservationMainLabel: UILabel = {
+    private var modelReservationCollectionView: UICollectionView!
+    private var recomandArtistReservationMainLabel: UILabel = {
         let label = UILabel()
         label.text = "어떤 아티스트를 선택할 지 모르겠을 때"
         label.font = UIFont.boldSystemFont(ofSize: 20)
         
         return label
     }()
-    var recomandArtistReservationSubLabel: UILabel = {
+    private var recomandArtistReservationSubLabel: UILabel = {
         let label = UILabel()
         label.text = "후기가 많은 아티스트를 만나봐요"
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
-    var recomandReservationCollectionView: UICollectionView!
-    var recomandHastyReservationMainLabel: UILabel = {
+    private var recomandReservationCollectionView: UICollectionView!
+    private var recomandHastyReservationMainLabel: UILabel = {
         let label = UILabel()
         label.text = "급하게 메이크업이 필요할 때"
         label.font = UIFont.boldSystemFont(ofSize: 20)
         
         return label
     }()
-    var recomandHastyReservationSubLabel: UILabel = {
+    private var recomandHastyReservationSubLabel: UILabel = {
         let label = UILabel()
         label.text = "오늘, 내일 바로 예약 가능한 아티스트를 알아봐요"
         label.font = UIFont.systemFont(ofSize: 14)
         return label
     }()
-    var recomandHastyReservationCollectionView: UICollectionView!
+    private var recomandHastyReservationCollectionView: UICollectionView!
     
-    var modelReservations: [ModelReservationModel]? {
+    private var modelReservations: [ModelReservationModel]? {
         didSet { self.modelReservationCollectionView.reloadData() }
     }
-    var makeupCards: [MakeupCardModel]? {
+    private var makeupCards: [MakeupCardModel]? {
         didSet { self.recomandReservationCollectionView.reloadData() }
     }
     
