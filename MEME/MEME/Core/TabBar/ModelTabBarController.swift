@@ -9,7 +9,7 @@ import UIKit
 
 final class ModelTabBarController: UITabBarController {
     
-    private var tabs: [TabBarItemType: UIViewController] = [:]
+    private var tabs: [TabBarItemType: UINavigationController] = [:]
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,18 +19,18 @@ final class ModelTabBarController: UITabBarController {
     
     private func setTabBarItems() {
         tabs = [
-            TabBarItemType.modelHome: ModelHomeViewController(),
-            TabBarItemType.modelReservation: ModelReservationViewController()//,
-//            TabBarItemType.modelMypage: ModelMyMage()
+            TabBarItemType.modelHome: UINavigationController(rootViewController: ModelHomeViewController()),
+            TabBarItemType.modelReservation: UINavigationController(rootViewController: ModelReservationViewController()),
+            TabBarItemType.modelMypage: UINavigationController(rootViewController: ModelMyPageViewController())
         ]
         
-        tabs.forEach { tabType, viewController in
-            viewController.tabBarItem = tabType.setTabBarItem()
+        tabs.forEach { tabType, navigationController in
+            navigationController.tabBarItem = tabType.setTabBarItem()
         }
         let sortedKeys = tabs.sorted { $0.key.rawValue < $1.key.rawValue }
         
-        let tabViewControllers = sortedKeys.map { tabs[$0.key] ?? UIViewController() }
-        setViewControllers(tabViewControllers, animated: false)
+        let tabNavigationControllers = sortedKeys.map { tabs[$0.key] ?? UINavigationController() }
+        setViewControllers(tabNavigationControllers, animated: false)
     }
     
     private func setUI() {
