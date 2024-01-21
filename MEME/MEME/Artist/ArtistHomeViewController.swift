@@ -77,10 +77,9 @@ class ArtistHomeViewController: UIViewController {
 
 extension ArtistHomeViewController : UITableViewDelegate,UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(makeUpNameArray.count>2)
-        {
+        if(makeUpNameArray.count>2) {
             return 2
-        }else{
+        } else {
             return makeUpNameArray.count
         }
     }
