@@ -37,7 +37,7 @@ class ArtistReservationStatusTableViewCell: UITableViewCell {
         reservationFrameView.layer.shadowOffset = CGSize(width: 8, height: 8)
         
         selectionStyle = .none
-
+    }
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
 
