@@ -40,7 +40,7 @@ class ArtistProfilePreviewViewController: UIViewController {
 
     }
     
-    @IBAction func backButtonDidTap(_ sender: UIButton) {
+    @IBAction private func backButtonDidTap(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }
 
