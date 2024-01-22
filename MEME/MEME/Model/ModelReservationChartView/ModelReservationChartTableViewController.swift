@@ -197,7 +197,17 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
     }
     //MARK: -Action
     private func setupButtonsAction() {
-            let buttons = [allButton, specialButton, actorButton, interviewButton, dailyButton, studioButton, weddingButton, partyButton, etcButton]
+            let buttons = [
+                allButton,
+                specialButton,
+                actorButton,
+                interviewButton,
+                dailyButton,
+                studioButton,
+                weddingButton,
+                partyButton,
+                etcButton
+            ]
             buttons.forEach { button in
                 button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
             }
@@ -223,9 +233,7 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
         self.present(sortOptionsVC, animated: true)
         }
     
-    // UIViewControllerTransitioningDelegate 메서드 구현
        func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-           // ModalPresentationController 인스턴스를 생성하고 반환합니다.
            return ModalPresentationController(presentedViewController: presented, presenting: presenting)
        }
    
@@ -243,8 +251,6 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
                 make.height.equalTo(30)
                 make.width.greaterThanOrEqualTo(54)
             }
-            button.setContentHuggingPriority(UILayoutPriority.required, for: .horizontal)
-            button.setContentCompressionResistancePriority(UILayoutPriority.required, for: .horizontal)
         }
 
         buttonScrollView.addSubview(buttonsStackView)
@@ -265,7 +271,6 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
         //cell 등록
         let ModelReservationChartTableViewCell = UINib(nibName: "ModelReservationChartTableViewCell", bundle: nil)
         reservationChartTableView.register(ModelReservationChartTableViewCell, forCellReuseIdentifier: "ModelReservationChartTableViewCell")
-        
         
     }
 
@@ -290,7 +295,7 @@ extension ModelReservationChartViewController: UITableViewDataSource, UITableVie
         guard let cell = tableView.dequeueReusableCell(withIdentifier: "ModelReservationChartTableViewCell", for: indexPath) as? ModelReservationChartTableViewCell else {
                 fatalError("셀 타입 캐스팅 실패...")
             }
-            
+            cell.selectionStyle = .none
             return cell
     }
     

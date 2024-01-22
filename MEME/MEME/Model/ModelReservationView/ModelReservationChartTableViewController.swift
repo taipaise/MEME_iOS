@@ -1,8 +1,8 @@
 //
-//  ModelReservationViewController.swift
+//  ModelReservationChartTableViewController.swift
 //  MEME
 //
-//  Created by 이동현 on 1/9/24.
+//  Created by 정민지 on 1/20/24.
 //
 
 import UIKit
@@ -158,14 +158,6 @@ class ModelReservationViewController: UIViewController {
         configureSubviews()
         makeConstraints()
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let path = UIBezierPath(roundedRect: backgroundView.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 17, height: 17))
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path.cgPath
-        backgroundView.layer.mask = maskLayer
-    }
     
     // MARK: - configureSubviews
     func configureSubviews() {
@@ -307,4 +299,5 @@ class ModelReservationViewController: UIViewController {
         self.segmentedControl.selectedSegmentIndex = 0
         self.didChangeValue(segment: self.segmentedControl)
     }
+    
 }
