@@ -11,6 +11,9 @@ class ArtistProfilePreviewViewController: UIViewController {
     @IBOutlet var makeupTagCollectionView: UICollectionView!
     @IBOutlet var portfolioCollectionView: UICollectionView!
     @IBOutlet var bottomBarView: UIView!
+    @IBOutlet var artistGenderView: UIView!
+    @IBOutlet var artistShopView: UIView!
+    @IBOutlet var artistVisitingView: UIView!
     
     // 더미데이터
     private var subtitleArray : [String] = ["데일리 메이크업","배우 메이크업","배우 메이크업"]
@@ -25,8 +28,22 @@ class ArtistProfilePreviewViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionViewConfig()
+        uiSet()
         bottomBarView.layer.cornerRadius = 10
         
+    }
+    
+    private func uiSet(){
+        artistGenderView.layer.borderColor = UIColor(resource: .mainBold).cgColor
+        artistGenderView.layer.cornerRadius = artistGenderView.frame.height/2
+        artistGenderView.layer.borderWidth = 1
+        
+        artistShopView.backgroundColor = UIColor(resource: .mainBold)
+        artistShopView.layer.cornerRadius = artistShopView.frame.height/2
+
+        artistVisitingView.backgroundColor = UIColor(resource: .mainBold)
+        artistVisitingView.layer.cornerRadius = artistVisitingView.frame.height/2
+
     }
     
     private func collectionViewConfig(){
@@ -41,7 +58,7 @@ class ArtistProfilePreviewViewController: UIViewController {
     }
     
     @IBAction private func backButtonDidTap(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 
 }

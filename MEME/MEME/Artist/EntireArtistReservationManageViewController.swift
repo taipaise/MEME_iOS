@@ -9,9 +9,6 @@ import UIKit
 
 class EntireArtistReservationManageViewController: UIViewController {
     
-    @IBOutlet var onComingButton: UIButton!
-    @IBOutlet var completeButton: UIButton!
-    
     @IBOutlet var bottomBarView: UIView!
     @IBOutlet var artistReservationTableView: UITableView!
     // 더미 데이터
@@ -31,12 +28,12 @@ class EntireArtistReservationManageViewController: UIViewController {
         artistReservationTableView.register(ArtistReservationStatusTableViewCell.nib(), forCellReuseIdentifier: ArtistReservationStatusTableViewCell.identifier)
     }
     @IBAction private func backButtonDidTap(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
     
     @objc private func reservationManagedBtnTapped(){
         let vc = ArtistReservationSingleManageViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
 }
 

@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -17,6 +18,8 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArtistReservationManageViewController" customModule="MEME" customModuleProvider="target">
             <connections>
                 <outlet property="artistReservationTableView" destination="9ij-15-5Xn" id="AYE-Eo-HRI"/>
+                <outlet property="completeButton" destination="a6b-VH-KlA" id="IB5-Tu-ecd"/>
+                <outlet property="onComingButton" destination="L2a-ng-bgb" id="kjd-1D-TPo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,7 +32,7 @@
                     <rect key="frame" x="0.0" y="61" width="393" height="48"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="예약 관리" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hs5-xB-zKz">
-                            <rect key="frame" x="167" y="14" width="59.333333333333343" height="20"/>
+                            <rect key="frame" x="166.66666666666666" y="14.666666666666673" width="60" height="18.666666666666671"/>
                             <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -42,26 +45,56 @@
                         <constraint firstItem="Hs5-xB-zKz" firstAttribute="centerY" secondItem="Q9K-yN-R96" secondAttribute="centerY" id="noZ-hZ-bcz"/>
                     </constraints>
                 </view>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9ij-15-5Xn">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="9ij-15-5Xn">
                     <rect key="frame" x="0.0" y="109" width="393" height="709"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L2a-ng-bgb">
+                    <rect key="frame" x="240.33333333333334" y="94" width="64.333333333333343" height="27"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="예정" imagePadding="4" buttonSize="small" titleAlignment="automatic">
+                        <imageReference key="image" image="ic_check_fill" symbolScale="small"/>
+                        <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="14"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="onComingButtonTapped:" destination="-1" eventType="touchUpInside" id="C3K-GY-qaI"/>
+                    </connections>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a6b-VH-KlA">
+                    <rect key="frame" x="304.66666666666669" y="94" width="64.333333333333314" height="27"/>
+                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" title="완료" imagePadding="4" buttonSize="small" titleAlignment="automatic">
+                        <imageReference key="image" image="ic_check_empty" symbolScale="small"/>
+                        <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="14"/>
+                    </buttonConfiguration>
+                    <connections>
+                        <action selector="completeButtonTapped:" destination="-1" eventType="touchUpInside" id="mA1-uj-lx1"/>
+                    </connections>
+                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9ij-15-5Xn" secondAttribute="bottom" id="0Kq-1P-jec"/>
+                <constraint firstItem="a6b-VH-KlA" firstAttribute="top" secondItem="Q9K-yN-R96" secondAttribute="bottom" constant="-15" id="5B0-Pm-0b2"/>
                 <constraint firstItem="9ij-15-5Xn" firstAttribute="top" secondItem="Q9K-yN-R96" secondAttribute="bottom" id="EFP-42-qOr"/>
+                <constraint firstItem="L2a-ng-bgb" firstAttribute="centerY" secondItem="a6b-VH-KlA" secondAttribute="centerY" id="GrM-IT-air"/>
                 <constraint firstItem="Q9K-yN-R96" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="2" id="Lmx-8N-v8B"/>
                 <constraint firstItem="Q9K-yN-R96" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="f5m-HE-p0e"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Q9K-yN-R96" secondAttribute="trailing" id="haS-if-tc0"/>
+                <constraint firstItem="a6b-VH-KlA" firstAttribute="leading" secondItem="L2a-ng-bgb" secondAttribute="trailing" id="nU4-eb-9Ff"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="9ij-15-5Xn" secondAttribute="trailing" id="rbx-vs-RE3"/>
                 <constraint firstItem="9ij-15-5Xn" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="y0W-cm-p3Y"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="a6b-VH-KlA" secondAttribute="trailing" constant="24" id="z8V-2C-Qz8"/>
             </constraints>
-            <point key="canvasLocation" x="27" y="-11"/>
+            <point key="canvasLocation" x="26.717557251908396" y="-11.267605633802818"/>
         </view>
     </objects>
     <resources>
+        <image name="ic_check_empty" width="16" height="16"/>
+        <image name="ic_check_fill" width="16" height="16"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

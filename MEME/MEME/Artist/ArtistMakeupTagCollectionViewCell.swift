@@ -9,6 +9,7 @@ import UIKit
 
 class ArtistMakeupTagCollectionViewCell: UICollectionViewCell {
     @IBOutlet var makeupTagLabel: UILabel!
+    @IBOutlet var makeupTagView: UIView!
     
     static let identifier = "ArtistMakeupTagCollectionViewCell"
 
@@ -18,6 +19,12 @@ class ArtistMakeupTagCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        uiSet()
+    }
+    private func uiSet(){
+        makeupTagView.layer.borderColor = UIColor(resource: .mainBold).cgColor
+        makeupTagView.layer.cornerRadius = makeupTagView.frame.height/2
+        makeupTagView.layer.borderWidth = 1
     }
 
 }

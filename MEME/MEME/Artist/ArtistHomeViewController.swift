@@ -9,6 +9,7 @@ import UIKit
 
 class ArtistHomeViewController: UIViewController {
     @IBOutlet var artistHomeProfileStatusView: UIView!
+    @IBOutlet var secondArtistHomeProfileStatusView: UIView!
     @IBOutlet var artistHomeProfileNoStatusView: UIView!
     @IBOutlet var artistProfileImageView: UIImageView!
     @IBOutlet var artistHomeProfileLabel: UILabel!
@@ -23,8 +24,8 @@ class ArtistHomeViewController: UIViewController {
     
     // 예약 전적 유무
     private var isReservation : Bool = true
-    // 오늘 예약 유무
-    private var isTodayReservation : Bool = false
+    // 오늘 예약 수
+    private var TodayRes : Int = 2
     // 내일 예약 수
     private var tomorrowRes : Int = 3
     
@@ -37,15 +38,28 @@ class ArtistHomeViewController: UIViewController {
     }
     private func uiSet(){
         
-        artistHomeProfileNoStatusView.isHidden = isTodayReservation
-        artistHomeProfileStatusView.isHidden = !isTodayReservation
+        if(TodayRes==0){
+            artistHomeProfileNoStatusView.isHidden = false
+            artistHomeProfileStatusView.isHidden = true
+            secondArtistHomeProfileStatusView.isHidden = true
+        }else if(TodayRes==1){
+            artistHomeProfileNoStatusView.isHidden = true
+            artistHomeProfileStatusView.isHidden = false
+            secondArtistHomeProfileStatusView.isHidden = true
+        }else{
+            artistHomeProfileNoStatusView.isHidden = true
+            artistHomeProfileStatusView.isHidden = false
+            secondArtistHomeProfileStatusView.isHidden = false
+        }
+        
+        
         
         artistHomeProfileStatusView.layer.cornerRadius = 10
         artistHomeProfileNoStatusView.layer.cornerRadius = 10
+        secondArtistHomeProfileStatusView.layer.cornerRadius = 10
+        
         artistProfileImageView.layer.cornerRadius = artistProfileImageView.frame.height/2
         artistProfileImageView.clipsToBounds = true
-        
-        
         
         artistHomeProfileLabel.text = "안녕하세요, 00님!\n내일 예약 " + String(tomorrowRes) + "건이 있어요."
     }
@@ -58,19 +72,23 @@ class ArtistHomeViewController: UIViewController {
 
     @IBAction private func profileImageTapped(_ sender: UIButton) {
         let vc = ArtistProfilePreviewViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @IBAction private func portfolioManageBtnTapped(_ sender: UIButton) {
         // 포트폴리오 관리 화면 전환
+        // 테이블뷰를 스택뷰랑 레이아웃 잡기위해, 스택뷰랑 겹쳐서 보이기
+        if(TodayRes==0){
+            print("mangedBtnTapped")
+        }
     }
     @IBAction private func entireReservationBtnTapped(_ sender: UIButton) {
         let vc = EntireArtistReservationManageViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     @objc private func reservationManagedBtnTapped(){
         let vc = ArtistReservationSingleManageViewController()
-        self.navigationController?.pushViewController(vc, animated: true)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
