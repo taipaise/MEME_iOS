@@ -11,27 +11,28 @@ class ModelReservationChartTableViewCell: UITableViewCell {
     // MARK: - Properties
     static let identifier = "ModelReservationChartTableViewCell"
     
-    @IBOutlet weak var makeupImgView: UIImageView!
-    @IBOutlet weak var makeupSortView: UIView!
-    @IBOutlet weak var makeupSortLabel: UILabel!
-    @IBOutlet weak var artistNameLabel: UILabel!
+    @IBOutlet private weak var makeupImgView: UIImageView!
+    @IBOutlet private weak var makeupSortView: UIView!
+    @IBOutlet private weak var makeupSortLabel: UILabel!
+    @IBOutlet private weak var artistNameLabel: UILabel!
     
-    @IBOutlet weak var shopView: UIView!
-    @IBOutlet weak var shopLabel: UILabel!
-    @IBOutlet weak var shopLocationLabel: UILabel!
-    @IBOutlet weak var visitView: UIView!
-    @IBOutlet weak var visitLabel: UILabel!
-    @IBOutlet weak var visitLocationLabel: UILabel!
+    @IBOutlet private weak var shopView: UIView!
+    @IBOutlet private weak var shopLabel: UILabel!
+    @IBOutlet private weak var shopLocationLabel: UILabel!
+    @IBOutlet private weak var visitView: UIView!
+    @IBOutlet private weak var visitLabel: UILabel!
+    @IBOutlet private weak var visitLocationLabel: UILabel!
     
-    @IBOutlet weak var makeupNameLabel: UILabel!
-    @IBOutlet weak var makeupPriceLabel: UILabel!
-    @IBOutlet weak var starLabel: UILabel!
-    @IBOutlet weak var reviewLabel: UILabel!
-    @IBOutlet weak var reviewExplainLabel: UILabel!
+    @IBOutlet private weak var makeupNameLabel: UILabel!
+    @IBOutlet private weak var makeupPriceLabel: UILabel!
+    @IBOutlet private weak var starLabel: UILabel!
+    @IBOutlet private weak var reviewLabel: UILabel!
+    @IBOutlet private weak var reviewExplainLabel: UILabel!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        
+        shopView.backgroundColor = .white
+        visitView.backgroundColor = .white
         shopView.layer.borderColor = UIColor.mainLight.cgColor
         visitView.layer.borderColor = UIColor.mainLight.cgColor
 

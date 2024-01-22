@@ -32,7 +32,7 @@ final class ModelHomeViewController: UIViewController {
         searchBar.backgroundColor = .white
         searchBar.layer.cornerRadius = 20
         searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = UIColor(red: 255/255, green: 99/255, blue: 62/255, alpha: 1).cgColor
+        searchBar.layer.borderColor = UIColor.mainLight.cgColor
         
         searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
             searchBar.setSearchFieldBackgroundImage(UIImage(), for: .normal)
@@ -42,11 +42,11 @@ final class ModelHomeViewController: UIViewController {
             textField.textColor = .black
         
         if let leftView = textField.leftView as? UIImageView {
-                leftView.tintColor = UIColor(red: 255/255, green: 99/255, blue: 62/255, alpha: 1)
+            leftView.tintColor = .mainLight
             }
-        let placeholderAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(red: 255/255, green: 99/255, blue: 62/255, alpha: 1)]
+        let placeholderAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.mainLight]
             textField.attributedPlaceholder = NSAttributedString(string: "원하는 메이크업을 검색해보세요.", attributes: placeholderAttributes)
-        searchBar.tintColor = UIColor(red: 255/255, green: 99/255, blue: 62/255, alpha: 1)
+        searchBar.tintColor = .mainLight
         
         return searchBar
     }()
@@ -55,7 +55,7 @@ final class ModelHomeViewController: UIViewController {
         let label = UILabel()
         label.text = "000 님, 환영합니다!"
         label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = .pretendard(to: .semiBold, size: 20)
         label.numberOfLines = 0
         
         return label
@@ -64,36 +64,53 @@ final class ModelHomeViewController: UIViewController {
         let label = UILabel()
         label.text = "아티스트와의 약속 놓치지 마세요!"
         label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.font = .pretendard(to: .semiBold, size: 20)
         
         return label
     }()
+    private var viewAllReservationsButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("전체 예약 보기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        if let image = UIImage(systemName: "chevron.right")?.withTintColor(.black, renderingMode: .alwaysOriginal) {
+            button.setImage(image, for: .normal)
+        }
+        button.semanticContentAttribute = .forceRightToLeft
+        button.addTarget(self, action: #selector(viewAllReservationsTapped), for: .touchUpInside)
+
+        return button
+    }()
+
     private var modelReservationCollectionView: UICollectionView!
     private var recomandArtistReservationMainLabel: UILabel = {
         let label = UILabel()
         label.text = "어떤 아티스트를 선택할 지 모르겠을 때"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .black
+        label.font = .pretendard(to: .semiBold, size: 20)
         
         return label
     }()
     private var recomandArtistReservationSubLabel: UILabel = {
         let label = UILabel()
         label.text = "후기가 많은 아티스트를 만나봐요"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
+        label.font = .pretendard(to: .regular, size: 14)
         return label
     }()
     private var recomandReservationCollectionView: UICollectionView!
     private var recomandHastyReservationMainLabel: UILabel = {
         let label = UILabel()
         label.text = "급하게 메이크업이 필요할 때"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .black
+        label.font = .pretendard(to: .semiBold, size: 20)
         
         return label
     }()
     private var recomandHastyReservationSubLabel: UILabel = {
         let label = UILabel()
         label.text = "오늘, 내일 바로 예약 가능한 아티스트를 알아봐요"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
+        label.font = .pretendard(to: .regular, size: 14)
         return label
     }()
     private var recomandHastyReservationCollectionView: UICollectionView!
@@ -124,12 +141,16 @@ final class ModelHomeViewController: UIViewController {
         contentsView.addSubview(searchMakeup)
         contentsView.addSubview(modelWelcomeLabel)
         contentsView.addSubview(modelWelcomeGuideLabel)
+        contentsView.addSubview(viewAllReservationsButton)
+        modelReservationCollectionView.backgroundColor = .white
         contentsView.addSubview(modelReservationCollectionView)
         contentsView.addSubview(recomandArtistReservationMainLabel)
         contentsView.addSubview(recomandArtistReservationSubLabel)
+        recomandReservationCollectionView.backgroundColor = .white
         contentsView.addSubview(recomandReservationCollectionView)
         contentsView.addSubview(recomandHastyReservationMainLabel)
         contentsView.addSubview(recomandHastyReservationSubLabel)
+        recomandHastyReservationCollectionView.backgroundColor = .white
         contentsView.addSubview(recomandHastyReservationCollectionView)
         scrollView.addSubview(contentsView)
         view.addSubview(scrollView)
@@ -171,8 +192,12 @@ final class ModelHomeViewController: UIViewController {
             make.top.equalTo(modelWelcomeLabel.snp.bottom)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
+        viewAllReservationsButton.snp.makeConstraints {make in
+            make.top.equalTo(modelWelcomeGuideLabel.snp.bottom).offset(17)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+        }
         modelReservationCollectionView.snp.makeConstraints {make in
-            make.top.equalTo(modelWelcomeLabel.snp.top).offset(71)
+            make.top.equalTo(viewAllReservationsButton.snp.bottom).offset(13)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
             make.height.equalTo(150)
@@ -212,6 +237,11 @@ final class ModelHomeViewController: UIViewController {
     func setupSearchBar() {
         searchMakeup.delegate = self
     }
+    @objc private func viewAllReservationsTapped() {
+        let reservationsVC = ModelManagementReservationsViewController()
+        navigationController?.pushViewController(reservationsVC, animated: true)
+    }
+
     
     //MARK: -Helpers
     private func setupReservationCollectionView() {

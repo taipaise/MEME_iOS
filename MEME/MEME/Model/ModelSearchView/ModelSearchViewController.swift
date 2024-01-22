@@ -10,21 +10,21 @@ import SwiftUI
 
 class ModelSearchViewController: UIViewController {
     //MARK: -Properties
-    let backButton: UIButton = {
+    private let backButton: UIButton = {
         let backButton = UIButton()
         backButton.setTitle("<", for: .normal)
-        backButton.setTitleColor(UIColor.black, for: .normal)
-        backButton.backgroundColor = UIColor.white
+        backButton.setTitleColor(.black, for: .normal)
+        backButton.backgroundColor = .white
         
         return backButton
     }()
-    let searchMakeup: UISearchBar = {
+    private let searchMakeup: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "원하는 메이크업을 검색해보세요."
         searchBar.backgroundColor = .white
         searchBar.layer.cornerRadius = 20
         searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = UIColor(red: 255/255, green: 99/255, blue: 62/255, alpha: 1).cgColor
+        searchBar.layer.borderColor = UIColor.mainLight.cgColor
         
         searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
             searchBar.setSearchFieldBackgroundImage(UIImage(), for: .normal)
@@ -34,41 +34,44 @@ class ModelSearchViewController: UIViewController {
             textField.textColor = .black
         
         if let leftView = textField.leftView as? UIImageView {
-                leftView.tintColor = UIColor(red: 255/255, green: 99/255, blue: 62/255, alpha: 1)
+            leftView.tintColor = .mainLight
             }
-        let placeholderAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(red: 255/255, green: 99/255, blue: 62/255, alpha: 1)]
+        let placeholderAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.mainLight]
             textField.attributedPlaceholder = NSAttributedString(string: "원하는 메이크업을 검색해보세요.", attributes: placeholderAttributes)
-        searchBar.tintColor = UIColor(red: 255/255, green: 99/255, blue: 62/255, alpha: 1)
+        searchBar.tintColor = .mainLight
         
         return searchBar
     }()
-    var recentSearchesLabel: UILabel = {
+    private var recentSearchesLabel: UILabel = {
         let label = UILabel()
         label.text = "최근 검색어"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
+        label.font = .pretendard(to: .regular, size: 14)
         
         return label
     }()
-    var recentSearchesCollectionView: UICollectionView!
-    var categorySearchesLabel: UILabel = {
+    private var recentSearchesCollectionView: UICollectionView!
+    private var categorySearchesLabel: UILabel = {
         let label = UILabel()
         label.text = "카테고리로 찾기"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
+        label.font = .pretendard(to: .regular, size: 14)
         
         return label
     }()
-    var categorySearchesCollectionView: UICollectionView!
-    var artistSearchesLabel: UILabel = {
+    private var categorySearchesCollectionView: UICollectionView!
+    private var artistSearchesLabel: UILabel = {
         let label = UILabel()
         label.text = "관심 아티스트로 찾기"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
+        label.font = .pretendard(to: .regular, size: 14)
         
         return label
     }()
-    let Artist1Button: UIButton = {
+    private let Artist1Button: UIButton = {
         let button = UIButton()
         button.setTitle("아티스트명", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+        button.titleLabel?.font = .pretendard(to: .regular, size: 10)
         button.setTitleColor(UIColor.black, for: .normal)
         button.backgroundColor = UIColor.white
         
@@ -79,10 +82,10 @@ class ModelSearchViewController: UIViewController {
         
         return button
     }()
-    let Artist2Button: UIButton = {
+    private let Artist2Button: UIButton = {
         let button = UIButton()
         button.setTitle("아티스트명", for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 10)
+        button.titleLabel?.font = .pretendard(to: .regular, size: 10)
         button.setTitleColor(UIColor.black, for: .normal)
         button.backgroundColor = UIColor.white
         
@@ -113,8 +116,10 @@ class ModelSearchViewController: UIViewController {
         view.addSubview(backButton)
         view.addSubview(searchMakeup)
         view.addSubview(recentSearchesLabel)
+        recentSearchesCollectionView.backgroundColor = .white
         view.addSubview(recentSearchesCollectionView)
         view.addSubview(categorySearchesLabel)
+        categorySearchesCollectionView.backgroundColor = .white
         view.addSubview(categorySearchesCollectionView)
         view.addSubview(artistSearchesLabel)
         view.addSubview(Artist1Button)

@@ -23,6 +23,7 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
     private var titleLabel: UILabel = {
         let label = UILabel()
         label.text = "예약하기"
+        label.textColor = .black
         label.font = UIFont.systemFont(ofSize: 16)
         
         return label
@@ -99,14 +100,16 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
     private var numLabel: UILabel = {
         let label = UILabel()
         label.text = "100"
-        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.textColor = .black
+        label.font = .pretendard(to: .bold, size: 12)
         
         return label
     }()
     private var searchNumLabel: UILabel = {
         let label = UILabel()
         label.text = "개의 검색 결과"
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = .black
+        label.font = .pretendard(to: .regular, size: 12)
         
         return label
     }()
@@ -148,6 +151,7 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
         view.addSubview(numLabel)
         view.addSubview(searchNumLabel)
         view.addSubview(sortButton)
+        reservationChartTableView.backgroundColor = .white
         view.addSubview(reservationChartTableView)
         
     }

@@ -25,10 +25,10 @@
                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="예정된 약속이 없어요. 🥲 지금 예약하러 가볼까요?" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kMe-p6-Hqc">
                         <rect key="frame" x="72.333333333333329" y="46" width="180.33333333333337" height="43"/>
                         <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="18"/>
-                        <nil key="textColor"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
-                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ZB-l5-hGm">
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2ZB-l5-hGm">
                         <rect key="frame" x="0.0" y="118" width="325" height="48"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="48" id="Cc3-pm-Uzp"/>
@@ -53,7 +53,7 @@
                 <outlet property="modelNoReservationButton" destination="2ZB-l5-hGm" id="HL0-RI-gSo"/>
                 <outlet property="modelNoReservationLabel" destination="kMe-p6-Hqc" id="EqS-V2-iKv"/>
             </connections>
-            <point key="canvasLocation" x="26" y="-151"/>
+            <point key="canvasLocation" x="25.190839694656489" y="-151.40845070422537"/>
         </collectionViewCell>
     </objects>
 </document>

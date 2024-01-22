@@ -10,9 +10,9 @@ import UIKit
 
 class CategorySearchViewCell: UICollectionViewCell {
     static let identifier = "CategorySearchViewCell"
-    @IBOutlet weak var categoryImageBackgroundView: UIView!
-    @IBOutlet weak var categoryImageView: UIImageView!
-    @IBOutlet weak var categoryLabel: UILabel!
+    @IBOutlet private weak var categoryImageBackgroundView: UIView!
+    @IBOutlet private weak var categoryImageView: UIImageView!
+    @IBOutlet private weak var categoryLabel: UILabel!
     
     // MARK: - Initialization
     override func awakeFromNib() {
