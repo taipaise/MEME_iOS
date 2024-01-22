@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class ModelReservationViewController: UIViewController {
+class ModelReservationViewController: UIViewController, BackButtonTappedDelegate {
     // MARK: - Properties
     private let scrollView = UIScrollView()
     private let contentsView = UIView()
@@ -36,7 +36,8 @@ class ModelReservationViewController: UIViewController {
     private var artistNameLabel: UILabel = {
         let label = UILabel()
         label.text = "김차차"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = .black
+        label.font = .pretendard(to: .semiBold, size: 18)
         
         return label
     }()
@@ -57,21 +58,24 @@ class ModelReservationViewController: UIViewController {
     private var makeupNameLabel: UILabel = {
         let label = UILabel()
         label.text = "촬영 메이크업"
-        label.font = UIFont.boldSystemFont(ofSize: 16)
+        label.textColor = .black
+        label.font = .pretendard(to: .semiBold, size: 16)
         
         return label
     }()
     private var makeupExplainLabel: UILabel = {
         let label = UILabel()
         label.text = "프로필사진 촬영에 좋아요"
-        label.font = UIFont.systemFont(ofSize: 12)
+        label.textColor = .black
+        label.font = .pretendard(to: .regular, size: 12)
         
         return label
     }()
     private var makeupPriceLabel: UILabel = {
         let label = UILabel()
         label.text = "100,000"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = .black
+        label.font = .pretendard(to: .semiBold, size: 18)
         
         return label
     }()
@@ -84,28 +88,32 @@ class ModelReservationViewController: UIViewController {
     private var qEmploymentStatusLabel: UILabel = {
         let label = UILabel()
         label.text = "샵 재직 여부"
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textColor = .black
+        label.font = .pretendard(to: .semiBold, size: 14)
         
         return label
     }()
     private var aEmploymentStatusLabel: UILabel = {
         let label = UILabel()
         label.text = "🙅🏻프리랜서에요"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
+        label.font = .pretendard(to: .regular, size: 14)
         
         return label
     }()
     private var qCategoryLabel: UILabel = {
         let label = UILabel()
         label.text = "카테고리"
-        label.font = UIFont.boldSystemFont(ofSize: 14)
+        label.textColor = .black
+        label.font = .pretendard(to: .semiBold, size: 14)
         
         return label
     }()
     private var aCategoryLabel: UILabel = {
         let label = UILabel()
         label.text = "면접 메이크업"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
+        label.font = .pretendard(to: .regular, size: 14)
         
         return label
     }()
@@ -129,18 +137,8 @@ class ModelReservationViewController: UIViewController {
             stackView.spacing = 8 // 요소 사이의 간격 설정
             return stackView
         }()
-    let informationView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .green
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    let reviewView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .yellow
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    private var informationView = InformationView()
+    private var reviewView = ReviewView()
     private var shouldHideInformationView: Bool? {
         didSet {
           guard let shouldHideInformationView = self.shouldHideInformationView else { return }
@@ -153,7 +151,8 @@ class ModelReservationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-
+        
+        setupCustomNavigationBar()
         setupSegmentedControl()
         configureSubviews()
         makeConstraints()
@@ -294,17 +293,28 @@ class ModelReservationViewController: UIViewController {
             make.height.equalTo(400)
         }
     }
-    
+    // MARK: - Action
+    func backButtonTapped() {
+            self.navigationController?.popViewController(animated: true)
+        }
     // MARK: - Methods
-      
       @objc private func didChangeValue(segment: UISegmentedControl) {
         self.shouldHideInformationView = segment.selectedSegmentIndex != 0
       }
     
     //MARK: -Helpers
+    private func setupCustomNavigationBar() {
+        let navigationBarView = NavigationBarView()
+        navigationBarView.delegate = self
+        navigationBarView.configure(title: "뒤로")
+        let leftBarButtonItem = UIBarButtonItem(customView: navigationBarView)
+        self.navigationItem.leftBarButtonItem = leftBarButtonItem
+    }
     private func setupSegmentedControl() {
         self.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
         self.segmentedControl.selectedSegmentIndex = 0
         self.didChangeValue(segment: self.segmentedControl)
     }
 }
+
+

@@ -54,6 +54,7 @@ final class ModelHomeViewController: UIViewController {
     private var modelWelcomeLabel: UILabel = {
         let label = UILabel()
         label.text = "000 님, 환영합니다!"
+        label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 18)
         label.numberOfLines = 0
         
@@ -62,6 +63,7 @@ final class ModelHomeViewController: UIViewController {
     private var modelWelcomeGuideLabel: UILabel = {
         let label = UILabel()
         label.text = "아티스트와의 약속 놓치지 마세요!"
+        label.textColor = .black
         label.font = UIFont.boldSystemFont(ofSize: 18)
         
         return label
