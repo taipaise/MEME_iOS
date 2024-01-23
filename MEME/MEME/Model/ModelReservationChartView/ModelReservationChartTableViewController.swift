@@ -12,23 +12,6 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
     private var selectedButton: ModelReservationTypeButton?
     
     // MARK: - Properties
-    private let backButton: UIButton = {
-        let backButton = UIButton()
-        backButton.setTitle("<", for: .normal)
-        backButton.setTitleColor(UIColor.black, for: .normal)
-        backButton.backgroundColor = UIColor.white
-        
-        return backButton
-    }()
-    private var titleLabel: UILabel = {
-        let label = UILabel()
-        label.text = "예약하기"
-        label.textColor = .black
-        label.font = UIFont.systemFont(ofSize: 16)
-        
-        return label
-    }()
-    
     private let buttonScrollView = UIScrollView()
     private let buttonsStackView = UIStackView()
     
@@ -132,6 +115,9 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.title = "예약하기"
 
         setupButtonsStackView()
         setupButtonsAction()
@@ -143,8 +129,6 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
     
     // MARK: - configureSubviews
     func configureSubviews() {
-        view.addSubview(backButton)
-        view.addSubview(titleLabel)
         buttonScrollView.showsHorizontalScrollIndicator = false
         view.addSubview(buttonScrollView)
         view.addSubview(lineView)
@@ -158,18 +142,8 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
     
     // MARK: - makeConstraints
     func makeConstraints() {
-        backButton.snp.makeConstraints {make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
-            make.leading.equalToSuperview().offset(24)
-            make.width.equalTo(40)
-            make.height.equalTo(40)
-        }
-        titleLabel.snp.makeConstraints {make in
-            make.centerY.equalTo(backButton.snp.centerY)
-            make.centerX.equalToSuperview()
-        }
         buttonScrollView.snp.makeConstraints {make in
-            make.top.equalTo(titleLabel.snp.bottom).offset(14.5)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview()
             make.height.equalTo(48)

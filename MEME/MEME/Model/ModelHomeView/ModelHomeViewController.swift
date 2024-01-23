@@ -14,7 +14,7 @@ final class ModelHomeViewController: UIViewController {
     private let contentsView = UIView()
     private var memeLogoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "memeLogo")
+        imageView.image = UIImage(named: "logo")
         imageView.contentMode = .scaleAspectFit
         
         return imageView
@@ -32,7 +32,7 @@ final class ModelHomeViewController: UIViewController {
         searchBar.backgroundColor = .white
         searchBar.layer.cornerRadius = 20
         searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = UIColor.mainLight.cgColor
+        searchBar.layer.borderColor = UIColor.mainBold.cgColor
         
         searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
             searchBar.setSearchFieldBackgroundImage(UIImage(), for: .normal)
@@ -42,11 +42,11 @@ final class ModelHomeViewController: UIViewController {
             textField.textColor = .black
         
         if let leftView = textField.leftView as? UIImageView {
-            leftView.tintColor = .mainLight
+            leftView.tintColor = .mainBold
             }
-        let placeholderAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.mainLight]
+        let placeholderAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.mainBold]
             textField.attributedPlaceholder = NSAttributedString(string: "원하는 메이크업을 검색해보세요.", attributes: placeholderAttributes)
-        searchBar.tintColor = .mainLight
+        searchBar.tintColor = .mainBold
         
         return searchBar
     }()
@@ -126,6 +126,8 @@ final class ModelHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         setupReservationCollectionView()
         setupMakeupCardCollectionView()

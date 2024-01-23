@@ -17,7 +17,9 @@ struct StarRatingDistribution {
 }
 
 class TotalStarRatingView: UIView {
-    // 별점 별 프로그레스 바
+    private let starImage = UIImage(named: "icon_star")
+    private let emptyStarImage = UIImage(named: "icon_emptyStar")
+    
     private let fiveStarProgressView = UIProgressView(progressViewStyle: .default)
     private let fourStarProgressView = UIProgressView(progressViewStyle: .default)
     private let threeStarProgressView = UIProgressView(progressViewStyle: .default)
@@ -35,10 +37,9 @@ class TotalStarRatingView: UIView {
     }
 
     private func setupViews() {
-        // 프로그레스 바들의 기본 설정을 여기에서 할 수 있습니다.
         [fiveStarProgressView, fourStarProgressView, threeStarProgressView, twoStarProgressView, oneStarProgressView].forEach {
-            $0.trackTintColor = UIColor.lightGray
-            $0.progressTintColor = UIColor.red
+            $0.trackTintColor = .gray300
+            $0.progressTintColor = .mainBold
             addSubview($0)
         }
     }

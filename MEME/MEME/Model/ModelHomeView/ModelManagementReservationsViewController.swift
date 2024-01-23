@@ -16,6 +16,11 @@ final class ModelManagementReservationsViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationController?.navigationBar.topItem?.title = ""
+        self.title = "전체 예약 보기"
+        
+        
         
 //        configureSubviews()
 //        makeConstraints()
@@ -24,3 +29,4 @@ final class ModelManagementReservationsViewController: UIViewController {
     // MARK: - configureSubviews
     // MARK: - makeConstraints
 }
+

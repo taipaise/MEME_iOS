@@ -10,21 +10,15 @@ import SwiftUI
 
 class ModelSearchViewController: UIViewController {
     //MARK: -Properties
-    private let backButton: UIButton = {
-        let backButton = UIButton()
-        backButton.setTitle("<", for: .normal)
-        backButton.setTitleColor(.black, for: .normal)
-        backButton.backgroundColor = .white
-        
-        return backButton
-    }()
+    private let scrollView = UIScrollView()
+    private let contentsView = UIView()
     private let searchMakeup: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "원하는 메이크업을 검색해보세요."
         searchBar.backgroundColor = .white
         searchBar.layer.cornerRadius = 20
         searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = UIColor.mainLight.cgColor
+        searchBar.layer.borderColor = UIColor.mainBold.cgColor
         
         searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
             searchBar.setSearchFieldBackgroundImage(UIImage(), for: .normal)
@@ -34,11 +28,11 @@ class ModelSearchViewController: UIViewController {
             textField.textColor = .black
         
         if let leftView = textField.leftView as? UIImageView {
-            leftView.tintColor = .mainLight
+            leftView.tintColor = .mainBold
             }
-        let placeholderAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.mainLight]
+        let placeholderAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.mainBold]
             textField.attributedPlaceholder = NSAttributedString(string: "원하는 메이크업을 검색해보세요.", attributes: placeholderAttributes)
-        searchBar.tintColor = .mainLight
+        searchBar.tintColor = .mainBold
         
         return searchBar
     }()
@@ -50,6 +44,16 @@ class ModelSearchViewController: UIViewController {
         
         return label
     }()
+    private var allCancelButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("전체 삭제", for: .normal)
+        button.setTitleColor(.gray400, for: .normal)
+        button.titleLabel?.font = .pretendard(to: .regular, size: 12)
+        button.backgroundColor = .clear
+
+        return button
+    }()
+    private let categorySearchesData = [("icon_daily", "데일리 메이크업"), ("icon_actor", "배우 메이크업"), ("icon_interview", "면접 메이크업"), ("icon_party", "파티/이벤트\n메이크업"), ("icon_wedding", "웨딩 메이크업"), ("icon_special", "특수 메이크업"), ("icon_studio", "스튜디오\n메이크업"), ("icon_etc", "기타(속눈썹,\n퍼스널 컬러)")]
     private var recentSearchesCollectionView: UICollectionView!
     private var categorySearchesLabel: UILabel = {
         let label = UILabel()
@@ -102,6 +106,7 @@ class ModelSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.navigationController?.navigationBar.tintColor = .black
         
         setupRecentSearchCollectionView()
         setupSearchCollectionView()
@@ -113,66 +118,74 @@ class ModelSearchViewController: UIViewController {
     
     // MARK: - configureSubviews
     func configureSubviews() {
-        view.addSubview(backButton)
-        view.addSubview(searchMakeup)
-        view.addSubview(recentSearchesLabel)
+        view.addSubview(scrollView)
+        scrollView.addSubview(contentsView)
+        contentsView.addSubview(searchMakeup)
+        contentsView.addSubview(recentSearchesLabel)
+        contentsView.addSubview(allCancelButton)
         recentSearchesCollectionView.backgroundColor = .white
-        view.addSubview(recentSearchesCollectionView)
-        view.addSubview(categorySearchesLabel)
+        contentsView.addSubview(recentSearchesCollectionView)
+        contentsView.addSubview(categorySearchesLabel)
         categorySearchesCollectionView.backgroundColor = .white
-        view.addSubview(categorySearchesCollectionView)
-        view.addSubview(artistSearchesLabel)
-        view.addSubview(Artist1Button)
-        view.addSubview(Artist2Button)
+        contentsView.addSubview(categorySearchesCollectionView)
+        contentsView.addSubview(artistSearchesLabel)
+        contentsView.addSubview(Artist1Button)
+        contentsView.addSubview(Artist2Button)
     }
     
     // MARK: - makeConstraints
     func makeConstraints() {
-        backButton.snp.makeConstraints {make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
-            make.leading.equalToSuperview().offset(24)
-            make.width.equalTo(40)
-            make.height.equalTo(40)
+        scrollView.snp.makeConstraints {make in
+            make.edges.equalToSuperview()
+        }
+        contentsView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+            make.width.equalTo(scrollView)
         }
         searchMakeup.snp.makeConstraints {make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
-            make.leading.equalTo(backButton.snp.trailing).offset(5)
-            make.trailing.equalToSuperview().offset(-24)
+            make.top.equalTo(contentsView.snp.top).offset(16)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
             make.height.equalTo(40)
         }
         recentSearchesLabel.snp.makeConstraints {make in
-            make.top.equalTo(backButton.snp.bottom).offset(42)
-            make.leading.equalToSuperview().offset(24)
+            make.top.equalTo(searchMakeup.snp.bottom).offset(42)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
+        }
+        allCancelButton.snp.makeConstraints {make in
+            make.centerY.equalTo(recentSearchesLabel.snp.centerY)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
         }
         recentSearchesCollectionView.snp.makeConstraints {make in
             make.top.equalTo(recentSearchesLabel.snp.bottom).offset(3)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
             make.height.equalTo(30)
         }
         categorySearchesLabel.snp.makeConstraints {make in
             make.top.equalTo(recentSearchesCollectionView.snp.bottom).offset(31)
-            make.leading.equalToSuperview().offset(24)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
         categorySearchesCollectionView.snp.makeConstraints {make in
             make.top.equalTo(categorySearchesLabel.snp.bottom).offset(9)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
-            make.height.equalTo(405)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+            make.height.equalTo(450)
         }
         artistSearchesLabel.snp.makeConstraints {make in
             make.top.equalTo(categorySearchesCollectionView.snp.bottom).offset(27)
-            make.leading.equalToSuperview().offset(24)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
         Artist1Button.snp.makeConstraints {make in
             make.top.equalTo(artistSearchesLabel.snp.bottom).offset(9)
-            make.leading.equalToSuperview().offset(24)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
             make.width.equalTo(68)
         }
         Artist2Button.snp.makeConstraints {make in
             make.centerY.equalTo(Artist1Button.snp.centerY)
             make.leading.equalTo(Artist1Button.snp.trailing).offset(5)
             make.width.equalTo(68)
+            make.bottom.equalTo(contentsView.snp.bottom).offset(-20)
         }
     }
 
@@ -241,6 +254,9 @@ extension ModelSearchViewController: UICollectionViewDelegate, UICollectionViewD
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategorySearchViewCell.identifier, for: indexPath) as? CategorySearchViewCell else {
                     fatalError("셀 타입 캐스팅 실패...")
                 }
+                let data = categorySearchesData[indexPath.row]
+                cell.categoryImageView.image = UIImage(named: data.0)
+                cell.categoryLabel.text = data.1
                 return cell
             }
         return UICollectionViewCell()
@@ -253,24 +269,28 @@ extension ModelSearchViewController: UICollectionViewDelegateFlowLayout {
         if collectionView == recentSearchesCollectionView {
             return CGSize(width: 107, height: 28)
             }  else if collectionView == categorySearchesCollectionView{
-                return CGSize(width: 95, height: 115)
+                return CGSize(width: 95, height: 137)
             }
         return CGSize(width: 0, height: 0)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        if collectionView == recentSearchesCollectionView {
-            return CGFloat(10)
-            }  else if collectionView == categorySearchesCollectionView{
-                return CGFloat(25)
+        if collectionView == categorySearchesCollectionView {
+                let totalWidth = collectionView.bounds.width
+                let numberOfItemsPerRow: CGFloat = 3
+                let cellWidth: CGFloat = 95
+                let totalCellWidth = cellWidth * numberOfItemsPerRow
+                let totalSpacingWidth = totalWidth - totalCellWidth
+                let spacing = totalSpacingWidth / (numberOfItemsPerRow - 1)
+                return spacing
             }
-        return CGFloat(20)
+            return 10 
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         if collectionView == recentSearchesCollectionView {
             return CGFloat(10)
             }  else if collectionView == categorySearchesCollectionView{
-                return CGFloat(20)
+                return CGFloat(7)
             }
         return CGFloat(25)
     }

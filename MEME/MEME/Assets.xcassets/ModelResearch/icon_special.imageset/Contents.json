@@ -1,17 +1,17 @@
 {
   "images" : [
     {
-      "filename" : "meme 1.png",
+      "filename" : "Helix.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
-      "filename" : "meme 2.png",
+      "filename" : "Helix (1).png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
-      "filename" : "meme 3.png",
+      "filename" : "Helix (2).png",
       "idiom" : "universal",
       "scale" : "3x"
     }

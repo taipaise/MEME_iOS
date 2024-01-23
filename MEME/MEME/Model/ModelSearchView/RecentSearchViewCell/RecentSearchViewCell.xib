@@ -29,7 +29,7 @@
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KgU-cu-sjp">
-                        <rect key="frame" x="104" y="10" width="7" height="7"/>
+                        <rect key="frame" x="104" y="8" width="7" height="7"/>
                         <constraints>
                             <constraint firstAttribute="width" constant="7" id="Ed4-a2-kwe"/>
                             <constraint firstAttribute="height" constant="7" id="xzh-N0-UyI"/>
@@ -47,7 +47,7 @@
                 <constraint firstItem="KgU-cu-sjp" firstAttribute="leading" secondItem="NJv-31-rjq" secondAttribute="trailing" constant="10" id="LTc-kF-Ej8"/>
                 <constraint firstItem="NJv-31-rjq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="7" id="Yud-Q7-GyJ"/>
                 <constraint firstAttribute="bottom" secondItem="NJv-31-rjq" secondAttribute="bottom" constant="7" id="gJi-yb-cBL"/>
-                <constraint firstItem="KgU-cu-sjp" firstAttribute="centerY" secondItem="NJv-31-rjq" secondAttribute="centerY" id="h1e-OK-qc4"/>
+                <constraint firstItem="KgU-cu-sjp" firstAttribute="centerY" secondItem="NJv-31-rjq" secondAttribute="centerY" constant="-2" id="h1e-OK-qc4"/>
                 <constraint firstAttribute="trailing" secondItem="KgU-cu-sjp" secondAttribute="trailing" constant="12" id="tY6-Dj-T8i"/>
             </constraints>
             <size key="customSize" width="123" height="27"/>
@@ -55,7 +55,7 @@
                 <outlet property="cancelButton" destination="KgU-cu-sjp" id="45D-ed-mRl"/>
                 <outlet property="searchWordLabel" destination="NJv-31-rjq" id="z2k-yK-6uO"/>
             </connections>
-            <point key="canvasLocation" x="156" y="12"/>
+            <point key="canvasLocation" x="154.96183206106869" y="11.619718309859156"/>
         </collectionViewCell>
     </objects>
 </document>

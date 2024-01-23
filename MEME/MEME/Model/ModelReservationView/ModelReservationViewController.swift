@@ -129,14 +129,6 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
-    let verticalStackView: UIStackView = {
-            let stackView = UIStackView()
-            stackView.axis = .vertical // 수직 스택 뷰로 설정
-            stackView.alignment = .leading // 정렬 방식 설정 (예: .leading, .center, .trailing)
-            stackView.distribution = .fill // 요소 간 간격을 균등하게 배분
-            stackView.spacing = 8 // 요소 사이의 간격 설정
-            return stackView
-        }()
     private var informationView = InformationView()
     private var reviewView = ReviewView()
     private var shouldHideInformationView: Bool? {
@@ -146,13 +138,42 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
           self.reviewView.isHidden = !self.informationView.isHidden
         }
       }
+    private var underBarView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 6)
+        gradient.colors = [
+            UIColor.black.withAlphaComponent(0.1).cgColor,
+            UIColor.clear.cgColor
+        ]
+        gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
+        
+        view.layer.insertSublayer(gradient, at: 0)
+        
+        return view
+    }()
+    private let reservationButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("예약하기", for: .normal)
+        button.titleLabel?.font = .pretendard(to: .regular, size: 14)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
+        
+        return button
+    }()
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
-        setupCustomNavigationBar()
+        self.navigationController?.navigationBar.tintColor = .black
+        self.title = "예약하기"
+
         setupSegmentedControl()
         configureSubviews()
         makeConstraints()
@@ -188,6 +209,8 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         contentsView.addSubview(segmentedControl)
         contentsView.addSubview(informationView)
         contentsView.addSubview(reviewView)
+        view.addSubview(underBarView)
+        view.addSubview(reservationButton)
     }
     
     // MARK: - makeConstraints
@@ -276,21 +299,32 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         }
         segmentedControl.snp.makeConstraints { make in
             make.top.equalTo(underLineView.snp.bottom)
-            make.leading.equalTo(contentsView.snp.leading).offset(14)
-            make.trailing.equalTo(contentsView.snp.trailing).offset(-14)
+            make.leading.equalTo(contentsView.snp.leading).offset(25)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
             make.height.equalTo(35)
         }
         informationView.snp.makeConstraints { make in
             make.top.equalTo(segmentedControl.snp.bottom).offset(2)
-            make.leading.equalTo(contentsView.snp.leading).offset(14)
-            make.trailing.equalTo(contentsView.snp.trailing).offset(-14)
+            make.leading.equalTo(contentsView.snp.leading).offset(25)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
             make.height.equalTo(100)
         }
         reviewView.snp.makeConstraints { make in
             make.top.equalTo(segmentedControl.snp.bottom).offset(2)
-            make.leading.equalTo(contentsView.snp.leading).offset(14)
-            make.trailing.equalTo(contentsView.snp.trailing).offset(-14)
+            make.leading.equalTo(contentsView.snp.leading).offset(25)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
             make.height.equalTo(400)
+        }
+        underBarView.snp.makeConstraints { (make) in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(160)
+        }
+        reservationButton.snp.makeConstraints { (make) in
+            make.top.equalTo(underBarView.snp.top).offset(12)
+            make.leading.equalTo(underBarView.snp.leading).offset(26)
+            make.trailing.equalTo(underBarView.snp.trailing).offset(-26)
+            make.height.equalTo(50)
         }
     }
     // MARK: - Action
@@ -303,13 +337,6 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
       }
     
     //MARK: -Helpers
-    private func setupCustomNavigationBar() {
-        let navigationBarView = NavigationBarView()
-        navigationBarView.delegate = self
-        navigationBarView.configure(title: "뒤로")
-        let leftBarButtonItem = UIBarButtonItem(customView: navigationBarView)
-        self.navigationItem.leftBarButtonItem = leftBarButtonItem
-    }
     private func setupSegmentedControl() {
         self.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
         self.segmentedControl.selectedSegmentIndex = 0

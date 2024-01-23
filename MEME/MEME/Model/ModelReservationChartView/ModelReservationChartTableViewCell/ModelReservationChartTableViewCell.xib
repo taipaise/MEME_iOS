@@ -27,7 +27,7 @@
                 <rect key="frame" x="0.0" y="0.0" width="355" height="141"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sL9-KN-bby">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ex_artist_img" translatesAutoresizingMaskIntoConstraints="NO" id="sL9-KN-bby">
                         <rect key="frame" x="4" y="11" width="120" height="120"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="sL9-KN-bby" secondAttribute="height" multiplier="1:1" id="EHn-1X-AOc"/>
@@ -211,6 +211,7 @@
         </tableViewCell>
     </objects>
     <resources>
+        <image name="ex_artist_img" width="122" height="122"/>
         <namedColor name="SubApricotBold">
             <color red="0.9882352941176471" green="0.7803921568627451" blue="0.68627450980392157" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
