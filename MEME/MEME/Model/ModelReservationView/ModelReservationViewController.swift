@@ -123,6 +123,21 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         
         return lineView
     }()
+    private let mainStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fillProportionally
+        stack.alignment = .fill
+        stack.spacing = 0
+        
+        return stack
+    }()
+    private let topContainerView: UIView = {
+        let view = UIView()
+        
+        return view
+    }()
+    
     private let segmentedControl: ModelReservationSegmentedControl = {
         let underbarInfo = UnderbarInfo(height: 3, barColor: .mainBold, backgroundColor: .gray300)
         let control = ModelReservationSegmentedControl(items: ["정보", "리뷰"], underbarInfo: underbarInfo)
@@ -131,6 +146,7 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
     }()
     private var informationView = InformationView()
     private var reviewView = ReviewView()
+    private var placeholderView = UIView()
     private var shouldHideInformationView: Bool? {
         didSet {
           guard let shouldHideInformationView = self.shouldHideInformationView else { return }
@@ -163,6 +179,7 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         button.backgroundColor = .black
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
+        button.addTarget(self, action: #selector(reservationTapped), for: .touchUpInside)
         
         return button
     }()
@@ -172,9 +189,12 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationController?.navigationBar.tintColor = .black
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.title = "예약하기"
 
         setupSegmentedControl()
+        setupTopContainerView()
+        setupMainStackView()
         configureSubviews()
         makeConstraints()
     }
@@ -206,12 +226,36 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         contentsView.addSubview(qCategoryLabel)
         contentsView.addSubview(aCategoryLabel)
         contentsView.addSubview(underLineView)
-        contentsView.addSubview(segmentedControl)
-        contentsView.addSubview(informationView)
-        contentsView.addSubview(reviewView)
+        contentsView.addSubview(mainStackView)
         view.addSubview(underBarView)
         view.addSubview(reservationButton)
     }
+    
+    private func setupTopContainerView() {
+        topContainerView.addSubview(segmentedControl)
+        topContainerView.addSubview(informationView)
+        topContainerView.addSubview(reviewView)
+        
+        segmentedControl.snp.makeConstraints { make in
+            make.top.equalTo(topContainerView.snp.top)
+            make.leading.trailing.equalTo(topContainerView)
+            make.height.equalTo(35)
+        }
+        informationView.snp.makeConstraints { make in
+            make.top.equalTo(segmentedControl.snp.bottom).offset(2)
+            make.leading.trailing.equalTo(topContainerView)
+        }
+        reviewView.snp.makeConstraints { make in
+            make.top.equalTo(segmentedControl.snp.bottom).offset(2)
+            make.leading.trailing.equalTo(topContainerView)
+            make.bottom.equalTo(topContainerView.snp.bottom)
+        }
+    }
+    private func setupMainStackView() {
+        mainStackView.addArrangedSubview(topContainerView)
+        mainStackView.addArrangedSubview(placeholderView)
+    }
+
     
     // MARK: - makeConstraints
     func makeConstraints() {
@@ -219,9 +263,8 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
             make.edges.equalToSuperview()
         }
         contentsView.snp.makeConstraints { (make) in
-            make.edges.equalTo(scrollView)
+            make.edges.equalToSuperview()
             make.width.equalTo(scrollView)
-            make.height.equalTo(scrollView)
         }
         backgroundImageView.snp.makeConstraints { (make) in
             make.top.equalTo(contentsView.snp.top)
@@ -297,24 +340,23 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
             make.trailing.equalTo(contentsView.snp.trailing).offset(-14)
             make.height.equalTo(1)
         }
-        segmentedControl.snp.makeConstraints { make in
+        mainStackView.snp.makeConstraints { make in
             make.top.equalTo(underLineView.snp.bottom)
             make.leading.equalTo(contentsView.snp.leading).offset(25)
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
-            make.height.equalTo(35)
         }
-        informationView.snp.makeConstraints { make in
-            make.top.equalTo(segmentedControl.snp.bottom).offset(2)
-            make.leading.equalTo(contentsView.snp.leading).offset(25)
-            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
-            make.height.equalTo(100)
-        }
-        reviewView.snp.makeConstraints { make in
-            make.top.equalTo(segmentedControl.snp.bottom).offset(2)
-            make.leading.equalTo(contentsView.snp.leading).offset(25)
-            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
-            make.height.equalTo(400)
-        }
+        // 지금 높이 조절 못하겠어서 보류중 -> 수정 필요
+//        informationView.snp.makeConstraints { make in
+//            make.top.equalTo(segmentedControl.snp.bottom).offset(2)
+//            make.leading.equalTo(contentsView.snp.leading).offset(25)
+//            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+//        }
+//        reviewView.snp.makeConstraints { make in
+//            make.top.equalTo(segmentedControl.snp.bottom).offset(2)
+//            make.leading.equalTo(contentsView.snp.leading).offset(25)
+//            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+//            make.bottom.equalTo(contentsView.snp.bottom)
+//        }
         underBarView.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview()
             make.leading.trailing.equalToSuperview()
@@ -331,10 +373,15 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
     func backButtonTapped() {
             self.navigationController?.popViewController(animated: true)
         }
+    @objc private func reservationTapped() {
+        let reservationsVC = ModelReservationDetailViewController()
+        navigationController?.pushViewController(reservationsVC, animated: true)
+    }
     // MARK: - Methods
-      @objc private func didChangeValue(segment: UISegmentedControl) {
+    @objc private func didChangeValue(segment: UISegmentedControl) {
         self.shouldHideInformationView = segment.selectedSegmentIndex != 0
-      }
+    }
+    
     
     //MARK: -Helpers
     private func setupSegmentedControl() {

@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class InformationView: UIView {
+    // MARK: - Properties
     private var informationLabel: UILabel = {
         let label = UILabel()
         label.text = "안녕하세요, 김차차입니다. 첫 세팅 기준 10만원이고,\n컨셉 변경될 경우 금액이 추가됩니다. 감사합니다.\ninsta@kimchacha"
@@ -19,6 +20,7 @@ class InformationView: UIView {
         return label
     }()
     
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         configureSubviews()
@@ -30,11 +32,15 @@ class InformationView: UIView {
         configureSubviews()
         makeConstraints()
     }
+    
+    // MARK: - configureSubviews
     private func configureSubviews() {
         backgroundColor = .white
         translatesAutoresizingMaskIntoConstraints = false
         addSubview(informationLabel)
     }
+    
+    // MARK: - makeConstraints
     private func makeConstraints() {
         informationLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(33)

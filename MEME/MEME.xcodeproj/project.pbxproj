@@ -33,6 +33,8 @@
 		2D4B7C242B5F1026001E1B09 /* ReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4B7C232B5F1026001E1B09 /* ReviewView.swift */; };
 		2D4B7C262B5F17E7001E1B09 /* TotalStarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4B7C252B5F17E7001E1B09 /* TotalStarRatingView.swift */; };
 		2D4B7C292B5F294A001E1B09 /* ModelManagementReservationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4B7C282B5F294A001E1B09 /* ModelManagementReservationsViewController.swift */; };
+		2D5C05A12B60269900EDC69F /* ReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C05A02B60269900EDC69F /* ReviewTableViewCell.swift */; };
+		2D5C05A42B60433000EDC69F /* ModelReservationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C05A32B60433000EDC69F /* ModelReservationDetailViewController.swift */; };
 		2D62E23E2B5428CC004E8299 /* ModelNonReservationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E23D2B5428CC004E8299 /* ModelNonReservationViewCell.swift */; };
 		2D62E2412B542BD0004E8299 /* ModelUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2402B542BD0004E8299 /* ModelUserModel.swift */; };
 		2D62E2462B543653004E8299 /* ModelReservationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2452B543653004E8299 /* ModelReservationModel.swift */; };
@@ -163,6 +165,8 @@
 		2D4B7C232B5F1026001E1B09 /* ReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewView.swift; sourceTree = "<group>"; };
 		2D4B7C252B5F17E7001E1B09 /* TotalStarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalStarRatingView.swift; sourceTree = "<group>"; };
 		2D4B7C282B5F294A001E1B09 /* ModelManagementReservationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManagementReservationsViewController.swift; sourceTree = "<group>"; };
+		2D5C05A02B60269900EDC69F /* ReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewTableViewCell.swift; sourceTree = "<group>"; };
+		2D5C05A32B60433000EDC69F /* ModelReservationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationDetailViewController.swift; sourceTree = "<group>"; };
 		2D62E23D2B5428CC004E8299 /* ModelNonReservationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelNonReservationViewCell.swift; sourceTree = "<group>"; };
 		2D62E2402B542BD0004E8299 /* ModelUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelUserModel.swift; sourceTree = "<group>"; };
 		2D62E2452B543653004E8299 /* ModelReservationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationModel.swift; sourceTree = "<group>"; };
@@ -311,9 +315,18 @@
 			isa = PBXGroup;
 			children = (
 				2D4B7C232B5F1026001E1B09 /* ReviewView.swift */,
+				2D5C05A02B60269900EDC69F /* ReviewTableViewCell.swift */,
 				2D4B7C252B5F17E7001E1B09 /* TotalStarRatingView.swift */,
 			);
 			path = ReviewView;
+			sourceTree = "<group>";
+		};
+		2D5C05A22B60430400EDC69F /* ModelReservationDetailView */ = {
+			isa = PBXGroup;
+			children = (
+				2D5C05A32B60433000EDC69F /* ModelReservationDetailViewController.swift */,
+			);
+			path = ModelReservationDetailView;
 			sourceTree = "<group>";
 		};
 		2D62E2352B541798004E8299 /* SelectMakeupCardCell */ = {
@@ -563,6 +576,7 @@
 				CC2F3AC32B54362B00508DA5 /* MyPageInfo */,
 				CC2F3ABA2B4EAF8B00508DA5 /* MyPage */,
 				2D6F59A32B561D4700CA883A /* ModelReservationView */,
+				2D5C05A22B60430400EDC69F /* ModelReservationDetailView */,
 				2D6F59B92B5C689D00CA883A /* ModelReservationChartView */,
 			);
 			path = Model;
@@ -946,6 +960,7 @@
 				2D62E2552B549407004E8299 /* CategorySearchViewCell.swift in Sources */,
 				2D6F59B32B5C397400CA883A /* SortOptionsViewController.swift in Sources */,
 				2D6F59B82B5C4FB100CA883A /* SortOptionIconView.swift in Sources */,
+				2D5C05A42B60433000EDC69F /* ModelReservationDetailViewController.swift in Sources */,
 				CC2F3AC72B54444E00508DA5 /* InfoTableViewCell.swift in Sources */,
 				31B2634F2B57EE7D00304FBE /* SetProfileViewController.swift in Sources */,
 				2D6F59B32B5C397400CA883A /* SortOptionsViewController.swift in Sources */,
@@ -965,6 +980,7 @@
 				3142B99B2B4D020E0066CD5A /* NSObject+.swift in Sources */,
 				CC2F3AC02B514EE900508DA5 /* ModelHeaderView.swift in Sources */,
 				3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */,
+				2D5C05A12B60269900EDC69F /* ReviewTableViewCell.swift in Sources */,
 				2D62E25B2B54A658004E8299 /* RecentSearchViewCell.swift in Sources */,
 				2D0A190E2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift in Sources */,
 				2D6F59AB2B5BD07500CA883A /* ModelReservationChartTableViewCell.swift in Sources */,
