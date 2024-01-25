@@ -1,5 +1,5 @@
 //
-//  InformationView.swift
+//  ShowInformationView.swift
 //  MEME
 //
 //  Created by 정민지 on 1/23/24.
@@ -8,7 +8,7 @@
 import UIKit
 import SnapKit
 
-class InformationView: UIView {
+class ShowInformationView: UIView {
     // MARK: - Properties
     private var informationLabel: UILabel = {
         let label = UILabel()

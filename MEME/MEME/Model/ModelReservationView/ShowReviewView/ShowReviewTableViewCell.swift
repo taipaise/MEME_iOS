@@ -1,5 +1,5 @@
 //
-//  ReviewTableViewCell.swift
+//  ShowReviewTableViewCell.swift
 //  MEME
 //
 //  Created by 정민지 on 1/24/24.
@@ -7,7 +7,7 @@
 import UIKit
 import SnapKit
 
-class ReviewTableViewCell: UITableViewCell {
+class ShowReviewTableViewCell: UITableViewCell {
     private var profileImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "modelProfile"))
         imageView.layer.cornerRadius = 15
@@ -72,7 +72,7 @@ class ReviewTableViewCell: UITableViewCell {
         contentView.addSubview(reviewLabel)
     }
        
-       // MARK: - makeConstraints
+    // MARK: - makeConstraints
     private func makeConstraints() {
         profileImageView.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(19)

@@ -146,6 +146,23 @@ class ModelReservationDetailViewController: UIViewController {
         
         return stackView
     }()
+    private var underBarView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        let gradient = CAGradientLayer()
+        gradient.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 6)
+        gradient.colors = [
+            UIColor.black.withAlphaComponent(0.1).cgColor,
+            UIColor.clear.cgColor
+        ]
+        gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
+        gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
+        
+        view.layer.insertSublayer(gradient, at: 0)
+        
+        return view
+    }()
     private let reservationButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
@@ -189,6 +206,7 @@ class ModelReservationDetailViewController: UIViewController {
         contentsView.addSubview(morningVerticalStackView)
         contentsView.addSubview(afternoonLabel)
         contentsView.addSubview(afternoonVerticalStackView)
+        view.addSubview(underBarView)
         view.addSubview(reservationButton)
     }
     
@@ -252,10 +270,15 @@ class ModelReservationDetailViewController: UIViewController {
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
             make.bottom.equalTo(contentsView.snp.bottom).offset(-150)
         }
+        underBarView.snp.makeConstraints { (make) in
+            make.bottom.equalToSuperview()
+            make.leading.trailing.equalToSuperview()
+            make.height.equalTo(160)
+        }
         reservationButton.snp.makeConstraints { (make) in
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-30)
-            make.leading.equalToSuperview().offset(24)
-            make.trailing.equalToSuperview().offset(-24)
+            make.top.equalTo(underBarView.snp.top).offset(12)
+            make.leading.equalTo(underBarView.snp.leading).offset(24)
+            make.trailing.equalTo(underBarView.snp.trailing).offset(-24)
             make.height.equalTo(50)
         }
         

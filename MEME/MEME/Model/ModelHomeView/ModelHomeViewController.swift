@@ -256,7 +256,7 @@ final class ModelHomeViewController: UIViewController {
         modelReservationCollectionView.dataSource = self
         
         //cell 등록
-        modelReservationCollectionView.register(UINib(nibName: "ModelNonReservationViewCell", bundle: nil), forCellWithReuseIdentifier: ModelNonReservationViewCell.identifier)
+        modelReservationCollectionView.register(ModelNonReservationViewCell.self, forCellWithReuseIdentifier: ModelNonReservationViewCell.identifier)
         
         modelReservationCollectionView.register(UINib(nibName: "ModelReservationConfirmViewCell", bundle: nil), forCellWithReuseIdentifier: ModelReservationConfirmViewCell.identifier)
     }

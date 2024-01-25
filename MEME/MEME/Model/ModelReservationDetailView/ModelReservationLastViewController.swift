@@ -27,7 +27,7 @@ class ModelReservationLastViewController: UIViewController {
     }()
     private var backgroundColorView: UIView = {
         let UIView = UIView()
-        UIView.backgroundColor = UIColor(red: 244.0/255.0, green: 246.0/255.0, blue: 248.0/255.0, alpha: 1.0)
+        UIView.backgroundColor = .gray200
         UIView.layer.cornerRadius = 20
         
         return UIView

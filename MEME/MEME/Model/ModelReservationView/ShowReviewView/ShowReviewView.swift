@@ -1,5 +1,5 @@
 //
-//  ReviewView.swift
+//  ShowReviewView.swift
 //  MEME
 //
 //  Created by 정민지 on 1/23/24.
@@ -15,7 +15,7 @@ struct ReviewData {
     var reviewImages: [UIImage]
 }
 
-class ReviewView: UIView {
+class ShowReviewView: UIView {
     // 예시 데이터 배열 -> 이후 삭제 필요
     var reviews: [ReviewData] = [
         ReviewData(profileImage: UIImage(named: "modelProfile"),
@@ -103,12 +103,12 @@ class ReviewView: UIView {
         reviewTableView.dataSource = self
         
         //cell 등록
-        reviewTableView.register(ReviewTableViewCell.self, forCellReuseIdentifier: "ReviewTableViewCell")
+        reviewTableView.register(ShowReviewTableViewCell.self, forCellReuseIdentifier: "ShowReviewTableViewCell")
     }
 }
 
 //MARK: -UITableViewDataSource, UITableViewDelegate
-extension ReviewView: UITableViewDataSource, UITableViewDelegate {
+extension ShowReviewView: UITableViewDataSource, UITableViewDelegate {
     //cell의 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //api 호출 한 수 만큼 수정
@@ -117,7 +117,7 @@ extension ReviewView: UITableViewDataSource, UITableViewDelegate {
     
     //cell의 생성
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ReviewTableViewCell", for: indexPath) as? ReviewTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShowReviewTableViewCell", for: indexPath) as? ShowReviewTableViewCell else {
             fatalError("셀 타입 캐스팅 실패...")
         }
         cell.selectionStyle = .none

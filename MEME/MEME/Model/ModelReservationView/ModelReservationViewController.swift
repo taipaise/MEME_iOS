@@ -144,8 +144,8 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
-    private var informationView = InformationView()
-    private var reviewView = ReviewView()
+    private var informationView = ShowInformationView()
+    private var reviewView = ShowReviewView()
     private var placeholderView = UIView()
     private var shouldHideInformationView: Bool? {
         didSet {
