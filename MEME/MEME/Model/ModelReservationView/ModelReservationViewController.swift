@@ -30,6 +30,7 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         let imageView = UIImageView()
         imageView.image = UIImage(named: "modelProfile")
         imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
         
         return imageView
     }()
@@ -45,6 +46,7 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         let imageView = UIImageView()
         imageView.image = UIImage(named: "icon_like")
         imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
         
         return imageView
     }()
@@ -191,12 +193,14 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.title = "예약하기"
-
+        
         setupSegmentedControl()
         setupTopContainerView()
         setupMainStackView()
         configureSubviews()
         makeConstraints()
+        
+        setupGestureRecognizers()
     }
 
     override func viewDidLayoutSubviews() {
@@ -371,6 +375,15 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         }
     }
     // MARK: - Action
+    private func setupGestureRecognizers() {
+        setupTapGestureRecognizer(for: profileImageView, withSelector: #selector(profileImageTapped))
+        setupTapGestureRecognizer(for: likeImageView, withSelector: #selector(likeImageTapped))
+    }
+    private func setupTapGestureRecognizer(for view: UIView, withSelector selector: Selector) {
+        let tapGesture = UITapGestureRecognizer(target: self, action: selector)
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
+    }
     func backButtonTapped() {
             self.navigationController?.popViewController(animated: true)
         }
@@ -378,6 +391,18 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         let reservationsVC = ModelReservationDetailViewController()
         navigationController?.pushViewController(reservationsVC, animated: true)
     }
+    @objc private func profileImageTapped() {
+        let artistProfileVC = ModelViewArtistProfileViewController()
+        navigationController?.pushViewController(artistProfileVC, animated: true)
+    }
+    @objc private func likeImageTapped() {
+        if likeImageView.image == UIImage(named: "icon_like") {
+            likeImageView.image = UIImage(named: "icon_fillLike")
+        } else {
+            likeImageView.image = UIImage(named: "icon_like")
+        }
+    }
+    
     // MARK: - Methods
     @objc private func didChangeValue(segment: UISegmentedControl) {
         self.shouldHideInformationView = segment.selectedSegmentIndex != 0

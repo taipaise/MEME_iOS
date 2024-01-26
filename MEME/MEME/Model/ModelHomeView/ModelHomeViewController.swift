@@ -331,6 +331,10 @@ extension ModelHomeViewController: UICollectionViewDelegate, UICollectionViewDat
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelNonReservationViewCell.identifier, for: indexPath) as? ModelNonReservationViewCell else {
                     fatalError("셀 타입 캐스팅 실패...")
                 }
+                cell.onReservationTapped = { [weak self] in
+                       self?.tabBarController?.selectedIndex = 1
+                   }
+                
                 return cell
             default:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.identifier, for: indexPath) as? ModelReservationConfirmViewCell else {
@@ -381,6 +385,12 @@ extension ModelHomeViewController: UICollectionViewDelegateFlowLayout {
             return CGFloat(10)
         }
         return CGFloat(20)
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == recomandReservationCollectionView || collectionView == recomandHastyReservationCollectionView  {
+            let reservationVC = ModelReservationViewController()
+            self.navigationController?.pushViewController(reservationVC, animated: true)
+        }
     }
 }
 

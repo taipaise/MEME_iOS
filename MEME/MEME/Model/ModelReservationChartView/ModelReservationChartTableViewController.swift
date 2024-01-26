@@ -8,11 +8,11 @@
 import UIKit
 import SnapKit
 
-class ModelReservationChartViewController: UIViewController, UIViewControllerTransitioningDelegate {
+class ModelReservationChartViewController: UIViewController {
     private var selectedButton: ModelReservationTypeButton?
     
     // MARK: - Properties
-    private let buttonScrollView = UIScrollView()
+    let buttonScrollView = UIScrollView()
     private let buttonsStackView = UIStackView()
     
     
@@ -175,31 +175,31 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
     }
     //MARK: -Action
     private func setupButtonsAction() {
-            let buttons = [
-                allButton,
-                specialButton,
-                actorButton,
-                interviewButton,
-                dailyButton,
-                studioButton,
-                weddingButton,
-                partyButton,
-                etcButton
-            ]
-            buttons.forEach { button in
-                button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
-            }
+        let buttons = [
+            allButton,
+            specialButton,
+            actorButton,
+            interviewButton,
+            dailyButton,
+            studioButton,
+            weddingButton,
+            partyButton,
+            etcButton
+        ]
+        buttons.forEach { button in
+            button.addTarget(self, action: #selector(buttonTapped(_:)), for: .touchUpInside)
         }
+    }
 
-        @objc func buttonTapped(_ sender: ModelReservationTypeButton) {
-            selectButton(sender)
-        }
+    @objc func buttonTapped(_ sender: ModelReservationTypeButton) {
+        selectButton(sender)
+    }
 
-        private func selectButton(_ button: ModelReservationTypeButton) {
-            selectedButton?.backgroundColor = .white
-            button.backgroundColor = .mainBold
-            selectedButton = button
-        }
+    private func selectButton(_ button: ModelReservationTypeButton) {
+        selectedButton?.backgroundColor = .white
+        button.backgroundColor = .mainBold
+        selectedButton = button
+    }
     
     @objc func sortButtonTapped() {
         let sortOptionsVC = SortOptionsViewController()
@@ -210,10 +210,6 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
         }
         self.present(sortOptionsVC, animated: true)
         }
-    
-       func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
-           return ModalPresentationController(presentedViewController: presented, presenting: presenting)
-       }
    
     
     //MARK: -Helpers
@@ -251,9 +247,6 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
         reservationChartTableView.register(ModelReservationChartTableViewCell, forCellReuseIdentifier: "ModelReservationChartTableViewCell")
         
     }
-
-
-
     // MARK: - Navigation
 
 
@@ -261,7 +254,6 @@ class ModelReservationChartViewController: UIViewController, UIViewControllerTra
 
 //MARK: -UITableViewDataSource, UITableViewDelegate
 extension ModelReservationChartViewController: UITableViewDataSource, UITableViewDelegate {
-
     //cell의 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //api 호출 한 수 만큼 수정
@@ -285,6 +277,11 @@ extension ModelReservationChartViewController: UITableViewDataSource, UITableVie
             // 전달할 데이터 추가
             self.navigationController?.pushViewController(reservationVC, animated: true)
         }
-
 }
 
+//MARK: - UIViewControllerTransitioningDelegate
+extension ModelReservationChartViewController: UIViewControllerTransitioningDelegate {
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        return ModalPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}

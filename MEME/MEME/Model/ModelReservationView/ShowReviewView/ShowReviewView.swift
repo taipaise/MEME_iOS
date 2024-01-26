@@ -17,6 +17,7 @@ struct ReviewData {
 
 class ShowReviewView: UIView {
     // 예시 데이터 배열 -> 이후 삭제 필요
+    
     var reviews: [ReviewData] = [
         ReviewData(profileImage: UIImage(named: "modelProfile"),
                    profileName: "메메**",
@@ -89,7 +90,7 @@ class ShowReviewView: UIView {
         reviewTableView.snp.makeConstraints { make in
             make.top.equalTo(lineView.snp.bottom)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(500)
+            make.height.equalTo(700)
             make.bottom.equalToSuperview()
         }
     }

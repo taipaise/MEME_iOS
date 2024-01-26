@@ -10,6 +10,8 @@ import SnapKit
 
 class ModelNonReservationViewCell: UICollectionViewCell {
     // MARK: - Properties
+    var onReservationTapped: (() -> Void)?
+    
     static let identifier = "ModelNonReservationViewCell"
     
     private var modelNoReservationLabel: UILabel = {
@@ -29,6 +31,7 @@ class ModelNonReservationViewCell: UICollectionViewCell {
         button.setTitle("메이크업 예약하기", for: .normal)
         button.backgroundColor = .black
         button.layer.cornerRadius = 10
+        button.addTarget(self, action: #selector(reservationTapped), for: .touchUpInside)
         
         return button
     }()
@@ -63,5 +66,9 @@ class ModelNonReservationViewCell: UICollectionViewCell {
             make.bottom.equalTo(modelNoReservationButton.snp.top).offset(-30)
             make.centerX.equalToSuperview()
         }
+    }
+    // MARK: - Action
+    @objc private func reservationTapped() {
+        onReservationTapped?()
     }
 }

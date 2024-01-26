@@ -107,13 +107,13 @@ class ModelSearchViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         self.navigationController?.navigationBar.tintColor = .black
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
-        setupRecentSearchCollectionView()
         setupSearchCollectionView()
+        setupRecentSearchCollectionView()
+        setupSearchMakeupBar()
         configureSubviews()
         makeConstraints()
-        
-
     }
     
     // MARK: - configureSubviews
@@ -219,6 +219,10 @@ class ModelSearchViewController: UIViewController {
         //cell 등록
         categorySearchesCollectionView.register(UINib(nibName: "CategorySearchViewCell", bundle: nil), forCellWithReuseIdentifier: CategorySearchViewCell.identifier)
     }
+    private func setupSearchMakeupBar() {
+        searchMakeup.delegate = self
+        
+    }
 }
 
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource
@@ -293,5 +297,16 @@ extension ModelSearchViewController: UICollectionViewDelegateFlowLayout {
                 return CGFloat(7)
             }
         return CGFloat(25)
+    }
+}
+
+//MARK: - UISearchBarDelegate
+extension ModelSearchViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        if let searchText = searchBar.text, !searchText.isEmpty {
+            let extendedReservationChartVC = ExtendedReservationChartViewController()
+            self.navigationController?.pushViewController(extendedReservationChartVC, animated: true)
+        }
     }
 }

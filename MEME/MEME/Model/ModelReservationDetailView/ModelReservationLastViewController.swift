@@ -96,7 +96,7 @@ class ModelReservationLastViewController: UIViewController {
         button.backgroundColor = .mainBold
         button.layer.cornerRadius = 10
         button.clipsToBounds = true
-//        button.addTarget(self, action: #selector(nextTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(nextTapped), for: .touchUpInside)
         
         return button
     }()
@@ -107,7 +107,7 @@ class ModelReservationLastViewController: UIViewController {
         view.backgroundColor = .white
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-
+        
         configureSubviews()
         makeConstraints()
     }
@@ -178,5 +178,19 @@ class ModelReservationLastViewController: UIViewController {
         }
     }
     
+    // MARK: - Action
+    @objc private func nextTapped() {
+        guard let tabBarController = self.tabBarController else { return }
+        
+        tabBarController.selectedIndex = 0
+        
+        if let viewControllers = tabBarController.viewControllers {
+            for viewController in viewControllers {
+                if let navigationController = viewController as? UINavigationController {
+                    navigationController.popToRootViewController(animated: false)
+                }
+            }
+        }
+    }
 }
 
