@@ -12,16 +12,16 @@ class ArtistReservationManageViewController: UIViewController {
     @IBOutlet var onComingButton: UIButton!
     @IBOutlet var completeButton: UIButton!
     private var showOnComing : Bool = true
-    
-    // 더미 데이터
-    private var makeUpNameArray : [String] = ["메이크업1","메이크업2","메이크업3"]
-    private var modelNameArray : [String] = ["모델1","모델2","모델3"]
-    private var reservationDateArray : [String] = ["2024.01.01 월","2024.01.02 화","2024.01.03 수"]
-    private var onComingArray : [Bool] = [false,false,true]
+    @IBOutlet var noReservationLabel: UIStackView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewConfigure()
+        uiSet()
+    }
+    private func uiSet(){
+        navigationController?.isNavigationBarHidden = true
+        noReservationLabel.isHidden = !resMakeUpNameArray.isEmpty
     }
     private func tableViewConfigure(){
         artistReservationTableView.delegate = self
@@ -29,7 +29,7 @@ class ArtistReservationManageViewController: UIViewController {
         artistReservationTableView.register(ArtistReservationStatusTableViewCell.nib(), forCellReuseIdentifier: ArtistReservationStatusTableViewCell.identifier)
     }
     @objc private func reservationManagedBtnTapped(){
-        let vc = ArtistReservationSingleManageViewController()
+        let vc = SingleArtistReservationManageViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func onComingButtonTapped(_ sender: UIButton) {
@@ -50,15 +50,15 @@ class ArtistReservationManageViewController: UIViewController {
 
 extension ArtistReservationManageViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return modelNameArray.count
+        return resMakeUpNameArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         guard let cell = artistReservationTableView.dequeueReusableCell(withIdentifier: ArtistReservationStatusTableViewCell.identifier, for: indexPath) as? ArtistReservationStatusTableViewCell else { return UITableViewCell() }
-        cell.makeUpNameLabel.text = makeUpNameArray[indexPath.row]
-        cell.modelNameLabel.text = modelNameArray[indexPath.row]
-        cell.reservationDateLabel.text = reservationDateArray[indexPath.row]
+        cell.makeUpNameLabel.text = resMakeUpNameArray[indexPath.row]
+        cell.modelNameLabel.text = resModelNameArray[indexPath.row]
+        cell.reservationDateLabel.text = resDateArray[indexPath.row]
         cell.reservationManageBtn.addTarget(self, action: #selector(reservationManagedBtnTapped), for: .touchUpInside)
         if !onComingArray[indexPath.row]{
             cell.reservationTimeLabel.textColor = UIColor(resource: .gray500)

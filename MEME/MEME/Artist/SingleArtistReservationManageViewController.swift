@@ -7,14 +7,14 @@
 
 import UIKit
 
-class ArtistReservationSingleManageViewController: UIViewController {
+class SingleArtistReservationManageViewController: UIViewController {
     
     @IBOutlet var cancelBarView: UIView!
     @IBOutlet var cancelBarLabel: UILabel!
     @IBOutlet var cancelBarButton: UIButton!
     @IBOutlet var resInfoFrameView: UIView!
     
-    private var Today: Bool = true
+    private var isToday: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,9 +23,10 @@ class ArtistReservationSingleManageViewController: UIViewController {
     }
 
     private func uiSet(){
+        navigationController?.isNavigationBarHidden = true
         cancelBarView.layer.cornerRadius=10
         resInfoFrameView.layer.cornerRadius=10
-        if Today {
+        if isToday {
             cancelBarView.backgroundColor = .gray500
             cancelBarLabel.text = "당일 예약은 취소가 불가능합니다"
             cancelBarButton.isHidden = true

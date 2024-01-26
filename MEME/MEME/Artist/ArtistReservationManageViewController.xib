@@ -13,12 +13,16 @@
         <array key="Pretendard-Regular.otf">
             <string>Pretendard-Regular</string>
         </array>
+        <array key="Pretendard-SemiBold.otf">
+            <string>Pretendard-SemiBold</string>
+        </array>
     </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ArtistReservationManageViewController" customModule="MEME" customModuleProvider="target">
             <connections>
                 <outlet property="artistReservationTableView" destination="9ij-15-5Xn" id="AYE-Eo-HRI"/>
                 <outlet property="completeButton" destination="a6b-VH-KlA" id="IB5-Tu-ecd"/>
+                <outlet property="noReservationLabel" destination="Vi1-fj-CAe" id="YKL-vO-BH7"/>
                 <outlet property="onComingButton" destination="L2a-ng-bgb" id="kjd-1D-TPo"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -32,7 +36,7 @@
                     <rect key="frame" x="0.0" y="61" width="393" height="48"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="예약 관리" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hs5-xB-zKz">
-                            <rect key="frame" x="166.66666666666666" y="14.666666666666673" width="60" height="18.666666666666671"/>
+                            <rect key="frame" x="167" y="14.333333333333327" width="59.333333333333343" height="19.333333333333329"/>
                             <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>
@@ -73,15 +77,37 @@
                         <action selector="completeButtonTapped:" destination="-1" eventType="touchUpInside" id="mA1-uj-lx1"/>
                     </connections>
                 </button>
+                <stackView opaque="NO" contentMode="center" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="Vi1-fj-CAe">
+                    <rect key="frame" x="84" y="421.66666666666669" width="225" height="84"/>
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="등록된 예약이 없어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="od8-tc-xKn">
+                            <rect key="frame" x="27" y="0.0" width="171" height="24"/>
+                            <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="포트폴리오를 수정하고 모델과의 예약을 잡아봐요" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="eai-5i-OTE">
+                            <rect key="frame" x="12.333333333333329" y="36" width="200.33333333333337" height="48"/>
+                            <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="20"/>
+                            <nil key="textColor"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="225" id="7Kz-YX-Abw"/>
+                    </constraints>
+                </stackView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="9ij-15-5Xn" secondAttribute="bottom" id="0Kq-1P-jec"/>
                 <constraint firstItem="a6b-VH-KlA" firstAttribute="top" secondItem="Q9K-yN-R96" secondAttribute="bottom" constant="-15" id="5B0-Pm-0b2"/>
+                <constraint firstItem="Vi1-fj-CAe" firstAttribute="centerY" secondItem="9ij-15-5Xn" secondAttribute="centerY" id="BlO-mH-fl0"/>
                 <constraint firstItem="9ij-15-5Xn" firstAttribute="top" secondItem="Q9K-yN-R96" secondAttribute="bottom" id="EFP-42-qOr"/>
                 <constraint firstItem="L2a-ng-bgb" firstAttribute="centerY" secondItem="a6b-VH-KlA" secondAttribute="centerY" id="GrM-IT-air"/>
                 <constraint firstItem="Q9K-yN-R96" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="2" id="Lmx-8N-v8B"/>
+                <constraint firstItem="Vi1-fj-CAe" firstAttribute="centerX" secondItem="9ij-15-5Xn" secondAttribute="centerX" id="cBy-rA-tis"/>
                 <constraint firstItem="Q9K-yN-R96" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="f5m-HE-p0e"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Q9K-yN-R96" secondAttribute="trailing" id="haS-if-tc0"/>
                 <constraint firstItem="a6b-VH-KlA" firstAttribute="leading" secondItem="L2a-ng-bgb" secondAttribute="trailing" id="nU4-eb-9Ff"/>
