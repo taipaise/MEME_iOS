@@ -10,29 +10,29 @@ import SnapKit
 
 final class ModelHomeViewController: UIViewController {
     // MARK: - Properties
-    let scrollView = UIScrollView()
-    let contentsView = UIView()
-    var memeLogoImageView: UIImageView = {
+    private let scrollView = UIScrollView()
+    private let contentsView = UIView()
+    private var memeLogoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "memeLogo")
+        imageView.image = UIImage(named: "logo")
         imageView.contentMode = .scaleAspectFit
         
         return imageView
     }()
-    var alarmImageView: UIImageView = {
+    private var alarmImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "icon _bell")
         imageView.contentMode = .scaleAspectFit
         
         return imageView
     }()
-    let searchMakeup: UISearchBar = {
+    private let searchMakeup: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "원하는 메이크업을 검색해보세요."
         searchBar.backgroundColor = .white
         searchBar.layer.cornerRadius = 20
         searchBar.layer.borderWidth = 1
-        searchBar.layer.borderColor = UIColor(red: 255/255, green: 99/255, blue: 62/255, alpha: 1).cgColor
+        searchBar.layer.borderColor = UIColor.mainBold.cgColor
         
         searchBar.setBackgroundImage(UIImage(), for: .any, barMetrics: .default)
             searchBar.setSearchFieldBackgroundImage(UIImage(), for: .normal)
@@ -42,64 +42,83 @@ final class ModelHomeViewController: UIViewController {
             textField.textColor = .black
         
         if let leftView = textField.leftView as? UIImageView {
-                leftView.tintColor = UIColor(red: 255/255, green: 99/255, blue: 62/255, alpha: 1)
+            leftView.tintColor = .mainBold
             }
-        let placeholderAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor(red: 255/255, green: 99/255, blue: 62/255, alpha: 1)]
+        let placeholderAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.mainBold]
             textField.attributedPlaceholder = NSAttributedString(string: "원하는 메이크업을 검색해보세요.", attributes: placeholderAttributes)
-        searchBar.tintColor = UIColor(red: 255/255, green: 99/255, blue: 62/255, alpha: 1)
+        searchBar.tintColor = .mainBold
         
         return searchBar
     }()
 
-    var modelWelcomeLabel: UILabel = {
+    private var modelWelcomeLabel: UILabel = {
         let label = UILabel()
         label.text = "000 님, 환영합니다!"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = .black
+        label.font = .pretendard(to: .semiBold, size: 20)
         label.numberOfLines = 0
         
         return label
     }()
-    var modelWelcomeGuideLabel: UILabel = {
+    private var modelWelcomeGuideLabel: UILabel = {
         let label = UILabel()
         label.text = "아티스트와의 약속 놓치지 마세요!"
-        label.font = UIFont.boldSystemFont(ofSize: 18)
+        label.textColor = .black
+        label.font = .pretendard(to: .semiBold, size: 20)
         
         return label
     }()
-    var modelReservationCollectionView: UICollectionView!
-    var recomandArtistReservationMainLabel: UILabel = {
+    private var viewAllReservationsButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("전체 예약 보기", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        if let image = UIImage(systemName: "chevron.right")?.withTintColor(.black, renderingMode: .alwaysOriginal) {
+            button.setImage(image, for: .normal)
+        }
+        button.semanticContentAttribute = .forceRightToLeft
+        button.addTarget(self, action: #selector(viewAllReservationsTapped), for: .touchUpInside)
+
+        return button
+    }()
+
+    private var modelReservationCollectionView: UICollectionView!
+    private var recomandArtistReservationMainLabel: UILabel = {
         let label = UILabel()
         label.text = "어떤 아티스트를 선택할 지 모르겠을 때"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .black
+        label.font = .pretendard(to: .semiBold, size: 20)
         
         return label
     }()
-    var recomandArtistReservationSubLabel: UILabel = {
+    private var recomandArtistReservationSubLabel: UILabel = {
         let label = UILabel()
         label.text = "후기가 많은 아티스트를 만나봐요"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
+        label.font = .pretendard(to: .regular, size: 14)
         return label
     }()
-    var recomandReservationCollectionView: UICollectionView!
-    var recomandHastyReservationMainLabel: UILabel = {
+    private var recomandReservationCollectionView: UICollectionView!
+    private var recomandHastyReservationMainLabel: UILabel = {
         let label = UILabel()
         label.text = "급하게 메이크업이 필요할 때"
-        label.font = UIFont.boldSystemFont(ofSize: 20)
+        label.textColor = .black
+        label.font = .pretendard(to: .semiBold, size: 20)
         
         return label
     }()
-    var recomandHastyReservationSubLabel: UILabel = {
+    private var recomandHastyReservationSubLabel: UILabel = {
         let label = UILabel()
         label.text = "오늘, 내일 바로 예약 가능한 아티스트를 알아봐요"
-        label.font = UIFont.systemFont(ofSize: 14)
+        label.textColor = .black
+        label.font = .pretendard(to: .regular, size: 14)
         return label
     }()
-    var recomandHastyReservationCollectionView: UICollectionView!
+    private var recomandHastyReservationCollectionView: UICollectionView!
     
-    var modelReservations: [ModelReservationModel]? {
+    private var modelReservations: [ModelReservationModel]? {
         didSet { self.modelReservationCollectionView.reloadData() }
     }
-    var makeupCards: [MakeupCardModel]? {
+    private var makeupCards: [MakeupCardModel]? {
         didSet { self.recomandReservationCollectionView.reloadData() }
     }
     
@@ -107,6 +126,8 @@ final class ModelHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         setupReservationCollectionView()
         setupMakeupCardCollectionView()
@@ -122,12 +143,16 @@ final class ModelHomeViewController: UIViewController {
         contentsView.addSubview(searchMakeup)
         contentsView.addSubview(modelWelcomeLabel)
         contentsView.addSubview(modelWelcomeGuideLabel)
+        contentsView.addSubview(viewAllReservationsButton)
+        modelReservationCollectionView.backgroundColor = .white
         contentsView.addSubview(modelReservationCollectionView)
         contentsView.addSubview(recomandArtistReservationMainLabel)
         contentsView.addSubview(recomandArtistReservationSubLabel)
+        recomandReservationCollectionView.backgroundColor = .white
         contentsView.addSubview(recomandReservationCollectionView)
         contentsView.addSubview(recomandHastyReservationMainLabel)
         contentsView.addSubview(recomandHastyReservationSubLabel)
+        recomandHastyReservationCollectionView.backgroundColor = .white
         contentsView.addSubview(recomandHastyReservationCollectionView)
         scrollView.addSubview(contentsView)
         view.addSubview(scrollView)
@@ -169,8 +194,12 @@ final class ModelHomeViewController: UIViewController {
             make.top.equalTo(modelWelcomeLabel.snp.bottom)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
+        viewAllReservationsButton.snp.makeConstraints {make in
+            make.top.equalTo(modelWelcomeGuideLabel.snp.bottom).offset(17)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+        }
         modelReservationCollectionView.snp.makeConstraints {make in
-            make.top.equalTo(modelWelcomeLabel.snp.top).offset(71)
+            make.top.equalTo(viewAllReservationsButton.snp.bottom).offset(13)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
             make.height.equalTo(150)
@@ -210,6 +239,11 @@ final class ModelHomeViewController: UIViewController {
     func setupSearchBar() {
         searchMakeup.delegate = self
     }
+    @objc private func viewAllReservationsTapped() {
+        let reservationsVC = ModelManagementReservationsViewController()
+        navigationController?.pushViewController(reservationsVC, animated: true)
+    }
+
     
     //MARK: -Helpers
     private func setupReservationCollectionView() {
@@ -222,7 +256,7 @@ final class ModelHomeViewController: UIViewController {
         modelReservationCollectionView.dataSource = self
         
         //cell 등록
-        modelReservationCollectionView.register(UINib(nibName: "ModelNonReservationViewCell", bundle: nil), forCellWithReuseIdentifier: ModelNonReservationViewCell.identifier)
+        modelReservationCollectionView.register(ModelNonReservationViewCell.self, forCellWithReuseIdentifier: ModelNonReservationViewCell.identifier)
         
         modelReservationCollectionView.register(UINib(nibName: "ModelReservationConfirmViewCell", bundle: nil), forCellWithReuseIdentifier: ModelReservationConfirmViewCell.identifier)
     }
@@ -297,6 +331,10 @@ extension ModelHomeViewController: UICollectionViewDelegate, UICollectionViewDat
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelNonReservationViewCell.identifier, for: indexPath) as? ModelNonReservationViewCell else {
                     fatalError("셀 타입 캐스팅 실패...")
                 }
+                cell.onReservationTapped = { [weak self] in
+                       self?.tabBarController?.selectedIndex = 1
+                   }
+                
                 return cell
             default:
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.identifier, for: indexPath) as? ModelReservationConfirmViewCell else {
@@ -347,6 +385,12 @@ extension ModelHomeViewController: UICollectionViewDelegateFlowLayout {
             return CGFloat(10)
         }
         return CGFloat(20)
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == recomandReservationCollectionView || collectionView == recomandHastyReservationCollectionView  {
+            let reservationVC = ModelReservationViewController()
+            self.navigationController?.pushViewController(reservationVC, animated: true)
+        }
     }
 }
 
