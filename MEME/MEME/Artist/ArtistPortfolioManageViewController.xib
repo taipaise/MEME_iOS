@@ -58,7 +58,6 @@
                         <constraint firstAttribute="height" constant="48" id="bz6-qk-nx2"/>
                         <constraint firstItem="Apg-Z4-GdG" firstAttribute="centerY" secondItem="4f5-3e-X7y" secondAttribute="centerY" id="eKC-YX-U4Y"/>
                         <constraint firstItem="p3h-BD-xjo" firstAttribute="centerX" secondItem="4f5-3e-X7y" secondAttribute="centerX" id="lRi-Dx-PgM"/>
-                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="48" id="pxG-Qy-Bte"/>
                     </constraints>
                 </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="s3h-1v-L6y">

@@ -33,7 +33,8 @@ class ArtistPortfolioManageViewController: UIViewController {
         navigationController?.popViewController(animated: true)
     }
     @IBAction func portfolioAddButtonDidTap(_ sender: UIButton) {
-        // Todo : 포트폴리오 추가 화면 전환
+        let vc = ArtistPortfolioEditingViewController()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

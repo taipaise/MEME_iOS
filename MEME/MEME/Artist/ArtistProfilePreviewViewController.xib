@@ -47,7 +47,7 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="프로필" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="85r-gq-lfr" userLabel="titleLabel">
-                    <rect key="frame" x="175.66666666666666" y="69.333333333333329" width="41.666666666666657" height="19.333333333333329"/>
+                    <rect key="frame" x="175.66666666666666" y="69.666666666666671" width="41.666666666666657" height="18.666666666666671"/>
                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -59,16 +59,16 @@
                             <rect key="frame" x="0.0" y="0.0" width="393" height="770"/>
                             <subviews>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="7UU-ER-NCG" userLabel="Profile Stack View">
-                                    <rect key="frame" x="131" y="49.666666666666657" width="189.66666666666663" height="45.666666666666657"/>
+                                    <rect key="frame" x="131" y="50" width="189.66666666666663" height="45"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="아티스트 차차" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Rz-8j-Yxo" userLabel="artistNameLabel">
-                                            <rect key="frame" x="0.0" y="0.0" width="87" height="19.333333333333332"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="87.666666666666671" height="18.666666666666668"/>
                                             <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제가 다니는 샵에서 진행해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Qd4-WN-BJC" userLabel="artistWorkStyleLabel">
-                                            <rect key="frame" x="0.0" y="25.333333333333343" width="189.66666666666666" height="20.333333333333329"/>
+                                            <rect key="frame" x="0.0" y="24.666666666666657" width="189.66666666666666" height="20.333333333333329"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -83,7 +83,7 @@
                                     </constraints>
                                 </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I5A-1m-FnY" userLabel="artistGenderView">
-                                    <rect key="frame" x="229" y="50" width="19" height="19"/>
+                                    <rect key="frame" x="229.66666666666666" y="50" width="19" height="19"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="여" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4e6-Mn-gk7" userLabel="artistGenderLabel">
                                             <rect key="frame" x="2" y="-0.66666666666665719" width="15" height="20.333333333333332"/>
@@ -103,40 +103,40 @@
                                     </constraints>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="소개" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oxU-3v-uaS" userLabel="introTitleLabel">
-                                    <rect key="frame" x="24" y="140" width="27.666666666666671" height="19.333333333333343"/>
+                                    <rect key="frame" x="24" y="140" width="28" height="18.666666666666657"/>
                                     <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="안녕하세요 차차입니다 반갑습니다 메이크업 잘해요 다들 저에게 와주세요 ㅠㅠ" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lb8-s1-fYd" userLabel="introLabel">
-                                    <rect key="frame" x="24" y="174.33333333333331" width="345" height="38.333333333333343"/>
+                                    <rect key="frame" x="24" y="173.66666666666669" width="345" height="37.333333333333343"/>
                                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전문 분야" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aMq-XP-Ztt" userLabel="professionalFieldLabel">
-                                    <rect key="frame" x="24.000000000000004" y="354.33333333333331" width="59.333333333333343" height="19.333333333333314"/>
+                                    <rect key="frame" x="24" y="351.33333333333331" width="60" height="18.666666666666686"/>
                                     <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="포트폴리오" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vlh-A3-QkB" userLabel="portfolioTitle">
-                                    <rect key="frame" x="24" y="427.66666666666663" width="69.333333333333329" height="19.333333333333314"/>
+                                    <rect key="frame" x="24" y="496" width="69.333333333333329" height="18.666666666666629"/>
                                     <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="mRO-sZ-LW9" userLabel="Info Title Stack View">
-                                    <rect key="frame" x="24.000000000000007" y="250.66666666666666" width="90.666666666666686" height="50.666666666666657"/>
+                                    <rect key="frame" x="24" y="249.00000000000003" width="92" height="49.333333333333343"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="총 경력 기간" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HNk-5u-Gfk" userLabel="totalCareer">
-                                            <rect key="frame" x="0.0" y="0.0" width="90.666666666666671" height="19.333333333333332"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="92" height="18.666666666666668"/>
                                             <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="활동 가능 지역" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YPE-Bm-hur" userLabel="Place">
-                                            <rect key="frame" x="0.0" y="31.333333333333314" width="90.666666666666671" height="19.333333333333329"/>
+                                            <rect key="frame" x="0.0" y="30.666666666666686" width="92" height="18.666666666666671"/>
                                             <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
@@ -144,30 +144,30 @@
                                     </subviews>
                                 </stackView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서울 강남구" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOG-ee-p86" userLabel="workplaceShopLabel">
-                                    <rect key="frame" x="295.66666666666669" y="282" width="73.333333333333314" height="19.333333333333314"/>
+                                    <rect key="frame" x="295.33333333333331" y="279.66666666666669" width="73.666666666666686" height="18.666666666666686"/>
                                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4년" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HHn-ZP-OtX" userLabel="totalCareerLabel">
-                                    <rect key="frame" x="345" y="250.66666666666671" width="24" height="19.333333333333343"/>
+                                    <rect key="frame" x="346" y="248.99999999999997" width="23" height="18.666666666666657"/>
                                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서울 동작구, 영등포구" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ZXL-uq-HGR" userLabel="workplaceVisitingLabel">
-                                    <rect key="frame" x="232.33333333333337" y="313.33333333333331" width="136.66666666666663" height="19.333333333333314"/>
+                                    <rect key="frame" x="231" y="310.33333333333331" width="138" height="18.666666666666686"/>
                                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
                                     <nil key="textColor"/>
                                     <nil key="highlightedColor"/>
                                 </label>
-                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="vcY-Ph-GPi" userLabel="ProTag Collection View">
-                                    <rect key="frame" x="24" y="381.66666666666669" width="369" height="28"/>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="vcY-Ph-GPi" userLabel="ProTag Collection View">
+                                    <rect key="frame" x="24" y="378" width="345" height="100"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
-                                        <constraint firstAttribute="height" constant="28" id="Lt9-ex-O3Q"/>
+                                        <constraint firstAttribute="height" constant="100" id="Lt9-ex-O3Q"/>
                                     </constraints>
-                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FpU-a5-HOK">
+                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="FpU-a5-HOK">
                                         <size key="itemSize" width="97" height="27"/>
                                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -175,7 +175,7 @@
                                     </collectionViewFlowLayout>
                                 </collectionView>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" alwaysBounceHorizontal="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="mhF-Kv-VXI" userLabel="Portfolio Collection View">
-                                    <rect key="frame" x="24" y="460" width="369" height="250"/>
+                                    <rect key="frame" x="24" y="527.66666666666663" width="369" height="250"/>
                                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="250" id="4xf-3k-p3I"/>
@@ -188,10 +188,10 @@
                                     </collectionViewFlowLayout>
                                 </collectionView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wen-Ol-TRt">
-                                    <rect key="frame" x="274.66666666666669" y="282.33333333333331" width="19" height="19"/>
+                                    <rect key="frame" x="274.33333333333331" y="279.66666666666669" width="19" height="19"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="샵" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Rrf-W0-dGH">
-                                            <rect key="frame" x="5.3333333333333135" y="3.3333333333333712" width="8.6666666666666643" height="12"/>
+                                            <rect key="frame" x="5.3333333333333703" y="3.6666666666666279" width="8.6666666666666643" height="11.666666666666664"/>
                                             <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="10"/>
                                             <color key="textColor" name="Gray100"/>
                                             <nil key="highlightedColor"/>
@@ -206,10 +206,10 @@
                                     </constraints>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Af8-df-FNx">
-                                    <rect key="frame" x="206.33333333333334" y="313.66666666666669" width="24" height="19"/>
+                                    <rect key="frame" x="205" y="310.33333333333331" width="24" height="19"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="방문" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8EA-bA-APM">
-                                            <rect key="frame" x="3.3333333333333144" y="3.3333333333333144" width="17.333333333333332" height="12"/>
+                                            <rect key="frame" x="3.3333333333333428" y="3.6666666666666847" width="17.333333333333332" height="11.666666666666664"/>
                                             <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="10"/>
                                             <color key="textColor" name="Gray100"/>
                                             <nil key="highlightedColor"/>
@@ -227,7 +227,7 @@
                                     <rect key="frame" x="24" y="811.33333333333337" width="345" height="51.666666666666629"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="프로필 수정은 마이페이지에서 가능해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CQV-0D-PT0">
-                                            <rect key="frame" x="64.333333333333329" y="17.333333333333258" width="216.33333333333337" height="17"/>
+                                            <rect key="frame" x="63.666666666666671" y="17.666666666666629" width="217.66666666666663" height="16.333333333333329"/>
                                             <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
                                             <color key="textColor" name="Gray100"/>
                                             <nil key="highlightedColor"/>
@@ -245,7 +245,7 @@
                             <constraints>
                                 <constraint firstItem="I5A-1m-FnY" firstAttribute="leading" secondItem="0Rz-8j-Yxo" secondAttribute="trailing" constant="11" id="0XZ-A0-Ruw"/>
                                 <constraint firstItem="HHn-ZP-OtX" firstAttribute="trailing" secondItem="xOG-ee-p86" secondAttribute="trailing" id="1B7-mE-L4v"/>
-                                <constraint firstAttribute="trailing" secondItem="vcY-Ph-GPi" secondAttribute="trailing" id="1VL-Dj-ekm"/>
+                                <constraint firstAttribute="trailing" secondItem="vcY-Ph-GPi" secondAttribute="trailing" constant="24" id="7Z8-bR-zxK"/>
                                 <constraint firstAttribute="trailing" secondItem="xOG-ee-p86" secondAttribute="trailing" constant="24" id="7bl-vZ-NEN"/>
                                 <constraint firstItem="ZXL-uq-HGR" firstAttribute="leading" secondItem="Af8-df-FNx" secondAttribute="trailing" constant="2" id="8Ba-Dz-MJY"/>
                                 <constraint firstItem="64T-mW-a4o" firstAttribute="leading" secondItem="xRs-lC-waJ" secondAttribute="leading" constant="24" id="8Iu-DU-VBb"/>
