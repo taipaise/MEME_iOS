@@ -25,6 +25,12 @@ final class BusinessRegistrationViewController: UIViewController {
         progressBar.configure(progress: 2)
         nextButton.layer.cornerRadius = 10
     }
+    
+    @IBAction private func nextButtonTapped(_ sender: Any) {
+        let nextVC = SetBusinessInfoViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
 }
 
 extension BusinessRegistrationViewController: BackButtonTappedDelegate {
