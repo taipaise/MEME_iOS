@@ -29,7 +29,8 @@ final class ModelReservationSegmentedControl: UISegmentedControl {
         label.textColor = .mainBold
         // label 내용 api에서 받아온 숫자로 수정 필요
         label.text = "3"
-        label.font = UIFont(name: "Pretendard-Bold", size: 14)
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = .pretendard(to: .regular, size: 14)
 
         return label
       }()
@@ -114,9 +115,10 @@ private extension ModelReservationSegmentedControl {
         
         if let secondSegmentLabel = segmentedTitleLabels.first(where: { $0.text == titles[1] }) {
             secondSegmentLabel.addSubview(reviewNumLabel)
+            reviewNumLabel.translatesAutoresizingMaskIntoConstraints = false
             NSLayoutConstraint.activate([
                 reviewNumLabel.centerYAnchor.constraint(equalTo: secondSegmentLabel.centerYAnchor),
-                reviewNumLabel.trailingAnchor.constraint(equalTo: secondSegmentLabel.trailingAnchor, constant: 5)
+                reviewNumLabel.leadingAnchor.constraint(equalTo: secondSegmentLabel.trailingAnchor, constant: 5)
             ])
         }
     }

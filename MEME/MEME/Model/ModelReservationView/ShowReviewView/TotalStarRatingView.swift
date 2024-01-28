@@ -38,11 +38,11 @@ class TotalStarRatingView: UIView {
         return label
     }
     
-    private var fiveStarNumLabel: UILabel { createStarNumLabel() }
-    private var fourStarNumLabel: UILabel { createStarNumLabel() }
-    private var threeStarNumLabel: UILabel { createStarNumLabel() }
-    private var twoStarNumLabel: UILabel { createStarNumLabel() }
-    private var oneStarNumLabel: UILabel { createStarNumLabel() }
+    private lazy var fiveStarNumLabel: UILabel = createStarNumLabel()
+    private lazy var fourStarNumLabel: UILabel = createStarNumLabel()
+    private lazy var threeStarNumLabel: UILabel = createStarNumLabel()
+    private lazy var twoStarNumLabel: UILabel = createStarNumLabel()
+    private lazy var oneStarNumLabel: UILabel = createStarNumLabel()
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -118,8 +118,6 @@ class TotalStarRatingView: UIView {
     
     // MARK: - Update View
     func update(with distribution: StarRatingDistribution) {
-        print(distribution)
-        print(distribution.fiveStars)
         fiveStarNumLabel.text = "\(distribution.fiveStars)"
         fourStarNumLabel.text = "\(distribution.fourStars)"
         threeStarNumLabel.text = "\(distribution.threeStars)"

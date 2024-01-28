@@ -55,6 +55,7 @@ class ShowReviewView: UIView {
         return lineView
     }()
     private var reviewTableView: UITableView!
+    private var tableViewHeightConstraint: NSLayoutConstraint?
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -120,9 +121,7 @@ class ShowReviewView: UIView {
 
 //MARK: -UITableViewDataSource, UITableViewDelegate
 extension ShowReviewView: UITableViewDataSource, UITableViewDelegate {
-    //cell의 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //api 호출 한 수 만큼 수정
         return 5
     }
     
