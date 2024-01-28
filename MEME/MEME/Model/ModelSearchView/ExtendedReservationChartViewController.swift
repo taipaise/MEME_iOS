@@ -9,6 +9,7 @@ import UIKit
 import SnapKit
 
 class ExtendedReservationChartViewController: ModelReservationChartViewController {
+    var initialSearchText: String?
     
     private let searchMakeup: UISearchBar = {
         let searchBar = UISearchBar()
@@ -37,16 +38,20 @@ class ExtendedReservationChartViewController: ModelReservationChartViewControlle
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // 기본적인 ModelReservationChartViewController의 로딩 로직을 수행
+        
+        // 상속받는 ModelReservationChartViewController의 viewDidLoad()
         super.configureSubviews()
         super.makeConstraints()
-
-
+        
         setupMakeupSearchBar()
     }
 
     private func setupMakeupSearchBar() {
+        searchMakeup.delegate = self
+        if let searchText = initialSearchText {
+            searchMakeup.text = searchText
+        }
+        
         view.addSubview(searchMakeup)
         searchMakeup.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
@@ -58,6 +63,25 @@ class ExtendedReservationChartViewController: ModelReservationChartViewControlle
             make.top.equalTo(searchMakeup.snp.bottom).offset(16)
             make.leading.trailing.equalToSuperview().inset(24)
             make.height.equalTo(48)
+        }
+    }
+    
+    //MAEK: - Action
+    private func reloadData(with searchText: String) {
+        // API 호출 결과에 따라 테이블뷰 업데이트
+    }
+}
+
+// MARK: - UISearchBarDelegate
+extension ExtendedReservationChartViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+    }
+
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.resignFirstResponder()
+        if let searchText = searchBar.text, !searchText.isEmpty {
+            reloadData(with: searchText)
         }
     }
 }

@@ -12,6 +12,8 @@ class ModelReservationChartViewController: UIViewController {
     private var selectedButton: ModelReservationTypeButton?
     
     // MARK: - Properties
+    var selectedCategory: String?
+    
     let buttonScrollView = UIScrollView()
     private let buttonsStackView = UIStackView()
     
@@ -70,9 +72,6 @@ class ModelReservationChartViewController: UIViewController {
 
         return button
     }()
-
-
-    
     
     private var lineView: UIView = {
         let lineView = UIView()
@@ -125,6 +124,10 @@ class ModelReservationChartViewController: UIViewController {
         setupReservationChartTableView()
         configureSubviews()
         makeConstraints()
+        
+        if let category = selectedCategory {
+            activateButtonForCategory(category)
+        }
     }
     
     // MARK: - configureSubviews
@@ -174,6 +177,27 @@ class ModelReservationChartViewController: UIViewController {
         }
     }
     //MARK: -Action
+    private func activateButtonForCategory(_ category: String) {
+        let buttons = [
+            allButton,
+            specialButton,
+            actorButton,
+            interviewButton,
+            dailyButton,
+            studioButton,
+            weddingButton,
+            partyButton,
+            etcButton
+        ]
+        
+        for button in buttons {
+            if button.titleLabel?.text == category {
+                selectButton(button)
+                break
+            }
+        }
+    }
+    
     private func setupButtonsAction() {
         let buttons = [
             allButton,

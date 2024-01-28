@@ -9,7 +9,7 @@ import UIKit
 
 class RecentSearchViewCell: UICollectionViewCell {
     static let identifier = "RecentSearchViewCell"
-    @IBOutlet private weak var searchWordLabel: UILabel!
+    @IBOutlet weak var searchWordLabel: UILabel!
     @IBOutlet private weak var cancelButton: UIButton!
     
     override func awakeFromNib() {

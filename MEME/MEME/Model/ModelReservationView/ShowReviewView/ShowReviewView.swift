@@ -25,6 +25,16 @@ class ShowReviewView: UIView {
                    reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
                    reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
         ReviewData(profileImage: UIImage(named: "modelProfile"),
+                   profileName: "메메**",
+                   starRate: "5",
+                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
+                   reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
+        ReviewData(profileImage: UIImage(named: "modelProfile"),
+                   profileName: "메메**",
+                   starRate: "5",
+                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
+                   reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
+        ReviewData(profileImage: UIImage(named: "modelProfile"),
                    profileName: "차*",
                    starRate: "1",
                    reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
@@ -113,7 +123,7 @@ extension ShowReviewView: UITableViewDataSource, UITableViewDelegate {
     //cell의 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         //api 호출 한 수 만큼 수정
-        return 3
+        return 5
     }
     
     //cell의 생성

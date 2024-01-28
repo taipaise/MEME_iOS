@@ -9,6 +9,9 @@ import UIKit
 import SwiftUI
 
 class ModelSearchViewController: UIViewController {
+    // 예시 데이터 -> 추후 API 호출해서 데이터 받아오는 것으로 수정 필요
+    private let artists = ["차차", "리타","딩동", "마요", "전얀", "웅아", "돌리", "요비", "썬", "제이스", "아티스트명"]
+    
     //MARK: -Properties
     private let scrollView = UIScrollView()
     private let contentsView = UIView()
@@ -72,33 +75,21 @@ class ModelSearchViewController: UIViewController {
         
         return label
     }()
-    private let Artist1Button: UIButton = {
-        let button = UIButton()
-        button.setTitle("아티스트명", for: .normal)
-        button.titleLabel?.font = .pretendard(to: .regular, size: 10)
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.backgroundColor = UIColor.white
-        
-        button.layer.borderColor = UIColor(red: 255/255, green: 99/255, blue: 62/255, alpha: 1).cgColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        
-        return button
+    private let artistsVerticalStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 9
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .fill
+        return stackView
     }()
-    private let Artist2Button: UIButton = {
-        let button = UIButton()
-        button.setTitle("아티스트명", for: .normal)
-        button.titleLabel?.font = .pretendard(to: .regular, size: 10)
-        button.setTitleColor(UIColor.black, for: .normal)
-        button.backgroundColor = UIColor.white
+    private let artistsStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.spacing = 5
         
-        button.layer.borderColor = UIColor(red: 255/255, green: 99/255, blue: 62/255, alpha: 1).cgColor
-        button.layer.borderWidth = 1
-        button.layer.cornerRadius = 10
-        button.clipsToBounds = true
-        
-        return button
+        return stackView
     }()
 
     
@@ -114,6 +105,7 @@ class ModelSearchViewController: UIViewController {
         setupSearchMakeupBar()
         configureSubviews()
         makeConstraints()
+        setupArtistsButtons()
     }
     
     // MARK: - configureSubviews
@@ -129,8 +121,7 @@ class ModelSearchViewController: UIViewController {
         categorySearchesCollectionView.backgroundColor = .white
         contentsView.addSubview(categorySearchesCollectionView)
         contentsView.addSubview(artistSearchesLabel)
-        contentsView.addSubview(Artist1Button)
-        contentsView.addSubview(Artist2Button)
+        contentsView.addSubview(artistsVerticalStackView)
     }
     
     // MARK: - makeConstraints
@@ -176,16 +167,11 @@ class ModelSearchViewController: UIViewController {
             make.top.equalTo(categorySearchesCollectionView.snp.bottom).offset(27)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
-        Artist1Button.snp.makeConstraints {make in
+        artistsVerticalStackView.snp.makeConstraints {make in
             make.top.equalTo(artistSearchesLabel.snp.bottom).offset(9)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
-            make.width.equalTo(68)
-        }
-        Artist2Button.snp.makeConstraints {make in
-            make.centerY.equalTo(Artist1Button.snp.centerY)
-            make.leading.equalTo(Artist1Button.snp.trailing).offset(5)
-            make.width.equalTo(68)
-            make.bottom.equalTo(contentsView.snp.bottom).offset(-20)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+            make.bottom.equalTo(contentsView.snp.bottom)
         }
     }
 
@@ -195,7 +181,21 @@ class ModelSearchViewController: UIViewController {
     @objc func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
+    @objc private func artistButtonTapped(_ sender: UIButton) {
+            guard let artistName = sender.titleLabel?.text else { return }
+
+            searchMakeup.text = artistName
+            executeSearch(with: artistName)
+        }
+
+        private func executeSearch(with searchText: String) {
+            searchBarSearchButtonClicked(searchMakeup)
+        }
+    
     //MARK: -Helpers
+    private func setupSearchMakeupBar() {
+        searchMakeup.delegate = self
+    }
     private func setupRecentSearchCollectionView() {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
@@ -219,9 +219,75 @@ class ModelSearchViewController: UIViewController {
         //cell 등록
         categorySearchesCollectionView.register(UINib(nibName: "CategorySearchViewCell", bundle: nil), forCellWithReuseIdentifier: CategorySearchViewCell.identifier)
     }
-    private func setupSearchMakeupBar() {
-        searchMakeup.delegate = self
+    private func maxNumberOfButtonsPerRow() -> Int {
+        let viewWidth = self.view.bounds.width
+        let buttonWidth: CGFloat = 70
+        let buttonSpacing: CGFloat = 5
+        let sidePadding: CGFloat = 24 * 2
+        let availableWidth = viewWidth - sidePadding
+        let maxButtons = Int(availableWidth / (buttonWidth + buttonSpacing))
         
+        return maxButtons
+    }
+    
+    private func setupArtistsButtons() {
+        var currentStackView = createNewHorizontalStackView()
+        artistsVerticalStackView.addArrangedSubview(currentStackView)
+        
+        for artist in artists {
+            let button = createButton(with: artist)
+            
+            if currentStackView.arrangedSubviews.count >= maxNumberOfButtonsPerRow() {
+                currentStackView = createNewHorizontalStackView()
+                artistsVerticalStackView.addArrangedSubview(currentStackView)
+            }
+            currentStackView.addArrangedSubview(button)
+        }
+        fillRemainingSpaceInLastStackView(currentStackView)
+    }
+
+    private func fillRemainingSpaceInLastStackView(_ stackView: UIStackView) {
+        let numberOfButtons = stackView.arrangedSubviews.count
+        let maxButtonsPerRow = maxNumberOfButtonsPerRow()
+        
+        if numberOfButtons < maxButtonsPerRow {
+            let numberOfEmptySpaces = maxButtonsPerRow - numberOfButtons
+            for _ in 0..<numberOfEmptySpaces {
+                let emptySpaceView = UIView()
+                emptySpaceView.widthAnchor.constraint(equalToConstant: 70).isActive = true
+                stackView.addArrangedSubview(emptySpaceView)
+            }
+        }
+    }
+
+    private func createNewVerticalStackView() -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.spacing = 9
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .center
+        return stackView
+    }
+    private func createNewHorizontalStackView() -> UIStackView {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.spacing = 5
+        stackView.distribution = .equalSpacing
+        stackView.alignment = .center
+        return stackView
+    }
+    private func createButton(with artist: String) -> UIButton {
+        let button = UIButton(type: .system)
+        button.setTitle(artist, for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.pretendard(to: .regular, size: 10)
+        button.layer.cornerRadius = 10
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.mainBold.cgColor
+        button.widthAnchor.constraint(equalToConstant: 70).isActive = true
+        button.addTarget(self, action: #selector(artistButtonTapped(_:)), for: .touchUpInside)
+        
+        return button
     }
 }
 
@@ -265,6 +331,32 @@ extension ModelSearchViewController: UICollectionViewDelegate, UICollectionViewD
             }
         return UICollectionViewCell()
     }
+    
+    //cell 눌렀을때 동작
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == recentSearchesCollectionView {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? RecentSearchViewCell,
+                  let searchText = cell.searchWordLabel.text else {
+                return
+            }
+            searchMakeup.text = searchText
+            executeSearch(with: searchText)
+        } else if collectionView == categorySearchesCollectionView {
+            guard let cell = collectionView.cellForItem(at: indexPath) as? CategorySearchViewCell else {
+                return
+            }
+            
+            let category = cell.categoryLabel.text ?? ""
+            if let tabBarController = self.tabBarController {
+                tabBarController.selectedIndex = 1
+                
+                if let navController = tabBarController.viewControllers?[1] as? UINavigationController,
+                   let reservationChartVC = navController.viewControllers.first as? ModelReservationChartViewController {
+                    reservationChartVC.selectedCategory = category
+                }
+            }
+        }
+    }
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
@@ -300,12 +392,16 @@ extension ModelSearchViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-//MARK: - UISearchBarDelegate
 extension ModelSearchViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        searchBar.text = ""
+    }
+    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let searchText = searchBar.text, !searchText.isEmpty {
             let extendedReservationChartVC = ExtendedReservationChartViewController()
+            extendedReservationChartVC.initialSearchText = searchText
             self.navigationController?.pushViewController(extendedReservationChartVC, animated: true)
         }
     }

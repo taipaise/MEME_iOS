@@ -248,6 +248,7 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         informationView.snp.makeConstraints { make in
             make.top.equalTo(segmentedControl.snp.bottom).offset(2)
             make.leading.trailing.equalTo(topContainerView)
+            make.bottom.equalTo(topContainerView.snp.bottom)
         }
         reviewView.snp.makeConstraints { make in
             make.top.equalTo(segmentedControl.snp.bottom).offset(2)
@@ -348,7 +349,7 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
             make.top.equalTo(underLineView.snp.bottom)
             make.leading.equalTo(contentsView.snp.leading).offset(25)
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
-            make.bottom.equalTo(contentsView.snp.bottom).offset(-200)
+            make.bottom.equalTo(contentsView.snp.bottom)
         }
         // 지금 높이 조절 못하겠어서 보류중 -> 수정 필요
 //        informationView.snp.makeConstraints { make in

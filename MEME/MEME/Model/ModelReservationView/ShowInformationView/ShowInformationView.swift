@@ -45,7 +45,6 @@ class ShowInformationView: UIView {
         informationLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().offset(33)
             make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview().offset(40)
         }
     }
 
