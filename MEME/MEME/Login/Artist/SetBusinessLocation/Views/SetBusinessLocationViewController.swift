@@ -48,6 +48,12 @@ final class SetBusinessLocationViewController: UIViewController {
         progressBar.configure(progress: 1)
         nextButton.layer.cornerRadius = 10
     }
+    
+    @IBAction private func nextButtonTapped(_ sender: Any) {
+        let nextVC = SetBusinessInfoDetailViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
 }
 
 extension SetBusinessLocationViewController {

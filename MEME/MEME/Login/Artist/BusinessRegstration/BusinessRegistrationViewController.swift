@@ -17,11 +17,11 @@ final class BusinessRegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-
     }
     
     private func setUI() {
         navigationBar.delegate = self
+        navigationBar.configure(title: "회원가입")
         progressBar.configure(progress: 2)
         nextButton.layer.cornerRadius = 10
     }
