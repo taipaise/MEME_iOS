@@ -7,52 +7,57 @@
         <capability name="collection view cell content view" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pretendard-Regular.otf">
+            <string>Pretendard-Regular</string>
+        </array>
+    </customFonts>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" restorationIdentifier="CategorySearchViewCell" reuseIdentifier="CategorySearchViewCell" id="UMy-ly-eNl" customClass="CategorySearchViewCell" customModule="MEME" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="95" height="129"/>
+            <rect key="frame" x="0.0" y="0.0" width="95" height="130"/>
             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
             <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="7iX-v6-Te3">
-                <rect key="frame" x="0.0" y="0.0" width="95" height="129"/>
+                <rect key="frame" x="0.0" y="0.0" width="95" height="130"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="qy6-9m-U6Y">
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="categoryBackgroundImage" translatesAutoresizingMaskIntoConstraints="NO" id="HC2-N1-Sxd">
                         <rect key="frame" x="0.0" y="0.0" width="95" height="95"/>
-                        <color key="backgroundColor" red="0.98431372640000003" green="0.91764706370000004" blue="0.89803922179999995" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstAttribute="width" secondItem="qy6-9m-U6Y" secondAttribute="height" id="Fs9-Kz-xVa"/>
+                            <constraint firstAttribute="width" secondItem="HC2-N1-Sxd" secondAttribute="height" multiplier="1:1" id="DZW-s1-DZH"/>
                         </constraints>
-                    </view>
-                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Trophy" translatesAutoresizingMaskIntoConstraints="NO" id="ffo-By-iWl">
-                        <rect key="frame" x="21" y="21" width="53" height="53"/>
+                    </imageView>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_actor" translatesAutoresizingMaskIntoConstraints="NO" id="ffo-By-iWl">
+                        <rect key="frame" x="22" y="22" width="51" height="51"/>
                         <constraints>
                             <constraint firstAttribute="width" secondItem="ffo-By-iWl" secondAttribute="height" id="3nz-Cs-E3G"/>
                         </constraints>
                     </imageView>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="데일리 메이크업" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ge2-Hb-8iE">
-                        <rect key="frame" x="9.3333333333333357" y="106" width="76.333333333333314" height="23"/>
-                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                        <nil key="textColor"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="스튜디오 메이크업" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ge2-Hb-8iE">
+                        <rect key="frame" x="0.0" y="103" width="95" height="27"/>
+                        <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="12"/>
+                        <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <nil key="highlightedColor"/>
                     </label>
                 </subviews>
                 <constraints>
                     <constraint firstItem="ge2-Hb-8iE" firstAttribute="centerX" secondItem="7iX-v6-Te3" secondAttribute="centerX" id="02Q-KW-57j"/>
-                    <constraint firstItem="qy6-9m-U6Y" firstAttribute="leading" secondItem="7iX-v6-Te3" secondAttribute="leading" id="0LI-Tz-XpG"/>
-                    <constraint firstItem="ffo-By-iWl" firstAttribute="leading" secondItem="qy6-9m-U6Y" secondAttribute="leading" constant="21" id="KEK-4y-Jtl"/>
+                    <constraint firstItem="ffo-By-iWl" firstAttribute="centerX" secondItem="HC2-N1-Sxd" secondAttribute="centerX" id="7GR-Up-IVS"/>
+                    <constraint firstAttribute="trailing" secondItem="ge2-Hb-8iE" secondAttribute="trailing" id="HGN-e5-vR5"/>
                     <constraint firstAttribute="bottom" secondItem="ge2-Hb-8iE" secondAttribute="bottom" id="Qe2-rL-SYb"/>
-                    <constraint firstItem="ge2-Hb-8iE" firstAttribute="top" secondItem="qy6-9m-U6Y" secondAttribute="bottom" constant="11" id="c8w-U3-k1G"/>
-                    <constraint firstItem="qy6-9m-U6Y" firstAttribute="trailing" secondItem="ffo-By-iWl" secondAttribute="trailing" constant="21" id="oYW-b1-WKI"/>
-                    <constraint firstItem="qy6-9m-U6Y" firstAttribute="top" secondItem="7iX-v6-Te3" secondAttribute="top" id="qTF-Li-Pac"/>
-                    <constraint firstItem="ffo-By-iWl" firstAttribute="top" secondItem="qy6-9m-U6Y" secondAttribute="top" constant="21" id="qxJ-pp-Qeh"/>
-                    <constraint firstAttribute="trailing" secondItem="qy6-9m-U6Y" secondAttribute="trailing" id="xXA-Do-uhD"/>
+                    <constraint firstAttribute="trailing" secondItem="HC2-N1-Sxd" secondAttribute="trailing" id="Qza-Jc-0zT"/>
+                    <constraint firstItem="ffo-By-iWl" firstAttribute="centerY" secondItem="HC2-N1-Sxd" secondAttribute="centerY" id="XPE-nD-h7Z"/>
+                    <constraint firstItem="HC2-N1-Sxd" firstAttribute="leading" secondItem="7iX-v6-Te3" secondAttribute="leading" id="XiP-It-yQ9"/>
+                    <constraint firstItem="ge2-Hb-8iE" firstAttribute="top" secondItem="HC2-N1-Sxd" secondAttribute="bottom" constant="8" id="cUe-hi-To5"/>
+                    <constraint firstItem="HC2-N1-Sxd" firstAttribute="top" secondItem="7iX-v6-Te3" secondAttribute="top" id="lUi-vc-Nrp"/>
+                    <constraint firstItem="ge2-Hb-8iE" firstAttribute="leading" secondItem="7iX-v6-Te3" secondAttribute="leading" id="zY0-2s-uAS"/>
                 </constraints>
             </collectionViewCellContentView>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <size key="customSize" width="164" height="205"/>
             <connections>
-                <outlet property="categoryImageBackgroundView" destination="qy6-9m-U6Y" id="NZX-Bx-LzL"/>
+                <outlet property="categoryBackgroundImageView" destination="HC2-N1-Sxd" id="MCl-kc-lon"/>
                 <outlet property="categoryImageView" destination="ffo-By-iWl" id="dxv-x9-gxY"/>
                 <outlet property="categoryLabel" destination="ge2-Hb-8iE" id="lA5-zp-PPZ"/>
             </connections>
@@ -60,6 +65,7 @@
         </collectionViewCell>
     </objects>
     <resources>
-        <image name="Trophy" width="51" height="51"/>
+        <image name="categoryBackgroundImage" width="95" height="90"/>
+        <image name="icon_actor" width="51" height="51"/>
     </resources>
 </document>
