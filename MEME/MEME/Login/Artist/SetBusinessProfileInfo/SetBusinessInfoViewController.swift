@@ -34,7 +34,7 @@ final class SetBusinessInfoViewController: UIViewController {
     
     private func setUI() {
         navigationBar.delegate = self
-        navigationBar.configure(title: "회원가입")
+        navigationBar.configure(title: "프로필 입력")
         progressBar.configure(progress: 0)
         nextButton.layer.cornerRadius = 10
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
@@ -94,6 +94,11 @@ final class SetBusinessInfoViewController: UIViewController {
     @IBAction private func careerButtonTapped(_ sender: Any) {
     }
     
+    
+    @IBAction private func nextButtonTapped(_ sender: Any) {
+        let nextVC = SetBusinessLocationViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
 }
 
 // MARK: - 사진 선택 설정
