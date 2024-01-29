@@ -298,7 +298,7 @@ class ModelReservationDetailViewController: UIViewController {
         
         let noAction = UIAlertAction(title: "아니요", style: .cancel) { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
-        } 
+        }
         let yesAction = UIAlertAction(title: "예", style: .default) { _ in
             let reservationsVC = ModelReservationLastViewController()
             self.navigationController?.pushViewController(reservationsVC, animated: true)

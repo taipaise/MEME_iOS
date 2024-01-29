@@ -95,7 +95,6 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegate, U
             cell.modelReservationArtistNameLabel.textColor = .black
             cell.modelReservationLocationLabel.textColor = .black
             cell.modelReservationPriceLabel.textColor = .black
-            cell.cancelButton.backgroundColor = .gray300
             
             return cell
         }
