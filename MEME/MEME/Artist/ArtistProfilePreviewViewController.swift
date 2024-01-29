@@ -22,7 +22,7 @@ class ArtistProfilePreviewViewController: UIViewController {
     }
     
     private func uiSet(){
-        navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         artistGenderView.layer.borderColor = UIColor(resource: .mainBold).cgColor
         artistGenderView.layer.cornerRadius = artistGenderView.frame.height/2
         artistGenderView.layer.borderWidth = 1

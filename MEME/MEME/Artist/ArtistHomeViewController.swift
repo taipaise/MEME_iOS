@@ -8,21 +8,22 @@
 import UIKit
 
 class ArtistHomeViewController: UIViewController {
-    @IBOutlet var artistHomeProfileStatusView: UIView!
-    @IBOutlet var secondArtistHomeProfileStatusView: UIView!
-    @IBOutlet var artistHomeProfileNoStatusView: UIView!
-    @IBOutlet var artistProfileImageView: UIImageView!
-    @IBOutlet var artistHomeProfileLabel: UILabel!
-    @IBOutlet var artistReservationStatusTableView: UITableView!
+    @IBOutlet private var artistHomeProfileStatusView: UIView!
+    @IBOutlet private var secondArtistHomeProfileStatusView: UIView!
+    @IBOutlet private var artistHomeProfileNoStatusView: UIView!
+    @IBOutlet private var artistProfileImageView: UIImageView!
+    @IBOutlet private var artistHomeProfileLabel: UILabel!
+    @IBOutlet private var artistReservationStatusTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.navigationController?.navigationBar.tintColor = .black
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         uiSet()
         tableViewConfigure()
     }
     private func uiSet(){
-        if(TodayRes==0){
+        if(TodayRes == 0) {
             artistHomeProfileNoStatusView.isHidden = false
             artistHomeProfileStatusView.isHidden = true
             secondArtistHomeProfileStatusView.isHidden = true
@@ -35,7 +36,6 @@ class ArtistHomeViewController: UIViewController {
             artistHomeProfileStatusView.isHidden = false
             secondArtistHomeProfileStatusView.isHidden = false
         }
-        
         
         
         artistHomeProfileStatusView.layer.cornerRadius = 10
@@ -55,7 +55,7 @@ class ArtistHomeViewController: UIViewController {
     }
 
     @IBAction private func profileImageTapped(_ sender: UIButton) {
-        let vc = ArtistProfilePreviewViewController()
+        let vc = ModelViewArtistProfileViewController()
         navigationController?.pushViewController(vc, animated: true)
     }
     
@@ -68,6 +68,15 @@ class ArtistHomeViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     @objc private func reservationManagedBtnTapped(){
+        let vc = SingleArtistReservationManageViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    @IBAction func firstTodayResBtnDidTap(_ sender: UIButton) {
+        let vc = SingleArtistReservationManageViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    @IBAction func secondTodayResBtnDidTap(_ sender: UIButton) {
+        print("tapped")
         let vc = SingleArtistReservationManageViewController()
         navigationController?.pushViewController(vc, animated: true)
     }

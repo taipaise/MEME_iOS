@@ -34,12 +34,20 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nRp-5n-OCz" userLabel="ArtistHomeProfileView">
                     <rect key="frame" x="0.0" y="0.0" width="390" height="320"/>
                     <subviews>
-                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hnj-33-7ww">
+                        <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Hnj-33-7ww">
                             <rect key="frame" x="24" y="238.33333333333337" width="342" height="148"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GEB-6g-fj9" userLabel="1ArtistHomeProfileStatusView">
                                     <rect key="frame" x="0.0" y="0.0" width="342" height="70"/>
                                     <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Smf-ka-bkE" userLabel="1Button">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="70"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain"/>
+                                            <connections>
+                                                <action selector="firstTodayResBtnDidTap:" destination="-1" eventType="touchUpInside" id="PDF-zW-1iD"/>
+                                            </connections>
+                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="예약된 서비스명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wyo-XT-Mnq">
                                             <rect key="frame" x="14.000000000000007" y="25.333333333333343" width="100.66666666666669" height="19.333333333333329"/>
                                             <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
@@ -61,11 +69,15 @@
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
+                                        <constraint firstItem="Smf-ka-bkE" firstAttribute="top" secondItem="GEB-6g-fj9" secondAttribute="top" id="6Lh-EG-mXL"/>
                                         <constraint firstItem="RbC-nP-PQW" firstAttribute="centerY" secondItem="GEB-6g-fj9" secondAttribute="centerY" id="DZe-cJ-Vc6"/>
+                                        <constraint firstItem="Smf-ka-bkE" firstAttribute="width" secondItem="GEB-6g-fj9" secondAttribute="width" id="N3M-ba-vzL"/>
+                                        <constraint firstItem="Smf-ka-bkE" firstAttribute="leading" secondItem="GEB-6g-fj9" secondAttribute="leading" id="Ohf-8g-iZc"/>
                                         <constraint firstItem="27q-PE-IJQ" firstAttribute="centerY" secondItem="GEB-6g-fj9" secondAttribute="centerY" id="QCt-TU-B9v"/>
                                         <constraint firstItem="27q-PE-IJQ" firstAttribute="leading" secondItem="RbC-nP-PQW" secondAttribute="trailing" constant="10" id="Y7A-ta-af1"/>
                                         <constraint firstItem="Wyo-XT-Mnq" firstAttribute="leading" secondItem="GEB-6g-fj9" secondAttribute="leading" constant="14" id="Ynz-KZ-FwW"/>
                                         <constraint firstItem="Wyo-XT-Mnq" firstAttribute="centerY" secondItem="GEB-6g-fj9" secondAttribute="centerY" id="bfD-dr-2zo"/>
+                                        <constraint firstItem="Smf-ka-bkE" firstAttribute="height" secondItem="GEB-6g-fj9" secondAttribute="height" id="h8E-gf-MA4"/>
                                         <constraint firstAttribute="trailing" secondItem="27q-PE-IJQ" secondAttribute="trailing" constant="14" id="lCI-xf-3ER"/>
                                         <constraint firstAttribute="width" secondItem="GEB-6g-fj9" secondAttribute="height" multiplier="171:35" id="nTr-0g-aGX"/>
                                     </constraints>
@@ -91,15 +103,27 @@
                                             <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2mz-zQ-p7V" userLabel="2Button">
+                                            <rect key="frame" x="0.0" y="0.0" width="342" height="70"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain"/>
+                                            <connections>
+                                                <action selector="secondTodayResBtnDidTap:" destination="-1" eventType="touchUpInside" id="OpT-xB-0a0"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstItem="BbF-UB-5Bd" firstAttribute="leading" secondItem="aWM-zA-lPo" secondAttribute="leading" constant="14" id="4Rj-5J-wl8"/>
                                         <constraint firstItem="8nG-Gj-Aph" firstAttribute="centerY" secondItem="aWM-zA-lPo" secondAttribute="centerY" id="6y3-8D-FmZ"/>
+                                        <constraint firstItem="2mz-zQ-p7V" firstAttribute="top" secondItem="aWM-zA-lPo" secondAttribute="top" id="Ho1-h7-FWf"/>
                                         <constraint firstAttribute="trailing" secondItem="qVK-65-1Ad" secondAttribute="trailing" constant="14" id="iEM-Uo-cUD"/>
                                         <constraint firstItem="qVK-65-1Ad" firstAttribute="centerY" secondItem="aWM-zA-lPo" secondAttribute="centerY" id="kbO-Oc-LqD"/>
                                         <constraint firstAttribute="width" secondItem="aWM-zA-lPo" secondAttribute="height" multiplier="171:35" id="kp6-Tl-4sD"/>
                                         <constraint firstItem="qVK-65-1Ad" firstAttribute="leading" secondItem="8nG-Gj-Aph" secondAttribute="trailing" constant="10" id="t35-MT-7GS"/>
+                                        <constraint firstItem="2mz-zQ-p7V" firstAttribute="leading" secondItem="aWM-zA-lPo" secondAttribute="leading" id="wJf-DH-k1s"/>
+                                        <constraint firstItem="2mz-zQ-p7V" firstAttribute="height" secondItem="aWM-zA-lPo" secondAttribute="height" id="xB1-Wv-E9F"/>
+                                        <constraint firstItem="2mz-zQ-p7V" firstAttribute="width" secondItem="aWM-zA-lPo" secondAttribute="width" id="z9M-71-2AW"/>
                                         <constraint firstItem="BbF-UB-5Bd" firstAttribute="centerY" secondItem="aWM-zA-lPo" secondAttribute="centerY" id="zAy-Pr-OdL"/>
                                     </constraints>
                                 </view>
@@ -274,7 +298,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

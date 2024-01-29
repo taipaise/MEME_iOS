@@ -19,7 +19,7 @@ class EntireArtistReservationManageViewController: UIViewController {
     }
     
     private func uiSet(){
-        navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         bottomBarView.layer.cornerRadius=10
     }
     

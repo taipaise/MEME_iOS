@@ -20,7 +20,7 @@ class ArtistReservationManageViewController: UIViewController {
         uiSet()
     }
     private func uiSet(){
-        navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         noReservationLabel.isHidden = !resMakeUpNameArray.isEmpty
     }
     private func tableViewConfigure(){

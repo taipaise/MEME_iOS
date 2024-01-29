@@ -11,6 +11,7 @@ import SnapKit
 class ModelViewArtistProfileViewController: UIViewController {
     // 예시 데이터 -> 추후 API 호출해서 데이터 받아오는 것으로 수정 필요
     private let expertiseFields = ["데일리 메이크업", "배우 메이크업","면접 메이크업"]
+    private let isModel : Bool = false
     
     // MARK: - Properties
     private let scrollView = UIScrollView()
@@ -57,6 +58,7 @@ class ModelViewArtistProfileViewController: UIViewController {
         
         return label
     }()
+    // 모델에서만 동작
     private let addFavoriteArtistButton: UIButton = {
         let button = UIButton()
         button.setTitle("관심 아티스트 설정하기", for: .normal)
@@ -67,6 +69,17 @@ class ModelViewArtistProfileViewController: UIViewController {
         button.clipsToBounds = true
         button.addTarget(self, action: #selector(addFavoriteArtistTapped), for: .touchUpInside)
         
+        return button
+    }()
+    // 아티스트에서만 동작
+    private let artistProfileEditingInfoBar: UIButton = {
+        let button = UIButton()
+        button.setTitle("프로필 수정은 마이페이지에서 가능해요", for: .normal)
+        button.titleLabel?.font = .pretendard(to: .regular, size: 14)
+        button.setTitleColor(.white, for: .normal)
+        button.backgroundColor = .black
+        button.layer.cornerRadius = 10
+        button.clipsToBounds = true
         return button
     }()
     private var artistintroductionLabel: UILabel = {
@@ -121,7 +134,7 @@ class ModelViewArtistProfileViewController: UIViewController {
         let label = UILabel()
         label.text = "샵"
         label.font = .pretendard(to: .regular, size: 10)
-        label.textColor = .black
+        label.textColor = .white
         
         return label
     }()
@@ -144,7 +157,7 @@ class ModelViewArtistProfileViewController: UIViewController {
         let label = UILabel()
         label.text = "방문"
         label.font = .pretendard(to: .regular, size: 10)
-        label.textColor = .black
+        label.textColor = .white
         
         return label
     }()
@@ -189,18 +202,23 @@ class ModelViewArtistProfileViewController: UIViewController {
         return label
     }()
     private var portfolioCollectionView: UICollectionView!
-    
-    
-    
+    private var navigationBarView: UINavigationBar!
+    private var backButton: UIButton {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "chevron.left"), for: .normal)
+        button.tintColor = .black
+        return button
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        let closeButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(closeButtonTapped))
-        self.navigationItem.rightBarButtonItem = closeButton
-        self.title = "프로필"
+//        self.navigationController?.isNavigationBarHidden = false
+//        self.navigationController?.navigationBar.tintColor = .black
+//        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+//        let closeButton = UIBarButtonItem(image: UIImage(systemName: "xmark"), style: .plain, target: self, action: #selector(closeButtonTapped))
+//        self.navigationItem.rightBarButtonItem = closeButton
+//        self.title = "프로필"
         
         setupPortfolioCollectionView()
         configureSubviews()
@@ -209,6 +227,7 @@ class ModelViewArtistProfileViewController: UIViewController {
     }
     // MARK: - configureSubviews
     func configureSubviews() {
+        view.addSubview(navigationBarView)
         view.addSubview(scrollView)
         scrollView.addSubview(contentsView)
         contentsView.addSubview(artistProfileImageView)
@@ -216,7 +235,6 @@ class ModelViewArtistProfileViewController: UIViewController {
         contentsView.addSubview(employmentStatusLabel)
         contentsView.addSubview(genderBackgroundColorView)
         contentsView.addSubview(artistGenderLabel)
-        contentsView.addSubview(addFavoriteArtistButton)
         contentsView.addSubview(artistintroductionLabel)
         contentsView.addSubview(inputIntroductionLabel)
         contentsView.addSubview(totalCareerTimeLabel)
@@ -232,13 +250,28 @@ class ModelViewArtistProfileViewController: UIViewController {
         contentsView.addSubview(expertiseFieldVerticalStackView)
         contentsView.addSubview(portfolioLabel)
         contentsView.addSubview(portfolioCollectionView)
+        navigationBarView.addSubview(backButton)
+        if(isModel){
+            contentsView.addSubview(addFavoriteArtistButton)
+        }else{
+            contentsView.addSubview(artistProfileEditingInfoBar)
+        }
+        
         
     }
     
     // MARK: - makeConstraints
     func makeConstraints() {
+        
+        navigationBarView.snp.makeConstraints{ (make) in
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.top.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(44)
+        }
         scrollView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.equalTo(navigationBarView.snp.bottom)
+            make.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         contentsView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
@@ -268,16 +301,8 @@ class ModelViewArtistProfileViewController: UIViewController {
             make.centerY.equalTo(artistProfileImageView.snp.centerY).multipliedBy(1.2)
             make.leading.equalTo(artistProfileImageView.snp.trailing).offset(20)
         }
-        addFavoriteArtistButton.snp.makeConstraints {make in
-            make.top.equalTo(artistProfileImageView.snp.bottom).offset(16)
-            make.leading.equalTo(contentsView.snp.leading).offset(24)
-            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
-            make.height.equalTo(49)
-        }
-        artistintroductionLabel.snp.makeConstraints {make in
-            make.top.equalTo(addFavoriteArtistButton.snp.bottom).offset(31)
-            make.leading.equalTo(contentsView.snp.leading).offset(24)
-        }
+        
+        
         inputIntroductionLabel.snp.makeConstraints {make in
             make.top.equalTo(artistintroductionLabel.snp.bottom).offset(15)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
@@ -336,12 +361,48 @@ class ModelViewArtistProfileViewController: UIViewController {
             make.top.equalTo(expertiseFieldVerticalStackView.snp.bottom).offset(18)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
+        backButton.snp.makeConstraints {make in
+            make.centerY.equalTo(navigationBarView)
+            make.leading.equalTo(view.safeAreaLayoutGuide).offset(24)
+        }
+        
         portfolioCollectionView.snp.makeConstraints {make in
             make.top.equalTo(portfolioLabel.snp.bottom).offset(13)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
             make.height.equalTo(260)
-            make.bottom.equalTo(contentsView.snp.bottom)
+            if(isModel){
+                make.bottom.equalTo(contentsView.snp.bottom)
+            }else{
+                make.bottom.equalTo(contentsView.snp.bottom).offset(-50)
+            }
+
+            
+        }
+        if(isModel)
+        {
+            addFavoriteArtistButton.snp.makeConstraints {make in
+                make.top.equalTo(artistProfileImageView.snp.bottom).offset(16)
+                make.leading.equalTo(contentsView.snp.leading).offset(24)
+                make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+                make.height.equalTo(49)
+                
+            }
+            artistintroductionLabel.snp.makeConstraints {make in
+                make.top.equalTo(addFavoriteArtistButton.snp.bottom).offset(31)
+                make.leading.equalTo(contentsView.snp.leading).offset(24)
+            }
+        }else{
+            artistProfileEditingInfoBar.snp.makeConstraints {make in
+                make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(0)
+                make.leading.equalTo(contentsView.snp.leading).offset(24)
+                make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+                make.height.equalTo(49)
+            }
+            artistintroductionLabel.snp.makeConstraints {make in
+                make.top.equalTo(artistProfileImageView.snp.bottom).offset(38)
+                make.leading.equalTo(contentsView.snp.leading).offset(24)
+            }
         }
         
     }

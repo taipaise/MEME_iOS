@@ -14,7 +14,7 @@ class SingleArtistReservationManageViewController: UIViewController {
     @IBOutlet var cancelBarButton: UIButton!
     @IBOutlet var resInfoFrameView: UIView!
     
-    private var isToday: Bool = true
+    private var isToday: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,7 +23,7 @@ class SingleArtistReservationManageViewController: UIViewController {
     }
 
     private func uiSet(){
-        navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         cancelBarView.layer.cornerRadius=10
         resInfoFrameView.layer.cornerRadius=10
         if isToday {

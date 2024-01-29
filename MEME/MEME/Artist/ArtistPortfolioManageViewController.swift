@@ -19,7 +19,7 @@ class ArtistPortfolioManageViewController: UIViewController {
     }
     
     private func uiSet(){
-        navigationController?.isNavigationBarHidden = true
+        self.navigationController?.isNavigationBarHidden = true
         noPortfolioLabel.isHidden = !portfolioMakeupNameArray.isEmpty
     }
     private func collectionViewConfig(){
