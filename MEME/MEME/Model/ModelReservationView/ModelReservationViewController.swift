@@ -7,9 +7,48 @@
 
 import UIKit
 import SnapKit
+// 예시 데이터 구조 -> 이후 삭제 필요
+struct ReviewData {
+    var profileImage: UIImage?
+    var profileName: String
+    var starRate: String
+    var reviewText: String
+    var reviewImages: [UIImage]
+}
 
-class ModelReservationViewController: UIViewController, BackButtonTappedDelegate {
+
+class ModelReservationViewController: UIViewController {
+    // 예시 데이터 배열 -> 이후 삭제 필요
+    
+    var reviews: [ReviewData] = [
+        ReviewData(profileImage: UIImage(named: "modelProfile"),
+                   profileName: "메메**",
+                   starRate: "5",
+                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
+                   reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
+        ReviewData(profileImage: UIImage(named: "modelProfile"),
+                   profileName: "메메**",
+                   starRate: "5",
+                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
+                   reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
+        ReviewData(profileImage: UIImage(named: "modelProfile"),
+                   profileName: "메메**",
+                   starRate: "5",
+                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
+                   reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
+        ReviewData(profileImage: UIImage(named: "modelProfile"),
+                   profileName: "차*",
+                   starRate: "1",
+                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
+                   reviewImages: []),
+        ReviewData(profileImage: UIImage(named: "modelProfile"),
+                   profileName: "리*",
+                   starRate: "4",
+                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
+                   reviewImages: [UIImage(named: "img_exReview3")].compactMap { $0 })
+    ]
     // MARK: - Properties
+    private let navigationBar = NavigationBarView()
     private let scrollView = UIScrollView()
     private let contentsView = UIView()
     private var backgroundImageView: UIImageView = {
@@ -143,7 +182,8 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
     }()
     private var informationView = ShowInformationView()
     private var reviewView = ShowReviewView()
-
+    private var reviewTableView: UITableView!
+    
     private var underBarView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -178,9 +218,9 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.title = "예약하기"
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationBar.delegate = self
+        navigationBar.configure(title: "예약하기")
         
         setupSegmentedControl()
 
@@ -200,6 +240,8 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
     
     // MARK: - configureSubviews
     func configureSubviews() {
+        view.addSubview(navigationBar)
+        scrollView.delegate = self
         view.addSubview(scrollView)
         scrollView.addSubview(contentsView)
         contentsView.addSubview(backgroundImageView)
@@ -227,11 +269,16 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
     
     // MARK: - makeConstraints
     func makeConstraints() {
+        navigationBar.snp.makeConstraints {make in
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(48)
+        }
         scrollView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.equalTo(navigationBar.snp.bottom)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         contentsView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(scrollView)
             make.width.equalTo(scrollView)
         }
         backgroundImageView.snp.makeConstraints { (make) in
@@ -318,12 +365,11 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
             make.top.equalTo(segmentedControl.snp.bottom)
             make.leading.equalTo(contentsView.snp.leading).offset(25)
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
-            make.bottom.equalTo(contentsView.snp.bottom).offset(-51)
+            make.bottom.equalTo(contentsView.snp.bottom).offset(-100)
         }
         underBarView.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(160)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(61)
         }
         reservationButton.snp.makeConstraints { (make) in
             make.top.equalTo(underBarView.snp.top).offset(12)
@@ -342,9 +388,6 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         view.addGestureRecognizer(tapGesture)
         view.isUserInteractionEnabled = true
     }
-    func backButtonTapped() {
-            self.navigationController?.popViewController(animated: true)
-        }
     @objc private func reservationTapped() {
         let reservationsVC = ModelReservationDetailViewController()
         navigationController?.pushViewController(reservationsVC, animated: true)
@@ -372,8 +415,32 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         switch index {
         case 0:
             mainStackView.addArrangedSubview(informationView)
+            reviewTableView?.removeFromSuperview()
+            reviewTableView = nil
         case 1:
             mainStackView.addArrangedSubview(reviewView)
+            // 리뷰뷰 선택 시 스크롤뷰 아래 리뷰 테이블뷰 생성
+            if reviewTableView == nil {
+                reviewTableView = UITableView()
+                reviewTableView.backgroundColor = .red
+                
+                reviewTableView.delegate = self
+                reviewTableView.dataSource = self
+                
+                reviewTableView.register(ShowReviewTableViewCell.self, forCellReuseIdentifier: "ShowReviewTableViewCell")
+                
+                mainStackView.addSubview(reviewTableView)
+                                        
+                reviewTableView.rowHeight = UITableView.automaticDimension
+                reviewTableView.estimatedRowHeight = 44
+                
+                reviewTableView.snp.makeConstraints { make in
+                    make.top.equalTo(reviewView.snp.bottom)
+                    make.leading.equalTo(mainStackView.snp.leading)
+                    make.trailing.equalTo(mainStackView.snp.trailing)
+                    make.bottom.equalTo(mainStackView.snp.bottom)
+                }
+            }
         default:
             break
         }
@@ -384,5 +451,57 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         self.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
         self.segmentedControl.selectedSegmentIndex = 0
         self.didChangeValue(segment: self.segmentedControl)
+    }
+}
+
+//MARK: -UITableViewDataSource, UITableViewDelegate
+extension ModelReservationViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    //cell의 생성
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShowReviewTableViewCell", for: indexPath) as? ShowReviewTableViewCell else {
+            fatalError("셀 타입 캐스팅 실패...")
+        }
+        cell.selectionStyle = .none
+        let review = reviews[indexPath.row]
+        cell.configure(profileImage: review.profileImage,
+                       profileName: review.profileName,
+                       starRate: review.starRate,
+                       reviewImages: review.reviewImages,
+                       reviewText: review.reviewText
+                       )
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return UITableView.automaticDimension
+    }
+}
+
+//MARK: - UIScrollViewDelegate
+extension ModelReservationViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+           let offsetY = scrollView.contentOffset.y
+           let contentHeight = scrollView.contentSize.height
+           let height = scrollView.frame.size.height
+           
+           // 스크롤이 맨 아래에 도달했다면, 테이블뷰의 스크롤을 활성화
+           if offsetY > contentHeight - height {
+               reviewTableView?.isScrollEnabled = true
+           } else {
+               reviewTableView?.isScrollEnabled = false
+           }
+       }
+}
+
+// MARK: -BackButtonTappedDelegate
+extension ModelReservationViewController: BackButtonTappedDelegate  {
+    func backButtonTapped() {
+        if let navigationController = self.navigationController {
+            navigationController.popViewController(animated: true)
+        }
     }
 }

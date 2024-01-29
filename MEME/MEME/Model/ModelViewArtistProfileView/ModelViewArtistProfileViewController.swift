@@ -416,7 +416,7 @@ class ModelViewArtistProfileViewController: UIViewController {
         button.setTitle(field, for: .normal)
         button.setTitleColor(.black, for: .normal)
         button.titleLabel?.font = UIFont.pretendard(to: .regular, size: 10)
-        button.layer.cornerRadius = 13
+        button.layer.cornerRadius = 12
         button.layer.borderWidth = 1
         button.layer.borderColor = UIColor.mainBold.cgColor
         button.widthAnchor.constraint(equalToConstant: 97).isActive = true

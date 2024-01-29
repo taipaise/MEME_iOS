@@ -13,6 +13,21 @@ class ModelSearchViewController: UIViewController {
     private let artists = ["차차", "리타","딩동", "마요", "전얀", "웅아", "돌리", "요비", "썬", "제이스", "아티스트명"]
     
     //MARK: -Properties
+    private var navigationBarView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        return view
+    }()
+    private var backButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "ic_back"), for: .normal)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        button.tintColor = .black
+        
+        return button
+    }()
+    
     private let scrollView = UIScrollView()
     private let contentsView = UIView()
     private let searchMakeup: UISearchBar = {
@@ -97,8 +112,7 @@ class ModelSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
         setupSearchCollectionView()
         setupRecentSearchCollectionView()
@@ -110,9 +124,11 @@ class ModelSearchViewController: UIViewController {
     
     // MARK: - configureSubviews
     func configureSubviews() {
+        view.addSubview(navigationBarView)
+        navigationBarView.addSubview(backButton)
+        navigationBarView.addSubview(searchMakeup)
         view.addSubview(scrollView)
         scrollView.addSubview(contentsView)
-        contentsView.addSubview(searchMakeup)
         contentsView.addSubview(recentSearchesLabel)
         contentsView.addSubview(allCancelButton)
         recentSearchesCollectionView.backgroundColor = .white
@@ -126,21 +142,31 @@ class ModelSearchViewController: UIViewController {
     
     // MARK: - makeConstraints
     func makeConstraints() {
-        scrollView.snp.makeConstraints {make in
-            make.edges.equalToSuperview()
+        navigationBarView.snp.makeConstraints {make in
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(48)
         }
-        contentsView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-            make.width.equalTo(scrollView)
+        backButton.snp.makeConstraints {make in
+            make.leading.equalTo(navigationBarView.snp.leading).offset(24)
+            make.centerY.equalTo(navigationBarView.snp.centerY)
         }
         searchMakeup.snp.makeConstraints {make in
-            make.top.equalTo(contentsView.snp.top).offset(16)
-            make.leading.equalTo(contentsView.snp.leading).offset(24)
-            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+            make.centerY.equalTo(navigationBarView.snp.centerY)
+            make.leading.equalTo(backButton.snp.trailing).offset(13)
+            make.trailing.equalTo(navigationBarView.snp.trailing).offset(-24.26)
             make.height.equalTo(40)
         }
+        
+        scrollView.snp.makeConstraints {make in
+            make.top.equalTo(navigationBarView.snp.bottom)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        contentsView.snp.makeConstraints { (make) in
+            make.edges.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+        }
         recentSearchesLabel.snp.makeConstraints {make in
-            make.top.equalTo(searchMakeup.snp.bottom).offset(42)
+            make.top.equalTo(contentsView.snp.top).offset(38)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
         allCancelButton.snp.makeConstraints {make in
@@ -171,7 +197,7 @@ class ModelSearchViewController: UIViewController {
             make.top.equalTo(artistSearchesLabel.snp.bottom).offset(9)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
-            make.bottom.equalTo(contentsView.snp.bottom)
+            make.bottom.equalTo(contentsView.snp.bottom).offset(-72)
         }
     }
 
@@ -334,28 +360,8 @@ extension ModelSearchViewController: UICollectionViewDelegate, UICollectionViewD
     
     //cell 눌렀을때 동작
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == recentSearchesCollectionView {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? RecentSearchViewCell,
-                  let searchText = cell.searchWordLabel.text else {
-                return
-            }
-            searchMakeup.text = searchText
-            executeSearch(with: searchText)
-        } else if collectionView == categorySearchesCollectionView {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? CategorySearchViewCell else {
-                return
-            }
-            
-            let category = cell.categoryLabel.text ?? ""
-            if let tabBarController = self.tabBarController {
-                tabBarController.selectedIndex = 1
-                
-                if let navController = tabBarController.viewControllers?[1] as? UINavigationController,
-                   let reservationChartVC = navController.viewControllers.first as? ModelReservationChartViewController {
-                    reservationChartVC.selectedCategory = category
-                }
-            }
-        }
+        let ReservationChartVC = ModelReservationChartViewController()
+        self.navigationController?.pushViewController(ReservationChartVC, animated: true)
     }
 }
 
@@ -400,9 +406,8 @@ extension ModelSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let searchText = searchBar.text, !searchText.isEmpty {
-            let extendedReservationChartVC = ExtendedReservationChartViewController()
-            extendedReservationChartVC.initialSearchText = searchText
-            self.navigationController?.pushViewController(extendedReservationChartVC, animated: true)
+            let ReservationChartVC = ModelReservationChartViewController()
+            self.navigationController?.pushViewController(ReservationChartVC, animated: true)
         }
     }
 }
