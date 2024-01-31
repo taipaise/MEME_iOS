@@ -10,9 +10,7 @@ import UIKit
 class ArtistMakeupTagCollectionViewCell: UICollectionViewCell {
     @IBOutlet var makeupTagLabel: UILabel!
     @IBOutlet var makeupTagView: UIView!
-    weak var delegate: CollectionViewCellDelegate?
     static let identifier = "ArtistMakeupTagCollectionViewCell"
-    var tagSelected : Bool = false
 
     static func nib() -> UINib {
         return UINib(nibName: "ArtistMakeupTagCollectionViewCell", bundle: nil)
@@ -29,17 +27,13 @@ class ArtistMakeupTagCollectionViewCell: UICollectionViewCell {
         makeupTagView.backgroundColor = .gray100
         makeupTagLabel.textColor = .gray500
     }
-    @IBAction func makeupTagButtonDidTap(_ sender: UIButton) {
-        delegate?.makeupTagDidTap(self)
-        if(tagSelected){
-            makeupTagView.backgroundColor = .gray100
-            makeupTagLabel.textColor = .gray500
-            tagSelected = false
-        }else{
-            makeupTagView.backgroundColor = .mainBold
-            makeupTagLabel.textColor = .gray100
-            tagSelected = true
-        }
+    func selected(){
+        makeupTagView.backgroundColor = .mainBold
+        makeupTagLabel.textColor = .gray100
+    }
+    func deSelected(){
+        makeupTagView.backgroundColor = .gray100
+        makeupTagLabel.textColor = .gray500
     }
     
 }

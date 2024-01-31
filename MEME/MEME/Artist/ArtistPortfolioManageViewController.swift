@@ -60,4 +60,9 @@ extension ArtistPortfolioManageViewController : UICollectionViewDelegate, UIColl
         
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let vc = ArtistPortfolioEditingViewController()
+        navigationController?.pushViewController(vc, animated: true)
+    }
 }

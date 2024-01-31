@@ -32,25 +32,12 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsE-re-sgk">
-                                <rect key="frame" x="0.0" y="0.0" width="97" height="27"/>
-                                <state key="normal" title="Button"/>
-                                <buttonConfiguration key="configuration" style="plain"/>
-                                <connections>
-                                    <action selector="makeupTagButtonDidTap:" destination="gTV-IL-0wX" eventType="touchUpInside" id="PmO-wG-Xbk"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstAttribute="height" constant="27" id="2GR-I1-mdz"/>
-                            <constraint firstAttribute="trailing" secondItem="vsE-re-sgk" secondAttribute="trailing" id="Ph1-ve-kZN"/>
-                            <constraint firstItem="vsE-re-sgk" firstAttribute="top" secondItem="41T-D6-mtA" secondAttribute="top" id="Pib-9A-Kiz"/>
-                            <constraint firstItem="vsE-re-sgk" firstAttribute="leading" secondItem="41T-D6-mtA" secondAttribute="leading" id="Rld-sC-8gt"/>
                             <constraint firstItem="T6K-D9-xgJ" firstAttribute="centerY" secondItem="41T-D6-mtA" secondAttribute="centerY" id="mFX-px-FzH"/>
                             <constraint firstItem="T6K-D9-xgJ" firstAttribute="centerX" secondItem="41T-D6-mtA" secondAttribute="centerX" id="n2W-RK-wUg"/>
-                            <constraint firstAttribute="bottom" secondItem="vsE-re-sgk" secondAttribute="bottom" id="zA3-ZR-b10"/>
-                            <constraint firstAttribute="width" constant="97" id="zTx-EF-zv0"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -59,6 +46,7 @@
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="41T-D6-mtA" secondAttribute="trailing" id="4RS-YQ-VMO"/>
                 <constraint firstAttribute="bottom" secondItem="41T-D6-mtA" secondAttribute="bottom" id="USM-kM-4mu"/>
+                <constraint firstItem="41T-D6-mtA" firstAttribute="width" secondItem="gTV-IL-0wX" secondAttribute="width" id="rA1-qv-nyE"/>
             </constraints>
             <size key="customSize" width="312" height="155"/>
             <connections>
