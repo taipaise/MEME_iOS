@@ -18,8 +18,12 @@ struct ReviewData {
 
 
 class ModelReservationViewController: UIViewController {
-    // 예시 데이터 배열 -> 이후 삭제 필요
+    // 예시 API 호출 이미지  -> 이후 삭제 필요
+    let imageUrlsFromAPI: [String] = ["https://images.unsplash.com/photo-1620613908146-bb9a8bbb7eca?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1594465919760-441fe5908ab0?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1629297777138-6ae859d4d6df?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    ]
     
+    // 예시 데이터 배열 -> 이후 삭제 필요
     var reviews: [ReviewData] = [
         ReviewData(profileImage: UIImage(named: "modelProfile"),
                    profileName: "메메**",
@@ -51,13 +55,25 @@ class ModelReservationViewController: UIViewController {
     private let navigationBar = NavigationBarView()
     private let scrollView = UIScrollView()
     private let contentsView = UIView()
-    private var backgroundImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "reservation_back")
-        imageView.contentMode = .scaleAspectFit
-        
-        return imageView
+    
+    //backgroundImage 스크롤
+    private lazy var backgroundImageScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.isPagingEnabled = true
+        scrollView.bounces = false
+        return scrollView
     }()
+    private var pageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.currentPageIndicatorTintColor = .gray500
+        pageControl.pageIndicatorTintColor = .white
+        
+        return pageControl
+    }()
+    private let defaultImage = UIImage(named: "reservation_back")
+   
+    
     private var backgroundView: UIView = {
         let UIView = UIView()
         UIView.backgroundColor = .white
@@ -222,20 +238,13 @@ class ModelReservationViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "예약하기")
         
+        fetchImagesFromAPI()
         setupSegmentedControl()
 
         configureSubviews()
         makeConstraints()
         
         setupGestureRecognizers()
-    }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let path = UIBezierPath(roundedRect: backgroundView.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 17, height: 17))
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path.cgPath
-        backgroundView.layer.mask = maskLayer
     }
     
     // MARK: - configureSubviews
@@ -244,7 +253,9 @@ class ModelReservationViewController: UIViewController {
         scrollView.delegate = self
         view.addSubview(scrollView)
         scrollView.addSubview(contentsView)
-        contentsView.addSubview(backgroundImageView)
+        backgroundImageScrollView.delegate = self
+        contentsView.addSubview(backgroundImageScrollView)
+        contentsView.addSubview(pageControl)
         contentsView.addSubview(backgroundView)
         contentsView.addSubview(profileImageView)
         contentsView.addSubview(artistNameLabel)
@@ -281,14 +292,16 @@ class ModelReservationViewController: UIViewController {
             make.edges.equalTo(scrollView)
             make.width.equalTo(scrollView)
         }
-        backgroundImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(contentsView.snp.top)
-            make.leading.equalTo(contentsView.snp.leading)
-            make.trailing.equalTo(contentsView.snp.trailing)
-            make.height.equalTo(backgroundImageView.snp.width)
+        backgroundImageScrollView.snp.makeConstraints { (make) in
+            make.top.leading.trailing.equalTo(contentsView)
+            make.height.equalTo(contentsView.snp.width)
+        }
+        pageControl.snp.makeConstraints { (make) in
+            make.centerX.equalTo(contentsView.snp.centerX)
+            make.top.equalTo(backgroundImageScrollView.snp.bottom).offset(-70)
         }
         backgroundView.snp.makeConstraints { (make) in
-            make.top.equalTo(backgroundImageView.snp.bottom).offset(-31)
+            make.top.equalTo(backgroundImageScrollView.snp.bottom).offset(-31)
             make.leading.equalTo(contentsView.snp.leading)
             make.trailing.equalTo(contentsView.snp.trailing)
             make.bottom.equalTo(contentsView.snp.bottom)
@@ -379,6 +392,10 @@ class ModelReservationViewController: UIViewController {
         }
     }
     // MARK: - Action
+    @objc func pageControlChanged(_ sender: UIPageControl) {
+        let current = sender.currentPage
+        backgroundImageScrollView.setContentOffset(CGPoint(x: CGFloat(current) * backgroundImageScrollView.frame.size.width, y: 0), animated: true)
+    }
     private func setupGestureRecognizers() {
         setupTapGestureRecognizer(for: profileImageView, withSelector: #selector(profileImageTapped))
         setupTapGestureRecognizer(for: likeImageView, withSelector: #selector(likeImageTapped))
@@ -403,8 +420,43 @@ class ModelReservationViewController: UIViewController {
             likeImageView.image = UIImage(named: "icon_like")
         }
     }
+    // MARK: - API Actions
+    private func fetchImagesFromAPI() {
+        if imageUrlsFromAPI.isEmpty {
+            addImageView(image: defaultImage!, index: 0)
+        } else {
+            for (index, urlString) in imageUrlsFromAPI.enumerated() {
+                guard let url = URL(string: urlString) else { continue }
+                URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+                    if let data = data, error == nil, let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            self?.addImageView(image: image, index: index)
+                        }
+                    }
+                }.resume()
+            }
+        }
+    }
     
     // MARK: - Methods
+    private func addImageView(image: UIImage, index: Int) {
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        backgroundImageScrollView.addSubview(imageView)
+        
+        imageView.snp.makeConstraints { make in
+            make.height.width.equalTo(backgroundImageScrollView.snp.width)
+            make.top.bottom.equalTo(backgroundImageScrollView)
+            make.left.equalTo(backgroundImageScrollView.snp.left).offset(CGFloat(index) * contentsView.frame.size.width)
+        }
+        
+        if index == 0 {
+            backgroundImageScrollView.contentSize = CGSize(width: contentsView.frame.width * CGFloat(imageUrlsFromAPI.count), height: contentsView.frame.width)
+            pageControl.numberOfPages = imageUrlsFromAPI.count
+            pageControl.isHidden = imageUrlsFromAPI.count <= 1
+        }
+    }
     @objc private func didChangeValue(segment: UISegmentedControl) {
         updateStackView(forSegmentIndex: segment.selectedSegmentIndex)
     }
@@ -484,17 +536,23 @@ extension ModelReservationViewController: UITableViewDataSource, UITableViewDele
 //MARK: - UIScrollViewDelegate
 extension ModelReservationViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-           let offsetY = scrollView.contentOffset.y
-           let contentHeight = scrollView.contentSize.height
-           let height = scrollView.frame.size.height
-           
-           // 스크롤이 맨 아래에 도달했다면, 테이블뷰의 스크롤을 활성화
-           if offsetY > contentHeight - height {
-               reviewTableView?.isScrollEnabled = true
-           } else {
-               reviewTableView?.isScrollEnabled = false
-           }
-       }
+        if scrollView == backgroundImageScrollView {
+            let page = Int(round(scrollView.contentOffset.x / view.frame.width))
+            pageControl.currentPage = page
+        } else if scrollView == reviewTableView {
+            // reviewTableView의 스크롤 처리
+            let offsetY = scrollView.contentOffset.y
+            let contentHeight = scrollView.contentSize.height
+            let height = scrollView.frame.size.height
+            
+            // 스크롤이 맨 아래에 도달했다면, 테이블뷰의 스크롤을 활성화
+            if offsetY > contentHeight - height {
+                reviewTableView?.isScrollEnabled = true
+            } else {
+                reviewTableView?.isScrollEnabled = false
+            }
+        }
+    }
 }
 
 // MARK: -BackButtonTappedDelegate
