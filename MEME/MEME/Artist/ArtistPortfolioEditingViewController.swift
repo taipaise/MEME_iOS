@@ -7,11 +7,18 @@
 
 import UIKit
 
-class ArtistPortfolioEditingViewController: UIViewController {
+class ArtistPortfolioEditingViewController: UIViewController, UINavigationControllerDelegate {
     var pastIndex: IndexPath?
 
     @IBOutlet private var makeupCategoryCollectionView: UICollectionView!
+    @IBOutlet private var titleLabel: UILabel!
     @IBOutlet var imagePickerStackView: UIStackView!
+    @IBOutlet weak var firstImgView: UIImageView!
+    @IBOutlet weak var secondImgView: UIImageView!
+    @IBOutlet weak var thirdImgView: UIImageView!
+    private var buttonAt: Int = 0
+    private var imgCnt: Int = 0
+    private var isEdit: Bool = true
     
     private let artistProfileEditingInfoBar: UIButton = {
         let button = UIButton()
@@ -30,7 +37,16 @@ class ArtistPortfolioEditingViewController: UIViewController {
         configureSubviews()
         makeConstraints()
         collectionViewConfigure()
+        uiSet()
     }
+    private func uiSet(){
+        if(isEdit) {
+            titleLabel.text = "포트폴리오 수정"
+        }else {
+            titleLabel.text = "포트폴리오 추가"
+        }
+    }
+    
     private func collectionViewConfigure(){
         makeupCategoryCollectionView.delegate = self
         makeupCategoryCollectionView.dataSource = self
@@ -52,6 +68,7 @@ class ArtistPortfolioEditingViewController: UIViewController {
     @IBAction func backButtonDidTap(_ sender: UIButton) {
         navigationController?.popViewController(animated: true)
     }
+    
     @objc func editButtonDidTap(_ sender: UIButton) {
         let alert = UIAlertController(title: "포트폴리오 수정하기", message: "\n포트폴리오를 수정하시겠습니까?", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "예", style: .default, handler : nil )
@@ -70,6 +87,18 @@ class ArtistPortfolioEditingViewController: UIViewController {
         alert.addAction(noAction)
         present(alert, animated: true, completion: nil)
     }
+    @IBAction func pick(_ sender: UIButton) {
+            // 이미지 피커 컨트롤러 생성
+            buttonAt = sender.tag
+            let picker = UIImagePickerController()
+            picker.sourceType = .photoLibrary // 이미지 소스로 사진 라이브러리 선택
+            picker.allowsEditing = true // 이미지 편집 기능 On
+            // 델리게이트 지정
+            picker.delegate = self
+            
+            // 이미지 피커 컨트롤러 실행
+            self.present(picker, animated: false)
+        }
     
 }
 
@@ -116,4 +145,55 @@ extension ArtistPortfolioEditingViewController : UICollectionViewDelegate, UICol
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat(15)
     }
+}
+
+extension ArtistPortfolioEditingViewController : UIImagePickerControllerDelegate{
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+            // 이미지 피커 컨트롤러 창 닫기
+            print("이미지 선택하지않고 취소한 경우")
+            
+            self.dismiss(animated: false) { () in
+                // 알림 창 호출
+                let alert = UIAlertController(title: "", message: "이미지 선택이 취소되었습니다.", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+                self.present(alert, animated: false)
+            }
+        }
+        // 이미지 피커에서 이미지를 선택했을 때 호출되는 메소드
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            print("이미지 선택")
+            // 이미지 피커 컨트롤러 창 닫기
+            picker.dismiss(animated: false) { () in
+                // 이미지를 이미지 뷰에 표시
+                let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+                
+                    print("buttonat : " + String(self.buttonAt))
+                    print("imgCnt : " + String(self.imgCnt))
+                if(self.imgCnt <= self.buttonAt) {
+                    // 잘 눌럿을때
+                    if(self.imgCnt == 0) {
+                        self.firstImgView.image = img
+                        self.imgCnt += 1
+                    }else if(self.imgCnt == 1) {
+                        self.secondImgView.image = img
+                        self.imgCnt += 1
+                    }else {
+                        self.thirdImgView.image = img
+                        self.imgCnt += 1
+                    }
+                }else {
+                    // 수정하고 싶을 때
+                    if(self.buttonAt == 0) {
+                        self.firstImgView.image = img
+                        self.imgCnt += 1
+                    }else if(self.buttonAt == 1) {
+                        self.secondImgView.image = img
+                        self.imgCnt += 1
+                    }else {
+                        self.thirdImgView.image = img
+                        self.imgCnt += 1
+                    }
+                }
+            }
+        }
 }
