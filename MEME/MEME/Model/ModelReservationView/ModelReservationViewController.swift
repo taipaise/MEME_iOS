@@ -8,52 +8,20 @@
 import UIKit
 import SnapKit
 // 예시 데이터 구조 -> 이후 삭제 필요
-struct ReviewData {
-    var profileImage: UIImage?
-    var profileName: String
-    var starRate: String
-    var reviewText: String
-    var reviewImages: [UIImage]
-}
-
-
 class ModelReservationViewController: UIViewController {
     // 예시 API 호출 이미지  -> 이후 삭제 필요
     let imageUrlsFromAPI: [String] = ["https://images.unsplash.com/photo-1620613908146-bb9a8bbb7eca?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "https://images.unsplash.com/photo-1594465919760-441fe5908ab0?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1629297777138-6ae859d4d6df?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ]
     
-    // 예시 데이터 배열 -> 이후 삭제 필요
-    var reviews: [ReviewData] = [
-        ReviewData(profileImage: UIImage(named: "modelProfile"),
-                   profileName: "메메**",
-                   starRate: "5",
-                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
-                   reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
-        ReviewData(profileImage: UIImage(named: "modelProfile"),
-                   profileName: "메메**",
-                   starRate: "5",
-                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
-                   reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
-        ReviewData(profileImage: UIImage(named: "modelProfile"),
-                   profileName: "메메**",
-                   starRate: "5",
-                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
-                   reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
-        ReviewData(profileImage: UIImage(named: "modelProfile"),
-                   profileName: "차*",
-                   starRate: "1",
-                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
-                   reviewImages: []),
-        ReviewData(profileImage: UIImage(named: "modelProfile"),
-                   profileName: "리*",
-                   starRate: "4",
-                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
-                   reviewImages: [UIImage(named: "img_exReview3")].compactMap { $0 })
-    ]
     // MARK: - Properties
     private let navigationBar = NavigationBarView()
-    private let scrollView = UIScrollView()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
+        
+        return scrollView
+    }()
     private let contentsView = UIView()
     
     //backgroundImage 스크롤
@@ -196,6 +164,7 @@ class ModelReservationViewController: UIViewController {
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
+    private var currentSegmentIndex = 0
     private var informationView = ShowInformationView()
     private var reviewView = ShowReviewView()
     private var reviewTableView: UITableView!
@@ -378,7 +347,7 @@ class ModelReservationViewController: UIViewController {
             make.top.equalTo(segmentedControl.snp.bottom)
             make.leading.equalTo(contentsView.snp.leading).offset(25)
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
-            make.bottom.equalTo(contentsView.snp.bottom).offset(-100)
+            make.bottom.equalTo(contentsView.snp.bottom).offset(-50)
         }
         underBarView.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -458,6 +427,7 @@ class ModelReservationViewController: UIViewController {
         }
     }
     @objc private func didChangeValue(segment: UISegmentedControl) {
+        currentSegmentIndex = segment.selectedSegmentIndex
         updateStackView(forSegmentIndex: segment.selectedSegmentIndex)
     }
 
@@ -471,28 +441,6 @@ class ModelReservationViewController: UIViewController {
             reviewTableView = nil
         case 1:
             mainStackView.addArrangedSubview(reviewView)
-            // 리뷰뷰 선택 시 스크롤뷰 아래 리뷰 테이블뷰 생성
-            if reviewTableView == nil {
-                reviewTableView = UITableView()
-                reviewTableView.backgroundColor = .red
-                
-                reviewTableView.delegate = self
-                reviewTableView.dataSource = self
-                
-                reviewTableView.register(ShowReviewTableViewCell.self, forCellReuseIdentifier: "ShowReviewTableViewCell")
-                
-                mainStackView.addSubview(reviewTableView)
-                                        
-                reviewTableView.rowHeight = UITableView.automaticDimension
-                reviewTableView.estimatedRowHeight = 44
-                
-                reviewTableView.snp.makeConstraints { make in
-                    make.top.equalTo(reviewView.snp.bottom)
-                    make.leading.equalTo(mainStackView.snp.leading)
-                    make.trailing.equalTo(mainStackView.snp.trailing)
-                    make.bottom.equalTo(mainStackView.snp.bottom)
-                }
-            }
         default:
             break
         }
@@ -506,51 +454,84 @@ class ModelReservationViewController: UIViewController {
     }
 }
 
-//MARK: -UITableViewDataSource, UITableViewDelegate
-extension ModelReservationViewController: UITableViewDataSource, UITableViewDelegate {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
-    }
-    
-    //cell의 생성
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShowReviewTableViewCell", for: indexPath) as? ShowReviewTableViewCell else {
-            fatalError("셀 타입 캐스팅 실패...")
-        }
-        cell.selectionStyle = .none
-        let review = reviews[indexPath.row]
-        cell.configure(profileImage: review.profileImage,
-                       profileName: review.profileName,
-                       starRate: review.starRate,
-                       reviewImages: review.reviewImages,
-                       reviewText: review.reviewText
-                       )
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-            return UITableView.automaticDimension
-    }
-}
-
 //MARK: - UIScrollViewDelegate
 extension ModelReservationViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         if scrollView == backgroundImageScrollView {
             let page = Int(round(scrollView.contentOffset.x / view.frame.width))
             pageControl.currentPage = page
-        } else if scrollView == reviewTableView {
-            // reviewTableView의 스크롤 처리
-            let offsetY = scrollView.contentOffset.y
-            let contentHeight = scrollView.contentSize.height
-            let height = scrollView.frame.size.height
+        } else if scrollView == self.scrollView {
+            let outerScroll = scrollView == scrollView
+            let innerScroll = !outerScroll
+            let moreScroll = scrollView.panGestureRecognizer.translation(in: scrollView).y < 0
+            let lessScroll = !moreScroll
             
-            // 스크롤이 맨 아래에 도달했다면, 테이블뷰의 스크롤을 활성화
-            if offsetY > contentHeight - height {
-                reviewTableView?.isScrollEnabled = true
-            } else {
-                reviewTableView?.isScrollEnabled = false
+            // outer scroll이 스크롤 할 수 있는 최대값 (이 값을 sticky header 뷰가 있다면 그 뷰의 frame.maxY와 같은 값으로 사용해도 가능)
+            let outerScrollMaxOffsetY = scrollView.contentSize.height - scrollView.frame.height
+            let innerScrollMaxOffsetY = reviewView.innerScrollView.contentSize.height - reviewView.innerScrollView.frame.height
+            
+            guard outerScroll else { return }
+            
+            // 1. outer scroll을 more 스크롤
+            // 만약 outer scroll을 more scroll 다 했으면, inner scroll을 more scroll
+            if outerScroll && moreScroll {
+                guard outerScrollMaxOffsetY < scrollView.contentOffset.y + ShowReviewView.Policy.floatingPointTolerance else { return }
+                reviewView.innerScrollingDownDueToOuterScroll = true
+                defer { reviewView.innerScrollingDownDueToOuterScroll = false }
+                
+                // innerScrollView를 모두 스크롤 한 경우 stop
+                guard reviewView.innerScrollView.contentOffset.y < innerScrollMaxOffsetY else { return }
+                
+                reviewView.innerScrollView.contentOffset.y = reviewView.innerScrollView.contentOffset.y + scrollView.contentOffset.y - outerScrollMaxOffsetY
+                scrollView.contentOffset.y = outerScrollMaxOffsetY
             }
+            
+            // 2. outer scroll을 less 스크롤
+            // 만약 inner scroll이 less 스크롤 할게 남아 있다면 inner scroll을 less 스크롤
+            if outerScroll && lessScroll {
+                guard reviewView.innerScrollView.contentOffset.y > 0 && scrollView.contentOffset.y < outerScrollMaxOffsetY else { return }
+                reviewView.innerScrollingDownDueToOuterScroll = true
+                defer { reviewView.innerScrollingDownDueToOuterScroll = false }
+                
+                // outer scroll에서 스크롤한 만큼 inner scroll에 적용
+                reviewView.innerScrollView.contentOffset.y = max(reviewView.innerScrollView.contentOffset.y - (outerScrollMaxOffsetY - scrollView.contentOffset.y), 0)
+                
+                // outer scroll은 스크롤 되지 않고 고정
+                scrollView.contentOffset.y = outerScrollMaxOffsetY
+            }
+            
+            // 3. inner scroll을 less 스크롤
+            // inner scroll을 모두 less scroll한 경우, outer scroll을 less scroll
+            if innerScroll && lessScroll {
+                defer { reviewView.innerScrollView.lastOffsetY = reviewView.innerScrollView.contentOffset.y }
+                guard reviewView.innerScrollView.contentOffset.y < 0 && scrollView.contentOffset.y > 0 else { return }
+                
+                // innerScrollView의 bounces에 의하여 다시 outerScrollView가 당겨질수 있으므로 bounces로 다시 되돌아가는 offset 방지
+                guard reviewView.innerScrollView.lastOffsetY > reviewView.innerScrollView.contentOffset.y else { return }
+                
+                let moveOffset = outerScrollMaxOffsetY - abs(reviewView.innerScrollView.contentOffset.y) * 3
+                guard moveOffset < scrollView.contentOffset.y else { return }
+                
+                scrollView.contentOffset.y = max(moveOffset, 0)
+            }
+            
+            // 4. inner scroll을 more 스크롤
+            // outer scroll이 아직 more 스크롤할게 남아 있다면, innerScroll을 그대로 두고 outer scroll을 more 스크롤
+            if innerScroll && moreScroll {
+                guard
+                    scrollView.contentOffset.y + ShowReviewView.Policy.floatingPointTolerance < outerScrollMaxOffsetY,
+                    !reviewView.innerScrollingDownDueToOuterScroll
+                else { return }
+                // outer scroll를 more 스크롤
+                let minOffetY = min(scrollView.contentOffset.y + reviewView.innerScrollView.contentOffset.y, outerScrollMaxOffsetY)
+                let offsetY = max(minOffetY, 0)
+                scrollView.contentOffset.y = offsetY
+                
+                // inner scroll은 스크롤 되지 않아야 하므로 0으로 고정
+                    reviewView.innerScrollView.contentOffset.y = 0
+            }
+        } else {
+            reviewView.reviewTableView.isScrollEnabled = false
         }
     }
 }
@@ -560,6 +541,21 @@ extension ModelReservationViewController: BackButtonTappedDelegate  {
     func backButtonTapped() {
         if let navigationController = self.navigationController {
             navigationController.popViewController(animated: true)
+        }
+    }
+}
+
+private struct AssociatedKeys {
+    static var lastOffsetY = "lastOffsetY"
+}
+
+extension UIScrollView {
+    var lastOffsetY: CGFloat {
+        get {
+            (objc_getAssociatedObject(self, &AssociatedKeys.lastOffsetY) as? CGFloat) ?? contentOffset.y
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.lastOffsetY, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 }
