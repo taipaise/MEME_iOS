@@ -19,6 +19,7 @@ class ModelReservationDetailViewController: UIViewController {
     private let navigationBar = NavigationBarView()
     private let scrollView = UIScrollView()
     private let contentsView = UIView()
+
     private var manualLabel: UILabel = {
         let label = UILabel()
         label.text = "예약 정보를 알려주세요."

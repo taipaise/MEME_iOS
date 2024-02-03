@@ -54,6 +54,16 @@ class ModelSearchViewController: UIViewController {
         
         return searchBar
     }()
+    private var recentSearchKeywords: [String] = []
+    private let mainStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fillProportionally
+        stack.alignment = .fill
+        stack.spacing = 0
+        
+        return stack
+    }()
     private var recentSearchesLabel: UILabel = {
         let label = UILabel()
         label.text = "최근 검색어"
@@ -68,6 +78,7 @@ class ModelSearchViewController: UIViewController {
         button.setTitleColor(.gray400, for: .normal)
         button.titleLabel?.font = .pretendard(to: .regular, size: 12)
         button.backgroundColor = .clear
+        button.addTarget(self, action: #selector(clearRecentSearches), for: .touchUpInside)
 
         return button
     }()
@@ -120,6 +131,9 @@ class ModelSearchViewController: UIViewController {
         configureSubviews()
         makeConstraints()
         setupArtistsButtons()
+        
+        recentSearchKeywords = loadSearchKeywords()
+        recentSearchesCollectionView.reloadData()
     }
     
     // MARK: - configureSubviews
@@ -149,6 +163,7 @@ class ModelSearchViewController: UIViewController {
         backButton.snp.makeConstraints {make in
             make.leading.equalTo(navigationBarView.snp.leading).offset(24)
             make.centerY.equalTo(navigationBarView.snp.centerY)
+            make.width.equalTo(24)
         }
         searchMakeup.snp.makeConstraints {make in
             make.centerY.equalTo(navigationBarView.snp.centerY)
@@ -332,7 +347,7 @@ extension ModelSearchViewController: UICollectionViewDelegate, UICollectionViewD
     //cell의 갯수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == recentSearchesCollectionView {
-            return 8
+            return recentSearchKeywords.count
             }  else if collectionView == categorySearchesCollectionView{
                 return 8
             }
@@ -345,6 +360,10 @@ extension ModelSearchViewController: UICollectionViewDelegate, UICollectionViewD
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentSearchViewCell.identifier, for: indexPath) as? RecentSearchViewCell else {
                 fatalError("셀 타입 캐스팅 실패...")
             }
+            let keyword = recentSearchKeywords[indexPath.row]
+            cell.configure(with: keyword)
+            cell.delegate = self
+            print("Delegate has been set for cell with keyword: \(keyword)")
             return cell
             }  else if collectionView == categorySearchesCollectionView{
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategorySearchViewCell.identifier, for: indexPath) as? CategorySearchViewCell else {
@@ -356,12 +375,6 @@ extension ModelSearchViewController: UICollectionViewDelegate, UICollectionViewD
                 return cell
             }
         return UICollectionViewCell()
-    }
-    
-    //cell 눌렀을때 동작
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let ReservationChartVC = ModelReservationChartViewController()
-        self.navigationController?.pushViewController(ReservationChartVC, animated: true)
     }
 }
 
@@ -406,8 +419,63 @@ extension ModelSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let searchText = searchBar.text, !searchText.isEmpty {
-            let ReservationChartVC = ModelReservationChartViewController()
-            self.navigationController?.pushViewController(ReservationChartVC, animated: true)
+            saveSearchKeyword(keyword: searchText)
+            
+            recentSearchKeywords = loadSearchKeywords()
+            recentSearchesCollectionView.reloadData()
+            
+            let reservationChartVC = ModelReservationChartViewController()
+            navigationController?.pushViewController(reservationChartVC, animated: true)
         }
     }
+}
+
+//MARK: - RecentSearchViewCellDelegate
+extension ModelSearchViewController: RecentSearchViewCellDelegate {
+    //최근 검색어 저장
+    func saveSearchKeyword(keyword: String) {
+        var keywords = loadSearchKeywords()
+        
+        if let index = keywords.firstIndex(of: keyword) {
+            keywords.remove(at: index)
+        }
+        
+        keywords.insert(keyword, at: 0)
+        
+        if keywords.count > 10 {
+            keywords.removeLast()
+        }
+        
+        UserDefaults.standard.set(keywords, forKey: "recentSearchKeywords")
+    }
+    
+    //최근 검색어 불러오기
+    func loadSearchKeywords() -> [String] {
+        return UserDefaults.standard.object(forKey: "recentSearchKeywords") as? [String] ?? []
+    }
+    
+    //최근 검색어로 검색
+    func didTapSearchWord(keyword: String) {
+        let reservationChartVC = ModelReservationChartViewController()
+        navigationController?.pushViewController(reservationChartVC, animated: true)
+    }
+    
+    //최근 검색어 삭제
+    func didTapDeleteButton(keyword: String) {
+        var keywords = loadSearchKeywords()
+        
+        if let index = keywords.firstIndex(of: keyword) {
+            keywords.remove(at: index)
+            UserDefaults.standard.set(keywords, forKey: "recentSearchKeywords")
+            recentSearchKeywords = keywords
+            recentSearchesCollectionView.deleteItems(at: [IndexPath(item: index, section: 0)])
+        }
+    }
+    
+    //최근 검색어 전체 삭제
+    @objc func clearRecentSearches() {
+       UserDefaults.standard.set([], forKey: "recentSearchKeywords")
+       recentSearchKeywords.removeAll()
+       recentSearchesCollectionView.reloadData()
+   }
 }

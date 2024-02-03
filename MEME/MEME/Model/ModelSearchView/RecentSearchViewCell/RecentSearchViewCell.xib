@@ -22,17 +22,16 @@
                 <rect key="frame" x="0.0" y="0.0" width="123" height="27"/>
                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                 <subviews>
-                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="특수 메이크업" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJv-31-rjq">
-                        <rect key="frame" x="12" y="7" width="82" height="13"/>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="특수 메이크업" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NJv-31-rjq">
+                        <rect key="frame" x="0.0" y="0.0" width="99" height="27"/>
                         <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="12"/>
                         <color key="textColor" red="0.36078432199999999" green="0.36078432199999999" blue="0.36078432199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <nil key="highlightedColor"/>
                     </label>
                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KgU-cu-sjp">
-                        <rect key="frame" x="104" y="8" width="7" height="7"/>
+                        <rect key="frame" x="99" y="-5.6666666666666679" width="24" height="34.333333333333336"/>
                         <constraints>
-                            <constraint firstAttribute="width" constant="7" id="Ed4-a2-kwe"/>
-                            <constraint firstAttribute="height" constant="7" id="xzh-N0-UyI"/>
+                            <constraint firstAttribute="width" constant="24" id="y6V-kV-QYY"/>
                         </constraints>
                         <color key="tintColor" red="0.36078432199999999" green="0.36078432199999999" blue="0.36078432199999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <state key="normal" title="Button"/>
@@ -43,12 +42,12 @@
             <viewLayoutGuide key="safeArea" id="ZTg-uK-7eu"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="NJv-31-rjq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="12" id="Io2-fR-dPU"/>
-                <constraint firstItem="KgU-cu-sjp" firstAttribute="leading" secondItem="NJv-31-rjq" secondAttribute="trailing" constant="10" id="LTc-kF-Ej8"/>
-                <constraint firstItem="NJv-31-rjq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" constant="7" id="Yud-Q7-GyJ"/>
-                <constraint firstAttribute="bottom" secondItem="NJv-31-rjq" secondAttribute="bottom" constant="7" id="gJi-yb-cBL"/>
+                <constraint firstItem="NJv-31-rjq" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" id="Io2-fR-dPU"/>
+                <constraint firstItem="KgU-cu-sjp" firstAttribute="leading" secondItem="NJv-31-rjq" secondAttribute="trailing" id="LTc-kF-Ej8"/>
+                <constraint firstItem="NJv-31-rjq" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="Yud-Q7-GyJ"/>
+                <constraint firstAttribute="bottom" secondItem="NJv-31-rjq" secondAttribute="bottom" id="gJi-yb-cBL"/>
                 <constraint firstItem="KgU-cu-sjp" firstAttribute="centerY" secondItem="NJv-31-rjq" secondAttribute="centerY" constant="-2" id="h1e-OK-qc4"/>
-                <constraint firstAttribute="trailing" secondItem="KgU-cu-sjp" secondAttribute="trailing" constant="12" id="tY6-Dj-T8i"/>
+                <constraint firstAttribute="trailing" secondItem="KgU-cu-sjp" secondAttribute="trailing" id="tY6-Dj-T8i"/>
             </constraints>
             <size key="customSize" width="123" height="27"/>
             <connections>

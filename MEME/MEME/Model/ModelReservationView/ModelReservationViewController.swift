@@ -460,53 +460,45 @@ extension ModelReservationViewController: UIScrollViewDelegate {
         if scrollView == backgroundImageScrollView {
             let page = Int(round(scrollView.contentOffset.x / view.frame.width))
             pageControl.currentPage = page
-        } else if scrollView == self.scrollView {
+        } else {
             let outerScroll = scrollView == scrollView
             let innerScroll = !outerScroll
             let moreScroll = scrollView.panGestureRecognizer.translation(in: scrollView).y < 0
             let lessScroll = !moreScroll
             
-            // outer scroll이 스크롤 할 수 있는 최대값 (이 값을 sticky header 뷰가 있다면 그 뷰의 frame.maxY와 같은 값으로 사용해도 가능)
             let outerScrollMaxOffsetY = scrollView.contentSize.height - scrollView.frame.height
             let innerScrollMaxOffsetY = reviewView.innerScrollView.contentSize.height - reviewView.innerScrollView.frame.height
             
             guard outerScroll else { return }
             
-            // 1. outer scroll을 more 스크롤
-            // 만약 outer scroll을 more scroll 다 했으면, inner scroll을 more scroll
+            // outer scroll을 more scroll 다 했으면, inner scroll을 more scroll
             if outerScroll && moreScroll {
                 guard outerScrollMaxOffsetY < scrollView.contentOffset.y + ShowReviewView.Policy.floatingPointTolerance else { return }
                 reviewView.innerScrollingDownDueToOuterScroll = true
                 defer { reviewView.innerScrollingDownDueToOuterScroll = false }
                 
-                // innerScrollView를 모두 스크롤 한 경우 stop
                 guard reviewView.innerScrollView.contentOffset.y < innerScrollMaxOffsetY else { return }
                 
                 reviewView.innerScrollView.contentOffset.y = reviewView.innerScrollView.contentOffset.y + scrollView.contentOffset.y - outerScrollMaxOffsetY
                 scrollView.contentOffset.y = outerScrollMaxOffsetY
             }
             
-            // 2. outer scroll을 less 스크롤
-            // 만약 inner scroll이 less 스크롤 할게 남아 있다면 inner scroll을 less 스크롤
+            // inner scroll이 less 스크롤 할게 남아 있다면 inner scroll을 less 스크롤
             if outerScroll && lessScroll {
                 guard reviewView.innerScrollView.contentOffset.y > 0 && scrollView.contentOffset.y < outerScrollMaxOffsetY else { return }
                 reviewView.innerScrollingDownDueToOuterScroll = true
                 defer { reviewView.innerScrollingDownDueToOuterScroll = false }
                 
-                // outer scroll에서 스크롤한 만큼 inner scroll에 적용
                 reviewView.innerScrollView.contentOffset.y = max(reviewView.innerScrollView.contentOffset.y - (outerScrollMaxOffsetY - scrollView.contentOffset.y), 0)
                 
-                // outer scroll은 스크롤 되지 않고 고정
                 scrollView.contentOffset.y = outerScrollMaxOffsetY
             }
-            
-            // 3. inner scroll을 less 스크롤
+
             // inner scroll을 모두 less scroll한 경우, outer scroll을 less scroll
             if innerScroll && lessScroll {
                 defer { reviewView.innerScrollView.lastOffsetY = reviewView.innerScrollView.contentOffset.y }
                 guard reviewView.innerScrollView.contentOffset.y < 0 && scrollView.contentOffset.y > 0 else { return }
                 
-                // innerScrollView의 bounces에 의하여 다시 outerScrollView가 당겨질수 있으므로 bounces로 다시 되돌아가는 offset 방지
                 guard reviewView.innerScrollView.lastOffsetY > reviewView.innerScrollView.contentOffset.y else { return }
                 
                 let moveOffset = outerScrollMaxOffsetY - abs(reviewView.innerScrollView.contentOffset.y) * 3
@@ -515,23 +507,18 @@ extension ModelReservationViewController: UIScrollViewDelegate {
                 scrollView.contentOffset.y = max(moveOffset, 0)
             }
             
-            // 4. inner scroll을 more 스크롤
             // outer scroll이 아직 more 스크롤할게 남아 있다면, innerScroll을 그대로 두고 outer scroll을 more 스크롤
             if innerScroll && moreScroll {
                 guard
                     scrollView.contentOffset.y + ShowReviewView.Policy.floatingPointTolerance < outerScrollMaxOffsetY,
                     !reviewView.innerScrollingDownDueToOuterScroll
                 else { return }
-                // outer scroll를 more 스크롤
                 let minOffetY = min(scrollView.contentOffset.y + reviewView.innerScrollView.contentOffset.y, outerScrollMaxOffsetY)
                 let offsetY = max(minOffetY, 0)
                 scrollView.contentOffset.y = offsetY
                 
-                // inner scroll은 스크롤 되지 않아야 하므로 0으로 고정
                     reviewView.innerScrollView.contentOffset.y = 0
             }
-        } else {
-            reviewView.reviewTableView.isScrollEnabled = false
         }
     }
 }
