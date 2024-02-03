@@ -23,19 +23,19 @@ extension MemeDomain {
     var url: String {
         switch self {
         case .register:
-            return "register"
+            return "/register"
         case .mypage:
-            return "mypage"
+            return "/mypage"
         case .search:
-            return "search"
+            return "/search"
         case .profile:
-            return "profile"
+            return "/profile"
         case .reservation:
-            return "reservation"
+            return "/reservation"
         case .portfolio:
-            return "portfolio"
+            return "/portfolio"
         case .review:
-            return "review"
+            return "/review"
         }
     }
 }

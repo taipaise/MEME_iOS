@@ -136,6 +136,8 @@
 		31B413842B6D322500535BB1 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B413832B6D322500535BB1 /* NetworkProvider.swift */; };
 		31B413862B6D338F00535BB1 /* BusinessVerificationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B413852B6D338F00535BB1 /* BusinessVerificationDTO.swift */; };
 		31B65E402B6E041300628C68 /* NetworkAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B65E3F2B6E041300628C68 /* NetworkAuthProvider.swift */; };
+		31B65E4D2B6E18BA00628C68 /* ReservationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B65E4C2B6E18BA00628C68 /* ReservationAPI.swift */; };
+		31B65E4F2B6E229000628C68 /* ReservationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B65E4E2B6E229000628C68 /* ReservationManager.swift */; };
 		31C85EED2B526B780064A6E7 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */; };
 		31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */; };
 		31F6F8332B52AF8600EC621D /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */; };
@@ -295,6 +297,8 @@
 		31B413832B6D322500535BB1 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		31B413852B6D338F00535BB1 /* BusinessVerificationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessVerificationDTO.swift; sourceTree = "<group>"; };
 		31B65E3F2B6E041300628C68 /* NetworkAuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAuthProvider.swift; sourceTree = "<group>"; };
+		31B65E4C2B6E18BA00628C68 /* ReservationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationAPI.swift; sourceTree = "<group>"; };
+		31B65E4E2B6E229000628C68 /* ReservationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationManager.swift; sourceTree = "<group>"; };
 		31BF22962B52CE5D0019F476 /* SetProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewController.swift; sourceTree = "<group>"; };
 		31BF22982B52CE670019F476 /* SetProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetProfileViewController.xib; sourceTree = "<group>"; };
 		31BF229A2B52D2830019F476 /* SetDetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDetailInfoViewController.swift; sourceTree = "<group>"; };
@@ -740,6 +744,7 @@
 			isa = PBXGroup;
 			children = (
 				31B4137D2B6D29C500535BB1 /* BusinessIDVerificationAPI.swift */,
+				31B65E4C2B6E18BA00628C68 /* ReservationAPI.swift */,
 				315FB8582B6DE1B00068163C /* AuthAPI.swift */,
 			);
 			path = API;
@@ -749,6 +754,7 @@
 			isa = PBXGroup;
 			children = (
 				31B4137B2B6D295900535BB1 /* BusinessIDVerificationManager.swift */,
+				31B65E4E2B6E229000628C68 /* ReservationManager.swift */,
 				315FB8562B6DE1480068163C /* AuthManager.swift */,
 			);
 			path = Manager;
@@ -1205,6 +1211,7 @@
 				CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */,
 				31B4137C2B6D295900535BB1 /* BusinessIDVerificationManager.swift in Sources */,
 				2D6F59B12B5BF92600CA883A /* ModelReservationTypeViewCell.swift in Sources */,
+				31B65E4D2B6E18BA00628C68 /* ReservationAPI.swift in Sources */,
 				3142B9AD2B4D07640066CD5A /* ModelReservationViewController.swift in Sources */,
 				2D62E2412B542BD0004E8299 /* ModelUserModel.swift in Sources */,
 				31B2634C2B57EE7100304FBE /* RoleSelectionViewController.swift in Sources */,
@@ -1264,6 +1271,7 @@
 				3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */,
 				2D62E2462B543653004E8299 /* ModelReservationModel.swift in Sources */,
 				3142B9B12B4D08480066CD5A /* ArtistReservationViewController.swift in Sources */,
+				31B65E4F2B6E229000628C68 /* ReservationManager.swift in Sources */,
 				2D4B7C262B5F17E7001E1B09 /* TotalStarRatingView.swift in Sources */,
 				2D6F59AE2B5BF3A900CA883A /* ModelReservationChartTableViewController.swift in Sources */,
 				094884DB2B59915500C233E0 /* ArtistReservationSingleManageViewController.swift in Sources */,
