@@ -7,13 +7,50 @@
 
 import UIKit
 import SnapKit
+// 예시 데이터 구조 -> 이후 삭제 필요
+struct ReviewData {
+    var profileImage: UIImage?
+    var profileName: String
+    var starRate: String
+    var reviewText: String
+    var reviewImages: [UIImage]
+}
 
-class ModelReservationViewController: UIViewController, UIScrollViewDelegate {
+
+class ModelReservationViewController: UIViewController {
     // 예시 API 호출 이미지  -> 이후 삭제 필요
     let imageUrlsFromAPI: [String] = ["https://images.unsplash.com/photo-1620613908146-bb9a8bbb7eca?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "https://images.unsplash.com/photo-1594465919760-441fe5908ab0?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1629297777138-6ae859d4d6df?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
     ]
     
+    // 예시 데이터 배열 -> 이후 삭제 필요
+    var reviews: [ReviewData] = [
+        ReviewData(profileImage: UIImage(named: "modelProfile"),
+                   profileName: "메메**",
+                   starRate: "5",
+                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
+                   reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
+        ReviewData(profileImage: UIImage(named: "modelProfile"),
+                   profileName: "메메**",
+                   starRate: "5",
+                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
+                   reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
+        ReviewData(profileImage: UIImage(named: "modelProfile"),
+                   profileName: "메메**",
+                   starRate: "5",
+                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
+                   reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
+        ReviewData(profileImage: UIImage(named: "modelProfile"),
+                   profileName: "차*",
+                   starRate: "1",
+                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
+                   reviewImages: []),
+        ReviewData(profileImage: UIImage(named: "modelProfile"),
+                   profileName: "리*",
+                   starRate: "4",
+                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
+                   reviewImages: [UIImage(named: "img_exReview3")].compactMap { $0 })
+    ]
     // MARK: - Properties
     private let navigationBar = NavigationBarView()
     private let scrollView = UIScrollView()
@@ -161,6 +198,7 @@ class ModelReservationViewController: UIViewController, UIScrollViewDelegate {
     }()
     private var informationView = ShowInformationView()
     private var reviewView = ShowReviewView()
+    private var reviewTableView: UITableView!
     
     private var underBarView: UIView = {
         let view = UIView()
@@ -212,6 +250,7 @@ class ModelReservationViewController: UIViewController, UIScrollViewDelegate {
     // MARK: - configureSubviews
     func configureSubviews() {
         view.addSubview(navigationBar)
+        scrollView.delegate = self
         view.addSubview(scrollView)
         scrollView.addSubview(contentsView)
         backgroundImageScrollView.delegate = self
@@ -232,7 +271,6 @@ class ModelReservationViewController: UIViewController, UIScrollViewDelegate {
         contentsView.addSubview(aCategoryLabel)
         contentsView.addSubview(underLineView)
         contentsView.addSubview(segmentedControl)
-        contentsView.addSubview(mainStackView)
         view.addSubview(underBarView)
         view.addSubview(reservationButton)
     }
@@ -339,7 +377,7 @@ class ModelReservationViewController: UIViewController, UIScrollViewDelegate {
             make.top.equalTo(segmentedControl.snp.bottom)
             make.leading.equalTo(contentsView.snp.leading).offset(25)
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
-            make.bottom.equalTo(contentsView.snp.bottom).offset(-100)
+            make.bottom.equalTo(contentsView.snp.bottom)
         }
         underBarView.snp.makeConstraints { (make) in
             make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -428,8 +466,33 @@ class ModelReservationViewController: UIViewController, UIScrollViewDelegate {
         switch index {
         case 0:
             mainStackView.addArrangedSubview(informationView)
+            reviewTableView?.removeFromSuperview()
+            reviewTableView = nil
         case 1:
             mainStackView.addArrangedSubview(reviewView)
+            // 리뷰뷰 선택 시 스크롤뷰 아래 리뷰 테이블뷰 생성
+            if reviewTableView == nil {
+                reviewTableView = UITableView()
+                reviewTableView.backgroundColor = .red
+                
+                reviewTableView.delegate = self
+                reviewTableView.dataSource = self
+                
+                reviewTableView.register(ShowReviewTableViewCell.self, forCellReuseIdentifier: "ShowReviewTableViewCell")
+                
+                mainStackView.addSubview(reviewTableView)
+                                        
+                reviewTableView.rowHeight = UITableView.automaticDimension
+                reviewTableView.estimatedRowHeight = 44
+                
+                reviewTableView.snp.makeConstraints { make in
+                    make.top.equalTo(reviewView.snp.bottom)
+                    make.leading.equalTo(mainStackView.snp.leading)
+                    make.trailing.equalTo(mainStackView.snp.trailing)
+                    make.height.equalTo(400)
+                    make.bottom.equalTo(mainStackView.snp.bottom)
+                }
+            }
         default:
             break
         }
@@ -440,6 +503,55 @@ class ModelReservationViewController: UIViewController, UIScrollViewDelegate {
         self.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
         self.segmentedControl.selectedSegmentIndex = 0
         self.didChangeValue(segment: self.segmentedControl)
+    }
+}
+
+//MARK: -UITableViewDataSource, UITableViewDelegate
+extension ModelReservationViewController: UITableViewDataSource, UITableViewDelegate {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 5
+    }
+    
+    //cell의 생성
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ShowReviewTableViewCell", for: indexPath) as? ShowReviewTableViewCell else {
+            fatalError("셀 타입 캐스팅 실패...")
+        }
+        cell.selectionStyle = .none
+        let review = reviews[indexPath.row]
+        cell.configure(profileImage: review.profileImage,
+                       profileName: review.profileName,
+                       starRate: review.starRate,
+                       reviewImages: review.reviewImages,
+                       reviewText: review.reviewText
+                       )
+        return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+            return UITableView.automaticDimension
+    }
+}
+
+//MARK: - UIScrollViewDelegate
+extension ModelReservationViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == backgroundImageScrollView {
+            let page = Int(round(scrollView.contentOffset.x / view.frame.width))
+            pageControl.currentPage = page
+        } else if scrollView == reviewTableView {
+            // reviewTableView의 스크롤 처리
+            let offsetY = scrollView.contentOffset.y
+            let contentHeight = scrollView.contentSize.height
+            let height = scrollView.frame.size.height
+            
+            // 스크롤이 맨 아래에 도달했다면, 테이블뷰의 스크롤을 활성화
+            if offsetY > contentHeight - height {
+                reviewTableView?.isScrollEnabled = true
+            } else {
+                reviewTableView?.isScrollEnabled = false
+            }
+        }
     }
 }
 
