@@ -33,7 +33,7 @@ extension MemeAuthDomain {
 /// urlPath : Domain 뒤에 붙는 상세 경로(path)
 /// error : 상태코드에 따른 NetworkError 구분하는데 사용되는 딕셔너리
 protocol MemeAuthAPI: TargetType {
-    var domain: MemeDomain { get }
+    var domain: MemeAuthDomain { get }
     var urlPath: String { get }
     var error: [Int: NetworkError]? { get }
     var headerType: HTTPHeaderFields { get }

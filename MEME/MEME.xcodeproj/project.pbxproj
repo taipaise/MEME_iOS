@@ -135,6 +135,7 @@
 		31B4137E2B6D29C500535BB1 /* BusinessIDVerificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B4137D2B6D29C500535BB1 /* BusinessIDVerificationAPI.swift */; };
 		31B413842B6D322500535BB1 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B413832B6D322500535BB1 /* NetworkProvider.swift */; };
 		31B413862B6D338F00535BB1 /* BusinessVerificationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B413852B6D338F00535BB1 /* BusinessVerificationDTO.swift */; };
+		31B65E402B6E041300628C68 /* NetworkAuthProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B65E3F2B6E041300628C68 /* NetworkAuthProvider.swift */; };
 		31C85EED2B526B780064A6E7 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */; };
 		31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */; };
 		31F6F8332B52AF8600EC621D /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */; };
@@ -293,6 +294,7 @@
 		31B4137D2B6D29C500535BB1 /* BusinessIDVerificationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessIDVerificationAPI.swift; sourceTree = "<group>"; };
 		31B413832B6D322500535BB1 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		31B413852B6D338F00535BB1 /* BusinessVerificationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessVerificationDTO.swift; sourceTree = "<group>"; };
+		31B65E3F2B6E041300628C68 /* NetworkAuthProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkAuthProvider.swift; sourceTree = "<group>"; };
 		31BF22962B52CE5D0019F476 /* SetProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewController.swift; sourceTree = "<group>"; };
 		31BF22982B52CE670019F476 /* SetProfileViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetProfileViewController.xib; sourceTree = "<group>"; };
 		31BF229A2B52D2830019F476 /* SetDetailInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetDetailInfoViewController.swift; sourceTree = "<group>"; };
@@ -728,6 +730,7 @@
 				315FB8652B6DE8900068163C /* MemeAPIAuth.swift */,
 				3156D2002B69443000559820 /* HTTPHeaderFields.swift */,
 				3156D2022B69446E00559820 /* NetworkError.swift */,
+				31B65E3F2B6E041300628C68 /* NetworkAuthProvider.swift */,
 				31B413832B6D322500535BB1 /* NetworkProvider.swift */,
 			);
 			path = Foundation;
@@ -1211,6 +1214,7 @@
 				3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */,
 				315FB85E2B6DE57C0068163C /* KeyChainValue.swift in Sources */,
 				2D5C05A12B60269900EDC69F /* ShowReviewTableViewCell.swift in Sources */,
+				31B65E402B6E041300628C68 /* NetworkAuthProvider.swift in Sources */,
 				2D62E25B2B54A658004E8299 /* RecentSearchViewCell.swift in Sources */,
 				2D0A190E2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift in Sources */,
 				2D6F59AB2B5BD07500CA883A /* ModelReservationChartTableViewCell.swift in Sources */,
