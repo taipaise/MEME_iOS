@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KakaoSDKAuth
 
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
@@ -25,6 +26,14 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         self.window = window
     }
 
+    func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
+           if let url = URLContexts.first?.url {
+               if (AuthApi.isKakaoTalkLoginUrl(url)) {
+                   _ = AuthController.handleOpenUrl(url: url)
+               }
+           }
+       }
+    
     func sceneDidDisconnect(_ scene: UIScene) {
         // Called as the scene is being released by the system.
         // This occurs shortly after the scene enters the background, or when its session is discarded.
@@ -59,7 +68,7 @@ extension SceneDelegate {
         let vc = NavigationController(nibName: nil, bundle: nil)
         vc.navigationBar.isHidden = true
         // TODO: - 로그인 여부, 아티스트 여부에 따라 rootVC 설정 필요
-        var isLogin: Bool = true
+        var isLogin: Bool = false
         
         if isLogin == true {
             var isArtist: Bool = false
