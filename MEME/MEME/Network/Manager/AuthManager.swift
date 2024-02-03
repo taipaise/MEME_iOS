@@ -12,7 +12,7 @@ final class AuthManager {
     typealias API = AuthAPI
     
     static let shared = AuthManager()
-    let provider = NetworkProvider<API>(plugins: [NetworkLoggerPlugin()])
+    let provider = NetworkAuthProvider<API>(plugins: [NetworkLoggerPlugin()])
     
     private init() {}
     

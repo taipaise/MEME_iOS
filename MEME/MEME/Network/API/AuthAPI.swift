@@ -12,11 +12,11 @@ enum AuthAPI {
     case kakakoLogin
 }
 
-extension AuthAPI: MemeAPI {
-    var domain: MemeDomain {
+extension AuthAPI: MemeAuthAPI {
+    var domain: MemeAuthDomain {
         return .auth
     }
-    
+
     var urlPath: String {
         switch self {
         case .kakakoLogin:
