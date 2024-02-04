@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import SwiftUI
 
 class ModelSearchViewController: UIViewController {
     // 예시 데이터 -> 추후 API 호출해서 데이터 받아오는 것으로 수정 필요
@@ -222,16 +221,17 @@ class ModelSearchViewController: UIViewController {
     @objc func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
+    
     @objc private func artistButtonTapped(_ sender: UIButton) {
             guard let artistName = sender.titleLabel?.text else { return }
 
             searchMakeup.text = artistName
-            executeSearch(with: artistName)
-        }
+            executeSearch(with: artistName)}
 
-        private func executeSearch(with searchText: String) {
-            searchBarSearchButtonClicked(searchMakeup)
-        }
+    private func executeSearch(with searchText: String) {
+        searchBarSearchButtonClicked(searchMakeup)
+    }
+    
     
     //MARK: -Helpers
     private func setupSearchMakeupBar() {
@@ -260,6 +260,7 @@ class ModelSearchViewController: UIViewController {
         //cell 등록
         categorySearchesCollectionView.register(UINib(nibName: "CategorySearchViewCell", bundle: nil), forCellWithReuseIdentifier: CategorySearchViewCell.identifier)
     }
+    
     private func maxNumberOfButtonsPerRow() -> Int {
         let viewWidth = self.view.bounds.width
         let buttonWidth: CGFloat = 70
@@ -408,6 +409,17 @@ extension ModelSearchViewController: UICollectionViewDelegateFlowLayout {
                 return CGFloat(7)
             }
         return CGFloat(25)
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == categorySearchesCollectionView {
+            let cell = collectionView.cellForItem(at: indexPath) as? CategorySearchViewCell
+            let category = cell?.categoryLabel.text
+            
+            let reservationChartVC = ModelReservationChartViewController()
+            reservationChartVC.selectedCategory = category
+            
+            navigationController?.pushViewController(reservationChartVC, animated: true)
+        }
     }
 }
 

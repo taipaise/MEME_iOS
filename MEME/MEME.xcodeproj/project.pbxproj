@@ -58,7 +58,6 @@
 		2DA5B53B2B6E1E6200E81049 /* SearchAPIInput.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA5B53A2B6E1E6200E81049 /* SearchAPIInput.swift */; };
 		2DA5B53D2B6E1EE900E81049 /* SearchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA5B53C2B6E1EE900E81049 /* SearchModel.swift */; };
 		2DA5B5422B6E22BE00E81049 /* SearchDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA5B5412B6E22BE00E81049 /* SearchDataManager.swift */; };
-		2DA5B5442B6E415400E81049 /* recentSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA5B5432B6E415400E81049 /* recentSearchView.swift */; };
 		312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */; };
 		312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EE2B52DE1900CACF20 /* Pretendard-Light.otf */; };
 		312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EB2B52DE1900CACF20 /* Pretendard-Medium.otf */; };
@@ -196,7 +195,6 @@
 		2DA5B53A2B6E1E6200E81049 /* SearchAPIInput.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPIInput.swift; sourceTree = "<group>"; };
 		2DA5B53C2B6E1EE900E81049 /* SearchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchModel.swift; sourceTree = "<group>"; };
 		2DA5B5412B6E22BE00E81049 /* SearchDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDataManager.swift; sourceTree = "<group>"; };
-		2DA5B5432B6E415400E81049 /* recentSearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = recentSearchView.swift; sourceTree = "<group>"; };
 		3142B9552B4CFFED0066CD5A /* MEME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEME.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		3142B9582B4CFFED0066CD5A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		3142B95A2B4CFFED0066CD5A /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -417,7 +415,6 @@
 				2D62E2582B54A60E004E8299 /* RecentSearchViewCell */,
 				2D62E2572B549491004E8299 /* CategorySearchViewCell */,
 				2D62E2502B548BAB004E8299 /* ModelSearchViewController.swift */,
-				2DA5B5432B6E415400E81049 /* recentSearchView.swift */,
 			);
 			path = ModelSearchView;
 			sourceTree = "<group>";
@@ -1028,7 +1025,6 @@
 				2D3E0D152B640BCC00C49EF3 /* ModelViewArtistProfileViewController.swift in Sources */,
 				CC2F3AC02B514EE900508DA5 /* ModelHeaderView.swift in Sources */,
 				3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */,
-				2DA5B5442B6E415400E81049 /* recentSearchView.swift in Sources */,
 				2D5C05A12B60269900EDC69F /* ShowReviewTableViewCell.swift in Sources */,
 				2D62E25B2B54A658004E8299 /* RecentSearchViewCell.swift in Sources */,
 				2D0A190E2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift in Sources */,
