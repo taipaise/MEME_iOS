@@ -10,10 +10,13 @@ import UIKit
 class ArtistHomeViewController: UIViewController {
     @IBOutlet private var artistHomeProfileStatusView: UIView!
     @IBOutlet private var secondArtistHomeProfileStatusView: UIView!
-    @IBOutlet private var artistHomeProfileNoStatusView: UIView!
     @IBOutlet private var artistProfileImageView: UIImageView!
     @IBOutlet private var artistHomeProfileLabel: UILabel!
     @IBOutlet private var artistReservationStatusTableView: UITableView!
+    @IBOutlet weak var firstArtistResLabel: UILabel!
+    @IBOutlet weak var firstArtistResTimeLabel: UILabel!
+    @IBOutlet weak var firstArtistResBtnLabel: UILabel!
+    @IBOutlet weak var secondArtistResBtn: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,23 +26,17 @@ class ArtistHomeViewController: UIViewController {
         tableViewConfigure()
     }
     private func uiSet(){
-        if(TodayRes == 0) {
-            artistHomeProfileNoStatusView.isHidden = false
-            artistHomeProfileStatusView.isHidden = true
+        if(TodayRes == 0){
+            firstArtistResLabel.text = "포트폴리오 관리하러 가기"
+            firstArtistResBtnLabel.text = ">"
+            firstArtistResTimeLabel.text = nil
             secondArtistHomeProfileStatusView.isHidden = true
-        }else if(TodayRes==1){
-            artistHomeProfileNoStatusView.isHidden = true
-            artistHomeProfileStatusView.isHidden = false
+            secondArtistResBtn.isHidden = true
+        }else if(TodayRes == 1){
             secondArtistHomeProfileStatusView.isHidden = true
-        }else{
-            artistHomeProfileNoStatusView.isHidden = true
-            artistHomeProfileStatusView.isHidden = false
-            secondArtistHomeProfileStatusView.isHidden = false
+            secondArtistResBtn.isHidden = true
         }
-        
-        
         artistHomeProfileStatusView.layer.cornerRadius = 10
-        artistHomeProfileNoStatusView.layer.cornerRadius = 10
         secondArtistHomeProfileStatusView.layer.cornerRadius = 10
         
         artistProfileImageView.layer.cornerRadius = artistProfileImageView.frame.height/2
@@ -59,10 +56,6 @@ class ArtistHomeViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     
-    @IBAction private func portfolioManageBtnTapped(_ sender: UIButton) {
-        let vc = ArtistPortfolioManageViewController()
-        navigationController?.pushViewController(vc, animated: true)
-    }
     @IBAction private func entireReservationBtnTapped(_ sender: UIButton) {
         let vc = EntireArtistReservationManageViewController()
         navigationController?.pushViewController(vc, animated: true)
@@ -72,8 +65,13 @@ class ArtistHomeViewController: UIViewController {
         navigationController?.pushViewController(vc, animated: true)
     }
     @IBAction func firstTodayResBtnDidTap(_ sender: UIButton) {
-        let vc = SingleArtistReservationManageViewController()
-        navigationController?.pushViewController(vc, animated: true)
+        if(TodayRes != 0) {
+            let vc = SingleArtistReservationManageViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }else{
+            let vc = ArtistPortfolioManageViewController()
+            navigationController?.pushViewController(vc, animated: true)
+        }
     }
     @IBAction func secondTodayResBtnDidTap(_ sender: UIButton) {
         print("tapped")

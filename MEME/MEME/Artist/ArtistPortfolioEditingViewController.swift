@@ -13,12 +13,25 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
     @IBOutlet private var makeupCategoryCollectionView: UICollectionView!
     @IBOutlet private var titleLabel: UILabel!
     @IBOutlet var imagePickerStackView: UIStackView!
+    
     @IBOutlet weak var firstImgView: UIImageView!
     @IBOutlet weak var secondImgView: UIImageView!
     @IBOutlet weak var thirdImgView: UIImageView!
+    
+    
+    @IBOutlet weak var trashButton: UIButton!
+    @IBOutlet weak var firstDeleteButton: UIButton!
+    @IBOutlet weak var secondDeleteButton: UIButton!
+    @IBOutlet weak var thirdDeleteButton: UIButton!
+    
+    
     private var buttonAt: Int = 0
     private var imgCnt: Int = 0
-    private var isEdit: Bool = true
+    private lazy var isEdit: Bool = true
+    
+    private lazy var imgViewList: [UIImageView] = {
+        return [self.firstImgView, self.secondImgView, self.thirdImgView]
+    }()
     
     private let artistProfileEditingInfoBar: UIButton = {
         let button = UIButton()
@@ -42,9 +55,13 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
     private func uiSet(){
         if(isEdit) {
             titleLabel.text = "포트폴리오 수정"
+            artistProfileEditingInfoBar.setTitle("수정하기", for: .normal)
         }else {
             titleLabel.text = "포트폴리오 추가"
+            artistProfileEditingInfoBar.setTitle("추가하기", for: .normal)
+            trashButton.isHidden = true
         }
+        deleteButtonAppear()
     }
     
     private func collectionViewConfigure(){
@@ -65,22 +82,86 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
             make.height.equalTo(49)
         }
     }
-    @IBAction func backButtonDidTap(_ sender: UIButton) {
-        navigationController?.popViewController(animated: true)
+    
+    private func deleteButtonAppear() {
+        if(self.imgCnt==3){
+            firstDeleteButton.isHidden = false
+            secondDeleteButton.isHidden = false
+            thirdDeleteButton.isHidden = false
+        }else if(self.imgCnt==2){
+            firstDeleteButton.isHidden = true
+            secondDeleteButton.isHidden = false
+            thirdDeleteButton.isHidden = false
+        }else if(self.imgCnt==1){
+            firstDeleteButton.isHidden = true
+            secondDeleteButton.isHidden = false
+            thirdDeleteButton.isHidden = true
+        }else if(self.imgCnt==0){
+            firstDeleteButton.isHidden = true
+            secondDeleteButton.isHidden = true
+            thirdDeleteButton.isHidden = true
+        }
     }
     
-    @objc func editButtonDidTap(_ sender: UIButton) {
-        let alert = UIAlertController(title: "포트폴리오 수정하기", message: "\n포트폴리오를 수정하시겠습니까?", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "예", style: .default, handler : nil )
-        let noAction = UIAlertAction(title: "아니오", style: .cancel, handler : nil )
+    @IBAction func backButtonDidTap(_ sender: UIButton) {
+        let okAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }
+        let noAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
+        
+        var title = ""
+        var message = ""
+        
+        if isEdit {
+            title = "포트폴리오 수정하기"
+            message = "\n포트폴리오 수정을 취소하시겠습니까?"
+        } else {
+            title = "포트폴리오 등록하기"
+            message = "\n포트폴리오 등록을 취소하시겠습니까?"
+        }
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
         // HIG에 따라 Cancel이 왼쪽
         alert.addAction(okAction)
         alert.addAction(noAction)
+        
         present(alert, animated: true, completion: nil)
     }
+    
+    @objc func editButtonDidTap(_ sender: UIButton) {
+        let okAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }
+        
+        let noAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
+        
+        var title = ""
+        var message = ""
+        
+        if isEdit {
+            title = "포트폴리오 수정하기"
+            message = "\n포트폴리오를 수정하시겠습니까?"
+        } else {
+            title = "포트폴리오 등록하기"
+            message = "\n포트폴리오를 등록하시겠습니까?"
+        }
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        
+        // HIG에 따라 Cancel이 왼쪽
+        alert.addAction(okAction)
+        alert.addAction(noAction)
+        
+        present(alert, animated: true, completion: nil)
+        
+    }
     @IBAction func trashButtonDidTap(_ sender: UIButton) {
+        
         let alert = UIAlertController(title: "포트폴리오 삭제하기", message: "\n포트폴리오를 삭제하시겠습니까?", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "예", style: .default, handler : nil )
+        let okAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
+                self?.navigationController?.popViewController(animated: true)
+            }
         let noAction = UIAlertAction(title: "아니오", style: .cancel, handler : nil )
         // HIG에 따라 Cancel이 왼쪽
         alert.addAction(okAction)
@@ -99,7 +180,35 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
             // 이미지 피커 컨트롤러 실행
             self.present(picker, animated: false)
         }
-    
+    @IBAction func deleteImg(_ sender: UIButton) {
+        buttonAt = sender.tag
+        if(buttonAt==0){
+            imgViewList[0].image = .icPicture
+        }else if(buttonAt==1){
+            if(imgCnt==1){
+                imgViewList[buttonAt].image = nil
+                imgViewList[0].image = .icPicture
+            }
+            if(imgCnt==2){
+                imgViewList[buttonAt].image = imgViewList[buttonAt+1].image
+                imgViewList[buttonAt+1].image = nil
+                imgViewList[0].image = .icPicture
+            }else if(imgCnt==3){
+                imgViewList[buttonAt].image = imgViewList[buttonAt-1].image
+                imgViewList[0].image = .icPicture
+            }
+        }else{
+            if(imgCnt==3){
+                imgViewList[buttonAt].image = imgViewList[buttonAt-1].image
+                imgViewList[buttonAt-1].image = imgViewList[buttonAt-2].image
+                imgViewList[0].image = .icPicture
+            }else{
+                imgViewList[buttonAt].image = nil
+            }
+        }
+        imgCnt-=1
+        deleteButtonAppear()
+    }
 }
 
 extension ArtistPortfolioEditingViewController : UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
@@ -151,7 +260,6 @@ extension ArtistPortfolioEditingViewController : UIImagePickerControllerDelegate
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
             // 이미지 피커 컨트롤러 창 닫기
             print("이미지 선택하지않고 취소한 경우")
-            
             self.dismiss(animated: false) { () in
                 // 알림 창 호출
                 let alert = UIAlertController(title: "", message: "이미지 선택이 취소되었습니다.", preferredStyle: .alert)
@@ -161,39 +269,37 @@ extension ArtistPortfolioEditingViewController : UIImagePickerControllerDelegate
         }
         // 이미지 피커에서 이미지를 선택했을 때 호출되는 메소드
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-            print("이미지 선택")
             // 이미지 피커 컨트롤러 창 닫기
             picker.dismiss(animated: false) { () in
                 // 이미지를 이미지 뷰에 표시
                 let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
                 
-                    print("buttonat : " + String(self.buttonAt))
-                    print("imgCnt : " + String(self.imgCnt))
-                if(self.imgCnt <= self.buttonAt) {
-                    // 잘 눌럿을때
+                print("buttonat:"+String(self.buttonAt)+", imgCnt:"+String(self.imgCnt))
+                
+                if(self.buttonAt == 0) {
                     if(self.imgCnt == 0) {
-                        self.firstImgView.image = img
-                        self.imgCnt += 1
+                        self.imgViewList[1].image = img
+                        self.imgCnt+=1
                     }else if(self.imgCnt == 1) {
-                        self.secondImgView.image = img
-                        self.imgCnt += 1
-                    }else {
-                        self.thirdImgView.image = img
-                        self.imgCnt += 1
+                        self.imgViewList[2].image = self.imgViewList[1].image
+                        self.imgViewList[1].image = img
+                        self.imgCnt+=1
+                    }else if(self.imgCnt == 2){
+                        self.imgViewList[0].image = img
+                        self.imgCnt+=1
+                    }else{
+                        self.firstImgView.image = img
                     }
-                }else {
-                    // 수정하고 싶을 때
+                }else{
                     if(self.buttonAt == 0) {
                         self.firstImgView.image = img
-                        self.imgCnt += 1
                     }else if(self.buttonAt == 1) {
                         self.secondImgView.image = img
-                        self.imgCnt += 1
                     }else {
                         self.thirdImgView.image = img
-                        self.imgCnt += 1
                     }
                 }
+                self.deleteButtonAppear()
             }
         }
 }

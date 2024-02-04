@@ -463,7 +463,6 @@
 		2D6F59A32B561D4700CA883A /* ModelReservationView */ = {
 			isa = PBXGroup;
 			children = (
-				2D6F59B92B5C689D00CA883A /* ModelReservationChartView */,
 				3142B9AC2B4D07640066CD5A /* ModelReservationViewController.swift */,
 				2D4B7C1F2B5EFA38001E1B09 /* ModelReservationSegmentedControl.swift */,
 				2D4B7C272B5F17F1001E1B09 /* ShowReviewView */,
@@ -613,7 +612,6 @@
 			children = (
 				2D62E2532B548BBA004E8299 /* ModelSearchView */,
 				2D0A19082B4ED53600C1CECA /* ModelHomeView */,
-				2D6F59A32B561D4700CA883A /* ModelReservationView */,
 				2D6E4CEC2B62217E00D7F919 /* ModelManagementReservationsView */,
 				CC2F3AC32B54362B00508DA5 /* MyPageInfo */,
 				CC2F3ABA2B4EAF8B00508DA5 /* MyPage */,
@@ -1077,7 +1075,7 @@
 				3142B9B12B4D08480066CD5A /* ArtistReservationViewController.swift in Sources */,
 				2D4B7C262B5F17E7001E1B09 /* TotalStarRatingView.swift in Sources */,
 				2D6F59AE2B5BF3A900CA883A /* ModelReservationChartTableViewController.swift in Sources */,
-				094884DB2B59915500C233E0 /* ArtistReservationSingleManageViewController.swift in Sources */,
+				094884DB2B59915500C233E0 /* SingleArtistReservationManageViewController.swift in Sources */,
 				09275E892B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
