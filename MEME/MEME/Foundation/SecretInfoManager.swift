@@ -45,7 +45,7 @@ final class SecretInfoManager {
     }
     
     private var info: [String: String] {
-        guard let plistPath = Bundle.main.path(forResource: "Base-Info", ofType: "plist"),
+        guard let plistPath = Bundle.main.path(forResource: "memeSecret", ofType: "plist"),
               let plist = NSDictionary(contentsOfFile: plistPath) as? [String: String] else {
             return [:]
         }

@@ -18,11 +18,11 @@ extension MemeAuthDomain {
     var url: String {
         switch self {
         case .auth:
-            return "auth"
+            return "/auth"
         case .logout:
-            return "logout"
+            return "/logout"
         case .withdraw:
-            return "withdraw"
+            return "/withdraw"
         }
     }
 }

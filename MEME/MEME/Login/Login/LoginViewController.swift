@@ -26,6 +26,21 @@ final class LoginViewController: UIViewController {
         appleLogin()
     }
     
+    @IBAction func testButtonTapped(_ sender: Any) {
+        let manager = ReservationManager.shared
+        
+        manager.postReservation(
+            modelId: 1,
+            portfolioId: 1,
+            date: "2024-01-01",
+            time: ._06_30,
+            dayOfWeek: .SAT,
+            location: "강남구 어디어디"
+        ) { result in
+                print(result)
+            }
+    }
+    
 }
 
 // MARK: - login 로직
