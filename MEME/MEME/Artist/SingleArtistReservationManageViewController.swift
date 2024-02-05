@@ -7,17 +7,36 @@
 
 import UIKit
 
-class ArtistReservationSingleManageViewController: UIViewController {
+class SingleArtistReservationManageViewController: UIViewController {
     
     @IBOutlet var cancelBarView: UIView!
+    @IBOutlet var cancelBarLabel: UILabel!
+    @IBOutlet var cancelBarButton: UIButton!
+    @IBOutlet var resInfoFrameView: UIView!
+    
+    private var isToday: Bool = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        cancelBarView.layer.cornerRadius=10
+        uiSet()
         // Do any additional setup after loading the view.
     }
 
+    private func uiSet(){
+        self.navigationController?.isNavigationBarHidden = true
+        cancelBarView.layer.cornerRadius=10
+        resInfoFrameView.layer.cornerRadius=10
+        if isToday {
+            cancelBarView.backgroundColor = .gray500
+            cancelBarLabel.text = "당일 예약은 취소가 불가능합니다"
+            cancelBarButton.isHidden = true
+        }else{
+            cancelBarView.backgroundColor = .systemRed
+            cancelBarLabel.text = "예약 취소하기"
+            cancelBarButton.isHidden = false
+        }
+    }
+    
     @IBAction private func backBtnDidTap(_ sender: UIButton) {
         self.navigationController?.popViewController(animated: true)
     }

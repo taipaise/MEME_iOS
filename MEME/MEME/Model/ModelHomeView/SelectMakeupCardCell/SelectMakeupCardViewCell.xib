@@ -75,7 +75,7 @@
                 <outlet property="makeupCardImageView" destination="bw5-j8-gwd" id="Y4m-xv-Yhe"/>
                 <outlet property="priceLabel" destination="eli-Jb-tIp" id="tgq-6P-htp"/>
             </connections>
-            <point key="canvasLocation" x="27" y="-177"/>
+            <point key="canvasLocation" x="25.954198473282442" y="-177.46478873239437"/>
         </collectionViewCell>
     </objects>
     <resources>

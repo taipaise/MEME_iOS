@@ -9,7 +9,7 @@ import UIKit
 
 class ArtistMakeupTagCollectionViewCell: UICollectionViewCell {
     @IBOutlet var makeupTagLabel: UILabel!
-    
+    @IBOutlet var makeupTagView: UIView!
     static let identifier = "ArtistMakeupTagCollectionViewCell"
 
     static func nib() -> UINib {
@@ -18,6 +18,22 @@ class ArtistMakeupTagCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        uiSet()
     }
-
+    private func uiSet(){
+        makeupTagView.layer.borderColor = UIColor(resource: .mainBold).cgColor
+        makeupTagView.layer.cornerRadius = makeupTagView.frame.height/2
+        makeupTagView.layer.borderWidth = 1
+        makeupTagView.backgroundColor = .gray100
+        makeupTagLabel.textColor = .gray500
+    }
+    func selected(){
+        makeupTagView.backgroundColor = .mainBold
+        makeupTagLabel.textColor = .gray100
+    }
+    func deSelected(){
+        makeupTagView.backgroundColor = .gray100
+        makeupTagLabel.textColor = .gray500
+    }
+    
 }
