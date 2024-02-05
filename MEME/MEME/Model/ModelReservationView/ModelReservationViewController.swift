@@ -240,6 +240,7 @@ class ModelReservationViewController: UIViewController {
         contentsView.addSubview(aCategoryLabel)
         contentsView.addSubview(underLineView)
         contentsView.addSubview(segmentedControl)
+        contentsView.addSubview(mainStackView)
         view.addSubview(underBarView)
         view.addSubview(reservationButton)
     }
