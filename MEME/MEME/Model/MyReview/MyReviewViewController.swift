@@ -37,7 +37,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     }()
     
     private let segmentedControl: MyPageSegmentedControl = {
-        let underbarInfo = UnderbarInfo(height: 3, barColor: .mainBold, backgroundColor: .gray300)
+        let underbarInfo = UnderbarIndicator(height: 3, barColor: .mainBold, backgroundColor: .gray300)
         let control = MyPageSegmentedControl(items: ["리뷰쓰기", "작성한 리뷰"], underbarInfo: underbarInfo)
         control.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
         control.translatesAutoresizingMaskIntoConstraints = false
