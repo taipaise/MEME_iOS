@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct UnderbarInfo {
+struct UnderbarIndicator{
   var height: CGFloat
   var barColor: UIColor
   var backgroundColor: UIColor
@@ -20,7 +20,7 @@ final class MyPageSegmentedControl: UISegmentedControl {
 
     private lazy var underbarWidth: CGFloat? = bounds.size.width / CGFloat(numberOfSegments)
 
-    private var underbarInfo: UnderbarInfo
+    private var underbarInfo: UnderbarIndicator
     
     private var isFirstSettingDone = false
     
@@ -36,13 +36,13 @@ final class MyPageSegmentedControl: UISegmentedControl {
       }()
 
     // MARK: - Lifecycle
-    init(frame: CGRect, underbarInfo info: UnderbarInfo) {
+    init(frame: CGRect, underbarInfo info: UnderbarIndicator) {
         self.underbarInfo = info
         super.init(frame: frame)
         configureUI()
     }
 
-    init(items: [Any]?, underbarInfo info: UnderbarInfo) {
+    init(items: [Any]?, underbarInfo info: UnderbarIndicator) {
         self.underbarInfo = info
         super.init(items: items)
         configureUI()

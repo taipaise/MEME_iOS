@@ -54,7 +54,8 @@ final class BusinessRegistrationViewController: UIViewController {
     }
     
     @IBAction private func nextButtonTapped(_ sender: Any) {
-        let nextVC = SetBusinessInfoViewController()
+        let nextVC = RegistrationCompletionViewController()
+        nextVC.configure(isArtist: true)
         navigationController?.pushViewController(nextVC, animated: true)
     }
     

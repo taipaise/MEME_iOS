@@ -166,6 +166,11 @@ final class SetBusinessInfoDetailViewController: UIViewController {
         collectionView.isHidden = false
     }
 
+    @IBAction private func completionButtonTapped(_ sender: Any) {
+        let nextVC = ArtistTabBarController()
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
 }
 
 // MARK: - collectionView 설정
