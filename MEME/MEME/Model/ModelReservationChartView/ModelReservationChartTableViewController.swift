@@ -12,8 +12,10 @@ class ModelReservationChartViewController: UIViewController {
     private var selectedButton: ModelReservationTypeButton?
     
     // MARK: - Properties
+    
     var selectedCategory: String?
     
+    private let navigationBar = NavigationBarView()
     let buttonScrollView = UIScrollView()
     private let buttonsStackView = UIStackView()
     
@@ -114,9 +116,9 @@ class ModelReservationChartViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.title = "예약하기"
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationBar.delegate = self
+        navigationBar.configure(title: "예약 하기")
 
         setupButtonsStackView()
         setupButtonsAction()
@@ -132,6 +134,7 @@ class ModelReservationChartViewController: UIViewController {
     
     // MARK: - configureSubviews
     func configureSubviews() {
+        view.addSubview(navigationBar)
         buttonScrollView.showsHorizontalScrollIndicator = false
         view.addSubview(buttonScrollView)
         view.addSubview(lineView)
@@ -145,8 +148,12 @@ class ModelReservationChartViewController: UIViewController {
     
     // MARK: - makeConstraints
     func makeConstraints() {
+        navigationBar.snp.makeConstraints {make in
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(48)
+        }
         buttonScrollView.snp.makeConstraints {make in
-            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.top.equalTo(navigationBar.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview()
             make.height.equalTo(48)
@@ -178,23 +185,25 @@ class ModelReservationChartViewController: UIViewController {
     }
     //MARK: -Action
     private func activateButtonForCategory(_ category: String) {
-        let buttons = [
-            allButton,
-            specialButton,
-            actorButton,
-            interviewButton,
-            dailyButton,
-            studioButton,
-            weddingButton,
-            partyButton,
-            etcButton
-        ]
-        
-        for button in buttons {
-            if button.titleLabel?.text == category {
-                selectButton(button)
-                break
-            }
+        switch category {
+        case "데일리 메이크업":
+            self.selectButton(self.dailyButton)
+        case "배우 메이크업":
+            self.selectButton(self.actorButton)
+        case "면접 메이크업":
+            self.selectButton(self.interviewButton)
+        case "파티/이벤트\n메이크업":
+            self.selectButton(self.partyButton)
+        case "웨딩 메이크업":
+            self.selectButton(self.weddingButton)
+        case "특수 메이크업":
+            self.selectButton(self.specialButton)
+        case "스튜디오\n메이크업":
+            self.selectButton(self.studioButton)
+        case "기타(속눈썹,\n퍼스널 컬러)":
+            self.selectButton(self.etcButton)
+        default:
+            break
         }
     }
     
@@ -307,5 +316,14 @@ extension ModelReservationChartViewController: UITableViewDataSource, UITableVie
 extension ModelReservationChartViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         return ModalPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+}
+
+// MARK: -BackButtonTappedDelegate
+extension ModelReservationChartViewController: BackButtonTappedDelegate  {
+    func backButtonTapped() {
+        if let navigationController = self.navigationController {
+            navigationController.popViewController(animated: true)
+        }
     }
 }

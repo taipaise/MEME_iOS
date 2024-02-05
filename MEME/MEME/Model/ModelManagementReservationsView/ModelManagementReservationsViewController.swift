@@ -11,16 +11,15 @@ import SnapKit
 final class ModelManagementReservationsViewController: UIViewController {
     // MARK: - Properties
     private var reservationCollectionView: UICollectionView!
+    private let navigationBar = NavigationBarView()
     
     //MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationController?.navigationBar.topItem?.title = ""
-        self.title = "전체 예약 보기"
-        
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationBar.delegate = self
+        navigationBar.configure(title: "전체 예약 보기")
         
         setupReservationCollectionView()
         configureSubviews()
@@ -29,14 +28,20 @@ final class ModelManagementReservationsViewController: UIViewController {
     
     // MARK: - configureSubviews
     func configureSubviews() {
+        view.addSubview(navigationBar)
         reservationCollectionView.backgroundColor = .white
         view.addSubview(reservationCollectionView)
     }
     
     // MARK: - makeConstraints
     func makeConstraints() {
+        navigationBar.snp.makeConstraints {make in
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(48)
+        }
         reservationCollectionView.snp.makeConstraints {make in
-            make.top.bottom.equalToSuperview()
+            make.top.equalTo(navigationBar.snp.bottom)
+            make.bottom.equalToSuperview()
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-24)
         }
@@ -90,7 +95,6 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegate, U
             cell.modelReservationArtistNameLabel.textColor = .black
             cell.modelReservationLocationLabel.textColor = .black
             cell.modelReservationPriceLabel.textColor = .black
-            cell.cancelButton.backgroundColor = .gray300
             
             return cell
         }
@@ -114,6 +118,11 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegateFlo
     }
 }
 
-
-
-
+// MARK: -BackButtonTappedDelegate
+extension ModelManagementReservationsViewController: BackButtonTappedDelegate  {
+    func backButtonTapped() {
+        if let navigationController = self.navigationController {
+            navigationController.popViewController(animated: true)
+        }
+    }
+}

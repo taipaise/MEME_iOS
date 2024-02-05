@@ -126,8 +126,6 @@ final class ModelHomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         
         setupReservationCollectionView()
         setupMakeupCardCollectionView()
@@ -161,10 +159,10 @@ final class ModelHomeViewController: UIViewController {
     // MARK: - makeConstraints
     func makeConstraints() {
         scrollView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(view.safeAreaLayoutGuide)
         }
         contentsView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(scrollView)
             make.width.equalTo(scrollView)
         }
         
@@ -241,6 +239,7 @@ final class ModelHomeViewController: UIViewController {
     }
     @objc private func viewAllReservationsTapped() {
         let reservationsVC = ModelManagementReservationsViewController()
+        reservationsVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(reservationsVC, animated: true)
     }
 
@@ -332,7 +331,9 @@ extension ModelHomeViewController: UICollectionViewDelegate, UICollectionViewDat
                     fatalError("셀 타입 캐스팅 실패...")
                 }
                 cell.onReservationTapped = { [weak self] in
-                       self?.tabBarController?.selectedIndex = 1
+                    let ReservationChartVC = ModelReservationChartViewController()
+                    ReservationChartVC.hidesBottomBarWhenPushed = true
+                    self?.navigationController?.pushViewController(ReservationChartVC, animated: true)
                    }
                 
                 return cell
@@ -389,6 +390,7 @@ extension ModelHomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == recomandReservationCollectionView || collectionView == recomandHastyReservationCollectionView  {
             let reservationVC = ModelReservationViewController()
+            reservationVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(reservationVC, animated: true)
         }
     }
@@ -398,6 +400,7 @@ extension ModelHomeViewController: UICollectionViewDelegateFlowLayout {
 extension ModelHomeViewController: UISearchBarDelegate {
     func searchBarShouldBeginEditing(_ searchBar: UISearchBar) -> Bool {
         let searchVC = ModelSearchViewController()
+        searchVC.hidesBottomBarWhenPushed = true
         self.navigationController?.pushViewController(searchVC, animated: true)
         return false
     }
