@@ -84,7 +84,11 @@ final class SetDetailInfoViewController: UIViewController {
     private func setNextButton() {
         
     }
-
+    
+    @IBAction private func nextButtonTapped(_ sender: Any) {
+        let nextVC = RegistrationCompletionViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
 }
 
 extension SetDetailInfoViewController: DetailSettingButtonTapped {

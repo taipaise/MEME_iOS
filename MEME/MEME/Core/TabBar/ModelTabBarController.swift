@@ -22,7 +22,6 @@ final class ModelTabBarController: UITabBarController {
     private func setTabBarItems() {
         tabs = [
             TabBarItemType.modelHome: UINavigationController(rootViewController: ModelHomeViewController()),
-            TabBarItemType.modelReservation: UINavigationController(rootViewController: ModelReservationViewController()),
             TabBarItemType.modelMypage: UINavigationController(rootViewController: ModelMyPageViewController())
         ]
 //        private func setTabBarItems() {

@@ -24,6 +24,8 @@ final class ArtistTabBarController: UITabBarController {
             TabBarItemType.artistHome: ArtistHomeViewController(),
             TabBarItemType.artistReservation: ArtistReservationViewController(),
             TabBarItemType.artistMypage: ArtistMyPageViewController()
+            TabBarItemType.artistReservation: ArtistReservationManageViewController()//,
+//            TabBarItemType.artistMypage: ArtistMyPage()
         ]
 //        private func setTabBarItems() {
 //            tabs = [
