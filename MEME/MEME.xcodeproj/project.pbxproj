@@ -157,6 +157,24 @@
 		CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3AC12B54361100508DA5 /* MyPageInfoViewController.swift */; };
 		CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3AC42B5436B800508DA5 /* InfoHeaderView.swift */; };
 		CC2F3AC72B54444E00508DA5 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3AC62B54444E00508DA5 /* InfoTableViewCell.swift */; };
+		CCAB5A472B6585F700067FA4 /* InterestMakeUpCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A462B6585F700067FA4 /* InterestMakeUpCollectionViewCell.swift */; };
+		CCAB5A492B65861600067FA4 /* InterestMakeUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A482B65861600067FA4 /* InterestMakeUpViewController.swift */; };
+		CCAB5A4D2B65938F00067FA4 /* InterestArtistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A4C2B65938F00067FA4 /* InterestArtistCollectionViewCell.swift */; };
+		CCAB5A532B66CD9F00067FA4 /* MyReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A522B66CD9E00067FA4 /* MyReviewViewController.swift */; };
+		CCAB5A572B66F44D00067FA4 /* WriteReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A562B66F44D00067FA4 /* WriteReviewViewController.swift */; };
+		CCAB5A592B66FD0000067FA4 /* StarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A582B66FD0000067FA4 /* StarRatingView.swift */; };
+		CCAB5A5B2B6740CE00067FA4 /* AskViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A5A2B6740CE00067FA4 /* AskViewController.swift */; };
+		CCAB5A5D2B6785D400067FA4 /* MyPageSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A5C2B6785D400067FA4 /* MyPageSegmentedControl.swift */; };
+		CCAB5A5F2B67AEB200067FA4 /* ModelModifyViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCAB5A5E2B67AEB200067FA4 /* ModelModifyViewController.xib */; };
+		CCAB5A612B67B6C100067FA4 /* ModelDetailSettingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A602B67B6C000067FA4 /* ModelDetailSettingView.swift */; };
+		CCAB5A632B67B6CA00067FA4 /* ModelDetailSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCAB5A622B67B6CA00067FA4 /* ModelDetailSettingView.xib */; };
+		CCAB5A652B6CFDB300067FA4 /* MyReviewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A642B6CFDB300067FA4 /* MyReviewCollectionViewCell.swift */; };
+		CCAB5A672B6D608700067FA4 /* ArtistMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A662B6D608700067FA4 /* ArtistMyPageViewController.swift */; };
+		CCAB5A692B6DD60900067FA4 /* WrittenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A682B6DD60900067FA4 /* WrittenCollectionViewCell.swift */; };
+		CCAB5A6B2B6E00A500067FA4 /* ArtistMyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A6A2B6E00A500067FA4 /* ArtistMyPageTableViewCell.swift */; };
+		CCAB5A6D2B6E011800067FA4 /* ArtistHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A6C2B6E011800067FA4 /* ArtistHeaderView.swift */; };
+		CCFC31E12B5C41E500C0673A /* ModelModifyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFC31E02B5C41E500C0673A /* ModelModifyViewController.swift */; };
+		CCFC31E62B5C4EAC00C0673A /* InterestArtistViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCFC31E52B5C4EAC00C0673A /* InterestArtistViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -339,6 +357,24 @@
 		CC2F3AC12B54361100508DA5 /* MyPageInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageInfoViewController.swift; sourceTree = "<group>"; };
 		CC2F3AC42B5436B800508DA5 /* InfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoHeaderView.swift; sourceTree = "<group>"; };
 		CC2F3AC62B54444E00508DA5 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
+		CCAB5A462B6585F700067FA4 /* InterestMakeUpCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestMakeUpCollectionViewCell.swift; sourceTree = "<group>"; };
+		CCAB5A482B65861600067FA4 /* InterestMakeUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestMakeUpViewController.swift; sourceTree = "<group>"; };
+		CCAB5A4C2B65938F00067FA4 /* InterestArtistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InterestArtistCollectionViewCell.swift; path = MEME/Model/InterestArtist/InterestArtistCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
+		CCAB5A522B66CD9E00067FA4 /* MyReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewViewController.swift; sourceTree = "<group>"; };
+		CCAB5A562B66F44D00067FA4 /* WriteReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteReviewViewController.swift; sourceTree = "<group>"; };
+		CCAB5A582B66FD0000067FA4 /* StarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StarRatingView.swift; sourceTree = "<group>"; };
+		CCAB5A5A2B6740CE00067FA4 /* AskViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AskViewController.swift; sourceTree = "<group>"; };
+		CCAB5A5C2B6785D400067FA4 /* MyPageSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageSegmentedControl.swift; sourceTree = "<group>"; };
+		CCAB5A5E2B67AEB200067FA4 /* ModelModifyViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModelModifyViewController.xib; sourceTree = "<group>"; };
+		CCAB5A602B67B6C000067FA4 /* ModelDetailSettingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelDetailSettingView.swift; sourceTree = "<group>"; };
+		CCAB5A622B67B6CA00067FA4 /* ModelDetailSettingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ModelDetailSettingView.xib; sourceTree = "<group>"; };
+		CCAB5A642B6CFDB300067FA4 /* MyReviewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyReviewCollectionViewCell.swift; sourceTree = "<group>"; };
+		CCAB5A662B6D608700067FA4 /* ArtistMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistMyPageViewController.swift; sourceTree = "<group>"; };
+		CCAB5A682B6DD60900067FA4 /* WrittenCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrittenCollectionViewCell.swift; sourceTree = "<group>"; };
+		CCAB5A6A2B6E00A500067FA4 /* ArtistMyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistMyPageTableViewCell.swift; sourceTree = "<group>"; };
+		CCAB5A6C2B6E011800067FA4 /* ArtistHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistHeaderView.swift; sourceTree = "<group>"; };
+		CCFC31E02B5C41E500C0673A /* ModelModifyViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelModifyViewController.swift; sourceTree = "<group>"; };
+		CCFC31E52B5C4EAC00C0673A /* InterestArtistViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestArtistViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -690,6 +726,14 @@
 		3142B9AA2B4D07170066CD5A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				CCFC31E42B5C435F00C0673A /* ModelModify */,
+				CC2F3AC32B54362B00508DA5 /* MyPageInfo */,
+				CC2F3ABA2B4EAF8B00508DA5 /* MyPage */,
+				CCAB5A452B65858700067FA4 /* InterestArtist */,
+				3142B95C2B4CFFED0066CD5A /* ModelHomeViewController.swift */,
+				3142B9AC2B4D07640066CD5A /* ModelReservationViewController.swift */,
+				CCAB5A502B66CD3400067FA4 /* InterestMakeUp */,
+				CCAB5A512B66CD4100067FA4 /* MyReview */,
 				2D62E2532B548BBA004E8299 /* ModelSearchView */,
 				2D0A19082B4ED53600C1CECA /* ModelHomeView */,
 				2D6E4CEC2B62217E00D7F919 /* ModelManagementReservationsView */,
@@ -707,6 +751,9 @@
 			isa = PBXGroup;
 			children = (
 				3142B9B02B4D08480066CD5A /* ArtistReservationViewController.swift */,
+				CCAB5A662B6D608700067FA4 /* ArtistMyPageViewController.swift */,
+				CCAB5A6A2B6E00A500067FA4 /* ArtistMyPageTableViewCell.swift */,
+				CCAB5A6C2B6E011800067FA4 /* ArtistHeaderView.swift */,
 				091CCCD62B639E4800ADD21C /* ArtistData.swift */,
 				3142B9AE2B4D08380066CD5A /* ArtistHomeViewController.swift */,
 				09275E812B518D150033EF34 /* ArtistHomeViewController.xib */,
@@ -1014,6 +1061,7 @@
 				CC2F3ABB2B5143FF00508DA5 /* ModelMyPageViewController.swift */,
 				CC2F3ABD2B514CDB00508DA5 /* ModelMyPageTableViewCell.swift */,
 				CC2F3ABF2B514EE900508DA5 /* ModelHeaderView.swift */,
+				CCAB5A5A2B6740CE00067FA4 /* AskViewController.swift */,
 			);
 			path = MyPage;
 			sourceTree = "<group>";
@@ -1028,6 +1076,49 @@
 			path = MyPageInfo;
 			sourceTree = "<group>";
 		};
+		CCAB5A452B65858700067FA4 /* InterestArtist */ = {
+			isa = PBXGroup;
+			children = (
+				CCFC31E52B5C4EAC00C0673A /* InterestArtistViewController.swift */,
+				CCAB5A4C2B65938F00067FA4 /* InterestArtistCollectionViewCell.swift */,
+			);
+			path = InterestArtist;
+			sourceTree = "<group>";
+		};
+		CCAB5A502B66CD3400067FA4 /* InterestMakeUp */ = {
+			isa = PBXGroup;
+			children = (
+				CCAB5A482B65861600067FA4 /* InterestMakeUpViewController.swift */,
+				CCAB5A462B6585F700067FA4 /* InterestMakeUpCollectionViewCell.swift */,
+			);
+			path = InterestMakeUp;
+			sourceTree = "<group>";
+		};
+		CCAB5A512B66CD4100067FA4 /* MyReview */ = {
+			isa = PBXGroup;
+			children = (
+				CCAB5A5C2B6785D400067FA4 /* MyPageSegmentedControl.swift */,
+				CCAB5A522B66CD9E00067FA4 /* MyReviewViewController.swift */,
+				CCAB5A562B66F44D00067FA4 /* WriteReviewViewController.swift */,
+				CCAB5A582B66FD0000067FA4 /* StarRatingView.swift */,
+				CCAB5A642B6CFDB300067FA4 /* MyReviewCollectionViewCell.swift */,
+				CCAB5A682B6DD60900067FA4 /* WrittenCollectionViewCell.swift */,
+			);
+			path = MyReview;
+			sourceTree = "<group>";
+		};
+		CCFC31E42B5C435F00C0673A /* ModelModify */ = {
+			isa = PBXGroup;
+			children = (
+				CCAB5A622B67B6CA00067FA4 /* ModelDetailSettingView.xib */,
+				CCAB5A602B67B6C000067FA4 /* ModelDetailSettingView.swift */,
+				CCAB5A5E2B67AEB200067FA4 /* ModelModifyViewController.xib */,
+				CCFC31E02B5C41E500C0673A /* ModelModifyViewController.swift */,
+			);
+			path = ModelModify;
+			sourceTree = "<group>";
+		};
+
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -1146,6 +1237,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCAB5A632B67B6CA00067FA4 /* ModelDetailSettingView.xib in Resources */,
 				094884CC2B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.xib in Resources */,
 				094884DC2B59915500C233E0 /* SingleArtistReservationManageViewController.xib in Resources */,
 				3142B9652B4CFFED0066CD5A /* LaunchScreen.storyboard in Resources */,
@@ -1160,6 +1252,7 @@
 				094884C82B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.xib in Resources */,
 				31B263462B57EDE300304FBE /* TermsAgreementViewController.xib in Resources */,
 				312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */,
+				CCAB5A5F2B67AEB200067FA4 /* ModelModifyViewController.xib in Resources */,
 				312B304F2B550FF9008D17FC /* Pretendard-Bold.otf in Resources */,
 				312B30502B550FF9008D17FC /* Pretendard-ExtraLight.otf in Resources */,
 				31B2636E2B57EECB00304FBE /* BusinessRegistrationViewController.xib in Resources */,
@@ -1217,6 +1310,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CCFC31E12B5C41E500C0673A /* ModelModifyViewController.swift in Sources */,
 				094884CB2B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.swift in Sources */,
 				312DF7622B669CC30060BDF0 /* TimeCollectionViewCell.swift in Sources */,
 				316A92772B667E7200E4337D /* SetBusinessInfoDetailViewController.swift in Sources */,
@@ -1240,6 +1334,9 @@
 				2D6F59B82B5C4FB100CA883A /* SortOptionIconView.swift in Sources */,
 				2D5C05A42B60433000EDC69F /* ModelReservationDetailViewController.swift in Sources */,
 				CC2F3AC72B54444E00508DA5 /* InfoTableViewCell.swift in Sources */,
+				CCAB5A5D2B6785D400067FA4 /* MyPageSegmentedControl.swift in Sources */,
+				CCAB5A5B2B6740CE00067FA4 /* AskViewController.swift in Sources */,
+				CCAB5A492B65861600067FA4 /* InterestMakeUpViewController.swift in Sources */,
 				3156D2012B69443000559820 /* HTTPHeaderFields.swift in Sources */,
 				31B2634F2B57EE7D00304FBE /* SetProfileViewController.swift in Sources */,
 				2D6F59B32B5C397400CA883A /* SortOptionsViewController.swift in Sources */,
@@ -1248,6 +1345,15 @@
 				2D0A19142B4F08DC00C1CECA /* ModelUserDataManager.swift in Sources */,
 				3142B95D2B4CFFED0066CD5A /* ModelHomeViewController.swift in Sources */,
 				31F6F8332B52AF8600EC621D /* OnboardingCollectionViewCell.swift in Sources */,
+				CCFC31E62B5C4EAC00C0673A /* InterestArtistViewController.swift in Sources */,
+				3142B9A42B4D03840066CD5A /* ModelTabBarController.swift in Sources */,
+				CCAB5A692B6DD60900067FA4 /* WrittenCollectionViewCell.swift in Sources */,
+				CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */,
+				CCAB5A572B66F44D00067FA4 /* WriteReviewViewController.swift in Sources */,
+				3142B9AD2B4D07640066CD5A /* ModelReservationViewController.swift in Sources */,
+				CCAB5A6D2B6E011800067FA4 /* ArtistHeaderView.swift in Sources */,
+				CCAB5A592B66FD0000067FA4 /* StarRatingView.swift in Sources */,
+				CCAB5A612B67B6C100067FA4 /* ModelDetailSettingView.swift in Sources */,
 				2D106F472B7025DB00F3C253 /* ModelReservationVisitLocationView.swift in Sources */,
 				316A927C2B6688F700E4337D /* Week.swift in Sources */,
 				3142B9A42B4D03840066CD5A /* ModelTabBarController.swift in Sources */,
@@ -1264,6 +1370,7 @@
 				3142B99B2B4D020E0066CD5A /* NSObject+.swift in Sources */,
 				2D3E0D152B640BCC00C49EF3 /* ModelViewArtistProfileViewController.swift in Sources */,
 				CC2F3AC02B514EE900508DA5 /* ModelHeaderView.swift in Sources */,
+				CCAB5A472B6585F700067FA4 /* InterestMakeUpCollectionViewCell.swift in Sources */,
 				3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */,
 				2D106F4A2B7028C200F3C253 /* ModelReservationShopLocationView.swift in Sources */,
 				315FB85E2B6DE57C0068163C /* KeyChainValue.swift in Sources */,
@@ -1275,12 +1382,15 @@
 				2D62E24F2B547D39004E8299 /* MakeupCardModel.swift in Sources */,
 				315EE2CE2B66566A0042A082 /* RegisterProgressBar.swift in Sources */,
 				31B263432B57EDE300304FBE /* TermsAgreementViewController.swift in Sources */,
+				CCAB5A672B6D608700067FA4 /* ArtistMyPageViewController.swift in Sources */,
 				091CCCDA2B64158B00ADD21C /* ArtistPortfolioManageViewController.swift in Sources */,
 				3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */,
 				2D62E2512B548BAB004E8299 /* ModelSearchViewController.swift in Sources */,
 				312DF7642B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift in Sources */,
 				315FB8592B6DE1B00068163C /* AuthAPI.swift in Sources */,
 				3142B9AF2B4D08380066CD5A /* ArtistHomeViewController.swift in Sources */,
+				CCAB5A532B66CD9F00067FA4 /* MyReviewViewController.swift in Sources */,
+				31B263652B57EEBD00304FBE /* RegisterProgressBar.swift in Sources */,
 				316A92712B66734100E4337D /* BusinessLocationModel.swift in Sources */,
 				315EE2D02B66566A0042A082 /* DetailSettingView.swift in Sources */,
 				2D6F59BF2B5C7D3300CA883A /* ModelReservationTypeButton.swift in Sources */,
@@ -1300,12 +1410,17 @@
 				315FB8622B6DE5F40068163C /* SecretInfoManager.swift in Sources */,
 				09FB67702B53FAA40063DAEA /* ArtistProfilePreviewViewController.swift in Sources */,
 				CC2F3ABE2B514CDB00508DA5 /* ModelMyPageTableViewCell.swift in Sources */,
+				CCAB5A6B2B6E00A500067FA4 /* ArtistMyPageTableViewCell.swift in Sources */,
 				CC2F3ABC2B5143FF00508DA5 /* ModelMyPageViewController.swift in Sources */,
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,
 				3156D2032B69446E00559820 /* NetworkError.swift in Sources */,
 				2D4B7C242B5F1026001E1B09 /* ShowReviewView.swift in Sources */,
 				2D4B7C202B5EFA38001E1B09 /* ModelReservationSegmentedControl.swift in Sources */,
 				3142B99D2B4D021A0066CD5A /* UIView+.swift in Sources */,
+				CCAB5A4D2B65938F00067FA4 /* InterestArtistCollectionViewCell.swift in Sources */,
+				CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */,
+				CCAB5A652B6CFDB300067FA4 /* MyReviewCollectionViewCell.swift in Sources */,
+				31B263692B57EEBD00304FBE /* RegisterProgressBar.swift in Sources */,
 				31B413842B6D322500535BB1 /* NetworkProvider.swift in Sources */,
 				2D4B7C292B5F294A001E1B09 /* ModelManagementReservationsViewController.swift in Sources */,
 				CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */,
@@ -1503,6 +1618,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -1541,6 +1657,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				CODE_SIGN_STYLE = Manual;

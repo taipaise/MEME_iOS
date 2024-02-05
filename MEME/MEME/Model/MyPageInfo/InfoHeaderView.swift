@@ -11,24 +11,9 @@ class InfoHeaderView: UIView {
     
     let infoprofileImage: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage()
-        iv.backgroundColor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1)
+        iv.image = UIImage.profile
         iv.layer.cornerRadius = 90 / 2
         iv.clipsToBounds = true
-        
-        let label = UILabel()
-        label.text = "profile \nimage"
-        label.textColor = .black
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        iv.addSubview(label)
-        
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: iv.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: iv.centerYAnchor)
-        ])
         
         return iv
     }()

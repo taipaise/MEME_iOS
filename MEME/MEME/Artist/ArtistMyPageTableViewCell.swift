@@ -1,13 +1,13 @@
 //
-//  MyPageTableViewCell.swift
+//  ArtistMyPageTableViewCell.swift
 //  MEME
 //
-//  Created by 임아영 on 1/12/24.
+//  Created by 임아영 on 2/3/24.
 //
 
 import UIKit
 
-class ModelMyPageTableViewCell: UITableViewCell {
+class ArtistMyPageTableViewCell: UITableViewCell {
     
     //MARK: - Properties
     
@@ -28,7 +28,7 @@ class ModelMyPageTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -41,11 +41,11 @@ class ModelMyPageTableViewCell: UITableViewCell {
         menuLabel.translatesAutoresizingMaskIntoConstraints = false
         
         menuLabel.font = UIFont(name: "Pretendard-Medium", size: 14)
-
+        
         NSLayoutConstraint.activate([
             menuLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             menuLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 24)
         ])
     }
-
+    
 }
