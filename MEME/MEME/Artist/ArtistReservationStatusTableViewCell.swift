@@ -12,10 +12,10 @@ class ArtistReservationStatusTableViewCell: UITableViewCell {
     @IBOutlet var reservationDateLabel: UILabel!
     @IBOutlet var makeUpNameLabel: UILabel!
     @IBOutlet var modelNameLabel: UILabel!
+    @IBOutlet var reservationTimeLabel: UILabel!
+    @IBOutlet var reservationPlaceIconImage: UIImageView!
+    @IBOutlet var reservationPriceIconLabel: UILabel!
     @IBOutlet var reservationManageBtn: UIButton!
-    
-    // 예정 완료 구분
-    var isComplete : Bool = true
     
     static let identifier = "ArtistReservationStatusTableViewCell"
     
@@ -30,12 +30,7 @@ class ArtistReservationStatusTableViewCell: UITableViewCell {
     }
 
     private func uiSet() {
-        
         reservationFrameView.layer.cornerRadius = 10
-        reservationFrameView.layer.shadowOpacity = 0.1
-        reservationFrameView.layer.shadowRadius = 20
-        reservationFrameView.layer.shadowOffset = CGSize(width: 8, height: 8)
-        
         selectionStyle = .none
     }
     override func setSelected(_ selected: Bool, animated: Bool) {
