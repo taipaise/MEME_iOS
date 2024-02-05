@@ -19,6 +19,21 @@ class ModelReservationDetailViewController: UIViewController {
     private let navigationBar = NavigationBarView()
     private let scrollView = UIScrollView()
     private let contentsView = UIView()
+    
+    private let selectLocationStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fillProportionally
+        stack.alignment = .fill
+        stack.spacing = 0
+        
+        return stack
+    }()
+
+    private var shopView: ModelReservationShopLocationView!
+    private var visitView: ModelReservationVisitLocationView!
+    private var bothView: ModelReservationBothLocationView!
+    
     private var manualLabel: UILabel = {
         let label = UILabel()
         label.text = "예약 정보를 알려주세요."
@@ -167,12 +182,14 @@ class ModelReservationDetailViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "예약하기")
         
+        configureLocationStackView(makeupLocation: "BOTH")
         updateNextButtonState()
         setAction()
         configureSubviews()
         makeConstraints()
         updateWeekdayLabels()
         setupTimeSelectionButtons()
+        view.setupDismissKeyboardOnTapGesture()
     }
     
     // MARK: - configureSubviews
@@ -180,6 +197,7 @@ class ModelReservationDetailViewController: UIViewController {
         view.addSubview(navigationBar)
         view.addSubview(scrollView)
         scrollView.addSubview(contentsView)
+        contentsView.addSubview(selectLocationStackView)
         contentsView.addSubview(manualLabel)
         contentsView.addSubview(selectDateLabel)
         contentsView.addSubview(calendarView)
@@ -195,6 +213,24 @@ class ModelReservationDetailViewController: UIViewController {
     }
     
     // MARK: - makeConstraints
+    private func configureLocationStackView(makeupLocation: String) {
+        selectLocationStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        switch makeupLocation {
+        case "SHOP":
+            shopView = ModelReservationShopLocationView()
+            selectLocationStackView.addArrangedSubview(shopView)
+        case "VISIT":
+            visitView = ModelReservationVisitLocationView()
+            selectLocationStackView.addArrangedSubview(visitView)
+        case "BOTH":
+            bothView = ModelReservationBothLocationView()
+            selectLocationStackView.addArrangedSubview(bothView)
+        default:
+            break
+        }
+        view.layoutIfNeeded()
+    }
     func makeConstraints() {
         navigationBar.snp.makeConstraints {make in
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
@@ -208,8 +244,13 @@ class ModelReservationDetailViewController: UIViewController {
             make.edges.equalTo(scrollView)
             make.width.equalTo(scrollView)
         }
-        manualLabel.snp.makeConstraints { (make) in
+        selectLocationStackView.snp.makeConstraints { (make) in
             make.top.equalTo(contentsView.snp.top).offset(34)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+        }
+        manualLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(selectLocationStackView.snp.bottom).offset(40)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
         selectDateLabel.snp.makeConstraints { (make) in
@@ -423,6 +464,7 @@ class ModelReservationDetailViewController: UIViewController {
     //모두 선택해야 다음 버튼 활성화
     private func updateNextButtonState() {
         reservationButton.isEnabled = selectedDate != nil && selectedTime != nil
+        
         reservationButton.backgroundColor = reservationButton.isEnabled ? .mainBold : .gray300
     }
 }

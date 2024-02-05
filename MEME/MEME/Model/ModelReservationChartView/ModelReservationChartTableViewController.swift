@@ -185,23 +185,25 @@ class ModelReservationChartViewController: UIViewController {
     }
     //MARK: -Action
     private func activateButtonForCategory(_ category: String) {
-        let buttons = [
-            allButton,
-            specialButton,
-            actorButton,
-            interviewButton,
-            dailyButton,
-            studioButton,
-            weddingButton,
-            partyButton,
-            etcButton
-        ]
-        
-        for button in buttons {
-            if button.titleLabel?.text == category {
-                selectButton(button)
-                break
-            }
+        switch category {
+        case "데일리 메이크업":
+            self.selectButton(self.dailyButton)
+        case "배우 메이크업":
+            self.selectButton(self.actorButton)
+        case "면접 메이크업":
+            self.selectButton(self.interviewButton)
+        case "파티/이벤트\n메이크업":
+            self.selectButton(self.partyButton)
+        case "웨딩 메이크업":
+            self.selectButton(self.weddingButton)
+        case "특수 메이크업":
+            self.selectButton(self.specialButton)
+        case "스튜디오\n메이크업":
+            self.selectButton(self.studioButton)
+        case "기타(속눈썹,\n퍼스널 컬러)":
+            self.selectButton(self.etcButton)
+        default:
+            break
         }
     }
     

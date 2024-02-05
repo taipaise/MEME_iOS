@@ -43,4 +43,14 @@ public extension UIView {
         let layers = layer.sublayers
         layers?.filter { $0 is CAGradientLayer }.forEach { $0.removeFromSuperlayer() }
     }
+    
+    func setupDismissKeyboardOnTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        self.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func dismissKeyboard() {
+        self.endEditing(true)
+    }
 }
