@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KakaoSDKUser
 
 final class LoginViewController: UIViewController {
     
@@ -35,6 +36,38 @@ extension LoginViewController {
     }
     
     private func appleLogin() {
-        
+        print("sss")
+        if (UserApi.isKakaoTalkLoginAvailable()) {
+            UserApi.shared.loginWithKakaoTalk {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("loginWithKakaoTalk() success.")
+                    print(oauthToken?.idToken)
+                    
+                    AuthManager.shared.a { result in
+                        switch result {
+                        case .success(let response):
+                            print("a")
+                        case .failure(let response):
+                            print("b")
+                        }
+                    }
+                }
+            }
+        } else {
+            UserApi.shared.loginWithKakaoAccount {(oauthToken, error) in
+                if let error = error {
+                    print(error)
+                }
+                else {
+                    print("loginWithKakaoAccount() success.")
+                    
+                    //do something
+                    _ = oauthToken
+                }
+            }
+        }
     }
 }
