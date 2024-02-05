@@ -11,7 +11,7 @@ private let cellID2 = "Cell2"
 
 class MyPageInfoViewController: UIViewController {
     
-    let tableView = UITableView(frame: .zero, style: .grouped)
+    let tableView = UITableView(frame: .zero, style: .plain)
     let infoMenu = ["닉네임","이름", "성별", "이메일"]
     let infoMenuRightText = ["차차", "김나령", "여성", "meme@naver.com"]
     
@@ -19,6 +19,7 @@ class MyPageInfoViewController: UIViewController {
         super.viewDidLoad()
 
         configureUI()
+        self.tabBarController?.tabBar.isHidden = true
         
         self.navigationController?.navigationBar.tintColor = UIColor.black
 
@@ -45,17 +46,28 @@ class MyPageInfoViewController: UIViewController {
         
         navigationItem.title = "내 정보 수정"
         navigationController?.navigationBar.titleTextAttributes = [
-        NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20)]
+            NSAttributedString.Key.font: UIFont.pretendard(to: .regular, size: 16)]
+        
+        let backButton = UIButton(type: .custom)
+        backButton.setImage(UIImage.icBack, for: .normal)
+        backButton.configuration?.imagePadding = 25
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
 
-        //뒤로가기 버튼
-        //        let rightBarButton = UIBarButtonItem(title: "Edit", style: .plain, target: self, action: #selector(rightBarButtonDidTap))
-        //                navigationItem.rightBarButtonItem = rightBarButton
-                    }
-            
-            // 네비개이션 바 뒤로가기 액션 정의 필요
-        //    @objc func rightBarButtonDidTap() {
-        //    }
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+       }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    @objc func backButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
+    }
+
 }
 
 extension MyPageInfoViewController: UITableViewDataSource {
