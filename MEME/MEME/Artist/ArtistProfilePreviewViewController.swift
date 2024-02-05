@@ -8,25 +8,31 @@
 import UIKit
 
 class ArtistProfilePreviewViewController: UIViewController {
-    @IBOutlet var makeupTagCollectionView: UICollectionView!
-    @IBOutlet var portfolioCollectionView: UICollectionView!
-    @IBOutlet var bottomBarView: UIView!
-    
-    // 더미데이터
-    private var subtitleArray : [String] = ["데일리 메이크업","배우 메이크업","배우 메이크업"]
-    private var makeUpNameArray : [String] = ["메이크업명1","메이크업명2","메이크업명3"]
-    private var priceArray : [String] = ["가격1","가격2","가격3"]
-    private var imageArray : [String] = ["logo","logo","logo"]
-    
-    
-    private var makeupTagArray : [String] = ["데일리 메이크업", "기본 메이크업", "특수 메이크업", "기본 메이크업", "특수 메이크업"]
-    
+    @IBOutlet private var makeupTagCollectionView: UICollectionView!
+    @IBOutlet private var portfolioCollectionView: UICollectionView!
+    @IBOutlet private var bottomBarView: UIView!
+    @IBOutlet private var artistGenderView: UIView!
+    @IBOutlet private var artistShopView: UIView!
+    @IBOutlet private var artistVisitingView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionViewConfig()
-        bottomBarView.layer.cornerRadius = 10
+        uiSet()
+    }
+    
+    private func uiSet(){
+        self.navigationController?.isNavigationBarHidden = true
+        artistGenderView.layer.borderColor = UIColor(resource: .mainBold).cgColor
+        artistGenderView.layer.cornerRadius = artistGenderView.frame.height/2
+        artistGenderView.layer.borderWidth = 1
         
+        artistShopView.backgroundColor = UIColor(resource: .mainBold)
+        artistShopView.layer.cornerRadius = artistShopView.frame.height/2
+
+        artistVisitingView.backgroundColor = UIColor(resource: .mainBold)
+        artistVisitingView.layer.cornerRadius = artistVisitingView.frame.height/2
+        bottomBarView.layer.cornerRadius = 10
     }
     
     private func collectionViewConfig(){
@@ -41,7 +47,7 @@ class ArtistProfilePreviewViewController: UIViewController {
     }
     
     @IBAction private func backButtonDidTap(_ sender: UIButton) {
-        self.navigationController?.popViewController(animated: true)
+        navigationController?.popViewController(animated: true)
     }
 
 }
@@ -50,9 +56,9 @@ extension ArtistProfilePreviewViewController : UICollectionViewDelegate, UIColle
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         if collectionView == makeupTagCollectionView{
-            return makeupTagArray.count
+            return portfolioMakeupTagArray.count
         }else if collectionView == portfolioCollectionView{
-            return makeUpNameArray.count
+            return portfolioMakeupNameArray.count
         }
         return 0
     }
@@ -61,15 +67,15 @@ extension ArtistProfilePreviewViewController : UICollectionViewDelegate, UIColle
         
         if collectionView == makeupTagCollectionView{
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArtistMakeupTagCollectionViewCell", for: indexPath) as? ArtistMakeupTagCollectionViewCell else { return UICollectionViewCell() }
-            cell.makeupTagLabel.text = makeupTagArray[indexPath.row]
+            cell.makeupTagLabel.text = profilemakeupTagArray[indexPath.row]
             return cell
             
         }else if collectionView == portfolioCollectionView{
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArtistPortfolioCollectionViewCell", for: indexPath) as? ArtistPortfolioCollectionViewCell else { return UICollectionViewCell() }
-            cell.portfolioMainLabel.text = makeUpNameArray[indexPath.row]
-            cell.portfolioSubLabel.text = subtitleArray[indexPath.row]
-            cell.portfolioPriceLabel.text = priceArray[indexPath.row]
-            cell.portfolioImageView.image = UIImage(named: imageArray[indexPath.row])
+            cell.portfolioMainLabel.text = portfolioMakeupNameArray[indexPath.row]
+            cell.portfolioSubLabel.text = portfolioMakeupTagArray[indexPath.row]
+            cell.portfolioPriceLabel.text = portfolioPriceArray[indexPath.row]
+            cell.portfolioImageView.image = UIImage(named: portfolioImageArray[indexPath.row])
             
             return cell
         }

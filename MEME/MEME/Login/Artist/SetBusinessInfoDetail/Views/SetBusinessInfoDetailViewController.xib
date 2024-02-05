@@ -91,7 +91,7 @@
                                     <rect key="frame" x="0.0" y="27" width="288" height="98"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" distribution="fillProportionally" spacing="7" id="iQe-fy-7bC">
-                                            <rect key="frame" x="0.0" y="0.0" width="258.66666666666669" height="26"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="258.66666666666669" height="25.666666666666668"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="91h-Sm-Der">
@@ -130,7 +130,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" distribution="fillProportionally" spacing="10" id="I4G-zx-ocf">
-                                            <rect key="frame" x="0.0" y="36" width="285" height="26"/>
+                                            <rect key="frame" x="0.0" y="35.666666666666664" width="285" height="25.666666666666664"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KQE-wK-C8N">
@@ -169,7 +169,7 @@
                                             </subviews>
                                         </stackView>
                                         <stackView opaque="NO" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" distribution="fillProportionally" spacing="7" id="ysc-Ye-Oru">
-                                            <rect key="frame" x="0.0" y="72" width="227.66666666666666" height="26"/>
+                                            <rect key="frame" x="0.0" y="71.333333333333329" width="227.66666666666666" height="25.666666666666671"/>
                                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                             <subviews>
                                                 <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="HGu-W0-aVC">
@@ -495,6 +495,9 @@
                                     <buttonConfiguration key="configuration" style="plain" title="프로필 등록하기">
                                         <fontDescription key="titleFontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
                                     </buttonConfiguration>
+                                    <connections>
+                                        <action selector="completionButtonTapped:" destination="-1" eventType="touchUpInside" id="Yhr-Fk-VOY"/>
+                                    </connections>
                                 </button>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4is-St-AE9">
                                     <rect key="frame" x="0.0" y="625.33333333333337" width="288" height="30"/>

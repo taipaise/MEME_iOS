@@ -54,8 +54,17 @@ class ShowReviewView: UIView {
         
         return lineView
     }()
-    private var reviewTableView: UITableView!
-    private var tableViewHeightConstraint: NSLayoutConstraint?
+    public var reviewTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.showsVerticalScrollIndicator = false
+        tableView.isUserInteractionEnabled = false
+        
+        return tableView
+    }()
+    var innerScrollView: UIScrollView {
+        reviewTableView
+    }
+    var innerScrollingDownDueToOuterScroll = false
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -101,7 +110,7 @@ class ShowReviewView: UIView {
         reviewTableView.snp.makeConstraints { make in
             make.top.equalTo(lineView.snp.bottom)
             make.leading.trailing.equalToSuperview()
-            make.height.equalTo(700)
+            make.height.equalTo(400)
             make.bottom.equalToSuperview()
         }
     }
@@ -121,6 +130,10 @@ class ShowReviewView: UIView {
 
 //MARK: -UITableViewDataSource, UITableViewDelegate
 extension ShowReviewView: UITableViewDataSource, UITableViewDelegate {
+    enum Policy {
+        static let floatingPointTolerance = 0.1
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 5
     }

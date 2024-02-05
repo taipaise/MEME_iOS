@@ -7,18 +7,41 @@
 
 import UIKit
 import SnapKit
-
-class ModelReservationViewController: UIViewController, BackButtonTappedDelegate {
+// 예시 데이터 구조 -> 이후 삭제 필요
+class ModelReservationViewController: UIViewController {
+    // 예시 API 호출 이미지  -> 이후 삭제 필요
+    let imageUrlsFromAPI: [String] = ["https://images.unsplash.com/photo-1620613908146-bb9a8bbb7eca?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+        "https://images.unsplash.com/photo-1594465919760-441fe5908ab0?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1629297777138-6ae859d4d6df?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+    ]
+    
     // MARK: - Properties
-    private let scrollView = UIScrollView()
-    private let contentsView = UIView()
-    private var backgroundImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "reservation_back")
-        imageView.contentMode = .scaleAspectFit
+    private let navigationBar = NavigationBarView()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsVerticalScrollIndicator = false
         
-        return imageView
+        return scrollView
     }()
+    private let contentsView = UIView()
+    
+    //backgroundImage 스크롤
+    private lazy var backgroundImageScrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.isPagingEnabled = true
+        scrollView.bounces = false
+        return scrollView
+    }()
+    private var pageControl: UIPageControl = {
+        let pageControl = UIPageControl()
+        pageControl.currentPageIndicatorTintColor = .gray500
+        pageControl.pageIndicatorTintColor = .white
+        
+        return pageControl
+    }()
+    private let defaultImage = UIImage(named: "reservation_back")
+   
+    
     private var backgroundView: UIView = {
         let UIView = UIView()
         UIView.backgroundColor = .white
@@ -141,9 +164,11 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
+    private var currentSegmentIndex = 0
     private var informationView = ShowInformationView()
     private var reviewView = ShowReviewView()
-
+    private var reviewTableView: UITableView!
+    
     private var underBarView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -178,10 +203,11 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.title = "예약하기"
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationBar.delegate = self
+        navigationBar.configure(title: "예약하기")
         
+        fetchImagesFromAPI()
         setupSegmentedControl()
 
         configureSubviews()
@@ -189,20 +215,16 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         
         setupGestureRecognizers()
     }
-
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        let path = UIBezierPath(roundedRect: backgroundView.bounds, byRoundingCorners: [.topRight, .topLeft], cornerRadii: CGSize(width: 17, height: 17))
-        let maskLayer = CAShapeLayer()
-        maskLayer.path = path.cgPath
-        backgroundView.layer.mask = maskLayer
-    }
     
     // MARK: - configureSubviews
     func configureSubviews() {
+        view.addSubview(navigationBar)
+        scrollView.delegate = self
         view.addSubview(scrollView)
         scrollView.addSubview(contentsView)
-        contentsView.addSubview(backgroundImageView)
+        backgroundImageScrollView.delegate = self
+        contentsView.addSubview(backgroundImageScrollView)
+        contentsView.addSubview(pageControl)
         contentsView.addSubview(backgroundView)
         contentsView.addSubview(profileImageView)
         contentsView.addSubview(artistNameLabel)
@@ -227,21 +249,28 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
     
     // MARK: - makeConstraints
     func makeConstraints() {
+        navigationBar.snp.makeConstraints {make in
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(48)
+        }
         scrollView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.equalTo(navigationBar.snp.bottom)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         contentsView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(scrollView)
             make.width.equalTo(scrollView)
         }
-        backgroundImageView.snp.makeConstraints { (make) in
-            make.top.equalTo(contentsView.snp.top)
-            make.leading.equalTo(contentsView.snp.leading)
-            make.trailing.equalTo(contentsView.snp.trailing)
-            make.height.equalTo(backgroundImageView.snp.width)
+        backgroundImageScrollView.snp.makeConstraints { (make) in
+            make.top.leading.trailing.equalTo(contentsView)
+            make.height.equalTo(contentsView.snp.width)
+        }
+        pageControl.snp.makeConstraints { (make) in
+            make.centerX.equalTo(contentsView.snp.centerX)
+            make.top.equalTo(backgroundImageScrollView.snp.bottom).offset(-70)
         }
         backgroundView.snp.makeConstraints { (make) in
-            make.top.equalTo(backgroundImageView.snp.bottom).offset(-31)
+            make.top.equalTo(backgroundImageScrollView.snp.bottom).offset(-31)
             make.leading.equalTo(contentsView.snp.leading)
             make.trailing.equalTo(contentsView.snp.trailing)
             make.bottom.equalTo(contentsView.snp.bottom)
@@ -318,12 +347,11 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
             make.top.equalTo(segmentedControl.snp.bottom)
             make.leading.equalTo(contentsView.snp.leading).offset(25)
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
-            make.bottom.equalTo(contentsView.snp.bottom).offset(-51)
+            make.bottom.equalTo(contentsView.snp.bottom).offset(-50)
         }
         underBarView.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(160)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(61)
         }
         reservationButton.snp.makeConstraints { (make) in
             make.top.equalTo(underBarView.snp.top).offset(12)
@@ -333,6 +361,10 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         }
     }
     // MARK: - Action
+    @objc func pageControlChanged(_ sender: UIPageControl) {
+        let current = sender.currentPage
+        backgroundImageScrollView.setContentOffset(CGPoint(x: CGFloat(current) * backgroundImageScrollView.frame.size.width, y: 0), animated: true)
+    }
     private func setupGestureRecognizers() {
         setupTapGestureRecognizer(for: profileImageView, withSelector: #selector(profileImageTapped))
         setupTapGestureRecognizer(for: likeImageView, withSelector: #selector(likeImageTapped))
@@ -342,9 +374,6 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         view.addGestureRecognizer(tapGesture)
         view.isUserInteractionEnabled = true
     }
-    func backButtonTapped() {
-            self.navigationController?.popViewController(animated: true)
-        }
     @objc private func reservationTapped() {
         let reservationsVC = ModelReservationDetailViewController()
         navigationController?.pushViewController(reservationsVC, animated: true)
@@ -360,9 +389,45 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
             likeImageView.image = UIImage(named: "icon_like")
         }
     }
+    // MARK: - API Actions
+    private func fetchImagesFromAPI() {
+        if imageUrlsFromAPI.isEmpty {
+            addImageView(image: defaultImage!, index: 0)
+        } else {
+            for (index, urlString) in imageUrlsFromAPI.enumerated() {
+                guard let url = URL(string: urlString) else { continue }
+                URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+                    if let data = data, error == nil, let image = UIImage(data: data) {
+                        DispatchQueue.main.async {
+                            self?.addImageView(image: image, index: index)
+                        }
+                    }
+                }.resume()
+            }
+        }
+    }
     
     // MARK: - Methods
+    private func addImageView(image: UIImage, index: Int) {
+        let imageView = UIImageView(image: image)
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        backgroundImageScrollView.addSubview(imageView)
+        
+        imageView.snp.makeConstraints { make in
+            make.height.width.equalTo(backgroundImageScrollView.snp.width)
+            make.top.bottom.equalTo(backgroundImageScrollView)
+            make.left.equalTo(backgroundImageScrollView.snp.left).offset(CGFloat(index) * contentsView.frame.size.width)
+        }
+        
+        if index == 0 {
+            backgroundImageScrollView.contentSize = CGSize(width: contentsView.frame.width * CGFloat(imageUrlsFromAPI.count), height: contentsView.frame.width)
+            pageControl.numberOfPages = imageUrlsFromAPI.count
+            pageControl.isHidden = imageUrlsFromAPI.count <= 1
+        }
+    }
     @objc private func didChangeValue(segment: UISegmentedControl) {
+        currentSegmentIndex = segment.selectedSegmentIndex
         updateStackView(forSegmentIndex: segment.selectedSegmentIndex)
     }
 
@@ -372,6 +437,8 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         switch index {
         case 0:
             mainStackView.addArrangedSubview(informationView)
+            reviewTableView?.removeFromSuperview()
+            reviewTableView = nil
         case 1:
             mainStackView.addArrangedSubview(reviewView)
         default:
@@ -384,5 +451,98 @@ class ModelReservationViewController: UIViewController, BackButtonTappedDelegate
         self.segmentedControl.addTarget(self, action: #selector(didChangeValue(segment:)), for: .valueChanged)
         self.segmentedControl.selectedSegmentIndex = 0
         self.didChangeValue(segment: self.segmentedControl)
+    }
+}
+
+//MARK: - UIScrollViewDelegate
+extension ModelReservationViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if scrollView == backgroundImageScrollView {
+            let page = Int(round(scrollView.contentOffset.x / view.frame.width))
+            pageControl.currentPage = page
+        } else {
+            let outerScroll = scrollView == scrollView
+            let innerScroll = !outerScroll
+            let moreScroll = scrollView.panGestureRecognizer.translation(in: scrollView).y < 0
+            let lessScroll = !moreScroll
+            
+            let outerScrollMaxOffsetY = scrollView.contentSize.height - scrollView.frame.height
+            let innerScrollMaxOffsetY = reviewView.innerScrollView.contentSize.height - reviewView.innerScrollView.frame.height
+            
+            guard outerScroll else { return }
+            
+            // outer scroll을 more scroll 다 했으면, inner scroll을 more scroll
+            if outerScroll && moreScroll {
+                guard outerScrollMaxOffsetY < scrollView.contentOffset.y + ShowReviewView.Policy.floatingPointTolerance else { return }
+                reviewView.innerScrollingDownDueToOuterScroll = true
+                defer { reviewView.innerScrollingDownDueToOuterScroll = false }
+                
+                guard reviewView.innerScrollView.contentOffset.y < innerScrollMaxOffsetY else { return }
+                
+                reviewView.innerScrollView.contentOffset.y = reviewView.innerScrollView.contentOffset.y + scrollView.contentOffset.y - outerScrollMaxOffsetY
+                scrollView.contentOffset.y = outerScrollMaxOffsetY
+            }
+            
+            // inner scroll이 less 스크롤 할게 남아 있다면 inner scroll을 less 스크롤
+            if outerScroll && lessScroll {
+                guard reviewView.innerScrollView.contentOffset.y > 0 && scrollView.contentOffset.y < outerScrollMaxOffsetY else { return }
+                reviewView.innerScrollingDownDueToOuterScroll = true
+                defer { reviewView.innerScrollingDownDueToOuterScroll = false }
+                
+                reviewView.innerScrollView.contentOffset.y = max(reviewView.innerScrollView.contentOffset.y - (outerScrollMaxOffsetY - scrollView.contentOffset.y), 0)
+                
+                scrollView.contentOffset.y = outerScrollMaxOffsetY
+            }
+
+            // inner scroll을 모두 less scroll한 경우, outer scroll을 less scroll
+            if innerScroll && lessScroll {
+                defer { reviewView.innerScrollView.lastOffsetY = reviewView.innerScrollView.contentOffset.y }
+                guard reviewView.innerScrollView.contentOffset.y < 0 && scrollView.contentOffset.y > 0 else { return }
+                
+                guard reviewView.innerScrollView.lastOffsetY > reviewView.innerScrollView.contentOffset.y else { return }
+                
+                let moveOffset = outerScrollMaxOffsetY - abs(reviewView.innerScrollView.contentOffset.y) * 3
+                guard moveOffset < scrollView.contentOffset.y else { return }
+                
+                scrollView.contentOffset.y = max(moveOffset, 0)
+            }
+            
+            // outer scroll이 아직 more 스크롤할게 남아 있다면, innerScroll을 그대로 두고 outer scroll을 more 스크롤
+            if innerScroll && moreScroll {
+                guard
+                    scrollView.contentOffset.y + ShowReviewView.Policy.floatingPointTolerance < outerScrollMaxOffsetY,
+                    !reviewView.innerScrollingDownDueToOuterScroll
+                else { return }
+                let minOffetY = min(scrollView.contentOffset.y + reviewView.innerScrollView.contentOffset.y, outerScrollMaxOffsetY)
+                let offsetY = max(minOffetY, 0)
+                scrollView.contentOffset.y = offsetY
+                
+                    reviewView.innerScrollView.contentOffset.y = 0
+            }
+        }
+    }
+}
+
+// MARK: -BackButtonTappedDelegate
+extension ModelReservationViewController: BackButtonTappedDelegate  {
+    func backButtonTapped() {
+        if let navigationController = self.navigationController {
+            navigationController.popViewController(animated: true)
+        }
+    }
+}
+
+private struct AssociatedKeys {
+    static var lastOffsetY = "lastOffsetY"
+}
+
+extension UIScrollView {
+    var lastOffsetY: CGFloat {
+        get {
+            (objc_getAssociatedObject(self, &AssociatedKeys.lastOffsetY) as? CGFloat) ?? contentOffset.y
+        }
+        set {
+            objc_setAssociatedObject(self, &AssociatedKeys.lastOffsetY, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+        }
     }
 }

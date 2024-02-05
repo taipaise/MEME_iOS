@@ -15,25 +15,10 @@ class ModelHeaderView: UIView {
     
     let profileImage: UIImageView = {
         let iv = UIImageView()
-        iv.image = UIImage()
-        iv.backgroundColor = UIColor(red: 217/255, green: 217/255, blue: 217/255, alpha: 1)
-        iv.layer.cornerRadius = 117 / 2
+        iv.image = UIImage.profile
+        iv.layer.cornerRadius = 94 / 2
         iv.clipsToBounds = true
-        
-        let label = UILabel()
-        label.text = "profile \nimage"
-        label.textColor = .black
-        label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 12)
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        iv.addSubview(label)
-        
-        NSLayoutConstraint.activate([
-                label.centerXAnchor.constraint(equalTo: iv.centerXAnchor),
-                label.centerYAnchor.constraint(equalTo: iv.centerYAnchor)
-            ])
-
+       
         return iv
     }()
     
@@ -49,7 +34,7 @@ class ModelHeaderView: UIView {
 
     let vectorbutton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(systemName: "chevron.right"), for: .normal)
+        button.setImage(UIImage.icRightArrow, for: .normal)
         button.tintColor = UIColor(red: 0.69, green: 0.69, blue: 0.69, alpha: 1)
         button.addTarget(self, action: #selector(buttonClicked(sender:)), for: .touchUpInside)
 
@@ -58,53 +43,64 @@ class ModelHeaderView: UIView {
     
     let myPageIcon1: UIButton = {
         let button = UIButton(type: .system)
-        let imageView = UIImageView(image: UIImage(systemName: "square.fill"))
-        imageView.frame = CGRect(x: 0, y: 0, width: 38, height: 38)
-        imageView.layer.cornerRadius = 0
-        imageView.clipsToBounds = true
-        imageView.tintColor = .white
-        button.addSubview(imageView)
-        
+        button.setImage(UIImage.mpArtist, for: .normal)
+        button.tintColor = UIColor.mainBold
+        button.addTarget(self, action: #selector(mpArtistClicked(sender:)), for: .touchUpInside)
+
         return button
     }()
 
     let myPageIcon2: UIButton = {
         let button = UIButton(type: .system)
-        let imageView = UIImageView(image: UIImage(systemName: "square.fill"))
-        imageView.frame = CGRect(x: 0, y: 0, width: 38, height: 38)
-        imageView.layer.cornerRadius = 0
-        imageView.clipsToBounds = true
-        imageView.tintColor = .white
-        button.addSubview(imageView)
-        
+        button.setImage(UIImage.mpMakeup, for: .normal)
+        button.tintColor = UIColor.mainBold
+        button.addTarget(self, action: #selector(mpMakeUpClicked(sender:)), for: .touchUpInside)
+
         return button
     }()
 
     let myPageIcon3: UIButton = {
         let button = UIButton(type: .system)
-        let imageView = UIImageView(image: UIImage(systemName: "square.fill"))
-        imageView.frame = CGRect(x: 0, y: 0, width: 38, height: 38)
-        imageView.layer.cornerRadius = 0
-        imageView.clipsToBounds = true
-        imageView.tintColor = .white
-        button.addSubview(imageView)
-        
+        button.setImage(UIImage.mpReview, for: .normal)
+        button.tintColor = UIColor.mainBold
+        button.addTarget(self, action: #selector(myReviewClicked(sender:)), for: .touchUpInside)
+
         return button
     }()
 
-    
-    let grayBackground: UIView = {
-        let view = UIView()
-        view.backgroundColor = UIColor(red: 0.85, green: 0.85, blue: 0.85, alpha: 1)
-        view.layer.cornerRadius = 10
-        
-        return view
+    lazy var mpArtistlabel: UILabel = {
+        let label = UILabel()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mpArtistClicked(sender:)))
+        label.addGestureRecognizer(tapGesture)
+        label.isUserInteractionEnabled = true
+            
+        return label
     }()
     
-    let mpArtistlabel = UILabel()
-    let mpMakeuplabel = UILabel()
-    let mpReviewlabel = UILabel()
+    lazy var mpMakeuplabel: UILabel = {
+        let label = UILabel()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(mpMakeUpClicked(sender:)))
+        label.addGestureRecognizer(tapGesture)
+        label.isUserInteractionEnabled = true
+            
+        return label
+    }()
     
+    lazy var mpReviewlabel: UILabel = {
+        let label = UILabel()
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(myReviewClicked(sender:)))
+        label.addGestureRecognizer(tapGesture)
+        label.isUserInteractionEnabled = true
+            
+        return label
+    }()
+    
+    let lineView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray500
+
+        return view
+    }()
     
     // MARK: - Lifecycle
     
@@ -128,108 +124,109 @@ class ModelHeaderView: UIView {
         myPageIcon1.translatesAutoresizingMaskIntoConstraints = false
         myPageIcon2.translatesAutoresizingMaskIntoConstraints = false
         myPageIcon3.translatesAutoresizingMaskIntoConstraints = false
-        grayBackground.translatesAutoresizingMaskIntoConstraints = false
         mpArtistlabel.translatesAutoresizingMaskIntoConstraints = false
         mpMakeuplabel.translatesAutoresizingMaskIntoConstraints = false
         mpReviewlabel.translatesAutoresizingMaskIntoConstraints = false
-        
+        lineView.translatesAutoresizingMaskIntoConstraints = false
+
         addSubview(profileImage)
         NSLayoutConstraint.activate([
             profileImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-            profileImage.widthAnchor.constraint(equalToConstant: 117),
-            profileImage.heightAnchor.constraint(equalToConstant: 117),
-            profileImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 26)
+            profileImage.widthAnchor.constraint(equalToConstant: 94),
+            profileImage.heightAnchor.constraint(equalToConstant: 94),
+            profileImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 16)
         ])
         
         addSubview(namebutton)
-        namebutton.titleLabel?.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 18)
+        namebutton.titleLabel?.font = UIFont(name: "Pretendard-SemiBold", size: 18)
         NSLayoutConstraint.activate([
             namebutton.centerXAnchor.constraint(equalTo: centerXAnchor),
-            namebutton.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 15),
+            namebutton.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 33)
         ])
         
         addSubview(vectorbutton)
         NSLayoutConstraint.activate([
-            vectorbutton.leadingAnchor.constraint(equalTo: namebutton.trailingAnchor, constant: 10),
+            vectorbutton.leadingAnchor.constraint(equalTo: namebutton.trailingAnchor, constant: 11),
             vectorbutton.centerYAnchor.constraint(equalTo: namebutton.centerYAnchor),
-            vectorbutton.widthAnchor.constraint(equalToConstant: 9),
+            vectorbutton.widthAnchor.constraint(equalToConstant: 5.9),
             vectorbutton.heightAnchor.constraint(equalToConstant: 11.92)
         ])
         
-        let buttonSize: CGFloat = 38
-        let backgroundPadding: CGFloat = 14
-        let sidePadding: CGFloat = 37.5
-        
-        addSubview(grayBackground)
-        NSLayoutConstraint.activate([
-            grayBackground.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor, constant: 0),
-            grayBackground.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 199),
-            grayBackground.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor, constant: 24),
-            grayBackground.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -24),
-            grayBackground.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -19)
-        ])
-
         addSubview(myPageIcon1)
         NSLayoutConstraint.activate([
-            myPageIcon1.topAnchor.constraint(equalTo: grayBackground.topAnchor, constant: backgroundPadding),
-            myPageIcon1.leadingAnchor.constraint(equalTo: grayBackground.leadingAnchor, constant: sidePadding),
-            myPageIcon1.widthAnchor.constraint(equalToConstant: buttonSize),
-            myPageIcon1.heightAnchor.constraint(equalToConstant: buttonSize)
+            myPageIcon1.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 63),
+            myPageIcon1.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 207),
+            myPageIcon1.widthAnchor.constraint(equalToConstant: 24),
+            myPageIcon1.heightAnchor.constraint(equalToConstant: 24)
         ])
-        
+
         addSubview(myPageIcon2)
-        myPageIcon2.contentHorizontalAlignment = .center
         NSLayoutConstraint.activate([
-            myPageIcon2.topAnchor.constraint(equalTo: grayBackground.topAnchor, constant: backgroundPadding),
-            myPageIcon2.centerXAnchor.constraint(equalTo: grayBackground.centerXAnchor),
-            myPageIcon2.widthAnchor.constraint(equalToConstant: buttonSize),
-            myPageIcon2.heightAnchor.constraint(equalToConstant: buttonSize)
+            myPageIcon2.centerXAnchor.constraint(equalTo: self.centerXAnchor),
+            myPageIcon2.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 207),
+            myPageIcon2.widthAnchor.constraint(equalToConstant: 20.9),
+            myPageIcon2.heightAnchor.constraint(equalToConstant: 17)
         ])
         
         addSubview(myPageIcon3)
         NSLayoutConstraint.activate([
-            myPageIcon3.topAnchor.constraint(equalTo: grayBackground.topAnchor, constant: backgroundPadding),
-            myPageIcon3.trailingAnchor.constraint(equalTo: grayBackground.trailingAnchor, constant: -sidePadding),
-            myPageIcon3.widthAnchor.constraint(equalToConstant: buttonSize),
-            myPageIcon3.heightAnchor.constraint(equalToConstant: buttonSize)
+            myPageIcon3.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -63),
+            myPageIcon3.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor, constant: 207),
+            myPageIcon3.widthAnchor.constraint(equalToConstant: 20),
+            myPageIcon3.heightAnchor.constraint(equalToConstant: 20)
         ])
         
         addSubview(mpArtistlabel)
         mpArtistlabel.text = "관심 아티스트"
-        mpArtistlabel.font = UIFont.systemFont(ofSize: 12)
+        mpArtistlabel.font = UIFont(name: "Pretendard-Regular", size: 12)
         
         addSubview(mpMakeuplabel)
         mpMakeuplabel.text = "관심 메이크업"
-        mpMakeuplabel.font = UIFont.systemFont(ofSize: 12)
+        mpMakeuplabel.font = UIFont(name: "Pretendard-Regular", size: 12)
         
         addSubview(mpReviewlabel)
-        mpReviewlabel.text = "내가 쓴 리뷰"
-        mpReviewlabel.font = UIFont.systemFont(ofSize: 12)
+        mpReviewlabel.text = "나의 리뷰"
+        mpReviewlabel.font = UIFont(name: "Pretendard-Regular", size: 12)
         
         NSLayoutConstraint.activate([
-            mpArtistlabel.topAnchor.constraint(equalTo: myPageIcon1.bottomAnchor, constant: 6),
+            mpArtistlabel.bottomAnchor.constraint(equalTo:bottomAnchor, constant: -18),
             mpArtistlabel.centerXAnchor.constraint(equalTo: myPageIcon1.centerXAnchor),
             
-            mpMakeuplabel.topAnchor.constraint(equalTo: myPageIcon2.bottomAnchor, constant: 6),
+            mpMakeuplabel.topAnchor.constraint(equalTo: myPageIcon2.bottomAnchor, constant: 10),
             mpMakeuplabel.centerXAnchor.constraint(equalTo: myPageIcon2.centerXAnchor),
 
-            mpReviewlabel.topAnchor.constraint(equalTo: myPageIcon3.bottomAnchor, constant: 6),
+            mpReviewlabel.topAnchor.constraint(equalTo: myPageIcon3.bottomAnchor, constant: 10),
             mpReviewlabel.centerXAnchor.constraint(equalTo: myPageIcon3.centerXAnchor)
         ])
-        
+       
+        addSubview(lineView)
+        NSLayoutConstraint.activate([
+            lineView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 26),
+            lineView.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -29), 
+            lineView.topAnchor.constraint(equalTo: mpArtistlabel.bottomAnchor, constant: 21),
+            lineView.heightAnchor.constraint(equalToConstant: 1)
+        ])
+
     }
-    
-//버튼 클릭 시 메서드 추가
-//    @objc func buttonClicked(sender: UIButton) {
-//        let MyPageInfoViewController = MyPageInfoViewController()
-//        self.navigationController?.pushViewController(MyPageInfoViewController, animated: true)
-//    }
 
 @objc func buttonClicked(sender: UIButton) {
         delegate?.buttonClicked()
+    }
+    
+@objc func mpArtistClicked(sender: UIView) {
+        delegate?.mpArtistClicked()
+    }
+@objc func mpMakeUpClicked(sender: UIView) {
+        delegate?.mpMakeUpClicked()
+    }
+@objc func myReviewClicked(sender: UIView) {
+        delegate?.myReviewClicked()
     }
 }
 
 protocol ModelHeaderViewDelegate: AnyObject {
     func buttonClicked()
+    func mpArtistClicked()
+    func mpMakeUpClicked()
+    func myReviewClicked()
 }

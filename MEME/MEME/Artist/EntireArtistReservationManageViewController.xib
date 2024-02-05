@@ -4,13 +4,15 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
-        <capability name="Image references" minToolsVersion="12.0"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <customFonts key="customFonts">
+        <array key="Pretendard-Medium.otf">
+            <string>Pretendard-Medium</string>
+        </array>
         <array key="Pretendard-Regular.otf">
             <string>Pretendard-Regular</string>
         </array>
@@ -20,8 +22,6 @@
             <connections>
                 <outlet property="artistReservationTableView" destination="J2H-OQ-N7U" id="1Vw-ra-Lzm"/>
                 <outlet property="bottomBarView" destination="l5b-O1-dI3" id="FxL-fu-4OI"/>
-                <outlet property="completeButton" destination="hmc-4P-csU" id="ET8-2z-i8a"/>
-                <outlet property="onComingButton" destination="DI4-QQ-Y5D" id="RjK-g3-fOd"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,7 +30,7 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="J2H-OQ-N7U">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" style="plain" separatorStyle="none" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="J2H-OQ-N7U">
                     <rect key="frame" x="0.0" y="122" width="393" height="696"/>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                 </tableView>
@@ -38,8 +38,8 @@
                     <rect key="frame" x="24" y="770" width="345" height="48"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="예약 취소는 '예약 관리'에서 가능해요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wrb-Kg-r86">
-                            <rect key="frame" x="72.000000000000014" y="15.666666666666629" width="201.33333333333337" height="17"/>
-                            <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
+                            <rect key="frame" x="72" y="15.666666666666629" width="201" height="17"/>
+                            <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="14"/>
                             <color key="textColor" name="Gray100"/>
                             <nil key="highlightedColor"/>
                         </label>
@@ -82,24 +82,6 @@
                         <constraint firstItem="t4C-7f-sho" firstAttribute="centerY" secondItem="3uc-Pn-uKb" secondAttribute="centerY" id="y2V-Lv-Zpb"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DI4-QQ-Y5D">
-                    <rect key="frame" x="232" y="95.333333333333329" width="66" height="29.333333333333329"/>
-                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="예정" imagePadding="4" buttonSize="small" titleAlignment="automatic">
-                        <imageReference key="image" image="chevron.down.circle" catalog="system" symbolScale="small"/>
-                        <fontDescription key="titleFontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
-                    </buttonConfiguration>
-                </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hmc-4P-csU">
-                    <rect key="frame" x="298" y="95.333333333333329" width="66" height="29.333333333333329"/>
-                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <state key="normal" title="Button"/>
-                    <buttonConfiguration key="configuration" style="plain" title="완료" imagePadding="4" buttonSize="small" titleAlignment="automatic">
-                        <imageReference key="image" image="chevron.down.circle.fill" catalog="system" symbolScale="small"/>
-                        <fontDescription key="titleFontDescription" type="system" pointSize="16"/>
-                    </buttonConfiguration>
-                </button>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -113,19 +95,13 @@
                 <constraint firstItem="3uc-Pn-uKb" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="cfB-VO-K6W"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="J2H-OQ-N7U" secondAttribute="bottom" id="eEZ-Mc-Tci"/>
                 <constraint firstItem="l5b-O1-dI3" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="fU6-of-0bS"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hmc-4P-csU" secondAttribute="trailing" constant="29" id="lJp-6J-Ea0"/>
-                <constraint firstItem="hmc-4P-csU" firstAttribute="top" secondItem="t4C-7f-sho" secondAttribute="bottom" constant="3" id="nDs-Kj-9M8"/>
                 <constraint firstItem="3uc-Pn-uKb" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="ndq-Q0-B5U"/>
-                <constraint firstItem="hmc-4P-csU" firstAttribute="leading" secondItem="DI4-QQ-Y5D" secondAttribute="trailing" id="wLw-OR-WbG"/>
-                <constraint firstItem="DI4-QQ-Y5D" firstAttribute="centerY" secondItem="hmc-4P-csU" secondAttribute="centerY" id="zIg-Ks-Ywk"/>
             </constraints>
             <point key="canvasLocation" x="69" y="-12"/>
         </view>
     </objects>
     <resources>
         <image name="chevron.backward" catalog="system" width="97" height="128"/>
-        <image name="chevron.down.circle" catalog="system" width="128" height="123"/>
-        <image name="chevron.down.circle.fill" catalog="system" width="128" height="123"/>
         <namedColor name="Gray100">
             <color red="1" green="1" blue="0.99607843137254903" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>

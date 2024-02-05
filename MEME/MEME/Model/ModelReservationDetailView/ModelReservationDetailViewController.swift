@@ -16,8 +16,24 @@ class ModelReservationDetailViewController: UIViewController {
     private var selectedDate: Date?
     private var selectedTime: String?
     
+    private let navigationBar = NavigationBarView()
     private let scrollView = UIScrollView()
     private let contentsView = UIView()
+    
+    private let selectLocationStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fillProportionally
+        stack.alignment = .fill
+        stack.spacing = 0
+        
+        return stack
+    }()
+
+    private var shopView: ModelReservationShopLocationView!
+    private var visitView: ModelReservationVisitLocationView!
+    private var bothView: ModelReservationBothLocationView!
+    
     private var manualLabel: UILabel = {
         let label = UILabel()
         label.text = "예약 정보를 알려주세요."
@@ -146,23 +162,6 @@ class ModelReservationDetailViewController: UIViewController {
         
         return stackView
     }()
-    private var underBarView: UIView = {
-        let view = UIView()
-        view.backgroundColor = .white
-        
-        let gradient = CAGradientLayer()
-        gradient.frame = CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 6)
-        gradient.colors = [
-            UIColor.black.withAlphaComponent(0.1).cgColor,
-            UIColor.clear.cgColor
-        ]
-        gradient.startPoint = CGPoint(x: 0.5, y: 0.0)
-        gradient.endPoint = CGPoint(x: 0.5, y: 1.0)
-        
-        view.layer.insertSublayer(gradient, at: 0)
-        
-        return view
-    }()
     private let reservationButton: UIButton = {
         let button = UIButton()
         button.setTitle("다음", for: .normal)
@@ -179,22 +178,26 @@ class ModelReservationDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.title = "예약하기"
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        navigationBar.delegate = self
+        navigationBar.configure(title: "예약하기")
         
+        configureLocationStackView(makeupLocation: "BOTH")
         updateNextButtonState()
         setAction()
         configureSubviews()
         makeConstraints()
         updateWeekdayLabels()
         setupTimeSelectionButtons()
+        view.setupDismissKeyboardOnTapGesture()
     }
     
     // MARK: - configureSubviews
     func configureSubviews() {
+        view.addSubview(navigationBar)
         view.addSubview(scrollView)
         scrollView.addSubview(contentsView)
+        contentsView.addSubview(selectLocationStackView)
         contentsView.addSubview(manualLabel)
         contentsView.addSubview(selectDateLabel)
         contentsView.addSubview(calendarView)
@@ -206,21 +209,48 @@ class ModelReservationDetailViewController: UIViewController {
         contentsView.addSubview(morningVerticalStackView)
         contentsView.addSubview(afternoonLabel)
         contentsView.addSubview(afternoonVerticalStackView)
-        view.addSubview(underBarView)
         view.addSubview(reservationButton)
     }
     
     // MARK: - makeConstraints
+    private func configureLocationStackView(makeupLocation: String) {
+        selectLocationStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        switch makeupLocation {
+        case "SHOP":
+            shopView = ModelReservationShopLocationView()
+            selectLocationStackView.addArrangedSubview(shopView)
+        case "VISIT":
+            visitView = ModelReservationVisitLocationView()
+            selectLocationStackView.addArrangedSubview(visitView)
+        case "BOTH":
+            bothView = ModelReservationBothLocationView()
+            selectLocationStackView.addArrangedSubview(bothView)
+        default:
+            break
+        }
+        view.layoutIfNeeded()
+    }
     func makeConstraints() {
+        navigationBar.snp.makeConstraints {make in
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(48)
+        }
         scrollView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.top.equalTo(navigationBar.snp.bottom)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         contentsView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.edges.equalTo(scrollView)
             make.width.equalTo(scrollView)
         }
-        manualLabel.snp.makeConstraints { (make) in
+        selectLocationStackView.snp.makeConstraints { (make) in
             make.top.equalTo(contentsView.snp.top).offset(34)
+            make.leading.equalTo(contentsView.snp.leading).offset(24)
+            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+        }
+        manualLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(selectLocationStackView.snp.bottom).offset(40)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
         selectDateLabel.snp.makeConstraints { (make) in
@@ -270,15 +300,10 @@ class ModelReservationDetailViewController: UIViewController {
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
             make.bottom.equalTo(contentsView.snp.bottom).offset(-150)
         }
-        underBarView.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview()
-            make.leading.trailing.equalToSuperview()
-            make.height.equalTo(160)
-        }
         reservationButton.snp.makeConstraints { (make) in
-            make.top.equalTo(underBarView.snp.top).offset(12)
-            make.leading.equalTo(underBarView.snp.leading).offset(24)
-            make.trailing.equalTo(underBarView.snp.trailing).offset(-24)
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-9)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
             make.height.equalTo(50)
         }
         
@@ -439,6 +464,7 @@ class ModelReservationDetailViewController: UIViewController {
     //모두 선택해야 다음 버튼 활성화
     private func updateNextButtonState() {
         reservationButton.isEnabled = selectedDate != nil && selectedTime != nil
+        
         reservationButton.backgroundColor = reservationButton.isEnabled ? .mainBold : .gray300
     }
 }
@@ -471,5 +497,14 @@ extension ModelReservationDetailViewController: FSCalendarDelegate, FSCalendarDa
     func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
         let today = Date()
         return date >= today
+    }
+}
+
+// MARK: -BackButtonTappedDelegate
+extension ModelReservationDetailViewController: BackButtonTappedDelegate  {
+    func backButtonTapped() {
+        if let navigationController = self.navigationController {
+            navigationController.popViewController(animated: true)
+        }
     }
 }

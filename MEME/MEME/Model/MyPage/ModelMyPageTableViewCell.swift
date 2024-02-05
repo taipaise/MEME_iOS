@@ -40,9 +40,8 @@ class ModelMyPageTableViewCell: UITableViewCell {
         addSubview(menuLabel)
         menuLabel.translatesAutoresizingMaskIntoConstraints = false
         
-       // menuLabel.font = UIFont(name: "Pretendard", size: 14)
-        menuLabel.font = UIFont.systemFont(ofSize: 14)
-        
+        menuLabel.font = UIFont(name: "Pretendard-Medium", size: 14)
+
         NSLayoutConstraint.activate([
             menuLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
             menuLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 24)

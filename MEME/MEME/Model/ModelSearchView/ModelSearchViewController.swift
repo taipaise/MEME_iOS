@@ -6,13 +6,27 @@
 //
 
 import UIKit
-import SwiftUI
 
 class ModelSearchViewController: UIViewController {
     // 예시 데이터 -> 추후 API 호출해서 데이터 받아오는 것으로 수정 필요
     private let artists = ["차차", "리타","딩동", "마요", "전얀", "웅아", "돌리", "요비", "썬", "제이스", "아티스트명"]
     
     //MARK: -Properties
+    private var navigationBarView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        return view
+    }()
+    private var backButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(named: "ic_back"), for: .normal)
+        button.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        button.tintColor = .black
+        
+        return button
+    }()
+    
     private let scrollView = UIScrollView()
     private let contentsView = UIView()
     private let searchMakeup: UISearchBar = {
@@ -39,6 +53,16 @@ class ModelSearchViewController: UIViewController {
         
         return searchBar
     }()
+    private var recentSearchKeywords: [String] = []
+    private let mainStackView: UIStackView = {
+        let stack = UIStackView()
+        stack.axis = .vertical
+        stack.distribution = .fillProportionally
+        stack.alignment = .fill
+        stack.spacing = 0
+        
+        return stack
+    }()
     private var recentSearchesLabel: UILabel = {
         let label = UILabel()
         label.text = "최근 검색어"
@@ -53,6 +77,7 @@ class ModelSearchViewController: UIViewController {
         button.setTitleColor(.gray400, for: .normal)
         button.titleLabel?.font = .pretendard(to: .regular, size: 12)
         button.backgroundColor = .clear
+        button.addTarget(self, action: #selector(clearRecentSearches), for: .touchUpInside)
 
         return button
     }()
@@ -97,8 +122,7 @@ class ModelSearchViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        navigationController?.setNavigationBarHidden(true, animated: false)
         
         setupSearchCollectionView()
         setupRecentSearchCollectionView()
@@ -106,13 +130,18 @@ class ModelSearchViewController: UIViewController {
         configureSubviews()
         makeConstraints()
         setupArtistsButtons()
+        
+        recentSearchKeywords = loadSearchKeywords()
+        recentSearchesCollectionView.reloadData()
     }
     
     // MARK: - configureSubviews
     func configureSubviews() {
+        view.addSubview(navigationBarView)
+        navigationBarView.addSubview(backButton)
+        navigationBarView.addSubview(searchMakeup)
         view.addSubview(scrollView)
         scrollView.addSubview(contentsView)
-        contentsView.addSubview(searchMakeup)
         contentsView.addSubview(recentSearchesLabel)
         contentsView.addSubview(allCancelButton)
         recentSearchesCollectionView.backgroundColor = .white
@@ -126,21 +155,32 @@ class ModelSearchViewController: UIViewController {
     
     // MARK: - makeConstraints
     func makeConstraints() {
-        scrollView.snp.makeConstraints {make in
-            make.edges.equalToSuperview()
+        navigationBarView.snp.makeConstraints {make in
+            make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
+            make.height.equalTo(48)
         }
-        contentsView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-            make.width.equalTo(scrollView)
+        backButton.snp.makeConstraints {make in
+            make.leading.equalTo(navigationBarView.snp.leading).offset(24)
+            make.centerY.equalTo(navigationBarView.snp.centerY)
+            make.width.equalTo(24)
         }
         searchMakeup.snp.makeConstraints {make in
-            make.top.equalTo(contentsView.snp.top).offset(16)
-            make.leading.equalTo(contentsView.snp.leading).offset(24)
-            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+            make.centerY.equalTo(navigationBarView.snp.centerY)
+            make.leading.equalTo(backButton.snp.trailing).offset(13)
+            make.trailing.equalTo(navigationBarView.snp.trailing).offset(-24.26)
             make.height.equalTo(40)
         }
+        
+        scrollView.snp.makeConstraints {make in
+            make.top.equalTo(navigationBarView.snp.bottom)
+            make.leading.trailing.bottom.equalTo(view.safeAreaLayoutGuide)
+        }
+        contentsView.snp.makeConstraints { (make) in
+            make.edges.equalTo(scrollView)
+            make.width.equalTo(scrollView)
+        }
         recentSearchesLabel.snp.makeConstraints {make in
-            make.top.equalTo(searchMakeup.snp.bottom).offset(42)
+            make.top.equalTo(contentsView.snp.top).offset(38)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
         allCancelButton.snp.makeConstraints {make in
@@ -171,7 +211,7 @@ class ModelSearchViewController: UIViewController {
             make.top.equalTo(artistSearchesLabel.snp.bottom).offset(9)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
-            make.bottom.equalTo(contentsView.snp.bottom)
+            make.bottom.equalTo(contentsView.snp.bottom).offset(-72)
         }
     }
 
@@ -181,16 +221,17 @@ class ModelSearchViewController: UIViewController {
     @objc func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
+    
     @objc private func artistButtonTapped(_ sender: UIButton) {
             guard let artistName = sender.titleLabel?.text else { return }
 
             searchMakeup.text = artistName
-            executeSearch(with: artistName)
-        }
+            executeSearch(with: artistName)}
 
-        private func executeSearch(with searchText: String) {
-            searchBarSearchButtonClicked(searchMakeup)
-        }
+    private func executeSearch(with searchText: String) {
+        searchBarSearchButtonClicked(searchMakeup)
+    }
+    
     
     //MARK: -Helpers
     private func setupSearchMakeupBar() {
@@ -219,6 +260,7 @@ class ModelSearchViewController: UIViewController {
         //cell 등록
         categorySearchesCollectionView.register(UINib(nibName: "CategorySearchViewCell", bundle: nil), forCellWithReuseIdentifier: CategorySearchViewCell.identifier)
     }
+    
     private func maxNumberOfButtonsPerRow() -> Int {
         let viewWidth = self.view.bounds.width
         let buttonWidth: CGFloat = 70
@@ -306,7 +348,7 @@ extension ModelSearchViewController: UICollectionViewDelegate, UICollectionViewD
     //cell의 갯수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if collectionView == recentSearchesCollectionView {
-            return 8
+            return recentSearchKeywords.count
             }  else if collectionView == categorySearchesCollectionView{
                 return 8
             }
@@ -319,6 +361,10 @@ extension ModelSearchViewController: UICollectionViewDelegate, UICollectionViewD
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RecentSearchViewCell.identifier, for: indexPath) as? RecentSearchViewCell else {
                 fatalError("셀 타입 캐스팅 실패...")
             }
+            let keyword = recentSearchKeywords[indexPath.row]
+            cell.configure(with: keyword)
+            cell.delegate = self
+            print("Delegate has been set for cell with keyword: \(keyword)")
             return cell
             }  else if collectionView == categorySearchesCollectionView{
                 guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CategorySearchViewCell.identifier, for: indexPath) as? CategorySearchViewCell else {
@@ -330,32 +376,6 @@ extension ModelSearchViewController: UICollectionViewDelegate, UICollectionViewD
                 return cell
             }
         return UICollectionViewCell()
-    }
-    
-    //cell 눌렀을때 동작
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if collectionView == recentSearchesCollectionView {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? RecentSearchViewCell,
-                  let searchText = cell.searchWordLabel.text else {
-                return
-            }
-            searchMakeup.text = searchText
-            executeSearch(with: searchText)
-        } else if collectionView == categorySearchesCollectionView {
-            guard let cell = collectionView.cellForItem(at: indexPath) as? CategorySearchViewCell else {
-                return
-            }
-            
-            let category = cell.categoryLabel.text ?? ""
-            if let tabBarController = self.tabBarController {
-                tabBarController.selectedIndex = 1
-                
-                if let navController = tabBarController.viewControllers?[1] as? UINavigationController,
-                   let reservationChartVC = navController.viewControllers.first as? ModelReservationChartViewController {
-                    reservationChartVC.selectedCategory = category
-                }
-            }
-        }
     }
 }
 
@@ -390,6 +410,17 @@ extension ModelSearchViewController: UICollectionViewDelegateFlowLayout {
             }
         return CGFloat(25)
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == categorySearchesCollectionView {
+            let cell = collectionView.cellForItem(at: indexPath) as? CategorySearchViewCell
+            let category = cell?.categoryLabel.text
+            
+            let reservationChartVC = ModelReservationChartViewController()
+            reservationChartVC.selectedCategory = category
+            
+            navigationController?.pushViewController(reservationChartVC, animated: true)
+        }
+    }
 }
 
 extension ModelSearchViewController: UISearchBarDelegate {
@@ -400,9 +431,63 @@ extension ModelSearchViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         if let searchText = searchBar.text, !searchText.isEmpty {
-            let extendedReservationChartVC = ExtendedReservationChartViewController()
-            extendedReservationChartVC.initialSearchText = searchText
-            self.navigationController?.pushViewController(extendedReservationChartVC, animated: true)
+            saveSearchKeyword(keyword: searchText)
+            
+            recentSearchKeywords = loadSearchKeywords()
+            recentSearchesCollectionView.reloadData()
+            
+            let reservationChartVC = ModelReservationChartViewController()
+            navigationController?.pushViewController(reservationChartVC, animated: true)
         }
     }
+}
+
+//MARK: - RecentSearchViewCellDelegate
+extension ModelSearchViewController: RecentSearchViewCellDelegate {
+    //최근 검색어 저장
+    func saveSearchKeyword(keyword: String) {
+        var keywords = loadSearchKeywords()
+        
+        if let index = keywords.firstIndex(of: keyword) {
+            keywords.remove(at: index)
+        }
+        
+        keywords.insert(keyword, at: 0)
+        
+        if keywords.count > 10 {
+            keywords.removeLast()
+        }
+        
+        UserDefaults.standard.set(keywords, forKey: "recentSearchKeywords")
+    }
+    
+    //최근 검색어 불러오기
+    func loadSearchKeywords() -> [String] {
+        return UserDefaults.standard.object(forKey: "recentSearchKeywords") as? [String] ?? []
+    }
+    
+    //최근 검색어로 검색
+    func didTapSearchWord(keyword: String) {
+        let reservationChartVC = ModelReservationChartViewController()
+        navigationController?.pushViewController(reservationChartVC, animated: true)
+    }
+    
+    //최근 검색어 삭제
+    func didTapDeleteButton(keyword: String) {
+        var keywords = loadSearchKeywords()
+        
+        if let index = keywords.firstIndex(of: keyword) {
+            keywords.remove(at: index)
+            UserDefaults.standard.set(keywords, forKey: "recentSearchKeywords")
+            recentSearchKeywords = keywords
+            recentSearchesCollectionView.deleteItems(at: [IndexPath(item: index, section: 0)])
+        }
+    }
+    
+    //최근 검색어 전체 삭제
+    @objc func clearRecentSearches() {
+       UserDefaults.standard.set([], forKey: "recentSearchKeywords")
+       recentSearchKeywords.removeAll()
+       recentSearchesCollectionView.reloadData()
+   }
 }
