@@ -30,3 +30,13 @@ class ModelReservationConfirmViewCell: UICollectionViewCell {
         self.layer.masksToBounds = true
     }
 }
+
+extension ModelReservationConfirmViewCell {
+    func configureModelReservationConfirmView(with data: ReservationData) {
+        modelReservationDateLabel.text = data.reservationDate
+        modelReservationMakeupNameLabel.text = data.makeupName
+        modelReservationArtistNameLabel.text = data.artistNickName
+        modelReservationLocationLabel.text = data.shopLocation
+        modelReservationPriceLabel.text = "\(data.price)원"
+    }
+}

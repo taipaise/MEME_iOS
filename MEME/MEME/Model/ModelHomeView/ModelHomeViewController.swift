@@ -7,6 +7,7 @@
 
 import UIKit
 import SnapKit
+import Moya
 
 final class ModelHomeViewController: UIViewController {
     // MARK: - Properties
@@ -115,7 +116,7 @@ final class ModelHomeViewController: UIViewController {
     }()
     private var recomandHastyReservationCollectionView: UICollectionView!
     
-    private var modelReservations: [ModelReservationModel]? {
+    private var modelReservations: [ReservationData]? {
         didSet { self.modelReservationCollectionView.reloadData() }
     }
     private var makeupCards: [MakeupCardModel]? {
@@ -127,12 +128,14 @@ final class ModelHomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        showModelReservations()
         setupReservationCollectionView()
         setupMakeupCardCollectionView()
         setupHastyMakeupCardCollectionView()
         configureSubviews()
         makeConstraints()
         setupSearchBar()
+        
     }
     // MARK: - configureSubviews
     func configureSubviews() {
@@ -308,8 +311,7 @@ extension ModelHomeViewController: UICollectionViewDelegate, UICollectionViewDat
             case 0:
                 return 1
             default:
-                //+불러온 예약 데이터의 수 만큼 바꾸기
-                return modelReservations?.count ?? 3
+                return modelReservations?.isEmpty ?? true ? 0 : modelReservations?.count ?? 0
             }
            } else if collectionView == recomandReservationCollectionView {
                return makeupCards?.count ?? 3
@@ -324,29 +326,20 @@ extension ModelHomeViewController: UICollectionViewDelegate, UICollectionViewDat
     //cell 생성
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == modelReservationCollectionView {
-            let section = indexPath.section
-            switch section {
-            case 0:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelNonReservationViewCell.identifier, for: indexPath) as? ModelNonReservationViewCell else {
-                    fatalError("셀 타입 캐스팅 실패...")
+            if indexPath.section == 0 {
+                if modelReservations?.isEmpty ?? true {
+                    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelNonReservationViewCell.identifier, for: indexPath) as? ModelNonReservationViewCell else {
+                        fatalError("셀 타입 캐스팅 실패...")
+                    }
+                    
+                    return cell
+                } else {
+                    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.identifier, for: indexPath) as? ModelReservationConfirmViewCell, let reservation = modelReservations?[indexPath.row] else {
+                        fatalError("셀 타입 캐스팅 실패...")
+                    }
+                    cell.configureModelReservationConfirmView(with: reservation)
+                    return cell
                 }
-                cell.onReservationTapped = { [weak self] in
-                    let ReservationChartVC = ModelReservationChartViewController()
-                    ReservationChartVC.hidesBottomBarWhenPushed = true
-                    self?.navigationController?.pushViewController(ReservationChartVC, animated: true)
-                   }
-                
-                return cell
-            default:
-                guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.identifier, for: indexPath) as? ModelReservationConfirmViewCell else {
-                    fatalError("셀 타입 캐스팅 실패...")
-                }
-                let itemIndex = indexPath.item
-                
-                if let cellData = self.modelReservations {
-                    //cell에 데이터를 전달
-                }
-                return cell
             }
         } else if collectionView == recomandReservationCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectMakeupCardViewCell.identifier, for: indexPath) as? SelectMakeupCardViewCell else {
@@ -408,8 +401,18 @@ extension ModelHomeViewController: UISearchBarDelegate {
 
 //MARK: -API 통신 메소드
 extension ModelHomeViewController {
-    func successUserDataAPI(_ result: ModelUserModel) {
-        // 내용 추가하기
+    func showModelReservations() {
+        ReservationManager.shared.getModelReservation(modelId: 6) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let reservationResponse):
+                    self?.modelReservations = reservationResponse.data
+                    print("모델 예약 정보 조회 성공: \(reservationResponse)")
+                    
+                case .failure(let error):
+                    print("모델 예약 정보 조회 실패: \(error.localizedDescription)")
+                }
+            }
+        }
     }
 }
-

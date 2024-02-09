@@ -10,6 +10,8 @@ import SnapKit
 
 class  ModelReservationBothLocationView: UIView {
     // MARK: - Properties
+    private var makeupLocationData: MakeupLocationData?
+        
     private let selectLocationLabel: UILabel = {
         let label = UILabel()
         label.text = "메이크업 받을 장소를 선택해주세요."
@@ -117,7 +119,9 @@ class  ModelReservationBothLocationView: UIView {
         sender.layer.borderWidth = 0
         sender.setTitleColor(.white, for: .normal)
         
-        updateSelectedOptionView(selectedButton: sender)
+        if let makeupLocationData = makeupLocationData {
+            updateSelectedOptionView(with: makeupLocationData, selectedButton: sender)
+        }
     }
     
     private func resetButtons() {
@@ -131,7 +135,7 @@ class  ModelReservationBothLocationView: UIView {
     }
     
     // MARK: - Update SelecteOptionView
-    private func updateSelectedOptionView(selectedButton: UIButton) {
+    private func updateSelectedOptionView(with data: MakeupLocationData, selectedButton: UIButton) {
         selectOptionResultStackView.arrangedSubviews.forEach {
             $0.removeFromSuperview()
             selectOptionResultStackView.removeArrangedSubview($0)
@@ -142,11 +146,13 @@ class  ModelReservationBothLocationView: UIView {
             if shopView == nil {
                 shopView = ModelReservationShopLocationView()
                 shopView.setCheckShopLocationLabelFont(.pretendard(to: .regular, size: 14))
+                shopView.configureModelReservationShopLocationView(with: data)
             }
             selectOptionResultStackView.addArrangedSubview(shopView)
         case comeVisitButton:
             if visitView == nil {
                 visitView = ModelReservationVisitLocationView()
+                visitView .configureModelReservationVisitLocationView(with: data)
                 visitView.setInputVisitLocationLabelFont(.pretendard(to: .regular, size: 14))
             }
             selectOptionResultStackView.addArrangedSubview(visitView)
@@ -154,4 +160,9 @@ class  ModelReservationBothLocationView: UIView {
             break
         }
     }
+    
+    // MARK: - Configuration
+        func configureModelReservationBothLocationView(with data: MakeupLocationData) {
+            self.makeupLocationData = data
+        }
 }

@@ -107,3 +107,9 @@ class ModelReservationVisitLocationView: UIView, UITextFieldDelegate {
     }
     
 }
+
+extension ModelReservationVisitLocationView {
+    func configureModelReservationVisitLocationView(with data: MakeupLocationData) {
+        artistAvailabilityLocationLabel.text = "아티스트 방문 가능 지역: \(data.region)"
+    }
+}

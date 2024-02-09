@@ -182,7 +182,7 @@ class ModelReservationDetailViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "예약하기")
         
-        configureLocationStackView(makeupLocation: "BOTH")
+        getPossibleLocation(aristId: 1)
         updateNextButtonState()
         setAction()
         configureSubviews()
@@ -213,18 +213,21 @@ class ModelReservationDetailViewController: UIViewController {
     }
     
     // MARK: - makeConstraints
-    private func configureLocationStackView(makeupLocation: String) {
+    private func configureLocationStackView(with makeupLocationData: MakeupLocationData) {
         selectLocationStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
-        switch makeupLocation {
+        switch makeupLocationData.makeupLocation {
         case "SHOP":
             shopView = ModelReservationShopLocationView()
+            shopView.configureModelReservationShopLocationView(with: makeupLocationData)
             selectLocationStackView.addArrangedSubview(shopView)
         case "VISIT":
             visitView = ModelReservationVisitLocationView()
+            visitView.configureModelReservationVisitLocationView(with: makeupLocationData)
             selectLocationStackView.addArrangedSubview(visitView)
         case "BOTH":
             bothView = ModelReservationBothLocationView()
+            bothView.configureModelReservationBothLocationView(with: makeupLocationData)
             selectLocationStackView.addArrangedSubview(bothView)
         default:
             break
@@ -505,6 +508,22 @@ extension ModelReservationDetailViewController: BackButtonTappedDelegate  {
     func backButtonTapped() {
         if let navigationController = self.navigationController {
             navigationController.popViewController(animated: true)
+        }
+    }
+}
+
+//MARK: -API 통신 메소드
+extension ModelReservationDetailViewController {
+    func getPossibleLocation(aristId: Int) {
+        ReservationManager.shared.getPossibleLocation(aristId: aristId) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let locationsDTO):
+                    self?.configureLocationStackView(with: locationsDTO.data)
+                case .failure(let error):
+                    print("예약 가능 장소 정보 조회 실패: \(error.localizedDescription)")
+                }
+            }
         }
     }
 }
