@@ -10,9 +10,9 @@ import SnapKit
 import FSCalendar
 
 class ModelReservationDetailViewController: UIViewController {
-    // 예시 데이터 -> 추후 API 호출해서 데이터 받아오는 것으로 수정 필요
-    private let availableTimes = ["10:30", "11:00","12:00", "12:30","13:00", "13:30","14:00", "14:30","15:00", "15:30","16:00", "16:30","17:00", "17:30","18:00", "18:30","19:00", "19:30", "20:00"]
     // MARK: - Properties
+    var possibleTimeSlots: [TimeSlot] = []
+    
     private var selectedDate: Date?
     private var selectedTime: String?
     
@@ -182,13 +182,15 @@ class ModelReservationDetailViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "예약하기")
         
+        getPossibleTime(aristId: 1)
         getPossibleLocation(aristId: 1)
+        
+        
         updateNextButtonState()
         setAction()
         configureSubviews()
         makeConstraints()
         updateWeekdayLabels()
-        setupTimeSelectionButtons()
         view.setupDismissKeyboardOnTapGesture()
     }
     
@@ -357,6 +359,27 @@ class ModelReservationDetailViewController: UIViewController {
     // MARK: - Methods
     
     //MARK: -Helpers
+    private func updateAvailableTimes(for selectedDate: Date) {
+        let weekdayFormatter = DateFormatter()
+        weekdayFormatter.dateFormat = "EEE"
+        let selectedWeekday = weekdayFormatter.string(from: selectedDate).uppercased()
+        
+        let filteredTimes = possibleTimeSlots.filter { $0.availableDayOfWeek.uppercased() == selectedWeekday }
+            .map { timeSlot -> String in
+                let timeComponents = timeSlot.availableTime.components(separatedBy: "_")
+                guard timeComponents.count == 3, let hour = Int(timeComponents[1]), let minute = Int(timeComponents[2]) else {
+                    return ""
+                }
+                let formattedTime = String(format: "%02d:%02d", hour, minute)
+                return formattedTime
+            }
+            .filter { !$0.isEmpty }
+        
+        DispatchQueue.main.async {
+            self.setupTimeSelectionButtons(with: filteredTimes)
+        }
+    }
+    
     private func updateWeekdayLabels() {
         let weekdayLabels = calendarView.calendarWeekdayView.weekdayLabels
         let customWeekdays = ["M", "T", "W", "T", "F", "S", "S"]
@@ -376,7 +399,13 @@ class ModelReservationDetailViewController: UIViewController {
         return maxButtons
     }
     
-    private func setupTimeSelectionButtons() {
+    private func setupTimeSelectionButtons(with availableTimes: [String]) {
+        morningVerticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        afternoonVerticalStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
+        
+        var morningTimeAvailable = false
+        var afternoonTimeAvailable = false
+        
         var currentMorningStackView = createNewHorizontalStackView()
         morningVerticalStackView.addArrangedSubview(currentMorningStackView)
         
@@ -384,8 +413,8 @@ class ModelReservationDetailViewController: UIViewController {
         afternoonVerticalStackView.addArrangedSubview(currentAfternoonStackView)
         
         for time in availableTimes {
-            let button = createButton(withTime: time)
-            let hour = Int(time.split(separator: ":")[0])!
+                let button = createButton(withTime: time)
+                let hour = Int(time.split(separator: ":")[0])!
             
             if hour < 12 {
                 if currentMorningStackView.arrangedSubviews.count >= maxNumberOfButtonsPerRow() {
@@ -393,14 +422,30 @@ class ModelReservationDetailViewController: UIViewController {
                     morningVerticalStackView.addArrangedSubview(currentMorningStackView)
                 }
                 currentMorningStackView.addArrangedSubview(button)
+                morningTimeAvailable = true
             } else {
                 if currentAfternoonStackView.arrangedSubviews.count >= maxNumberOfButtonsPerRow() {
                     currentAfternoonStackView = createNewHorizontalStackView()
                     afternoonVerticalStackView.addArrangedSubview(currentAfternoonStackView)
                 }
                 currentAfternoonStackView.addArrangedSubview(button)
+                afternoonTimeAvailable = true
             }
         }
+        
+        if !morningTimeAvailable {
+            let noMorningTimeLabel = UILabel()
+            noMorningTimeLabel.text = "예약 가능한 시간이 없어요"
+            noMorningTimeLabel.textColor = .mainBold
+            morningVerticalStackView.addArrangedSubview(noMorningTimeLabel)
+        }
+        if !afternoonTimeAvailable {
+            let noAfternoonTimeLabel = UILabel()
+            noAfternoonTimeLabel.text = "예약 가능한 시간이 없어요"
+            noAfternoonTimeLabel.textColor = .mainBold
+            afternoonVerticalStackView.addArrangedSubview(noAfternoonTimeLabel)
+        }
+        
         fillRemainingSpaceInLastStackView(currentMorningStackView)
         fillRemainingSpaceInLastStackView(currentAfternoonStackView)
     }
@@ -452,15 +497,17 @@ class ModelReservationDetailViewController: UIViewController {
         
         sender.layer.borderColor = UIColor.mainBold.cgColor
         sender.backgroundColor = .mainBold
+        sender.setTitleColor(.white, for: .normal)
         selectedTimeButton = sender
         
         // 선택된 시간 저장 -> 추후 api post 요청할때 전송
         selectedTime = sender.title(for: .normal)
         updateNextButtonState()
     }
-    // 날짜가 선택될 때 호출되는 메서드 (FSCalendarDelegate 메서드 내에서 호출)
+
     func calendar(_ calendar: FSCalendar, didSelect date: Date, at monthPosition: FSCalendarMonthPosition) {
         selectedDate = date
+        updateAvailableTimes(for: date)
         updateNextButtonState()
     }
     
@@ -499,6 +546,9 @@ extension ModelReservationDetailViewController: FSCalendarDelegate, FSCalendarDa
     
     func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
         let today = Date()
+        selectedDate = date
+            updateAvailableTimes(for: date)
+            updateNextButtonState()
         return date >= today
     }
 }
@@ -522,6 +572,21 @@ extension ModelReservationDetailViewController {
                     self?.configureLocationStackView(with: locationsDTO.data)
                 case .failure(let error):
                     print("예약 가능 장소 정보 조회 실패: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+    func getPossibleTime(aristId: Int) {
+        ReservationManager.shared.getPossibleTime(aristId: aristId) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let timesDTO):
+                    self?.possibleTimeSlots = timesDTO.data
+                    if let selectedDate = self?.selectedDate {
+                        self?.updateAvailableTimes(for: selectedDate)
+                    }
+                case .failure(let error):
+                    print("예약 가능 시간 정보 조회 실패: \(error.localizedDescription)")
                 }
             }
         }

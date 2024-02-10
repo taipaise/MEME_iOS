@@ -54,3 +54,17 @@ struct MakeupLocationData: Codable {
     let shopLocation: String
     let region: [String]
 }
+
+
+struct PossibleTimesDTO: Codable {
+    let result: String
+    let message: String
+    let data: [TimeSlot]
+    let statusCode: Int
+}
+
+struct TimeSlot: Codable {
+    let availableDayOfWeek: String
+    let availableTime: String
+}
+
