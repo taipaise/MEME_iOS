@@ -7,6 +7,7 @@
 
 import Foundation
 
+// MARK: -모델 예약 조회 DTO
 struct ReservationDTO: Codable {
     let result: String
     let message: String
@@ -42,6 +43,7 @@ struct ReservationData: Codable {
     let status: String
 }
 
+// MARK: -아티스트 예약 가능 장소 조회 DTO
 struct PossibleLocationsDTO: Codable {
     let result: String
     let message: String
@@ -55,7 +57,7 @@ struct MakeupLocationData: Codable {
     let region: [String]
 }
 
-
+// MARK: -아티스트 예약 가능 시간 조회 DTO
 struct PossibleTimesDTO: Codable {
     let result: String
     let message: String
@@ -68,3 +70,28 @@ struct TimeSlot: Codable {
     let availableTime: String
 }
 
+// MARK: -예약하기 DTO
+struct PostReservationDTO: Codable {
+    let result: String
+    let message: String
+    let data: PostReservationData?
+    let statusCode: Int
+
+    struct PostReservationData: Codable {
+        let makeupName: String
+        let artistNickName: String
+        let location: String
+        let reservationDate: String
+        let reservationDayOfWeekAndTime: DayOfWeekTime
+    }
+    
+    struct DayOfWeekTime: Codable {
+        let MON: String?
+        let TUE: String?
+        let WED: String?
+        let THU: String?
+        let FRI: String?
+        let SAT: String?
+        let SUN: String?
+    }
+}

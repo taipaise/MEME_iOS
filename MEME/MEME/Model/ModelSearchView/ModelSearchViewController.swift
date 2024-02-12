@@ -4,14 +4,15 @@
 //
 //  Created by 정민지 on 1/15/24.
 //
+struct ArtistModel {
+    let artistNickName: String
+}
 
 import UIKit
 
 class ModelSearchViewController: UIViewController {
-    // 예시 데이터 -> 추후 API 호출해서 데이터 받아오는 것으로 수정 필요
-    private let artists = ["차차", "리타","딩동", "마요", "전얀", "웅아", "돌리", "요비", "썬", "제이스", "아티스트명"]
-    
     //MARK: -Properties
+    private var favoriteArtists: [ArtistModel] = []
     private var navigationBarView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -124,6 +125,7 @@ class ModelSearchViewController: UIViewController {
         view.backgroundColor = .white
         navigationController?.setNavigationBarHidden(true, animated: false)
         
+        fetchFavoriteArtists()
         setupSearchCollectionView()
         setupRecentSearchCollectionView()
         setupSearchMakeupBar()
@@ -276,8 +278,8 @@ class ModelSearchViewController: UIViewController {
         var currentStackView = createNewHorizontalStackView()
         artistsVerticalStackView.addArrangedSubview(currentStackView)
         
-        for artist in artists {
-            let button = createButton(with: artist)
+        for artist in favoriteArtists {
+            let button = createButton(with: artist.artistNickName)
             
             if currentStackView.arrangedSubviews.count >= maxNumberOfButtonsPerRow() {
                 currentStackView = createNewHorizontalStackView()
@@ -417,7 +419,7 @@ extension ModelSearchViewController: UICollectionViewDelegateFlowLayout {
             
             let reservationChartVC = ModelReservationChartViewController()
             reservationChartVC.selectedCategory = category
-            
+
             navigationController?.pushViewController(reservationChartVC, animated: true)
         }
     }
@@ -490,4 +492,35 @@ extension ModelSearchViewController: RecentSearchViewCellDelegate {
        recentSearchKeywords.removeAll()
        recentSearchesCollectionView.reloadData()
    }
+}
+
+//MARK: -API 통신 메소드
+extension ModelSearchViewController {
+    func fetchFavoriteArtists() {
+        // modelId 임의 설정
+        let modelId = 6
+        
+        MyPageManager.shared.getFavoriteArtists(modelId: modelId) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    if let artistsData = response.data, let content = artistsData.content {
+                            self?.favoriteArtists = content.map {
+                                ArtistModel(artistNickName: $0.artistNickName)
+                            }
+                        } else {
+                            self?.favoriteArtists = []
+                        }
+                        self?.setupArtistsButtons()
+                        if self?.favoriteArtists.isEmpty == true {
+                            self?.artistSearchesLabel.isHidden = true
+                        } else {
+                            self?.artistSearchesLabel.isHidden = false
+                        }
+                case .failure(let error):
+                    print("Error fetching favorite artists: \(error)")
+                }
+            }
+        }
+    }
 }

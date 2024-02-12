@@ -16,6 +16,7 @@ final class ReservationManager {
     
     private init() {}
     
+    // MARK: -예약하기 API
     func postReservation(
         modelId: Int,
         portfolioId: Int,
@@ -38,8 +39,13 @@ final class ReservationManager {
     }
     
     // MARK: -아티스트 예약 가능 장소 조회 API
-    func getPossibleLocation(aristId: Int, completion: @escaping (Result<PossibleLocationsDTO, MoyaError>) -> Void) {
-        provider.request(api: .getPossibleLocation(aristId: aristId)) { result in
+    func getPossibleLocation(
+        aristId: Int,
+        completion: @escaping (Result<PossibleLocationsDTO, MoyaError>) -> Void
+    ) {
+        provider.request(api: .getPossibleLocation(
+            aristId: aristId
+        )) { result in
             switch result {
             case .success(let response):
                 do {
@@ -55,22 +61,27 @@ final class ReservationManager {
         }
     }
     // MARK: -아티스트 예약 가능 시간 조회 API
-        func getPossibleTime(aristId: Int, completion: @escaping (Result<PossibleTimesDTO, MoyaError>) -> Void) {
-            provider.request(api: .getPossibleTime(aristId: aristId)) { result in
-                switch result {
-                case .success(let response):
-                    do {
-                        let timesDTO = try JSONDecoder().decode(PossibleTimesDTO.self, from: response.data)
-                        completion(.success(timesDTO))
-                        print("성공: \(timesDTO)")
-                    } catch {
-                        completion(.failure(MoyaError.underlying(error, response)))
-                    }
-                case .failure(let error):
-                    completion(.failure(error))
+    func getPossibleTime(
+        aristId: Int,
+        completion: @escaping (Result<PossibleTimesDTO, MoyaError>) -> Void
+    ) {
+        provider.request(api: .getPossibleTime(
+            aristId: aristId
+        )) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let timesDTO = try JSONDecoder().decode(PossibleTimesDTO.self, from: response.data)
+                    completion(.success(timesDTO))
+                    print("성공: \(timesDTO)")
+                } catch {
+                    completion(.failure(MoyaError.underlying(error, response)))
                 }
+            case .failure(let error):
+                completion(.failure(error))
             }
         }
+    }
     
     // MARK: -모델 예약 조회 API
     func getModelReservation(

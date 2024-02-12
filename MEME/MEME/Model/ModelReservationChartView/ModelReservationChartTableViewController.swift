@@ -12,8 +12,9 @@ class ModelReservationChartViewController: UIViewController {
     private var selectedButton: ModelReservationTypeButton?
     
     // MARK: - Properties
-    
     var selectedCategory: String?
+    var selectedArtistName: String?
+    var searchKeyword: String?
     
     private let navigationBar = NavigationBarView()
     let buttonScrollView = UIScrollView()
@@ -326,4 +327,10 @@ extension ModelReservationChartViewController: BackButtonTappedDelegate  {
             navigationController.popViewController(animated: true)
         }
     }
+}
+
+//MARK: -API 통신 메소드
+extension ModelReservationChartTableViewController {
+    
+    
 }

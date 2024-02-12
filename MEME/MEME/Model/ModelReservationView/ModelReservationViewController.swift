@@ -385,8 +385,10 @@ class ModelReservationViewController: UIViewController {
     @objc private func likeImageTapped() {
         if likeImageView.image == UIImage(named: "icon_like") {
             likeImageView.image = UIImage(named: "icon_fillLike")
+            postFavoritePortfolio()
         } else {
             likeImageView.image = UIImage(named: "icon_like")
+            deleteFavoritePortfolio()
         }
     }
     // MARK: - API Actions
@@ -544,5 +546,39 @@ extension UIScrollView {
         set {
             objc_setAssociatedObject(self, &AssociatedKeys.lastOffsetY, newValue, .OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
+    }
+}
+
+//MARK: -API 통신 메소드
+extension ModelReservationViewController {
+    func postFavoritePortfolio() {
+        //ID 수정 필요
+        let modelId = 6
+        let portfolioId = 4
+        
+        MyPageManager.shared.postFavoritePortfolio(modelId: modelId, portfolioId: portfolioId) { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("Favorite portfolio added: \(response.message)")
+            case .failure(let error):
+                print("Error adding favorite portfolio: \(error)")
+            }
+        }
+
+    }
+    func deleteFavoritePortfolio() {
+        //ID 수정 필요
+        let modelId = 6
+        let portfolioId = 4
+        
+        MyPageManager.shared.deleteFavoritePortfolio(modelId: modelId, portfolioId: portfolioId) { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("Favorite portfolio deleted: \(response.message)")
+            case .failure(let error):
+                print("Error deleting favorite portfolio: \(error)")
+            }
+        }
+        
     }
 }
