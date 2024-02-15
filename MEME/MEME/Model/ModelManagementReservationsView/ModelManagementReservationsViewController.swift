@@ -29,6 +29,7 @@ final class ModelManagementReservationsViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "전체 예약 보기")
         
+        showModelReservations()
         setupReservationCollectionView()
         configureSubviews()
         makeConstraints()
@@ -156,7 +157,7 @@ extension ModelManagementReservationsViewController: BackButtonTappedDelegate  {
 //MARK: -API 통신 메소드
 extension ModelManagementReservationsViewController {
     func showModelReservations() {
-        ReservationManager.shared.getModelReservation(modelId: 0) { [weak self] result in
+        ReservationManager.shared.getModelReservation(modelId: 1) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let reservationResponse):
@@ -170,11 +171,26 @@ extension ModelManagementReservationsViewController {
             }
         }
     }
+    private var isoDateFormatter: ISO8601DateFormatter {
+            let formatter = ISO8601DateFormatter()
+            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+            return formatter
+        }
+
     private func groupReservationsByDate(_ reservations: [ReservationData]) {
-        let groupedDictionary = Dictionary(grouping: reservations, by: { $0.reservationDate })
+        let groupedDictionary = Dictionary(grouping: reservations) { (reservationData) -> Date in
+            guard let date = isoDateFormatter.date(from: reservationData.reservationDate) else {
+                return Date()
+            }
+            
+            let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
+            return Calendar.current.date(from: components) ?? date
+        }
+        
         reservationSections = groupedDictionary.map { (key, value) in
-            let date = self.dateFormatter.date(from: key) ?? Date()
-            return ReservationSection(date: date, reservations: value)
+            ReservationSection(date: key, reservations: value)
         }.sorted(by: { $0.date < $1.date })
+        
+        setupCollectionViewItems()
     }
 }
