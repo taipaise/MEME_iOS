@@ -23,7 +23,9 @@ final class SetBusinessInfoViewController: UIViewController {
     @IBOutlet private weak var careerLabel: UILabel!
     @IBOutlet private weak var nextButton: UIButton!
     @IBOutlet private weak var careerView: UIView!
+    @IBOutlet private weak var careerButton: UIButton!
     
+    private lazy var pickerView = UIPickerView()
     private var phpPicker: PHPickerViewController?
     private var imagePicker: UIImagePickerController?
     
@@ -50,12 +52,36 @@ final class SetBusinessInfoViewController: UIViewController {
             $0?.layer.borderColor = UIColor.gray400.cgColor
             $0?.layer.cornerRadius = 9
         }
-        
+
         setUpPhpPicker()
         setUpimagePicker()
+        setCareerButton()
         scrollView.delegate = self
     }
     
+    private func setCareerButton() {
+        var careerActions: [UIAction] = []
+
+        for experience in WorkExperience.allCases {
+            let action = UIAction(
+                title: experience.description,
+                image: nil,
+                handler: { [weak self] _ in
+                    self?.careerLabel.text = experience.description
+                }
+            )
+            careerActions.append(action)
+            careerButton.showsMenuAsPrimaryAction = true
+        }
+
+        careerButton.menu = UIMenu(
+            title: "",
+            image: nil,
+            identifier: nil,
+            options: .displayInline,
+            children: careerActions
+        )
+    }
     
     @IBAction private func genderButtonTapped(_ sender: UIButton) {
         let buttons = [maleButton, femaleButton]
@@ -89,11 +115,7 @@ final class SetBusinessInfoViewController: UIViewController {
         alert.addAction(cameraAction)
         alert.addAction(cancelAction)
         present(alert, animated: true)
-    }
-    
-    @IBAction private func careerButtonTapped(_ sender: Any) {
-    }
-    
+    }    
     
     @IBAction private func nextButtonTapped(_ sender: Any) {
         let nextVC = SetBusinessLocationViewController()

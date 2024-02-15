@@ -9,8 +9,8 @@ import UIKit
 
 final class SetBusinessLocationViewController: UIViewController {
     typealias LocationCell = BusinessLocationCollectionViewCell
-    typealias DataSource = UICollectionViewDiffableDataSource<Int, BusinessLocationModel>
-    typealias SnapShot = NSDiffableDataSourceSnapshot<Int, BusinessLocationModel>
+    typealias DataSource = UICollectionViewDiffableDataSource<Int, Region>
+    typealias SnapShot = NSDiffableDataSourceSnapshot<Int, Region>
     
     @IBOutlet private weak var navigationBar: NavigationBarView!
     @IBOutlet private weak var progressBar: RegisterProgressBar!
@@ -18,22 +18,8 @@ final class SetBusinessLocationViewController: UIViewController {
     @IBOutlet private weak var nextButton: UIButton!
     private var dataSource: DataSource?
     private var snapShot: SnapShot?
-    private var dummies = [
-        BusinessLocationModel(name: "강남구", count: 10),
-        BusinessLocationModel(name: "강동구", count: 10),
-        BusinessLocationModel(name: "강북구", count: 10),
-        BusinessLocationModel(name: "강서구", count: 10),
-        BusinessLocationModel(name: "마포구", count: 10),
-        BusinessLocationModel(name: "광진구", count: 10),
-        BusinessLocationModel(name: "구로구", count: 10),
-        BusinessLocationModel(name: "금천구", count: 10),
-        BusinessLocationModel(name: "노원구", count: 10),
-        BusinessLocationModel(name: "도봉구", count: 10),
-        BusinessLocationModel(name: "동대문구", count: 10),
-        BusinessLocationModel(name: "서대문구", count: 10),
-        BusinessLocationModel(name: "서초구", count: 10),
-        BusinessLocationModel(name: "성동구", count: 10)
-    ]
+    private var location: [Region] = Region.allCases
+    private var selectedLocation: Set<Region> = []
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,8 +50,9 @@ extension SetBusinessLocationViewController {
     }
     
     private func configureDataSource() {
-        let cellRegistration = UICollectionView.CellRegistration<LocationCell, BusinessLocationModel> { cell, indexPath, itemIdentifier in
-            cell.configure(location: itemIdentifier.name, count: itemIdentifier.count)
+        
+        let cellRegistration = UICollectionView.CellRegistration<LocationCell, Region> { cell, indexPath, itemIdentifier in
+            cell.configure(location: itemIdentifier.koreanName)
         }
         
         dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
@@ -78,7 +65,7 @@ extension SetBusinessLocationViewController {
         
         snapShot = SnapShot()
         snapShot?.appendSections([0])
-        snapShot?.appendItems(dummies, toSection: 0)
+        snapShot?.appendItems(location, toSection: 0)
         dataSource?.apply(snapShot ?? SnapShot(), animatingDifferences: false)
     }
     
@@ -119,13 +106,13 @@ extension SetBusinessLocationViewController {
 extension SetBusinessLocationViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? LocationCell else { return }
-        cell.setColor(isSelected: true)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? LocationCell else { return }
-        cell.contentView.layer.borderColor = UIColor.gray300.cgColor
-        cell.setColor(isSelected: false)
+        if selectedLocation.contains(location[indexPath.row]) {
+            selectedLocation.remove(location[indexPath.row])
+            cell.setColor(isSelected: false)
+        } else {
+            selectedLocation.insert(location[indexPath.row])
+            cell.setColor(isSelected: true)
+        }
     }
 }
 

@@ -63,6 +63,7 @@ final class DetailSettingView: UIView {
         button.isSelected.toggle()
         if button.isSelected {
             imageVIew.image = .detailSelected
+            layer.borderColor = UIColor.clear.cgColor
         } else {
             deselect(tag: -1)
         }
@@ -76,9 +77,9 @@ final class DetailSettingView: UIView {
     
     func deselect(tag: Int) {
         if button.tag != tag {
+            layer.borderColor = UIColor.gray400.cgColor
             button.isSelected = false
             imageVIew.image = nil
         }
     }
-    
 }

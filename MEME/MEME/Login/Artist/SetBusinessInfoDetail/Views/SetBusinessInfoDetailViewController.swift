@@ -7,6 +7,13 @@
 
 import UIKit
 
+
+enum MakeUpLoaction: Int {
+    case shop
+    case visit
+    case any
+}
+
 final class SetBusinessInfoDetailViewController: UIViewController {
     typealias TimeCell = TimeCollectionViewCell
     typealias DataSource = UICollectionViewDiffableDataSource<TimeSection, String>
@@ -24,7 +31,6 @@ final class SetBusinessInfoDetailViewController: UIViewController {
     
     @IBOutlet private weak var textField: UITextField!
     
-    
     @IBOutlet var timeViews: [UIView]!
     
     @IBOutlet private var weekButtons: [UIButton]!
@@ -39,7 +45,11 @@ final class SetBusinessInfoDetailViewController: UIViewController {
     private var snapShot: SnapShot?
     
     private var selectedFields: Set<Int> = []
-    private var makeUpLocation: Set<Int> = []
+    private var selectedWeekDay: Set<Int> = []
+    private var isProgressInShop = false
+    private var startTime: String?
+    private var endTime: String?
+    private var experience: WorkExperience?
     private var isStart = true
     
     private let amTimes: [String] = [
@@ -129,27 +139,36 @@ final class SetBusinessInfoDetailViewController: UIViewController {
     @IBAction func makeUpLocationButtonTapped(_ sender: UIButton) {
         let tag = sender.tag
         
-        if makeUpLocation.contains(tag) {
-            makeUpLocation.remove(tag)
-            sender.layer.borderColor = UIColor.gray200.cgColor
-            locationCheckImages[tag].image = nil
+        locationButtons.forEach { button in
+            if button.tag == tag {
+                button.layer.borderColor = UIColor.mainBold.cgColor
+                locationCheckImages[button.tag].image = .icCheck
+                
+            } else {
+                button.layer.borderColor = UIColor.gray300.cgColor
+                locationCheckImages[button.tag].image = nil
+            }
+        }
+        
+        if tag == MakeUpLoaction.visit.rawValue {
+            isProgressInShop = false
+            textField.text = nil
+            textField.isEnabled = false
         } else {
-            makeUpLocation.insert(tag)
-            sender.layer.borderColor = UIColor.mainBold.cgColor
-            locationCheckImages[tag].image = .icCheck
+            isProgressInShop = true
+            textField.isEnabled = true
         }
     }
     
-    
     @IBAction func weekButtonTapped(_ sender: UIButton) {
-        weekButtons.forEach {
-            if sender.tag == $0.tag {
-                $0.tintColor = .white
-                $0.backgroundColor = .mainBold
-            } else {
-                $0.tintColor = .black
-                $0.backgroundColor = .white
-            }
+        if selectedWeekDay.contains(sender.tag) {
+            selectedWeekDay.remove(sender.tag)
+            weekButtons[sender.tag].tintColor = .black
+            weekButtons[sender.tag].backgroundColor = .white
+        } else {
+            selectedWeekDay.insert(sender.tag)
+            weekButtons[sender.tag].tintColor = .white
+            weekButtons[sender.tag].backgroundColor = .mainBold
         }
     }
     
@@ -170,7 +189,6 @@ final class SetBusinessInfoDetailViewController: UIViewController {
         let nextVC = ArtistTabBarController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
-    
 }
 
 // MARK: - collectionView 설정
@@ -275,8 +293,10 @@ extension SetBusinessInfoDetailViewController: UICollectionViewDelegate {
         cell.contentView.layer.borderColor = UIColor.mainBold.cgColor
         
         if isStart {
+            startTime = cell.getTime()
             startTimeLabel.text = cell.getTime()
         } else {
+            endTime = cell.getTime()
             endTimeLabel.text = cell.getTime()
         }
         

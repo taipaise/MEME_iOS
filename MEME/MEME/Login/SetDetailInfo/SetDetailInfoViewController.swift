@@ -87,6 +87,7 @@ final class SetDetailInfoViewController: UIViewController {
     
     @IBAction private func nextButtonTapped(_ sender: Any) {
         let nextVC = RegistrationCompletionViewController()
+        nextVC.configure(isArtist: false)
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }
