@@ -29,6 +29,7 @@ class ModelReservationConfirmViewCell: UICollectionViewCell {
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true
     }
+    
     func configure(with data: ReservationData) {
         let isoFormatter = ISO8601DateFormatter()
             isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]

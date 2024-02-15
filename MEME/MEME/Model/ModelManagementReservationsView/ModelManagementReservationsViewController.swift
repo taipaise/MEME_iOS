@@ -112,14 +112,14 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegate, U
         switch item {
         case .date(let date):
             guard let dateCell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelManagementReservationsDateCollectionViewCell.identifier, for: indexPath) as? ModelManagementReservationsDateCollectionViewCell else {
-                fatalError("Unable to dequeue ModelManagementReservationsDateCollectionViewCell")
+                fatalError("셀 타입 캐스팅 실패...")
             }
             dateCell.configure(with: date)
             return dateCell
             
         case .reservation(let reservation):
             guard let reservationCell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.identifier, for: indexPath) as? ModelReservationConfirmViewCell else {
-                fatalError("Unable to dequeue ModelReservationConfirmViewCell")
+                fatalError("셀 타입 캐스팅 실패...")
             }
             reservationCell.contentView.backgroundColor = .gray200
             reservationCell.modelReservationLabel.textColor = .black

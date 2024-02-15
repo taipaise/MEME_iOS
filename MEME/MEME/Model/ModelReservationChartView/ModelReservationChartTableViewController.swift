@@ -452,11 +452,7 @@ extension ModelReservationChartViewController {
             self.numLabel.text = "0"
         }
         
-        if currentPage == 0 {
-            searchResults = searchResultDTO.data?.content ?? []
-        } else {
-            searchResults.append(contentsOf: searchResultDTO.data?.content ?? [])
-        }
+        searchResults.append(contentsOf: searchResultDTO.data?.content ?? [])
         
         totalPage = searchResultDTO.data?.totalPage ?? 0
         reservationChartTableView.reloadData()

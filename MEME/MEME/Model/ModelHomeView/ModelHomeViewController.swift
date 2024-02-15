@@ -265,6 +265,7 @@ final class ModelHomeViewController: UIViewController {
         modelReservationCollectionView.register(ModelNonReservationViewCell.self, forCellWithReuseIdentifier: ModelNonReservationViewCell.identifier)
         
         modelReservationCollectionView.register(UINib(nibName: "ModelReservationConfirmViewCell", bundle: nil), forCellWithReuseIdentifier: ModelReservationConfirmViewCell.identifier)
+
     }
 
     private func setupMakeupCardCollectionView() {
@@ -313,9 +314,9 @@ extension ModelHomeViewController: UICollectionViewDelegate, UICollectionViewDat
         if collectionView == modelReservationCollectionView {
             switch section {
             case 0:
-                return 1
-            default:
                 return modelReservations?.count ?? 0
+            default:
+                return 0
             }
            } else if collectionView == recomandReservationCollectionView {
                return makeupCards?.count ?? 0
@@ -413,11 +414,13 @@ extension ModelHomeViewController {
                 switch result {
                 case .success(let reservationResponse):
                     print("모델 예약 정보 조회 성공: \(reservationResponse)")
-                    let todaysReservations = reservationResponse.data?.filter { reservationData in
+                    let filteredReservations = reservationResponse.data?.filter { reservationData in
                         let reservationDate = self?.dateFromString(reservationData.reservationDate)
-                        return self?.isToday(reservationDate) ?? false
+                        let isToday = self?.isToday(reservationDate) ?? false
+                        let isExpected = reservationData.status == "EXPECTED"
+                        return isToday && isExpected
                     }
-                    self?.modelReservations = todaysReservations
+                    self?.modelReservations = filteredReservations
                     self?.modelReservationCollectionView.reloadData()
                     
                 case .failure(let error):
