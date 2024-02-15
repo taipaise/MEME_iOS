@@ -74,7 +74,7 @@ extension MyPageAPI: MemeAPI {
     var headerType: HTTPHeaderFields {
         switch self {
         case .getMyPage, .patchProfile, .getFavoriteArtist, .getFavoritePortfolio, .postFavoriteArtist, .postFavoritePortfolio, .deleteFavoriteArtist, .deleteFavoritePortfolio:
-            return .plain
+            return .hasAccessToken
         }
     }
     

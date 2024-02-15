@@ -16,7 +16,7 @@ class ModelSearchResultViewController: UIViewController {
     var searchKeyword: String?
     var selectedSortOption: String = "리뷰순"
     
-    var currentPage: Int = 1
+    var currentPage: Int = 0
     var totalPage: Int = 1
     var isLoading: Bool = false
     var searchResults: [SearchResultData] = []
@@ -385,7 +385,7 @@ extension ModelSearchResultViewController {
             
             switch searchResultDTO.result {
             case "SUCCESS":
-                if self.currentPage == 1 {
+                if self.currentPage == 0 {
                     self.searchResults = searchResultDTO.data?.content ?? []
                 } else {
                     self.searchResults.append(contentsOf: searchResultDTO.data?.content ?? [])

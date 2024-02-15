@@ -525,7 +525,7 @@ extension ModelSearchViewController: RecentSearchViewCellDelegate {
 extension ModelSearchViewController {
     func fetchFavoriteArtists() {
         // modelId 임의 설정
-        let modelId = 4
+        let modelId = 6
         
         MyPageManager.shared.getFavoriteArtists(modelId: modelId) { [weak self] result in
             DispatchQueue.main.async {

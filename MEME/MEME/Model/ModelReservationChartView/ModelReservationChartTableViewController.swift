@@ -15,8 +15,8 @@ class ModelReservationChartViewController: UIViewController {
     var selectedCategory: String?
     var selectedSortOption: String = "리뷰순"
     
-    var currentPage: Int = 1
-    var totalPage: Int = 1
+    var currentPage: Int = 0
+    var totalPage: Int = 0
     var isLoading: Bool = false
     var searchResults: [SearchResultData] = []
     
@@ -413,7 +413,7 @@ extension ModelReservationChartViewController {
                     self.numLabel.text = "0"
                     if let responseData = error.response {
                         let responseString = String(data: responseData.data, encoding: .utf8)
-                        print("Received error response: \(responseString ?? "no data")")
+                        print("카테고리 검색 실패: \(responseString ?? "no data")")
                     }
                 }
             }
@@ -437,7 +437,7 @@ extension ModelReservationChartViewController {
                     self.numLabel.text = "0"
                     if let responseData = error.response {
                         let responseString = String(data: responseData.data, encoding: .utf8)
-                        print("Received error response: \(responseString ?? "no data")")
+                        print("전체 조회 실패: \(responseString ?? "no data")")
                     }
                     
                 }
@@ -452,7 +452,7 @@ extension ModelReservationChartViewController {
             self.numLabel.text = "0"
         }
         
-        if currentPage == 1 {
+        if currentPage == 0 {
             searchResults = searchResultDTO.data?.content ?? []
         } else {
             searchResults.append(contentsOf: searchResultDTO.data?.content ?? [])

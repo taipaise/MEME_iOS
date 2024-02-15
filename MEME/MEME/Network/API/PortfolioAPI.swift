@@ -31,7 +31,7 @@ extension PortfolioAPI: MemeAPI {
     var headerType: HTTPHeaderFields {
         switch self {
         case .getPortfolioDetail:
-            return .plain
+            return .hasAccessToken
         }
     }
     

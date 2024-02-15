@@ -61,27 +61,12 @@ struct PostReservationDTO: Codable {
     let message: String
     let data: PostReservationData?
     let statusCode: Int
-
-    struct PostReservationData: Codable {
-        let makeupName: String
-        let artistNickName: String
-        let location: String
-        let reservationDate: String
-        let reservationDayOfWeekAndTime: DayOfWeekTime
-    }
-    
-    struct DayOfWeekTime: Codable {
-        let MON: String?
-        let TUE: String?
-        let WED: String?
-        let THU: String?
-        let FRI: String?
-        let SAT: String?
-        let SUN: String?
-    }
 }
 
-// MARK: -예약 상태 변경 DTO
-struct alterationReservationDTO: Codable {
-    
+struct PostReservationData: Codable {
+    let makeupName: String
+    let artistNickName: String
+    let location: String
+    let reservationDate: String
+    let reservationDayOfWeekAndTime: [String: String]
 }

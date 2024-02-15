@@ -121,7 +121,12 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegate, U
             guard let reservationCell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.identifier, for: indexPath) as? ModelReservationConfirmViewCell else {
                 fatalError("Unable to dequeue ModelReservationConfirmViewCell")
             }
-            
+            reservationCell.contentView.backgroundColor = .gray200
+            reservationCell.modelReservationLabel.textColor = .black
+            reservationCell.modelReservationMakeupNameLabel.textColor = .black
+            reservationCell.modelReservationArtistNameLabel.textColor = .black
+            reservationCell.modelReservationLocationLabel.textColor = .black
+            reservationCell.modelReservationPriceLabel.textColor = .black
             reservationCell.configure(with: reservation)
             return reservationCell
         }

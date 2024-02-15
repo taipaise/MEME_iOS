@@ -9,13 +9,7 @@ import UIKit
 import SnapKit
 import FSCalendar
 
-enum LocationType {
-    case shop
-    case visit
-    case both
-}
-
-class ModelReservationDetailViewController: UIViewController {
+class ModelReservationDetailViewController: UIViewController, ModelReservationBothLocationViewDelegate {
     // MARK: - Properties
     var selectedMakeupName: String?
     var selectedArtistName: String?
@@ -24,7 +18,7 @@ class ModelReservationDetailViewController: UIViewController {
     var possibleTimeSlots: [TimeSlot] = []
     private var selectedDate: Date?
     private var selectedTime: String?
-    private var selectedLocationType: LocationType?
+    private var selectedLocationType: String?
     private var selectedVisitLocation: String?
     
     private let navigationBar = NavigationBarView()
@@ -193,9 +187,8 @@ class ModelReservationDetailViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "예약하기")
         
-        getPossibleTime(aristId: 1)
-        getPossibleLocation(aristId: 1)
-        
+        getPossibleTime(aristId: 3)
+        getPossibleLocation(aristId: 3)
         
         updateNextButtonState()
         setAction()
@@ -228,21 +221,24 @@ class ModelReservationDetailViewController: UIViewController {
     // MARK: - makeConstraints
     private func configureLocationStackView(with makeupLocationData: MakeupLocationData) {
         selectLocationStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
-        
+        selectedLocationType = makeupLocationData.makeupLocation
         switch makeupLocationData.makeupLocation {
         case "SHOP":
             shopView = ModelReservationShopLocationView()
             shopView.configureModelReservationShopLocationView(with: makeupLocationData)
+            selectedLocation = makeupLocationData.shopLocation
             selectLocationStackView.addArrangedSubview(shopView)
         case "VISIT":
             visitView = ModelReservationVisitLocationView()
             visitView.configureModelReservationVisitLocationView(with: makeupLocationData)
+            visitView.delegate = self
             visitView.visitLocationTextField.delegate = self
             visitView.visitLocationTextField.addTarget(self, action: #selector(visitLocationTextFieldChanged(_:)), for: .editingChanged)
             selectLocationStackView.addArrangedSubview(visitView)
         case "BOTH":
             bothView = ModelReservationBothLocationView()
             bothView.configureModelReservationBothLocationView(with: makeupLocationData)
+            bothView.delegate = self
             selectLocationStackView.addArrangedSubview(bothView)
         default:
             break
@@ -330,7 +326,7 @@ class ModelReservationDetailViewController: UIViewController {
     
     // MARK: - Action
     @objc private func visitLocationTextFieldChanged(_ textField: UITextField) {
-        selectedVisitLocation = textField.text
+        selectedLocation = textField.text
         updateNextButtonState()
     }
     
@@ -382,13 +378,15 @@ class ModelReservationDetailViewController: UIViewController {
     // MARK: - Methods
     private func checkLocationValidity() -> Bool {
         switch selectedLocationType {
-        case .shop:
+        case "SHOP":
             return true
-        case .visit:
+        case "VISIT":
             return !(selectedVisitLocation?.isEmpty ?? true)
-        case .both:
+        case "BOTH":
             return true
-        default:
+        case .none:
+            return false
+        case .some(_):
             return false
         }
     }
@@ -537,7 +535,6 @@ class ModelReservationDetailViewController: UIViewController {
         sender.setTitleColor(.white, for: .normal)
         selectedTimeButton = sender
         
-        // 선택된 시간 저장 -> 추후 api post 요청할때 전송
         selectedTime = sender.title(for: .normal)
         updateNextButtonState()
     }
@@ -548,10 +545,31 @@ class ModelReservationDetailViewController: UIViewController {
         updateNextButtonState()
     }
     
-    //모두 선택해야 다음 버튼 활성화
+    func didSelectLocationType(_ type: String) {
+        selectedLocationType = type
+        if type == "SHOP" {
+            selectedLocation = "샵의 위치"
+        } else if type == "VISIT" {
+            selectedLocation = selectedVisitLocation
+        }
+        updateNextButtonState()
+    }
+    func didSelectShopLocation(_ location: String) {
+        selectedLocation = location
+        updateNextButtonState()
+    }
+    
+    func didSelectVisitLocation(_ location: String) {
+        selectedVisitLocation = location
+        updateNextButtonState()
+    }
+    
+    
     private func updateNextButtonState() {
+        print("Selected Date: \(String(describing: selectedDate)), Selected Time: \(String(describing: selectedTime)), Location Type: \(String(describing: selectedLocationType)), \(String(describing: selectedLocation))")
         let isDateAndTimeSelected = selectedDate != nil && selectedTime != nil
         let isLocationValid = checkLocationValidity()
+        print(isLocationValid)
         
         DispatchQueue.main.async {
             self.reservationButton.isEnabled = isDateAndTimeSelected && isLocationValid
@@ -637,5 +655,12 @@ extension ModelReservationDetailViewController {
 extension ModelReservationDetailViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
         selectedVisitLocation = textField.text
+    }
+}
+
+extension ModelReservationDetailViewController: ModelReservationVisitLocationViewDelegate {
+    func didEnterVisitLocation(_ location: String) {
+        selectedLocation = location
+        updateNextButtonState()
     }
 }

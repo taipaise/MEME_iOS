@@ -117,14 +117,9 @@ class ModelReservationLastViewController: UIViewController {
         reservationArtistNameLabel.text = artistName
         reservationLocationLabel.text = locationText
         
-        let modelId: Int = 1
-        let portfolioId: Int = 1
-        let date: String = "2024-02-20"
-        let time: ReservationTimes = ._12_30
-        let dayOfWeek: DayOfWeek = .MON
-        let location: String = "서울 강남구"
-        
-        postModelReservations(modelId: modelId, portfolioId: portfolioId, date: date, time: time, dayOfWeek: dayOfWeek, location: location)
+        //수정 필요
+        let reservationDayOfWeekAndTime = ["MON": "_20_30"]
+        self.postModelReservations(modelId: 6, portfolioId: 5, date: "2024-02-15T19:44:18.524Z", reservationDayOfWeekAndTime: reservationDayOfWeekAndTime, location: "서울")
         
         configureSubviews()
         makeConstraints()
@@ -214,8 +209,14 @@ class ModelReservationLastViewController: UIViewController {
 
 //MARK: -API 통신 메소드
 extension ModelReservationLastViewController {
-    func postModelReservations(modelId: Int, portfolioId: Int, date: String, time: ReservationTimes, dayOfWeek: DayOfWeek, location: String) {
-        ReservationManager.shared.postReservation(modelId: modelId, portfolioId: portfolioId, date: date, time: time, dayOfWeek: dayOfWeek, location: location) { [weak self] result in
+    func postModelReservations(modelId: Int, portfolioId: Int, date: String, reservationDayOfWeekAndTime: [String: String], location: String) {
+        ReservationManager.shared.postReservation(
+            modelId: modelId,
+            portfolioId: portfolioId,
+            reservationDate: date,
+            reservationDayOfWeekAndTime: reservationDayOfWeekAndTime,
+            location: location
+        ) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let reservationResponse):
@@ -223,9 +224,22 @@ extension ModelReservationLastViewController {
 
                 case .failure(let error):
                     print("모델 예약 실패: \(error.localizedDescription)")
+                    if let responseData = error.response {
+                        let responseString = String(data: responseData.data, encoding: .utf8)
+                        print("Received error response: \(responseString ?? "no data")")
+                    }
+                    self?.showAlertWithMessage("이미 예약된 시간입니다")
                 }
             }
         }
+    }
+    private func showAlertWithMessage(_ message: String) {
+        let alert = UIAlertController(title: "예약 오류", message: message, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "확인", style: .default) { [weak self] _ in
+            self?.navigationController?.popViewController(animated: true)
+        }
+        alert.addAction(okAction)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

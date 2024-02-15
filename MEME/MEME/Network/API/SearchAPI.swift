@@ -55,7 +55,7 @@ extension SearchAPI: MemeAPI {
     var headerType: HTTPHeaderFields {
         switch self {
         case .getSearchArtist, .getSearchCategory, .getSearchAll, .getSearchText:
-            return .plain
+            return .hasAccessToken
         }
     }
     
@@ -92,17 +92,8 @@ extension SearchAPI: MemeAPI {
                 parameters["sort"] = sort.rawValue
             }
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
-        case .getSearchAll(
-            page: let page,
-            sort: let sort):
-            var parameters: [String: Any] = [:]
-            if let page = page {
-                parameters["page"] = page
-            }
-            if let sort = sort {
-                parameters["sort"] = sort.rawValue
-            }
-            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+        case .getSearchAll(let page, let sort):
+            return .requestParameters(parameters: ["page": page ?? 0, "sort": sort ?? .review], encoding: URLEncoding.queryString)
         case .getSearchText(
             query: let query,
             page: let page,

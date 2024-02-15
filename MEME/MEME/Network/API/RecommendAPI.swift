@@ -34,7 +34,7 @@ extension RecommendAPI: MemeAPI {
     var headerType: HTTPHeaderFields {
         switch self {
         case .getRecommendArtistByReview, .getRecommendArtistByRecent:
-            return .plain
+            return .hasAccessToken
         }
     }
     

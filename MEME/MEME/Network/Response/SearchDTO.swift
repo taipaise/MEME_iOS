@@ -29,19 +29,17 @@ struct SearchResultData: Codable {
     let artistNickName: String
     let makeupName: String
     let price: Int
-    let info: String?
     let makeupLocation: String
     let shopLocation: String?
     let region: [String]?
     let isBlock: Bool
-    let averageStars: Float
+    let averageStars: String
     let reviewCount: Int
-    let portfolioImgDtoList: ImageData?
+    let portfolioImgDtoList: [ImageData]?
 }
 
 struct ImageData: Codable {
     let portfolioImgId: Int
     let portfolioImgSrc: String
     let delete: Bool
-    
 }

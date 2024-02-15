@@ -8,8 +8,15 @@
 import UIKit
 import SnapKit
 
+protocol ModelReservationBothLocationViewDelegate: AnyObject {
+    func didSelectLocationType(_ LocationType: String)
+    func didSelectShopLocation(_ location: String)
+    func didSelectVisitLocation(_ location: String)
+}
+
 class  ModelReservationBothLocationView: UIView {
     // MARK: - Properties
+    weak var delegate: ModelReservationBothLocationViewDelegate?
     private var makeupLocationData: MakeupLocationData?
         
     private let selectLocationLabel: UILabel = {
@@ -119,12 +126,15 @@ class  ModelReservationBothLocationView: UIView {
         sender.layer.borderWidth = 0
         sender.setTitleColor(.white, for: .normal)
         
-//        if sender == goShopButton {
-//                selectedLocationType = .shop
-//                selectedShopLocation = "샵 주소"
-//            } else if sender == comeVisitButton {
-//                selectedLocationType = .visit
-//            }
+        if sender == goShopButton {
+            delegate?.didSelectLocationType("SHOP")
+            delegate?.didSelectShopLocation("샵의 위치")
+        } else if sender == comeVisitButton {
+            delegate?.didSelectLocationType("VISIT")
+            if let visitLocation = visitView.getSavedTextFieldValue() {
+                delegate?.didSelectVisitLocation(visitLocation)
+            }
+        }
         
         if let makeupLocationData = makeupLocationData {
             updateSelectedOptionView(with: makeupLocationData, selectedButton: sender)

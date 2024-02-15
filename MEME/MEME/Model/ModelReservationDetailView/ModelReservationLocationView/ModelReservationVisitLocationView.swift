@@ -8,8 +8,13 @@
 import UIKit
 import SnapKit
 
+protocol ModelReservationVisitLocationViewDelegate: AnyObject {
+    func didEnterVisitLocation(_ location: String)
+}
+
 class ModelReservationVisitLocationView: UIView, UITextFieldDelegate {
     // MARK: - Properties
+    weak var delegate: ModelReservationVisitLocationViewDelegate?
     private var savedTextFieldValue: String?
     
     private var inputVisitLocationLabel: UILabel = {
@@ -104,6 +109,12 @@ class ModelReservationVisitLocationView: UIView, UITextFieldDelegate {
         }
         textField.resignFirstResponder()
         return true
+    }
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if textField == visitLocationTextField {
+            savedTextFieldValue = textField.text
+            delegate?.didEnterVisitLocation(textField.text ?? "")
+        }
     }
     
 }

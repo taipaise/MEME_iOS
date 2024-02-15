@@ -20,20 +20,19 @@ final class ReservationManager {
     func postReservation(
         modelId: Int,
         portfolioId: Int,
-        date: String,
-        time: ReservationTimes,
-        dayOfWeek: DayOfWeek,
+        reservationDate: String,
+        reservationDayOfWeekAndTime: [String: String],
         location: String,
         completion: @escaping (Result<PostReservationDTO, MoyaError>) -> Void
     ) {
-        provider.request(api: .postReservation(
-            modelId: modelId,
-            portfolioId: portfolioId,
-            date: date,
-            time: time,
-            dayOfWeek: dayOfWeek,
-            location: location
-        )) { result in
+        let parameters: [String: Any] = [
+                "modelId": modelId,
+                "portfolioId": portfolioId,
+                "reservationDate": reservationDate,
+                "reservationDayOfWeekAndTime": reservationDayOfWeekAndTime,
+                "location": location
+        ]
+        provider.request(api: .postReservation(parameters: parameters)) { result in
             switch result {
             case .success(let response):
                 do {
@@ -113,25 +112,4 @@ final class ReservationManager {
         }
     }
     
-    // MARK: -예약 상태 변경 API
-//    func alterationReservation(
-//        reservationId: Int,
-//        status: String,
-//        completion: @escaping (Result<alterationReservationDTO, MoyaError>) -> Void
-//    ) {
-//        provider.request(api: .alterationReservation(reservationId: Int,
-//                                                     status: String)) { result in
-//            switch result {
-//            case .success(let response):
-//                do {
-//                    let updateResponse = try JSONDecoder().decode(alterationReservationDTO.self, from: response.data)
-//                    completion(.success(updateResponse))
-//                } catch let error {
-//                    completion(.failure(MoyaError.underlying(error, response)))
-//                }
-//            case .failure(let error):
-//                completion(.failure(error))
-//            }
-//        }
-//    }
 }

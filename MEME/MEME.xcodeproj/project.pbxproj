@@ -59,7 +59,6 @@
 		2D6F59B82B5C4FB100CA883A /* SortOptionIconView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6F59B72B5C4FB100CA883A /* SortOptionIconView.swift */; };
 		2D6F59BF2B5C7D3300CA883A /* ModelReservationTypeButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6F59BE2B5C7D3300CA883A /* ModelReservationTypeButton.swift */; };
 		2D7D747B2B76972D005BDFD5 /* memeSecret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D7D74792B76972D005BDFD5 /* memeSecret.plist */; };
-		2D7D747C2B76972D005BDFD5 /* config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2D7D747A2B76972D005BDFD5 /* config.xcconfig */; };
 		2D7D747E2B769C9E005BDFD5 /* ReservationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D7D747D2B769C9E005BDFD5 /* ReservationDTO.swift */; };
 		2DA207F52B7A8D3D006EB9B9 /* MyPageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA207F42B7A8D3D006EB9B9 /* MyPageManager.swift */; };
 		2DA207F72B7A8D9D006EB9B9 /* MyPageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA207F62B7A8D9D006EB9B9 /* MyPageAPI.swift */; };
@@ -79,6 +78,8 @@
 		2DA208152B7CF865006EB9B9 /* PortfolioAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208142B7CF865006EB9B9 /* PortfolioAPI.swift */; };
 		2DA208172B7CF87B006EB9B9 /* PortfolioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */; };
 		2DA208192B7CF9EE006EB9B9 /* PortfolioDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */; };
+		2DCB3CCE2B7E041600BFCDA1 /* memeSecret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */; };
+		2DCB3CCF2B7E041600BFCDA1 /* config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2DCB3CCD2B7E041600BFCDA1 /* config.xcconfig */; };
 		312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */; };
 		312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EE2B52DE1900CACF20 /* Pretendard-Light.otf */; };
 		312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EB2B52DE1900CACF20 /* Pretendard-Medium.otf */; };
@@ -127,7 +128,6 @@
 		315EE2D12B66566A0042A082 /* DetailSettingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 315EE2CD2B66566A0042A082 /* DetailSettingView.xib */; };
 		315EE2D52B6658B50042A082 /* SetBusinessInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315EE2D32B6658B50042A082 /* SetBusinessInfoViewController.swift */; };
 		315EE2D62B6658B50042A082 /* SetBusinessInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 315EE2D42B6658B50042A082 /* SetBusinessInfoViewController.xib */; };
-		315FB8552B6DE0FF0068163C /* memeSecret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 315FB8542B6DE0FF0068163C /* memeSecret.plist */; };
 		315FB8572B6DE1480068163C /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB8562B6DE1480068163C /* AuthManager.swift */; };
 		315FB8592B6DE1B00068163C /* AuthAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB8582B6DE1B00068163C /* AuthAPI.swift */; };
 		315FB85E2B6DE57C0068163C /* KeyChainValue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB85D2B6DE57C0068163C /* KeyChainValue.swift */; };
@@ -265,7 +265,6 @@
 		2D6F59B72B5C4FB100CA883A /* SortOptionIconView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SortOptionIconView.swift; sourceTree = "<group>"; };
 		2D6F59BE2B5C7D3300CA883A /* ModelReservationTypeButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationTypeButton.swift; sourceTree = "<group>"; };
 		2D7D74792B76972D005BDFD5 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
-		2D7D747A2B76972D005BDFD5 /* config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = config.xcconfig; sourceTree = "<group>"; };
 		2D7D747D2B769C9E005BDFD5 /* ReservationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDTO.swift; sourceTree = "<group>"; };
 		2DA207F42B7A8D3D006EB9B9 /* MyPageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageManager.swift; sourceTree = "<group>"; };
 		2DA207F62B7A8D9D006EB9B9 /* MyPageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageAPI.swift; sourceTree = "<group>"; };
@@ -285,6 +284,8 @@
 		2DA208142B7CF865006EB9B9 /* PortfolioAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioAPI.swift; sourceTree = "<group>"; };
 		2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioManager.swift; sourceTree = "<group>"; };
 		2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDTO.swift; sourceTree = "<group>"; };
+		2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
+		2DCB3CCD2B7E041600BFCDA1 /* config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = config.xcconfig; sourceTree = "<group>"; };
 		312DF7612B669CC30060BDF0 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		312DF7632B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHeaderSupplementaryView.swift; sourceTree = "<group>"; };
 		3142B9552B4CFFED0066CD5A /* MEME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEME.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -332,7 +333,6 @@
 		315EE2D32B6658B50042A082 /* SetBusinessInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBusinessInfoViewController.swift; sourceTree = "<group>"; };
 		315EE2D42B6658B50042A082 /* SetBusinessInfoViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetBusinessInfoViewController.xib; sourceTree = "<group>"; };
 		315FB8532B6DDB210068163C /* config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = config.xcconfig; sourceTree = "<group>"; };
-		315FB8542B6DE0FF0068163C /* memeSecret.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
 		315FB8562B6DE1480068163C /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		315FB8582B6DE1B00068163C /* AuthAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthAPI.swift; sourceTree = "<group>"; };
 		315FB85D2B6DE57C0068163C /* KeyChainValue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainValue.swift; sourceTree = "<group>"; };
@@ -653,10 +653,10 @@
 				3142B9612B4CFFED0066CD5A /* Assets.xcassets */,
 				314F74E92B52DDF200CACF20 /* Font */,
 				3142B9662B4CFFED0066CD5A /* Info.plist */,
-				2D7D747A2B76972D005BDFD5 /* config.xcconfig */,
-				315FB8542B6DE0FF0068163C /* memeSecret.plist */,
 				315FB8532B6DDB210068163C /* config.xcconfig */,
+				2DCB3CCD2B7E041600BFCDA1 /* config.xcconfig */,
 				2D7D74792B76972D005BDFD5 /* memeSecret.plist */,
+				2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */,
 				3142B9632B4CFFED0066CD5A /* LaunchScreen.storyboard */,
 				3156D1FD2B69438800559820 /* Network */,
 				3142B9992B4D01FB0066CD5A /* extenstions */,
@@ -1292,7 +1292,8 @@
 				2D62E25C2B54A658004E8299 /* RecentSearchViewCell.xib in Resources */,
 				3142B9622B4CFFED0066CD5A /* Assets.xcassets in Resources */,
 				2D0A190A2B4EEDB500C1CECA /* CategorySearchViewCell.xib in Resources */,
-				2D7D747C2B76972D005BDFD5 /* config.xcconfig in Resources */,
+				2DCB3CCF2B7E041600BFCDA1 /* config.xcconfig in Resources */,
+				2DCB3CCE2B7E041600BFCDA1 /* memeSecret.plist in Resources */,
 				2D7D747B2B76972D005BDFD5 /* memeSecret.plist in Resources */,
 				2D0A19012B4EC9A000C1CECA /* ModelReservationConfirmViewCell.xib in Resources */,
 				2D6F59AC2B5BD07500CA883A /* ModelReservationChartTableViewCell.xib in Resources */,
@@ -1304,7 +1305,6 @@
 				31B263502B57EE7D00304FBE /* SetProfileViewController.xib in Resources */,
 				31B263572B57EE9500304FBE /* RegistrationCompletionViewController.xib in Resources */,
 				312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */,
-				315FB8552B6DE0FF0068163C /* memeSecret.plist in Resources */,
 				312B30542B550FF9008D17FC /* Pretendard-Regular.otf in Resources */,
 				31F6F8462B52C7A500EC621D /* NavigationBarView.xib in Resources */,
 				31B263482B57EE4800304FBE /* LoginViewController.xib in Resources */,
@@ -1530,7 +1530,6 @@
 /* Begin XCBuildConfiguration section */
 		3142B97D2B4CFFEE0066CD5A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 315FB8532B6DDB210068163C /* config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1594,7 +1593,6 @@
 		};
 		3142B97E2B4CFFEE0066CD5A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 315FB8532B6DDB210068163C /* config.xcconfig */;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
@@ -1651,7 +1649,6 @@
 		};
 		3142B9802B4CFFEE0066CD5A /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 315FB8532B6DDB210068163C /* config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -1689,7 +1686,6 @@
 		};
 		3142B9812B4CFFEE0066CD5A /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 315FB8532B6DDB210068163C /* config.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

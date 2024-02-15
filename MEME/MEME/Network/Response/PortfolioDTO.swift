@@ -11,6 +11,21 @@ import Foundation
 struct PortfolioDTO: Codable {
     let result: String
     let message: String
-    let data: SearchResultData?
+    let data: PortfolioData?
     let statusCode: Int
+}
+
+struct PortfolioData: Codable {
+    let portfolioId: Int
+    let category: String
+    let artistNickName: String
+    let makeupName: String
+    let price: Int
+    let makeupLocation: String
+    let shopLocation: String?
+    let region: [String]?
+    let isBlock: Bool
+    let averageStars: String
+    let reviewCount: Int
+    let portfolioImgDtoList: [ImageData]?
 }

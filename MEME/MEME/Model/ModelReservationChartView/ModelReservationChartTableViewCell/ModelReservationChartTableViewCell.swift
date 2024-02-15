@@ -40,19 +40,22 @@ class ModelReservationChartTableViewCell: UITableViewCell {
     }
     
     func configure(with data: SearchResultData) {
-        if let urlString = data.portfolioImgDtoList?.portfolioImgSrc, let url = URL(string: urlString) {
-            AF.request(url).responseData { response in
-                switch response.result {
-                case .success(let data):
-                    self.makeupImgView.image = UIImage(data: data)
-                case .failure(let error):
-                    print(error)
-                    self.makeupImgView.image = UIImage(named: "placeholder")
-                }
+        if let urlString = data.portfolioImgDtoList?.first?.portfolioImgSrc, let url = URL(string: urlString) {
+                URLSession.shared.dataTask(with: url) { data, response, error in
+                    if let data = data {
+                        DispatchQueue.main.async {
+                            self.makeupImgView.image = UIImage(data: data)
+                        }
+                    } else if let error = error {
+                        print(error.localizedDescription)
+                        DispatchQueue.main.async {
+                            self.makeupImgView.image = UIImage(named: "ex_artist_img")
+                        }
+                    }
+                }.resume()
+            } else {
+                makeupImgView.image = UIImage(named: "ex_artist_img")
             }
-        } else {
-            makeupImgView.image = UIImage(named: "placeholder")
-        }
 
         if let categoryEnum = SearchCategory(rawValue: data.category) {
                 makeupSortLabel.text = mapSearchCategoryToDisplayName(categoryEnum)
