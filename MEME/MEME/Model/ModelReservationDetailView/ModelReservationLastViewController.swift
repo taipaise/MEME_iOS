@@ -10,6 +10,11 @@ import SnapKit
 
 class ModelReservationLastViewController: UIViewController {
     // MARK: - Properties
+    var makeupName: String?
+    var reservationDateText: String?
+    var artistName: String?
+    var locationText: String?
+    
     private var backgrounImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "img_lastReservation"))
         imageView.contentMode = .scaleAspectFit
@@ -107,6 +112,20 @@ class ModelReservationLastViewController: UIViewController {
         view.backgroundColor = .white
         navigationController?.setNavigationBarHidden(true, animated: false)
         
+        makeupNameLabel.text = makeupName
+        reservationDateLabel.text = reservationDateText
+        reservationArtistNameLabel.text = artistName
+        reservationLocationLabel.text = locationText
+        
+        let modelId: Int = 1
+        let portfolioId: Int = 1
+        let date: String = "2024-02-20"
+        let time: ReservationTimes = ._12_30
+        let dayOfWeek: DayOfWeek = .MON
+        let location: String = "서울 강남구"
+        
+        postModelReservations(modelId: modelId, portfolioId: portfolioId, date: date, time: time, dayOfWeek: dayOfWeek, location: location)
+        
         configureSubviews()
         makeConstraints()
     }
@@ -192,4 +211,22 @@ class ModelReservationLastViewController: UIViewController {
         }
     }
 }
+
+//MARK: -API 통신 메소드
+extension ModelReservationLastViewController {
+    func postModelReservations(modelId: Int, portfolioId: Int, date: String, time: ReservationTimes, dayOfWeek: DayOfWeek, location: String) {
+        ReservationManager.shared.postReservation(modelId: modelId, portfolioId: portfolioId, date: date, time: time, dayOfWeek: dayOfWeek, location: location) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let reservationResponse):
+                    print("모델 예약 완료: \(reservationResponse)")
+
+                case .failure(let error):
+                    print("모델 예약 실패: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+}
+
 

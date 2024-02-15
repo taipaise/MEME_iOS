@@ -16,10 +16,14 @@ struct SearchResultDTO: Codable {
 }
 
 struct SearchData: Codable {
-    let content: [PortfolioData]?
+    let content: [SearchResultData]?
+    let currentPage: Int
+    let pageSize: Int
+    let totalNumber: Int?
+    let totalPage: Int
 }
 
-struct PortfolioData: Codable {
+struct SearchResultData: Codable {
     let portfolioId: Int
     let category: String
     let artistNickName: String

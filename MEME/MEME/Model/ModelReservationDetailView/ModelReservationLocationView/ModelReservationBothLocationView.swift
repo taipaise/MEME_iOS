@@ -119,6 +119,13 @@ class  ModelReservationBothLocationView: UIView {
         sender.layer.borderWidth = 0
         sender.setTitleColor(.white, for: .normal)
         
+//        if sender == goShopButton {
+//                selectedLocationType = .shop
+//                selectedShopLocation = "샵 주소"
+//            } else if sender == comeVisitButton {
+//                selectedLocationType = .visit
+//            }
+        
         if let makeupLocationData = makeupLocationData {
             updateSelectedOptionView(with: makeupLocationData, selectedButton: sender)
         }
@@ -166,3 +173,4 @@ class  ModelReservationBothLocationView: UIView {
             self.makeupLocationData = data
         }
 }
+

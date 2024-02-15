@@ -9,6 +9,8 @@ import UIKit
 import SnapKit
 // 예시 데이터 구조 -> 이후 삭제 필요
 class ModelReservationViewController: UIViewController {
+    var portfolioId: Int?
+    
     // 예시 API 호출 이미지  -> 이후 삭제 필요
     let imageUrlsFromAPI: [String] = ["https://images.unsplash.com/photo-1620613908146-bb9a8bbb7eca?q=80&w=1854&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
         "https://images.unsplash.com/photo-1594465919760-441fe5908ab0?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D", "https://images.unsplash.com/photo-1629297777138-6ae859d4d6df?q=80&w=1964&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -207,6 +209,9 @@ class ModelReservationViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "예약하기")
         
+        if let portfolioId = portfolioId {
+            fetchPortfolioDetail(portfolioId: portfolioId)
+        }
         fetchImagesFromAPI()
         setupSegmentedControl()
 
@@ -553,32 +558,62 @@ extension UIScrollView {
 extension ModelReservationViewController {
     func postFavoritePortfolio() {
         //ID 수정 필요
-        let modelId = 6
-        let portfolioId = 4
+        let modelId = 2
+        let portfolioId = 1
         
         MyPageManager.shared.postFavoritePortfolio(modelId: modelId, portfolioId: portfolioId) { [weak self] result in
             switch result {
             case .success(let response):
                 print("Favorite portfolio added: \(response.message)")
             case .failure(let error):
-                print("Error adding favorite portfolio: \(error)")
+                if let responseData = error.response {
+                    let responseString = String(data: responseData.data, encoding: .utf8)
+                    print("Received error response: \(responseString ?? "no data")")
+                }
             }
         }
 
     }
     func deleteFavoritePortfolio() {
         //ID 수정 필요
-        let modelId = 6
-        let portfolioId = 4
+        let modelId = 2
+        let portfolioId = 1
         
         MyPageManager.shared.deleteFavoritePortfolio(modelId: modelId, portfolioId: portfolioId) { [weak self] result in
             switch result {
             case .success(let response):
                 print("Favorite portfolio deleted: \(response.message)")
             case .failure(let error):
-                print("Error deleting favorite portfolio: \(error)")
+                if let responseData = error.response {
+                    let responseString = String(data: responseData.data, encoding: .utf8)
+                    print("Received error response: \(responseString ?? "no data")")
+                }
             }
         }
         
+    }
+}
+
+extension ModelReservationViewController {
+    private func fetchPortfolioDetail(portfolioId: Int) {
+        PortfolioManager.shared.getPortfolioDetail(portfolioId: portfolioId) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let portfolioDetail):
+                    if let jsonData = try? JSONEncoder().encode(portfolioDetail),
+                       let jsonString = String(data: jsonData, encoding: .utf8) {
+                        print("Received portfolio detail: \(jsonString)")
+                    } else {
+                        print("Received portfolio detail, but couldn't convert it to JSON string")
+                    }
+
+                case .failure(let error):
+                    if let responseData = error.response {
+                        let responseString = String(data: responseData.data, encoding: .utf8)
+                        print("Received error response: \(responseString ?? "no data")")
+                    }
+                }
+            }
+        }
     }
 }

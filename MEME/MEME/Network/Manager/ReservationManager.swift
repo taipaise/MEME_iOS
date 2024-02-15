@@ -24,7 +24,7 @@ final class ReservationManager {
         time: ReservationTimes,
         dayOfWeek: DayOfWeek,
         location: String,
-        completion: @escaping (Result<Response, MoyaError>) -> Void
+        completion: @escaping (Result<PostReservationDTO, MoyaError>) -> Void
     ) {
         provider.request(api: .postReservation(
             modelId: modelId,
@@ -34,7 +34,17 @@ final class ReservationManager {
             dayOfWeek: dayOfWeek,
             location: location
         )) { result in
-            completion(result)
+            switch result {
+            case .success(let response):
+                do {
+                    let reservationResponse = try JSONDecoder().decode(PostReservationDTO.self, from: response.data)
+                    completion(.success(reservationResponse))
+                } catch let error {
+                    completion(.failure(MoyaError.underlying(error, response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
     
@@ -102,4 +112,26 @@ final class ReservationManager {
             }
         }
     }
+    
+    // MARK: -예약 상태 변경 API
+//    func alterationReservation(
+//        reservationId: Int,
+//        status: String,
+//        completion: @escaping (Result<alterationReservationDTO, MoyaError>) -> Void
+//    ) {
+//        provider.request(api: .alterationReservation(reservationId: Int,
+//                                                     status: String)) { result in
+//            switch result {
+//            case .success(let response):
+//                do {
+//                    let updateResponse = try JSONDecoder().decode(alterationReservationDTO.self, from: response.data)
+//                    completion(.success(updateResponse))
+//                } catch let error {
+//                    completion(.failure(MoyaError.underlying(error, response)))
+//                }
+//            case .failure(let error):
+//                completion(.failure(error))
+//            }
+//        }
+//    }
 }

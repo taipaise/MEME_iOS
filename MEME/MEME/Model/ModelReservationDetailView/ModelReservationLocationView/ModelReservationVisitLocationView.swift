@@ -29,7 +29,7 @@ class ModelReservationVisitLocationView: UIView, UITextFieldDelegate {
         
         return label
     }()
-    private var visitLocationTextField: UITextField = {
+    var visitLocationTextField: UITextField = {
         let textField = UITextField()
         let placeholderText = " 정확한 위치를 입력해주세요."
         textField.attributedPlaceholder = NSAttributedString(string: placeholderText, attributes: [NSAttributedString.Key.foregroundColor: UIColor.gray400])

@@ -11,6 +11,7 @@ import Moya
 
 final class ModelHomeViewController: UIViewController {
     // MARK: - Properties
+    
     private let scrollView = UIScrollView()
     private let contentsView = UIView()
     private var memeLogoImageView: UIImageView = {
@@ -119,7 +120,7 @@ final class ModelHomeViewController: UIViewController {
     private var modelReservations: [ReservationData]? {
         didSet { self.modelReservationCollectionView.reloadData() }
     }
-    private var makeupCards: [MakeupCardModel]? {
+    private var makeupCards: [Portfolio]? {
         didSet { self.recomandReservationCollectionView.reloadData() }
     }
     
@@ -135,6 +136,9 @@ final class ModelHomeViewController: UIViewController {
         configureSubviews()
         makeConstraints()
         setupSearchBar()
+        
+        getRecommendArtistByReview()
+        getRecommendArtistByRecent()
         
     }
     // MARK: - configureSubviews
@@ -311,12 +315,12 @@ extension ModelHomeViewController: UICollectionViewDelegate, UICollectionViewDat
             case 0:
                 return 1
             default:
-                return modelReservations?.isEmpty ?? true ? 0 : modelReservations?.count ?? 0
+                return modelReservations?.count ?? 0
             }
            } else if collectionView == recomandReservationCollectionView {
-               return makeupCards?.count ?? 3
+               return makeupCards?.count ?? 0
            } else if collectionView == recomandHastyReservationCollectionView {
-               return makeupCards?.count ?? 3
+               return makeupCards?.count ?? 0
            }
            return 0
         
@@ -337,19 +341,21 @@ extension ModelHomeViewController: UICollectionViewDelegate, UICollectionViewDat
                     guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.identifier, for: indexPath) as? ModelReservationConfirmViewCell, let reservation = modelReservations?[indexPath.row] else {
                         fatalError("셀 타입 캐스팅 실패...")
                     }
-                    cell.configureModelReservationConfirmView(with: reservation)
+                    cell.configure(with: reservation)
                     return cell
                 }
             }
         } else if collectionView == recomandReservationCollectionView {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectMakeupCardViewCell.identifier, for: indexPath) as? SelectMakeupCardViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectMakeupCardViewCell.identifier, for: indexPath) as? SelectMakeupCardViewCell, let card = makeupCards?[indexPath.row] else {
                 fatalError("셀 타입 캐스팅 실패...")
             }
+            cell.configure(with: card)
             return cell
         } else if collectionView == recomandHastyReservationCollectionView {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectMakeupCardViewCell.identifier, for: indexPath) as? SelectMakeupCardViewCell else {
+            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectMakeupCardViewCell.identifier, for: indexPath) as? SelectMakeupCardViewCell, let card = makeupCards?[indexPath.row] else {
                 fatalError("셀 타입 캐스팅 실패...")
             }
+            cell.configure(with: card)
             return cell
         }
         return UICollectionViewCell()
@@ -385,7 +391,7 @@ extension ModelHomeViewController: UICollectionViewDelegateFlowLayout {
             let reservationVC = ModelReservationViewController()
             reservationVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(reservationVC, animated: true)
-        }
+        } 
     }
 }
 
@@ -402,17 +408,76 @@ extension ModelHomeViewController: UISearchBarDelegate {
 //MARK: -API 통신 메소드
 extension ModelHomeViewController {
     func showModelReservations() {
-        ReservationManager.shared.getModelReservation(modelId: 6) { [weak self] result in
+        ReservationManager.shared.getModelReservation(modelId: 1) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let reservationResponse):
-                    self?.modelReservations = reservationResponse.data
                     print("모델 예약 정보 조회 성공: \(reservationResponse)")
+                    let todaysReservations = reservationResponse.data?.filter { reservationData in
+                        let reservationDate = self?.dateFromString(reservationData.reservationDate)
+                        return self?.isToday(reservationDate) ?? false
+                    }
+                    self?.modelReservations = todaysReservations
+                    self?.modelReservationCollectionView.reloadData()
                     
                 case .failure(let error):
                     print("모델 예약 정보 조회 실패: \(error.localizedDescription)")
+                    if let responseData = error.response {
+                        let responseString = String(data: responseData.data, encoding: .utf8)
+                        print("Received error response: \(responseString ?? "no data")")
+                    }
                 }
             }
         }
+    }
+    func getRecommendArtistByReview() {
+        RecommendManager.shared.getRecommendArtistByReview { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let recommendResponse):
+                    self?.makeupCards = recommendResponse.data
+                    self?.recomandReservationCollectionView.reloadData()
+                    print("아티스트 추천 (리뷰순) 조회 성공: \(recommendResponse)")
+                case .failure(let error):
+                    print("아티스트 추천 (리뷰순) 조회 실패: \(error.localizedDescription)")
+                    if let responseData = error.response {
+                        let responseString = String(data: responseData.data, encoding: .utf8)
+                        print("Received error response: \(responseString ?? "no data")")
+                    }
+                }
+            }
+        }
+    }
+    
+    func getRecommendArtistByRecent() {
+        RecommendManager.shared.getRecommendArtistByRecent { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    self?.makeupCards = response.data
+                    self?.recomandHastyReservationCollectionView.reloadData()
+                    print("아티스트 추천 (최신 등록 순) 조회 성공: \(response)")
+                case .failure(let error):
+                    print("아티스트 추천 (최신 등록 순) 조회 실패: \(error.localizedDescription)")
+                    if let responseData = error.response {
+                        let responseString = String(data: responseData.data, encoding: .utf8)
+                        print("Received error response: \(responseString ?? "no data")")
+                    }
+                }
+            }
+        }
+    }
+    func dateFromString(_ dateString: String) -> Date? {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        let date = formatter.date(from: dateString)
+        return date
+    }
+
+    
+    func isToday(_ date: Date?) -> Bool {
+        guard let date = date else { return false }
+        print(Calendar.current.isDateInToday(date))
+        return Calendar.current.isDateInToday(date)
     }
 }

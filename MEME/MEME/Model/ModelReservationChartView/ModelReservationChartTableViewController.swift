@@ -13,10 +13,28 @@ class ModelReservationChartViewController: UIViewController {
     
     // MARK: - Properties
     var selectedCategory: String?
-    var selectedArtistName: String?
-    var searchKeyword: String?
+    var selectedSortOption: String = "리뷰순"
     
-    private let navigationBar = NavigationBarView()
+    var currentPage: Int = 1
+    var totalPage: Int = 1
+    var isLoading: Bool = false
+    var searchResults: [SearchResultData] = []
+    
+    private var navigationBarView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        return view
+    }()
+    private var navigationTitleLabel: UILabel = {
+        let label = UILabel()
+        label.text = "예약 하기"
+        label.textColor = .black
+        label.font = .pretendard(to: .regular, size: 16)
+        
+        return label
+    }()
+    
     let buttonScrollView = UIScrollView()
     private let buttonsStackView = UIStackView()
     
@@ -118,24 +136,21 @@ class ModelReservationChartViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationController?.setNavigationBarHidden(true, animated: false)
-        navigationBar.delegate = self
-        navigationBar.configure(title: "예약 하기")
 
+        selectButton(allButton)
         setupButtonsStackView()
         setupButtonsAction()
         selectButton(allButton)
         setupReservationChartTableView()
         configureSubviews()
         makeConstraints()
-        
-        if let category = selectedCategory {
-            activateButtonForCategory(category)
-        }
+        fetchSearchResultsAll()
     }
     
     // MARK: - configureSubviews
     func configureSubviews() {
-        view.addSubview(navigationBar)
+        view.addSubview(navigationBarView)
+        navigationBarView.addSubview(navigationTitleLabel)
         buttonScrollView.showsHorizontalScrollIndicator = false
         view.addSubview(buttonScrollView)
         view.addSubview(lineView)
@@ -149,12 +164,16 @@ class ModelReservationChartViewController: UIViewController {
     
     // MARK: - makeConstraints
     func makeConstraints() {
-        navigationBar.snp.makeConstraints {make in
+        navigationBarView.snp.makeConstraints {make in
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(48)
         }
+        navigationTitleLabel.snp.makeConstraints {make in
+            make.centerY.equalTo(navigationBarView.snp.centerY)
+            make.centerX.equalTo(navigationBarView.snp.centerX)
+        }
         buttonScrollView.snp.makeConstraints {make in
-            make.top.equalTo(navigationBar.snp.bottom).offset(12)
+            make.top.equalTo(navigationBarView.snp.bottom).offset(12)
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview()
             make.height.equalTo(48)
@@ -185,26 +204,15 @@ class ModelReservationChartViewController: UIViewController {
         }
     }
     //MARK: -Action
-    private func activateButtonForCategory(_ category: String) {
-        switch category {
-        case "데일리 메이크업":
-            self.selectButton(self.dailyButton)
-        case "배우 메이크업":
-            self.selectButton(self.actorButton)
-        case "면접 메이크업":
-            self.selectButton(self.interviewButton)
-        case "파티/이벤트\n메이크업":
-            self.selectButton(self.partyButton)
-        case "웨딩 메이크업":
-            self.selectButton(self.weddingButton)
-        case "특수 메이크업":
-            self.selectButton(self.specialButton)
-        case "스튜디오\n메이크업":
-            self.selectButton(self.studioButton)
-        case "기타(속눈썹,\n퍼스널 컬러)":
-            self.selectButton(self.etcButton)
-        default:
-            break
+    @objc func buttonTapped(_ sender: ModelReservationTypeButton) {
+        selectButton(sender)
+
+        guard let categoryTitle = sender.title(for: .normal) else { return }
+
+        if categoryTitle == "전체" {
+            fetchSearchResultsAll()
+        } else {
+            fetchSearchResultsByCategory(categoryTitle)
         }
     }
     
@@ -225,13 +233,11 @@ class ModelReservationChartViewController: UIViewController {
         }
     }
 
-    @objc func buttonTapped(_ sender: ModelReservationTypeButton) {
-        selectButton(sender)
-    }
-
     private func selectButton(_ button: ModelReservationTypeButton) {
         selectedButton?.backgroundColor = .white
         button.backgroundColor = .mainBold
+        selectedButton?.isSelected = false
+        button.isSelected = true
         selectedButton = button
     }
     
@@ -241,12 +247,62 @@ class ModelReservationChartViewController: UIViewController {
         sortOptionsVC.transitioningDelegate = self
         sortOptionsVC.onOptionSelected = { [weak self] selectedTitle in
             self?.sortButton.text = selectedTitle
+            self?.selectedSortOption = selectedTitle
         }
         self.present(sortOptionsVC, animated: true)
         }
+    func updateSortOption(newSortOption: String) {
+        self.selectedSortOption = newSortOption
+
+        // 현재 선택된 카테고리에 따라 API 호출
+        if selectedButton == allButton {
+            fetchSearchResultsAll()
+        } else if let categoryTitle = selectedButton?.title(for: .normal) {
+            fetchSearchResultsByCategory(categoryTitle)
+        }
+    }
+
    
     
     //MARK: -Helpers
+    private func mapSortParameter(from selectedSortOption: String) -> SearchSort? {
+        switch selectedSortOption {
+        case "리뷰 순":
+            return .review
+        case "가격 낮은 순":
+            return .asc
+        case "가격 높은 순":
+            return .desc
+        default:
+            return nil
+        }
+    }
+    
+    private func mapCategoryNameToSearchCategory(_ name: String) -> SearchCategory? {
+        switch name {
+        case "전체":
+            return nil
+        case "데일리 메이크업":
+            return .DAILY
+        case "배우 메이크업":
+            return .ACTOR
+        case "면접 메이크업":
+            return .INTERVIEW
+        case "파티/이벤트 메이크업":
+            return .PARTY
+        case "웨딩 메이크업":
+            return .WEDDING
+        case "특수 메이크업":
+            return .PROSTHETIC
+        case "스튜디오 메이크업":
+            return .STUDIO
+        case "기타 메이크업":
+            return .ETC
+        default:
+            return nil
+        }
+    }
+    
     private func setupButtonsStackView() {
         buttonsStackView.axis = .horizontal
         buttonsStackView.spacing = 5
@@ -281,17 +337,13 @@ class ModelReservationChartViewController: UIViewController {
         reservationChartTableView.register(ModelReservationChartTableViewCell, forCellReuseIdentifier: "ModelReservationChartTableViewCell")
         
     }
-    // MARK: - Navigation
-
-
 }
 
 //MARK: -UITableViewDataSource, UITableViewDelegate
 extension ModelReservationChartViewController: UITableViewDataSource, UITableViewDelegate {
     //cell의 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //api 호출 한 수 만큼 수정
-        return 10
+        return searchResults.count
     }
     
     //cell의 생성
@@ -300,6 +352,9 @@ extension ModelReservationChartViewController: UITableViewDataSource, UITableVie
                 fatalError("셀 타입 캐스팅 실패...")
             }
             cell.selectionStyle = .none
+            let data = searchResults[indexPath.row]
+            cell.configure(with: data)
+        
             return cell
     }
     
@@ -313,6 +368,25 @@ extension ModelReservationChartViewController: UITableViewDataSource, UITableVie
         }
 }
 
+//MARK: - UIScrollViewDelegate
+extension ModelReservationChartViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        let offsetY = scrollView.contentOffset.y
+        let contentHeight = scrollView.contentSize.height
+        let height = scrollView.frame.height
+        
+        if offsetY > contentHeight - height, !isLoading, currentPage < totalPage {
+            currentPage += 1
+ 
+            if let category = selectedCategory {
+                fetchSearchResultsByCategory(category)
+            } else {
+                fetchSearchResultsAll()
+            }
+        }
+    }
+}
+
 //MARK: - UIViewControllerTransitioningDelegate
 extension ModelReservationChartViewController: UIViewControllerTransitioningDelegate {
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
@@ -320,17 +394,71 @@ extension ModelReservationChartViewController: UIViewControllerTransitioningDele
     }
 }
 
-// MARK: -BackButtonTappedDelegate
-extension ModelReservationChartViewController: BackButtonTappedDelegate  {
-    func backButtonTapped() {
-        if let navigationController = self.navigationController {
-            navigationController.popViewController(animated: true)
+extension ModelReservationChartViewController {
+    //카테고리 검색
+    func fetchSearchResultsByCategory(_ categoryName: String) {
+        guard let searchCategory = mapCategoryNameToSearchCategory(categoryName), !isLoading else { return }
+        isLoading = true
+        let sortParameter = mapSortParameter(from: selectedSortOption)
+        
+        SearchManager.shared.getSearchCategory(category: searchCategory, page: currentPage, sort: sortParameter) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.isLoading = false
+                
+                switch result {
+                case .success(let searchResultDTO):
+                    self.handleSearchResults(searchResultDTO)
+                case .failure(let error):
+                    self.numLabel.text = "0"
+                    if let responseData = error.response {
+                        let responseString = String(data: responseData.data, encoding: .utf8)
+                        print("Received error response: \(responseString ?? "no data")")
+                    }
+                }
+            }
         }
     }
-}
+    
+    func fetchSearchResultsAll() {
+        guard !isLoading else { return }
+        isLoading = true
+        let sortParameter = mapSortParameter(from: selectedSortOption)
+        
+        SearchManager.shared.getSearchAll(page: currentPage, sort: sortParameter) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.isLoading = false
+                
+                switch result {
+                case .success(let searchResultDTO):
+                    self.handleSearchResults(searchResultDTO)
+                case .failure(let error):
+                    self.numLabel.text = "0"
+                    if let responseData = error.response {
+                        let responseString = String(data: responseData.data, encoding: .utf8)
+                        print("Received error response: \(responseString ?? "no data")")
+                    }
+                    
+                }
+            }
+        }
+    }
 
-//MARK: -API 통신 메소드
-extension ModelReservationChartTableViewController {
-    
-    
+    private func handleSearchResults(_ searchResultDTO: SearchResultDTO) {
+        if let totalNumber = searchResultDTO.data?.totalNumber {
+            self.numLabel.text = "\(totalNumber)"
+        } else {
+            self.numLabel.text = "0"
+        }
+        
+        if currentPage == 1 {
+            searchResults = searchResultDTO.data?.content ?? []
+        } else {
+            searchResults.append(contentsOf: searchResultDTO.data?.content ?? [])
+        }
+        
+        totalPage = searchResultDTO.data?.totalPage ?? 0
+        reservationChartTableView.reloadData()
+    }
 }

@@ -11,29 +11,14 @@ import Foundation
 struct ReservationDTO: Codable {
     let result: String
     let message: String
-    var data: [ReservationData]?
-
-    enum CodingKeys: String, CodingKey {
-        case result, message, data
-    }
-
-    init(from decoder: Decoder) throws {
-        let container = try decoder.container(keyedBy: CodingKeys.self)
-        result = try container.decode(String.self, forKey: .result)
-        message = try container.decode(String.self, forKey: .message)
-        
-        if let dataValue = try? container.decodeIfPresent([ReservationData].self, forKey: .data) {
-            data = dataValue
-        } else {
-            data = nil
-        }
-    }
+    let data: [ReservationData]?
+    let statusCode: Int
 }
 
 struct ReservationData: Codable {
     let reservationId: Int
     let portfolioId: Int
-    let modelName: String
+    let modelNickName: String
     let artistNickName: String
     let makeupName: String
     let price: Int
@@ -94,4 +79,9 @@ struct PostReservationDTO: Codable {
         let SAT: String?
         let SUN: String?
     }
+}
+
+// MARK: -예약 상태 변경 DTO
+struct alterationReservationDTO: Codable {
+    
 }

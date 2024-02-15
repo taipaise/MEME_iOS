@@ -31,7 +31,6 @@
 		2D0A19052B4ED07B00C1CECA /* SelectMakeupCardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D0A19042B4ED07B00C1CECA /* SelectMakeupCardViewCell.xib */; };
 		2D0A190A2B4EEDB500C1CECA /* CategorySearchViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D0A19092B4EEDB500C1CECA /* CategorySearchViewCell.xib */; };
 		2D0A190E2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0A190D2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift */; };
-		2D0A19142B4F08DC00C1CECA /* ModelUserDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0A19132B4F08DC00C1CECA /* ModelUserDataManager.swift */; };
 		2D106F472B7025DB00F3C253 /* ModelReservationVisitLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D106F462B7025DB00F3C253 /* ModelReservationVisitLocationView.swift */; };
 		2D106F4A2B7028C200F3C253 /* ModelReservationShopLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D106F492B7028C200F3C253 /* ModelReservationShopLocationView.swift */; };
 		2D106F4C2B702B5100F3C253 /* ModelReservationBothLocationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D106F4B2B702B5100F3C253 /* ModelReservationBothLocationView.swift */; };
@@ -44,9 +43,7 @@
 		2D5C05A12B60269900EDC69F /* ShowReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C05A02B60269900EDC69F /* ShowReviewTableViewCell.swift */; };
 		2D5C05A42B60433000EDC69F /* ModelReservationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C05A32B60433000EDC69F /* ModelReservationDetailViewController.swift */; };
 		2D62E23E2B5428CC004E8299 /* ModelNonReservationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E23D2B5428CC004E8299 /* ModelNonReservationViewCell.swift */; };
-		2D62E2412B542BD0004E8299 /* ModelUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2402B542BD0004E8299 /* ModelUserModel.swift */; };
 		2D62E24A2B5462B0004E8299 /* SelectMakeupCardViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2492B5462B0004E8299 /* SelectMakeupCardViewCell.swift */; };
-		2D62E24F2B547D39004E8299 /* MakeupCardModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E24E2B547D39004E8299 /* MakeupCardModel.swift */; };
 		2D62E2512B548BAB004E8299 /* ModelSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2502B548BAB004E8299 /* ModelSearchViewController.swift */; };
 		2D62E2552B549407004E8299 /* CategorySearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2542B549407004E8299 /* CategorySearchViewCell.swift */; };
 		2D62E25B2B54A658004E8299 /* RecentSearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2592B54A658004E8299 /* RecentSearchViewCell.swift */; };
@@ -75,6 +72,13 @@
 		2DA208052B7AB5F3006EB9B9 /* SearchCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208042B7AB5F3006EB9B9 /* SearchCategory.swift */; };
 		2DA208072B7ABB2E006EB9B9 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208062B7ABB2E006EB9B9 /* SearchManager.swift */; };
 		2DA208092B7ABE43006EB9B9 /* SearchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208082B7ABE43006EB9B9 /* SearchDTO.swift */; };
+		2DA2080B2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA2080A2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift */; };
+		2DA2080D2B7CB160006EB9B9 /* RecommendAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA2080C2B7CB160006EB9B9 /* RecommendAPI.swift */; };
+		2DA2080F2B7CB425006EB9B9 /* RecommendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA2080E2B7CB425006EB9B9 /* RecommendManager.swift */; };
+		2DA208112B7CB476006EB9B9 /* RecommendDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208102B7CB476006EB9B9 /* RecommendDTO.swift */; };
+		2DA208152B7CF865006EB9B9 /* PortfolioAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208142B7CF865006EB9B9 /* PortfolioAPI.swift */; };
+		2DA208172B7CF87B006EB9B9 /* PortfolioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */; };
+		2DA208192B7CF9EE006EB9B9 /* PortfolioDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */; };
 		312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */; };
 		312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EE2B52DE1900CACF20 /* Pretendard-Light.otf */; };
 		312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EB2B52DE1900CACF20 /* Pretendard-Medium.otf */; };
@@ -233,7 +237,6 @@
 		2D0A19042B4ED07B00C1CECA /* SelectMakeupCardViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectMakeupCardViewCell.xib; sourceTree = "<group>"; };
 		2D0A19092B4EEDB500C1CECA /* CategorySearchViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CategorySearchViewCell.xib; sourceTree = "<group>"; };
 		2D0A190D2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationConfirmViewCell.swift; sourceTree = "<group>"; };
-		2D0A19132B4F08DC00C1CECA /* ModelUserDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelUserDataManager.swift; sourceTree = "<group>"; };
 		2D106F462B7025DB00F3C253 /* ModelReservationVisitLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationVisitLocationView.swift; sourceTree = "<group>"; };
 		2D106F492B7028C200F3C253 /* ModelReservationShopLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationShopLocationView.swift; sourceTree = "<group>"; };
 		2D106F4B2B702B5100F3C253 /* ModelReservationBothLocationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationBothLocationView.swift; sourceTree = "<group>"; };
@@ -246,9 +249,7 @@
 		2D5C05A02B60269900EDC69F /* ShowReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowReviewTableViewCell.swift; sourceTree = "<group>"; };
 		2D5C05A32B60433000EDC69F /* ModelReservationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationDetailViewController.swift; sourceTree = "<group>"; };
 		2D62E23D2B5428CC004E8299 /* ModelNonReservationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelNonReservationViewCell.swift; sourceTree = "<group>"; };
-		2D62E2402B542BD0004E8299 /* ModelUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelUserModel.swift; sourceTree = "<group>"; };
 		2D62E2492B5462B0004E8299 /* SelectMakeupCardViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SelectMakeupCardViewCell.swift; sourceTree = "<group>"; };
-		2D62E24E2B547D39004E8299 /* MakeupCardModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeupCardModel.swift; sourceTree = "<group>"; };
 		2D62E2502B548BAB004E8299 /* ModelSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSearchViewController.swift; sourceTree = "<group>"; };
 		2D62E2542B549407004E8299 /* CategorySearchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySearchViewCell.swift; sourceTree = "<group>"; };
 		2D62E2592B54A658004E8299 /* RecentSearchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchViewCell.swift; sourceTree = "<group>"; };
@@ -277,6 +278,13 @@
 		2DA208042B7AB5F3006EB9B9 /* SearchCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCategory.swift; sourceTree = "<group>"; };
 		2DA208062B7ABB2E006EB9B9 /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		2DA208082B7ABE43006EB9B9 /* SearchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDTO.swift; sourceTree = "<group>"; };
+		2DA2080A2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSearchResultViewController.swift; sourceTree = "<group>"; };
+		2DA2080C2B7CB160006EB9B9 /* RecommendAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendAPI.swift; sourceTree = "<group>"; };
+		2DA2080E2B7CB425006EB9B9 /* RecommendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendManager.swift; sourceTree = "<group>"; };
+		2DA208102B7CB476006EB9B9 /* RecommendDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendDTO.swift; sourceTree = "<group>"; };
+		2DA208142B7CF865006EB9B9 /* PortfolioAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioAPI.swift; sourceTree = "<group>"; };
+		2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioManager.swift; sourceTree = "<group>"; };
+		2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDTO.swift; sourceTree = "<group>"; };
 		312DF7612B669CC30060BDF0 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		312DF7632B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHeaderSupplementaryView.swift; sourceTree = "<group>"; };
 		3142B9552B4CFFED0066CD5A /* MEME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEME.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -440,8 +448,6 @@
 			isa = PBXGroup;
 			children = (
 				315AC1C42B70CE02003FD1A1 /* ModelHomeViewController.swift */,
-				2D62E23F2B542BA2004E8299 /* ModelUserData */,
-				2D62E23C2B54191C004E8299 /* MakeupCardData */,
 				2D62E2352B541798004E8299 /* SelectMakeupCardCell */,
 				2D62E2382B541818004E8299 /* ModelReservationCell */,
 			);
@@ -521,29 +527,13 @@
 			path = ModelNonReservationCell;
 			sourceTree = "<group>";
 		};
-		2D62E23C2B54191C004E8299 /* MakeupCardData */ = {
-			isa = PBXGroup;
-			children = (
-				2D62E24E2B547D39004E8299 /* MakeupCardModel.swift */,
-			);
-			path = MakeupCardData;
-			sourceTree = "<group>";
-		};
-		2D62E23F2B542BA2004E8299 /* ModelUserData */ = {
-			isa = PBXGroup;
-			children = (
-				2D62E2402B542BD0004E8299 /* ModelUserModel.swift */,
-				2D0A19132B4F08DC00C1CECA /* ModelUserDataManager.swift */,
-			);
-			path = ModelUserData;
-			sourceTree = "<group>";
-		};
 		2D62E2532B548BBA004E8299 /* ModelSearchView */ = {
 			isa = PBXGroup;
 			children = (
 				2D62E2582B54A60E004E8299 /* RecentSearchViewCell */,
 				2D62E2572B549491004E8299 /* CategorySearchViewCell */,
 				2D62E2502B548BAB004E8299 /* ModelSearchViewController.swift */,
+				2DA2080A2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift */,
 			);
 			path = ModelSearchView;
 			sourceTree = "<group>";
@@ -843,6 +833,8 @@
 				315FB8582B6DE1B00068163C /* AuthAPI.swift */,
 				2DA207F62B7A8D9D006EB9B9 /* MyPageAPI.swift */,
 				2DA208002B7AB514006EB9B9 /* SearchAPI.swift */,
+				2DA2080C2B7CB160006EB9B9 /* RecommendAPI.swift */,
+				2DA208142B7CF865006EB9B9 /* PortfolioAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -855,6 +847,8 @@
 				315FB8562B6DE1480068163C /* AuthManager.swift */,
 				2DA207F42B7A8D3D006EB9B9 /* MyPageManager.swift */,
 				2DA208062B7ABB2E006EB9B9 /* SearchManager.swift */,
+				2DA2080E2B7CB425006EB9B9 /* RecommendManager.swift */,
+				2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -866,6 +860,8 @@
 				2D7D747D2B769C9E005BDFD5 /* ReservationDTO.swift */,
 				2DA207FE2B7A9B05006EB9B9 /* MyPageDTO.swift */,
 				2DA208082B7ABE43006EB9B9 /* SearchDTO.swift */,
+				2DA208102B7CB476006EB9B9 /* RecommendDTO.swift */,
+				2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1373,10 +1369,10 @@
 				2D6F59B32B5C397400CA883A /* SortOptionsViewController.swift in Sources */,
 				2D6F59B82B5C4FB100CA883A /* SortOptionIconView.swift in Sources */,
 				3142B9A72B4D04CA0066CD5A /* LoginViewController.swift in Sources */,
-				2D0A19142B4F08DC00C1CECA /* ModelUserDataManager.swift in Sources */,
 				31F6F8332B52AF8600EC621D /* OnboardingCollectionViewCell.swift in Sources */,
 				CCFC31E62B5C4EAC00C0673A /* InterestArtistViewController.swift in Sources */,
 				3142B9A42B4D03840066CD5A /* ModelTabBarController.swift in Sources */,
+				2DA208152B7CF865006EB9B9 /* PortfolioAPI.swift in Sources */,
 				CCAB5A692B6DD60900067FA4 /* WrittenCollectionViewCell.swift in Sources */,
 				CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */,
 				CCAB5A572B66F44D00067FA4 /* WriteReviewViewController.swift in Sources */,
@@ -1394,8 +1390,8 @@
 				CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */,
 				31B4137C2B6D295900535BB1 /* BusinessIDVerificationManager.swift in Sources */,
 				2D6F59B12B5BF92600CA883A /* ModelReservationTypeViewCell.swift in Sources */,
+				2DA2080F2B7CB425006EB9B9 /* RecommendManager.swift in Sources */,
 				31B65E4D2B6E18BA00628C68 /* ReservationAPI.swift in Sources */,
-				2D62E2412B542BD0004E8299 /* ModelUserModel.swift in Sources */,
 				31B2634C2B57EE7100304FBE /* RoleSelectionViewController.swift in Sources */,
 				095742512B66153E0011B580 /* ArtistPortfolioEditingViewController.swift in Sources */,
 				3142B99B2B4D020E0066CD5A /* NSObject+.swift in Sources */,
@@ -1414,12 +1410,14 @@
 				2D62E25B2B54A658004E8299 /* RecentSearchViewCell.swift in Sources */,
 				2D0A190E2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift in Sources */,
 				2D6F59AB2B5BD07500CA883A /* ModelReservationChartTableViewCell.swift in Sources */,
-				2D62E24F2B547D39004E8299 /* MakeupCardModel.swift in Sources */,
+				2DA208172B7CF87B006EB9B9 /* PortfolioManager.swift in Sources */,
 				315EE2CE2B66566A0042A082 /* RegisterProgressBar.swift in Sources */,
 				31B263432B57EDE300304FBE /* TermsAgreementViewController.swift in Sources */,
+				2DA2080D2B7CB160006EB9B9 /* RecommendAPI.swift in Sources */,
 				CCAB5A672B6D608700067FA4 /* ArtistMyPageViewController.swift in Sources */,
 				091CCCDA2B64158B00ADD21C /* ArtistPortfolioManageViewController.swift in Sources */,
 				3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */,
+				2DA208192B7CF9EE006EB9B9 /* PortfolioDTO.swift in Sources */,
 				2D62E2512B548BAB004E8299 /* ModelSearchViewController.swift in Sources */,
 				312DF7642B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift in Sources */,
 				315FB8592B6DE1B00068163C /* AuthAPI.swift in Sources */,
@@ -1428,6 +1426,7 @@
 				316A92712B66734100E4337D /* BusinessLocationModel.swift in Sources */,
 				315EE2D02B66566A0042A082 /* DetailSettingView.swift in Sources */,
 				2DA207F92B7A8FE4006EB9B9 /* Gender.swift in Sources */,
+				2DA208112B7CB476006EB9B9 /* RecommendDTO.swift in Sources */,
 				2D6F59BF2B5C7D3300CA883A /* ModelReservationTypeButton.swift in Sources */,
 				2D6E4CEE2B6221D800D7F919 /* ModelManagementReservationsDateCollectionViewCell.swift in Sources */,
 				2D6E4CEB2B61FA7D00D7F919 /* ModelReservationLastViewController.swift in Sources */,
@@ -1457,6 +1456,7 @@
 				CCAB5A652B6CFDB300067FA4 /* MyReviewCollectionViewCell.swift in Sources */,
 				31B413842B6D322500535BB1 /* NetworkProvider.swift in Sources */,
 				2D4B7C292B5F294A001E1B09 /* ModelManagementReservationsViewController.swift in Sources */,
+				2DA2080B2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift in Sources */,
 				CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */,
 				31B2636D2B57EECB00304FBE /* BusinessRegistrationViewController.swift in Sources */,
 				2DA207FD2B7A9069006EB9B9 /* PersonalColor.swift in Sources */,
