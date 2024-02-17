@@ -14,7 +14,7 @@ class ModelSearchResultViewController: UIViewController {
     var selectedCategory: String?
     var selectedArtistId: Int?
     var searchKeyword: String?
-    var selectedSortOption: String = "리뷰순"
+    var selectedSortOption: String = "리뷰 순"
     
     var currentPage: Int = 0
     var totalPage: Int = 1
@@ -176,6 +176,19 @@ class ModelSearchResultViewController: UIViewController {
         sortOptionsVC.onOptionSelected = { [weak self] selectedTitle in
             self?.sortButton.text = selectedTitle
             self?.selectedSortOption = selectedTitle
+            self?.currentPage = 0
+            self?.searchResults.removeAll()
+            self?.reservationChartTableView.reloadData()
+            
+            if let category = self?.selectedCategory {
+                self?.fetchSearchResultsByCategory(category)
+            } else if let keyword = self?.searchKeyword, !keyword.isEmpty {
+                self?.fetchSearchResultsByText(keyword)
+            } else if let artistId = self?.selectedArtistId {
+                self?.fetchSearchResultsByArtist(artistId)
+            } else {
+                self?.fetchSearchResultsAll(page: self?.currentPage)
+            }
         }
         self.present(sortOptionsVC, animated: true)
         }
@@ -311,7 +324,7 @@ extension ModelSearchResultViewController {
                 self.numLabel.text = "0"
                 if let responseData = error.response {
                     let responseString = String(data: responseData.data, encoding: .utf8)
-                    print("Received error response: \(responseString ?? "no data")")
+                    print("카테고리 검색 실패: \(responseString ?? "no data")")
                 }
             }
         }
@@ -332,7 +345,7 @@ extension ModelSearchResultViewController {
                 self.numLabel.text = "0"
                 if let responseData = error.response {
                     let responseString = String(data: responseData.data, encoding: .utf8)
-                    print("Received error response: \(responseString ?? "no data")")
+                    print("아티스트 검색 실패: \(responseString ?? "no data")")
                 }
             }
         }
@@ -353,7 +366,7 @@ extension ModelSearchResultViewController {
                 self.numLabel.text = "0"
                 if let responseData = error.response {
                     let responseString = String(data: responseData.data, encoding: .utf8)
-                    print("Received error response: \(responseString ?? "no data")")
+                    print("text 검색 실패: \(responseString ?? "no data")")
                 }
             }
         }
@@ -374,7 +387,7 @@ extension ModelSearchResultViewController {
                 self.numLabel.text = "0"
                 if let responseData = error.response {
                     let responseString = String(data: responseData.data, encoding: .utf8)
-                    print("Received error response: \(responseString ?? "no data")")
+                    print("전체 검색 실패: \(responseString ?? "no data")")
                 }
             }
         }

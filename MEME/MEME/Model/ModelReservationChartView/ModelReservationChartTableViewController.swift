@@ -13,12 +13,17 @@ class ModelReservationChartViewController: UIViewController {
     
     // MARK: - Properties
     var selectedCategory: String?
-    var selectedSortOption: String = "리뷰순"
+    var selectedSortOption: String = "리뷰 순"
     
     var currentPage: Int = 0
     var totalPage: Int = 0
     var isLoading: Bool = false
     var searchResults: [SearchResultData] = []
+    private var isLastPage: Bool {
+        return currentPage >= totalPage-1
+    }
+    
+    var isShowingEmptyState: Bool = false
     
     private var navigationBarView: UIView = {
         let view = UIView()
@@ -131,11 +136,34 @@ class ModelReservationChartViewController: UIViewController {
     }()
     private var reservationChartTableView: UITableView!
     
+    private var emptyStateView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        let label = UILabel()
+        label.text = "검색 결과가 없습니다."
+        label.textColor = .black
+        label.font = .pretendard(to: .regular, size: 16)
+        label.textAlignment = .center
+        view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+        
+        return view
+    }()
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationController?.setNavigationBarHidden(true, animated: false)
+        
+        if let category = selectedCategory {
+            fetchSearchResultsByCategory(category)
+        } else {
+            fetchSearchResultsAll()
+        }
 
         selectButton(allButton)
         setupButtonsStackView()
@@ -144,7 +172,6 @@ class ModelReservationChartViewController: UIViewController {
         setupReservationChartTableView()
         configureSubviews()
         makeConstraints()
-        fetchSearchResultsAll()
     }
     
     // MARK: - configureSubviews
@@ -159,6 +186,8 @@ class ModelReservationChartViewController: UIViewController {
         view.addSubview(sortButton)
         reservationChartTableView.backgroundColor = .white
         view.addSubview(reservationChartTableView)
+        view.addSubview(emptyStateView)
+        emptyStateView.isHidden = true
         
     }
     
@@ -248,20 +277,18 @@ class ModelReservationChartViewController: UIViewController {
         sortOptionsVC.onOptionSelected = { [weak self] selectedTitle in
             self?.sortButton.text = selectedTitle
             self?.selectedSortOption = selectedTitle
+            self?.currentPage = 0
+            self?.searchResults.removeAll()
+            self?.reservationChartTableView.reloadData()
+            
+            if let category = self?.selectedCategory {
+                self?.fetchSearchResultsByCategory(category)
+            } else {
+                self?.fetchSearchResultsAll()
+            }
         }
         self.present(sortOptionsVC, animated: true)
-        }
-    func updateSortOption(newSortOption: String) {
-        self.selectedSortOption = newSortOption
-
-        // 현재 선택된 카테고리에 따라 API 호출
-        if selectedButton == allButton {
-            fetchSearchResultsAll()
-        } else if let categoryTitle = selectedButton?.title(for: .normal) {
-            fetchSearchResultsByCategory(categoryTitle)
-        }
     }
-
    
     
     //MARK: -Helpers
@@ -343,19 +370,27 @@ class ModelReservationChartViewController: UIViewController {
 extension ModelReservationChartViewController: UITableViewDataSource, UITableViewDelegate {
     //cell의 갯수
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return searchResults.count
+        if isShowingEmptyState {
+            return 0
+        } else {
+            return searchResults.count
+        }
     }
     
     //cell의 생성
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "ModelReservationChartTableViewCell", for: indexPath) as? ModelReservationChartTableViewCell else {
+        if isShowingEmptyState {
+            return UITableViewCell()
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ModelReservationChartTableViewCell", for: indexPath) as? ModelReservationChartTableViewCell else {
                 fatalError("셀 타입 캐스팅 실패...")
             }
             cell.selectionStyle = .none
             let data = searchResults[indexPath.row]
             cell.configure(with: data)
-        
+            
             return cell
+        }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -375,7 +410,11 @@ extension ModelReservationChartViewController: UIScrollViewDelegate {
         let contentHeight = scrollView.contentSize.height
         let height = scrollView.frame.height
         
-        if offsetY > contentHeight - height, !isLoading, currentPage < totalPage {
+        guard !isLastPage else {
+            return
+        }
+        
+        if offsetY + height >= contentHeight, !isLoading, !isShowingEmptyState, currentPage < totalPage {
             currentPage += 1
  
             if let category = selectedCategory {
@@ -397,7 +436,11 @@ extension ModelReservationChartViewController: UIViewControllerTransitioningDele
 extension ModelReservationChartViewController {
     //카테고리 검색
     func fetchSearchResultsByCategory(_ categoryName: String) {
-        guard let searchCategory = mapCategoryNameToSearchCategory(categoryName), !isLoading else { return }
+        guard let searchCategory = mapCategoryNameToSearchCategory(categoryName),
+                !isLoading else {
+            return
+        }
+        
         isLoading = true
         let sortParameter = mapSortParameter(from: selectedSortOption)
         
@@ -415,6 +458,9 @@ extension ModelReservationChartViewController {
                         let responseString = String(data: responseData.data, encoding: .utf8)
                         print("카테고리 검색 실패: \(responseString ?? "no data")")
                     }
+                    self.totalPage = 0
+                    self.isShowingEmptyState = true
+                    self.reservationChartTableView.reloadData()
                 }
             }
         }
@@ -432,6 +478,7 @@ extension ModelReservationChartViewController {
                 
                 switch result {
                 case .success(let searchResultDTO):
+                    print(searchResultDTO)
                     self.handleSearchResults(searchResultDTO)
                 case .failure(let error):
                     self.numLabel.text = "0"
@@ -439,22 +486,33 @@ extension ModelReservationChartViewController {
                         let responseString = String(data: responseData.data, encoding: .utf8)
                         print("전체 조회 실패: \(responseString ?? "no data")")
                     }
-                    
+                    self.totalPage = 0
+                    self.isShowingEmptyState = true
+                    self.reservationChartTableView.reloadData()
                 }
             }
         }
     }
-
+    
     private func handleSearchResults(_ searchResultDTO: SearchResultDTO) {
+        searchResults.removeAll()
+        
         if let totalNumber = searchResultDTO.data?.totalNumber {
             self.numLabel.text = "\(totalNumber)"
         } else {
             self.numLabel.text = "0"
         }
         
-        searchResults.append(contentsOf: searchResultDTO.data?.content ?? [])
+        if let content = searchResultDTO.data?.content, !content.isEmpty {
+            isShowingEmptyState = false
+            searchResults.append(contentsOf: content)
+            reservationChartTableView.reloadData()
+            emptyStateView.isHidden = true
+        } else {
+            emptyStateView.isHidden = false
+        }
         
         totalPage = searchResultDTO.data?.totalPage ?? 0
-        reservationChartTableView.reloadData()
     }
 }
+
