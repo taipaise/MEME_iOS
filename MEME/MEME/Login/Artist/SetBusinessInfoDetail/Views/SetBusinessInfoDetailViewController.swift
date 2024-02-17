@@ -7,13 +7,6 @@
 
 import UIKit
 
-
-enum MakeUpLoaction: Int {
-    case shop
-    case visit
-    case any
-}
-
 final class SetBusinessInfoDetailViewController: UIViewController {
     typealias TimeCell = TimeCollectionViewCell
     typealias DataSource = UICollectionViewDiffableDataSource<TimeSection, String>
@@ -46,11 +39,12 @@ final class SetBusinessInfoDetailViewController: UIViewController {
     
     private var selectedFields: Set<Int> = []
     private var selectedWeekDay: Set<Int> = []
-    private var isProgressInShop = false
     private var startTime: String?
     private var endTime: String?
-    private var experience: WorkExperience?
     private var isStart = true
+    private var builder: ArtistProfileInfoBuilder?
+    private var selectedLocation: MakeUpLocation?
+    private var selectedExperience: WorkExperience?
     
     private let amTimes: [String] = [
         "04:00", "04:30",
@@ -121,6 +115,24 @@ final class SetBusinessInfoDetailViewController: UIViewController {
         completeButton.layer.cornerRadius = 10
     }
     
+    func configure(builder: ArtistProfileInfoBuilder) {
+        self.builder = builder
+    }
+    
+    private func setNextButton() {
+        guard
+            !selectedFields.isEmpty,
+            selectedLocation != nil,
+            !selectedWeekDay.isEmpty,
+            startTime != nil,
+            endTime != nil
+        else {
+            completeButton.isEnabled = false
+            return
+        }
+        
+        completeButton.isEnabled = true
+    }
     
     @IBAction func fieldButtonTapped(_ sender: UIButton) {
         let tag = sender.tag
@@ -150,12 +162,19 @@ final class SetBusinessInfoDetailViewController: UIViewController {
             }
         }
         
-        if tag == MakeUpLoaction.visit.rawValue {
-            isProgressInShop = false
+        switch sender.tag {
+        case 0:
+            selectedLocation = .SHOP
+        case 1:
+            selectedLocation = .VISIT
+        default:
+            selectedLocation = .BOTH
+        }
+        
+        if selectedLocation == .VISIT {
             textField.text = nil
             textField.isEnabled = false
         } else {
-            isProgressInShop = true
             textField.isEnabled = true
         }
     }
@@ -186,6 +205,39 @@ final class SetBusinessInfoDetailViewController: UIViewController {
     }
 
     @IBAction private func completionButtonTapped(_ sender: Any) {
+        guard 
+            var builder = builder,
+            let selectedLocation = selectedLocation,
+            let startTime = startTime,
+            let endTime = endTime
+        else { return }
+        
+        var specialization: [String] = []
+        MakeUpCategory.allCases.forEach { category in
+            if selectedFields.contains(category.intVal) {
+                specialization.append(category.rawValue)
+            }
+        }
+        
+        var weekDays: [String] = []
+        DayOfWeek.allCases.forEach { day in
+            if selectedWeekDay.contains(day.intVal) {
+                weekDays.append(day.rawValue)
+            }
+        }
+        
+        builder = builder.specialization(specialization)
+        builder = builder.makeupLocation(selectedLocation.rawValue)
+        builder = builder.week(weekDays)
+        builder = builder.startTime(startTime)
+        builder = builder.endTime(startTime)
+        if
+            selectedLocation != .VISIT,
+            let text = textField.text
+        {
+            builder = builder.shopLocation(text)
+        }
+        
         let nextVC = ArtistTabBarController()
         navigationController?.pushViewController(nextVC, animated: true)
     }

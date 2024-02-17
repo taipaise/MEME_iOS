@@ -9,8 +9,7 @@ import UIKit
 
 protocol DetailSettingButtonTapped: AnyObject {
     func detailSettingButtonTapped(
-        isSelected: Bool,
-        tag: Int,
+        title: String,
         type: DetailSettingViewType
     )
 }
@@ -65,18 +64,18 @@ final class DetailSettingView: UIView {
             imageVIew.image = .detailSelected
             layer.borderColor = UIColor.clear.cgColor
         } else {
-            deselect(tag: -1)
+            deselect(title: "")
         }
         
         delegate?.detailSettingButtonTapped(
-            isSelected: button.isSelected,
-            tag: button.tag,
+            title: label.text ?? "",
             type: type
         )
     }
     
-    func deselect(tag: Int) {
-        if button.tag != tag {
+    func deselect(title: String) {
+        guard let text = label.text else { return }
+        if text != title {
             layer.borderColor = UIColor.gray400.cgColor
             button.isSelected = false
             imageVIew.image = nil

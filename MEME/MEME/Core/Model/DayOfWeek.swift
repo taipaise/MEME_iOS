@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum DayOfWeek: String {
+enum DayOfWeek: String, CaseIterable {
     case MON
     case TUE
     case WED

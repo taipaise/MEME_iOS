@@ -13,11 +13,6 @@ enum SocialProvider: String {
     case KAKAO
 }
 
-enum Gender: String {
-    case MALE
-    case FEMALE
-}
-
 enum AuthAPI {
     case login(idToken: String, provider: SocialProvider)
     case logout
@@ -43,6 +38,7 @@ enum AuthAPI {
         userId: Int,
         profileImg: String,
         nickName: String,
+        gender: Gender,
         introduction: String,
         workExperience: String,
         region: [String],
@@ -97,7 +93,7 @@ extension AuthAPI: MemeAuthAPI {
     
     var task: Moya.Task {
         switch self {
-        
+            
         case .login(idToken: let idToken, provider: let provider):
             let parameters: [String: Any] = [
                 "id_token": idToken,
@@ -124,12 +120,12 @@ extension AuthAPI: MemeAuthAPI {
             let parameters: [String: Any] = [
                 "email": email,
                 "provider": provider.rawValue,
-                    "profileImg": profileImg,
-                    "username": username,
-                    "nickname": nickname,
+                "profileImg": profileImg,
+                "username": username,
+                "nickname": nickname,
                 "gender": gender.rawValue,
-                    "skinType": skinType,
-                    "personalColor": personalColor
+                "skinType": skinType,
+                "personalColor": personalColor
             ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             
@@ -143,9 +139,9 @@ extension AuthAPI: MemeAuthAPI {
             let parameters: [String: Any] = [
                 "email": email,
                 "provider": provider.rawValue,
-                    "profileImg": profileImg,
-                    "username": username,
-                    "nickname": nickname
+                "profileImg": profileImg,
+                "username": username,
+                "nickname": nickname
             ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             
@@ -153,6 +149,7 @@ extension AuthAPI: MemeAuthAPI {
             userId: let userId,
             profileImg: let profileImg,
             nickName: let nickName,
+            gender: let gender,
             introduction: let introduction,
             workExperience: let workExperience,
             region: let region,
@@ -163,15 +160,16 @@ extension AuthAPI: MemeAuthAPI {
         ):
             let parameters: [String: Any] = [
                 "userId": userId,
-                    "profileImg": profileImg,
-                    "nickname": nickName,
-                    "introduction": introduction,
-                    "workExperience": workExperience,
-                    "region": region,
-                    "specialization": specialization,
-                    "makeupLocation": makeupLocation,
-                    "shopLocation": shopLocation,
-                    "availableDayOfWeekAndTime": availableDayOfWeekAndTime
+                "profileImg": profileImg,
+                "nickname": nickName,
+                "gender": gender.rawValue,
+                "introduction": introduction,
+                "workExperience": workExperience,
+                "region": region,
+                "specialization": specialization,
+                "makeupLocation": makeupLocation,
+                "shopLocation": shopLocation,
+                "availableDayOfWeekAndTime": availableDayOfWeekAndTime
             ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             

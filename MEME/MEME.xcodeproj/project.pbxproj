@@ -121,6 +121,8 @@
 		315FB8602B6DE5860068163C /* KeyChainManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB85F2B6DE5860068163C /* KeyChainManager.swift */; };
 		315FB8622B6DE5F40068163C /* SecretInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB8612B6DE5F40068163C /* SecretInfoManager.swift */; };
 		315FB8662B6DE8900068163C /* MemeAPIAuth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 315FB8652B6DE8900068163C /* MemeAPIAuth.swift */; };
+		316239652B80DE58002D9E2F /* SignUpResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316239642B80DE58002D9E2F /* SignUpResponseDTO.swift */; };
+		316239672B80DE9B002D9E2F /* BasicResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316239662B80DE9B002D9E2F /* BasicResponseDTO.swift */; };
 		316A926A2B66703800E4337D /* SetBusinessLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A92682B66703800E4337D /* SetBusinessLocationViewController.swift */; };
 		316A926B2B66703800E4337D /* SetBusinessLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316A92692B66703800E4337D /* SetBusinessLocationViewController.xib */; };
 		316A926D2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A926C2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift */; };
@@ -130,6 +132,13 @@
 		316A927E2B66895D00E4337D /* TimeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A927D2B66895D00E4337D /* TimeSection.swift */; };
 		317D986A2B7DEDC5009BBB95 /* WorkExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D98692B7DEDC5009BBB95 /* WorkExperience.swift */; };
 		317D986C2B7DF59B009BBB95 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D986B2B7DF59B009BBB95 /* Region.swift */; };
+		317D986E2B7E0186009BBB95 /* SkinType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D986D2B7E0186009BBB95 /* SkinType.swift */; };
+		317D98702B7E01F7009BBB95 /* Gender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D986F2B7E01F7009BBB95 /* Gender.swift */; };
+		317D98722B7E023E009BBB95 /* PersonalColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D98712B7E023E009BBB95 /* PersonalColor.swift */; };
+		317D98752B7E0C68009BBB95 /* AtristProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D98742B7E0C68009BBB95 /* AtristProfileInfo.swift */; };
+		317D98772B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D98762B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift */; };
+		317D98792B7E16B5009BBB95 /* MakeUpLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D98782B7E16B5009BBB95 /* MakeUpLocation.swift */; };
+		317D987B2B7E1810009BBB95 /* MakeUpCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D987A2B7E1810009BBB95 /* MakeUpCategory.swift */; };
 		31B263432B57EDE300304FBE /* TermsAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2633F2B57EDE300304FBE /* TermsAgreementViewController.swift */; };
 		31B263442B57EDE300304FBE /* TermDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B263402B57EDE300304FBE /* TermDetailViewController.xib */; };
 		31B263452B57EDE300304FBE /* TermDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B263412B57EDE300304FBE /* TermDetailViewController.swift */; };
@@ -314,6 +323,8 @@
 		315FB85F2B6DE5860068163C /* KeyChainManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyChainManager.swift; sourceTree = "<group>"; };
 		315FB8612B6DE5F40068163C /* SecretInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecretInfoManager.swift; sourceTree = "<group>"; };
 		315FB8652B6DE8900068163C /* MemeAPIAuth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeAPIAuth.swift; sourceTree = "<group>"; };
+		316239642B80DE58002D9E2F /* SignUpResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpResponseDTO.swift; sourceTree = "<group>"; };
+		316239662B80DE9B002D9E2F /* BasicResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicResponseDTO.swift; sourceTree = "<group>"; };
 		316A92682B66703800E4337D /* SetBusinessLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBusinessLocationViewController.swift; sourceTree = "<group>"; };
 		316A92692B66703800E4337D /* SetBusinessLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetBusinessLocationViewController.xib; sourceTree = "<group>"; };
 		316A926C2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLocationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -323,6 +334,13 @@
 		316A927D2B66895D00E4337D /* TimeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSection.swift; sourceTree = "<group>"; };
 		317D98692B7DEDC5009BBB95 /* WorkExperience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkExperience.swift; sourceTree = "<group>"; };
 		317D986B2B7DF59B009BBB95 /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
+		317D986D2B7E0186009BBB95 /* SkinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinType.swift; sourceTree = "<group>"; };
+		317D986F2B7E01F7009BBB95 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
+		317D98712B7E023E009BBB95 /* PersonalColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalColor.swift; sourceTree = "<group>"; };
+		317D98742B7E0C68009BBB95 /* AtristProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AtristProfileInfo.swift; sourceTree = "<group>"; };
+		317D98762B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistProfileInfoBuilder.swift; sourceTree = "<group>"; };
+		317D98782B7E16B5009BBB95 /* MakeUpLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeUpLocation.swift; sourceTree = "<group>"; };
+		317D987A2B7E1810009BBB95 /* MakeUpCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeUpCategory.swift; sourceTree = "<group>"; };
 		31B2633F2B57EDE300304FBE /* TermsAgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsAgreementViewController.swift; path = Views/TermsAgreementViewController.swift; sourceTree = "<group>"; };
 		31B263402B57EDE300304FBE /* TermDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TermDetailViewController.xib; path = Views/TermDetailViewController.xib; sourceTree = "<group>"; };
 		31B263412B57EDE300304FBE /* TermDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermDetailViewController.swift; path = Views/TermDetailViewController.swift; sourceTree = "<group>"; };
@@ -864,6 +882,8 @@
 			isa = PBXGroup;
 			children = (
 				31B413852B6D338F00535BB1 /* BusinessVerificationDTO.swift */,
+				316239642B80DE58002D9E2F /* SignUpResponseDTO.swift */,
+				316239662B80DE9B002D9E2F /* BasicResponseDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -876,6 +896,11 @@
 				315AC1CB2B70FE76003FD1A1 /* DayOfWeek.swift */,
 				317D98692B7DEDC5009BBB95 /* WorkExperience.swift */,
 				317D986B2B7DF59B009BBB95 /* Region.swift */,
+				317D986F2B7E01F7009BBB95 /* Gender.swift */,
+				317D986D2B7E0186009BBB95 /* SkinType.swift */,
+				317D98782B7E16B5009BBB95 /* MakeUpLocation.swift */,
+				317D987A2B7E1810009BBB95 /* MakeUpCategory.swift */,
+				317D98712B7E023E009BBB95 /* PersonalColor.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -883,6 +908,7 @@
 		315EE2C92B6656430042A082 /* Artist */ = {
 			isa = PBXGroup;
 			children = (
+				317D98732B7E0C31009BBB95 /* ArtistInfoBuilder */,
 				316A92722B667E4400E4337D /* SetBusinessInfoDetail */,
 				316A92672B66701900E4337D /* SetBusinessLocation */,
 				315EE2D22B6658770042A082 /* SetBusinessProfileInfo */,
@@ -955,6 +981,15 @@
 				316A927D2B66895D00E4337D /* TimeSection.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		317D98732B7E0C31009BBB95 /* ArtistInfoBuilder */ = {
+			isa = PBXGroup;
+			children = (
+				317D98742B7E0C68009BBB95 /* AtristProfileInfo.swift */,
+				317D98762B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift */,
+			);
+			path = ArtistInfoBuilder;
 			sourceTree = "<group>";
 		};
 		31B2633E2B57ED1D00304FBE /* Recovered References */ = {
@@ -1332,6 +1367,7 @@
 				315FB8602B6DE5860068163C /* KeyChainManager.swift in Sources */,
 				3142B9A92B4D06310066CD5A /* ArtistTabBarController.swift in Sources */,
 				2D4B7C222B5F0B44001E1B09 /* ShowInformationView.swift in Sources */,
+				317D986E2B7E0186009BBB95 /* SkinType.swift in Sources */,
 				2D6F59B52B5C475800CA883A /* ModalPresentationController.swift in Sources */,
 				2D62E23E2B5428CC004E8299 /* ModelNonReservationViewCell.swift in Sources */,
 				2D62E2482B5436E7004E8299 /* ModelReservationDataManager.swift in Sources */,
@@ -1353,6 +1389,7 @@
 				CCAB5A492B65861600067FA4 /* InterestMakeUpViewController.swift in Sources */,
 				3156D2012B69443000559820 /* HTTPHeaderFields.swift in Sources */,
 				31B2634F2B57EE7D00304FBE /* SetProfileViewController.swift in Sources */,
+				316239652B80DE58002D9E2F /* SignUpResponseDTO.swift in Sources */,
 				2D6F59B32B5C397400CA883A /* SortOptionsViewController.swift in Sources */,
 				2D6F59B82B5C4FB100CA883A /* SortOptionIconView.swift in Sources */,
 				3142B9A72B4D04CA0066CD5A /* LoginViewController.swift in Sources */,
@@ -1371,6 +1408,7 @@
 				316A927C2B6688F700E4337D /* Week.swift in Sources */,
 				3142B9A42B4D03840066CD5A /* ModelTabBarController.swift in Sources */,
 				315AC1CC2B70FE76003FD1A1 /* DayOfWeek.swift in Sources */,
+				317D98792B7E16B5009BBB95 /* MakeUpLocation.swift in Sources */,
 				317D986A2B7DEDC5009BBB95 /* WorkExperience.swift in Sources */,
 				2D6F59B12B5BF92600CA883A /* ModelReservationTypeViewCell.swift in Sources */,
 				091CCCD72B639E4800ADD21C /* ArtistData.swift in Sources */,
@@ -1382,14 +1420,17 @@
 				31B2634C2B57EE7100304FBE /* RoleSelectionViewController.swift in Sources */,
 				095742512B66153E0011B580 /* ArtistPortfolioEditingViewController.swift in Sources */,
 				3142B99B2B4D020E0066CD5A /* NSObject+.swift in Sources */,
+				317D987B2B7E1810009BBB95 /* MakeUpCategory.swift in Sources */,
 				2D3E0D152B640BCC00C49EF3 /* ModelViewArtistProfileViewController.swift in Sources */,
 				CC2F3AC02B514EE900508DA5 /* ModelHeaderView.swift in Sources */,
 				CCAB5A472B6585F700067FA4 /* InterestMakeUpCollectionViewCell.swift in Sources */,
 				3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */,
 				2D106F4A2B7028C200F3C253 /* ModelReservationShopLocationView.swift in Sources */,
+				317D98772B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift in Sources */,
 				315AC1C52B70D186003FD1A1 /* ModelHomeViewController.swift in Sources */,
 				315FB85E2B6DE57C0068163C /* KeyChainValue.swift in Sources */,
 				2D5C05A12B60269900EDC69F /* ShowReviewTableViewCell.swift in Sources */,
+				317D98752B7E0C68009BBB95 /* AtristProfileInfo.swift in Sources */,
 				31B65E402B6E041300628C68 /* NetworkAuthProvider.swift in Sources */,
 				315AC1C32B70CDE9003FD1A1 /* ModelReservationViewController.swift in Sources */,
 				2D62E25B2B54A658004E8299 /* RecentSearchViewCell.swift in Sources */,
@@ -1405,6 +1446,7 @@
 				312DF7642B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift in Sources */,
 				315FB8592B6DE1B00068163C /* AuthAPI.swift in Sources */,
 				3142B9AF2B4D08380066CD5A /* ArtistHomeViewController.swift in Sources */,
+				317D98702B7E01F7009BBB95 /* Gender.swift in Sources */,
 				CCAB5A532B66CD9F00067FA4 /* MyReviewViewController.swift in Sources */,
 				315EE2D02B66566A0042A082 /* DetailSettingView.swift in Sources */,
 				2D6F59BF2B5C7D3300CA883A /* ModelReservationTypeButton.swift in Sources */,
@@ -1418,6 +1460,7 @@
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,
 				3142B99D2B4D021A0066CD5A /* UIView+.swift in Sources */,
 				2DA5B53B2B6E1E6200E81049 /* SearchAPIInput.swift in Sources */,
+				317D98722B7E023E009BBB95 /* PersonalColor.swift in Sources */,
 				2DA5B53D2B6E1EE900E81049 /* SearchModel.swift in Sources */,
 				094884C72B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.swift in Sources */,
 				315FB8622B6DE5F40068163C /* SecretInfoManager.swift in Sources */,
@@ -1437,6 +1480,7 @@
 				31B413842B6D322500535BB1 /* NetworkProvider.swift in Sources */,
 				2D4B7C292B5F294A001E1B09 /* ModelManagementReservationsViewController.swift in Sources */,
 				CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */,
+				316239672B80DE9B002D9E2F /* BasicResponseDTO.swift in Sources */,
 				31B2636D2B57EECB00304FBE /* BusinessRegistrationViewController.swift in Sources */,
 				31B4137E2B6D29C500535BB1 /* BusinessIDVerificationAPI.swift in Sources */,
 				31F6F8482B52C7B800EC621D /* NavigationBarView.swift in Sources */,

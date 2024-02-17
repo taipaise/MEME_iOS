@@ -20,6 +20,7 @@ final class SetBusinessLocationViewController: UIViewController {
     private var snapShot: SnapShot?
     private var location: [Region] = Region.allCases
     private var selectedLocation: Set<Region> = []
+    private var builder: ArtistProfileInfoBuilder?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -33,13 +34,29 @@ final class SetBusinessLocationViewController: UIViewController {
         navigationBar.configure(title: "프로필 입력")
         progressBar.configure(progress: 1)
         nextButton.layer.cornerRadius = 10
+        setNextButton()
+    }
+    
+    func configure(builder: ArtistProfileInfoBuilder) {
+        self.builder = builder
+    }
+    
+    func setNextButton() {
+        if selectedLocation.isEmpty {
+            nextButton.backgroundColor = .gray300
+            nextButton.isEnabled = false
+        } else {
+            nextButton.backgroundColor = .mainBold
+            nextButton.isEnabled = true
+        }
     }
     
     @IBAction private func nextButtonTapped(_ sender: Any) {
         let nextVC = SetBusinessInfoDetailViewController()
+        let regions = Array(selectedLocation).map{ $0.rawValue }
+        builder = builder?.region(regions)
         navigationController?.pushViewController(nextVC, animated: true)
     }
-    
 }
 
 extension SetBusinessLocationViewController {
@@ -113,6 +130,8 @@ extension SetBusinessLocationViewController: UICollectionViewDelegate {
             selectedLocation.insert(location[indexPath.row])
             cell.setColor(isSelected: true)
         }
+        
+        setNextButton()
     }
 }
 
