@@ -162,7 +162,7 @@ extension ModelManagementReservationsViewController: BackButtonTappedDelegate  {
 //MARK: -API 통신 메소드
 extension ModelManagementReservationsViewController {
     func showModelReservations() {
-        ReservationManager.shared.getModelReservation(modelId: 1) { [weak self] result in
+        ReservationManager.shared.getModelReservation(modelId: 6) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let reservationResponse):

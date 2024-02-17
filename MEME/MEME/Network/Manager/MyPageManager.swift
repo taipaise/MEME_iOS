@@ -50,37 +50,64 @@ final class MyPageManager {
     func postFavoritePortfolio(
         modelId: Int,
         portfolioId: Int,
-        completion: @escaping (Result<FavoritePortfolioDTO, MoyaError>) -> Void
+        completion: @escaping (Result<FavoriteDTO, MoyaError>) -> Void
     ) {
         provider.request(api: .postFavoritePortfolio(modelId: modelId, portfolioId: portfolioId)) { result in
             switch result {
             case .success(let response):
-                if let dataString = String(data: response.data, encoding: .utf8) {
-                            print("Response Data: \(dataString)")
-                        } else {
-                            print("Failed to convert response data to string.")
-                        }
+                do {
+                    let decoder = JSONDecoder()
+                    let favoritePortfolio = try decoder.decode(FavoriteDTO.self, from: response.data)
+                    completion(.success(favoritePortfolio))
+                } catch {
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                }
             case .failure(let error):
                 completion(.failure(error))
             }
         }
     }
+
 
     
     // MARK: -관심 메이크업 삭제 API
     func deleteFavoritePortfolio(
         modelId: Int,
         portfolioId: Int,
-        completion: @escaping (Result<FavoritePortfolioDTO, MoyaError>) -> Void
+        completion: @escaping (Result<FavoriteDTO, MoyaError>) -> Void
     ) {
         provider.request(api: .deleteFavoritePortfolio(modelId: modelId, portfolioId: portfolioId)) { result in
             switch result {
             case .success(let response):
-                if let dataString = String(data: response.data, encoding: .utf8) {
-                            print("Response Data: \(dataString)")
-                        } else {
-                            print("Failed to convert response data to string.")
-                        }
+                do {
+                    let decoder = JSONDecoder()
+                    let favoritePortfolio = try decoder.decode(FavoriteDTO.self, from: response.data)
+                    completion(.success(favoritePortfolio))
+                } catch {
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    // MARK: -관심 아티스트 추가 API
+    func postFavoriteArtist(
+        modelId: Int,
+        artistId: Int,
+        completion: @escaping (Result<FavoriteDTO, MoyaError>) -> Void
+    ) {
+        provider.request(api: .postFavoriteArtist(modelId: modelId, artistId: artistId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decoder = JSONDecoder()
+                    let favoritePortfolio = try decoder.decode(FavoriteDTO.self, from: response.data)
+                    completion(.success(favoritePortfolio))
+                } catch {
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                }
             case .failure(let error):
                 completion(.failure(error))
             }
@@ -89,5 +116,25 @@ final class MyPageManager {
 
 
     
-
+    // MARK: -관심 메이크업 삭제 API
+    func deleteFavoriteArtist(
+        modelId: Int,
+        artistId: Int,
+        completion: @escaping (Result<FavoriteDTO, MoyaError>) -> Void
+    ) {
+        provider.request(api: .postFavoriteArtist(modelId: modelId, artistId: artistId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decoder = JSONDecoder()
+                    let favoritePortfolio = try decoder.decode(FavoriteDTO.self, from: response.data)
+                    completion(.success(favoritePortfolio))
+                } catch {
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

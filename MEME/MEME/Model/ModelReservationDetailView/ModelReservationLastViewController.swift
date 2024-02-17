@@ -10,10 +10,15 @@ import SnapKit
 
 class ModelReservationLastViewController: UIViewController {
     // MARK: - Properties
+    var portfolioID: Int? = 0
     var makeupName: String?
-    var reservationDateText: String?
+    var selectedDate: Date?
+    var selectedWeek: String?
+    var selectedTime: String?
     var artistName: String?
     var locationText: String?
+    
+    var reservationDateText: String?
     
     private var backgrounImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "img_lastReservation"))
@@ -112,14 +117,8 @@ class ModelReservationLastViewController: UIViewController {
         view.backgroundColor = .white
         navigationController?.setNavigationBarHidden(true, animated: false)
         
-        makeupNameLabel.text = makeupName
-        reservationDateLabel.text = reservationDateText
-        reservationArtistNameLabel.text = artistName
-        reservationLocationLabel.text = locationText
-        
-        //수정 필요
-        let reservationDayOfWeekAndTime = ["MON": "_20_30"]
-        self.postModelReservations(modelId: 6, portfolioId: 5, date: "2024-02-15T19:44:18.524Z", reservationDayOfWeekAndTime: reservationDayOfWeekAndTime, location: "서울")
+        loadData()
+        loadAPI()
         
         configureSubviews()
         makeConstraints()
@@ -202,6 +201,30 @@ class ModelReservationLastViewController: UIViewController {
                 if let navigationController = viewController as? UINavigationController {
                     navigationController.popToRootViewController(animated: false)
                 }
+            }
+        }
+    }
+    
+    //MARK: -Method
+    private func loadData() {
+        makeupNameLabel.text = makeupName
+        reservationDateLabel.text = reservationDateText
+        reservationArtistNameLabel.text = artistName
+        reservationLocationLabel.text = locationText
+    }
+    private func loadAPI() {
+        if let selectedWeek = selectedWeek, let selectedTime = selectedTime {
+            let formattedTime = selectedTime.replacingOccurrences(of: ":", with: "_")
+            
+            let reservationDayOfWeekAndTime = [selectedWeek: "_\(formattedTime)"]
+            
+            if let portfolioID = portfolioID, let locationText = locationText {
+                let dateFormatter = DateFormatter()
+                dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSSZ"
+                dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
+                let dateString = dateFormatter.string(from: selectedDate ?? Date())
+                
+                self.postModelReservations(modelId: 6, portfolioId: portfolioID, date: dateString, reservationDayOfWeekAndTime: reservationDayOfWeekAndTime, location: locationText)
             }
         }
     }

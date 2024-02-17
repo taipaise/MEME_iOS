@@ -268,10 +268,11 @@ extension ModelSearchResultViewController: UITableViewDataSource, UITableViewDel
             return 141
     }
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            let reservationVC = ModelReservationViewController()
-            // 전달할 데이터 추가
-            self.navigationController?.pushViewController(reservationVC, animated: true)
-        }
+        let reservationVC = ModelReservationViewController()
+        let portfolioID = searchResults[indexPath.row].portfolioId
+        reservationVC.portfolioID = portfolioID
+        self.navigationController?.pushViewController(reservationVC, animated: true)
+    }
 }
 
 //MARK: - UIScrollViewDelegate

@@ -120,31 +120,31 @@ extension MyPageAPI: MemeAPI {
             return .requestParameters(parameters: params, encoding: URLEncoding.queryString)
         case .postFavoriteArtist(modelId: let modelId, artistId: let artistId):
             let parameters = [
-                "model_id": modelId,
-                "artist_id": artistId
+                "modelId": modelId,
+                "artistId": artistId
             ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             
         case .postFavoritePortfolio(modelId: let modelId, portfolioId: let portfolioId):
             let parameters = [
-                "model_id": modelId,
-                "portfolio_id": portfolioId
+                "modelId": modelId,
+                "portfolioId": portfolioId
             ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             
         case .deleteFavoriteArtist(modelId: let modelId, artistId: let artistId):
             let parameters = [
-                "model_id": modelId,
-                "artist_id": artistId
+                "modelId": modelId,
+                "artistId": artistId
             ]
-            return .requestCompositeData(bodyData: Data(), urlParameters: parameters)
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             
         case .deleteFavoritePortfolio(modelId: let modelId, portfolioId: let portfolioId):
             let parameters = [
-                "model_id": modelId,
-                "portfolio_id": portfolioId
+                "modelId": modelId,
+                "portfolioId": portfolioId
             ]
-            return .requestCompositeData(bodyData: Data(), urlParameters: parameters)
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }
     }
 }

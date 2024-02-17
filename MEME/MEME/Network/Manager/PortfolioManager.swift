@@ -17,8 +17,8 @@ final class PortfolioManager {
     private init() {}
     
     // MARK: -포트폴리오 세부 조회 API
-    func getPortfolioDetail(portfolioId: Int, completion: @escaping (Result<PortfolioDTO, MoyaError>) -> Void) {
-        provider.request(api: .getPortfolioDetail(portfolioId: portfolioId)) { result in
+    func getPortfolioDetail(userId: Int, portfolioId: Int, completion: @escaping (Result<PortfolioDTO, MoyaError>) -> Void) {
+        provider.request(api: .getPortfolioDetail(userId: userId, portfolioId: portfolioId)) { result in
             switch result {
             case .success(let response):
                 do {

@@ -10,14 +10,20 @@ import SnapKit
 import FSCalendar
 
 class ModelReservationDetailViewController: UIViewController, ModelReservationBothLocationViewDelegate {
+    var portfolioID: Int? = 0
+    var artistID: Int? = 0
+    var makeupName: String?
+    var artistName: String?
+    var locationText: String?
+    
     // MARK: - Properties
     var selectedMakeupName: String?
-    var selectedArtistName: String?
     var selectedLocation: String?
     
     var possibleTimeSlots: [TimeSlot] = []
     private var selectedDate: Date?
     private var selectedTime: String?
+    private var selectedWeek: String?
     private var selectedLocationType: String?
     private var selectedVisitLocation: String?
     
@@ -187,8 +193,10 @@ class ModelReservationDetailViewController: UIViewController, ModelReservationBo
         navigationBar.delegate = self
         navigationBar.configure(title: "예약하기")
         
-        getPossibleTime(aristId: 3)
-        getPossibleLocation(aristId: 3)
+        if let artistID = artistID {
+            getPossibleTime(aristId: artistID)
+            getPossibleLocation(aristId: artistID)
+        }
         
         updateNextButtonState()
         setAction()
@@ -349,6 +357,9 @@ class ModelReservationDetailViewController: UIViewController, ModelReservationBo
     @objc private func nextTapped() {
         guard let selectedDate = selectedDate else { return }
         guard let selectedTime = selectedTime else { return }
+        guard let selectedWeek = selectedWeek else { return }
+        guard let artistName = artistName else { return }
+        
         let formatter = DateFormatter()
         formatter.locale = Locale(identifier: "ko_KR")
         formatter.dateFormat = "M월 d일"
@@ -362,10 +373,18 @@ class ModelReservationDetailViewController: UIViewController, ModelReservationBo
         }
         let yesAction = UIAlertAction(title: "예", style: .default) { _ in
             let reservationsVC = ModelReservationLastViewController()
+            
+            reservationsVC.portfolioID = self.portfolioID
             reservationsVC.makeupName = self.selectedMakeupName
-            reservationsVC.reservationDateText = "\(formattedDate) \(selectedTime)시"
-            reservationsVC.artistName = self.selectedArtistName
+            reservationsVC.selectedDate = self.selectedDate
+            reservationsVC.selectedWeek = self.selectedWeek
+            reservationsVC.selectedTime = self.selectedTime
+            
+            reservationsVC.artistName = self.artistName
             reservationsVC.locationText = self.selectedLocation
+            
+            reservationsVC.reservationDateText = "\(formattedDate) \(selectedTime)시"
+            
             self.navigationController?.pushViewController(reservationsVC, animated: true)
         }
         
@@ -566,7 +585,6 @@ class ModelReservationDetailViewController: UIViewController, ModelReservationBo
     
     
     private func updateNextButtonState() {
-        print("Selected Date: \(String(describing: selectedDate)), Selected Time: \(String(describing: selectedTime)), Location Type: \(String(describing: selectedLocationType)), \(String(describing: selectedLocation))")
         let isDateAndTimeSelected = selectedDate != nil && selectedTime != nil
         let isLocationValid = checkLocationValidity()
         print(isLocationValid)
@@ -608,7 +626,42 @@ extension ModelReservationDetailViewController: FSCalendarDelegate, FSCalendarDa
         selectedDate = date
             updateAvailableTimes(for: date)
             updateNextButtonState()
+        
+        let weekday = Calendar.current.component(.weekday, from: date)
+        let weekdaySymbol = Calendar.current.weekdaySymbols[weekday - 1]
+        
+        if let week = WeekdayToSelectedWeek(rawValue: weekdaySymbol) {
+            switch week {
+            case .sunday:
+                selectedWeek = "SUN"
+            case .monday:
+                selectedWeek = "MON"
+            case .tuesday:
+                selectedWeek = "TUE"
+            case .wednesday:
+                selectedWeek = "WED"
+            case .thursday:
+                selectedWeek = "THU"
+            case .friday:
+                selectedWeek = "FRI"
+            case .saturday:
+                selectedWeek = "SAT"
+            }
+        } else {
+            selectedWeek = nil
+        }
+        
         return date >= today
+    }
+    
+    enum WeekdayToSelectedWeek: String {
+        case sunday = "Sunday"
+        case monday = "Monday"
+        case tuesday = "Tuesday"
+        case wednesday = "Wednesday"
+        case thursday = "Thursday"
+        case friday = "Friday"
+        case saturday = "Saturday"
     }
 }
 

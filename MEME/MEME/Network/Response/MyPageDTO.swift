@@ -30,10 +30,10 @@ struct Artist: Codable {
 }
 
 // MARK: -관심 메이크업 추가, 삭제 DTO
-struct FavoritePortfolioDTO: Codable {
-    let code: Int
+struct FavoriteDTO: Codable {
     let result: String
     let message: String
     let data: String?
+    let statusCode: Int
 }
 

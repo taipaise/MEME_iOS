@@ -17,10 +17,13 @@ struct PortfolioDTO: Codable {
 
 struct PortfolioData: Codable {
     let portfolioId: Int
+    let isFavorite: Bool
     let category: String
+    let artistProfileImg: String
     let artistNickName: String
     let makeupName: String
     let price: Int
+    let info: String
     let makeupLocation: String
     let shopLocation: String?
     let region: [String]?

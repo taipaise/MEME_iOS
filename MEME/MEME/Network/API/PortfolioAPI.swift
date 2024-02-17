@@ -9,7 +9,10 @@ import Foundation
 import Moya
 
 enum PortfolioAPI {
-    case getPortfolioDetail(portfolioId: Int)
+    case getPortfolioDetail(
+        userId: Int,
+        portfolioId: Int
+    )
 }
 
 extension PortfolioAPI: MemeAPI {
@@ -19,8 +22,8 @@ extension PortfolioAPI: MemeAPI {
     
     var urlPath: String {
         switch self {
-        case .getPortfolioDetail(portfolioId: let id):
-            return "/\(id)/details"
+        case .getPortfolioDetail(userId: let userId, portfolioId: let portfolioId):
+            return "/details/\(userId)/\(portfolioId)"
         }
     }
     

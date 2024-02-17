@@ -390,6 +390,8 @@ extension ModelHomeViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == recomandReservationCollectionView || collectionView == recomandHastyReservationCollectionView  {
             let reservationVC = ModelReservationViewController()
+            let portfolioID = makeupCards?[indexPath.row].portfolioId
+            reservationVC.portfolioID = portfolioID
             reservationVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(reservationVC, animated: true)
         } 
@@ -424,10 +426,9 @@ extension ModelHomeViewController {
                     self?.modelReservationCollectionView.reloadData()
                     
                 case .failure(let error):
-                    print("모델 예약 정보 조회 실패: \(error.localizedDescription)")
                     if let responseData = error.response {
                         let responseString = String(data: responseData.data, encoding: .utf8)
-                        print("Received error response: \(responseString ?? "no data")")
+                        print("모델 예약 정보 조회 실패: \(responseString ?? "no data")")
                     }
                 }
             }
@@ -442,10 +443,9 @@ extension ModelHomeViewController {
                     self?.recomandReservationCollectionView.reloadData()
                     print("아티스트 추천 (리뷰순) 조회 성공: \(recommendResponse)")
                 case .failure(let error):
-                    print("아티스트 추천 (리뷰순) 조회 실패: \(error.localizedDescription)")
                     if let responseData = error.response {
                         let responseString = String(data: responseData.data, encoding: .utf8)
-                        print("Received error response: \(responseString ?? "no data")")
+                        print("아티스트 추천 (리뷰순) 조회 실패: \(responseString ?? "no data")")
                     }
                 }
             }
@@ -461,10 +461,9 @@ extension ModelHomeViewController {
                     self?.recomandHastyReservationCollectionView.reloadData()
                     print("아티스트 추천 (최신 등록 순) 조회 성공: \(response)")
                 case .failure(let error):
-                    print("아티스트 추천 (최신 등록 순) 조회 실패: \(error.localizedDescription)")
                     if let responseData = error.response {
                         let responseString = String(data: responseData.data, encoding: .utf8)
-                        print("Received error response: \(responseString ?? "no data")")
+                        print("아티스트 추천 (최신 등록 순) 조회 실패: \(responseString ?? "no data")")
                     }
                 }
             }
