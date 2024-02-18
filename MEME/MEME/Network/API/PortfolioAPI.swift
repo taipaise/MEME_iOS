@@ -1,4 +1,5 @@
 //
+
 //  PortfolioAPI.swift
 //  MEME
 //
@@ -22,6 +23,7 @@ extension PortfolioAPI: MemeAPI {
     
     var urlPath: String {
         switch self {
+
         case .getPortfolioDetail(userId: let userId, portfolioId: let portfolioId):
             return "/details/\(userId)/\(portfolioId)"
         }
@@ -42,6 +44,7 @@ extension PortfolioAPI: MemeAPI {
         switch self {
         case .getPortfolioDetail:
             return .get
+
         }
     }
     
