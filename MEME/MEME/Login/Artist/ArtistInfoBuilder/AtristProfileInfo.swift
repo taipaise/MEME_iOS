@@ -19,6 +19,5 @@ struct AtristProfileInfo {
     var makeupLocation: String
     var shopLocation: String
     var week: [String]
-    var startTiem: String
-    var endTime: String
+    var selectedTime: [String]
 }

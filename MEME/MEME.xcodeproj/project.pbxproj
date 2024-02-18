@@ -70,6 +70,8 @@
 		2DA208192B7CF9EE006EB9B9 /* PortfolioDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */; };
 		2DB303F32B829EF200D9E394 /* BusinessLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */; };
 		2DCB3CCE2B7E041600BFCDA1 /* memeSecret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */; };
+		3101C72A2B81F77200460689 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C7292B81F77200460689 /* ProfileInfo.swift */; };
+		3101C72C2B81F80600460689 /* ProfileInfoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */; };
 		312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */; };
 		312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EE2B52DE1900CACF20 /* Pretendard-Light.otf */; };
 		312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EB2B52DE1900CACF20 /* Pretendard-Medium.otf */; };
@@ -104,6 +106,9 @@
 		3142B9AF2B4D08380066CD5A /* ArtistHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9AE2B4D08380066CD5A /* ArtistHomeViewController.swift */; };
 		3142B9B12B4D08480066CD5A /* ArtistReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9B02B4D08480066CD5A /* ArtistReservationViewController.swift */; };
 		3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3142B9B32B4D089D0066CD5A /* TabBarItemType.swift */; };
+		314525882B820631003D5CC7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 314525872B820631003D5CC7 /* GoogleService-Info.plist */; };
+		3145258A2B821C8B003D5CC7 /* TokenResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 314525892B821C8B003D5CC7 /* TokenResponseDTO.swift */; };
+		3145258C2B826AAE003D5CC7 /* ExtraProfileResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3145258B2B826AAE003D5CC7 /* ExtraProfileResponseDTO.swift */; };
 		3156D1FF2B69440E00559820 /* MemeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3156D1FE2B69440E00559820 /* MemeAPI.swift */; };
 		3156D2012B69443000559820 /* HTTPHeaderFields.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3156D2002B69443000559820 /* HTTPHeaderFields.swift */; };
 		3156D2032B69446E00559820 /* NetworkError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3156D2022B69446E00559820 /* NetworkError.swift */; };
@@ -127,7 +132,7 @@
 		316239652B80DE58002D9E2F /* SignUpResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316239642B80DE58002D9E2F /* SignUpResponseDTO.swift */; };
 		316239672B80DE9B002D9E2F /* BasicResponseDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316239662B80DE9B002D9E2F /* BasicResponseDTO.swift */; };
 		316239802B81B399002D9E2F /* ImageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3162397F2B81B399002D9E2F /* ImageManager.swift */; };
-		316239882B81C945002D9E2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 316239872B81C945002D9E2F /* GoogleService-Info.plist */; };
+		316239882B81C945002D9E2F /* (null) in Resources */ = {isa = PBXBuildFile; };
 		3162398B2B81C9A8002D9E2F /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 3162398A2B81C9A8002D9E2F /* FirebaseAnalytics */; };
 		3162398D2B81C9A8002D9E2F /* FirebaseAnalyticsOnDeviceConversion in Frameworks */ = {isa = PBXBuildFile; productRef = 3162398C2B81C9A8002D9E2F /* FirebaseAnalyticsOnDeviceConversion */; };
 		3162398F2B81C9A8002D9E2F /* FirebaseAnalyticsSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 3162398E2B81C9A8002D9E2F /* FirebaseAnalyticsSwift */; };
@@ -137,6 +142,8 @@
 		316239982B81CF37002D9E2F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 316239972B81CF37002D9E2F /* FirebaseFirestore */; };
 		3162399A2B81CF37002D9E2F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 316239992B81CF37002D9E2F /* FirebaseFirestoreSwift */; };
 		3162399C2B81CF37002D9E2F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3162399B2B81CF37002D9E2F /* FirebaseStorage */; };
+		316239AA2B81E3F9002D9E2F /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316239A92B81E3F9002D9E2F /* UserDefaultManager.swift */; };
+		316239AC2B81E917002D9E2F /* TermsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316239AB2B81E917002D9E2F /* TermsData.swift */; };
 		316A926A2B66703800E4337D /* SetBusinessLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A92682B66703800E4337D /* SetBusinessLocationViewController.swift */; };
 		316A926B2B66703800E4337D /* SetBusinessLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316A92692B66703800E4337D /* SetBusinessLocationViewController.xib */; };
 		316A926D2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A926C2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift */; };
@@ -343,6 +350,9 @@
 		2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDTO.swift; sourceTree = "<group>"; };
 		2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLocationModel.swift; sourceTree = "<group>"; };
 		2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
+		2DCB3CCD2B7E041600BFCDA1 /* config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = config.xcconfig; sourceTree = "<group>"; };
+		3101C7292B81F77200460689 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
+		3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoBuilder.swift; sourceTree = "<group>"; };
 		312DF7612B669CC30060BDF0 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		312DF7632B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHeaderSupplementaryView.swift; sourceTree = "<group>"; };
 		3142B9552B4CFFED0066CD5A /* MEME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEME.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -366,6 +376,9 @@
 		3142B9AE2B4D08380066CD5A /* ArtistHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistHomeViewController.swift; sourceTree = "<group>"; };
 		3142B9B02B4D08480066CD5A /* ArtistReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistReservationViewController.swift; sourceTree = "<group>"; };
 		3142B9B32B4D089D0066CD5A /* TabBarItemType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarItemType.swift; sourceTree = "<group>"; };
+		314525872B820631003D5CC7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		314525892B821C8B003D5CC7 /* TokenResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenResponseDTO.swift; sourceTree = "<group>"; };
+		3145258B2B826AAE003D5CC7 /* ExtraProfileResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtraProfileResponseDTO.swift; sourceTree = "<group>"; };
 		314F74EA2B52DE1900CACF20 /* Pretendard-Thin.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Thin.otf"; sourceTree = "<group>"; };
 		314F74EB2B52DE1900CACF20 /* Pretendard-Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-Medium.otf"; sourceTree = "<group>"; };
 		314F74EC2B52DE1900CACF20 /* Pretendard-ExtraLight.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Pretendard-ExtraLight.otf"; sourceTree = "<group>"; };
@@ -400,7 +413,8 @@
 		316239662B80DE9B002D9E2F /* BasicResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicResponseDTO.swift; sourceTree = "<group>"; };
 		3162397E2B81B34C002D9E2F /* MEME.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MEME.entitlements; sourceTree = "<group>"; };
 		3162397F2B81B399002D9E2F /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
-		316239872B81C945002D9E2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		316239A92B81E3F9002D9E2F /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		316239AB2B81E917002D9E2F /* TermsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsData.swift; sourceTree = "<group>"; };
 		316A92682B66703800E4337D /* SetBusinessLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBusinessLocationViewController.swift; sourceTree = "<group>"; };
 		316A92692B66703800E4337D /* SetBusinessLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetBusinessLocationViewController.xib; sourceTree = "<group>"; };
 		316A926C2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLocationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -792,10 +806,10 @@
 				3142B9612B4CFFED0066CD5A /* Assets.xcassets */,
 				314F74E92B52DDF200CACF20 /* Font */,
 				3142B9662B4CFFED0066CD5A /* Info.plist */,
-				316239872B81C945002D9E2F /* GoogleService-Info.plist */,
 				315FB8532B6DDB210068163C /* config.xcconfig */,
 				2D7D74792B76972D005BDFD5 /* memeSecret.plist */,
 				2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */,
+				314525872B820631003D5CC7 /* GoogleService-Info.plist */,
 				3142B9632B4CFFED0066CD5A /* LaunchScreen.storyboard */,
 				3156D1FD2B69438800559820 /* Network */,
 				3142B9992B4D01FB0066CD5A /* extenstions */,
@@ -844,6 +858,7 @@
 				3142B9B22B4D086B0066CD5A /* TabBar */,
 				CC9C386C2B7C798C0073A257 /* Artist */,
 				3162397F2B81B399002D9E2F /* ImageManager.swift */,
+				316239A92B81E3F9002D9E2F /* UserDefaultManager.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -860,6 +875,8 @@
 				31C85EF02B526B9F0064A6E7 /* OnBoarding */,
 				31C85EEF2B526B930064A6E7 /* Login */,
 				31C85EEE2B526B8F0064A6E7 /* TermsAgreement */,
+				3101C7292B81F77200460689 /* ProfileInfo.swift */,
+				3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1038,6 +1055,9 @@
 				CC9C38922B81B3830073A257 /* ContactDTO.swift */,
 				2D7D747D2B769C9E005BDFD5 /* ReservationDTO.swift */,
 				2DA208082B7ABE43006EB9B9 /* SearchDTO.swift */,
+				314525892B821C8B003D5CC7 /* TokenResponseDTO.swift */,
+				2DA208102B7CB476006EB9B9 /* RecommendDTO.swift */,
+				3145258B2B826AAE003D5CC7 /* ExtraProfileResponseDTO.swift */,
 				2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */,
 				316239642B80DE58002D9E2F /* SignUpResponseDTO.swift */,
 				316239662B80DE9B002D9E2F /* BasicResponseDTO.swift */,
@@ -1211,6 +1231,7 @@
 				31B263402B57EDE300304FBE /* TermDetailViewController.xib */,
 				31B2633F2B57EDE300304FBE /* TermsAgreementViewController.swift */,
 				31B263422B57EDE300304FBE /* TermsAgreementViewController.xib */,
+				316239AB2B81E917002D9E2F /* TermsData.swift */,
 			);
 			path = TermsAgreement;
 			sourceTree = "<group>";
@@ -1527,6 +1548,7 @@
 				312B304F2B550FF9008D17FC /* Pretendard-Bold.otf in Resources */,
 				312B30502B550FF9008D17FC /* Pretendard-ExtraLight.otf in Resources */,
 				31B2636E2B57EECB00304FBE /* BusinessRegistrationViewController.xib in Resources */,
+				314525882B820631003D5CC7 /* GoogleService-Info.plist in Resources */,
 				312B30532B550FF9008D17FC /* Pretendard-ExtraBold.otf in Resources */,
 				312B30522B550FF9008D17FC /* Pretendard-Thin.otf in Resources */,
 				CCCE563C2B81D9FB007555A2 /* ArtistLocationViewController.xib in Resources */,
@@ -1539,7 +1561,7 @@
 				316A92782B667E7200E4337D /* SetBusinessInfoDetailViewController.xib in Resources */,
 				CCCE56252B81D9BF007555A2 /* ArtistInfoViewController.xib in Resources */,
 				2D62E25C2B54A658004E8299 /* RecentSearchViewCell.xib in Resources */,
-				316239882B81C945002D9E2F /* GoogleService-Info.plist in Resources */,
+				316239882B81C945002D9E2F /* (null) in Resources */,
 				2D0A190A2B4EEDB500C1CECA /* CategorySearchViewCell.xib in Resources */,
 				CCCE56222B81D9BF007555A2 /* ArtistInfoViewController.xib in Resources */,
 				2DCB3CCE2B7E041600BFCDA1 /* memeSecret.plist in Resources */,
@@ -1616,6 +1638,7 @@
 				2D6F59B82B5C4FB100CA883A /* SortOptionIconView.swift in Sources */,
 				CCCE56412B81D9FB007555A2 /* ArtistLocationCollectionViewCell.swift in Sources */,
 				2D5C05A42B60433000EDC69F /* ModelReservationDetailViewController.swift in Sources */,
+				3145258A2B821C8B003D5CC7 /* TokenResponseDTO.swift in Sources */,
 				CCAB5A5D2B6785D400067FA4 /* MyPageSegmentedControl.swift in Sources */,
 				CCAB5A5B2B6740CE00067FA4 /* AskViewController.swift in Sources */,
 				CCAB5A492B65861600067FA4 /* InterestMakeUpViewController.swift in Sources */,
@@ -1645,6 +1668,7 @@
 				CCAB5A612B67B6C100067FA4 /* ModelDetailSettingView.swift in Sources */,
 				2DA208092B7ABE43006EB9B9 /* SearchDTO.swift in Sources */,
 				2D106F472B7025DB00F3C253 /* ModelReservationVisitLocationView.swift in Sources */,
+				3101C72C2B81F80600460689 /* ProfileInfoBuilder.swift in Sources */,
 				316A927C2B6688F700E4337D /* Week.swift in Sources */,
 				316239802B81B399002D9E2F /* ImageManager.swift in Sources */,
 				315AC1CC2B70FE76003FD1A1 /* DayOfWeek.swift in Sources */,
@@ -1669,11 +1693,13 @@
 				2D106F4A2B7028C200F3C253 /* ModelReservationShopLocationView.swift in Sources */,
 				317D98772B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift in Sources */,
 				315AC1C52B70D186003FD1A1 /* ModelHomeViewController.swift in Sources */,
+				3145258C2B826AAE003D5CC7 /* ExtraProfileResponseDTO.swift in Sources */,
 				CC9C387D2B80859B0073A257 /* WrittenReviewAPI.swift in Sources */,
 				2DA208032B7AB577006EB9B9 /* SearchSort.swift in Sources */,
 				315FB85E2B6DE57C0068163C /* KeyChainValue.swift in Sources */,
 				2D5C05A12B60269900EDC69F /* ShowReviewTableViewCell.swift in Sources */,
 				317D98752B7E0C68009BBB95 /* AtristProfileInfo.swift in Sources */,
+				3101C72A2B81F77200460689 /* ProfileInfo.swift in Sources */,
 				31B65E402B6E041300628C68 /* NetworkAuthProvider.swift in Sources */,
 				315AC1C32B70CDE9003FD1A1 /* ModelReservationViewController.swift in Sources */,
 				CCCE56422B81D9FB007555A2 /* ArtistInfoDetailViewController.swift in Sources */,
@@ -1737,6 +1763,7 @@
 				CCAB5A4D2B65938F00067FA4 /* InterestArtistCollectionViewCell.swift in Sources */,
 				CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */,
 				2DA208012B7AB514006EB9B9 /* SearchAPI.swift in Sources */,
+				316239AA2B81E3F9002D9E2F /* UserDefaultManager.swift in Sources */,
 				CCAB5A652B6CFDB300067FA4 /* MyReviewCollectionViewCell.swift in Sources */,
 				CC9C388D2B80F9C80073A257 /* ModelProfileInfoDTO.swift in Sources */,
 				31B413842B6D322500535BB1 /* NetworkProvider.swift in Sources */,
@@ -1761,6 +1788,7 @@
 				2DA208072B7ABB2E006EB9B9 /* SearchManager.swift in Sources */,
 				31B263452B57EDE300304FBE /* TermDetailViewController.swift in Sources */,
 				31B263542B57EE8600304FBE /* SetDetailInfoViewController.swift in Sources */,
+				316239AC2B81E917002D9E2F /* TermsData.swift in Sources */,
 				3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */,
 				CCCE56232B81D9BF007555A2 /* ArtistInfoViewController.swift in Sources */,
 				CC9C38932B81B3830073A257 /* ContactDTO.swift in Sources */,

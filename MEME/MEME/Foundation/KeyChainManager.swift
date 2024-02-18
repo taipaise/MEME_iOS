@@ -143,8 +143,10 @@ extension KeyChainManager {
     static func loadAccessToken() -> String {
         "Bearer " + (Self.read(forkey: .accessToken) ?? "")
     }
+
     
-    static func loadMemberID() -> String {
-        Self.read(forkey: .memberId) ?? ""
+    static func loadMemberID() -> Int {
+        var idString = Self.read(forkey: .memberId) ?? "-1"
+        return Int(idString) ?? -1
     }
 }

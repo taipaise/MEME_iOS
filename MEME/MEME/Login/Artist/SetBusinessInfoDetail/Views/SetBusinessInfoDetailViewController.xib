@@ -78,8 +78,8 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="I43-95-01N">
                     <rect key="frame" x="24" y="157" width="288" height="1108"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bt8-WU-tjE" userLabel="Content View">
-                            <rect key="frame" x="0.0" y="0.0" width="288" height="734.33333333333337"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Bt8-WU-tjE" userLabel="Content View">
+                            <rect key="frame" x="0.0" y="8" width="288" height="734.33333333333337"/>
                             <subviews>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전문분야 (다중 선택 가능)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Hb3-lE-MSG">
                                     <rect key="frame" x="0.0" y="0.0" width="141.33333333333334" height="17"/>
@@ -471,7 +471,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="RHr-J6-nbf">
-                                    <rect key="frame" x="0.0" y="676.33333333333337" width="288" height="49"/>
+                                    <rect key="frame" x="0.0" y="1012.3333333333333" width="288" height="49"/>
                                     <color key="backgroundColor" name="MainBold"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="49" id="5ca-WZ-Wcd"/>
@@ -486,7 +486,7 @@
                                     </connections>
                                 </button>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="4is-St-AE9">
-                                    <rect key="frame" x="0.0" y="625.33333333333337" width="288" height="30"/>
+                                    <rect key="frame" x="0.0" y="625.33333333333337" width="288" height="366"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Bpg-V6-Bke">
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="30"/>
@@ -495,8 +495,8 @@
                                                 <constraint firstAttribute="height" constant="30" id="4PE-QS-u6g"/>
                                             </constraints>
                                         </view>
-                                        <collectionView hidden="YES" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="mFl-81-Mv2">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="336"/>
+                                        <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="mFl-81-Mv2">
+                                            <rect key="frame" x="0.0" y="30" width="288" height="336"/>
                                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="336" id="0cP-Uc-zLt"/>

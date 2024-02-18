@@ -38,3 +38,17 @@ class FirebaseStorageManager {
         }
     }
 }
+
+class A  {
+    var a = UIImage(named: "pencil")!
+
+    func b() {
+        FirebaseStorageManager.uploadImage(image: a) { url in
+            guard let url = url else { return }
+            
+            
+        }
+    }
+    
+    
+}

@@ -10,7 +10,6 @@ import PhotosUI
 
 final class SetBusinessInfoViewController: UIViewController {
 
-    
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var navigationBar: NavigationBarView!
     @IBOutlet private weak var progressBar: RegisterProgressBar!
@@ -66,7 +65,7 @@ final class SetBusinessInfoViewController: UIViewController {
         verificationButton.layer.borderColor = UIColor.mainBold.cgColor
         verificationButton.layer.borderWidth = 1
         nameTextField.delegate = self
-        
+        nameTextField.text = KeyChainManager.read(forkey: .nickName)
         setNextButton()
     }
     

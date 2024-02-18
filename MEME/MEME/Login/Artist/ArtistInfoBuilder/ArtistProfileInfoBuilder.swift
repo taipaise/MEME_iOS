@@ -20,8 +20,7 @@ final class ArtistProfileInfoBuilder {
     private var makeupLocation = ""
     private var shopLocation = ""
     private var week: [String] = []
-    private var startTime = ""
-    private var endTime = ""
+    private var selectedTime: [String] = []
     
     func userId(_ userId: Int) -> ArtistProfileInfoBuilder {
         self.userId = userId
@@ -78,12 +77,8 @@ final class ArtistProfileInfoBuilder {
         return self
     }
     
-    func startTime(_ time: String) -> ArtistProfileInfoBuilder {
-        self.startTime = time
-        return self
-    }
-    func endTime(_ time: String) -> ArtistProfileInfoBuilder {
-        self.endTime = time
+    func selectedTime(_ time: [String]) -> ArtistProfileInfoBuilder {
+        self.selectedTime = time
         return self
     }
     
@@ -100,8 +95,7 @@ final class ArtistProfileInfoBuilder {
             makeupLocation: makeupLocation,
             shopLocation: shopLocation,
             week: week,
-            startTiem: startTime,
-            endTime: endTime
+            selectedTime: selectedTime
         )
     }
 }

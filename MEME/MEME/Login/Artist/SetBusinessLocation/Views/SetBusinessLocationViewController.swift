@@ -52,9 +52,11 @@ final class SetBusinessLocationViewController: UIViewController {
     }
     
     @IBAction private func nextButtonTapped(_ sender: Any) {
+        guard var builder = builder else { return }
         let nextVC = SetBusinessInfoDetailViewController()
         let regions = Array(selectedLocation).map{ $0.rawValue }
-        builder = builder?.region(regions)
+        builder = builder.region(regions)
+        nextVC.configure(builder: builder)
         navigationController?.pushViewController(nextVC, animated: true)
     }
 }

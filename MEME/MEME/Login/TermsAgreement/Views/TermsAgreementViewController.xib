@@ -96,24 +96,27 @@
                                 <constraint firstAttribute="width" constant="8" id="k6J-nS-Xx8"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="L0M-HZ-YBO">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8db-mj-OaG">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="19"/>
                             <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" title=""/>
+                            <buttonConfiguration key="configuration" style="plain"/>
+                            <connections>
+                                <action selector="termDetailButtonTapped:" destination="-1" eventType="touchUpInside" id="pc7-7e-WA2"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     <constraints>
-                        <constraint firstItem="L0M-HZ-YBO" firstAttribute="leading" secondItem="GVB-9b-87v" secondAttribute="leading" id="0MA-iR-J6r"/>
-                        <constraint firstAttribute="trailing" secondItem="L0M-HZ-YBO" secondAttribute="trailing" id="6Q7-dR-1AT"/>
                         <constraint firstItem="7P3-aF-M51" firstAttribute="top" secondItem="GVB-9b-87v" secondAttribute="top" id="DTG-LN-DDt"/>
+                        <constraint firstAttribute="trailing" secondItem="8db-mj-OaG" secondAttribute="trailing" id="ENp-hC-Qtc"/>
                         <constraint firstAttribute="height" constant="19" id="Fh0-mL-2Q9"/>
                         <constraint firstAttribute="bottom" secondItem="9w2-M6-u6c" secondAttribute="bottom" id="GPs-5U-thD"/>
                         <constraint firstItem="9w2-M6-u6c" firstAttribute="top" secondItem="GVB-9b-87v" secondAttribute="top" id="JsZ-zo-awN"/>
+                        <constraint firstAttribute="bottom" secondItem="8db-mj-OaG" secondAttribute="bottom" id="KnV-qQ-wHy"/>
+                        <constraint firstItem="8db-mj-OaG" firstAttribute="leading" secondItem="GVB-9b-87v" secondAttribute="leading" id="Q4G-5X-q5C"/>
                         <constraint firstItem="9w2-M6-u6c" firstAttribute="leading" secondItem="GVB-9b-87v" secondAttribute="leading" id="Wdq-gt-cOz"/>
                         <constraint firstAttribute="trailing" secondItem="7P3-aF-M51" secondAttribute="trailing" id="dLe-Xq-2wj"/>
-                        <constraint firstAttribute="bottom" secondItem="L0M-HZ-YBO" secondAttribute="bottom" id="jtJ-Rw-ltG"/>
-                        <constraint firstItem="L0M-HZ-YBO" firstAttribute="top" secondItem="GVB-9b-87v" secondAttribute="top" id="tn7-zc-Umz"/>
+                        <constraint firstItem="8db-mj-OaG" firstAttribute="top" secondItem="GVB-9b-87v" secondAttribute="top" id="v7u-Jr-pIf"/>
                         <constraint firstAttribute="bottom" secondItem="7P3-aF-M51" secondAttribute="bottom" id="wTj-Z4-gfB"/>
                     </constraints>
                 </view>
@@ -145,10 +148,13 @@
                                 <constraint firstAttribute="width" constant="8" id="caY-Y9-fVn"/>
                             </constraints>
                         </imageView>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhu-zR-iCa">
+                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dhu-zR-iCa">
                             <rect key="frame" x="0.0" y="0.0" width="320" height="19"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title=""/>
+                            <connections>
+                                <action selector="termDetailButtonTapped:" destination="-1" eventType="touchUpInside" id="5f6-PB-4aj"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
