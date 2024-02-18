@@ -14,9 +14,9 @@ class InterestMakeUpViewController: UIViewController, UICollectionViewDelegate, 
     struct MakeUp {
         let type: String
         let name: String
-        let price: String
+        let price: Int
     }
-    var data = [MakeUp]()
+    var data = [MakeupContent]()
     
     var collectionView: UICollectionView!
     
@@ -25,13 +25,27 @@ class InterestMakeUpViewController: UIViewController, UICollectionViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        InterestMakeUpManager.shared.getInterestMakeUp(modelId: 1, portfolioId: 3,  portfolioImg: "URL", category: "Category", makeupName: "Name", artistName: "ArtistName", price: 20000, makeupLocation: "makeupLocation") { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("Success: \(response)")
+                self?.data = response.data.content 
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                    self?.totalLabel.text = "총 \(self?.data.count ?? 0)명"
+                }
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
+        
         self.tabBarController?.tabBar.isHidden = true
         
-        let makeup1 = MakeUp(type:"데일리 메이크업", name: "메이크업명", price: "가격")
-        let makeup2 = MakeUp(type:"배우 메이크업", name: "메이크업명", price: "가격")
-        let makeup3 = MakeUp(type:"데일리 메이크업", name: "메이크업명", price: "가격")
-        let makeup4 = MakeUp(type:"배우 메이크업", name: "메이크업명", price: "가격")
-        data = [makeup1, makeup2, makeup3, makeup4]
+//        let makeup1 = MakeUp(type:"데일리 메이크업", name: "메이크업명", price: "가격")
+//        let makeup2 = MakeUp(type:"배우 메이크업", name: "메이크업명", price: "가격")
+//        let makeup3 = MakeUp(type:"데일리 메이크업", name: "메이크업명", price: "가격")
+//        let makeup4 = MakeUp(type:"배우 메이크업", name: "메이크업명", price: "가격")
+//        data = [makeup1, makeup2, makeup3, makeup4]
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 57, left: 28, bottom: 10, right: 28)
@@ -82,18 +96,18 @@ class InterestMakeUpViewController: UIViewController, UICollectionViewDelegate, 
         }
         
         let makeup = data[indexPath.item]
-        cell.typeLabel.text = makeup.type
-        cell.titleLabel.text = makeup.name
-        cell.priceLabel.text = makeup.price
-        
+        cell.typeLabel.text = makeup.category
+        cell.titleLabel.text = makeup.makeupName
+        cell.priceLabel.text = String(makeup.price)
+
         return cell
     }
     
-    // 셀 클릭시 예약하기 화면의 아티스트로 이동
-    //    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-    //        let viewController = SomeViewController()
-    //        self.navigationController?.pushViewController(viewController, animated: true)
-    //    }
+        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let modelReservationViewController = ModelReservationViewController()
+            self.navigationController?.pushViewController(modelReservationViewController, animated: true)
+        }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true

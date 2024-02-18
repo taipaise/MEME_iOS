@@ -81,7 +81,7 @@ extension MemeAPI {
         case .hasAccessToken:
             return [
                 HTTPHeaderFieldsKey.contentType: HTTPHeaderFieldsValue.json,
-                HTTPHeaderFieldsKey.authorization: HTTPHeaderFieldsValue.accessToken
+                HTTPHeaderFieldsKey.authorization: "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJtZW1lX3VtYyIsImlhdCI6MTcwNzk4NTkwOSwiZXhwIjoxNzEwNTc3OTA5LCJzdWIiOiJhY2Nlc3MtdG9rZW4iLCJ1c2VybmFtZSI6IuyehOyerOyYgSIsInJvbGUiOiJST0xFX01PREVMIn0.8MSYAcPOl6IfxOARHAS_aiYhG6JaQ1NjkuKqt_mZJEKgRLOxHkxHqbzZ2fmoq4Il1EVj3ieOU6Uq2WHFPcPZ6g"
             ]
         }
     }

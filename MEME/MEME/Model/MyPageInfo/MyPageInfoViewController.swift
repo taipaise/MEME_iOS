@@ -9,20 +9,30 @@ import UIKit
 
 private let cellID2 = "Cell2"
 
-class MyPageInfoViewController: UIViewController {
+class MyPageInfoViewController: UIViewController, UITableViewDataSource {
     
     let tableView = UITableView(frame: .zero, style: .plain)
     let infoMenu = ["닉네임","이름", "성별", "이메일"]
-    let infoMenuRightText = ["차차", "김나령", "여성", "meme@naver.com"]
     
+    var myPageResponse: MyPageResponse?
+
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        configureUI()
-        self.tabBarController?.tabBar.isHidden = true
         
-        self.navigationController?.navigationBar.tintColor = UIColor.black
-
+        MyPageManager.shared.getMyPageProfile(userId: 6) { [weak self] result in
+            switch result {
+            case .success(let profile):
+                print("Success: \(profile)")
+                self?.myPageResponse = profile
+                self?.tableView.reloadData()
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
+            configureUI()
+            self.tabBarController?.tabBar.isHidden = true
+            
+            self.navigationController?.navigationBar.tintColor = UIColor.black
     }
 
     func configureUI() {
@@ -44,6 +54,8 @@ class MyPageInfoViewController: UIViewController {
             tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
         ])
         
+        self.tabBarController?.tabBar.isHidden = true
+        
         navigationItem.title = "내 정보 수정"
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.pretendard(to: .regular, size: 16)]
@@ -56,36 +68,43 @@ class MyPageInfoViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
        }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
-    }
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
-    }
-    @objc func backButtonTapped() {
+
+    @objc private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
-
-}
-
-extension MyPageInfoViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return infoMenu.count
+    @objc func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return myPageResponse != nil ? infoMenu.count : 0
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    @objc(tableView:cellForRowAtIndexPath:) func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath) as! InfoTableViewCell
 
         cell.infomenuLabel.text = infoMenu[indexPath.row]
-        cell.rightLabel.text = infoMenuRightText[indexPath.row]
+        cell.rightLabel.text = profileValue(for: indexPath.row)
 
         return cell
     }
-
-    
+    private func profileValue(for index: Int) -> String? {
+        guard let data = myPageResponse?.data else { return nil }
+        switch index {
+        case 0:
+            return data.nickname
+        case 1:
+            return data.name
+        case 2:
+            return data.gender
+        case 3:
+            return data.email
+        default:
+            return nil
+        }
+    }
 }
+
+
+//var myPageResponse: MyPageResponse?
+//
+//extension MyPageInfoViewController: UITableViewDataSource {}
 
 extension MyPageInfoViewController: UITableViewDelegate {
     

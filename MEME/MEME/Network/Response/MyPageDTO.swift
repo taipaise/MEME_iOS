@@ -1,39 +1,23 @@
 //
-//  MyPageDTO.swift
+//  MyPageAPI.swift
 //  MEME
 //
-//  Created by 정민지 on 2/13/24.
+//  Created by 임아영 on 2/9/24.
 //
 
 import Foundation
 
-// MARK: -관심 아티스트 조회 DTO
-struct FavoriteArtistsDTO: Codable {
+struct MyPageResponse: Codable {
     let result: String
     let message: String
-    let data: FavoriteArtistsData?
+    let data: MyPageData?
     let statusCode: Int
 }
 
-struct FavoriteArtistsData: Codable {
-    let content: [Artist]?
-    let currentPage: Int
-    let pageSize: Int
-    let totalNumber: Int
-    let totalPage: Int
+struct MyPageData: Codable {
+    let profileImg: String?
+    let nickname: String?
+    let name: String?
+    let gender: String?
+    let email: String?
 }
-
-struct Artist: Codable {
-    let artistId: Int
-    let profileImg: String
-    let artistNickName: String
-}
-
-// MARK: -관심 메이크업 추가, 삭제 DTO
-struct FavoriteDTO: Codable {
-    let result: String
-    let message: String
-    let data: String?
-    let statusCode: Int
-}
-

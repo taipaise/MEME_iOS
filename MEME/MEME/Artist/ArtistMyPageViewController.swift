@@ -53,6 +53,24 @@ private let cellID = "Cell"
             tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 1))
             
         }
+        
+        func buttonClicked() {
+            let myPageInfoViewController = MyPageInfoViewController()
+            self.navigationController?.pushViewController(myPageInfoViewController, animated: true)
+        }
+        func profileManage() {
+            let artistInfoViewController = ArtistInfoViewController()
+            self.navigationController?.pushViewController(artistInfoViewController, animated: true)
+        }
+        
+        func portfolioManage() {
+            let artistPortfolioManageViewController = ArtistPortfolioManageViewController()
+            self.navigationController?.pushViewController(artistPortfolioManageViewController, animated: true)
+        }
+        func reservationManage() {
+            let artistReservationManageViewController = ArtistReservationManageViewController()
+            self.navigationController?.pushViewController(artistReservationManageViewController, animated: true)
+        }
     }
 
 extension ArtistMyPageViewController: UITableViewDataSource {
@@ -172,23 +190,5 @@ extension ArtistMyPageViewController: UITableViewDelegate {
         return 37
     }
     
-    func buttonClicked() {
-        let myPageInfoViewController = MyPageInfoViewController()
-        self.navigationController?.pushViewController(myPageInfoViewController, animated: true)
-    }
-    //수정필요
-    func mpArtistClicked() {
-        let interestArtistViewController = InterestArtistViewController()
-        self.navigationController?.pushViewController(interestArtistViewController, animated: true)
-    }
-    
-    func mpMakeUpClicked() {
-        let interestMakeUpViewController = InterestMakeUpViewController()
-        self.navigationController?.pushViewController(interestMakeUpViewController, animated: true)
-    }
-    func myReviewClicked() {
-        let myReviewViewController = MyReviewViewController()
-        self.navigationController?.pushViewController(myReviewViewController, animated: true)
-    }
 }
 

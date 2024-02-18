@@ -26,9 +26,7 @@ final class MyPageSegmentedControl: UISegmentedControl {
     
     private lazy var reviewNumLabel: UILabel = {
         let label = UILabel()
-        label.textColor = .mainBold
-        // label 내용 api에서 받아온 숫자로 수정 필요
-        label.text = "3"
+        label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .pretendard(to: .regular, size: 14)
 
@@ -58,7 +56,7 @@ final class MyPageSegmentedControl: UISegmentedControl {
         if !isFirstSettingDone {
             isFirstSettingDone.toggle()
             setUnderbarMovableBackgroundLayer()
-//            setReviewNumLabelInSegmentedViews()
+            setReviewNumLabelInSegmentedViews()
             layer.cornerRadius = 0
             layer.masksToBounds = false
         }
@@ -95,7 +93,37 @@ private extension MyPageSegmentedControl {
         backgroundLayer.cornerRadius = underbarInfo.height/2
         layer.addSublayer(backgroundLayer)
     }
-
+    
+    func setReviewNumLabelInSegmentedViews() {
+        let titles = (0..<numberOfSegments).map {
+            titleForSegment(at: $0)
+        }
+        
+        let segmentedTitleLabels = subviews
+            .compactMap { subview in
+                subview.subviews.compactMap { $0 as? UILabel }
+            }
+            .flatMap { $0 }
+            .sorted {
+                guard
+                    let idx1 = titles.firstIndex(of: $0.text ?? ""),
+                    let idx2 = titles.firstIndex(of: $1.text ?? "")
+                else { return false }
+                return idx1 < idx2
+            }
+        
+        for (index, title) in titles.enumerated() {
+            if let segmentLabel = segmentedTitleLabels.first(where: { $0.text == title }) {          
+                
+                segmentLabel.addSubview(reviewNumLabel)
+                NSLayoutConstraint.activate([
+                    reviewNumLabel.centerYAnchor.constraint(equalTo: segmentLabel.centerYAnchor),
+                    reviewNumLabel.leadingAnchor.constraint(equalTo: segmentLabel.trailingAnchor, constant: 5)
+                ])
+            }
+        }
+    }
+    
     func makeUnderbar() -> UIView {
         return {
             $0.translatesAutoresizingMaskIntoConstraints = false

@@ -20,11 +20,11 @@ class AskViewController: UIViewController {
         tf.layer.cornerRadius = 9
         tf.layer.borderWidth = 1
         tf.layer.borderColor = UIColor(named: "Gray300")?.cgColor
-        tf.placeholder = "답변받을 이메일 주소를 남겨주세요."
+        tf.placeholder = "제목을 입력해주세요."
         
         tf.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: tf.frame.height))
         tf.leftViewMode = .always
-
+        
         return tf
     }()
     
@@ -32,19 +32,24 @@ class AskViewController: UIViewController {
     
     let askTextView = UITextView()
     
-    let sendButton = UIButton(type: .system)
-
+    let sendButton: UIButton = {
+        let btn = UIButton(type: .system)
+        btn.addTarget(self, action: #selector(sendButtonTapped(_:)), for: .touchUpInside)
+        
+        return btn
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureUI()
         
         self.tabBarController?.tabBar.isHidden = true
-
+        
         navigationItem.backButtonTitle = ""
     }
     
-
+    
     func configureUI() {
         view.backgroundColor = .white
         
@@ -55,7 +60,7 @@ class AskViewController: UIViewController {
         backButton.setImage(UIImage.icBack, for: .normal)
         backButton.configuration?.imagePadding = 25
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
         
         askLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -74,7 +79,7 @@ class AskViewController: UIViewController {
         ])
         
         view.addSubview(emailLabel)
-        emailLabel.text = "이메일"
+        emailLabel.text = "문의 제목"
         emailLabel.font = UIFont(name: "Pretendard-Regular", size: 14)
         NSLayoutConstraint.activate([
             emailLabel.topAnchor.constraint(equalTo: askLabel.bottomAnchor, constant: 24),
@@ -105,7 +110,7 @@ class AskViewController: UIViewController {
         askTextView.layer.cornerRadius = 9
         
         askTextView.delegate = self
-
+        
         askTextView.layer.borderColor = UIColor.gray300.cgColor
         askTextView.layer.borderWidth = 1
         NSLayoutConstraint.activate([
@@ -127,19 +132,29 @@ class AskViewController: UIViewController {
             sendButton.widthAnchor.constraint(equalTo: view.widthAnchor, multiplier: 0.8)
         ])
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
-    }
     
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        self.tabBarController?.tabBar.isHidden = false
-    }
     @objc func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
+    
+    @objc func sendButtonTapped(_ sender: UIButton) {
+        guard let title = emailTextField.text,
+              let content = askTextView.text else {
+            print("입력값이 잘못되었습니다.")
+            return
+        }
+        
+        ContactManager.shared.postContact(userId: 6, inquiryTitle: title, inquiryText: content) { result in
+            switch result {
+            case .success(let contactResponse):
+                print("요청 성공: \(contactResponse)")
+            case .failure(let error):
+                print("요청 실패: \(error)")
+            }
+        }
+    }
 }
+
 extension AskViewController: UITextViewDelegate {
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.gray300 {
