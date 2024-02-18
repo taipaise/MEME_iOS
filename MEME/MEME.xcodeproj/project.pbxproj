@@ -75,6 +75,9 @@
 		2DA208172B7CF87B006EB9B9 /* PortfolioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */; };
 		2DA208192B7CF9EE006EB9B9 /* PortfolioDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */; };
 		2DCB3CCE2B7E041600BFCDA1 /* memeSecret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */; };
+		2DCB3CCF2B7E041600BFCDA1 /* config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2DCB3CCD2B7E041600BFCDA1 /* config.xcconfig */; };
+		3101C72A2B81F77200460689 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C7292B81F77200460689 /* ProfileInfo.swift */; };
+		3101C72C2B81F80600460689 /* ProfileInfoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */; };
 		312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */; };
 		312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EE2B52DE1900CACF20 /* Pretendard-Light.otf */; };
 		312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EB2B52DE1900CACF20 /* Pretendard-Medium.otf */; };
@@ -142,6 +145,8 @@
 		316239982B81CF37002D9E2F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 316239972B81CF37002D9E2F /* FirebaseFirestore */; };
 		3162399A2B81CF37002D9E2F /* FirebaseFirestoreSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 316239992B81CF37002D9E2F /* FirebaseFirestoreSwift */; };
 		3162399C2B81CF37002D9E2F /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 3162399B2B81CF37002D9E2F /* FirebaseStorage */; };
+		316239AA2B81E3F9002D9E2F /* UserDefaultManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316239A92B81E3F9002D9E2F /* UserDefaultManager.swift */; };
+		316239AC2B81E917002D9E2F /* TermsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316239AB2B81E917002D9E2F /* TermsData.swift */; };
 		316A926A2B66703800E4337D /* SetBusinessLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A92682B66703800E4337D /* SetBusinessLocationViewController.swift */; };
 		316A926B2B66703800E4337D /* SetBusinessLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316A92692B66703800E4337D /* SetBusinessLocationViewController.xib */; };
 		316A926D2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A926C2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift */; };
@@ -302,6 +307,8 @@
 		2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDTO.swift; sourceTree = "<group>"; };
 		2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
 		2DCB3CCD2B7E041600BFCDA1 /* config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = config.xcconfig; sourceTree = "<group>"; };
+		3101C7292B81F77200460689 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
+		3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoBuilder.swift; sourceTree = "<group>"; };
 		312DF7612B669CC30060BDF0 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		312DF7632B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHeaderSupplementaryView.swift; sourceTree = "<group>"; };
 		3142B9552B4CFFED0066CD5A /* MEME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEME.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -359,7 +366,8 @@
 		316239662B80DE9B002D9E2F /* BasicResponseDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicResponseDTO.swift; sourceTree = "<group>"; };
 		3162397E2B81B34C002D9E2F /* MEME.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MEME.entitlements; sourceTree = "<group>"; };
 		3162397F2B81B399002D9E2F /* ImageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageManager.swift; sourceTree = "<group>"; };
-		316239872B81C945002D9E2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		316239A92B81E3F9002D9E2F /* UserDefaultManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDefaultManager.swift; sourceTree = "<group>"; };
+		316239AB2B81E917002D9E2F /* TermsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsData.swift; sourceTree = "<group>"; };
 		316A92682B66703800E4337D /* SetBusinessLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBusinessLocationViewController.swift; sourceTree = "<group>"; };
 		316A92692B66703800E4337D /* SetBusinessLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetBusinessLocationViewController.xib; sourceTree = "<group>"; };
 		316A926C2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLocationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -747,6 +755,7 @@
 				31F6F8472B52C7B800EC621D /* NavigationBarView.swift */,
 				3142B9B22B4D086B0066CD5A /* TabBar */,
 				3162397F2B81B399002D9E2F /* ImageManager.swift */,
+				316239A92B81E3F9002D9E2F /* UserDefaultManager.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -763,6 +772,8 @@
 				31C85EF02B526B9F0064A6E7 /* OnBoarding */,
 				31C85EEF2B526B930064A6E7 /* Login */,
 				31C85EEE2B526B8F0064A6E7 /* TermsAgreement */,
+				3101C7292B81F77200460689 /* ProfileInfo.swift */,
+				3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1075,6 +1086,7 @@
 				31B263402B57EDE300304FBE /* TermDetailViewController.xib */,
 				31B2633F2B57EDE300304FBE /* TermsAgreementViewController.swift */,
 				31B263422B57EDE300304FBE /* TermsAgreementViewController.xib */,
+				316239AB2B81E917002D9E2F /* TermsData.swift */,
 			);
 			path = TermsAgreement;
 			sourceTree = "<group>";
@@ -1446,6 +1458,7 @@
 				CCAB5A612B67B6C100067FA4 /* ModelDetailSettingView.swift in Sources */,
 				2DA208092B7ABE43006EB9B9 /* SearchDTO.swift in Sources */,
 				2D106F472B7025DB00F3C253 /* ModelReservationVisitLocationView.swift in Sources */,
+				3101C72C2B81F80600460689 /* ProfileInfoBuilder.swift in Sources */,
 				316A927C2B6688F700E4337D /* Week.swift in Sources */,
 				316239802B81B399002D9E2F /* ImageManager.swift in Sources */,
 				315AC1CC2B70FE76003FD1A1 /* DayOfWeek.swift in Sources */,
@@ -1472,6 +1485,7 @@
 				315FB85E2B6DE57C0068163C /* KeyChainValue.swift in Sources */,
 				2D5C05A12B60269900EDC69F /* ShowReviewTableViewCell.swift in Sources */,
 				317D98752B7E0C68009BBB95 /* AtristProfileInfo.swift in Sources */,
+				3101C72A2B81F77200460689 /* ProfileInfo.swift in Sources */,
 				31B65E402B6E041300628C68 /* NetworkAuthProvider.swift in Sources */,
 				315AC1C32B70CDE9003FD1A1 /* ModelReservationViewController.swift in Sources */,
 				2D62E25B2B54A658004E8299 /* RecentSearchViewCell.swift in Sources */,
@@ -1517,6 +1531,7 @@
 				CCAB5A4D2B65938F00067FA4 /* InterestArtistCollectionViewCell.swift in Sources */,
 				CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */,
 				2DA208012B7AB514006EB9B9 /* SearchAPI.swift in Sources */,
+				316239AA2B81E3F9002D9E2F /* UserDefaultManager.swift in Sources */,
 				CCAB5A652B6CFDB300067FA4 /* MyReviewCollectionViewCell.swift in Sources */,
 				31B413842B6D322500535BB1 /* NetworkProvider.swift in Sources */,
 				2D4B7C292B5F294A001E1B09 /* ModelManagementReservationsViewController.swift in Sources */,
@@ -1532,6 +1547,7 @@
 				2DA208072B7ABB2E006EB9B9 /* SearchManager.swift in Sources */,
 				31B263452B57EDE300304FBE /* TermDetailViewController.swift in Sources */,
 				31B263542B57EE8600304FBE /* SetDetailInfoViewController.swift in Sources */,
+				316239AC2B81E917002D9E2F /* TermsData.swift in Sources */,
 				3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */,
 				3142B9B12B4D08480066CD5A /* ArtistReservationViewController.swift in Sources */,
 				31B65E4F2B6E229000628C68 /* ReservationManager.swift in Sources */,

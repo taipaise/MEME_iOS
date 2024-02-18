@@ -18,22 +18,24 @@ enum AuthAPI {
     case logout
     case withdraw
     case modelSignUp(
-        email: String,
+        idToken: String,
         provider: SocialProvider,
         profileImg: String,
         username: String,
         nickname: String,
         gender: Gender,
-        skinType: String, //임시
-        personalColor: String //임시
+        skinType: String,
+        personalColor: String
     )
+
     case artistSignUp(
-        email: String,
+        idToken: String,
         provider: SocialProvider,
         profileImg: String,
         username: String,
         nickname: String
     )
+    
     case artistProfile(
         userId: Int,
         profileImg: String,
@@ -60,15 +62,15 @@ extension AuthAPI: MemeAuthAPI {
         case .login:
             return "/login"
         case .logout:
-            return "/logout"
+            return "/auth/logout"
         case .withdraw:
-            return "/withdraw"
+            return "/auth/withdraw"
         case .modelSignUp:
-            return "/model/signup"
+            return "/signup/model"
         case .artistSignUp:
-            return "/artist/signup"
+            return "/signup/artist"
         case .artistProfile:
-            return "/artist/extra"
+            return "/auth/artist/extra"
         case .reissue:
             return "/reissue"
         }
@@ -80,9 +82,9 @@ extension AuthAPI: MemeAuthAPI {
     
     var headerType: HTTPHeaderFields {
         switch self {
-        case .login, .modelSignUp, .artistSignUp, .artistProfile, .reissue:
+        case .login, .modelSignUp, .artistSignUp, .reissue:
             return .plain
-        case .logout, .withdraw:
+        case .logout, .withdraw, .artistProfile:
             return .hasAccessToken
         }
     }
@@ -108,7 +110,7 @@ extension AuthAPI: MemeAuthAPI {
             return .requestPlain
             
         case .modelSignUp(
-            email: let email,
+            idToken: let idToken,
             provider: let provider,
             profileImg: let profileImg,
             username: let username,
@@ -117,8 +119,9 @@ extension AuthAPI: MemeAuthAPI {
             skinType: let skinType,
             personalColor: let personalColor
         ):
+
             let parameters: [String: Any] = [
-                "email": email,
+                "id_token": idToken,
                 "provider": provider.rawValue,
                 "profileImg": profileImg,
                 "username": username,
@@ -130,14 +133,14 @@ extension AuthAPI: MemeAuthAPI {
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             
         case .artistSignUp(
-            email: let email,
+            idToken: let idToken,
             provider: let provider,
             profileImg: let profileImg,
             username: let username,
             nickname: let nickname
         ):
             let parameters: [String: Any] = [
-                "email": email,
+                "id_token": idToken,
                 "provider": provider.rawValue,
                 "profileImg": profileImg,
                 "username": username,

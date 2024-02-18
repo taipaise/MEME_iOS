@@ -10,9 +10,12 @@ import KakaoSDKUser
 import AuthenticationServices
 
 final class LoginViewController: UIViewController {
+    let userDefaultManager = UserDefaultManager.shared
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        userDefaultManager.removeId()
+        userDefaultManager.removeProvider()
     }
     
     @IBAction private func kakaoLoginButtonTapped(_ sender: Any) {
@@ -32,7 +35,7 @@ final class LoginViewController: UIViewController {
 extension LoginViewController {
     
     private func kakaoLogin() {
-        
+        userDefaultManager.saveProvider(SocialProvider.KAKAO.rawValue)
     }
     
     private func appleLogin() {
@@ -50,18 +53,7 @@ extension LoginViewController {
 
 extension LoginViewController: ASAuthorizationControllerDelegate {
     func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
-        let authManager = AuthManager.shared
-        guard
-            let credential = authorization.credential as? ASAuthorizationAppleIDCredential,
-            let identityToken = credential.identityToken,
-            let tokenString = String(data: identityToken, encoding: .utf8)
-        else { return }
-        
-        print("token start")
-        print(tokenString)
-        authManager.login(idToken: tokenString, socialProvider: .APPLE) { result in
-            print(result)
-        }
+        userDefaultManager.saveProvider(SocialProvider.APPLE.rawValue)
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {

@@ -39,7 +39,7 @@ final class AuthManager {
     }
     
     func modelSignUp(
-        email: String,
+        idToken: String,
         socialProvider: SocialProvider,
         profileImg: String,
         username: String,
@@ -50,7 +50,7 @@ final class AuthManager {
         completion: @escaping (Result<Response, MoyaError>) -> Void
     ) {
         provider.request(api: .modelSignUp(
-            email: email,
+            idToken: idToken,
             provider: socialProvider,
             profileImg: profileImg,
             username: username,
@@ -64,7 +64,7 @@ final class AuthManager {
     }
     
     func artistsignUp(
-        email: String,
+        idToken: String,
         socialProvider: SocialProvider,
         profileImg: String,
         username: String,
@@ -72,7 +72,7 @@ final class AuthManager {
         completion: @escaping (Result<Response, MoyaError>) -> Void
     ) {
         provider.request(api: .artistSignUp(
-            email: email,
+            idToken: idToken,
             provider: socialProvider,
             profileImg: profileImg,
             username: username,
@@ -80,7 +80,6 @@ final class AuthManager {
         )) { result in
             completion(result)
         }
-
     }
     
     func setArtistProfile(

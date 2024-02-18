@@ -25,8 +25,10 @@ final class SetProfileViewController: UIViewController {
     
     private var phpPicker: PHPickerViewController?
     private var imagePicker: UIImagePickerController?
+    private var profileImage = UIImage.profile
     private var isArtist: Bool = true
     private var isVerifiedNickName = false
+    private var builder = ProfileInfoBuilder()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,6 +77,7 @@ final class SetProfileViewController: UIViewController {
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
+        
         if isArtist {
             let nextVC = BusinessRegistrationViewController()
             navigationController?.pushViewController(nextVC, animated: true)
@@ -94,8 +97,8 @@ final class SetProfileViewController: UIViewController {
     
     private func setNextButton() {
         guard
-            let name = nameTextField.text,
-            let nickName = nickNameTextField.text,
+            nameTextField.text != nil,
+            nickNameTextField.text != nil,
             isVerifiedNickName
         else {
             nextButton.backgroundColor = .gray300
@@ -128,13 +131,11 @@ extension SetProfileViewController: PHPickerViewControllerDelegate {
             print("sdaa")
             return }
         
-        itemProvider.loadObject(ofClass: UIImage.self) {[weak self] image, error in
+        itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
             DispatchQueue.main.async {
                 guard let selectedImage = image as? UIImage else { return }
-                FirebaseStorageManager.uploadImage(image: selectedImage) { url in
-                    print(url)
-                }
                 self?.profileImageView.image = selectedImage
+                self?.profileImage = selectedImage
             }
         }
     }
@@ -155,6 +156,7 @@ extension SetProfileViewController: UIImagePickerControllerDelegate, UINavigatio
     ) {
         if let image = info[.originalImage] as? UIImage {
             profileImageView.image = image
+            profileImage = image
         }
         imagePicker?.dismiss(animated: true)
     }

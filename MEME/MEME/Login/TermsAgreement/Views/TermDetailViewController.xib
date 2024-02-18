@@ -11,6 +11,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermDetailViewController" customModule="MEME" customModuleProvider="target">
             <connections>
+                <outlet property="contentLabel" destination="4jr-ya-RoE" id="OVo-h0-569"/>
+                <outlet property="titleLabel" destination="C2Y-at-OqA" id="IG0-FF-BBN"/>
                 <outlet property="view" destination="iN0-l3-epB" id="u2w-at-rMU"/>
             </connections>
         </placeholder>
@@ -33,6 +35,9 @@
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="ic_x" title=""/>
+                    <connections>
+                        <action selector="cancelButtonTapped:" destination="-1" eventType="touchUpInside" id="F09-4i-MnF"/>
+                    </connections>
                 </button>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34e-43-Z82">
                     <rect key="frame" x="24" y="124" width="345" height="694"/>
@@ -40,17 +45,20 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q6q-T7-gE7">
                             <rect key="frame" x="0.0" y="0.0" width="345" height="694"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="1000" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FJC-ht-4wi">
-                                    <rect key="frame" x="0.0" y="0.0" width="41.333333333333336" height="20.333333333333332"/>
-                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                    <nil key="textColor"/>
-                                    <nil key="highlightedColor"/>
-                                </label>
+                                <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="content" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4jr-ya-RoE">
+                                    <rect key="frame" x="0.0" y="0.0" width="345" height="694"/>
+                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="textColor" systemColor="labelColor"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                </textView>
                             </subviews>
                             <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                             <constraints>
-                                <constraint firstItem="FJC-ht-4wi" firstAttribute="top" secondItem="q6q-T7-gE7" secondAttribute="top" id="KGa-hf-LVH"/>
-                                <constraint firstItem="FJC-ht-4wi" firstAttribute="leading" secondItem="q6q-T7-gE7" secondAttribute="leading" id="TMZ-yK-d40"/>
+                                <constraint firstItem="4jr-ya-RoE" firstAttribute="top" secondItem="q6q-T7-gE7" secondAttribute="top" id="aTh-j2-bP1"/>
+                                <constraint firstAttribute="trailing" secondItem="4jr-ya-RoE" secondAttribute="trailing" id="cjd-Qx-PeB"/>
+                                <constraint firstItem="4jr-ya-RoE" firstAttribute="leading" secondItem="q6q-T7-gE7" secondAttribute="leading" id="lhK-3h-K26"/>
+                                <constraint firstAttribute="bottom" secondItem="4jr-ya-RoE" secondAttribute="bottom" id="uhV-4u-lDZ"/>
                             </constraints>
                         </view>
                     </subviews>
@@ -83,6 +91,9 @@
     </objects>
     <resources>
         <image name="ic_x" width="25" height="25"/>
+        <systemColor name="labelColor">
+            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
