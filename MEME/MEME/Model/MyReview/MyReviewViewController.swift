@@ -13,6 +13,9 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     var collectionView: UICollectionView!
     var dataSource: [String] = []
     
+    var data = [Review]()
+
+    
     private let cellId = "cellId"
     private let cellId2 = "cellId2"
     
@@ -44,11 +47,6 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         return control
     }()
     
-    //    func updateSegmentedControlText() {
-    //        let buttonText = "리뷰쓰기(\(buttons.count))"
-    //        segmentedControl.setTitle(buttonText, forSegmentAt: 0)
-    //    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
@@ -59,6 +57,22 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ReviewListManager.shared.getReviews(portfolioId: 3, modelName: nameLabel.text ?? "", star: 5, comment: "Comment", reviewImgDtoList: [ReviewImage]()) { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("Success: \(response)")
+                
+                self?.data = response.data?.content ?? []
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                    self?.updateSegmentedControlText() 
+                }
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
+        
         self.tabBarController?.tabBar.isHidden = true
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -90,6 +104,13 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         handleSegmentChange()
     }
     
+    func updateSegmentedControlText() {
+        let buttonText = "리뷰쓰기(\(data.count))"
+        segmentedControl.setTitle(buttonText, forSegmentAt: 0)
+        let buttonText2 = "작성한 리뷰(\(data.count))"
+        segmentedControl.setTitle(buttonText2, forSegmentAt: 1)
+    }
+    
     func configureUI() {
         
         navigationItem.title = "나의 리뷰"
@@ -115,7 +136,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
             ProfileImage.widthAnchor.constraint(equalToConstant: 42),
             ProfileImage.heightAnchor.constraint(equalToConstant: 42),
             ProfileImage.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 18),
-            ProfileImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 25)
+            ProfileImage.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 18)
         ])
         
         view.addSubview(modelLabel)
@@ -123,7 +144,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         modelLabel.font = UIFont(name: "Pretendard-Regular", size: 12)
         NSLayoutConstraint.activate([
             modelLabel.leadingAnchor.constraint(equalTo: ProfileImage.trailingAnchor, constant: 7),
-            modelLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 37),
+            modelLabel.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 22),
         ])
         
         view.addSubview(nameLabel)
@@ -288,6 +309,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
             return cell
         }
     }
+    
     @objc func handleSegmentChange() {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
@@ -306,7 +328,20 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     func ReviewWrittenView() {
         collectionView.register(CustomCell2.self, forCellWithReuseIdentifier: "CustomCell2")
-        collectionView.reloadData()
+        WrittenReviewManager.shared.getReviews(modelId: 5, modelNickName: nameLabel.text ?? "", star: 5, comment: "Comment", reviewImgDtoList: [ReviewImage]()) { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("Success: \(response)")
+                
+                self?.data = response.data?.content ?? []
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                    self?.updateSegmentedControlText()
+                }
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -318,8 +353,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         self.navigationController?.popViewController(animated: true)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 2
-        //사용자 설정에 따라 바꿔야함
+        return data.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -346,7 +380,6 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
 
         self.view.viewWithTag(100)?.removeFromSuperview()
         
-        // 메뉴 뷰 생성
         let menuView = UIStackView()
         menuView.tag = 100
         menuView.axis = .vertical
@@ -357,14 +390,11 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         menuView.layer.borderWidth = 1
         self.view.addSubview(menuView)
 
-        
-        // "수정하기" 버튼 생성 및 설정
-        let editButton = UIButton()
+                let editButton = UIButton()
         editButton.setTitle("수정하기", for: .normal)
         editButton.setTitleColor(.black, for: .normal)
         editButton.addTarget(self, action: #selector(moveToReviewEditVC), for: .touchUpInside)
         
-        // "삭제하기" 버튼 생성 및 설정
         let deleteButton = UIButton()
         deleteButton.setTitle("삭제하기", for: .normal)
         deleteButton.setTitleColor(.black, for: .normal)
@@ -374,18 +404,11 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         editButton.titleLabel?.font = UIFont.pretendard(to: .regular, size: 12)
         deleteButton.titleLabel?.font = UIFont.pretendard(to: .regular, size: 12)
         
-        // 메뉴 뷰에 버튼 추가
         menuView.addArrangedSubview(editButton)
         menuView.addArrangedSubview(deleteButton)
         editButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         deleteButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
 
-
-        // 메뉴 뷰 위치 및 크기 설정
-//            let cellBottomRight = CGPoint(x: cell.bounds.width, y: cell.bounds.height)
-//            let cellPosition = cell.convert(cellBottomRight, to: self.view.window)
-//            menuView.frame = CGRect(x: cellPosition.x - 150, y: cellPosition.y, width: 150, height: 100)
-//        menuView.center = self.view.center
         menuView.translatesAutoresizingMaskIntoConstraints = false
         let cellBottomRight = CGPoint(x: cell.bounds.width, y: cell.bounds.height)
         let cellPositionInSuperview = cell.convert(cellBottomRight, to: self.view)
@@ -406,9 +429,26 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     
     @objc func deleteCollectionViewCell(_ sender: UIButton) {
+        
+        let alert = UIAlertController(title: "삭제", message: "리뷰를 삭제하시겠습니까? (삭제한 리뷰는 복구할 수 없습니다.)", preferredStyle: .alert)
+          
+          let yesAction = UIAlertAction(title: "예", style: .destructive) { [weak self] _ in
+              let index = sender.tag
+              // 삭제 작업 수행 (예: self?.data.remove(at: index))
+          }
+          
+          let noAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
+          
+          alert.addAction(yesAction)
+          alert.addAction(noAction)
+          present(alert, animated: true, completion: nil)
         let index = sender.tag
       
-        dataSource.remove(at: index)
+        if dataSource.indices.contains(index) {
+            dataSource.remove(at: index)
+        } else {
+            print("Invalid index")
+        }
 
         collectionView.performBatchUpdates({
             collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])

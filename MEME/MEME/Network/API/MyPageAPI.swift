@@ -2,13 +2,15 @@
 //  MyPageAPI.swift
 //  MEME
 //
-//  Created by 정민지 on 2/13/24.
+//  Created by 임아영 on 2/9/24.
+
 //
 
 import Foundation
 import Moya
 
 enum MyPageAPI {
+    case getMyPageProfile(userId: Int)
     case getMyPage(userId: Int)
     case patchProfile(
         modelId: Int,
@@ -39,15 +41,40 @@ enum MyPageAPI {
         modelId: Int,
         portfolioId: Int
     )
+    case patchModelProfile(
+        userId: Int,
+        profileImg: String,
+        nickname: String,
+        gender: Gender,
+        skinYype: SkinType,
+        personalColor: PersonalColor
+    )
+    case patchArtistProfile(
+        userId: Int,
+        profileImg: String,
+        nickname: String,
+        gender: Gender,
+        introduction: String,
+        workExperience: WorkExperience,
+        region: [Region],
+        specialization: [SearchCategory],
+        makeupLocation: MakeUpLocation,
+        shopLocation: String,
+        availableDayOfWeek: [DayOfWeek: ReservationTimes]
+    )
+    case getProfileManagementData(userId: Int)
 }
 
 extension MyPageAPI: MemeAPI {
-    var domain: MemeDomain {
+
+  var domain: MemeDomain {
         return .mypage
     }
     
-    var urlPath: String {
+  var urlPath: String {
         switch self {
+        case .getMyPageProfile(let userId):
+            return "/profile/\(userId)"
         case .getMyPage(userId: let id):
             return "/profile/\(id)"
         case .patchProfile:
@@ -64,6 +91,12 @@ extension MyPageAPI: MemeAPI {
             return "/favorite/artist"
         case .deleteFavoritePortfolio:
             return "/favorite/portfolio"
+        case .patchModelProfile:
+            return "/profile/model"
+        case  .patchArtistProfile:
+            return "/profile/artist"
+        case .getProfileManagementData(userId: let id):
+            return "/profile/artist/\(id)"
         }
     }
     
@@ -73,7 +106,7 @@ extension MyPageAPI: MemeAPI {
     
     var headerType: HTTPHeaderFields {
         switch self {
-        case .getMyPage, .patchProfile, .getFavoriteArtist, .getFavoritePortfolio, .postFavoriteArtist, .postFavoritePortfolio, .deleteFavoriteArtist, .deleteFavoritePortfolio:
+        case .getMyPageProfile, .getMyPage, .patchProfile, .getFavoriteArtist, .getFavoritePortfolio, .postFavoriteArtist, .postFavoritePortfolio, .deleteFavoriteArtist, .deleteFavoritePortfolio, .patchModelProfile, .patchArtistProfile, .getProfileManagementData:
             return .hasAccessToken
         }
     }
@@ -82,17 +115,21 @@ extension MyPageAPI: MemeAPI {
         switch self {
         case .patchProfile:
             return .patch
-        case .getMyPage, .getFavoriteArtist, .getFavoritePortfolio:
+        case .getMyPageProfile, .getMyPage, .getFavoriteArtist, .getFavoritePortfolio, .getProfileManagementData:
             return .get
         case .postFavoriteArtist, .postFavoritePortfolio:
             return .post
+        case .patchModelProfile, .patchArtistProfile:
+            return .patch
         case .deleteFavoriteArtist, .deleteFavoritePortfolio:
             return .delete
         }
     }
     
-    var task: Moya.Task {
+    var task: Task {
         switch self {
+        case .getMyPageProfile:
+            return .requestPlain
         case .patchProfile(
             modelId: let modelId,
             profileImg: let profileImg,
@@ -145,6 +182,54 @@ extension MyPageAPI: MemeAPI {
                 "portfolioId": portfolioId
             ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+            
+        case .patchModelProfile(
+            userId: let userId,
+            profileImg: let profileImg,
+            nickname: let nickname,
+            gender: let gender,
+            skinYype: let skinYype,
+            personalColor: let personalColor):
+            var parameters: [String: Any] = [
+                "userId": userId,
+                "profileImg": profileImg,
+                "nickname": nickname,
+                "gender": gender,
+                "skinYype": skinYype,
+                "personalColor": personalColor
+            ]
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+            
+        case .patchArtistProfile(
+            userId: let userId,
+            profileImg: let profileImg,
+            nickname: let nickname,
+            gender: let gender,
+            introduction: let introduction,
+            workExperience: let workExperience,
+            region: let region,
+            specialization: let specialization,
+            makeupLocation: let makeupLocation,
+            shopLocation: let shopLocation,
+            availableDayOfWeek: let availableDayOfWeek):
+            var parameters: [String: Any] = [
+                "userId": userId,
+                "profileImg": profileImg,
+                "nickname": nickname,
+                "gender": gender,
+                "introduction": introduction,
+                "workExperience": workExperience,
+                "region": region,
+                "specialization": specialization,
+                "makeupLocation": makeupLocation,
+                "shopLocation": shopLocation,
+                "availableDayOfWeek": availableDayOfWeek
+            ]
+            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+            
+        case .getProfileManagementData(userId: let userId):
+            var parameters: [String: Any] = ["userId": userId]
+            return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
         }
     }
 }

@@ -1,11 +1,26 @@
 //
-//  MyPageDTO.swift
+//  MyPageAPI.swift
 //  MEME
 //
-//  Created by 정민지 on 2/13/24.
+//  Created by 임아영 on 2/9/24.
 //
 
 import Foundation
+
+struct MyPageResponse: Codable {
+    let result: String
+    let message: String
+    let data: MyPageData?
+    let statusCode: Int
+}
+
+struct MyPageData: Codable {
+    let profileImg: String?
+    let nickname: String?
+    let name: String?
+    let gender: String?
+    let email: String?
+}
 
 // MARK: -관심 아티스트 조회 DTO
 struct FavoriteArtistsDTO: Codable {
@@ -37,3 +52,32 @@ struct FavoriteDTO: Codable {
     let statusCode: Int
 }
 
+// MARK: -프로필 관리 DTO
+struct PatchProfileDTO: Codable {
+    let result: String
+    let message: String
+    let data: String?
+    let statusCode: Int
+}
+
+// MARK: -프로필 조회(관리 정보 불러오기) DTO
+struct ProfileManagementDataDTO: Codable {
+    let result: String
+    let message: String
+    let data: ProfileManagementData?
+    let statusCode: Int
+}
+
+struct ProfileManagementData: Codable {
+    let userId: Int
+    let profileImg: String
+    let nickname: String
+    let gender: String
+    let introduction: String
+    let workExperience: String
+    let region: [String]?
+    let specialization: [String]
+    let makeupLocation: String
+    let shopLocation: String
+    let availableDayOfWeek: [String: String]
+}

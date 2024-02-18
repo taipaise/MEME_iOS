@@ -15,22 +15,36 @@ class InterestArtistViewController: UIViewController, UICollectionViewDelegate, 
         let name: String
     }
 
-    var data = [Artist]() 
+    var data = [ArtistContent]()
 
     var collectionView: UICollectionView!
     
     let totalLabel = UILabel()
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        InterestArtistManager.shared.getInterestArtist(modelID: 1, artistId: 12, artistNickName: "Artist NickName", profileImg: "Profile Image URL")  { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("Success: \(response)")
+                self?.data = response.data?.content ?? []
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                    self?.totalLabel.text = "총 \(self?.data.count ?? 0)명"
+                }
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
+        
         self.tabBarController?.tabBar.isHidden = true
         
-        let artist1 = Artist(name: "아티스트1")
-        let artist2 = Artist(name: "아티스트2")
-        let artist3 = Artist(name: "아티스트3")
-        let artist4 = Artist(name: "아티스트4")
-        data = [artist1, artist2, artist3, artist4]
+//        let artist1 = Artist(name: "아티스트1")
+//        let artist2 = Artist(name: "아티스트2")
+//        let artist3 = Artist(name: "아티스트3")
+//        let artist4 = Artist(name: "아티스트4")
+//        data = [artist1, artist2, artist3, artist4]
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
         layout.sectionInset = UIEdgeInsets(top: 57, left: 28, bottom: 10, right: 28)
@@ -81,7 +95,7 @@ class InterestArtistViewController: UIViewController, UICollectionViewDelegate, 
         }
         
         let artist = data[indexPath.item]
-        cell.titleLabel.text = artist.name
+        cell.titleLabel.text = artist.artistNickName
         
         return cell
     }

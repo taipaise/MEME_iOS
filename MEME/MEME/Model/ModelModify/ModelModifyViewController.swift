@@ -14,6 +14,11 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
     var selectedGenderTag: Int?
     var selectedSkinTypeTag: Int?
     var selectedPersonalColorTag: Int?
+    
+    var request: ModelProfileRequest?
+    var response: ModelProfileResponse?
+    var getresponse: ModelProfileInfoResponse?
+
 
     @IBOutlet private weak var completeButton: UIButton!
     @IBOutlet private weak var womanView: ModelDetailSettingView!
@@ -51,9 +56,57 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ModelProfileInfoManager.shared.getModelProfileInfo(userId: 6) { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("Success: \(response)")
+                self?.getresponse = response
+                if let data = response.data {
+                    DispatchQueue.main.async {
+                        self?.nameTextField.text = data.nickname
+                        
+                        self?.genderViews.forEach { view in
+                            if view?.label.text == data.gender.korString{
+                                view?.setSelected()
+                            }
+                        }
+                        self?.skinViews.forEach { view in
+                            if view?.label.text == data.skinType.korString {
+                                view?.setSelected()
+                            }
+                        }
+                        self?.colorViews.forEach { view in
+                            if view?.label.text == data.personalColor.korString {
+                                view?.setSelected()
+                            }
+                        }
+                        self?.setUI()
+                    }
+                } else {
+                    print("data nil")
+                }
+
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
+
+        
+        navigationItem.title = "프로필 관리"
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.pretendard(to: .regular, size: 16)]
+        let backButton = UIButton(type: .custom)
+        backButton.setImage(UIImage.icBack, for: .normal)
+        backButton.configuration?.imagePadding = 25
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        self.tabBarController?.tabBar.isHidden = true
+        
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
             modifyImageView.isUserInteractionEnabled = true
             modifyImageView.addGestureRecognizer(tapGesture)
+        
 
         setUI()
     }
@@ -93,7 +146,7 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
         nameTextField.layer.cornerRadius = 9
         nameTextField.layer.borderWidth = 1
         nameTextField.layer.borderColor = UIColor.gray200.cgColor
-        nameTextField.text = "차차"
+//        nameTextField.text = "차차"
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: nameTextField.frame.height))
         nameTextField.leftView = leftPaddingView
         nameTextField.leftViewMode = .always
@@ -106,12 +159,10 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
     
     private func configureDetailSettingViews() {
         
-        womanView.configure(title: "여자", tag: 0, type: .gender)
-        womanView.setSelected()
-        manView.configure(title: "남자", tag: 1, type: .gender)
+        womanView.configure(title: "여성", tag: 0, type: .gender)
+        manView.configure(title: "남성", tag: 1, type: .gender)
         drySkinView.configure(title: "건성", tag: 2, type: .skinType)
         neutralSkinView.configure(title: "중성", tag: 3, type: .skinType)
-        neutralSkinView.setSelected()
         oilySkinView.configure(title: "지성", tag: 4, type: .skinType)
         combinationSkinView.configure(title: "복합성", tag: 5, type: .skinType)
         unknownSkinView.configure(title: "모르겠음", tag: 6, type: .skinType)
@@ -135,13 +186,49 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
         }
     }
     
+//    func uploadImage(_ image: UIImage, completion: @escaping (String?) -> Void) {
+//        // 이미지 업로드 로직
+//        
+//        // 이미지 업로드
+//        uploadImage(selectedImage) { [weak self] imageUrl in
+//            guard let imageUrl = imageUrl else {
+//                print("Image upload failed")
+//                return
+//            }
+//        }
+//            // 이미지 URL 저장
+//            self?.uploadedImageUrl = imageUrl
+//            
+//            // 프로필 업데이트
+//            self?.completeButtonTapped(self?.completeButton ?? UIButton())
+//        }
+
     @IBAction func completeButtonTapped(_ sender: Any) {
-        //서버 저장 코드
-        }
+        let profileImg = /*uploadedImageUrl ??*/ ""
+        let nickname = nameTextField.text ?? ""
+        
+        let selectedGender = genderViews.first(where: { $0?.tag == selectedGenderTag })??.button.titleLabel?.text
+        let gender = Gender.rawValueFrom(displayText: selectedGender ?? "")
+
+        let selectedSkinTypeText = skinViews.first(where: { $0?.tag == selectedSkinTypeTag })??.button.titleLabel?.text
+          let skinType = SkinType.rawValueFrom(displayText: selectedSkinTypeText ?? "")
+
+          let selectedPersonalColorText = colorViews.first(where: { $0?.tag == selectedPersonalColorTag })??.button.titleLabel?.text
+          let personalColor = PersonalColor.rawValueFrom(displayText: selectedPersonalColorText ?? "")
+
+          ModelProfileManager.shared.patchProfile(userId: 6, profileImg: profileImg, nickname: nickname, gender: gender, skinType: skinType, personalColor: personalColor) { result in
+              switch result {
+              case .success(let response):
+                  print("Profile updated successfully: \(response)")
+              case .failure(let error):
+                  print("Failed to update profile: \(error)")
+              }
+          }
+      }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         if let image = info[.originalImage] as? UIImage {
-            modifyImageView.image = image
+            profileImageView.image = image
         }
         dismiss(animated: true, completion: nil)
     }
@@ -152,10 +239,13 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
         results[0].itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
             if let image = object as? UIImage {
                 DispatchQueue.main.async {
-                    self.modifyImageView.image = image
+                    self.profileImageView.image = image
                 }
             }
         }
+    }
+    @objc func backButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
     }
 }
 
@@ -195,7 +285,6 @@ extension ModelModifyViewController: DetailSetButtonTapped {
         }
         views.forEach { $0?.deselect(tag: tag) }
         
-        // After deselecting all views of the same type, select the tapped view
         if isSelected {
                switch type {
                case .gender:

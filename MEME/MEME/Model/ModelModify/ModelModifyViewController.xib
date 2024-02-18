@@ -267,7 +267,6 @@
                     </buttonConfiguration>
                     <connections>
                         <action selector="completeButtonTapped:" destination="-1" eventType="touchUpInside" id="TzY-ao-rQx"/>
-                        <action selector="nextButtonTapped:" destination="-1" eventType="touchUpInside" id="dBH-VQ-fZV"/>
                     </connections>
                 </button>
             </subviews>

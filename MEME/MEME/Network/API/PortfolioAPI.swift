@@ -5,7 +5,6 @@
 //
 //  Created by 정민지 on 2/14/24.
 //
-
 import Foundation
 import Moya
 
@@ -14,6 +13,8 @@ enum PortfolioAPI {
         userId: Int,
         portfolioId: Int
     )
+    case getRecommendArtistByReview
+    case getRecommendArtistByRecent
 }
 
 extension PortfolioAPI: MemeAPI {
@@ -23,9 +24,13 @@ extension PortfolioAPI: MemeAPI {
     
     var urlPath: String {
         switch self {
-
+            
         case .getPortfolioDetail(userId: let userId, portfolioId: let portfolioId):
             return "/details/\(userId)/\(portfolioId)"
+        case .getRecommendArtistByReview:
+            return "/recommend/review"
+        case .getRecommendArtistByRecent:
+            return "/recommend/recent"
         }
     }
     
@@ -35,14 +40,14 @@ extension PortfolioAPI: MemeAPI {
     
     var headerType: HTTPHeaderFields {
         switch self {
-        case .getPortfolioDetail:
+        case .getPortfolioDetail, .getRecommendArtistByReview, .getRecommendArtistByRecent:
             return .hasAccessToken
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getPortfolioDetail:
+        case .getPortfolioDetail, .getRecommendArtistByReview, .getRecommendArtistByRecent:
             return .get
 
         }
@@ -54,6 +59,10 @@ extension PortfolioAPI: MemeAPI {
             portfolioId: let portfolioId):
             var parameters: [String: Any] = ["portfolioId": portfolioId]
             return .requestParameters(parameters: parameters, encoding: URLEncoding.queryString)
+        case .getRecommendArtistByReview:
+            return .requestPlain
+        case .getRecommendArtistByRecent:
+            return .requestPlain
         }
     }
 }

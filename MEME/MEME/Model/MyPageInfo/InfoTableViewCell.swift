@@ -41,8 +41,7 @@ class InfoTableViewCell: UITableViewCell {
         
         addSubview(infomenuLabel)
     
-       // infomenuLabel.font = UIFont(name: "Pretendard", size: 14)
-        infomenuLabel.font = UIFont.systemFont(ofSize: 14)
+        infomenuLabel.font = UIFont.pretendard(to: .medium, size: 14)
         
         NSLayoutConstraint.activate([
             infomenuLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
@@ -51,7 +50,7 @@ class InfoTableViewCell: UITableViewCell {
         
         addSubview(rightLabel)
         rightLabel.textAlignment = .right
-        rightLabel.font = UIFont.systemFont(ofSize: 14)
+        rightLabel.font = UIFont.pretendard(to: .regular, size: 14)
         NSLayoutConstraint.activate([
             rightLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -24),
             rightLabel.centerYAnchor.constraint(equalTo: centerYAnchor)

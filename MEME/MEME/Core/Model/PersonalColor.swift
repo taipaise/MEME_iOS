@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum PersonalColor: String, CaseIterable {
+enum PersonalColor: String, Codable,CaseIterable {
     case SPRING, SUMMER, AUTUMN, WINTER, UNKNOWN
     
     var korString: String {
@@ -22,6 +22,22 @@ enum PersonalColor: String, CaseIterable {
             "겨울쿨톤"
         case .UNKNOWN:
             "모르겠음"
+        }
+    }
+    static func rawValueFrom(displayText: String) -> String {
+        switch displayText {
+        case "봄웜톤":
+            return PersonalColor.SPRING.rawValue
+        case "여름쿨톤":
+            return PersonalColor.SUMMER.rawValue
+        case "가을웜톤":
+            return PersonalColor.AUTUMN.rawValue
+        case "겨울쿨톤":
+            return PersonalColor.WINTER.rawValue
+        case "모르겠음":
+            return PersonalColor.UNKNOWN.rawValue
+        default:
+            return ""
         }
     }
 }
