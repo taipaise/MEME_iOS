@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 enum Gender: String, CaseIterable {
     case MALE
     case FEMALE
@@ -19,4 +20,5 @@ enum Gender: String, CaseIterable {
             "여성"
         }
     }
+
 }
