@@ -3,6 +3,7 @@
 //  MEME
 //
 //  Created by 임아영 on 2/9/24.
+
 //
 
 import Foundation
@@ -13,12 +14,12 @@ enum MyPageAPI {
 }
 
 extension MyPageAPI: MemeAPI {
-  
-    var domain: MemeDomain {
+
+  var domain: MemeDomain {
         return .mypage
     }
     
-    var urlPath: String {
+  var urlPath: String {
         switch self {
         case .getMyPageProfile(let userId):
             return "/profile/\(userId)"
