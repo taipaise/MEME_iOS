@@ -435,7 +435,7 @@ extension ModelHomeViewController {
         }
     }
     func getRecommendArtistByReview() {
-        RecommendManager.shared.getRecommendArtistByReview { [weak self] result in
+        PortfolioManager.shared.getRecommendArtistByReview { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let recommendResponse):
@@ -453,7 +453,7 @@ extension ModelHomeViewController {
     }
     
     func getRecommendArtistByRecent() {
-        RecommendManager.shared.getRecommendArtistByRecent { [weak self] result in
+        PortfolioManager.shared.getRecommendArtistByRecent { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):

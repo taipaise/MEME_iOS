@@ -65,12 +65,10 @@
 		2DA208072B7ABB2E006EB9B9 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208062B7ABB2E006EB9B9 /* SearchManager.swift */; };
 		2DA208092B7ABE43006EB9B9 /* SearchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208082B7ABE43006EB9B9 /* SearchDTO.swift */; };
 		2DA2080B2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA2080A2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift */; };
-		2DA2080D2B7CB160006EB9B9 /* RecommendAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA2080C2B7CB160006EB9B9 /* RecommendAPI.swift */; };
-		2DA2080F2B7CB425006EB9B9 /* RecommendManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA2080E2B7CB425006EB9B9 /* RecommendManager.swift */; };
-		2DA208112B7CB476006EB9B9 /* RecommendDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208102B7CB476006EB9B9 /* RecommendDTO.swift */; };
 		2DA208152B7CF865006EB9B9 /* PortfolioAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208142B7CF865006EB9B9 /* PortfolioAPI.swift */; };
 		2DA208172B7CF87B006EB9B9 /* PortfolioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */; };
 		2DA208192B7CF9EE006EB9B9 /* PortfolioDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */; };
+		2DB303F32B829EF200D9E394 /* BusinessLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */; };
 		2DCB3CCE2B7E041600BFCDA1 /* memeSecret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */; };
 		312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */; };
 		312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EE2B52DE1900CACF20 /* Pretendard-Light.otf */; };
@@ -205,7 +203,6 @@
 		CC9C386B2B7C79860073A257 /* ArtistType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9C386A2B7C79860073A257 /* ArtistType.swift */; };
 		CC9C386E2B7C7D940073A257 /* ArtistProfileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9C386D2B7C7D940073A257 /* ArtistProfileManager.swift */; };
 		CC9C38702B7C7F9C0073A257 /* ArtistID.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9C386F2B7C7F9C0073A257 /* ArtistID.swift */; };
-		CC9C38752B7DE8670073A257 /* ModelType.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9C38742B7DE8670073A257 /* ModelType.swift */; };
 		CC9C38772B7FEAF40073A257 /* ReviewListAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9C38762B7FEAF40073A257 /* ReviewListAPI.swift */; };
 		CC9C38792B7FEB0E0073A257 /* ReviewListManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9C38782B7FEB0E0073A257 /* ReviewListManager.swift */; };
 		CC9C387B2B7FEB1F0073A257 /* ReviewListDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9C387A2B7FEB1F0073A257 /* ReviewListDTO.swift */; };
@@ -334,7 +331,6 @@
 		2DA207F62B7A8D9D006EB9B9 /* MyPageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageAPI.swift; sourceTree = "<group>"; };
 		2DA207F82B7A8FE4006EB9B9 /* Gender.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Gender.swift; sourceTree = "<group>"; };
 		2DA207FA2B7A9037006EB9B9 /* SkinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinType.swift; sourceTree = "<group>"; };
-		2DA207FC2B7A9069006EB9B9 /* PersonalColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalColor.swift; sourceTree = "<group>"; };
 		2DA207FE2B7A9B05006EB9B9 /* MyPageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDTO.swift; sourceTree = "<group>"; };
 		2DA208002B7AB514006EB9B9 /* SearchAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchAPI.swift; sourceTree = "<group>"; };
 		2DA208022B7AB577006EB9B9 /* SearchSort.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchSort.swift; sourceTree = "<group>"; };
@@ -342,12 +338,10 @@
 		2DA208062B7ABB2E006EB9B9 /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		2DA208082B7ABE43006EB9B9 /* SearchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDTO.swift; sourceTree = "<group>"; };
 		2DA2080A2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSearchResultViewController.swift; sourceTree = "<group>"; };
-		2DA2080C2B7CB160006EB9B9 /* RecommendAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendAPI.swift; sourceTree = "<group>"; };
-		2DA2080E2B7CB425006EB9B9 /* RecommendManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendManager.swift; sourceTree = "<group>"; };
-		2DA208102B7CB476006EB9B9 /* RecommendDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendDTO.swift; sourceTree = "<group>"; };
 		2DA208142B7CF865006EB9B9 /* PortfolioAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioAPI.swift; sourceTree = "<group>"; };
 		2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioManager.swift; sourceTree = "<group>"; };
 		2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDTO.swift; sourceTree = "<group>"; };
+		2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLocationModel.swift; sourceTree = "<group>"; };
 		2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
 		312DF7612B669CC30060BDF0 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		312DF7632B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHeaderSupplementaryView.swift; sourceTree = "<group>"; };
@@ -486,7 +480,6 @@
 		CC9C386A2B7C79860073A257 /* ArtistType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistType.swift; sourceTree = "<group>"; };
 		CC9C386D2B7C7D940073A257 /* ArtistProfileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistProfileManager.swift; sourceTree = "<group>"; };
 		CC9C386F2B7C7F9C0073A257 /* ArtistID.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistID.swift; sourceTree = "<group>"; };
-		CC9C38742B7DE8670073A257 /* ModelType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelType.swift; sourceTree = "<group>"; };
 		CC9C38762B7FEAF40073A257 /* ReviewListAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListAPI.swift; sourceTree = "<group>"; };
 		CC9C38782B7FEB0E0073A257 /* ReviewListManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListManager.swift; sourceTree = "<group>"; };
 		CC9C387A2B7FEB1F0073A257 /* ReviewListDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewListDTO.swift; sourceTree = "<group>"; };
@@ -759,6 +752,14 @@
 			path = ModelReservationChartView;
 			sourceTree = "<group>";
 		};
+		2DB303F12B829E7800D9E394 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		3142B94C2B4CFFED0066CD5A = {
 			isa = PBXGroup;
 			children = (
@@ -994,7 +995,6 @@
 				CC9C38882B80F9AA0073A257 /* ModelProfileInfoAPI.swift */,
 				CC9C388E2B81B3530073A257 /* ContactAPI.swift */,
 				2DA208002B7AB514006EB9B9 /* SearchAPI.swift */,
-				2DA2080C2B7CB160006EB9B9 /* RecommendAPI.swift */,
 				2DA208142B7CF865006EB9B9 /* PortfolioAPI.swift */,
 			);
 			path = API;
@@ -1017,7 +1017,6 @@
 				CC9C388A2B80F9BA0073A257 /* ModelProfileInfoManager.swift */,
 				CC9C38902B81B3780073A257 /* ContactManager.swift */,
 				2DA208062B7ABB2E006EB9B9 /* SearchManager.swift */,
-				2DA2080E2B7CB425006EB9B9 /* RecommendManager.swift */,
 				2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */,
 			);
 			path = Manager;
@@ -1039,7 +1038,6 @@
 				CC9C38922B81B3830073A257 /* ContactDTO.swift */,
 				2D7D747D2B769C9E005BDFD5 /* ReservationDTO.swift */,
 				2DA208082B7ABE43006EB9B9 /* SearchDTO.swift */,
-				2DA208102B7CB476006EB9B9 /* RecommendDTO.swift */,
 				2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */,
 				316239642B80DE58002D9E2F /* SignUpResponseDTO.swift */,
 				316239662B80DE9B002D9E2F /* BasicResponseDTO.swift */,
@@ -1053,10 +1051,8 @@
 				315AC1C72B70FE35003FD1A1 /* ReservationTimes.swift */,
 				315AC1C92B70FE60003FD1A1 /* ReservationState.swift */,
 				315AC1CB2B70FE76003FD1A1 /* DayOfWeek.swift */,
-				CC9C38742B7DE8670073A257 /* ModelType.swift */,
 				2DA207F82B7A8FE4006EB9B9 /* Gender.swift */,
 				2DA207FA2B7A9037006EB9B9 /* SkinType.swift */,
-				2DA207FC2B7A9069006EB9B9 /* PersonalColor.swift */,
 				2DA208022B7AB577006EB9B9 /* SearchSort.swift */,
 				2DA208042B7AB5F3006EB9B9 /* SearchCategory.swift */,
 				317D98692B7DEDC5009BBB95 /* WorkExperience.swift */,
@@ -1111,6 +1107,7 @@
 		316A92672B66701900E4337D /* SetBusinessLocation */ = {
 			isa = PBXGroup;
 			children = (
+				2DB303F12B829E7800D9E394 /* Model */,
 				316A926F2B66732D00E4337D /* Views */,
 			);
 			path = SetBusinessLocation;
@@ -1639,6 +1636,7 @@
 				CCAB5A692B6DD60900067FA4 /* WrittenCollectionViewCell.swift in Sources */,
 				CC9C38912B81B3780073A257 /* ContactManager.swift in Sources */,
 				CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */,
+				2DB303F32B829EF200D9E394 /* BusinessLocationModel.swift in Sources */,
 				CCAB5A572B66F44D00067FA4 /* WriteReviewViewController.swift in Sources */,
 				2D7D747E2B769C9E005BDFD5 /* ReservationDTO.swift in Sources */,
 				CCAB5A6D2B6E011800067FA4 /* ArtistHeaderView.swift in Sources */,
@@ -1657,7 +1655,6 @@
 				CCCE563F2B81D9FB007555A2 /* ArtistTimeHeaderSupplementaryView.swift in Sources */,
 				CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */,
 				31B4137C2B6D295900535BB1 /* BusinessIDVerificationManager.swift in Sources */,
-				2DA2080F2B7CB425006EB9B9 /* RecommendManager.swift in Sources */,
 				31B65E4D2B6E18BA00628C68 /* ReservationAPI.swift in Sources */,
 				31B2634C2B57EE7100304FBE /* RoleSelectionViewController.swift in Sources */,
 				095742512B66153E0011B580 /* ArtistPortfolioEditingViewController.swift in Sources */,
@@ -1672,7 +1669,6 @@
 				2D106F4A2B7028C200F3C253 /* ModelReservationShopLocationView.swift in Sources */,
 				317D98772B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift in Sources */,
 				315AC1C52B70D186003FD1A1 /* ModelHomeViewController.swift in Sources */,
-				CC9C38752B7DE8670073A257 /* ModelType.swift in Sources */,
 				CC9C387D2B80859B0073A257 /* WrittenReviewAPI.swift in Sources */,
 				2DA208032B7AB577006EB9B9 /* SearchSort.swift in Sources */,
 				315FB85E2B6DE57C0068163C /* KeyChainValue.swift in Sources */,
@@ -1689,7 +1685,6 @@
 				2DA208172B7CF87B006EB9B9 /* PortfolioManager.swift in Sources */,
 				315EE2CE2B66566A0042A082 /* RegisterProgressBar.swift in Sources */,
 				31B263432B57EDE300304FBE /* TermsAgreementViewController.swift in Sources */,
-				2DA2080D2B7CB160006EB9B9 /* RecommendAPI.swift in Sources */,
 				CCAB5A672B6D608700067FA4 /* ArtistMyPageViewController.swift in Sources */,
 				091CCCDA2B64158B00ADD21C /* ArtistPortfolioManageViewController.swift in Sources */,
 				3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */,
@@ -1706,7 +1701,6 @@
 				315EE2D02B66566A0042A082 /* DetailSettingView.swift in Sources */,
 				CC9C38592B7BC8D10073A257 /* InterestArtistAPI.swift in Sources */,
 				315EE2D02B66566A0042A082 /* DetailSettingView.swift in Sources */,
-				2DA208112B7CB476006EB9B9 /* RecommendDTO.swift in Sources */,
 				2D6F59BF2B5C7D3300CA883A /* ModelReservationTypeButton.swift in Sources */,
 				2D6E4CEE2B6221D800D7F919 /* ModelManagementReservationsDateCollectionViewCell.swift in Sources */,
 				2D6E4CEB2B61FA7D00D7F919 /* ModelReservationLastViewController.swift in Sources */,
