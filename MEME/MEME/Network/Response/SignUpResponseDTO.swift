@@ -7,10 +7,25 @@
 
 import Foundation
 
-struct UserId: Codable {
-    let userId: Int
+struct SignUpResponseDTO: Codable {
+    let code: Int
+    let result: String
+    let message: String
+    let data: UserIdResponseDTO
+    
     
     enum CodingKeys: String, CodingKey {
-        case userId
+        case code, result, message, data
+    }
+}
+
+struct UserIdResponseDTO: Codable {
+    let userId: Int
+    let accessToken: String
+    let refreshToken: String
+    let details: Bool
+    
+    enum CodingKeys: String, CodingKey {
+        case userId, accessToken, refreshToken, details
     }
 }

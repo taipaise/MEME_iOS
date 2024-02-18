@@ -9,20 +9,20 @@ import Foundation
 
 final class ProfileInfoBuilder {
     private var idToken = ""
-    private var provider = SocialProvider.KAKAO
+    private var provider = ""
     private var profileImg = ""
     private var username = ""
     private var nickname = ""
-    private var gender = Gender.FEMALE
-    var skinType: SkinType?
-    var personalColor: PersonalColor?
+    private var gender: String?
+    var skinType: String?
+    var personalColor: String?
     
     func idToken(_ idToken: String) -> ProfileInfoBuilder {
         self.idToken = idToken
         return self
     }
     
-    func provider(_ provider: SocialProvider) -> ProfileInfoBuilder {
+    func provider(_ provider: String) -> ProfileInfoBuilder {
         self.provider = provider
         return self
     }
@@ -42,18 +42,18 @@ final class ProfileInfoBuilder {
         return self
     }
     
-    func gender(_ gender: Gender) -> ProfileInfoBuilder {
+    func gender(_ gender: String) -> ProfileInfoBuilder {
         self.gender = gender
         return self
     }
     
     
-    func skinType(_ skinType: SkinType) -> ProfileInfoBuilder {
+    func skinType(_ skinType: String) -> ProfileInfoBuilder {
         self.skinType = skinType
         return self
     }
     
-    func personalColor(_ personalColor: PersonalColor) -> ProfileInfoBuilder {
+    func personalColor(_ personalColor: String) -> ProfileInfoBuilder {
         self.personalColor = personalColor
         return self
     }

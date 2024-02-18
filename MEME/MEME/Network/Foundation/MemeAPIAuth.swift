@@ -18,7 +18,7 @@ extension MemeAuthDomain {
     var url: String {
         switch self {
         case .auth:
-            return "/auth"
+            return ""
         case .logout:
             return "/logout"
         case .withdraw:

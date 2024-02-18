@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Moya
 
 final class SetBusinessInfoDetailViewController: UIViewController {
     typealias TimeCell = TimeCollectionViewCell
@@ -39,8 +40,7 @@ final class SetBusinessInfoDetailViewController: UIViewController {
     
     private var selectedFields: Set<Int> = []
     private var selectedWeekDay: Set<Int> = []
-    private var startTime: String?
-    private var endTime: String?
+    private var selectedTime: Set<String> = []
     private var isStart = true
     private var builder: ArtistProfileInfoBuilder?
     private var selectedLocation: MakeUpLocation?
@@ -73,6 +73,7 @@ final class SetBusinessInfoDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        setNextButton()
         configureCollectionView()
     }
     
@@ -117,6 +118,7 @@ final class SetBusinessInfoDetailViewController: UIViewController {
     
     func configure(builder: ArtistProfileInfoBuilder) {
         self.builder = builder
+        print(builder)
     }
     
     private func setNextButton() {
@@ -124,8 +126,7 @@ final class SetBusinessInfoDetailViewController: UIViewController {
             !selectedFields.isEmpty,
             selectedLocation != nil,
             !selectedWeekDay.isEmpty,
-            startTime != nil,
-            endTime != nil
+            !selectedTime.isEmpty
         else {
             completeButton.isEnabled = false
             return
@@ -146,6 +147,8 @@ final class SetBusinessInfoDetailViewController: UIViewController {
             sender.tintColor = .white
             sender.backgroundColor = .mainBold
         }
+        
+        setNextButton()
     }
     
     @IBAction func makeUpLocationButtonTapped(_ sender: UIButton) {
@@ -177,6 +180,8 @@ final class SetBusinessInfoDetailViewController: UIViewController {
         } else {
             textField.isEnabled = true
         }
+        
+        setNextButton()
     }
     
     @IBAction func weekButtonTapped(_ sender: UIButton) {
@@ -189,6 +194,8 @@ final class SetBusinessInfoDetailViewController: UIViewController {
             weekButtons[sender.tag].tintColor = .white
             weekButtons[sender.tag].backgroundColor = .mainBold
         }
+        
+        setNextButton()
     }
     
     @IBAction private func timeButtonTapped(_ sender: UIButton) {
@@ -201,24 +208,26 @@ final class SetBusinessInfoDetailViewController: UIViewController {
         timeSetButtons.forEach {
             $0.isEnabled = false
         }
-        collectionView.isHidden = false
+        
+        setNextButton()
     }
 
     @IBAction private func completionButtonTapped(_ sender: Any) {
         guard 
             var builder = builder,
-            let selectedLocation = selectedLocation,
-            let startTime = startTime,
-            let endTime = endTime
-        else { return }
-        
+            let selectedLocation = selectedLocation
+        else {
+            if builder == nil {print("builder nil") }
+            if selectedLocation == nil {print("sele nil")}
+            return
+        }
+
         var specialization: [String] = []
         MakeUpCategory.allCases.forEach { category in
             if selectedFields.contains(category.intVal) {
                 specialization.append(category.rawValue)
             }
         }
-        
         var weekDays: [String] = []
         DayOfWeek.allCases.forEach { day in
             if selectedWeekDay.contains(day.intVal) {
@@ -229,17 +238,24 @@ final class SetBusinessInfoDetailViewController: UIViewController {
         builder = builder.specialization(specialization)
         builder = builder.makeupLocation(selectedLocation.rawValue)
         builder = builder.week(weekDays)
-        builder = builder.startTime(startTime)
-        builder = builder.endTime(startTime)
+        builder = builder.selectedTime(Array(selectedTime))
         if
             selectedLocation != .VISIT,
             let text = textField.text
+                
         {
             builder = builder.shopLocation(text)
         }
-        
-        let nextVC = ArtistTabBarController()
-        navigationController?.pushViewController(nextVC, animated: true)
+
+        AuthManager.shared.setArtistProfile(extraInfo: builder.build()) { [weak self] result in
+            switch result {
+            case .success(let response):
+                let nextVC = ArtistTabBarController()
+                self?.navigationController?.pushViewController(nextVC, animated: true)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 
@@ -344,24 +360,17 @@ extension SetBusinessInfoDetailViewController: UICollectionViewDelegate {
         guard let cell = collectionView.cellForItem(at: indexPath) as? TimeCell else { return }
         cell.contentView.layer.borderColor = UIColor.mainBold.cgColor
         
-        if isStart {
-            startTime = cell.getTime()
-            startTimeLabel.text = cell.getTime()
+        if selectedTime.contains(cell.getTime()) {
+            selectedTime.remove(cell.getTime())
+            cell.updateUI(isSelected: false)
         } else {
-            endTime = cell.getTime()
-            endTimeLabel.text = cell.getTime()
+            selectedTime.insert(cell.getTime())
+            cell.updateUI(isSelected: true)
         }
         
-        timeSetButtons.forEach {
-            $0.isEnabled = true
-        }
-        collectionView.isHidden = true
+        setNextButton()
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didDeselectItemAt indexPath: IndexPath) {
-        guard let cell = collectionView.cellForItem(at: indexPath) as? TimeCell else { return }
-        cell.contentView.layer.borderColor = UIColor.gray300.cgColor
-    }
+
 }
 
 // MARK: - scrollView delelgate

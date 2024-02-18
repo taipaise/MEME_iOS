@@ -47,4 +47,12 @@ final class TimeCollectionViewCell: UICollectionViewCell {
     func getTime() -> String {
         return timeLabel.text ?? ""
     }
+    
+    func updateUI(isSelected: Bool) {
+        if isSelected {
+            contentView.layer.borderColor = UIColor.mainBold.cgColor
+        } else {
+            contentView.layer.borderColor = UIColor.gray300.cgColor
+        }
+    }
 }

@@ -49,13 +49,13 @@
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사업자 등록 번호를 입력해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7JI-O4-js5">
-                    <rect key="frame" x="24" y="217" width="210" height="19.333333333333343"/>
+                    <rect key="frame" x="24" y="216" width="210" height="19.333333333333343"/>
                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="사업자 등록 번호를 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ipt-18-QLJ">
-                    <rect key="frame" x="24" y="261.33333333333331" width="345" height="17"/>
+                    <rect key="frame" x="24" y="260.33333333333331" width="345" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="A3v-79-CEK"/>
                     </constraints>
@@ -63,7 +63,7 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="bjc-02-cMo">
-                    <rect key="frame" x="24" y="286.33333333333331" width="345" height="1"/>
+                    <rect key="frame" x="24" y="285.33333333333331" width="345" height="1"/>
                     <color key="backgroundColor" name="Gray500"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="oTG-kk-3I5"/>
@@ -85,19 +85,19 @@
                     </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="대표자 성명을 입력해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ilM-xM-WeA">
-                    <rect key="frame" x="24" y="337.33333333333331" width="178.33333333333334" height="19.333333333333314"/>
+                    <rect key="frame" x="24" y="336.33333333333331" width="178.33333333333334" height="19.333333333333314"/>
                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개업일자를 입력해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HVK-Xe-cuA">
-                    <rect key="frame" x="24" y="456.66666666666669" width="160.33333333333334" height="19.333333333333314"/>
+                    <rect key="frame" x="24" y="455.66666666666669" width="160.33333333333334" height="19.333333333333314"/>
                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="대표자 성명을 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="kHf-XF-nRW">
-                    <rect key="frame" x="24" y="380.66666666666669" width="345" height="17"/>
+                    <rect key="frame" x="24" y="379.66666666666669" width="345" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="bgS-ys-5wI"/>
                     </constraints>
@@ -105,35 +105,35 @@
                     <textInputTraits key="textInputTraits"/>
                 </textField>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XVN-4x-sBv">
-                    <rect key="frame" x="24" y="405.66666666666669" width="345" height="1"/>
+                    <rect key="frame" x="24" y="404.66666666666669" width="345" height="1"/>
                     <color key="backgroundColor" name="Gray500"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="WYL-UU-1p0"/>
                     </constraints>
                 </view>
                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="YYYYMMDD" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Vi0-yE-44s">
-                    <rect key="frame" x="24" y="500" width="345" height="17"/>
+                    <rect key="frame" x="24" y="499" width="345" height="17"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="17" id="4uZ-PM-KSf"/>
                     </constraints>
                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
                     <textInputTraits key="textInputTraits"/>
                 </textField>
-                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CTL-4U-djB">
-                    <rect key="frame" x="27" y="525" width="345" height="1"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CTL-4U-djB">
+                    <rect key="frame" x="24" y="524" width="345" height="1"/>
                     <color key="backgroundColor" name="Gray500"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="2hb-bV-Bsa"/>
                     </constraints>
                 </view>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사업자등록증에 표기된 개업연월일 날짜로 입력해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Kq-Ld-ce6">
-                    <rect key="frame" x="24" y="535" width="264" height="14"/>
+                    <rect key="frame" x="24" y="534" width="264" height="14"/>
                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="12"/>
                     <color key="textColor" systemColor="systemRedColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사업자 인증이 필요해요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2Is-kA-pj6">
-                    <rect key="frame" x="24" y="157" width="169" height="22"/>
+                    <rect key="frame" x="24" y="157" width="169" height="21"/>
                     <fontDescription key="fontDescription" name="Pretendard-Bold" family="Pretendard" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
@@ -174,7 +174,9 @@
                 <constraint firstItem="lK7-9K-8eC" firstAttribute="top" secondItem="fVJ-ep-xhf" secondAttribute="bottom" constant="2" id="pEW-sj-O9f"/>
                 <constraint firstItem="fVJ-ep-xhf" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="pVm-XV-xGN"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="kHf-XF-nRW" secondAttribute="trailing" constant="24" id="qqE-A9-2jV"/>
+                <constraint firstAttribute="trailing" secondItem="CTL-4U-djB" secondAttribute="trailing" constant="24" id="rbI-z4-GgY"/>
                 <constraint firstItem="ilM-xM-WeA" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="ror-AX-bcE"/>
+                <constraint firstItem="CTL-4U-djB" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="24" id="s66-pL-zfx"/>
                 <constraint firstItem="ipt-18-QLJ" firstAttribute="top" secondItem="7JI-O4-js5" secondAttribute="bottom" constant="25" id="sAH-y9-6rW"/>
                 <constraint firstItem="XVN-4x-sBv" firstAttribute="top" secondItem="kHf-XF-nRW" secondAttribute="bottom" constant="8" id="zpo-sz-byF"/>
             </constraints>
@@ -192,7 +194,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemRedColor">
-            <color red="1" green="0.23137254901960785" blue="0.18823529411764706" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.23137254900000001" blue="0.18823529410000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

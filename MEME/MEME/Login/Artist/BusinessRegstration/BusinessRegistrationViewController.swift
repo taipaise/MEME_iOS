@@ -15,6 +15,7 @@ final class BusinessRegistrationViewController: UIViewController {
     @IBOutlet private weak var nameTextField: UITextField!
     @IBOutlet private weak var dateTextField: UITextField!
     @IBOutlet private weak var nextButton: UIButton!
+    private var profileInfoBuilder: ProfileInfoBuilder?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,6 +27,10 @@ final class BusinessRegistrationViewController: UIViewController {
         navigationBar.configure(title: "회원가입")
         progressBar.configure(progress: 2)
         nextButton.layer.cornerRadius = 10
+    }
+    
+    func configure(builder: ProfileInfoBuilder) {
+        profileInfoBuilder = builder
     }
     
     @IBAction private func nextButtonTapped(_ sender: Any) {
@@ -52,7 +57,8 @@ final class BusinessRegistrationViewController: UIViewController {
             id: id,
             name: name,
             date: date
-        ) {[weak self] result in
+        ) {
+            [weak self] result in
             switch result {
             case .success(let data):
                 let nextVC = RegistrationCompletionViewController()

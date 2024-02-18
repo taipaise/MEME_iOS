@@ -9,11 +9,11 @@ import Foundation
 
 struct ProfileInfo {
     var id_token: String
-    var provider: SocialProvider
+    var provider: String
     var profileImg: String
     var username: String
     var nickname: String
-    var gender: Gender?
-    var skinType: SkinType?
-    var personalColor: PersonalColor?
+    var gender: String?
+    var skinType: String?
+    var personalColor: String?
 }

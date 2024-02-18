@@ -15,17 +15,7 @@ final class AuthManager {
     let provider = NetworkAuthProvider<API>(plugins: [NetworkLoggerPlugin()])
     
     private init() {}
-    
-    func login(
-        idToken: String,
-        socialProvider: SocialProvider,
-        completion: @escaping (Result<Response, MoyaError>) -> Void
-    ) {
-        provider.request(api: .login(idToken: idToken, provider: socialProvider)) { result in
-            completion(result)
-        }
-    }
-    
+        
     func logout(completion: @escaping (Result<Response, MoyaError>) -> Void) {
         provider.request(api: .logout) { reslut in
             completion(reslut)
@@ -39,90 +29,120 @@ final class AuthManager {
     }
     
     func modelSignUp(
-        idToken: String,
-        socialProvider: SocialProvider,
-        profileImg: String,
-        username: String,
-        nickname: String,
-        gender: Gender,
-        skinType: String,
-        personalColor: String,
-        completion: @escaping (Result<Response, MoyaError>) -> Void
+        profileInfo: ProfileInfo,
+        completion: @escaping (Result<SignUpResponseDTO, MoyaError>) -> Void
     ) {
+        guard
+            let gender = profileInfo.gender,
+            let skinType = profileInfo.skinType,
+            let personalColor = profileInfo.personalColor
+        else { return }
         provider.request(api: .modelSignUp(
-            idToken: idToken,
-            provider: socialProvider,
-            profileImg: profileImg,
-            username: username,
-            nickname: nickname,
+            idToken: profileInfo.id_token,
+            provider: profileInfo.provider,
+            profileImg: profileInfo.profileImg,
+            username: profileInfo.username,
+            nickname: profileInfo.nickname,
             gender: gender,
             skinType: skinType,
             personalColor: personalColor
         )) { result in
-            completion(result)
+            switch result {
+            case .success(let response):
+                do {
+                    let data = try JSONDecoder().decode(SignUpResponseDTO.self, from: response.data)
+                    completion(.success(data))
+                } catch let error {
+                    print("Error decoding : \(error)")
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
     
     func artistsignUp(
-        idToken: String,
-        socialProvider: SocialProvider,
-        profileImg: String,
-        username: String,
-        nickname: String,
-        completion: @escaping (Result<Response, MoyaError>) -> Void
+        profileInfo: ProfileInfo,
+        completion: @escaping (Result<SignUpResponseDTO, MoyaError>) -> Void
     ) {
         provider.request(api: .artistSignUp(
-            idToken: idToken,
-            provider: socialProvider,
-            profileImg: profileImg,
-            username: username,
-            nickname: nickname
+            idToken: profileInfo.id_token,
+            provider: profileInfo.provider,
+            profileImg: profileInfo.profileImg,
+            username: profileInfo.username,
+            nickname: profileInfo.nickname
         )) { result in
-            completion(result)
+            switch result {
+            case .success(let response):
+                do {
+                    let data = try JSONDecoder().decode(SignUpResponseDTO.self, from: response.data)
+                    completion(.success(data))
+                } catch let error {
+                    print("Error decoding : \(error)")
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
     
     func setArtistProfile(
-        userId: Int,
-        profileImg: String,
-        nickName: String,
-        gender: Gender,
-        introduction: String,
-        workExperience: String,
-        region: [String],
-        specialization: [String],
-        makeupLocation: String,
-        shopLocation: String,
-        availableDayOfWeekAndTime: String,
-        completion: @escaping (Result<Response, MoyaError>) -> Void
+        extraInfo: AtristProfileInfo,
+        completion: @escaping (Result<ExtraProfileResponseDTO, MoyaError>) -> Void
     ) {
         provider.request(api: .artistProfile(
-            userId: userId,
-            profileImg: profileImg,
-            nickName: nickName,
-            gender: gender,
-            introduction: introduction,
-            workExperience: workExperience,
-            region: region,
-            specialization: specialization,
-            makeupLocation: makeupLocation,
-            shopLocation: shopLocation,
-            availableDayOfWeekAndTime: availableDayOfWeekAndTime
+            userId: extraInfo.userId,
+            profileImg: extraInfo.profileImg,
+            nickName: extraInfo.nickName,
+            gender: extraInfo.gender,
+            introduction: extraInfo.introduction,
+            workExperience: extraInfo.workExperience,
+            region: extraInfo.region,
+            specialization: extraInfo.specialization,
+            makeupLocation: extraInfo.makeupLocation,
+            shopLocation: extraInfo.shopLocation,
+            week: extraInfo.week,
+            selectedTime: extraInfo.selectedTime
         )) { result in
-            completion(result)
+            switch result {
+            case .success(let response):
+                do {
+                    let data = try JSONDecoder().decode(ExtraProfileResponseDTO.self, from: response.data)
+                    completion(.success(data))
+                } catch let error {
+                    print("Error decoding : \(error)")
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+            
         }
     }
     
     func reissue(
         accessToken: String,
         refreshToken: String,
-        completion: @escaping (Result<Response, MoyaError>) -> Void
+        completion: @escaping (Result<TokenResponseDTO, MoyaError>) -> Void
     ) {
         provider.request(api: .reissue(
             accessToken: accessToken,
             refreshToken: refreshToken
         )) { result in
-            completion(result)
+            switch result {
+            case .success(let response):
+                do {
+                    let artists = try JSONDecoder().decode(TokenResponseDTO.self, from: response.data)
+                    completion(.success(artists))
+                } catch let error {
+                    print("Error decoding : \(error)")
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
         }
     }
 }

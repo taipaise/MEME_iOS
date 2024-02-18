@@ -19,18 +19,18 @@ enum AuthAPI {
     case withdraw
     case modelSignUp(
         idToken: String,
-        provider: SocialProvider,
+        provider: String,
         profileImg: String,
         username: String,
         nickname: String,
-        gender: Gender,
+        gender: String,
         skinType: String,
         personalColor: String
     )
 
     case artistSignUp(
         idToken: String,
-        provider: SocialProvider,
+        provider: String,
         profileImg: String,
         username: String,
         nickname: String
@@ -47,7 +47,8 @@ enum AuthAPI {
         specialization: [String],
         makeupLocation: String,
         shopLocation: String,
-        availableDayOfWeekAndTime: String //임시
+        week: [String],
+        selectedTime: [String]
     )
     case reissue(accessToken: String, refreshToken: String)
 }
@@ -122,14 +123,17 @@ extension AuthAPI: MemeAuthAPI {
 
             let parameters: [String: Any] = [
                 "id_token": idToken,
-                "provider": provider.rawValue,
+                "provider": provider,
                 "profileImg": profileImg,
                 "username": username,
                 "nickname": nickname,
-                "gender": gender.rawValue,
+                "gender": gender,
                 "skinType": skinType,
                 "personalColor": personalColor
             ]
+            print("@!#!#!@#!@#!@")
+            print(parameters)
+            print("@!#!#!@#!@#!@")
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             
         case .artistSignUp(
@@ -141,11 +145,14 @@ extension AuthAPI: MemeAuthAPI {
         ):
             let parameters: [String: Any] = [
                 "id_token": idToken,
-                "provider": provider.rawValue,
+                "provider": provider,
                 "profileImg": profileImg,
                 "username": username,
                 "nickname": nickname
             ]
+            print("@!#!@#!@#!@#!@!@#!")
+            print(parameters)
+            print("@!#!@#!@#!@#!@!@#!")
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             
         case .artistProfile(
@@ -159,22 +166,33 @@ extension AuthAPI: MemeAuthAPI {
             specialization: let specialization,
             makeupLocation: let makeupLocation,
             shopLocation: let shopLocation,
-            availableDayOfWeekAndTime: let availableDayOfWeekAndTime
+            week: let week,
+            selectedTime: let selectedTime
         ):
-            let parameters: [String: Any] = [
-                "userId": userId,
-                "profileImg": profileImg,
-                "nickname": nickName,
-                "gender": gender.rawValue,
-                "introduction": introduction,
-                "workExperience": workExperience,
-                "region": region,
-                "specialization": specialization,
-                "makeupLocation": makeupLocation,
-                "shopLocation": shopLocation,
-                "availableDayOfWeekAndTime": availableDayOfWeekAndTime
-            ]
-            return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
+            
+            let jsonString = """
+            {
+              "userId": \(userId),
+              "profileImg": \(profileImg),
+              "nickname": \(nickName),
+              "gender": \(gender.rawValue),
+              "introduction": \(introduction),
+              "workExperience": \(workExperience),
+              "region": [
+                "JONGNO"
+              ],
+              "specialization": [
+                \(specialization.)
+              ],
+              "makeupLocation": "\(makeupLocation)",
+              "shopLocation": "\(shopLocation)",
+              "availableDayOfWeekAndTime": {
+                "MON": ["_00_00", "_00_30"]
+              }
+            }
+            """
+    
+            return .requestJSONEncodable(jsonString)
             
         case .reissue(accessToken: let accessToken, refreshToken: let refreshToken):
             let parameters: [String: Any] = [
@@ -184,4 +202,9 @@ extension AuthAPI: MemeAuthAPI {
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }
     }
+}
+
+struct AvailableTime: Codable {
+    let day: String
+    let time: String
 }
