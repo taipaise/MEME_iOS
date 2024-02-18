@@ -66,17 +66,17 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
                         self?.nameTextField.text = data.nickname
                         
                         self?.genderViews.forEach { view in
-                            if view?.label.text == data.gender.displayText {
+                            if view?.label.text == data.gender.korString{
                                 view?.setSelected()
                             }
                         }
                         self?.skinViews.forEach { view in
-                            if view?.label.text == data.skinType.displayText {
+                            if view?.label.text == data.skinType.korString {
                                 view?.setSelected()
                             }
                         }
                         self?.colorViews.forEach { view in
-                            if view?.label.text == data.personalColor.displayText {
+                            if view?.label.text == data.personalColor.korString {
                                 view?.setSelected()
                             }
                         }

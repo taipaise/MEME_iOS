@@ -65,7 +65,7 @@ extension ArtistLocationViewController {
     
     private func configureDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<LocationCell, BusinessLocationModel> { cell, indexPath, itemIdentifier in
-            cell.configure(location: itemIdentifier.name, count: itemIdentifier.count)
+            cell.configure(location: itemIdentifier.name)
         }
         
         dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
