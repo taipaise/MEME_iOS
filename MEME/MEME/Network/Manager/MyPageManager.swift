@@ -24,6 +24,12 @@ final class MyPageManager {
                     completion(.success(myPageResponse))
                 } catch {
                     completion(.failure(MoyaError.objectMapping(error, response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
     // MARK: -관심 아티스트 조회 API
     func getFavoriteArtists(
         modelId: Int,

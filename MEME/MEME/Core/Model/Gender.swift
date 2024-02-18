@@ -8,7 +8,7 @@
 import Foundation
 
 
-enum Gender: String, CaseIterable {
+enum Gender: String, Codable, CaseIterable {
     case MALE
     case FEMALE
     
@@ -20,5 +20,14 @@ enum Gender: String, CaseIterable {
             "여성"
         }
     }
-
+    static func rawValueFrom(displayText: String) -> String {
+        switch displayText {
+        case "남성":
+            return Gender.MALE.rawValue
+        case "여성":
+            return Gender.FEMALE.rawValue
+        default:
+            return ""
+        }
+    }
 }
