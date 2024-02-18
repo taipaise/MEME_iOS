@@ -26,10 +26,14 @@ class InfoHeaderView: UIView {
         return label
     }()
     
+    var myPageResponse: MyPageResponse?
+
     // MARK: - Lifecycle
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        
+        
         
         configureUI()
     }
@@ -59,6 +63,34 @@ class InfoHeaderView: UIView {
             nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             nameLabel.topAnchor.constraint(equalTo: infoprofileImage.bottomAnchor, constant: 17)
         ])
+        MyPageManager.shared.getMyPageProfile(userId: 6) { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.myPageResponse = response
+                
+                // UI 업데이트
+                DispatchQueue.main.async {
+                    self?.nameLabel.text = response.data?.name
+                    if let profileImgUrl = response.data?.profileImg {
+                        self?.infoprofileImage.loadImage(from: profileImgUrl)
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+}
+extension UIImageView {
+    func loadImage(from url: String) {
+        guard let imageUrl = URL(string: url) else { return }
         
+        URLSession.shared.dataTask(with: imageUrl) { (data, _, _) in
+            guard let data = data else { return }
+            
+            DispatchQueue.main.async {
+                self.image = UIImage(data: data)
+            }
+        }.resume()
     }
 }
