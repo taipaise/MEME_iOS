@@ -15,7 +15,7 @@ enum HTTPHeaderFieldsKey {
 enum HTTPHeaderFieldsValue {
     static let html = "application/x-www-form-urlencoded"
     static let json = "application/json"
-    static var accessToken: String { "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJtZW1lX3VtYyIsImlhdCI6MTcwNzk4NTkwOSwiZXhwIjoxNzEwNTc3OTA5LCJzdWIiOiJhY2Nlc3MtdG9rZW4iLCJ1c2VybmFtZSI6IuyehOyerOyYgSIsInJvbGUiOiJST0xFX01PREVMIn0.8MSYAcPOl6IfxOARHAS_aiYhG6JaQ1NjkuKqt_mZJEKgRLOxHkxHqbzZ2fmoq4Il1EVj3ieOU6Uq2WHFPcPZ6g" }
+    static var accessToken: String { "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJtZW1lX3VtYyIsImlhdCI6MTcwODIzNzgzOSwiZXhwIjoxODgxMDM3ODM5LCJzdWIiOiJhY2Nlc3MtdG9rZW4iLCJ1c2VybmFtZSI6IuyehOyerOyYgSIsInJvbGUiOiJST0xFX0FSVElTVCJ9.TnRBD5tiiOE9VgOGXx1gKsbuUKdS6QTRoOlm46M8fiBKRyneF-yjqOY17ZX74EjBgXKklf16rTuE7Q2pwD8TOg" }
 }
 
 enum HTTPHeaderFields {

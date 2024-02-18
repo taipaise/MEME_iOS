@@ -236,6 +236,9 @@
 		CCAB5A692B6DD60900067FA4 /* WrittenCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A682B6DD60900067FA4 /* WrittenCollectionViewCell.swift */; };
 		CCAB5A6B2B6E00A500067FA4 /* ArtistMyPageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A6A2B6E00A500067FA4 /* ArtistMyPageTableViewCell.swift */; };
 		CCAB5A6D2B6E011800067FA4 /* ArtistHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A6C2B6E011800067FA4 /* ArtistHeaderView.swift */; };
+		CCB319062B82907B003B4738 /* ArtistProfileInfoDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB319052B82907B003B4738 /* ArtistProfileInfoDTO.swift */; };
+		CCB319082B82908A003B4738 /* ArtistProfileInfoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB319072B82908A003B4738 /* ArtistProfileInfoManager.swift */; };
+		CCB3190A2B829096003B4738 /* ArtistProfileInfoAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCB319092B829096003B4738 /* ArtistProfileInfoAPI.swift */; };
 		CCCE56222B81D9BF007555A2 /* ArtistInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = CCCE561E2B81D9BF007555A2 /* ArtistInfoViewController.xib */; };
 		CCCE56232B81D9BF007555A2 /* ArtistInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCE561F2B81D9BF007555A2 /* ArtistInfoViewController.swift */; };
 		CCCE56242B81D9BF007555A2 /* ArtistInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCCE56202B81D9BF007555A2 /* ArtistInfoViewController.swift */; };
@@ -344,8 +347,8 @@
 		2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDTO.swift; sourceTree = "<group>"; };
 		2DB303DB2B827F4400D9E394 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2DB303DD2B827F4B00D9E394 /* MEME.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MEME.entitlements; sourceTree = "<group>"; };
-		2DB303DE2B827F5300D9E394 /* config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; name = config.xcconfig; path = "../../../../Downloads/아카이브/config.xcconfig"; sourceTree = "<group>"; };
-		2DB303DF2B827F5300D9E394 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = memeSecret.plist; path = "../../../../Downloads/아카이브/memeSecret.plist"; sourceTree = "<group>"; };
+		2DB303DE2B827F5300D9E394 /* config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = config.xcconfig; sourceTree = "<group>"; };
+		2DB303DF2B827F5300D9E394 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
 		2DB303E22B82842E00D9E394 /* PersonalColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalColor.swift; sourceTree = "<group>"; };
 		2DB303E72B8286EF00D9E394 /*  BusinessLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = " BusinessLocationModel.swift"; sourceTree = "<group>"; };
 		2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
@@ -515,6 +518,9 @@
 		CCAB5A682B6DD60900067FA4 /* WrittenCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WrittenCollectionViewCell.swift; sourceTree = "<group>"; };
 		CCAB5A6A2B6E00A500067FA4 /* ArtistMyPageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistMyPageTableViewCell.swift; sourceTree = "<group>"; };
 		CCAB5A6C2B6E011800067FA4 /* ArtistHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistHeaderView.swift; sourceTree = "<group>"; };
+		CCB319052B82907B003B4738 /* ArtistProfileInfoDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistProfileInfoDTO.swift; sourceTree = "<group>"; };
+		CCB319072B82908A003B4738 /* ArtistProfileInfoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistProfileInfoManager.swift; sourceTree = "<group>"; };
+		CCB319092B829096003B4738 /* ArtistProfileInfoAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistProfileInfoAPI.swift; sourceTree = "<group>"; };
 		CCCE561E2B81D9BF007555A2 /* ArtistInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtistInfoViewController.xib; sourceTree = "<group>"; };
 		CCCE561F2B81D9BF007555A2 /* ArtistInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistInfoViewController.swift; sourceTree = "<group>"; };
 		CCCE56202B81D9BF007555A2 /* ArtistInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ArtistInfoViewController.swift; path = ArtistInfoViewController/ArtistInfoViewController.swift; sourceTree = "<group>"; };
@@ -1001,6 +1007,7 @@
 				2DA208002B7AB514006EB9B9 /* SearchAPI.swift */,
 				2DA2080C2B7CB160006EB9B9 /* RecommendAPI.swift */,
 				2DA208142B7CF865006EB9B9 /* PortfolioAPI.swift */,
+				CCB319092B829096003B4738 /* ArtistProfileInfoAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1023,6 +1030,7 @@
 				CC9C38902B81B3780073A257 /* ContactManager.swift */,
 				2DA208062B7ABB2E006EB9B9 /* SearchManager.swift */,
 				2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */,
+				CCB319072B82908A003B4738 /* ArtistProfileInfoManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1046,6 +1054,7 @@
 				2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */,
 				316239642B80DE58002D9E2F /* SignUpResponseDTO.swift */,
 				316239662B80DE9B002D9E2F /* BasicResponseDTO.swift */,
+				CCB319052B82907B003B4738 /* ArtistProfileInfoDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1605,6 +1614,7 @@
 				317D986E2B7E0186009BBB95 /* SkinType.swift in Sources */,
 				2D6F59B52B5C475800CA883A /* ModalPresentationController.swift in Sources */,
 				CC9C384E2B754C240073A257 /* MyPageDTO.swift in Sources */,
+				CCB319082B82908A003B4738 /* ArtistProfileInfoManager.swift in Sources */,
 				2D62E23E2B5428CC004E8299 /* ModelNonReservationViewCell.swift in Sources */,
 				316A926D2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift in Sources */,
 				2D62E24A2B5462B0004E8299 /* SelectMakeupCardViewCell.swift in Sources */,
@@ -1663,6 +1673,7 @@
 				31B4137C2B6D295900535BB1 /* BusinessIDVerificationManager.swift in Sources */,
 				31B65E4D2B6E18BA00628C68 /* ReservationAPI.swift in Sources */,
 				31B2634C2B57EE7100304FBE /* RoleSelectionViewController.swift in Sources */,
+				CCB319062B82907B003B4738 /* ArtistProfileInfoDTO.swift in Sources */,
 				095742512B66153E0011B580 /* ArtistPortfolioEditingViewController.swift in Sources */,
 				CC9C388B2B80F9BA0073A257 /* ModelProfileInfoManager.swift in Sources */,
 				3142B99B2B4D020E0066CD5A /* NSObject+.swift in Sources */,
@@ -1703,6 +1714,7 @@
 				315FB8592B6DE1B00068163C /* AuthAPI.swift in Sources */,
 				3142B9AF2B4D08380066CD5A /* ArtistHomeViewController.swift in Sources */,
 				317D98702B7E01F7009BBB95 /* Gender.swift in Sources */,
+				CCB3190A2B829096003B4738 /* ArtistProfileInfoAPI.swift in Sources */,
 				CCAB5A532B66CD9F00067FA4 /* MyReviewViewController.swift in Sources */,
 				CC9C38672B7C760B0073A257 /* ArtistProfileDTO.swift in Sources */,
 				2DB303E32B82842E00D9E394 /* PersonalColor.swift in Sources */,

@@ -127,8 +127,6 @@ final class MyPageManager {
             }
         }
     }
-
-
     
     // MARK: -관심 메이크업 삭제 API
     func deleteFavoriteArtist(
