@@ -25,8 +25,10 @@ final class SetProfileViewController: UIViewController {
     
     private var phpPicker: PHPickerViewController?
     private var imagePicker: UIImagePickerController?
+    private var profileImage = UIImage.profile
     private var isArtist: Bool = true
     private var isVerifiedNickName = false
+    private var builder = ProfileInfoBuilder()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -75,12 +77,38 @@ final class SetProfileViewController: UIViewController {
     }
     
     @IBAction func nextButtonTapped(_ sender: Any) {
-        if isArtist {
-            let nextVC = BusinessRegistrationViewController()
-            navigationController?.pushViewController(nextVC, animated: true)
-        } else {
-            let nextVC = SetDetailInfoViewController()
-            navigationController?.pushViewController(nextVC, animated: true)
+        FirebaseStorageManager.uploadImage(image: profileImage) { [weak self] url in
+            guard 
+                let self = self,
+                let name = nameTextField.text,
+                let nickName = nickNameTextField.text
+            else { return }
+            if let url = url {
+                self.builder = self.builder.profileImg(url.absoluteString)
+                self.builder = self.builder.username(name)
+                self.builder = self.builder.nickname(nickName)
+                
+                if isArtist {
+                    builder = builder.provider(UserDefaultManager.shared.getProvider()!)
+                    builder = builder.idToken(UserDefaultManager.shared.getIdToken()!)
+                    AuthManager.shared.artistsignUp(profileInfo: builder.build()) { [weak self] result in
+                        switch result {
+                        case .success(let response):
+                            KeyChainManager.save(forKey: .role, value: "ARTIST")
+                            KeyChainManager.save(forKey: .nickName, value: nickName)
+                            let nextVC = BusinessRegistrationViewController()
+                            self?.navigationController?.pushViewController(nextVC, animated: true)
+                        case .failure(let error):
+                            print(error.response?.request?.httpBody)
+                            print(error.localizedDescription)
+                        }
+                    }
+                } else {
+                    let nextVC = SetDetailInfoViewController()
+                    nextVC.configure(builder: builder)
+                    navigationController?.pushViewController(nextVC, animated: true)
+                }
+            }
         }
     }
     
@@ -94,8 +122,8 @@ final class SetProfileViewController: UIViewController {
     
     private func setNextButton() {
         guard
-            let name = nameTextField.text,
-            let nickName = nickNameTextField.text,
+            nameTextField.text != nil,
+            nickNameTextField.text != nil,
             isVerifiedNickName
         else {
             nextButton.backgroundColor = .gray300
@@ -105,12 +133,6 @@ final class SetProfileViewController: UIViewController {
         nextButton.isEnabled = true
         nextButton.backgroundColor = .mainBold
     }
-    
-    
-    @IBAction func downImage(_ sender: Any) {
-        
-    }
-    
 }
 
 // MARK: - 사진 선택 설정
@@ -128,13 +150,11 @@ extension SetProfileViewController: PHPickerViewControllerDelegate {
             print("sdaa")
             return }
         
-        itemProvider.loadObject(ofClass: UIImage.self) {[weak self] image, error in
+        itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
             DispatchQueue.main.async {
                 guard let selectedImage = image as? UIImage else { return }
-                FirebaseStorageManager.uploadImage(image: selectedImage) { url in
-                    print(url)
-                }
                 self?.profileImageView.image = selectedImage
+                self?.profileImage = selectedImage
             }
         }
     }
@@ -155,6 +175,7 @@ extension SetProfileViewController: UIImagePickerControllerDelegate, UINavigatio
     ) {
         if let image = info[.originalImage] as? UIImage {
             profileImageView.image = image
+            profileImage = image
         }
         imagePicker?.dismiss(animated: true)
     }

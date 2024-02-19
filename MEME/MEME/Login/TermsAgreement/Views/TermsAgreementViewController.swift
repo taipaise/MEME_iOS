@@ -50,6 +50,19 @@ final class TermsAgreementViewController: UIViewController {
         let nextVC = RoleSelectionViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
+
+    @IBAction func termDetailButtonTapped(_ sender: UIButton) {
+        let termVC = TermDetailViewController()
+        
+        if sender.tag == 0 {
+            termVC.configure(state: .persnalData)
+        } else {
+            termVC.configure(state: .service)
+        }
+        
+        navigationController?.pushViewController(termVC, animated: true)
+    }
+    
     
 }
 

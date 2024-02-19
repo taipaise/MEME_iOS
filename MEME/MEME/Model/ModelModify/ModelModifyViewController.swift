@@ -67,7 +67,6 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
                         
                         self?.genderViews.forEach { view in
                             if view?.label.text == data.gender.korString {
-                                view?.setSelected()
                             }
                         }
                         self?.skinViews.forEach { view in

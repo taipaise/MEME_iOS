@@ -35,6 +35,7 @@ struct PortfolioDTO: Codable {
 
 struct PortfolioData: Codable {
     let portfolioId: Int
+    let userId: Int
     let isFavorite: Bool
     let category: String
     let artistProfileImg: String

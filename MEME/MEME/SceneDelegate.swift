@@ -68,10 +68,11 @@ extension SceneDelegate {
         let vc = NavigationController(nibName: nil, bundle: nil)
         vc.navigationBar.isHidden = true
         // TODO: - 로그인 여부, 아티스트 여부에 따라 rootVC 설정 필요
-        var isLogin: Bool = true
+        var isLogin: Bool = UserDefaultManager.shared.getIsLogin() ?? false
         
         if isLogin == true {
-            var isArtist: Bool = false
+            let role = KeyChainManager.read(forkey: .role) ?? "ARTIST"
+            var isArtist: Bool = role == "ARTIST"
             
             if isArtist == true {
                 let mainVC = ArtistTabBarController(

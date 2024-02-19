@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import AuthenticationServices
 
 final class SetDetailInfoViewController: UIViewController {
 
@@ -24,6 +25,7 @@ final class SetDetailInfoViewController: UIViewController {
     @IBOutlet private weak var fallColorView: DetailSettingView!
     @IBOutlet private weak var winterColorView: DetailSettingView!
     @IBOutlet private weak var unknownColorView: DetailSettingView!
+    private let userDefaultManager = UserDefaultManager.shared
     
     private lazy var genderViews = [womanView, manView]
     private lazy var skinViews = [
@@ -44,6 +46,7 @@ final class SetDetailInfoViewController: UIViewController {
     private var selectedSkinType: String?
     private var selectedPersonalColor: String?
     private var selectedGender: String?
+    private var profileInfoBuilder: ProfileInfoBuilder?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -57,6 +60,10 @@ final class SetDetailInfoViewController: UIViewController {
         completeButton.layer.cornerRadius = 10
         setDetailSettingView()
         setNextButton()
+    }
+    
+    func configure(builder: ProfileInfoBuilder) {
+        profileInfoBuilder = builder
     }
     
     private func setDetailSettingView() {
@@ -102,9 +109,35 @@ final class SetDetailInfoViewController: UIViewController {
     
     
     @IBAction private func nextButtonTapped(_ sender: Any) {
-        let nextVC = RegistrationCompletionViewController()
-        nextVC.configure(isArtist: false)
-        navigationController?.pushViewController(nextVC, animated: true)
+        guard
+            let skinType = selectedSkinType,
+            let color = selectedPersonalColor,
+            let gender = selectedGender,
+            let socialProvider = userDefaultManager.getProvider(),
+            var builder = profileInfoBuilder,
+            var token = userDefaultManager.getIdToken()
+        else { return }
+            
+        builder = builder.idToken(token)
+        builder = builder.skinType(skinType)
+        builder = builder.personalColor(color)
+        builder = builder.gender(gender)
+        builder = builder.provider(socialProvider)
+        
+        AuthManager.shared.modelSignUp(profileInfo: builder.build()) { [weak self] result in
+            switch result {
+            case .success(let data):
+                KeyChainManager.save(forKey: .memberId, value: String(data.data.userId))
+                KeyChainManager.save(forKey: .accessToken, value: data.data.accessToken)
+                KeyChainManager.save(forKey: .refreshToken, value: data.data.refreshToken)
+                KeyChainManager.save(forKey: .role, value: "MODEL")
+                let nextVC = RegistrationCompletionViewController()
+                nextVC.configure(isArtist: false)
+                self?.navigationController?.pushViewController(nextVC, animated: true)
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
+        }
     }
 }
 

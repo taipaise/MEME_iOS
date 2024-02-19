@@ -40,3 +40,5 @@ enum SkinType: String, Codable, CaseIterable {
         }
     }
 }
+
+
