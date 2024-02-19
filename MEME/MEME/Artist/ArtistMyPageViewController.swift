@@ -14,10 +14,22 @@ private let cellID = "Cell"
         let tableView = UITableView(frame: .zero, style: .plain)
         let myPageMenu = ["약관 및 정책", "문의하기", "로그아웃", "탈퇴하기"]
         
-        // MARK: - Lifecycle
-        
+        var myPageResponse: MyPageResponse?
+
         override func viewDidLoad() {
             super.viewDidLoad()
+                
+            MyPageManager.shared.getMyPageProfile(userId: 6) { [weak self] result in
+                switch result {
+                case .success(let profile):
+                    print("Success: \(profile)")
+                    self?.myPageResponse = profile
+                    self?.tableView.reloadData()
+                case .failure(let error):
+                    print("Failure: \(error)")
+                }
+            }
+                
             
             configureUI()
             
@@ -127,11 +139,11 @@ extension ArtistMyPageViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
-        //약관
-//        if indexPath.row == 0 {
-//            let modelModifyViewController = ModelModifyViewController()
-//            self.navigationController?.pushViewController(modelModifyViewController, animated: true)
-//        }
+        
+        if indexPath.row == 0 {
+            let provisionViewController = ProvisionViewController()
+            self.navigationController?.pushViewController(provisionViewController, animated: true)
+        }
         if indexPath.row == 1 {
             let askViewController = AskViewController()
             self.navigationController?.pushViewController(askViewController, animated: true)
@@ -139,7 +151,17 @@ extension ArtistMyPageViewController: UITableViewDelegate {
         if indexPath.row == 2 {
             let alert = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
-                // 로그아웃 처리 코드
+                let nextVC = LoginViewController()
+//                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
+            }))
+            alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
+        }
+    if indexPath.row == 4 {
+            let alert = UIAlertController(title: "탈퇴", message: "정말 탈퇴 하시겠습니까?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
+                let nextVC = LoginViewController()
+//                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
             }))
             alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)

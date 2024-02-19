@@ -9,7 +9,6 @@ import Foundation
 import Moya
 
 enum ArtistProfileAPI {
-    case getProfile(artistId: Int)
     case patchProfile(artistId: Int, profileImg: String?, nickname: String?, gender: Gender?, introduction: String?, workExperience: WorkExperience?, region: [Region]?, specialization: [Category]?, makeupLocation: MakeupLocation?, shopLocation: String?, availableDayOfWeek: [DayOfWeek: Times]?)
 }
 
@@ -20,8 +19,8 @@ extension ArtistProfileAPI: MemeAPI {
     
     var urlPath: String {
         switch self {
-        case .getProfile, .patchProfile:
-            return "/api/v1/mypage/profile/artist"
+        case .patchProfile:
+            return "profile/artist"
         }
     }
     
@@ -31,15 +30,13 @@ extension ArtistProfileAPI: MemeAPI {
     
     var headerType: HTTPHeaderFields {
         switch self {
-        case .getProfile, .patchProfile:
+        case .patchProfile:
             return .hasAccessToken
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getProfile:
-            return .get
         case .patchProfile:
             return .patch
         }
@@ -47,8 +44,6 @@ extension ArtistProfileAPI: MemeAPI {
     
     var task: Moya.Task {
         switch self {
-        case .getProfile(let artistId):
-            return .requestParameters(parameters: ["artist_id": artistId], encoding: URLEncoding.default)
         case .patchProfile(let artistId, let profileImg, let nickname, let gender, let introduction, let workExperience, let region, let specialization, let makeupLocation, let shopLocation, let availableDayOfWeek):
             var parameters: [String: Any] = ["artist_id": artistId]
             if let profileImg = profileImg { parameters["profile_img"] = profileImg }

@@ -37,6 +37,8 @@ final class ArtistInfoDetailViewController: UIViewController {
     
     private var dataSource: DataSource?
     private var snapShot: SnapShot?
+    var response: ArtistProfileResponse?
+    var getresponse: ArtistProfileInfoResponse?
     
     private var selectedFields: Set<Int> = []
     private var makeUpLocation: Set<Int> = []
@@ -68,6 +70,84 @@ final class ArtistInfoDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let mondayButton = weekButtons.first(where: { $0.tag == 1 }) {
+               weekButtonTapped(mondayButton)
+           }
+        
+        ArtistProfileInfoManager.shared.getArtistProfileInfo(userId: 10) { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("Success: \(response)")
+                self?.getresponse = response
+                if let data = response.data {
+                    DispatchQueue.main.async {
+                      
+                        
+                        for button in self?.fieldButtons ?? [] {
+                            if data.specialization.contains(where: { $0.displayText == button.titleLabel?.text }) {
+                                button.layer.backgroundColor = UIColor.mainBold.cgColor
+                            } else {
+                                button.layer.borderColor = UIColor.mainBold.cgColor
+                                button.tintColor = .white
+                            }
+                        }
+                        
+                        guard let self = self else { return }
+                        for (index, button) in self.locationButtons.enumerated() {
+                            button.layer.borderWidth = 1
+                            button.layer.cornerRadius = 9
+
+                            if data.makeupLocation.displayText == button.titleLabel?.text {
+                                button.layer.borderColor = UIColor.mainBold.cgColor
+                                button.tintColor = .black
+                                if index < self.locationCheckImages.count {
+                                    self.locationCheckImages[index].tintColor = .mainBold
+                                }
+                            } else {
+                                button.layer.borderColor = UIColor.gray300.cgColor
+                                button.tintColor = .black
+                                if index < self.locationCheckImages.count {
+                                    self.locationCheckImages[index].tintColor = .gray
+                                }
+                            }
+                        }
+                        
+                        self.textField.text = data.shopLocation
+                        
+//                        
+//                        for button in self.weekButtons ?? [] {
+//                            // 디코딩된 사전에서 키를 ArtistDayOfWeek 타입으로 변환합니다.
+//                            let artistDayOfWeekTimes = data.availableDayOfWeek.compactMapKeys { ArtistDayOfWeek(rawValue: $0) }
+//                            // 변환된 사전에서 값을 검색하고, 해당 값의 displayText가 버튼의 타이틀과 일치하는지 확인합니다.
+//                            if artistDayOfWeekTimes.values.contains(where: { $0.displayText == button.titleLabel?.text }) {
+//                                button.layer.backgroundColor = UIColor.mainBold.cgColor
+//                            } else {
+//                                button.layer.borderColor = UIColor.mainBold.cgColor
+//                                button.tintColor = .black
+//                            }
+//                        }
+
+                        
+//                        if let firstEntry = data.availableDayOfWeek.first {
+//                            let times = firstEntry.value
+//                            startTimeLabel.text = times.displayText
+//                            endTimeLabel.text = times.displayText // 아마도 종료 시간은 다른 방법으로 가져와야 할 것 같습니다.
+//                        }
+
+                        self.setUI()
+
+                    }
+                } else {
+                    print("data nil")
+                }
+
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
+        
+        
         setUI()
         configureCollectionView()
     }
@@ -85,12 +165,12 @@ final class ArtistInfoDetailViewController: UIViewController {
             $0.layer.borderWidth = 1
             $0.layer.borderColor = UIColor.mainBold.cgColor
         }
-        
-        locationButtons.forEach { button in
-            button.layer.borderWidth = 1
-            button.layer.borderColor = UIColor.gray300.cgColor
-            button.layer.cornerRadius = 9
-        }
+//        
+//        locationButtons.forEach { button in
+//            button.layer.borderWidth = 1
+//            button.layer.borderColor = UIColor.gray300.cgColor
+//            button.layer.cornerRadius = 9
+//        }
         
         textField.layer.cornerRadius = 9
         textField.layer.borderWidth = 1
@@ -109,6 +189,10 @@ final class ArtistInfoDetailViewController: UIViewController {
         }
 
         completeButton.layer.cornerRadius = 10
+        
+        startTimeLabel.text = "04:00"
+        endTimeLabel.text = "21:00"
+
     }
     
     

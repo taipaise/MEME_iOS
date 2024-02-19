@@ -30,10 +30,15 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
             }
         }
             configureUI()
-            self.tabBarController?.tabBar.isHidden = true
             
             self.navigationController?.navigationBar.tintColor = UIColor.black
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tabBarController?.tabBar.isHidden = false
+    }
+    
 
     func configureUI() {
         

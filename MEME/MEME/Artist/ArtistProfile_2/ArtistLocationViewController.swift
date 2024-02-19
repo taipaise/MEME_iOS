@@ -19,6 +19,7 @@ final class ArtistLocationViewController: UIViewController {
     private var dataSource: DataSource?
     private var snapShot: SnapShot?
     private var dummies = [
+        BusinessLocationModel(name: "전체", count: 10),
         BusinessLocationModel(name: "강남구", count: 10),
         BusinessLocationModel(name: "강동구", count: 10),
         BusinessLocationModel(name: "강북구", count: 10),
@@ -34,9 +35,30 @@ final class ArtistLocationViewController: UIViewController {
         BusinessLocationModel(name: "서초구", count: 10),
         BusinessLocationModel(name: "성동구", count: 10)
     ]
+    var response: ArtistProfileResponse?
+    var getresponse: ArtistProfileInfoResponse?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        ArtistProfileInfoManager.shared.getArtistProfileInfo(userId: 10) { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("Success: \(response)")
+                self?.getresponse = response
+                if let data = response.data {
+                    DispatchQueue.main.async {
+                        self?.collectionView.reloadData()
+                    }
+                } else {
+                    print("data nil")
+                }
+                
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
+        
         setUI()
         configureCollectionView()
         nextButton.layer.cornerRadius = 10
@@ -65,7 +87,7 @@ extension ArtistLocationViewController {
     
     private func configureDataSource() {
         let cellRegistration = UICollectionView.CellRegistration<LocationCell, BusinessLocationModel> { cell, indexPath, itemIdentifier in
-//            cell.configure(location: itemIdentifier.name, count: itemIdentifier.count)
+            cell.configure(location: itemIdentifier.name)
         }
         
         dataSource = DataSource(collectionView: collectionView) { collectionView, indexPath, itemIdentifier in
@@ -117,6 +139,21 @@ extension ArtistLocationViewController {
 }
 
 extension ArtistLocationViewController: UICollectionViewDelegate {
+    private func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArtistLocationViewController", for: indexPath) as! ArtistLocationCollectionViewCell
+
+        let model = dummies[indexPath.item]
+        cell.locationLabel.text = model.name
+
+        if let data = getresponse?.data, data.region.map({ $0.koreanName }).contains(model.name) {
+            cell.setColor(isSelected: true)
+        } else {
+            cell.setColor(isSelected: false)
+        }
+
+        return cell
+    }
+
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let cell = collectionView.cellForItem(at: indexPath) as? LocationCell else { return }
         cell.setColor(isSelected: true)

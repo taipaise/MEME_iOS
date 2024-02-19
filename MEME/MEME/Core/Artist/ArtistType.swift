@@ -16,12 +16,49 @@ enum Category: String, Codable {
     case prosthetic = "PROSTHETIC"
     case studio = "STUDIO"
     case etc = "ETC"
+    
+    static func rawValueFrom(displayText: String) -> String {
+        switch displayText {
+        case "데일리 메이크업":
+            return Category.daily.rawValue
+        case "배우 메이크업":
+            return Category.actor.rawValue
+        case "면접 메이크업":
+            return Category.interview.rawValue
+        case "파티/이벤트 메이크업":
+            return Category.party.rawValue
+        case "웨딩 메이크업":
+            return Category.wedding.rawValue
+        case "특수 메이크업":
+            return Category.prosthetic.rawValue
+        case "스튜디오 메이크업":
+            return Category.studio.rawValue
+        case "기타(속눈썹, 퍼스널컬러)":
+            return Category.etc.rawValue
+            
+        default:
+            return ""
+        }
+    }
 }
 
 enum MakeupLocation: String, Codable {
     case shop = "SHOP"
     case visit = "VISIT"
     case both = "BOTH"
+    
+    static func rawValueFrom(displayText: String) -> String {
+        switch displayText {
+        case "제가 다니는 샵에서 진행해요":
+            return MakeupLocation.shop.rawValue
+        case "직접 방문해서 진행해요":
+            return MakeupLocation.visit.rawValue
+        case "둘 다 상관없어요":
+            return MakeupLocation.both.rawValue
+        default:
+            return ""
+        }
+    }
 }
 
 enum Times: String, Codable {
