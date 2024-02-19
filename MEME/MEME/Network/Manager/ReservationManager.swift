@@ -111,5 +111,27 @@ final class ReservationManager {
             }
         }
     }
-    
+    // MARK: -예약 상태 변경 API
+    func patchReservation(
+        reservationId: Int,
+        status: ReservationState,
+        completion: @escaping (Result<PatchReservationDTO, MoyaError>) -> Void
+    ) {
+        provider.request(api: .patchReservation(
+            reservationId: reservationId,
+            status: status
+        )) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(PatchReservationDTO.self, from: response.data)
+                    completion(.success(decodedData))
+                } catch let error {
+                    completion(.failure(MoyaError.underlying(error, response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

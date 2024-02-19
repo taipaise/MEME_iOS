@@ -70,3 +70,11 @@ struct PostReservationData: Codable {
     let reservationDate: String
     let reservationDayOfWeekAndTime: [String: String]
 }
+// MARK: -예약 상태 변경 DTO
+struct PatchReservationDTO: Codable {
+    let result: String
+    let message: String
+    let data: String?
+    let statusCode: Int
+}
+

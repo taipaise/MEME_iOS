@@ -399,6 +399,7 @@ extension ModelReservationChartViewController: UITableViewDataSource, UITableVie
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let reservationVC = ModelReservationViewController()
         let portfolioID = searchResults[indexPath.row].portfolioId
+        print(portfolioID)
         reservationVC.portfolioID = portfolioID
         self.navigationController?.pushViewController(reservationVC, animated: true)
     }

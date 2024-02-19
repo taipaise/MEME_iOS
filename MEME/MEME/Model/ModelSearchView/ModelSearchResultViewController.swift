@@ -56,7 +56,7 @@ class ModelSearchResultViewController: UIViewController {
         let placeholderAttributes: [NSAttributedString.Key: Any] = [.foregroundColor: UIColor.mainBold]
             textField.attributedPlaceholder = NSAttributedString(string: "원하는 메이크업을 검색해보세요.", attributes: placeholderAttributes)
         searchBar.tintColor = .mainBold
-        searchBar.isUserInteractionEnabled = false 
+        searchBar.isUserInteractionEnabled = true
         
         return searchBar
     }()
