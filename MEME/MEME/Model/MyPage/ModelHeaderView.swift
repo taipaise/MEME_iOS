@@ -10,7 +10,8 @@ import UIKit
 class ModelHeaderView: UIView {
     
     weak var delegate: ModelHeaderViewDelegate?
-    
+    var myPageResponse: MyPageResponse?
+
     // MARK: - Properties
     
     let profileImage: UIImageView = {
@@ -206,7 +207,24 @@ class ModelHeaderView: UIView {
             lineView.topAnchor.constraint(equalTo: mpArtistlabel.bottomAnchor, constant: 21),
             lineView.heightAnchor.constraint(equalToConstant: 1)
         ])
-
+        MyPageManager.shared.getMyPageProfile(userId: 6) { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.myPageResponse = response
+                
+                // UI 업데이트
+                DispatchQueue.main.async {
+                    if let nickname = response.data?.nickname {
+                        self?.namebutton.setTitle(nickname, for: .normal)
+                    }
+                    if let profileImgUrl = response.data?.profileImg {
+                        self?.profileImage.loadImage(from: profileImgUrl)
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
     }
 
 @objc func buttonClicked(sender: UIButton) {

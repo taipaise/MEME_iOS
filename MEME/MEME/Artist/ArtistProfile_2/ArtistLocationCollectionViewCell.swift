@@ -10,7 +10,7 @@ import SnapKit
 
 final class ArtistLocationCollectionViewCell: UICollectionViewCell {
     
-    private lazy var locationLabel: UILabel = {
+     lazy var locationLabel: UILabel = {
         let label = UILabel()
         label.font = .pretendard(to: .semiBold, size: 12)
         label.textColor = .gray500

@@ -54,6 +54,45 @@ final class PortfolioManager {
         }
     }
     
+    // MARK: -아티스트 추천 (리뷰순) API
+    func getRecommendArtistByReview(
+        completion: @escaping (Result<RecommendDTO, MoyaError>) -> Void
+    ) {
+        provider.request(api: .getRecommendArtistByReview) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let response = try response.map(RecommendDTO.self)
+                    completion(.success(response))
+                } catch {
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    // MARK: -아티스트 추천 (최신 등록 순) API
+    func getRecommendArtistByRecent(
+        completion: @escaping (Result<RecommendDTO, MoyaError>) -> Void
+    ) {
+        provider.request(api: .getRecommendArtistByRecent) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let response = try response.map(RecommendDTO.self)
+                    completion(.success(response))
+                } catch {
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    
+    
     // MARK: -포트폴리오 세부 조회 API
     func getPortfolioDetail(userId: Int, portfolioId: Int, completion: @escaping (Result<PortfolioDTO, MoyaError>) -> Void) {
         provider.request(api: .getPortfolioDetail(userId: userId, portfolioId: portfolioId)) { result in

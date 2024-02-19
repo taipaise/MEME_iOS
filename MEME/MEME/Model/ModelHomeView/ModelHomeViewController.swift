@@ -423,7 +423,7 @@ extension ModelHomeViewController: UISearchBarDelegate {
 //MARK: -API 통신 메소드
 extension ModelHomeViewController {
     func showModelReservations() {
-        ReservationManager.shared.getModelReservation(modelId: 2) { [weak self] result in
+        ReservationManager.shared.getModelReservation(modelId: 1) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let reservationResponse):

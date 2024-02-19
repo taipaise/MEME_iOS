@@ -66,8 +66,7 @@ enum MyPageAPI {
 }
 
 extension MyPageAPI: MemeAPI {
-
-  var domain: MemeDomain {
+    var domain: MemeDomain {
         return .mypage
     }
     
