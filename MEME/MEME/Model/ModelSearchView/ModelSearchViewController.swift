@@ -36,7 +36,13 @@ class ModelSearchViewController: UIViewController {
         return button
     }()
     
-    private let scrollView = UIScrollView()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        
+        return scrollView
+    }()
     private let contentsView = UIView()
     private let searchMakeup: UISearchBar = {
         let searchBar = UISearchBar()
@@ -91,7 +97,13 @@ class ModelSearchViewController: UIViewController {
         return button
     }()
     private let categorySearchesData = [("icon_daily", "데일리 메이크업"), ("icon_actor", "배우 메이크업"), ("icon_interview", "면접 메이크업"), ("icon_party", "파티/이벤트\n메이크업"), ("icon_wedding", "웨딩 메이크업"), ("icon_special", "특수 메이크업"), ("icon_studio", "스튜디오\n메이크업"), ("icon_etc", "기타(속눈썹,\n퍼스널 컬러)")]
-    private var recentSearchesCollectionView: UICollectionView!
+    private var recentSearchesCollectionView: UICollectionView! {
+        didSet {
+            recentSearchesCollectionView.showsHorizontalScrollIndicator = false
+            recentSearchesCollectionView.showsVerticalScrollIndicator = false
+        }
+    }
+
     private var categorySearchesLabel: UILabel = {
         let label = UILabel()
         label.text = "카테고리로 찾기"
@@ -100,7 +112,12 @@ class ModelSearchViewController: UIViewController {
         
         return label
     }()
-    private var categorySearchesCollectionView: UICollectionView!
+    private var categorySearchesCollectionView: UICollectionView! {
+        didSet {
+            categorySearchesCollectionView.showsHorizontalScrollIndicator = false
+            categorySearchesCollectionView.showsVerticalScrollIndicator = false
+        }
+    }
     private var artistSearchesLabel: UILabel = {
         let label = UILabel()
         label.text = "관심 아티스트로 찾기"
@@ -413,7 +430,7 @@ extension ModelSearchViewController: UICollectionViewDelegateFlowLayout {
                 let spacing = totalSpacingWidth / (numberOfItemsPerRow - 1)
                 return spacing
             }
-            return 10 
+            return 10
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -525,7 +542,7 @@ extension ModelSearchViewController: RecentSearchViewCellDelegate {
 extension ModelSearchViewController {
     func fetchFavoriteArtists() {
         // modelId 임의 설정
-        let modelId = 6
+        let modelId = 1
         
         MyPageManager.shared.getFavoriteArtists(modelId: modelId) { [weak self] result in
             DispatchQueue.main.async {

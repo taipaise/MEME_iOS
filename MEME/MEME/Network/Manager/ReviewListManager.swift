@@ -15,9 +15,9 @@ final class ReviewListManager {
     let provider = NetworkProvider<API>(plugins: [NetworkLoggerPlugin()])
     
     private init() {}
-
-func getReviews(portfolioId: Int, modelName: String, star: Int, comment: String, reviewImgDtoList: [ReviewImage], completion: @escaping (Result<ReviewResponse, MoyaError>) -> Void) {
-    provider.request(api: .getIReviewList(portfolioId: portfolioId, modelName: modelName, star: star, comment: comment, reviewImgDtoList: reviewImgDtoList)) { result in
+    
+    func getReviews(portfolioId: Int, modelName: String, star: Int, comment: String, reviewImgDtoList: [ReviewImage], completion: @escaping (Result<ReviewResponse, MoyaError>) -> Void) {
+        provider.request(api: .getIReviewList(portfolioId: portfolioId, modelName: modelName, star: star, comment: comment, reviewImgDtoList: reviewImgDtoList)) { result in
             switch result {
             case .success(let response):
                 do {

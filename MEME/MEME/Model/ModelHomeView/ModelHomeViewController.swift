@@ -11,8 +11,13 @@ import Moya
 
 final class ModelHomeViewController: UIViewController {
     // MARK: - Properties
-    
-    private let scrollView = UIScrollView()
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        
+        return scrollView
+    }()
     private let contentsView = UIView()
     private var memeLogoImageView: UIImageView = {
         let imageView = UIImageView()
@@ -55,7 +60,7 @@ final class ModelHomeViewController: UIViewController {
 
     private var modelWelcomeLabel: UILabel = {
         let label = UILabel()
-        label.text = "000 님, 환영합니다!"
+        label.text = "메메님, 환영합니다!"
         label.textColor = .black
         label.font = .pretendard(to: .semiBold, size: 20)
         label.numberOfLines = 0
@@ -83,7 +88,12 @@ final class ModelHomeViewController: UIViewController {
         return button
     }()
 
-    private var modelReservationCollectionView: UICollectionView!
+    private var modelReservationCollectionView: UICollectionView! {
+        didSet {
+            modelReservationCollectionView.showsHorizontalScrollIndicator = false
+            modelReservationCollectionView.showsVerticalScrollIndicator = false
+        }
+    }
     private var recomandArtistReservationMainLabel: UILabel = {
         let label = UILabel()
         label.text = "어떤 아티스트를 선택할 지 모르겠을 때"
@@ -99,7 +109,12 @@ final class ModelHomeViewController: UIViewController {
         label.font = .pretendard(to: .regular, size: 14)
         return label
     }()
-    private var recomandReservationCollectionView: UICollectionView!
+    private var recomandReservationCollectionView: UICollectionView! {
+        didSet {
+            recomandReservationCollectionView.showsHorizontalScrollIndicator = false
+            recomandReservationCollectionView.showsVerticalScrollIndicator = false
+        }
+    }
     private var recomandHastyReservationMainLabel: UILabel = {
         let label = UILabel()
         label.text = "급하게 메이크업이 필요할 때"
@@ -115,7 +130,12 @@ final class ModelHomeViewController: UIViewController {
         label.font = .pretendard(to: .regular, size: 14)
         return label
     }()
-    private var recomandHastyReservationCollectionView: UICollectionView!
+    private var recomandHastyReservationCollectionView: UICollectionView! {
+        didSet {
+            recomandHastyReservationCollectionView.showsHorizontalScrollIndicator = false
+            recomandHastyReservationCollectionView.showsVerticalScrollIndicator = false
+        }
+    }
     
     private var modelReservations: [ReservationData]? {
         didSet { self.modelReservationCollectionView.reloadData() }
@@ -139,6 +159,10 @@ final class ModelHomeViewController: UIViewController {
         
         getRecommendArtistByReview()
         getRecommendArtistByRecent()
+        
+        
+//        patchArtistProfile(userId: 3, profileImg: "url_to_image", nickname: "nickname", gender: "gender", introduction: "introduction", workExperience: "experience", region: ["region1", "region2"], specialization: ["specialization1", "specialization2"], makeupLocation: "location", shopLocation: "shop_location", availableDayOfWeek: ["MON": "_09_00", "TUE": "_10_00"])
+
         
     }
     // MARK: - configureSubviews
@@ -311,38 +335,26 @@ extension ModelHomeViewController: UICollectionViewDelegate, UICollectionViewDat
     
     //cell의 갯수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == modelReservationCollectionView {
-            switch section {
-            case 0:
-                return modelReservations?.count ?? 0
-            default:
-                return 0
-            }
-           } else if collectionView == recomandReservationCollectionView {
-               return makeupCards?.count ?? 0
-           } else if collectionView == recomandHastyReservationCollectionView {
-               return makeupCards?.count ?? 0
-           }
-           return 0
-        
+        if collectionView == modelReservationCollectionView && section == 0 {
+            return max(modelReservations?.count ?? 0, 1)
+        } else if collectionView == recomandReservationCollectionView || collectionView == recomandHastyReservationCollectionView {
+            return makeupCards?.count ?? 0
+        }
+        return 0
     }
     
     
     //cell 생성
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == modelReservationCollectionView {
-            if indexPath.section == 0 {
-                if modelReservations?.isEmpty ?? true {
-                    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelNonReservationViewCell.identifier, for: indexPath) as? ModelNonReservationViewCell else {
-                        fatalError("셀 타입 캐스팅 실패...")
-                    }
-                    
+            if collectionView == modelReservationCollectionView && indexPath.section == 0 {
+                if let reservations = modelReservations, !reservations.isEmpty {
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.identifier, for: indexPath) as! ModelReservationConfirmViewCell
+                    let reservation = reservations[indexPath.row]
+                    cell.configure(with: reservation)
                     return cell
                 } else {
-                    guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.identifier, for: indexPath) as? ModelReservationConfirmViewCell, let reservation = modelReservations?[indexPath.row] else {
-                        fatalError("셀 타입 캐스팅 실패...")
-                    }
-                    cell.configure(with: reservation)
+                    let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelNonReservationViewCell.identifier, for: indexPath) as! ModelNonReservationViewCell
                     return cell
                 }
             }
@@ -394,7 +406,7 @@ extension ModelHomeViewController: UICollectionViewDelegateFlowLayout {
             reservationVC.portfolioID = portfolioID
             reservationVC.hidesBottomBarWhenPushed = true
             self.navigationController?.pushViewController(reservationVC, animated: true)
-        } 
+        }
     }
 }
 
@@ -411,16 +423,18 @@ extension ModelHomeViewController: UISearchBarDelegate {
 //MARK: -API 통신 메소드
 extension ModelHomeViewController {
     func showModelReservations() {
-        ReservationManager.shared.getModelReservation(modelId: 6) { [weak self] result in
+        ReservationManager.shared.getModelReservation(modelId: 2) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let reservationResponse):
                     print("모델 예약 정보 조회 성공: \(reservationResponse)")
                     let filteredReservations = reservationResponse.data?.filter { reservationData in
-                        let reservationDate = self?.dateFromString(reservationData.reservationDate)
-                        let isToday = self?.isToday(reservationDate) ?? false
-                        let isExpected = reservationData.status == "EXPECTED"
-                        return isToday && isExpected
+                        // 문자열을 Date 객체로 변환
+                        if let date = self?.dateFromString(reservationData.reservationDate) {
+                            // 변환된 Date 객체를 isToday 함수에 전달
+                            return self?.isToday(date) ?? false
+                        }
+                        return false
                     }
                     self?.modelReservations = filteredReservations
                     self?.modelReservationCollectionView.reloadData()
@@ -434,6 +448,7 @@ extension ModelHomeViewController {
             }
         }
     }
+
     func getRecommendArtistByReview() {
         PortfolioManager.shared.getRecommendArtistByReview { [weak self] result in
             DispatchQueue.main.async {
@@ -472,14 +487,11 @@ extension ModelHomeViewController {
     func dateFromString(_ dateString: String) -> Date? {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-        let date = formatter.date(from: dateString)
-        return date
+        return formatter.date(from: dateString)
     }
-
     
     func isToday(_ date: Date?) -> Bool {
         guard let date = date else { return false }
-        print(Calendar.current.isDateInToday(date))
         return Calendar.current.isDateInToday(date)
     }
 }

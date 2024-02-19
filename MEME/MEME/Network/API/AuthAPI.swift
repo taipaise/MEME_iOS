@@ -182,7 +182,7 @@ extension AuthAPI: MemeAuthAPI {
                 "JONGNO"
               ],
               "specialization": [
-                \(specialization.)
+                \(specialization)
               ],
               "makeupLocation": "\(makeupLocation)",
               "shopLocation": "\(shopLocation)",

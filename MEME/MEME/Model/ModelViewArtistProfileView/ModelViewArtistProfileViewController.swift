@@ -2,15 +2,25 @@ import UIKit
 import SnapKit
 
 class ModelViewArtistProfileViewController: UIViewController {
-    
-    // 예시 데이터 -> 추후 API 호출해서 데이터 받아오는 것으로 수정 필요
-    private let expertiseFields = ["데일리 메이크업", "배우 메이크업","면접 메이크업","데일리 메이크업", "배우 메이크업","면접 메이크업"]
     private let isModel : Bool = true
-    private var isFavoriteArtist : Bool = true
+    private var isFavoriteArtist : Bool = false
     var artistID: Int? = 0
     
     // MARK: - Properties
-    private let scrollView = UIScrollView()
+    private var expertiseFields: [String] = []
+    private var portfolios: [SimplePortfolioDTO] = [] {
+        didSet {
+            portfolioCollectionView.reloadData()
+        }
+    }
+    
+    private let scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
+        scrollView.showsVerticalScrollIndicator = false
+        
+        return scrollView
+    }()
     private let contentsView = UIView()
     private var artistProfileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -55,11 +65,13 @@ class ModelViewArtistProfileViewController: UIViewController {
         return label
     }()
     // 모델에서만 동작
-    private let addFavoriteArtistButton: UIButton = {
-        let button = UIButton()
-        button.setImage(.unfilledFavoriteArtistHeart, for: .normal)
-        button.addTarget(self, action: #selector(addFavoriteArtistTapped), for: .touchUpInside)
-        return button
+    private var likeImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "icon_like")
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
+        
+        return imageView
     }()
     // 아티스트에서만 동작
     private let artistProfileEditingInfoBar: UIButton = {
@@ -191,7 +203,12 @@ class ModelViewArtistProfileViewController: UIViewController {
         
         return label
     }()
-    private var portfolioCollectionView: UICollectionView!
+    private var portfolioCollectionView: UICollectionView! {
+        didSet {
+            portfolioCollectionView.showsHorizontalScrollIndicator = false
+            portfolioCollectionView.showsVerticalScrollIndicator = false
+        }
+    }
     
     let navigationBar = NavigationBarView()
     
@@ -202,11 +219,12 @@ class ModelViewArtistProfileViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "프로필")
         
+        getArtistProfile(userId: 6, artistId: artistID!)
+        setupGestureRecognizers()
         setupPortfolioCollectionView()
         configureSubviews()
         makeConstraints()
         setupExpertiseFieldsButtons()
-        updateButtonStatus()
     }
     // MARK: - configureSubviews
     func configureSubviews() {
@@ -235,7 +253,8 @@ class ModelViewArtistProfileViewController: UIViewController {
         contentsView.addSubview(portfolioCollectionView)
         if(isModel){
             // 하트 버튼으로 수정하기
-            contentsView.addSubview(addFavoriteArtistButton)
+            contentsView.addSubview(likeImageView)
+//            contentsView.addSubview(addFavoriteArtistButton)
         }else{
             contentsView.addSubview(artistProfileEditingInfoBar)
         }
@@ -356,10 +375,11 @@ class ModelViewArtistProfileViewController: UIViewController {
         }
         if(isModel) {
             // 하트
-            addFavoriteArtistButton.snp.makeConstraints { make in
+            likeImageView.snp.makeConstraints { make in
                 make.centerY.equalTo(genderBackgroundColorView.snp.centerY)
                 make.leading.equalTo(genderBackgroundColorView.snp.trailing).offset(19)
-                make.height.equalTo(18)
+                make.width.equalTo(24)
+                make.height.equalTo(20)
             }
         }
         else{
@@ -372,28 +392,33 @@ class ModelViewArtistProfileViewController: UIViewController {
         }
         
     }
-    private func updateButtonStatus() {
-        if(isFavoriteArtist){
-            addFavoriteArtistButton.setImage(.filledFavoriteArtistHeart, for: .normal)
-        }else{
-            addFavoriteArtistButton.setImage(.unfilledFavoriteArtistHeart, for: .normal)
-        }
-    }
 
     // MARK: - Action
-    @objc func closeButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
+    private func setupTapGestureRecognizer(for view: UIView, withSelector selector: Selector) {
+        let tapGesture = UITapGestureRecognizer(target: self, action: selector)
+        view.addGestureRecognizer(tapGesture)
+        view.isUserInteractionEnabled = true
     }
-    @objc private func addFavoriteArtistTapped() {
+
+    private func setupGestureRecognizers() {
+        setupTapGestureRecognizer(for: likeImageView, withSelector: #selector(likeImageTapped))
+    }
+
+    private func likeImageDecision() {
+        if isFavoriteArtist {
+            likeImageView.image = UIImage(named: "icon_fillLike")
+        } else {
+            likeImageView.image = UIImage(named: "icon_like")
+        }
+    }
+    @objc private func likeImageTapped() {
         if isFavoriteArtist {
             if let artistID = artistID {
-                deleteFavoriteArtist(modelId: 6, artistId: artistID)
-                updateButtonStatus()
+                deleteFavoriteArtist(modelId: 1, artistId: artistID)
             }
         } else {
             if let artistID = artistID {
-                postFavoriteArtist(modelId: 6, artistId: artistID)
-                updateButtonStatus()
+                postFavoriteArtist(modelId: 1, artistId: artistID)
             }
         }
     }
@@ -492,7 +517,7 @@ extension ModelViewArtistProfileViewController: UICollectionViewDelegate, UIColl
     
     //cell의 갯수
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 5
+        return portfolios.count
         
     }
     
@@ -501,6 +526,9 @@ extension ModelViewArtistProfileViewController: UICollectionViewDelegate, UIColl
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectMakeupCardViewCell.identifier, for: indexPath) as? SelectMakeupCardViewCell else {
             fatalError("셀 타입 캐스팅 실패...")
         }
+        let portfolio = portfolios[indexPath.item]
+        cell.configure(with: portfolio)
+    
         return cell
     }
 }
@@ -529,9 +557,11 @@ extension ModelViewArtistProfileViewController {
         MyPageManager.shared.postFavoriteArtist(modelId: modelId, artistId: artistId) { [weak self] result in
             switch result {
             case .success(let response):
+                self!.likeImageView.image = UIImage(named: "icon_fillLike")
                 self!.isFavoriteArtist = true
                 print("관심 아티스트 추가 성공: \(response.message)")
             case .failure(let error):
+                self!.likeImageView.image = UIImage(named: "icon_like")
                 self!.isFavoriteArtist = false
                 if let responseData = error.response {
                     let responseString = String(data: responseData.data, encoding: .utf8)
@@ -545,9 +575,11 @@ extension ModelViewArtistProfileViewController {
         MyPageManager.shared.deleteFavoriteArtist(modelId: modelId, artistId: artistId) { [weak self] result in
             switch result {
             case .success(let response):
+                self!.likeImageView.image = UIImage(named: "icon_like")
                 self!.isFavoriteArtist = false
                 print("관심 아티스트 삭제 성공: \(response.message)")
             case .failure(let error):
+                self!.likeImageView.image = UIImage(named: "icon_fillLike")
                 self!.isFavoriteArtist = true
                 if let responseData = error.response {
                     let responseString = String(data: responseData.data, encoding: .utf8)
@@ -555,6 +587,96 @@ extension ModelViewArtistProfileViewController {
                 }
             }
         }
+    }
+    
+    func getArtistProfile(userId: Int, artistId: Int) {
+        ProfileManager.shared.getArtistProfile(userId: userId, artistId: artistId) { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("아티스트 프로필 조회 성공: \(response.message)")
+                self?.displayProfile(response)
+            case .failure(let error):
+                if let responseData = error.response {
+                    let responseString = String(data: responseData.data, encoding: .utf8)
+                    print("아티스트 프로필 조회 실패: \(responseString ?? "no data")")
+                }
+            }
+        }
+    }
+    enum Gender: String {
+        case MALE
+        case FEMALE
+    }
+    
+    enum EmploymentStatus: String {
+        case SHOP
+        case VISIT
+        case BOTH
+    }
+    
+    private func displayProfile(_ response: ArtistProfileDTO) {
+        artistNameLabel.text =  response.data?.nickname
         
+        if let genderString = response.data?.gender,
+           let GenderEnum = Gender(rawValue: genderString) {
+            switch GenderEnum {
+            case .MALE:
+                artistGenderLabel.text = "남"
+            case .FEMALE:
+                artistGenderLabel.text = "여"
+            }
+        } else {
+            artistGenderLabel.text = ""
+        }
+        if let isFavoriteArtist = response.data?.isFavorite {
+            self.isFavoriteArtist = isFavoriteArtist
+        }
+        likeImageDecision()
+        if let employmentStatusString = response.data?.makeupLocation,
+           let employmentStatus = EmploymentStatus(rawValue: employmentStatusString) {
+            switch employmentStatus {
+            case .SHOP:
+                employmentStatusLabel.text = "제가 다니는 샵에서 진행해요"
+            case .VISIT:
+                employmentStatusLabel.text = "프리랜서에요"
+            case .BOTH:
+                employmentStatusLabel.text = "샵, 방문 다 가능해요"
+            }
+        } else {
+            employmentStatusLabel.text = "정보가 없어요"
+        }
+        inputIntroductionLabel.text = response.data?.introduction
+        
+        if let workExperienceString = response.data?.workExperience,
+           let workExperienceEnum = WorkExperience(rawValue: workExperienceString) {
+            inputTotalCareerTimeLabel.text = workExperienceEnum.description
+        } else {
+            inputTotalCareerTimeLabel.text = "경력 정보 없음"
+        }
+//        response.data?.specialization
+        shopAvailableAreaLabel.text =
+        visitAvailableAreaLabel.text
+        
+        if let shopLocation = response.data?.shopLocation  {
+            shopAvailableAreaLabel.text = shopLocation
+        } else {
+            shopAvailableAreaLabel.text = "정보 없음"
+        }
+        
+        if let regions = response.data?.region {
+            let regionsString = regions.compactMap { Region(rawValue: $0)?.koreanName }.joined(separator: ", ")
+            visitAvailableAreaLabel.text = regionsString.isEmpty ? "정보 없음" : regionsString
+        } else {
+            visitAvailableAreaLabel.text = "정보 없음"
+        }
+
+        
+        expertiseFields = response.data?.specialization ?? []
+        setupExpertiseFieldsButtons()
+        
+        self.portfolios.removeAll()
+        if let portfolioList = response.data?.simplePortfolioDtoList {
+                self.portfolios = portfolioList
+            }
     }
 }

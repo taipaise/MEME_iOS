@@ -14,11 +14,51 @@ struct ReservationSection {
 }
 
 final class ModelManagementReservationsViewController: UIViewController {
+    private let isModel : Bool = true
+    private var isFavoriteArtist : Bool = false
+    var artistID: Int? = 0
+    
     // MARK: - Properties
+    private var allReservations: [ReservationData] = []
     private var reservationSections: [ReservationSection] = []
     private var collectionViewItems: [ReservationCollectionViewItem] = []
     
-    private var reservationCollectionView: UICollectionView!
+    private lazy var topView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        return view
+    }()
+    private var reservationStatusLabel: UILabel = {
+        let label = UILabel()
+        label.text = "예약 현황"
+        label.textColor = .black
+        label.font = .pretendard(to: .bold, size: 20)
+        
+        return label
+    }()
+    private var expectedImgView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "ExpectedButton")
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
+        
+        return imageView
+    }()
+    private var completeImgView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "NoCompleteButton")
+        imageView.contentMode = .scaleAspectFit
+        imageView.isUserInteractionEnabled = true
+        
+        return imageView
+    }()
+    private var reservationCollectionView: UICollectionView! {
+        didSet {
+            reservationCollectionView.showsHorizontalScrollIndicator = false
+            reservationCollectionView.showsVerticalScrollIndicator = false
+        }
+    }
+    
     private let navigationBar = NavigationBarView()
     
     //MARK: - Lifecycle
@@ -29,15 +69,20 @@ final class ModelManagementReservationsViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "전체 예약 보기")
         
-        showModelReservations()
         setupReservationCollectionView()
         configureSubviews()
         makeConstraints()
+        showReservations()
+        setupImageViewGestures()
     }
     
     // MARK: - configureSubviews
     func configureSubviews() {
         view.addSubview(navigationBar)
+        view.addSubview(topView)
+        topView.addSubview(reservationStatusLabel)
+        topView.addSubview(expectedImgView)
+        topView.addSubview(completeImgView)
         reservationCollectionView.backgroundColor = .white
         view.addSubview(reservationCollectionView)
     }
@@ -48,12 +93,92 @@ final class ModelManagementReservationsViewController: UIViewController {
             make.top.leading.trailing.equalTo(view.safeAreaLayoutGuide)
             make.height.equalTo(48)
         }
-        reservationCollectionView.snp.makeConstraints {make in
+        topView.snp.makeConstraints {make in
             make.top.equalTo(navigationBar.snp.bottom)
+            make.height.equalTo(48)
+            make.leading.equalToSuperview().offset(24)
+            make.trailing.equalToSuperview().offset(-24)
+        }
+        reservationStatusLabel.snp.makeConstraints {make in
+            make.bottom.equalTo(topView.snp.bottom).offset(-6)
+            make.leading.equalToSuperview()
+        }
+        completeImgView.snp.makeConstraints {make in
+            make.centerY.equalTo(topView.snp.centerY)
+            make.height.equalTo(24)
+            make.trailing.equalToSuperview()
+        }
+        expectedImgView.snp.makeConstraints {make in
+            make.centerY.equalTo(topView.snp.centerY)
+            make.height.equalTo(24)
+            make.trailing.equalTo(completeImgView.snp.leading).offset(-8)
+        }
+        reservationCollectionView.snp.makeConstraints {make in
+            make.top.equalTo(topView.snp.bottom)
             make.bottom.equalToSuperview()
             make.leading.equalToSuperview().offset(24)
             make.trailing.equalToSuperview().offset(-24)
         }
+    }
+    //MARK: -Action
+    @objc private func expectedImgViewTapped() {
+        filterAndDisplayReservations(byStatus: .EXPECTED)
+        expectedImgView.image = UIImage(named: "ExpectedButton")
+        completeImgView.image = UIImage(named: "NoCompleteButton")
+    }
+
+    @objc private func completeImgViewTapped() {
+        filterAndDisplayReservations(byStatus: .COMPLETE)
+        expectedImgView.image = UIImage(named: "NoExpectedButton")
+        completeImgView.image = UIImage(named: "CompleteButton")
+    }
+        
+    private func setupImageViewGestures() {
+        let expectedTap = UITapGestureRecognizer(target: self, action: #selector(expectedImgViewTapped))
+        expectedImgView.addGestureRecognizer(expectedTap)
+
+        let completeTap = UITapGestureRecognizer(target: self, action: #selector(completeImgViewTapped))
+        completeImgView.addGestureRecognizer(completeTap)
+
+        expectedImgViewTapped()
+    }
+    //MARK: -API 호출
+    private func showReservations() {
+        if(isModel) {
+            showModelReservations(modelId: 1)
+        }
+        else{
+//            showArtistReservations(modelId: 1)-> 여기 API만 바꾸면 됩니다
+        }
+    }
+    
+    private func filterAndDisplayReservations(byStatus status: ReservationState) {
+        let filteredReservations = allReservations.filter { $0.status == status.rawValue }
+        groupReservationsByDate(filteredReservations)
+    }
+    
+    private var isoDateFormatter: ISO8601DateFormatter {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return formatter
+    }
+    
+    private func groupReservationsByDate(_ reservations: [ReservationData]) {
+        let groupedDictionary = Dictionary(grouping: reservations) { (reservationData) -> Date in
+            guard let date = isoDateFormatter.date(from: reservationData.reservationDate) else {
+                return Date()
+            }
+            
+            let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
+            return Calendar.current.date(from: components) ?? date
+        }
+        
+        reservationSections = groupedDictionary.map { (key, value) in
+            ReservationSection(date: key, reservations: value)
+        }.sorted(by: { $0.date < $1.date })
+        print("이거:", reservationSections)
+        
+        setupCollectionViewItems()
     }
     
     //MARK: -Helpers
@@ -75,6 +200,7 @@ final class ModelManagementReservationsViewController: UIViewController {
             sectionItems += section.reservations.map { .reservation($0) }
             return sectionItems
         }
+        reservationCollectionView.reloadData()
     }
     private func setupReservationCollectionView() {
         let layout = UICollectionViewFlowLayout()
@@ -148,6 +274,18 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegateFlo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return CGFloat(12)
     }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+            let item = collectionViewItems[indexPath.item]
+            switch item {
+            case .reservation(let reservationData):
+                let vc = SingleArtistReservationManageViewController()
+                vc.reservationId = reservationData.reservationId
+                navigationController?.pushViewController(vc, animated: true)
+                
+            default:
+                break
+            }
+        }
 }
 
 // MARK: -BackButtonTappedDelegate
@@ -161,13 +299,13 @@ extension ModelManagementReservationsViewController: BackButtonTappedDelegate  {
 
 //MARK: -API 통신 메소드
 extension ModelManagementReservationsViewController {
-    func showModelReservations() {
-        ReservationManager.shared.getModelReservation(modelId: 6) { [weak self] result in
+    func showModelReservations(modelId: Int) {
+        ReservationManager.shared.getModelReservation(modelId: modelId) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let reservationResponse):
-                    self?.groupReservationsByDate(reservationResponse.data ?? [])
-                    self?.reservationCollectionView.reloadData()
+                    self?.allReservations = reservationResponse.data ?? []
+                    self?.filterAndDisplayReservations(byStatus: .EXPECTED)
                     print("모델 예약 정보 조회 성공: \(reservationResponse)")
                     
                 case .failure(let error):
@@ -175,27 +313,5 @@ extension ModelManagementReservationsViewController {
                 }
             }
         }
-    }
-    private var isoDateFormatter: ISO8601DateFormatter {
-            let formatter = ISO8601DateFormatter()
-            formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-            return formatter
-        }
-
-    private func groupReservationsByDate(_ reservations: [ReservationData]) {
-        let groupedDictionary = Dictionary(grouping: reservations) { (reservationData) -> Date in
-            guard let date = isoDateFormatter.date(from: reservationData.reservationDate) else {
-                return Date()
-            }
-            
-            let components = Calendar.current.dateComponents([.year, .month, .day], from: date)
-            return Calendar.current.date(from: components) ?? date
-        }
-        
-        reservationSections = groupedDictionary.map { (key, value) in
-            ReservationSection(date: key, reservations: value)
-        }.sorted(by: { $0.date < $1.date })
-        
-        setupCollectionViewItems()
     }
 }

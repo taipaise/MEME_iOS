@@ -11,7 +11,7 @@ import SnapKit
 class ModelReservationViewController: UIViewController {
     // MARK: - Properties
     var portfolioID: Int? = 0
-    var artistID: Int? = 3
+    var artistID: Int? = 0
     var makeupName: String?
     var artistName: String?
     
@@ -21,6 +21,7 @@ class ModelReservationViewController: UIViewController {
     private let navigationBar = NavigationBarView()
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
+        scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
         
         return scrollView
@@ -380,7 +381,6 @@ class ModelReservationViewController: UIViewController {
         navigationController?.pushViewController(artistProfileVC, animated: true)
     }
     private func likeImageDecision() {
-        print(isFavorite)
         if isFavorite {
             likeImageView.image = UIImage(named: "icon_fillLike")
         } else {
@@ -390,11 +390,11 @@ class ModelReservationViewController: UIViewController {
     @objc private func likeImageTapped() {
         if isFavorite {
             if let portfolioID = portfolioID {
-                deleteFavoritePortfolio(modelId: 6, portfolioId: portfolioID)
+                deleteFavoritePortfolio(modelId: 1, portfolioId: portfolioID)
             }
         } else {
             if let portfolioID = portfolioID {
-                postFavoritePortfolio(modelId: 6, portfolioId: portfolioID)
+                postFavoritePortfolio(modelId: 1, portfolioId: portfolioID)
             }
         }
     }
@@ -738,7 +738,8 @@ extension ModelReservationViewController {
         if let reviewCount = portfolioDetail.data?.reviewCount {
             segmentedControl.setReviewCount(reviewCount)
         }
-        //아티스트 아이디 추가 필요
+        
+        artistID = portfolioDetail.data?.userId
     }
         
     private func downloadImage(from url: URL, completion: @escaping (UIImage?) -> Void) {
