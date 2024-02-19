@@ -25,6 +25,9 @@ class ModelReservationChartViewController: UIViewController {
     
     var isShowingEmptyState: Bool = false
     
+    var searchCategory: Bool = false
+    var searchAll: Bool = true
+    
     private var navigationBarView: UIView = {
         let view = UIView()
         view.backgroundColor = .white
@@ -281,11 +284,14 @@ class ModelReservationChartViewController: UIViewController {
             self?.searchResults.removeAll()
             self?.reservationChartTableView.reloadData()
             
-            if let category = self?.selectedCategory {
-                self?.fetchSearchResultsByCategory(category)
-            } else {
-                self?.fetchSearchResultsAll()
-            }
+            print(self?.selectedCategory )
+            let searchCategory: Bool = self?.searchCategory ?? false
+                   
+                   if searchCategory, let category = self?.selectedCategory {
+                       self?.fetchSearchResultsByCategory(category)
+                   } else {
+                       self?.fetchSearchResultsAll()
+                   }
         }
         self.present(sortOptionsVC, animated: true)
     }
@@ -438,6 +444,10 @@ extension ModelReservationChartViewController: UIViewControllerTransitioningDele
 extension ModelReservationChartViewController {
     //카테고리 검색
     func fetchSearchResultsByCategory(_ categoryName: String) {
+        searchCategory = true
+        searchAll = false
+        selectedCategory = categoryName
+        
         guard let searchCategory = mapCategoryNameToSearchCategory(categoryName),
                 !isLoading else {
             return
@@ -469,6 +479,10 @@ extension ModelReservationChartViewController {
     }
     
     func fetchSearchResultsAll() {
+        searchCategory = false
+        searchAll = true
+        selectedCategory = ""
+        
         guard !isLoading else { return }
         isLoading = true
         let sortParameter = mapSortParameter(from: selectedSortOption)

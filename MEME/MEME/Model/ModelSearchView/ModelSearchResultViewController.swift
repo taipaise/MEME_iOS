@@ -8,9 +8,14 @@
 import UIKit
 import SnapKit
 
+protocol ModelSearchResultViewControllerDelegate: AnyObject {
+    func searchResultViewControllerDidFinish(_ controller: ModelSearchResultViewController)
+}
+
 class ModelSearchResultViewController: UIViewController {
-    
     // MARK: - Properties
+    weak var delegate: ModelSearchResultViewControllerDelegate?
+    
     var selectedCategory: String?
     var selectedArtistId: Int?
     var searchKeyword: String?
@@ -20,6 +25,15 @@ class ModelSearchResultViewController: UIViewController {
     var totalPage: Int = 1
     var isLoading: Bool = false
     var searchResults: [SearchResultData] = []
+    private var isLastPage: Bool {
+        return currentPage >= totalPage-1
+    }
+    var isShowingEmptyState: Bool = false
+    
+    var searchCategory: Bool = false
+    var searchArtist: Bool = false
+    var searchText: Bool = false
+    var searchAll: Bool = false
     
     private var navigationBarView: UIView = {
         let view = UIView()
@@ -91,6 +105,22 @@ class ModelSearchResultViewController: UIViewController {
         return button
     }()
     private var reservationChartTableView: UITableView!
+    private var emptyStateView: UIView = {
+        let view = UIView()
+        view.backgroundColor = .white
+        
+        let label = UILabel()
+        label.text = "검색 결과가 없습니다."
+        label.textColor = .black
+        label.font = .pretendard(to: .regular, size: 16)
+        label.textAlignment = .center
+        view.addSubview(label)
+        label.snp.makeConstraints { make in
+            make.centerX.centerY.equalToSuperview()
+        }
+        
+        return view
+    }()
     
 
     override func viewDidLoad() {
@@ -109,6 +139,7 @@ class ModelSearchResultViewController: UIViewController {
             fetchSearchResultsAll(page: currentPage)
         }
         
+        setupDismissKeyboardOnTapGesture()
         setupReservationChartTableView()
         configureSubviews()
         makeConstraints()
@@ -118,6 +149,7 @@ class ModelSearchResultViewController: UIViewController {
     func configureSubviews() {
         view.addSubview(navigationBarView)
         navigationBarView.addSubview(backButton)
+        searchMakeup.delegate = self
         navigationBarView.addSubview(searchMakeup)
         view.addSubview(numLabel)
         view.addSubview(searchNumLabel)
@@ -165,7 +197,20 @@ class ModelSearchResultViewController: UIViewController {
         }
     }
     //MARK: -Action
+    func saveSearchKeyword(_ keyword: String) {
+        var keywords = UserDefaults.standard.stringArray(forKey: "recentSearchKeywords") ?? []
+        if let index = keywords.firstIndex(of: keyword) {
+            keywords.remove(at: index)
+        }
+        keywords.insert(keyword, at: 0)
+        if keywords.count > 10 {
+            keywords.removeLast()
+        }
+        UserDefaults.standard.set(keywords, forKey: "recentSearchKeywords")
+    }
+    
     @objc func backButtonTapped() {
+        delegate?.searchResultViewControllerDidFinish(self)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -282,21 +327,53 @@ extension ModelSearchResultViewController: UIScrollViewDelegate {
         let contentHeight = scrollView.contentSize.height
         let height = scrollView.frame.height
         
-        if offsetY > contentHeight - height, !isLoading, currentPage < totalPage {
+        if offsetY + height >= contentHeight, !isLoading, !isShowingEmptyState, currentPage < totalPage {
             currentPage += 1
- 
-            if let category = selectedCategory {
-                fetchSearchResultsByCategory(category)
-            } else if let keyword = searchKeyword, !keyword.isEmpty {
-                fetchSearchResultsByText(keyword)
-            } else if let artistId = selectedArtistId {
-                fetchSearchResultsByArtist(artistId)
+            
+            if searchCategory, let category = self.selectedCategory {
+                self.fetchSearchResultsByCategory(category)
+            } else if searchText, let keyword = self.searchKeyword, !keyword.isEmpty {
+                self.fetchSearchResultsByText(keyword)
+            } else if searchArtist, let artistId = self.selectedArtistId {
+                self.fetchSearchResultsByArtist(artistId)
             } else {
-                fetchSearchResultsAll(page: currentPage)
+                self.fetchSearchResultsAll(page: self.currentPage)
             }
         }
     }
 }
+
+//MARK: - UIViewControllerTransitioningDelegate
+extension ModelSearchResultViewController {
+    func setupDismissKeyboardOnTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func dismissKeyboard() {
+        self.view.endEditing(true)
+    }
+}
+
+extension ModelSearchResultViewController: UISearchBarDelegate {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        guard let query = searchBar.text, !query.isEmpty else {
+            return
+        }
+        searchResults.removeAll()
+        reservationChartTableView.reloadData()
+        
+        isLoading = false
+        saveSearchKeyword(query)
+        currentPage = 0
+        fetchSearchResultsByText(query)
+        
+        searchBar.resignFirstResponder()
+    }
+}
+
+
 
 //MARK: - UIViewControllerTransitioningDelegate
 extension ModelSearchResultViewController: UIViewControllerTransitioningDelegate {
@@ -305,10 +382,17 @@ extension ModelSearchResultViewController: UIViewControllerTransitioningDelegate
     }
 }
 
+
+
 //MARK: -API 통신 메소드
 extension ModelSearchResultViewController {
     //카테고리 검색
     func fetchSearchResultsByCategory(_ categoryName: String) {
+        searchCategory = true
+        searchArtist = false
+        searchText = false
+        searchAll = false
+        
         guard let searchCategory = mapCategoryNameToSearchCategory(categoryName),
               !isLoading else {
             return
@@ -327,15 +411,23 @@ extension ModelSearchResultViewController {
                     let responseString = String(data: responseData.data, encoding: .utf8)
                     print("카테고리 검색 실패: \(responseString ?? "no data")")
                 }
+                self.totalPage = 0
+                self.isShowingEmptyState = true
+                self.reservationChartTableView.reloadData()
             }
         }
     }
     
     //아티스트 검색
     func fetchSearchResultsByArtist(_ artistId: Int) {
+        searchCategory = false
+        searchArtist = true
+        searchText = false
+        searchAll = false
+        
         guard !isLoading else { return }
         isLoading = true
-
+        
         let sortParameter = mapSortParameter(from: selectedSortOption)
         SearchManager.shared.getSearchArtist(artistId: artistId, page: currentPage, sort: sortParameter) { [weak self] result in
             guard let self = self else { return }
@@ -348,15 +440,23 @@ extension ModelSearchResultViewController {
                     let responseString = String(data: responseData.data, encoding: .utf8)
                     print("아티스트 검색 실패: \(responseString ?? "no data")")
                 }
+                self.totalPage = 0
+                self.isShowingEmptyState = true
+                self.reservationChartTableView.reloadData()
             }
         }
     }
-
+    
     //최근 검색어 검색 & text 검색
     func fetchSearchResultsByText(_ query: String) {
+        searchCategory = false
+        searchArtist = false
+        searchText = true
+        searchAll = false
+        
         guard !isLoading else { return }
         isLoading = true
-
+        
         let sortParameter = mapSortParameter(from: selectedSortOption)
         SearchManager.shared.getSearchText(query: query, page: currentPage, sort: sortParameter) { [weak self] result in
             guard let self = self else { return }
@@ -369,15 +469,23 @@ extension ModelSearchResultViewController {
                     let responseString = String(data: responseData.data, encoding: .utf8)
                     print("text 검색 실패: \(responseString ?? "no data")")
                 }
+                self.totalPage = 0
+                self.isShowingEmptyState = true
+                self.reservationChartTableView.reloadData()
             }
         }
     }
     
     //검색 text가 null일 경우 전체 검색
     func fetchSearchResultsAll(page: Int? = nil) {
+        searchCategory = false
+        searchArtist = false
+        searchText = false
+        searchAll = true
+        
         guard !isLoading else { return }
         isLoading = true
-
+        
         let sortParameter = mapSortParameter(from: selectedSortOption)
         SearchManager.shared.getSearchAll(page: currentPage, sort: sortParameter) { [weak self] result in
             guard let self = self else { return }
@@ -390,36 +498,30 @@ extension ModelSearchResultViewController {
                     let responseString = String(data: responseData.data, encoding: .utf8)
                     print("전체 검색 실패: \(responseString ?? "no data")")
                 }
+                self.totalPage = 0
+                self.isShowingEmptyState = true
+                self.reservationChartTableView.reloadData()
             }
         }
     }
-    private func handleSearchResults(_ searchResultDTO: SearchResultDTO, errorResponse: ((Error) -> Void)? = nil) {
-        DispatchQueue.main.async {
-            self.isLoading = false
-            
-            switch searchResultDTO.result {
-            case "SUCCESS":
-                if self.currentPage == 0 {
-                    self.searchResults = searchResultDTO.data?.content ?? []
-                } else {
-                    self.searchResults.append(contentsOf: searchResultDTO.data?.content ?? [])
-                }
-                
-                self.totalPage = searchResultDTO.data?.totalPage ?? 0
-                self.numLabel.text = "\(searchResultDTO.data?.totalNumber ?? 0)"
-                self.reservationChartTableView.reloadData()
-                
-            case "FAILURE":
-                if let error = errorResponse {
-                    error(NSError(domain: "", code: searchResultDTO.statusCode, userInfo: [NSLocalizedDescriptionKey: searchResultDTO.message]))
-                } else {
-                    print("Received error response: \(searchResultDTO.message)")
-                    self.numLabel.text = "0"
-                }
-            default:
-                break
-            }
+    private func handleSearchResults(_ searchResultDTO: SearchResultDTO) {
+        searchResults.removeAll()
+        
+        if let totalNumber = searchResultDTO.data?.totalNumber {
+            self.numLabel.text = "\(totalNumber)"
+        } else {
+            self.numLabel.text = "0"
         }
+        
+        if let content = searchResultDTO.data?.content, !content.isEmpty {
+            isShowingEmptyState = false
+            searchResults.append(contentsOf: content)
+            reservationChartTableView.reloadData()
+            emptyStateView.isHidden = true
+        } else {
+            emptyStateView.isHidden = false
+        }
+        
+        totalPage = searchResultDTO.data?.totalPage ?? 0
     }
 }
-

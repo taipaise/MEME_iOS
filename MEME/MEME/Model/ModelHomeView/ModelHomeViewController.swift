@@ -60,7 +60,7 @@ final class ModelHomeViewController: UIViewController {
 
     private var modelWelcomeLabel: UILabel = {
         let label = UILabel()
-        label.text = "000 님, 환영합니다!"
+        label.text = "메메님, 환영합니다!"
         label.textColor = .black
         label.font = .pretendard(to: .semiBold, size: 20)
         label.numberOfLines = 0
