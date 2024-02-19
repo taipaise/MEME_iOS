@@ -47,11 +47,13 @@ final class TermsAgreementViewController: UIViewController {
     }
 
     @IBAction func nextButtonTapped(_ sender: Any) {
+        print("next button tapped")
         let nextVC = RoleSelectionViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
 
     @IBAction func termDetailButtonTapped(_ sender: UIButton) {
+        print("term button tapped")
         let termVC = TermDetailViewController()
         
         if sender.tag == 0 {

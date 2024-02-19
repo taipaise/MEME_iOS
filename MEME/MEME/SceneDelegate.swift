@@ -97,5 +97,14 @@ extension SceneDelegate {
     
         return vc
     }
+    
+    func changeRootVC(_ vc:UIViewController, animated: Bool) {
+        guard let window = self.window else { return }
+        let navigationcontroller = NavigationController(nibName: nil, bundle: nil)
+        window.rootViewController = navigationcontroller
+        navigationcontroller.viewControllers = [vc]
+        UIView.transition(with: window, duration: 0.2, options: [.transitionCrossDissolve], animations: nil, completion: nil)
+    }
+
 }
 

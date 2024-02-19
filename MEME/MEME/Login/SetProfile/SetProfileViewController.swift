@@ -35,6 +35,7 @@ final class SetProfileViewController: UIViewController {
         setUI()
         setUpPhpPicker()
         setUpimagePicker()
+        setupDismissKeyboardOnTapGesture()
     }
    
     private func setUI() {
@@ -78,7 +79,7 @@ final class SetProfileViewController: UIViewController {
     
     @IBAction func nextButtonTapped(_ sender: Any) {
         FirebaseStorageManager.uploadImage(image: profileImage) { [weak self] url in
-            guard 
+            guard
                 let self = self,
                 let name = nameTextField.text,
                 let nickName = nickNameTextField.text
@@ -217,5 +218,17 @@ extension SetProfileViewController: UITextFieldDelegate {
         }
         
         setNextButton()
+    }
+}
+
+extension SetProfileViewController {
+    func setupDismissKeyboardOnTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

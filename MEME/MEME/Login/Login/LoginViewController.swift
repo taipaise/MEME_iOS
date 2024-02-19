@@ -58,7 +58,7 @@ extension LoginViewController {
                 } else {
                     self?.userDefaultManager.saveIdToken(oauthToken!.idToken!)
                     let nextVC = TermsAgreementViewController()
-                    self?.navigationController?.pushViewController(nextVC, animated: true)
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
                 }
             }
         } else {
@@ -68,7 +68,7 @@ extension LoginViewController {
                 } else {
                     self?.userDefaultManager.saveIdToken(oauthToken!.idToken!)
                     let nextVC = TermsAgreementViewController()
-                    self?.navigationController?.pushViewController(nextVC, animated: true)
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
                     _ = oauthToken
                 }
             }
@@ -98,11 +98,12 @@ extension LoginViewController: ASAuthorizationControllerDelegate {
             provider == SocialProvider.KAKAO.rawValue
         {
             if role == "ARTIST" {
+                
                 let nextVC = SetBusinessInfoViewController()
-                navigationController?.pushViewController(nextVC, animated: true)
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
             } else {
                 let nextVC = ModelTabBarController()
-                navigationController?.pushViewController(nextVC, animated: true)
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
             }
             
             return

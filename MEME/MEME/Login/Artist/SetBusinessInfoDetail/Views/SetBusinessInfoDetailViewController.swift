@@ -75,6 +75,7 @@ final class SetBusinessInfoDetailViewController: UIViewController {
         setUI()
         setNextButton()
         configureCollectionView()
+        setupDismissKeyboardOnTapGesture()
     }
     
     private func setUI() {
@@ -213,7 +214,7 @@ final class SetBusinessInfoDetailViewController: UIViewController {
     }
 
     @IBAction private func completionButtonTapped(_ sender: Any) {
-        guard 
+        guard
             var builder = builder,
             let selectedLocation = selectedLocation
         else {
@@ -251,9 +252,11 @@ final class SetBusinessInfoDetailViewController: UIViewController {
             switch result {
             case .success(let response):
                 let nextVC = ArtistTabBarController()
-                self?.navigationController?.pushViewController(nextVC, animated: true)
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
             case .failure(let error):
-                print(error.localizedDescription)
+                //
+                let nextVC = ArtistTabBarController()
+                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
             }
         }
     }
@@ -381,5 +384,17 @@ extension SetBusinessInfoDetailViewController: UIScrollViewDelegate {
 extension SetBusinessInfoDetailViewController: BackButtonTappedDelegate {
     func backButtonTapped() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension SetBusinessInfoDetailViewController {
+    func setupDismissKeyboardOnTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }

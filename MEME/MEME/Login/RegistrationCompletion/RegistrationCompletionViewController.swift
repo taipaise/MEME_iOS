@@ -29,7 +29,7 @@ final class RegistrationCompletionViewController: UIViewController {
     @IBAction private func nextButtonTapped(_ sender: Any) {
         
         let nextVC = isArtist ? SetBusinessInfoViewController() : ModelTabBarController()
-        navigationController?.pushViewController(nextVC, animated: true)
+        (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
     }
     
     private func setUI() {

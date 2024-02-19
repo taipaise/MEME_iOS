@@ -36,6 +36,10 @@ class ModelMyPageViewController: UIViewController, ModelHeaderViewDelegate {
         navigationItem.backButtonTitle = ""
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tabBarController?.tabBar.isHidden = false
+    }
     // MARK: - Helpers
     
     func configureUI() {
@@ -138,7 +142,7 @@ extension ModelMyPageViewController: UITableViewDelegate {
                 let alert = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
                     let nextVC = LoginViewController()
-//                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
                 }))
                 alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)
@@ -147,7 +151,7 @@ extension ModelMyPageViewController: UITableViewDelegate {
                 let alert = UIAlertController(title: "탈퇴", message: "정말 탈퇴 하시겠습니까?", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
                     let nextVC = LoginViewController()
-//                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
+                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
                 }))
                 alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
                 present(alert, animated: true, completion: nil)

@@ -70,16 +70,16 @@
 		2DA208072B7ABB2E006EB9B9 /* SearchManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208062B7ABB2E006EB9B9 /* SearchManager.swift */; };
 		2DA208092B7ABE43006EB9B9 /* SearchDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208082B7ABE43006EB9B9 /* SearchDTO.swift */; };
 		2DA2080B2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA2080A2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift */; };
-		2DA2080D2B7CB160006EB9B9 /* RecommendAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA2080C2B7CB160006EB9B9 /* RecommendAPI.swift */; };
 		2DA208112B7CB476006EB9B9 /* ReservationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208102B7CB476006EB9B9 /* ReservationDTO.swift */; };
-		2DB303E02B827F5400D9E394 /* config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2DB303DE2B827F5300D9E394 /* config.xcconfig */; };
-		2DB303E82B8286EF00D9E394 /*  BusinessLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB303E72B8286EF00D9E394 /*  BusinessLocationModel.swift */; };
 		2DA208152B7CF865006EB9B9 /* PortfolioAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208142B7CF865006EB9B9 /* PortfolioAPI.swift */; };
 		2DA208172B7CF87B006EB9B9 /* PortfolioManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */; };
 		2DA208192B7CF9EE006EB9B9 /* PortfolioDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */; };
+		2DB303E82B8286EF00D9E394 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2DB303F32B829EF200D9E394 /* BusinessLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */; };
 		3101C72A2B81F77200460689 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C7292B81F77200460689 /* ProfileInfo.swift */; };
 		3101C72C2B81F80600460689 /* ProfileInfoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */; };
+		3117A6EA2B8315B900D6121E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3117A6E92B8315B900D6121E /* GoogleService-Info.plist */; };
+		3117A6EC2B8315BF00D6121E /* config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3117A6EB2B8315BF00D6121E /* config.xcconfig */; };
 		312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */; };
 		312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EE2B52DE1900CACF20 /* Pretendard-Light.otf */; };
 		312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EB2B52DE1900CACF20 /* Pretendard-Medium.otf */; };
@@ -359,19 +359,18 @@
 		2DA208062B7ABB2E006EB9B9 /* SearchManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchManager.swift; sourceTree = "<group>"; };
 		2DA208082B7ABE43006EB9B9 /* SearchDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchDTO.swift; sourceTree = "<group>"; };
 		2DA2080A2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSearchResultViewController.swift; sourceTree = "<group>"; };
-		2DA2080C2B7CB160006EB9B9 /* RecommendAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendAPI.swift; sourceTree = "<group>"; };
 		2DA208102B7CB476006EB9B9 /* ReservationDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationDTO.swift; sourceTree = "<group>"; };
-		2DB303DB2B827F4400D9E394 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
-		2DB303DE2B827F5300D9E394 /* config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = config.xcconfig; sourceTree = "<group>"; };
-		2DB303DF2B827F5300D9E394 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
-		2DB303E22B82842E00D9E394 /* PersonalColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalColor.swift; sourceTree = "<group>"; };
-		2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
 		2DA208142B7CF865006EB9B9 /* PortfolioAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioAPI.swift; sourceTree = "<group>"; };
 		2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioManager.swift; sourceTree = "<group>"; };
 		2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDTO.swift; sourceTree = "<group>"; };
+		2DB303DE2B827F5300D9E394 /* config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = config.xcconfig; sourceTree = "<group>"; };
+		2DB303E22B82842E00D9E394 /* PersonalColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalColor.swift; sourceTree = "<group>"; };
 		2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLocationModel.swift; sourceTree = "<group>"; };
+		2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
 		3101C7292B81F77200460689 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoBuilder.swift; sourceTree = "<group>"; };
+		3117A6E92B8315B900D6121E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		3117A6EB2B8315BF00D6121E /* config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = config.xcconfig; sourceTree = "<group>"; };
 		312DF7612B669CC30060BDF0 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		312DF7632B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHeaderSupplementaryView.swift; sourceTree = "<group>"; };
 		3142B9552B4CFFED0066CD5A /* MEME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEME.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -787,7 +786,6 @@
 			path = ModelReservationChartView;
 			sourceTree = "<group>";
 		};
-
 		2DB303F12B829E7800D9E394 /* Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -829,8 +827,9 @@
 				314F74E92B52DDF200CACF20 /* Font */,
 				3142B9662B4CFFED0066CD5A /* Info.plist */,
 				2D8C20CA2B82F20D00CD4A90 /* GoogleService-Info.plist */,
+				3117A6E92B8315B900D6121E /* GoogleService-Info.plist */,
+				3117A6EB2B8315BF00D6121E /* config.xcconfig */,
 				2D8C20CC2B82F2CE00CD4A90 /* memeSecret.plist */,
-				315FB8532B6DDB210068163C /* config.xcconfig */,
 				3142B9632B4CFFED0066CD5A /* LaunchScreen.storyboard */,
 				3156D1FD2B69438800559820 /* Network */,
 				3142B9992B4D01FB0066CD5A /* extenstions */,
@@ -1082,9 +1081,6 @@
 				2D7D747D2B769C9E005BDFD5 /* ReservationDTO.swift */,
 				2DA208082B7ABE43006EB9B9 /* SearchDTO.swift */,
 				2DA208102B7CB476006EB9B9 /* ReservationDTO.swift */,
-				2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */,
-				316239642B80DE58002D9E2F /* SignUpResponseDTO.swift */,
-				316239662B80DE9B002D9E2F /* BasicResponseDTO.swift */,
 				CCB319052B82907B003B4738 /* ArtistProfileInfoDTO.swift */,
 				314525892B821C8B003D5CC7 /* TokenResponseDTO.swift */,
 				3145258B2B826AAE003D5CC7 /* ExtraProfileResponseDTO.swift */,
@@ -1228,12 +1224,12 @@
 				31F6F8372B52B2EE00EC621D /* TermsAgreementViewController.xib */,
 				31F6F83D2B52BD0D00EC621D /* TermDetailViewController.xib */,
 				31BF22982B52CE670019F476 /* SetProfileViewController.xib */,
-				316239872B81C945002D9E2F /* GoogleService-Info.plist */,
 				2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */,
 				2DB303E22B82842E00D9E394 /* PersonalColor.swift */,
 				2DA207F62B7A8D9D006EB9B9 /* MyPageAPI.swift */,
 				2DA207F42B7A8D3D006EB9B9 /* MyPageManager.swift */,
 				2DA207FE2B7A9B05006EB9B9 /* MyPageDTO.swift */,
+				2DB303DE2B827F5300D9E394 /* config.xcconfig */,
 			);
 			name = "Recovered References";
 			sourceTree = "<group>";
@@ -1563,7 +1559,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2DB303E02B827F5400D9E394 /* config.xcconfig in Resources */,
+				3117A6EC2B8315BF00D6121E /* config.xcconfig in Resources */,
 				CCAB5A632B67B6CA00067FA4 /* ModelDetailSettingView.xib in Resources */,
 				094884CC2B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.xib in Resources */,
 				094884DC2B59915500C233E0 /* SingleArtistReservationManageViewController.xib in Resources */,
@@ -1574,6 +1570,7 @@
 				094884D42B58F41100C233E0 /* ArtistReservationManageViewController.xib in Resources */,
 				3142B9622B4CFFED0066CD5A /* Assets.xcassets in Resources */,
 				09275E822B518D150033EF34 /* ArtistHomeViewController.xib in Resources */,
+				3117A6EA2B8315B900D6121E /* GoogleService-Info.plist in Resources */,
 				09FB67712B53FAA40063DAEA /* ArtistProfilePreviewViewController.xib in Resources */,
 				2D8C20CB2B82F20D00CD4A90 /* GoogleService-Info.plist in Resources */,
 				315EE2CF2B66566A0042A082 /* RegisterProgressBar.xib in Resources */,
@@ -1605,7 +1602,6 @@
 				315EE2D12B66566A0042A082 /* DetailSettingView.xib in Resources */,
 				312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */,
 				091CCCDB2B64158B00ADD21C /* ArtistPortfolioManageViewController.xib in Resources */,
-				2DB303E12B827F5400D9E394 /* memeSecret.plist in Resources */,
 				31B263502B57EE7D00304FBE /* SetProfileViewController.xib in Resources */,
 				31B263572B57EE9500304FBE /* RegistrationCompletionViewController.xib in Resources */,
 				312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */,
@@ -1811,7 +1807,7 @@
 				31B413842B6D322500535BB1 /* NetworkProvider.swift in Sources */,
 				CCCE56382B81D9FB007555A2 /* ArtistTimeHeaderSupplementaryView.swift in Sources */,
 				2D4B7C292B5F294A001E1B09 /* ModelManagementReservationsViewController.swift in Sources */,
-				2DB303E82B8286EF00D9E394 /*  BusinessLocationModel.swift in Sources */,
+				2DB303E82B8286EF00D9E394 /* (null) in Sources */,
 				CC9C38892B80F9AA0073A257 /* ModelProfileInfoAPI.swift in Sources */,
 				CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */,
 				2DA2080B2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift in Sources */,

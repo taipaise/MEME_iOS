@@ -20,6 +20,7 @@ final class BusinessRegistrationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        setupDismissKeyboardOnTapGesture()
     }
     
     private func setUI() {
@@ -76,5 +77,17 @@ final class BusinessRegistrationViewController: UIViewController {
 extension BusinessRegistrationViewController: BackButtonTappedDelegate {
     func backButtonTapped() {
         navigationController?.popViewController(animated: true)
+    }
+}
+
+extension BusinessRegistrationViewController {
+    func setupDismissKeyboardOnTapGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
+        tapGesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
 }
