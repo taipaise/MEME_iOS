@@ -18,7 +18,7 @@ struct ArtistProfileDTO: Codable {
 struct ArtistProfileData: Codable {
     let artistId: Int
     let isFavorite: Bool
-    let gender: String
+    let gender: String?
     let nickname: String
     let profileImg: String
     let introduction: String
@@ -26,7 +26,7 @@ struct ArtistProfileData: Codable {
     let shopLocation: String?
     let region: [String]?
     let specialization: [String]
-    let makeupLocation: String
+    let makeupLocation: String?
     let availableDayOfWeekAndTime: [String: String]
     let simplePortfolioDtoList: [SimplePortfolioDTO]?
 }
