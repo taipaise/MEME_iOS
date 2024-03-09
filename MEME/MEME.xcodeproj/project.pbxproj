@@ -77,8 +77,6 @@
 		2DB303F32B829EF200D9E394 /* BusinessLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */; };
 		3101C72A2B81F77200460689 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C7292B81F77200460689 /* ProfileInfo.swift */; };
 		3101C72C2B81F80600460689 /* ProfileInfoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */; };
-		3117A6EA2B8315B900D6121E /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 3117A6E92B8315B900D6121E /* GoogleService-Info.plist */; };
-		3117A6EC2B8315BF00D6121E /* config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 3117A6EB2B8315BF00D6121E /* config.xcconfig */; };
 		312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */; };
 		312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EE2B52DE1900CACF20 /* Pretendard-Light.otf */; };
 		312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EB2B52DE1900CACF20 /* Pretendard-Medium.otf */; };
@@ -164,6 +162,9 @@
 		317D98772B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D98762B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift */; };
 		317D98792B7E16B5009BBB95 /* MakeUpLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D98782B7E16B5009BBB95 /* MakeUpLocation.swift */; };
 		317D987B2B7E1810009BBB95 /* MakeUpCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D987A2B7E1810009BBB95 /* MakeUpCategory.swift */; };
+		31AB17FE2B9BF1CB0049E02D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 31AB17FD2B9BF1CB0049E02D /* RxCocoa */; };
+		31AB18002B9BF1CB0049E02D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 31AB17FF2B9BF1CB0049E02D /* RxRelay */; };
+		31AB18022B9BF95A0049E02D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AB18012B9BF95A0049E02D /* ViewModel.swift */; };
 		31B263432B57EDE300304FBE /* TermsAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2633F2B57EDE300304FBE /* TermsAgreementViewController.swift */; };
 		31B263442B57EDE300304FBE /* TermDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B263402B57EDE300304FBE /* TermDetailViewController.xib */; };
 		31B263452B57EDE300304FBE /* TermDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B263412B57EDE300304FBE /* TermDetailViewController.swift */; };
@@ -359,8 +360,6 @@
 		2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
 		3101C7292B81F77200460689 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoBuilder.swift; sourceTree = "<group>"; };
-		3117A6E92B8315B900D6121E /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		3117A6EB2B8315BF00D6121E /* config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = config.xcconfig; sourceTree = "<group>"; };
 		312DF7612B669CC30060BDF0 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		312DF7632B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHeaderSupplementaryView.swift; sourceTree = "<group>"; };
 		3142B9552B4CFFED0066CD5A /* MEME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEME.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -436,6 +435,7 @@
 		317D98762B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistProfileInfoBuilder.swift; sourceTree = "<group>"; };
 		317D98782B7E16B5009BBB95 /* MakeUpLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeUpLocation.swift; sourceTree = "<group>"; };
 		317D987A2B7E1810009BBB95 /* MakeUpCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeUpCategory.swift; sourceTree = "<group>"; };
+		31AB18012B9BF95A0049E02D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		31B2633F2B57EDE300304FBE /* TermsAgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermsAgreementViewController.swift; path = Views/TermsAgreementViewController.swift; sourceTree = "<group>"; };
 		31B263402B57EDE300304FBE /* TermDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = TermDetailViewController.xib; path = Views/TermDetailViewController.xib; sourceTree = "<group>"; };
 		31B263412B57EDE300304FBE /* TermDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TermDetailViewController.swift; path = Views/TermDetailViewController.swift; sourceTree = "<group>"; };
@@ -560,7 +560,9 @@
 				3162399A2B81CF37002D9E2F /* FirebaseFirestoreSwift in Frameworks */,
 				3162398B2B81C9A8002D9E2F /* FirebaseAnalytics in Frameworks */,
 				3142B98A2B4D019B0066CD5A /* SnapKit in Frameworks */,
+				31AB17FE2B9BF1CB0049E02D /* RxCocoa in Frameworks */,
 				3142B9932B4D01DF0066CD5A /* KakaoSDK in Frameworks */,
+				31AB18002B9BF1CB0049E02D /* RxRelay in Frameworks */,
 				3142B98D2B4D01A90066CD5A /* FSCalendar in Frameworks */,
 				3162399C2B81CF37002D9E2F /* FirebaseStorage in Frameworks */,
 				3142B9902B4D01C40066CD5A /* Moya in Frameworks */,
@@ -858,8 +860,6 @@
 				314F74E92B52DDF200CACF20 /* Font */,
 				3142B9662B4CFFED0066CD5A /* Info.plist */,
 				2D8C20CA2B82F20D00CD4A90 /* GoogleService-Info.plist */,
-				3117A6E92B8315B900D6121E /* GoogleService-Info.plist */,
-				3117A6EB2B8315BF00D6121E /* config.xcconfig */,
 				09A6B0A22B9B0FD4007DCC0A /* memeSecret.plist */,
 				3142B9632B4CFFED0066CD5A /* LaunchScreen.storyboard */,
 				3156D1FD2B69438800559820 /* Network */,
@@ -910,6 +910,7 @@
 				CC9C386C2B7C798C0073A257 /* Artist */,
 				3162397F2B81B399002D9E2F /* ImageManager.swift */,
 				316239A92B81E3F9002D9E2F /* UserDefaultManager.swift */,
+				31AB18012B9BF95A0049E02D /* ViewModel.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -1468,6 +1469,8 @@
 				316239972B81CF37002D9E2F /* FirebaseFirestore */,
 				316239992B81CF37002D9E2F /* FirebaseFirestoreSwift */,
 				3162399B2B81CF37002D9E2F /* FirebaseStorage */,
+				31AB17FD2B9BF1CB0049E02D /* RxCocoa */,
+				31AB17FF2B9BF1CB0049E02D /* RxRelay */,
 			);
 			productName = MEME;
 			productReference = 3142B9552B4CFFED0066CD5A /* MEME.app */;
@@ -1547,6 +1550,7 @@
 				3142B98E2B4D01C40066CD5A /* XCRemoteSwiftPackageReference "Moya" */,
 				3142B9912B4D01DF0066CD5A /* XCRemoteSwiftPackageReference "kakao-ios-sdk" */,
 				316239892B81C9A8002D9E2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				31AB17FC2B9BF1CB0049E02D /* XCRemoteSwiftPackageReference "RxSwift" */,
 			);
 			productRefGroup = 3142B9562B4CFFED0066CD5A /* Products */;
 			projectDirPath = "";
@@ -1565,7 +1569,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				09A6B0A32B9B0FD4007DCC0A /* memeSecret.plist in Resources */,
-				3117A6EC2B8315BF00D6121E /* config.xcconfig in Resources */,
 				CCAB5A632B67B6CA00067FA4 /* ModelDetailSettingView.xib in Resources */,
 				094884CC2B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.xib in Resources */,
 				094884DC2B59915500C233E0 /* SingleArtistReservationManageViewController.xib in Resources */,
@@ -1576,7 +1579,6 @@
 				094884D42B58F41100C233E0 /* ArtistReservationManageViewController.xib in Resources */,
 				3142B9622B4CFFED0066CD5A /* Assets.xcassets in Resources */,
 				09275E822B518D150033EF34 /* ArtistHomeViewController.xib in Resources */,
-				3117A6EA2B8315B900D6121E /* GoogleService-Info.plist in Resources */,
 				2D8C20CB2B82F20D00CD4A90 /* GoogleService-Info.plist in Resources */,
 				315EE2CF2B66566A0042A082 /* RegisterProgressBar.xib in Resources */,
 				094884C82B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.xib in Resources */,
@@ -1779,6 +1781,7 @@
 				CC9C386E2B7C7D940073A257 /* ArtistProfileManager.swift in Sources */,
 				317D98722B7E023E009BBB95 /* PersonalColor.swift in Sources */,
 				094884C72B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.swift in Sources */,
+				31AB18022B9BF95A0049E02D /* ViewModel.swift in Sources */,
 				CC9C38832B808C760073A257 /* LogOutAPI.swift in Sources */,
 				CC9C38872B808C8E0073A257 /* LogOutDTO.swift in Sources */,
 				315FB8622B6DE5F40068163C /* SecretInfoManager.swift in Sources */,
@@ -2232,6 +2235,14 @@
 				minimumVersion = 10.21.0;
 			};
 		};
+		31AB17FC2B9BF1CB0049E02D /* XCRemoteSwiftPackageReference "RxSwift" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ReactiveX/RxSwift.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 6.6.0;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -2309,6 +2320,16 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 316239892B81C9A8002D9E2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseStorage;
+		};
+		31AB17FD2B9BF1CB0049E02D /* RxCocoa */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31AB17FC2B9BF1CB0049E02D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxCocoa;
+		};
+		31AB17FF2B9BF1CB0049E02D /* RxRelay */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 31AB17FC2B9BF1CB0049E02D /* XCRemoteSwiftPackageReference "RxSwift" */;
+			productName = RxRelay;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
