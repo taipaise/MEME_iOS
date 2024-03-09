@@ -1,11 +1,3 @@
----
-name: 기본 issue
-about: description
-title: ''
-labels: ''
-assignees: ''
-
----
 
 ## 💡 Issue
 <!-- 이슈에 대한 내용을 설명해주세요. -->
