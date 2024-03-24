@@ -6,45 +6,16 @@
 //
 
 import UIKit
-// 예시 데이터 구조 -> 이후 삭제 필요
+
 struct ReviewData {
-    var profileImage: UIImage?
-    var profileName: String
-    var starRate: String
-    var reviewText: String
-    var reviewImages: [UIImage]
+    var modelName: String
+    var star: Int
+    var comment: String
+    var reviewImgDtoList: [UIImage]
 }
 
 class ShowReviewView: UIView {
-    // 예시 데이터 배열 -> 이후 삭제 필요
-    
-    var reviews: [ReviewData] = [
-        ReviewData(profileImage: UIImage(named: "modelProfile"),
-                   profileName: "메메**",
-                   starRate: "5",
-                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
-                   reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
-        ReviewData(profileImage: UIImage(named: "modelProfile"),
-                   profileName: "메메**",
-                   starRate: "5",
-                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
-                   reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
-        ReviewData(profileImage: UIImage(named: "modelProfile"),
-                   profileName: "메메**",
-                   starRate: "5",
-                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
-                   reviewImages: [UIImage(named: "img_exReview1"), UIImage(named: "img_exReview2")].compactMap { $0 }),
-        ReviewData(profileImage: UIImage(named: "modelProfile"),
-                   profileName: "차*",
-                   starRate: "1",
-                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
-                   reviewImages: []),
-        ReviewData(profileImage: UIImage(named: "modelProfile"),
-                   profileName: "리*",
-                   starRate: "4",
-                   reviewText: "후기 작성 칸 후기 작성 칸\n후기후기",
-                   reviewImages: [UIImage(named: "img_exReview3")].compactMap { $0 })
-    ]
+    var reviews: [ReviewData] = []
     
     // MARK: - Properties
     private var totalStarRatingView = TotalStarRatingView()
@@ -69,9 +40,6 @@ class ShowReviewView: UIView {
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        let sampleData = StarRatingDistribution(fiveStars: 50, fourStars: 30, threeStars: 15, twoStars: 3, oneStar: 2)
-        totalStarRatingView.update(with: sampleData)
         
         setupReviewTableView()
         configureSubviews()
@@ -114,6 +82,12 @@ class ShowReviewView: UIView {
             make.bottom.equalToSuperview()
         }
     }
+    func updateReviews(with newData: [ReviewData], starRatingDistribution: StarRatingDistribution) {
+        self.reviews = newData
+        self.totalStarRatingView.update(with: starRatingDistribution)
+        reviewTableView.reloadData()
+    }
+
     
     //MARK: -Helpers
     private func setupReviewTableView() {
@@ -135,7 +109,7 @@ extension ShowReviewView: UITableViewDataSource, UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return reviews.count
     }
     
     //cell의 생성
@@ -145,11 +119,10 @@ extension ShowReviewView: UITableViewDataSource, UITableViewDelegate {
         }
         cell.selectionStyle = .none
         let review = reviews[indexPath.row]
-        cell.configure(profileImage: review.profileImage,
-                       profileName: review.profileName,
-                       starRate: review.starRate,
-                       reviewImages: review.reviewImages,
-                       reviewText: review.reviewText
+        cell.configure(modelName: review.modelName,
+                       star: review.star,
+                       comment: review.comment,
+                       reviewImgDtoList: review.reviewImgDtoList
                        )
         return cell
     }
