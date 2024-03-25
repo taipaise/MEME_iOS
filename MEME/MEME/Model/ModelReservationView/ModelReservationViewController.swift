@@ -376,7 +376,7 @@ class ModelReservationViewController: UIViewController {
         navigationController?.pushViewController(reservationsVC, animated: true)
     }
     @objc private func profileImageTapped() {
-        let artistProfileVC = ModelViewArtistProfileViewController()
+        let artistProfileVC = ArtistProfileViewController()
         artistProfileVC.artistID = artistID
         navigationController?.pushViewController(artistProfileVC, animated: true)
     }

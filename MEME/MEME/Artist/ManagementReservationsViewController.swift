@@ -13,10 +13,9 @@ struct ReservationSection {
     var reservations: [ReservationData]
 }
 
-final class ModelManagementReservationsViewController: UIViewController {
-    private let isModel : Bool = true
+final class ManagementReservationsViewController: UIViewController {
+    private let isModel : Bool = false
     private var isFavoriteArtist : Bool = false
-    var artistID: Int? = 0
     
     // MARK: - Properties
     private var allReservations: [ReservationData] = []
@@ -148,7 +147,7 @@ final class ModelManagementReservationsViewController: UIViewController {
             showModelReservations(modelId: 1)
         }
         else{
-//            showArtistReservations(modelId: 1)-> 여기 API만 바꾸면 됩니다
+            showArtistReservations(artistId: 1)
         }
     }
     
@@ -212,7 +211,7 @@ final class ModelManagementReservationsViewController: UIViewController {
         reservationCollectionView.dataSource = self
         
         //cell 등록
-        reservationCollectionView.register(ModelManagementReservationsDateCollectionViewCell.self, forCellWithReuseIdentifier: ModelManagementReservationsDateCollectionViewCell.identifier)
+        reservationCollectionView.register(ManagementReservationsDateCollectionViewCell.self, forCellWithReuseIdentifier: ManagementReservationsDateCollectionViewCell.identifier)
 
   
         reservationCollectionView.register(UINib(nibName: "ModelReservationConfirmViewCell", bundle: nil), forCellWithReuseIdentifier: ModelReservationConfirmViewCell.identifier)
@@ -221,7 +220,7 @@ final class ModelManagementReservationsViewController: UIViewController {
 }
 
 //MARK: -UITableViewDataSource, UITableViewDelegate
-extension ModelManagementReservationsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ManagementReservationsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     //섹션의 갯수
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -237,7 +236,7 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegate, U
         let item = collectionViewItems[indexPath.item]
         switch item {
         case .date(let date):
-            guard let dateCell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelManagementReservationsDateCollectionViewCell.identifier, for: indexPath) as? ModelManagementReservationsDateCollectionViewCell else {
+            guard let dateCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagementReservationsDateCollectionViewCell.identifier, for: indexPath) as? ManagementReservationsDateCollectionViewCell else {
                 fatalError("셀 타입 캐스팅 실패...")
             }
             dateCell.configure(with: date)
@@ -259,7 +258,7 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegate, U
     }
 }
 
-extension ModelManagementReservationsViewController: UICollectionViewDelegateFlowLayout {
+extension ManagementReservationsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionViewItems[indexPath.item] {
         case .date:
@@ -279,7 +278,7 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegateFlo
             switch item {
             case .reservation(let reservationData):
                 let vc = SingleArtistReservationManageViewController()
-                vc.reservationId = reservationData.reservationId
+                vc.reservationData = reservationData
                 navigationController?.pushViewController(vc, animated: true)
                 
             default:
@@ -289,16 +288,17 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegateFlo
 }
 
 // MARK: -BackButtonTappedDelegate
-extension ModelManagementReservationsViewController: BackButtonTappedDelegate  {
+extension ManagementReservationsViewController: BackButtonTappedDelegate  {
     func backButtonTapped() {
         if let navigationController = self.navigationController {
+            self.tabBarController?.tabBar.isHidden = false
             navigationController.popViewController(animated: true)
         }
     }
 }
 
 //MARK: -API 통신 메소드
-extension ModelManagementReservationsViewController {
+extension ManagementReservationsViewController {
     func showModelReservations(modelId: Int) {
         ReservationManager.shared.getModelReservation(modelId: modelId) { [weak self] result in
             DispatchQueue.main.async {
@@ -313,5 +313,19 @@ extension ModelManagementReservationsViewController {
                 }
             }
         }
+    }
+    func showArtistReservations(artistId: Int) {
+        let showArtistReservations = ReservationManager.shared
+        showArtistReservations.getArtistReservation(artistId: artistId) { [weak self] result in
+            switch result {
+            case .success(let reservationResponse):
+                self?.allReservations = reservationResponse.data ?? []
+                self?.filterAndDisplayReservations(byStatus: .EXPECTED)
+                print("아티스트 예약 정보 조회 성공: \(reservationResponse)")
+            case .failure(let error):
+                print("아티스트 예약 정보 조회 실패: \(error.localizedDescription)")
+            }
+        }
+        
     }
 }

@@ -15,17 +15,12 @@ class ArtistPortfolioCollectionViewCell: UICollectionViewCell {
     @IBOutlet var portfolioView: UIView!
     @IBOutlet var fullView: UIView!
     
-    
-    
-    static let identifier = "ArtistPortfolioCollectionViewCell"
-
     static func nib() -> UINib {
-        return UINib(nibName: "ArtistPortfolioCollectionViewCell", bundle: nil)
+        return UINib(nibName: ArtistPortfolioCollectionViewCell.className, bundle: nil)
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
         uiSet()
     }
     

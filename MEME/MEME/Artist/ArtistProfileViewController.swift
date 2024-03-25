@@ -1,10 +1,10 @@
 import UIKit
 import SnapKit
 
-class ModelViewArtistProfileViewController: UIViewController {
-    private let isModel : Bool = true
+class ArtistProfileViewController: UIViewController {
+    private let isModel : Bool = false
     private var isFavoriteArtist : Bool = false
-    var artistID: Int? = 0
+    var artistID: Int? = 1
     
     // MARK: - Properties
     private var expertiseFields: [String] = []
@@ -218,7 +218,7 @@ class ModelViewArtistProfileViewController: UIViewController {
         view.backgroundColor = .white
         navigationBar.delegate = self
         navigationBar.configure(title: "프로필")
-        
+        navigationController?.setNavigationBarHidden(true, animated: false)
         getArtistProfile(userId: 6, artistId: artistID!)
         setupGestureRecognizers()
         setupPortfolioCollectionView()
@@ -509,7 +509,7 @@ class ModelViewArtistProfileViewController: UIViewController {
 }
 
 //MARK: - UICollectionViewDelegate, UICollectionViewDataSource
-extension ModelViewArtistProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ArtistProfileViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     //섹션의 갯수
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -534,7 +534,7 @@ extension ModelViewArtistProfileViewController: UICollectionViewDelegate, UIColl
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
-extension ModelViewArtistProfileViewController: UICollectionViewDelegateFlowLayout {
+extension ArtistProfileViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout,sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: 154, height: 222)
     }
@@ -544,15 +544,18 @@ extension ModelViewArtistProfileViewController: UICollectionViewDelegateFlowLayo
 }
 
 //MARK: - BackButtonTappedDelegate
-extension ModelViewArtistProfileViewController: BackButtonTappedDelegate {
+extension ArtistProfileViewController: BackButtonTappedDelegate {
     func backButtonTapped() {
         if let navigationController = self.navigationController {
+            if isModel == false {
+                self.tabBarController?.tabBar.isHidden = false
+            }
             navigationController.popViewController(animated: true)
         }
     }
 }
 
-extension ModelViewArtistProfileViewController {
+extension ArtistProfileViewController {
     func postFavoriteArtist(modelId: Int, artistId: Int) {
         MyPageManager.shared.postFavoriteArtist(modelId: modelId, artistId: artistId) { [weak self] result in
             switch result {
@@ -679,4 +682,8 @@ extension ModelViewArtistProfileViewController {
                 self.portfolios = portfolioList
             }
     }
+}
+
+extension ArtistProfileViewController {
+    
 }

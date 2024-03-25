@@ -17,7 +17,7 @@ struct CreatePortfolioDTO: Codable {
 struct GetAllPortfolioDTO: Codable {
     let result: String
     let message: String
-    let data: PortfolioData?
+    let data: PortfolioAllDTO?
     let statusCode: Int
 }
 struct PortfolioAllDTO: Codable {
