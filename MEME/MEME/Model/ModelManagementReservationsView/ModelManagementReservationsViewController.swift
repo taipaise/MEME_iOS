@@ -145,7 +145,7 @@ final class ModelManagementReservationsViewController: UIViewController {
     //MARK: -API 호출
     private func showReservations() {
         if(isModel) {
-            showModelReservations(modelId: KeyChainManager.loadMemberID())
+            showModelReservations(modelId: 1)
         }
         else{
 //            showArtistReservations(modelId: 1)-> 여기 API만 바꾸면 됩니다

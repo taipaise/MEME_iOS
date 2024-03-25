@@ -224,7 +224,7 @@ class ModelReservationLastViewController: UIViewController {
                 dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
                 let dateString = dateFormatter.string(from: selectedDate ?? Date())
                 
-                self.postModelReservations(modelId: KeyChainManager.loadMemberID(), portfolioId: portfolioID, date: dateString, reservationDayOfWeekAndTime: reservationDayOfWeekAndTime, location: locationText)
+                self.postModelReservations(modelId: 1, portfolioId: portfolioID, date: dateString, reservationDayOfWeekAndTime: reservationDayOfWeekAndTime, location: locationText)
             }
         }
     }

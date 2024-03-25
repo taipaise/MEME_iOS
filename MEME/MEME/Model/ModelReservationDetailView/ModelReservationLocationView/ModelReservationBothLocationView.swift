@@ -73,8 +73,16 @@ class  ModelReservationBothLocationView: UIView {
         return stack
     }()
     
-    private var visitView: ModelReservationVisitLocationView!
-    private var shopView: ModelReservationShopLocationView!
+    private lazy var visitView: ModelReservationVisitLocationView = {
+        let view = ModelReservationVisitLocationView()
+
+        return view
+    }()
+    private lazy var shopView: ModelReservationShopLocationView = {
+        let view = ModelReservationShopLocationView()
+
+        return view
+    }()
     
     // MARK: - Initializers
     override init(frame: CGRect) {
