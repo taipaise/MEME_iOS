@@ -16,6 +16,8 @@ class ArtistReservationStatusTableViewCell: UITableViewCell {
     @IBOutlet var reservationPlaceIconImage: UIImageView!
     @IBOutlet var reservationPriceIconLabel: UILabel!
     @IBOutlet var reservationManageBtn: UIButton!
+    @IBOutlet var reservationPlaceLabel: UILabel!
+    @IBOutlet var reservationPriceLabel: UILabel!
     
     static let identifier = "ArtistReservationStatusTableViewCell"
     

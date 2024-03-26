@@ -34,6 +34,8 @@ class ManagementReservationsDateCollectionViewCell: UICollectionViewCell {
     }
     func configure(with date: Date) {
         let dateFormatter = DateFormatter()
+        let UTCTimeZone = TimeZone(identifier: "UTC")!
+        dateFormatter.timeZone = UTCTimeZone
         dateFormatter.dateFormat = "yyyy. MM. dd EEE"
         dateFormatter.locale = Locale(identifier: "ko_KR")
         label.text = dateFormatter.string(from: date)

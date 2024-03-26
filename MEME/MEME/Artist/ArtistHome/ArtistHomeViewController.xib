@@ -25,6 +25,8 @@
                 <outlet property="firstArtistResTimeLabel" destination="RbC-nP-PQW" id="B6e-Xo-Jos"/>
                 <outlet property="secondArtistHomeProfileStatusView" destination="aWM-zA-lPo" id="nWR-29-yhy"/>
                 <outlet property="secondArtistResBtn" destination="fHS-8K-ddk" id="g6s-rh-RdK"/>
+                <outlet property="secondArtistResLabel" destination="BbF-UB-5Bd" id="hME-g8-j6z"/>
+                <outlet property="secondArtistResTimeLabel" destination="8nG-Gj-Aph" id="wiT-fw-FNH"/>
                 <outlet property="view" destination="iN0-l3-epB" id="onH-gb-FdA"/>
             </connections>
         </placeholder>
@@ -254,7 +256,7 @@
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
         <systemColor name="systemOrangeColor">
-            <color red="1" green="0.58431372549019611" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="1" green="0.58431372550000005" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </systemColor>
     </resources>
 </document>

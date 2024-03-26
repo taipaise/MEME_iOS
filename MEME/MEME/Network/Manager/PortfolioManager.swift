@@ -67,13 +67,13 @@ final class PortfolioManager {
         info: String,
         isBlock: Bool,
         portfolio_img_src: [String],
-        completion: @escaping (Result<EditPortfolioDTO.Response, Error>) -> Void
+        completion: @escaping (Result<EditPortfolioDTO, Error>) -> Void
     ) {
         provider.request(api: .editPortfolio(artistId: artistId, portfolioId: portfolioId, category: category, makeup_name: makeup_name, price: price, info: info, isBlock: isBlock, portfolio_img_src: portfolio_img_src)) { result in
             switch result {
                 case let .success(response):
                     do {
-                        let dto = try response.map(EditPortfolioDTO.Response.self)
+                        let dto = try response.map(EditPortfolioDTO.self)
                         completion(.success(dto))
                     } catch let error {
                         completion(.failure(error))

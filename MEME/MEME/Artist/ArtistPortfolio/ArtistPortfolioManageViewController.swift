@@ -12,13 +12,13 @@ class ArtistPortfolioManageViewController: UIViewController {
     @IBOutlet var portfolioCollectionView: UICollectionView!
     @IBOutlet var noPortfolioLabel: UIStackView!
     
-    
     private var portfolioData : PortfolioAllDTO?
-    private var artistId: Int = 1
+    private var artistId: Int = 2
     private var page: Int = 0
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
+        self.tabBarController?.tabBar.isHidden = true
         getAllPortfolio()
     }
     override func viewDidLoad() {
@@ -29,7 +29,6 @@ class ArtistPortfolioManageViewController: UIViewController {
     
     private func uiSet(){
         self.navigationController?.isNavigationBarHidden = true
-        noPortfolioLabel.isHidden = !portfolioMakeupNameArray.isEmpty
     }
     private func collectionViewConfig(){
         portfolioCollectionView.delegate = self
@@ -55,8 +54,10 @@ extension ArtistPortfolioManageViewController : UICollectionViewDelegate, UIColl
     {
         guard let portfolioData = portfolioData else {
             print("no portfolio")
+            self.noPortfolioLabel.isHidden = false
             return 0
         }
+        print("portfolioData.content!.count : \(portfolioData.content?.count)")
         return portfolioData.content!.count
     }
     
@@ -75,6 +76,7 @@ extension ArtistPortfolioManageViewController : UICollectionViewDelegate, UIColl
                 cell.portfolioMainLabel.text = portfolioData.content?[indexPath.row].makeupName
                 cell.portfolioSubLabel.text = portfolioData.content?[indexPath.row].category
                 cell.portfolioPriceLabel.text = String(portfolioData.content![indexPath.row].price) + "원"
+                
 //                cell.portfolioImageView.image = UIImage(named:
 //                portfolioImageArray[indexPath.row]) // 수정 필요
             }

@@ -19,15 +19,15 @@ struct ArtistProfileData: Codable {
     let artistId: Int
     let isFavorite: Bool
     let gender: String?
-    let nickname: String
-    let profileImg: String
-    let introduction: String
-    let workExperience:  String
+    let nickname: String?
+    let profileImg: String?
+    let introduction: String?
+    let workExperience:  String?
     let shopLocation: String?
     let region: [String]?
-    let specialization: [String]
+    let specialization: [String]?
     let makeupLocation: String?
-    let availableDayOfWeekAndTime: [String: String]
+    let availableDayOfWeekAndTime: [String: String]?
     let simplePortfolioDtoList: [SimplePortfolioDTO]?
 }
 
@@ -38,5 +38,5 @@ struct SimplePortfolioDTO: Codable {
     let makeupName: String
     let artistName: String
     let price: Int
-    let makeupLocation: String
+    let makeupLocation: String?
 }

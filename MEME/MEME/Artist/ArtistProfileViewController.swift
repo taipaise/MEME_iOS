@@ -4,7 +4,8 @@ import SnapKit
 class ArtistProfileViewController: UIViewController {
     private let isModel : Bool = false
     private var isFavoriteArtist : Bool = false
-    var artistID: Int? = 1
+    var artistID: Int? = 2
+    var userID: Int = 1
     
     // MARK: - Properties
     private var expertiseFields: [String] = []
@@ -219,7 +220,7 @@ class ArtistProfileViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "프로필")
         navigationController?.setNavigationBarHidden(true, animated: false)
-        getArtistProfile(userId: 6, artistId: artistID!)
+        getArtistProfile(userId: userID, artistId: artistID!)
         setupGestureRecognizers()
         setupPortfolioCollectionView()
         configureSubviews()

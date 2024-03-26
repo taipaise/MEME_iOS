@@ -14,14 +14,23 @@ class SingleArtistReservationManageViewController: UIViewController {
     @IBOutlet var cancelBarLabel: UILabel!
     @IBOutlet var cancelBarButton: UIButton!
     @IBOutlet var resInfoFrameView: UIView!
+    @IBOutlet weak var modelProfileImageView: UIImageView!
+    @IBOutlet weak var modelNicknameLabel: UILabel!
+    @IBOutlet weak var modelGenderLabel: UILabel!
+    @IBOutlet weak var modelSkinTypeLabel: UILabel!
+    @IBOutlet weak var modelPersonalColorLabel: UILabel!
+    @IBOutlet weak var makeupNameLabel: UILabel!
+    @IBOutlet weak var reservationDateLabel: UILabel!
+    @IBOutlet weak var reservationPlaceLabel: UILabel!
     
     private var isToday: Bool = false
     var reservationData: ReservationData!
     var modelData: ModelProfileInfoData!
+    var reservationDateString: String!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        getModelData(modelId: 5)
+        getModelData(modelId: 1)
     }
     
     override func viewDidLoad() {
@@ -43,6 +52,16 @@ class SingleArtistReservationManageViewController: UIViewController {
             cancelBarLabel.text = "예약 취소하기"
             cancelBarButton.isHidden = false
         }
+        if let data = modelData {
+            //        modelProfileImageView.image = 이미지처리
+            modelNicknameLabel.text = data.nickname
+            modelGenderLabel.text = data.gender.korString
+            modelSkinTypeLabel.text = data.skinType.korString
+            modelPersonalColorLabel.text = data.personalColor.korString
+        }
+        makeupNameLabel.text = reservationData.makeupName
+        reservationDateLabel.text = reservationDateString
+        reservationPlaceLabel.text = reservationData.shopLocation
     }
     
     @IBAction private func backBtnDidTap(_ sender: UIButton) {
@@ -84,12 +103,15 @@ extension SingleArtistReservationManageViewController {
     func getModelData(modelId: Int) {
         let getModelData = ModelProfileInfoManager.shared
         getModelData.getModelProfileInfo(userId: modelId) { result in
-            switch result {
-            case .success(let response):
-                print("모델 정보 조회 성공: \(response)")
-                self.modelData = response.data
-            case .failure(let error):
-                print("모델 정보 조회 실패: \(error.localizedDescription)")
+            DispatchQueue.main.async{
+                switch result {
+                case .success(let response):
+                    print("모델 정보 조회 성공: \(response)")
+                    self.modelData = response.data
+                    self.uiSet()
+                case .failure(let error):
+                    print("모델 정보 조회 실패: \(error.localizedDescription)")
+                }
             }
         }
     }

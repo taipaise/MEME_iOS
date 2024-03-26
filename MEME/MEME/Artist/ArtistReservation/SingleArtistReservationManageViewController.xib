@@ -26,7 +26,15 @@
                 <outlet property="cancelBarButton" destination="ZHC-bl-Cct" id="9fp-Lb-j6R"/>
                 <outlet property="cancelBarLabel" destination="2Om-41-ScY" id="3AG-ZJ-5GI"/>
                 <outlet property="cancelBarView" destination="Gyk-ma-98k" id="sIn-G6-Xfl"/>
+                <outlet property="makeupNameLabel" destination="dnu-ia-tMB" id="y9d-o8-0si"/>
+                <outlet property="modelGenderLabel" destination="fDw-cX-i9E" id="nBz-yO-tl8"/>
+                <outlet property="modelNicknameLabel" destination="274-4Y-4iE" id="n20-Wl-tgh"/>
+                <outlet property="modelPersonalColorLabel" destination="wxw-2w-1u6" id="hd9-5u-VR7"/>
+                <outlet property="modelProfileImageView" destination="sYv-km-DBx" id="Lzl-n0-qVx"/>
+                <outlet property="modelSkinTypeLabel" destination="8eh-en-J1z" id="wmJ-hF-PFK"/>
                 <outlet property="resInfoFrameView" destination="AgI-kR-cB7" id="kA9-Fa-m9K"/>
+                <outlet property="reservationDateLabel" destination="ZLA-Cf-KjS" id="Vdp-vg-moE"/>
+                <outlet property="reservationPlaceLabel" destination="dBD-fA-WoM" id="E3p-up-DLg"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

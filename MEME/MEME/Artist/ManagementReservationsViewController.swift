@@ -147,7 +147,7 @@ final class ManagementReservationsViewController: UIViewController {
             showModelReservations(modelId: 1)
         }
         else{
-            showArtistReservations(artistId: 1)
+            showArtistReservations(artistId: 2)
         }
     }
     
@@ -315,17 +315,18 @@ extension ManagementReservationsViewController {
         }
     }
     func showArtistReservations(artistId: Int) {
-        let showArtistReservations = ReservationManager.shared
-        showArtistReservations.getArtistReservation(artistId: artistId) { [weak self] result in
-            switch result {
-            case .success(let reservationResponse):
-                self?.allReservations = reservationResponse.data ?? []
-                self?.filterAndDisplayReservations(byStatus: .EXPECTED)
-                print("아티스트 예약 정보 조회 성공: \(reservationResponse)")
-            case .failure(let error):
-                print("아티스트 예약 정보 조회 실패: \(error.localizedDescription)")
+        ReservationManager.shared.getArtistReservation(artistId: artistId) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let reservationResponse):
+                    self?.allReservations = reservationResponse.data ?? []
+                    self?.filterAndDisplayReservations(byStatus: .EXPECTED)
+                    print("아티스트 예약 정보 조회 성공: \(reservationResponse)")
+                    
+                case .failure(let error):
+                    print("아티스트 예약 정보 조회 실패: \(error.localizedDescription)")
+                }
             }
         }
-        
     }
 }

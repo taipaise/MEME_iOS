@@ -37,7 +37,7 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
     }
     private var portfolioDetailData: PortfolioData!
     private var userId = 1
-    private var artistId = 10
+    private var artistId = 2
     private var isBlock : Bool = false
     
     private var selectedCategory: PortfolioCategories?
@@ -264,7 +264,10 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
         
         let alert = UIAlertController(title: "포트폴리오 삭제하기", message: "\n포트폴리오를 삭제하시겠습니까?", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
-            self?.navigationController?.popViewController(animated: true)
+            self?.isBlock=true
+            self?.editPortfolio(completion: { result in
+                self?.navigationController?.popViewController(animated: true)
+            })
         }
         let noAction = UIAlertAction(title: "아니오", style: .cancel, handler : nil )
         // HIG에 따라 Cancel이 왼쪽
@@ -321,7 +324,7 @@ extension ArtistPortfolioEditingViewController : UICollectionViewDelegate, UICol
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ArtistMakeupTagCollectionViewCell", for: indexPath) as? ArtistMakeupTagCollectionViewCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArtistMakeupTagCollectionViewCell.className, for: indexPath) as? ArtistMakeupTagCollectionViewCell else { return UICollectionViewCell() }
         let tagName = portfolioCategories[indexPath.row].korName
         cell.makeupTagLabel.text = tagName
         

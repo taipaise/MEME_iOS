@@ -21,9 +21,9 @@ enum PortfolioCategories: String, Codable, CaseIterable {
         case .DAILY:
             return "데일리 메이크업"
         case .INTERVIEW:
-            return "배우 메이크업"
-        case .ACTOR:
             return "면접 메이크업"
+        case .ACTOR:
+            return "배우 메이크업"
         case .PARTY:
             return "파티/이벤트 메이크업"
         case .WEDDING:
