@@ -107,7 +107,7 @@ class ModelReservationDetailViewController: UIViewController, ModelReservationBo
         // 날짜 설정
         calendar.appearance.titleFont = .pretendard(to: .regular, size: 18)
         calendar.appearance.selectionColor = UIColor(red: 67.0/255.0, green: 85.0/255.0, blue: 250.0/255.0, alpha: 1.0)
-        calendar.appearance.todayColor = .white
+        calendar.appearance.todayColor = nil
         calendar.appearance.titleTodayColor = .black
         calendar.calendarWeekdayView.weekdayLabels.last!.textColor = UIColor(red: 255.0/255.0, green: 48.0/255.0, blue: 48.0/255.0, alpha: 1.0)
         calendar.calendarWeekdayView.weekdayLabels[5].textColor = UIColor(red: 255.0/255.0, green: 48.0/255.0, blue: 48.0/255.0, alpha: 1.0)
@@ -205,6 +205,16 @@ class ModelReservationDetailViewController: UIViewController, ModelReservationBo
         updateWeekdayLabels()
         view.setupDismissKeyboardOnTapGesture()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let artistID = artistID {
+            getPossibleTime(aristId: artistID)
+            getPossibleLocation(aristId: artistID)
+        }
+    }
+
     
     // MARK: - configureSubviews
     func configureSubviews() {
@@ -404,9 +414,9 @@ class ModelReservationDetailViewController: UIViewController, ModelReservationBo
         case "BOTH":
             return true
         case .none:
-            return false
+            return true
         case .some(_):
-            return false
+            return true
         }
     }
     
@@ -587,7 +597,6 @@ class ModelReservationDetailViewController: UIViewController, ModelReservationBo
     private func updateNextButtonState() {
         let isDateAndTimeSelected = selectedDate != nil && selectedTime != nil
         let isLocationValid = checkLocationValidity()
-        print(isLocationValid)
         
         DispatchQueue.main.async {
             self.reservationButton.isEnabled = isDateAndTimeSelected && isLocationValid
@@ -607,25 +616,56 @@ extension ModelReservationDetailViewController: FSCalendarDelegate, FSCalendarDa
     }
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-        let day = Calendar.current.component(.weekday, from: date) - 1
-        let today = Date()
         
-        if date < today {
+        let timeZoneKST = TimeZone(identifier: "Asia/Seoul")!
+        let calendarKST = Calendar.current
+        
+        
+        var componentsNow = calendarKST.dateComponents(in: timeZoneKST, from: Date())
+        componentsNow.hour = 0
+        componentsNow.minute = 0
+        componentsNow.second = 0
+        componentsNow.nanosecond = 0
+        let todayKST = calendarKST.date(from: componentsNow)!
+        
+        var componentsDate = calendarKST.dateComponents(in: timeZoneKST, from: date)
+        componentsDate.hour = 0
+        componentsDate.minute = 0
+        componentsDate.second = 0
+        componentsDate.nanosecond = 0
+        let dateKST = calendarKST.date(from: componentsDate)!
+        
+        if dateKST < todayKST {
             return .gray400
-        } else if Calendar.current.shortWeekdaySymbols[day] == "Sun" {
-            return UIColor(red: 255.0/255.0, green: 48.0/255.0, blue: 48.0/255.0, alpha: 1.0)
-        } else if Calendar.current.shortWeekdaySymbols[day] == "Sat" {
-            return UIColor(red: 255.0/255.0, green: 48.0/255.0, blue: 48.0/255.0, alpha: 1.0)
         } else {
-            return .black
+            let weekday = calendarKST.component(.weekday, from: date)
+            switch weekday {
+            case 1:
+                return UIColor(red: 255.0/255.0, green: 48.0/255.0, blue: 48.0/255.0, alpha: 1.0)
+            case 7:
+                return UIColor(red: 255.0/255.0, green: 48.0/255.0, blue: 48.0/255.0, alpha: 1.0)
+            default:
+                return .black
+            }
         }
     }
+
     
     func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-        let today = Date()
+        let timeZoneKST = TimeZone(identifier: "Asia/Seoul")!
+        let calendarKST = Calendar.current
+        
+        
+        var componentsNow = calendarKST.dateComponents(in: timeZoneKST, from: Date())
+        componentsNow.hour = 0
+        componentsNow.minute = 0
+        componentsNow.second = 0
+        componentsNow.nanosecond = 0
+        let todayKST = calendarKST.date(from: componentsNow)!
+        
         selectedDate = date
-            updateAvailableTimes(for: date)
-            updateNextButtonState()
+        updateAvailableTimes(for: date)
+        updateNextButtonState()
         
         let weekday = Calendar.current.component(.weekday, from: date)
         let weekdaySymbol = Calendar.current.weekdaySymbols[weekday - 1]
@@ -651,7 +691,7 @@ extension ModelReservationDetailViewController: FSCalendarDelegate, FSCalendarDa
             selectedWeek = nil
         }
         
-        return date >= today
+        return date >= todayKST
     }
     
     enum WeekdayToSelectedWeek: String {
@@ -707,7 +747,10 @@ extension ModelReservationDetailViewController {
 
 extension ModelReservationDetailViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        selectedVisitLocation = textField.text
+        if textField == visitView.visitLocationTextField {
+            selectedVisitLocation = textField.text
+            updateNextButtonState()
+        }
     }
 }
 

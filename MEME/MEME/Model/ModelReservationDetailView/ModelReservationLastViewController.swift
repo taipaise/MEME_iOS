@@ -28,7 +28,7 @@ class ModelReservationLastViewController: UIViewController {
     }()
     private var completeLabel: UILabel = {
         let label = UILabel()
-        label.text = "김리타님,\n예약이 완료되었습니다!"
+        label.text = "예약이 완료되었습니다!"
         label.font = .pretendard(to: .bold, size: 22)
         label.textColor = .black
         label.numberOfLines = 0

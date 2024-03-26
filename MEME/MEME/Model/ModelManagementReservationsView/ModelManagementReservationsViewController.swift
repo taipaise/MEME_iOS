@@ -176,7 +176,6 @@ final class ModelManagementReservationsViewController: UIViewController {
         reservationSections = groupedDictionary.map { (key, value) in
             ReservationSection(date: key, reservations: value)
         }.sorted(by: { $0.date < $1.date })
-        print("이거:", reservationSections)
         
         setupCollectionViewItems()
     }

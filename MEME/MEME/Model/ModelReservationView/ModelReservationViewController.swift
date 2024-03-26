@@ -205,9 +205,10 @@ class ModelReservationViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "예약하기")
         
-        fetchPortfolioDetail(userId: 5, portfolioId: portfolioID!)
+        fetchPortfolioDetail(userId: 1, portfolioId: portfolioID!)
         fetchReviews(portfolioId: portfolioID!, page: 0)
         fetchImagesFromAPI()
+
         setupSegmentedControl()
 
         configureSubviews()

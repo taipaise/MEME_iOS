@@ -60,7 +60,7 @@ final class ModelHomeViewController: UIViewController {
 
     private var modelWelcomeLabel: UILabel = {
         let label = UILabel()
-        label.text = "메메님, 환영합니다!"
+        label.text = "환영합니다!"
         label.textColor = .black
         label.font = .pretendard(to: .semiBold, size: 20)
         label.numberOfLines = 0
@@ -159,12 +159,15 @@ final class ModelHomeViewController: UIViewController {
         
         getRecommendArtistByReview()
         getRecommendArtistByRecent()
-        
-        
-//        patchArtistProfile(userId: 3, profileImg: "url_to_image", nickname: "nickname", gender: "gender", introduction: "introduction", workExperience: "experience", region: ["region1", "region2"], specialization: ["specialization1", "specialization2"], makeupLocation: "location", shopLocation: "shop_location", availableDayOfWeek: ["MON": "_09_00", "TUE": "_10_00"])
-
-        
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        showModelReservations()
+        getRecommendArtistByReview()
+        getRecommendArtistByRecent()
+    }
+
     // MARK: - configureSubviews
     func configureSubviews() {
         contentsView.addSubview(memeLogoImageView)
