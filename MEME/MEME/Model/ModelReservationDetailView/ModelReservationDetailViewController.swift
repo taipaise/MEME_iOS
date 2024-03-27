@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import FSCalendar
 
-class ModelReservationDetailViewController: UIViewController, ModelReservationBothLocationViewDelegate {
+class ModelReservationDetailViewController: UIViewController {
     var portfolioID: Int? = 0
     var artistID: Int? = 0
     var makeupName: String?
@@ -412,11 +412,11 @@ class ModelReservationDetailViewController: UIViewController, ModelReservationBo
         case "VISIT":
             return !(selectedVisitLocation?.isEmpty ?? true)
         case "BOTH":
-            return true
+            return !(selectedLocation?.isEmpty ?? true)
         case .none:
-            return true
+            return false
         case .some(_):
-            return true
+            return false
         }
     }
     
@@ -574,30 +574,12 @@ class ModelReservationDetailViewController: UIViewController, ModelReservationBo
         updateNextButtonState()
     }
     
-    func didSelectLocationType(_ type: String) {
-        selectedLocationType = type
-        if type == "SHOP" {
-            selectedLocation = "샵의 위치"
-        } else if type == "VISIT" {
-            selectedLocation = selectedVisitLocation
-        }
-        updateNextButtonState()
-    }
-    func didSelectShopLocation(_ location: String) {
-        selectedLocation = location
-        updateNextButtonState()
-    }
-    
-    func didSelectVisitLocation(_ location: String) {
-        selectedVisitLocation = location
-        updateNextButtonState()
-    }
     
     
     private func updateNextButtonState() {
         let isDateAndTimeSelected = selectedDate != nil && selectedTime != nil
         let isLocationValid = checkLocationValidity()
-        
+
         DispatchQueue.main.async {
             self.reservationButton.isEnabled = isDateAndTimeSelected && isLocationValid
             self.reservationButton.backgroundColor = self.reservationButton.isEnabled ? .mainBold : .gray300
@@ -757,6 +739,27 @@ extension ModelReservationDetailViewController: UITextFieldDelegate {
 extension ModelReservationDetailViewController: ModelReservationVisitLocationViewDelegate {
     func didEnterVisitLocation(_ location: String) {
         selectedLocation = location
+        updateNextButtonState()
+    }
+}
+
+extension ModelReservationDetailViewController: ModelReservationBothLocationViewDelegate {
+    func didSelectLocationType(_ type: String) {
+        selectedLocationType = type
+        if type == "SHOP" {
+            selectedLocation = "샵의 위치"
+        } else if type == "VISIT" {
+            selectedLocation = selectedVisitLocation
+        }
+        updateNextButtonState()
+    }
+    func didSelectShopLocation(_ location: String) {
+        selectedLocation = location
+        updateNextButtonState()
+    }
+    func didSelectVisitLocation(_ location: String) {
+        self.selectedLocation = location
+        self.selectedVisitLocation = location
         updateNextButtonState()
     }
 }

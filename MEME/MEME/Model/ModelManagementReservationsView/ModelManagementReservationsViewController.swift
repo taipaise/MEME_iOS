@@ -75,6 +75,11 @@ final class ModelManagementReservationsViewController: UIViewController {
         showReservations()
         setupImageViewGestures()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        showReservations()
+    }
     
     // MARK: - configureSubviews
     func configureSubviews() {
@@ -256,6 +261,7 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegate, U
             return reservationCell
         }
     }
+
 }
 
 extension ModelManagementReservationsViewController: UICollectionViewDelegateFlowLayout {
@@ -274,17 +280,20 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegateFlo
         return CGFloat(12)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let item = collectionViewItems[indexPath.item]
-            switch item {
-            case .reservation(let reservationData):
-                let vc = SingleArtistReservationManageViewController()
-                vc.reservationId = reservationData.reservationId
-                navigationController?.pushViewController(vc, animated: true)
-                
-            default:
-                break
-            }
+        let item = collectionViewItems[indexPath.item]
+        switch item {
+        case .reservation(let reservationData):
+            let vc = ModelCancelReservationViewController()
+            vc.reservationId = reservationData.reservationId
+            vc.portfolioId = reservationData.portfolioId
+            vc.reservationDate = reservationData.reservationDate
+            
+            navigationController?.pushViewController(vc, animated: true)
+            
+        default:
+            break
         }
+    }
 }
 
 // MARK: -BackButtonTappedDelegate

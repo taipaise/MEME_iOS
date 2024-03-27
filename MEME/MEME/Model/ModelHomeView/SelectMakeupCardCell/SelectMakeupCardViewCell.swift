@@ -92,5 +92,45 @@ class SelectMakeupCardViewCell: UICollectionViewCell {
         priceLabel.text = "\(portfolio.price)"
         
     }
+    
+    func configureWithPortfolio(_ portfolio: PortfolioData) {
+        if let firstImageURLString = portfolio.portfolioImgDtoList?.first?.portfolioImgSrc, let url = URL(string: firstImageURLString) {
+            URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+                DispatchQueue.main.async {
+                    if let data = data, error == nil, let image = UIImage(data: data) {
+                        self?.makeupCardImageView.image = image
+                    } else {
+                        self?.makeupCardImageView.image = UIImage(named: "SelectMakeupCardIMG")
+                    }
+                }
+            }.resume()
+        } else {
+            makeupCardImageView.image = UIImage(named: "SelectMakeupCardIMG")
+        }
+        
+        switch portfolio.category {
+        case "DAILY":
+            artistInformLabel.text = "데일리 메이크업"
+        case "ACTOR":
+            artistInformLabel.text = "배우 메이크업"
+        case "INTERVIEW":
+            artistInformLabel.text = "면접 메이크업"
+        case "PARTY":
+            artistInformLabel.text = "파티/이벤트 메이크업"
+        case "WEDDING":
+            artistInformLabel.text = "웨딩 메이크업"
+        case "PROSTHETIC":
+            artistInformLabel.text = "특수 메이크업"
+        case "STUDIO":
+            artistInformLabel.text = "스튜디오 메이크업"
+        case "ETC":
+            artistInformLabel.text = "기타 메이크업"
+        default:
+            artistInformLabel.text = "해당 메이크업 분야 없음"
+        }
+        
+        artistNameLabel.text = portfolio.artistNickName
+        priceLabel.text = "\(portfolio.price)원"
+    }
 
 }

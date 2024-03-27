@@ -16,6 +16,8 @@ protocol ModelReservationBothLocationViewDelegate: AnyObject {
 
 class  ModelReservationBothLocationView: UIView {
     // MARK: - Properties
+    var selectedLocation: String?
+    
     weak var delegate: ModelReservationBothLocationViewDelegate?
     private var makeupLocationData: MakeupLocationData?
         
@@ -75,7 +77,8 @@ class  ModelReservationBothLocationView: UIView {
     
     private lazy var visitView: ModelReservationVisitLocationView = {
         let view = ModelReservationVisitLocationView()
-
+        view.delegate = self
+        
         return view
     }()
     private lazy var shopView: ModelReservationShopLocationView = {
@@ -136,7 +139,12 @@ class  ModelReservationBothLocationView: UIView {
         
         if sender == goShopButton {
             delegate?.didSelectLocationType("SHOP")
-            delegate?.didSelectShopLocation("샵의 위치")
+            if let shopLocation = self.makeupLocationData?.shopLocation {
+                delegate?.didSelectShopLocation(shopLocation)
+            }
+            if let data = self.makeupLocationData {
+                shopView.updateShopLocation(data.shopLocation)
+            }
         } else if sender == comeVisitButton {
             delegate?.didSelectLocationType("VISIT")
             if let visitLocation = visitView.getSavedTextFieldValue() {
@@ -187,8 +195,16 @@ class  ModelReservationBothLocationView: UIView {
     }
     
     // MARK: - Configuration
-        func configureModelReservationBothLocationView(with data: MakeupLocationData) {
-            self.makeupLocationData = data
-        }
+    func configureModelReservationBothLocationView(with data: MakeupLocationData) {
+        self.makeupLocationData = data
+        shopView.updateShopLocation(data.shopLocation)
+    }
 }
 
+extension ModelReservationBothLocationView: ModelReservationVisitLocationViewDelegate {
+    func didEnterVisitLocation(_ location: String) {
+        self.selectedLocation = location
+
+        delegate?.didSelectVisitLocation(location)
+    }
+}

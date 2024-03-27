@@ -15,6 +15,7 @@ enum ReservationAPI {
     case patchReservation(reservationId: Int, status: ReservationState)
     case getArtistReservation(aristId: Int)
     case getModelReservation(modelId: Int)
+    case getModelDetailReservation(reservationId: Int)
 }
 
 extension ReservationAPI: MemeAPI {
@@ -36,6 +37,8 @@ extension ReservationAPI: MemeAPI {
             return "/\(id)/artist"
         case .getModelReservation(modelId: let id):
             return "/\(id)/model"
+        case .getModelDetailReservation(reservationId: let id):
+            return "/\(id)/model/details"
         }
     }
     
@@ -45,14 +48,14 @@ extension ReservationAPI: MemeAPI {
     
     var headerType: HTTPHeaderFields {
         switch self {
-        case .getArtistReservation, .getModelReservation, .getPossibleLocation, .getPossibleTime, .patchReservation, .postReservation:
+        case .getArtistReservation, .getModelReservation, .getPossibleLocation, .getPossibleTime, .patchReservation, .postReservation, .getModelDetailReservation:
             return .hasAccessToken
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getArtistReservation, .getModelReservation, .getPossibleLocation, .getPossibleTime:
+        case .getArtistReservation, .getModelReservation, .getPossibleLocation, .getPossibleTime, .getModelDetailReservation:
             return .get
         case .patchReservation:
             return .patch
@@ -63,7 +66,7 @@ extension ReservationAPI: MemeAPI {
     
     var task: Moya.Task {
         switch self {
-        case .getArtistReservation, .getModelReservation, .getPossibleLocation, .getPossibleTime:
+        case .getArtistReservation, .getModelReservation, .getPossibleLocation, .getPossibleTime, .getModelDetailReservation:
             return .requestPlain
         case .patchReservation(reservationId: let id, status: let state):
             let parameters: [String: Any] = [
