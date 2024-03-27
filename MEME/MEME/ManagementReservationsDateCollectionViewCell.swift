@@ -8,8 +8,8 @@
 import UIKit
 import SnapKit
 
-class ModelManagementReservationsDateCollectionViewCell: UICollectionViewCell {
-    static let identifier = "ModelManagementReservationsDateCollectionViewCell"
+class ManagementReservationsDateCollectionViewCell: UICollectionViewCell {
+    static let identifier = "ManagementReservationsDateCollectionViewCell"
     
     private var label = UILabel()
 

@@ -13,7 +13,7 @@ struct ReservationSection {
     var reservations: [ReservationData]
 }
 
-final class ModelManagementReservationsViewController: UIViewController {
+final class ManagementReservationsViewController: UIViewController {
     private let isModel : Bool = true
     private var isFavoriteArtist : Bool = false
     var artistID: Int? = 0
@@ -216,7 +216,7 @@ final class ModelManagementReservationsViewController: UIViewController {
         reservationCollectionView.dataSource = self
         
         //cell 등록
-        reservationCollectionView.register(ModelManagementReservationsDateCollectionViewCell.self, forCellWithReuseIdentifier: ModelManagementReservationsDateCollectionViewCell.identifier)
+        reservationCollectionView.register(ManagementReservationsDateCollectionViewCell.self, forCellWithReuseIdentifier: ManagementReservationsDateCollectionViewCell.identifier)
 
   
         reservationCollectionView.register(UINib(nibName: "ModelReservationConfirmViewCell", bundle: nil), forCellWithReuseIdentifier: ModelReservationConfirmViewCell.identifier)
@@ -225,7 +225,7 @@ final class ModelManagementReservationsViewController: UIViewController {
 }
 
 //MARK: -UITableViewDataSource, UITableViewDelegate
-extension ModelManagementReservationsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ManagementReservationsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     //섹션의 갯수
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -241,7 +241,7 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegate, U
         let item = collectionViewItems[indexPath.item]
         switch item {
         case .date(let date):
-            guard let dateCell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelManagementReservationsDateCollectionViewCell.identifier, for: indexPath) as? ModelManagementReservationsDateCollectionViewCell else {
+            guard let dateCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagementReservationsDateCollectionViewCell.identifier, for: indexPath) as? ManagementReservationsDateCollectionViewCell else {
                 fatalError("셀 타입 캐스팅 실패...")
             }
             dateCell.configure(with: date)
@@ -264,7 +264,7 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegate, U
 
 }
 
-extension ModelManagementReservationsViewController: UICollectionViewDelegateFlowLayout {
+extension ManagementReservationsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionViewItems[indexPath.item] {
         case .date:
@@ -297,7 +297,7 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegateFlo
 }
 
 // MARK: -BackButtonTappedDelegate
-extension ModelManagementReservationsViewController: BackButtonTappedDelegate  {
+extension ManagementReservationsViewController: BackButtonTappedDelegate  {
     func backButtonTapped() {
         if let navigationController = self.navigationController {
             navigationController.popViewController(animated: true)
@@ -306,7 +306,7 @@ extension ModelManagementReservationsViewController: BackButtonTappedDelegate  {
 }
 
 //MARK: -API 통신 메소드
-extension ModelManagementReservationsViewController {
+extension ManagementReservationsViewController {
     func showModelReservations(modelId: Int) {
         ReservationManager.shared.getModelReservation(modelId: modelId) { [weak self] result in
             DispatchQueue.main.async {

@@ -25,6 +25,8 @@
 		094884DC2B59915500C233E0 /* SingleArtistReservationManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094884DA2B59915400C233E0 /* SingleArtistReservationManageViewController.xib */; };
 		095742512B66153E0011B580 /* ArtistPortfolioEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0957424F2B66153E0011B580 /* ArtistPortfolioEditingViewController.swift */; };
 		095742522B66153E0011B580 /* ArtistPortfolioEditingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 095742502B66153E0011B580 /* ArtistPortfolioEditingViewController.xib */; };
+		098C48C32BB4987E00756C55 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 098C48C12BB4987E00756C55 /* GoogleService-Info.plist */; };
+		098C48C42BB4987E00756C55 /* memeSecret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 098C48C22BB4987E00756C55 /* memeSecret.plist */; };
 		09A6B0A02B9B0EE6007DCC0A /* PortfolioCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A6B09F2B9B0EE6007DCC0A /* PortfolioCategories.swift */; };
 		2D0A19012B4EC9A000C1CECA /* ModelReservationConfirmViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D0A19002B4EC9A000C1CECA /* ModelReservationConfirmViewCell.xib */; };
 		2D0A19052B4ED07B00C1CECA /* SelectMakeupCardViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D0A19042B4ED07B00C1CECA /* SelectMakeupCardViewCell.xib */; };
@@ -38,7 +40,7 @@
 		2D4B7C222B5F0B44001E1B09 /* ShowInformationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4B7C212B5F0B44001E1B09 /* ShowInformationView.swift */; };
 		2D4B7C242B5F1026001E1B09 /* ShowReviewView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4B7C232B5F1026001E1B09 /* ShowReviewView.swift */; };
 		2D4B7C262B5F17E7001E1B09 /* TotalStarRatingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4B7C252B5F17E7001E1B09 /* TotalStarRatingView.swift */; };
-		2D4B7C292B5F294A001E1B09 /* ModelManagementReservationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4B7C282B5F294A001E1B09 /* ModelManagementReservationsViewController.swift */; };
+		2D4B7C292B5F294A001E1B09 /* ManagementReservationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D4B7C282B5F294A001E1B09 /* ManagementReservationsViewController.swift */; };
 		2D5C05A12B60269900EDC69F /* ShowReviewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C05A02B60269900EDC69F /* ShowReviewTableViewCell.swift */; };
 		2D5C05A42B60433000EDC69F /* ModelReservationDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D5C05A32B60433000EDC69F /* ModelReservationDetailViewController.swift */; };
 		2D62E23E2B5428CC004E8299 /* ModelNonReservationViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E23D2B5428CC004E8299 /* ModelNonReservationViewCell.swift */; };
@@ -47,13 +49,11 @@
 		2D62E2552B549407004E8299 /* CategorySearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2542B549407004E8299 /* CategorySearchViewCell.swift */; };
 		2D62E25B2B54A658004E8299 /* RecentSearchViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D62E2592B54A658004E8299 /* RecentSearchViewCell.swift */; };
 		2D62E25C2B54A658004E8299 /* RecentSearchViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D62E25A2B54A658004E8299 /* RecentSearchViewCell.xib */; };
-		2D669BA02BAD9069007E03A0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D669B9E2BAD9069007E03A0 /* GoogleService-Info.plist */; };
-		2D669BA12BAD9069007E03A0 /* memeSecret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D669B9F2BAD9069007E03A0 /* memeSecret.plist */; };
 		2D669BA32BAD9EBF007E03A0 /* ReviewAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D669BA22BAD9EBF007E03A0 /* ReviewAPI.swift */; };
 		2D669BA52BAD9F37007E03A0 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D669BA42BAD9F37007E03A0 /* ReviewManager.swift */; };
 		2D6D2CE32BB35013007EF440 /* ModelCancelReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D2CE22BB35013007EF440 /* ModelCancelReservationViewController.swift */; };
 		2D6E4CEB2B61FA7D00D7F919 /* ModelReservationLastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6E4CEA2B61FA7D00D7F919 /* ModelReservationLastViewController.swift */; };
-		2D6E4CEE2B6221D800D7F919 /* ModelManagementReservationsDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6E4CED2B6221D800D7F919 /* ModelManagementReservationsDateCollectionViewCell.swift */; };
+		2D6E4CEE2B6221D800D7F919 /* ManagementReservationsDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6E4CED2B6221D800D7F919 /* ManagementReservationsDateCollectionViewCell.swift */; };
 		2D6F59AB2B5BD07500CA883A /* ModelReservationChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6F59A92B5BD07500CA883A /* ModelReservationChartTableViewCell.swift */; };
 		2D6F59AC2B5BD07500CA883A /* ModelReservationChartTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 2D6F59AA2B5BD07500CA883A /* ModelReservationChartTableViewCell.xib */; };
 		2D6F59AE2B5BF3A900CA883A /* ModelReservationChartTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6F59AD2B5BF3A900CA883A /* ModelReservationChartTableViewController.swift */; };
@@ -310,6 +310,8 @@
 		094884DA2B59915400C233E0 /* SingleArtistReservationManageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleArtistReservationManageViewController.xib; sourceTree = "<group>"; };
 		0957424F2B66153E0011B580 /* ArtistPortfolioEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistPortfolioEditingViewController.swift; sourceTree = "<group>"; };
 		095742502B66153E0011B580 /* ArtistPortfolioEditingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtistPortfolioEditingViewController.xib; sourceTree = "<group>"; };
+		098C48C12BB4987E00756C55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		098C48C22BB4987E00756C55 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = memeSecret.plist; path = ../../../../memeSecret.plist; sourceTree = "<group>"; };
 		09A6B09F2B9B0EE6007DCC0A /* PortfolioCategories.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCategories.swift; sourceTree = "<group>"; };
 		2D0A19002B4EC9A000C1CECA /* ModelReservationConfirmViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelReservationConfirmViewCell.xib; sourceTree = "<group>"; };
 		2D0A19042B4ED07B00C1CECA /* SelectMakeupCardViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SelectMakeupCardViewCell.xib; sourceTree = "<group>"; };
@@ -323,7 +325,7 @@
 		2D4B7C212B5F0B44001E1B09 /* ShowInformationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowInformationView.swift; sourceTree = "<group>"; };
 		2D4B7C232B5F1026001E1B09 /* ShowReviewView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowReviewView.swift; sourceTree = "<group>"; };
 		2D4B7C252B5F17E7001E1B09 /* TotalStarRatingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TotalStarRatingView.swift; sourceTree = "<group>"; };
-		2D4B7C282B5F294A001E1B09 /* ModelManagementReservationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManagementReservationsViewController.swift; sourceTree = "<group>"; };
+		2D4B7C282B5F294A001E1B09 /* ManagementReservationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementReservationsViewController.swift; sourceTree = "<group>"; };
 		2D5C05A02B60269900EDC69F /* ShowReviewTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShowReviewTableViewCell.swift; sourceTree = "<group>"; };
 		2D5C05A32B60433000EDC69F /* ModelReservationDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationDetailViewController.swift; sourceTree = "<group>"; };
 		2D62E23D2B5428CC004E8299 /* ModelNonReservationViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelNonReservationViewCell.swift; sourceTree = "<group>"; };
@@ -332,13 +334,11 @@
 		2D62E2542B549407004E8299 /* CategorySearchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategorySearchViewCell.swift; sourceTree = "<group>"; };
 		2D62E2592B54A658004E8299 /* RecentSearchViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecentSearchViewCell.swift; sourceTree = "<group>"; };
 		2D62E25A2B54A658004E8299 /* RecentSearchViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecentSearchViewCell.xib; sourceTree = "<group>"; };
-		2D669B9E2BAD9069007E03A0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		2D669B9F2BAD9069007E03A0 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
 		2D669BA22BAD9EBF007E03A0 /* ReviewAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAPI.swift; sourceTree = "<group>"; };
 		2D669BA42BAD9F37007E03A0 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
 		2D6D2CE22BB35013007EF440 /* ModelCancelReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCancelReservationViewController.swift; sourceTree = "<group>"; };
 		2D6E4CEA2B61FA7D00D7F919 /* ModelReservationLastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationLastViewController.swift; sourceTree = "<group>"; };
-		2D6E4CED2B6221D800D7F919 /* ModelManagementReservationsDateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManagementReservationsDateCollectionViewCell.swift; sourceTree = "<group>"; };
+		2D6E4CED2B6221D800D7F919 /* ManagementReservationsDateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ManagementReservationsDateCollectionViewCell.swift; sourceTree = "<group>"; };
 		2D6F59A92B5BD07500CA883A /* ModelReservationChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationChartTableViewCell.swift; sourceTree = "<group>"; };
 		2D6F59AA2B5BD07500CA883A /* ModelReservationChartTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ModelReservationChartTableViewCell.xib; sourceTree = "<group>"; };
 		2D6F59AD2B5BF3A900CA883A /* ModelReservationChartTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationChartTableViewController.swift; sourceTree = "<group>"; };
@@ -773,8 +773,6 @@
 		2D6E4CEC2B62217E00D7F919 /* ModelManagementReservationsView */ = {
 			isa = PBXGroup;
 			children = (
-				2D4B7C282B5F294A001E1B09 /* ModelManagementReservationsViewController.swift */,
-				2D6E4CED2B6221D800D7F919 /* ModelManagementReservationsDateCollectionViewCell.swift */,
 				2D6D2CE22BB35013007EF440 /* ModelCancelReservationViewController.swift */,
 			);
 			path = ModelManagementReservationsView;
@@ -878,14 +876,16 @@
 				3142B9612B4CFFED0066CD5A /* Assets.xcassets */,
 				314F74E92B52DDF200CACF20 /* Font */,
 				3142B9662B4CFFED0066CD5A /* Info.plist */,
-				2D669B9E2BAD9069007E03A0 /* GoogleService-Info.plist */,
-				2D669B9F2BAD9069007E03A0 /* memeSecret.plist */,
+				098C48C12BB4987E00756C55 /* GoogleService-Info.plist */,
+				098C48C22BB4987E00756C55 /* memeSecret.plist */,
 				3142B9632B4CFFED0066CD5A /* LaunchScreen.storyboard */,
 				3156D1FD2B69438800559820 /* Network */,
 				3142B9992B4D01FB0066CD5A /* extenstions */,
 				3142B9A02B4D036D0066CD5A /* Core */,
 				3142B9A52B4D04BD0066CD5A /* Login */,
 				3142B9AB2B4D071E0066CD5A /* Artist */,
+				2D4B7C282B5F294A001E1B09 /* ManagementReservationsViewController.swift */,
+				2D6E4CED2B6221D800D7F919 /* ManagementReservationsDateCollectionViewCell.swift */,
 				3142B9AA2B4D07170066CD5A /* Model */,
 			);
 			path = MEME;
@@ -1596,7 +1596,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CCAB5A632B67B6CA00067FA4 /* ModelDetailSettingView.xib in Resources */,
-				2D669BA02BAD9069007E03A0 /* GoogleService-Info.plist in Resources */,
 				094884CC2B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.xib in Resources */,
 				094884DC2B59915500C233E0 /* SingleArtistReservationManageViewController.xib in Resources */,
 				3142B9652B4CFFED0066CD5A /* LaunchScreen.storyboard in Resources */,
@@ -1615,7 +1614,6 @@
 				312B30502B550FF9008D17FC /* Pretendard-ExtraLight.otf in Resources */,
 				31B2636E2B57EECB00304FBE /* BusinessRegistrationViewController.xib in Resources */,
 				312B30532B550FF9008D17FC /* Pretendard-ExtraBold.otf in Resources */,
-				2D669BA12BAD9069007E03A0 /* memeSecret.plist in Resources */,
 				312B30522B550FF9008D17FC /* Pretendard-Thin.otf in Resources */,
 				CCCE563C2B81D9FB007555A2 /* ArtistLocationViewController.xib in Resources */,
 				31B263532B57EE8600304FBE /* SetDetailInfoViewController.xib in Resources */,
@@ -1631,6 +1629,7 @@
 				2D0A19012B4EC9A000C1CECA /* ModelReservationConfirmViewCell.xib in Resources */,
 				2D6F59AC2B5BD07500CA883A /* ModelReservationChartTableViewCell.xib in Resources */,
 				31B2634B2B57EE7100304FBE /* RoleSelectionViewController.xib in Resources */,
+				098C48C42BB4987E00756C55 /* memeSecret.plist in Resources */,
 				315EE2D12B66566A0042A082 /* DetailSettingView.xib in Resources */,
 				312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */,
 				091CCCDB2B64158B00ADD21C /* ArtistPortfolioManageViewController.xib in Resources */,
@@ -1643,6 +1642,7 @@
 				312B30512B550FF9008D17FC /* Pretendard-SemiBold.otf in Resources */,
 				31B263442B57EDE300304FBE /* TermDetailViewController.xib in Resources */,
 				315EE2D62B6658B50042A082 /* SetBusinessInfoViewController.xib in Resources */,
+				098C48C32BB4987E00756C55 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1799,7 +1799,7 @@
 				315EE2D02B66566A0042A082 /* DetailSettingView.swift in Sources */,
 				2DA208112B7CB476006EB9B9 /* ReservationDTO.swift in Sources */,
 				2D6F59BF2B5C7D3300CA883A /* ModelReservationTypeButton.swift in Sources */,
-				2D6E4CEE2B6221D800D7F919 /* ModelManagementReservationsDateCollectionViewCell.swift in Sources */,
+				2D6E4CEE2B6221D800D7F919 /* ManagementReservationsDateCollectionViewCell.swift in Sources */,
 				2D6E4CEB2B61FA7D00D7F919 /* ModelReservationLastViewController.swift in Sources */,
 				31C85EED2B526B780064A6E7 /* OnBoardingViewController.swift in Sources */,
 				CC9C38502B7550070073A257 /* MyPageAPI.swift in Sources */,
@@ -1840,7 +1840,7 @@
 				CC9C388D2B80F9C80073A257 /* ModelProfileInfoDTO.swift in Sources */,
 				31B413842B6D322500535BB1 /* NetworkProvider.swift in Sources */,
 				CCCE56382B81D9FB007555A2 /* ArtistTimeHeaderSupplementaryView.swift in Sources */,
-				2D4B7C292B5F294A001E1B09 /* ModelManagementReservationsViewController.swift in Sources */,
+				2D4B7C292B5F294A001E1B09 /* ManagementReservationsViewController.swift in Sources */,
 				2D669BA52BAD9F37007E03A0 /* ReviewManager.swift in Sources */,
 				2DB303E82B8286EF00D9E394 /* (null) in Sources */,
 				CC9C38892B80F9AA0073A257 /* ModelProfileInfoAPI.swift in Sources */,
