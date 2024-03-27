@@ -154,7 +154,7 @@ class ModelReservationViewController: UIViewController {
         return stack
     }()
     
-    private let segmentedControl: ModelReservationSegmentedControl = {
+    private var segmentedControl: ModelReservationSegmentedControl = {
         let underbarInfo = UnderbarInfo(height: 3, barColor: .mainBold, backgroundColor: .gray300)
         let control = ModelReservationSegmentedControl(items: ["정보", "리뷰"], underbarInfo: underbarInfo)
         control.translatesAutoresizingMaskIntoConstraints = false
@@ -203,7 +203,8 @@ class ModelReservationViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "예약하기")
         
-        fetchPortfolioDetail(userId: 6, portfolioId: portfolioID!)
+        fetchPortfolioDetail(userId: KeyChainManager.loadMemberID(), portfolioId: portfolioID!)
+        fetchReviews(portfolioId: portfolioID!, page: 0)
         fetchImagesFromAPI()
         setupSegmentedControl()
 
@@ -616,7 +617,57 @@ extension ModelReservationViewController {
             }
         }
     }
-    
+    private func fetchReviews(portfolioId: Int, page: Int) {
+        ReviewManager.shared.getReviews(portfolioId: portfolioId, page: page) { [weak self] result in
+            switch result {
+            case .success(let reviewResponse):
+                print("리뷰 조회 완료: \(reviewResponse)")
+                var reviewDatas: [ReviewData] = []
+                
+                let dispatchGroup = DispatchGroup()
+                
+                reviewResponse.data?.content.forEach { review in
+                    dispatchGroup.enter()
+                    
+                    var images: [UIImage] = []
+                    let imageDispatchGroup = DispatchGroup()
+                    
+                    review.reviewImgDtoList.forEach { imgDto in
+                        imageDispatchGroup.enter()
+                        FirebaseStorageManager.downloadImage(urlString: imgDto.reviewImgSrc) { downloadedImage in
+                            if let image = downloadedImage {
+                                images.append(image)
+                            }
+                            imageDispatchGroup.leave()
+                        }
+                    }
+                    
+                    imageDispatchGroup.notify(queue: .main) {
+                        reviewDatas.append(ReviewData(modelName: review.modelName, star: review.star, comment: review.comment, reviewImgDtoList: images))
+                        dispatchGroup.leave()
+                    }
+                }
+                
+                dispatchGroup.notify(queue: .main) {
+                    let starRatingDistribution = StarRatingDistribution(
+                        fiveStars: reviewResponse.data?.starStatus["5"] ?? 0,
+                        fourStars: reviewResponse.data?.starStatus["4"] ?? 0,
+                        threeStars: reviewResponse.data?.starStatus["3"] ?? 0,
+                        twoStars: reviewResponse.data?.starStatus["2"] ?? 0,
+                        oneStar: reviewResponse.data?.starStatus["1"] ?? 0
+                    )
+                    
+                    self?.reviewView.updateReviews(with: reviewDatas, starRatingDistribution: starRatingDistribution)
+                    self?.segmentedControl.setReviewCount(reviewDatas.count)
+                }
+            case .failure(let error):
+                print("리뷰 리스트 조회 실패: \(error.localizedDescription)")
+            }
+        }
+    }
+
+
+
     // MARK: - Enum 처리
     enum MakeupCategory: String {
         case DAILY
@@ -642,6 +693,9 @@ extension ModelReservationViewController {
         case SHOP
         case VISIT
         case BOTH
+    }
+    private func handleReviewResponse(_ response: ReviewResponse) {
+        print("Successfully fetched reviews: \(response)")
     }
     
     private func displayPortfolioDetail(_ portfolioDetail: PortfolioDTO) {

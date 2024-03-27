@@ -105,7 +105,7 @@ extension PortfolioAPI: MemeAPI {
                 "info": info,
                 "portfolioImgSrc": portfolio_img_src
             ]
-            //쿼리 파라미터가 아니기 때문에 JSONEncoding.default -> 바디에 담을 데이터
+          
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         
         case .getAllPortfolio(
@@ -115,7 +115,7 @@ extension PortfolioAPI: MemeAPI {
             let parameters: [String:Any] = [
                 "page": page
             ]
-            //쿼리 파라미터이기 때문에 URLEncoding.default를 해서 URL 뒤에 붙도록 한다. ex) portfolio/?page=1
+            
             return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
             
         case .editPortfolio(

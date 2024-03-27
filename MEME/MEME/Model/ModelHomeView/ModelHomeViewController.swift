@@ -423,15 +423,13 @@ extension ModelHomeViewController: UISearchBarDelegate {
 //MARK: -API 통신 메소드
 extension ModelHomeViewController {
     func showModelReservations() {
-        ReservationManager.shared.getModelReservation(modelId: 1) { [weak self] result in
+        ReservationManager.shared.getModelReservation(modelId: KeyChainManager.loadMemberID()) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let reservationResponse):
                     print("모델 예약 정보 조회 성공: \(reservationResponse)")
                     let filteredReservations = reservationResponse.data?.filter { reservationData in
-                        // 문자열을 Date 객체로 변환
                         if let date = self?.dateFromString(reservationData.reservationDate) {
-                            // 변환된 Date 객체를 isToday 함수에 전달
                             return self?.isToday(date) ?? false
                         }
                         return false

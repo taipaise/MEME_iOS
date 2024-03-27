@@ -27,7 +27,6 @@ final class ModelReservationSegmentedControl: UISegmentedControl {
     private lazy var reviewNumLabel: UILabel = {
         let label = UILabel()
         label.textColor = .mainBold
-        // label 내용 api에서 받아온 숫자로 수정 필요
         label.text = "3"
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .pretendard(to: .regular, size: 14)

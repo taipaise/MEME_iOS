@@ -34,9 +34,9 @@ class SelectMakeupCardViewCell: UICollectionViewCell {
     
     func configure(with portfolio: Portfolio) {
         guard let url = URL(string: portfolio.portfolioImg) else {
-                makeupCardImageView.image = UIImage(named: "SelectMakeupCardIMG")
-                return
-            }
+            makeupCardImageView.image = UIImage(named: "SelectMakeupCardIMG")
+            return
+        }
 
         URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
             DispatchQueue.main.async {
