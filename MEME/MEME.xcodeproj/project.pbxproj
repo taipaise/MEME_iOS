@@ -609,6 +609,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		098C48C52BB4ADE600756C55 /* ReservationManagement */ = {
+			isa = PBXGroup;
+			children = (
+				2D6E4CED2B6221D800D7F919 /* ManagementReservationsDateCollectionViewCell.swift */,
+				2D4B7C282B5F294A001E1B09 /* ManagementReservationsViewController.swift */,
+			);
+			path = ReservationManagement;
+			sourceTree = "<group>";
+		};
 		09A6B0A42B9B22B3007DCC0A /* ArtistHome */ = {
 			isa = PBXGroup;
 			children = (
@@ -884,8 +893,6 @@
 				3142B9A02B4D036D0066CD5A /* Core */,
 				3142B9A52B4D04BD0066CD5A /* Login */,
 				3142B9AB2B4D071E0066CD5A /* Artist */,
-				2D4B7C282B5F294A001E1B09 /* ManagementReservationsViewController.swift */,
-				2D6E4CED2B6221D800D7F919 /* ManagementReservationsDateCollectionViewCell.swift */,
 				3142B9AA2B4D07170066CD5A /* Model */,
 			);
 			path = MEME;
@@ -975,6 +982,7 @@
 		3142B9AB2B4D071E0066CD5A /* Artist */ = {
 			isa = PBXGroup;
 			children = (
+				098C48C52BB4ADE600756C55 /* ReservationManagement */,
 				CCCE562C2B81D9FA007555A2 /* ArtistProfile_2 */,
 				CCCE56262B81D9FA007555A2 /* ArtistProfile_3 */,
 				CCCE56302B81D9FA007555A2 /* ArtistTimeCollectionViewCell.swift */,
