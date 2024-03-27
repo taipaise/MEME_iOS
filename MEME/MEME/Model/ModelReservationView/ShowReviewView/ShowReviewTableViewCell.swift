@@ -90,6 +90,7 @@ class ShowReviewTableViewCell: UITableViewCell {
         imagesStackView.snp.makeConstraints { make in
             make.top.equalTo(modelImageView.snp.bottom).offset(20)
             make.leading.trailing.equalToSuperview()
+            make.height.equalTo(200)
         }
         reviewLabel.snp.makeConstraints { make in
             make.top.equalTo(imagesStackView.snp.bottom).offset(18)

@@ -639,16 +639,23 @@ extension ModelReservationViewController {
                     
                     review.reviewImgDtoList.forEach { imgDto in
                         imageDispatchGroup.enter()
-                        FirebaseStorageManager.downloadImage(urlString: imgDto.reviewImgSrc) { downloadedImage in
-                            if let image = downloadedImage {
-                                images.append(image)
+                        
+                        if let url = URL(string: imgDto.reviewImgSrc) {
+                            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                                defer { imageDispatchGroup.leave() }
+                                
+                                if let data = data, let image = UIImage(data: data) {
+                                    images.append(image)
+                                }
                             }
+                            task.resume()
+                        } else {
                             imageDispatchGroup.leave()
                         }
                     }
                     
                     imageDispatchGroup.notify(queue: .main) {
-                        reviewDatas.append(ReviewData(modelName: review.modelName, star: review.star, comment: review.comment, reviewImgDtoList: images))
+                        reviewDatas.append(ReviewData(modelName: review.modelNickName, star: review.star, comment: review.comment, reviewImgDtoList: images))
                         dispatchGroup.leave()
                     }
                 }
