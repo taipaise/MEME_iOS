@@ -16,12 +16,12 @@ final class WrittenReviewManager {
     
     private init() {}
 
-func getReviews(modelId: Int, modelNickName: String, star: Int, comment: String, reviewImgDtoList: [ReviewImage], completion: @escaping (Result<ReviewResponse, MoyaError>) -> Void) {
-    provider.request(api: .getWrittenReview(modelId: modelId, modelNickName: modelNickName, star: star, comment: comment, reviewImgDtoList: reviewImgDtoList)) { result in
+func getWrittenReview(modelId: Int, reviewId: Int, artistNickName: String, makeupName: String, portfolioImg: String, location: String, createdAt: String, completion: @escaping (Result<WrittenReviewResponse, MoyaError>) -> Void) {
+    provider.request(api: .getWrittenReview(modelId: modelId, reviewId: reviewId, artistNickName: artistNickName, makeupName: makeupName, portfolioImg: portfolioImg, location: location, createdAt: createdAt)) { result in
             switch result {
             case .success(let response):
                 do {
-                    let reviewResponse = try JSONDecoder().decode(ReviewResponse.self, from: response.data)
+                    let reviewResponse = try JSONDecoder().decode(WrittenReviewResponse.self, from: response.data)
                     completion(.success(reviewResponse))
                 } catch {
                     completion(.failure(MoyaError.objectMapping(error, response)))

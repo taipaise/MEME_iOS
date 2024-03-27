@@ -19,8 +19,11 @@ struct WrittenReviewResponse: Codable {
 }
     
 struct WrittenReviewData: Codable {
-    let modelNickName: String
-    let star: Int
-    let comment: String
-    let reviewImgDtoList: [ReviewImage]
+    let modelId: Int
+    let reviewId: Int
+    let artistNickName: String
+    let makeupName: String
+    let portfolioImg: String
+    let location: String
+    let createdAt: String
 }

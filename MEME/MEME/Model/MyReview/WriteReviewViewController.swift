@@ -18,23 +18,10 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
     
     let reviewLabel: UILabel = {
         let label = UILabel()
-        label.textColor = UIColor.black
+        label.textColor = .black
         label.font = UIFont(name: "Pretendard-Regular", size: 20)
         label.numberOfLines = 0
         label.lineBreakMode = .byWordWrapping
-        
-        let labelText = "아티스트명 의\n메이크업명 은 어땠나요?"
-        let attributedString = NSMutableAttributedString(string: labelText)
-        let boldFontAttribute = [NSAttributedString.Key.font: UIFont(name: "Pretendard-SemiBold", size: 20)!]
-        
-        let artistNameRange = (labelText as NSString).range(of: "아티스트명")
-        let makeupNameRange = (labelText as NSString).range(of: "메이크업명")
-        
-        attributedString.addAttributes(boldFontAttribute, range: artistNameRange)
-        attributedString.addAttributes(boldFontAttribute, range: makeupNameRange)
-        
-        label.attributedText = attributedString
-        
         return label
     }()
     
@@ -82,6 +69,21 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
         
         return setbtn
     }()
+    
+    func updateReviewLabel(artistName: String, makeupName: String) {
+        let labelText = "\(artistName)의\n\(makeupName)은 어땠나요?"
+        let attributedString = NSMutableAttributedString(string: labelText)
+        let boldFontAttribute = [NSAttributedString.Key.font: UIFont(name: "Pretendard-SemiBold", size: 20)!]
+
+        let artistNameRange = (labelText as NSString).range(of: artistName)
+        let makeupNameRange = (labelText as NSString).range(of: makeupName)
+
+        attributedString.addAttributes(boldFontAttribute, range: artistNameRange)
+        attributedString.addAttributes(boldFontAttribute, range: makeupNameRange)
+
+        reviewLabel.attributedText = attributedString
+    }
+
     
     var imageViewHeightConstraint: NSLayoutConstraint?
     var reviewTextViewTopConstraint: NSLayoutConstraint?
@@ -379,6 +381,24 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
             }
         }
     }
+    func loadImageFromUrl(imageUrl: String) {
+        guard let url = URL(string: imageUrl) else {
+            print("Invalid URL")
+            return
+        }
+        
+        URLSession.shared.dataTask(with: url) { [weak self] data, response, error in
+            guard let data = data, error == nil else {
+                print("Error downloading image: \(String(describing: error))")
+                return
+            }
+            
+            DispatchQueue.main.async {
+                self?.imageView.image = UIImage(data: data)
+            }
+        }.resume()
+    }
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true

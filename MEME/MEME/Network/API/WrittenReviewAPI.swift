@@ -9,8 +9,8 @@ import Foundation
 import Moya
 
 enum WrittenReviewAPI {
-    case getWrittenReview(modelId: Int, modelNickName: String, star: Int, comment: String, 
-                          reviewImgDtoList: [ReviewImage])
+    case getWrittenReview(modelId: Int, reviewId:Int, artistNickName: String, makeupName: String, portfolioImg: String,
+                          location: String ,createdAt: String)
 }
 
 extension WrittenReviewAPI: MemeAPI {
@@ -20,8 +20,8 @@ extension WrittenReviewAPI: MemeAPI {
     
     var urlPath: String {
         switch self {
-        case .getWrittenReview(let modelId, _, _, _, _):
-            return "/\(modelId)"
+        case .getWrittenReview(let modelId, _, _, _, _, _, _):
+            return "/me/\(modelId)"
         }
     }
     
@@ -45,13 +45,16 @@ extension WrittenReviewAPI: MemeAPI {
     
     var task: Task {
            switch self {
-           case .getWrittenReview(let modelId, let modelNickName, let star, let comment, let reviewImgDtoList):
+           case .getWrittenReview(let modelId, let reviewId, let artistNickName, let makeupName, let portfolioImg,
+                                  let location, let createdAt):
                let parameters: [String: Any] = [
                    "modelId": modelId,
-                   "modelNickName": modelNickName,
-                   "star": star,
-                   "comment": comment,
-                   "reviewImgDtoList": reviewImgDtoList.map { ["reviewImgSrc": $0.reviewImgSrc, "delete": $0.delete, "reviewImgId": $0.reviewImgId] }
+                   "reviewId": reviewId,
+                   "artistNickName": artistNickName,
+                   "makeupName": makeupName,
+                   "portfolioImg":portfolioImg,
+                   "location": location,
+                   "createdAt": createdAt
                ]
                return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         }
