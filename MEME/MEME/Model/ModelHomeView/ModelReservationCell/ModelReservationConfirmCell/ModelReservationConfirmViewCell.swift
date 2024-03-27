@@ -36,11 +36,12 @@ class ModelReservationConfirmViewCell: UICollectionViewCell {
         
         let daysOfWeek = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
         
-        
         var firstFoundReservationTime: String?
         
         for day in daysOfWeek {
-            if let time = data.reservationDayOfWeekAndTime[day]?.replacingOccurrences(of: "_", with: ":") {
+            if let time = data
+                .reservationDayOfWeekAndTime[day]?
+                .replacingOccurrences(of: "_", with: ":") {
                 firstFoundReservationTime = time
                 break
             }

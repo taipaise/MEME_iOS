@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import FSCalendar
 
-class ModelReservationDetailViewController: UIViewController {
+final class ModelReservationDetailViewController: UIViewController {
     var portfolioID: Int? = 0
     var artistID: Int? = 0
     var makeupName: String?
@@ -602,30 +602,16 @@ extension ModelReservationDetailViewController: FSCalendarDelegate, FSCalendarDa
         let timeZoneKST = TimeZone(identifier: "Asia/Seoul")!
         let calendarKST = Calendar.current
         
-        
-        var componentsNow = calendarKST.dateComponents(in: timeZoneKST, from: Date())
-        componentsNow.hour = 0
-        componentsNow.minute = 0
-        componentsNow.second = 0
-        componentsNow.nanosecond = 0
-        let todayKST = calendarKST.date(from: componentsNow)!
-        
-        var componentsDate = calendarKST.dateComponents(in: timeZoneKST, from: date)
-        componentsDate.hour = 0
-        componentsDate.minute = 0
-        componentsDate.second = 0
-        componentsDate.nanosecond = 0
-        let dateKST = calendarKST.date(from: componentsDate)!
+        let todayKST = calendarKST.startOfDay(for: Date())
+        let dateKST = calendarKST.startOfDay(for: date)
         
         if dateKST < todayKST {
             return .gray400
         } else {
             let weekday = calendarKST.component(.weekday, from: date)
             switch weekday {
-            case 1:
-                return UIColor(red: 255.0/255.0, green: 48.0/255.0, blue: 48.0/255.0, alpha: 1.0)
-            case 7:
-                return UIColor(red: 255.0/255.0, green: 48.0/255.0, blue: 48.0/255.0, alpha: 1.0)
+            case 1, 7:
+                return .subRed
             default:
                 return .black
             }
@@ -746,9 +732,7 @@ extension ModelReservationDetailViewController: ModelReservationVisitLocationVie
 extension ModelReservationDetailViewController: ModelReservationBothLocationViewDelegate {
     func didSelectLocationType(_ type: String) {
         selectedLocationType = type
-        if type == "SHOP" {
-            selectedLocation = "샵의 위치"
-        } else if type == "VISIT" {
+        if type == "VISIT" {
             selectedLocation = selectedVisitLocation
         }
         updateNextButtonState()

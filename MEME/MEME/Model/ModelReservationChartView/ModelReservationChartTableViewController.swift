@@ -9,9 +9,6 @@ import UIKit
 import SnapKit
 
 class ModelReservationChartViewController: UIViewController {
-    
-    var a: Int = 0
-    
     private var selectedButton: ModelReservationTypeButton?
     
     // MARK: - Properties

@@ -474,7 +474,6 @@ extension ModelReservationViewController: UIScrollViewDelegate {
         if scrollView.tag == 100 {
             let page = Int(round(scrollView.contentOffset.x / view.frame.width))
             pageControl.currentPage = page
-            print("이것도 호출됨2222")
         } else {
             let outerScroll = scrollView == scrollView
             let innerScroll = !outerScroll
@@ -644,7 +643,9 @@ extension ModelReservationViewController {
                             let task = URLSession.shared.dataTask(with: url) { data, response, error in
                                 defer { imageDispatchGroup.leave() }
                                 
-                                if let data = data, let image = UIImage(data: data) {
+                                if let data = data,
+                                   let image = UIImage(data: data)
+                                {
                                     images.append(image)
                                 }
                             }
@@ -655,7 +656,12 @@ extension ModelReservationViewController {
                     }
                     
                     imageDispatchGroup.notify(queue: .main) {
-                        reviewDatas.append(ReviewData(modelName: review.modelNickName, star: review.star, comment: review.comment, reviewImgDtoList: images))
+                        reviewDatas.append(ReviewData(
+                            modelName: review.modelNickName,
+                            star: review.star,
+                            comment: review.comment,
+                            reviewImgDtoList: images
+                        ))
                         dispatchGroup.leave()
                     }
                 }
@@ -712,7 +718,7 @@ extension ModelReservationViewController {
     
     private func displayPortfolioDetail(_ portfolioDetail: PortfolioDTO) {
         if let imageDTOs = portfolioDetail.data?.portfolioImgDtoList {
-            for imageDTO in imageDTOs {
+            imageDTOs.forEach { imageDTO in
                 portfolioImageUrls.append(imageDTO.portfolioImgSrc)
             }
             fetchImagesFromAPI()

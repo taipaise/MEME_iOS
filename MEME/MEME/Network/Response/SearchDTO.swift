@@ -30,7 +30,7 @@ struct SearchResultData: Codable {
     let userId: Int
     let makeupName: String
     let price: Int
-    let makeupLocation: String?
+    let makeupLocation: String
     let shopLocation: String?
     let region: [String]?
     let isBlock: Bool
