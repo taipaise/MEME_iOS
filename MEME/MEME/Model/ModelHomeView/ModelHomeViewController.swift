@@ -272,7 +272,7 @@ final class ModelHomeViewController: UIViewController {
         searchMakeup.delegate = self
     }
     @objc private func viewAllReservationsTapped() {
-        let reservationsVC = ModelManagementReservationsViewController()
+        let reservationsVC = ManagementReservationsViewController()
         reservationsVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(reservationsVC, animated: true)
     }
