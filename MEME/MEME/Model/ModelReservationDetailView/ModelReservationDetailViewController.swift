@@ -601,9 +601,9 @@ extension ModelReservationDetailViewController: FSCalendarDelegate, FSCalendarDa
         
         let timeZoneKST = TimeZone(identifier: "Asia/Seoul")!
         let calendarKST = Calendar.current
-        
-        let todayKST = calendarKST.startOfDay(for: Date())
-        let dateKST = calendarKST.startOfDay(for: date)
+
+           let todayKST = calendarKST.startOfDay(for: Date())
+           let dateKST = calendarKST.startOfDay(for: date)
         
         if dateKST < todayKST {
             return .gray400

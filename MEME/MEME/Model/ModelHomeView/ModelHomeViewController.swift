@@ -149,7 +149,7 @@ final class ModelHomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        showModelReservations()
+      
         setupReservationCollectionView()
         setupMakeupCardCollectionView()
         setupHastyMakeupCardCollectionView()
@@ -426,14 +426,16 @@ extension ModelHomeViewController: UISearchBarDelegate {
 //MARK: -API 통신 메소드
 extension ModelHomeViewController {
     func showModelReservations() {
-        ReservationManager.shared.getModelReservation(modelId: KeyChainManager.loadMemberID()) { [weak self] result in
+        ReservationManager.shared.getModelReservation(modelId: 1) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let reservationResponse):
                     print("모델 예약 정보 조회 성공: \(reservationResponse)")
                     let filteredReservations = reservationResponse.data?.filter { reservationData in
-                        if let date = self?.dateFromString(reservationData.reservationDate) {
-                            return self?.isToday(date) ?? false
+                        if let date = self?.dateFromString(reservationData.reservationDate),
+                           self?.isToday(date) ?? false,
+                           reservationData.status == "EXPECTED" {
+                            return true
                         }
                         return false
                     }
