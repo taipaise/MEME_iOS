@@ -70,7 +70,7 @@ extension ReservationAPI: MemeAPI {
             return .requestPlain
         case .patchReservation(reservationId: let id, status: let state):
             let parameters: [String: Any] = [
-                "reservation_id": id,
+                "reservationId": id,
                 "status": state.rawValue
             ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
