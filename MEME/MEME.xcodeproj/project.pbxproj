@@ -200,6 +200,12 @@
 		CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3AC12B54361100508DA5 /* MyPageInfoViewController.swift */; };
 		CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3AC42B5436B800508DA5 /* InfoHeaderView.swift */; };
 		CC2F3AC72B54444E00508DA5 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3AC62B54444E00508DA5 /* InfoTableViewCell.swift */; };
+		CC8CA9FB2BB44E4F005F1E53 /* AvailableReviewAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8CA9FA2BB44E4F005F1E53 /* AvailableReviewAPI.swift */; };
+		CC8CA9FD2BB44E66005F1E53 /* AvailableReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8CA9FC2BB44E66005F1E53 /* AvailableReviewManager.swift */; };
+		CC8CA9FF2BB44E7D005F1E53 /* AvailableReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8CA9FE2BB44E7D005F1E53 /* AvailableReviewDTO.swift */; };
+		CC8CAA012BB44E90005F1E53 /* DetailReviewAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8CAA002BB44E90005F1E53 /* DetailReviewAPI.swift */; };
+		CC8CAA032BB44EA9005F1E53 /* DetailReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8CAA022BB44EA9005F1E53 /* DetailReviewManager.swift */; };
+		CC8CAA052BB44EBA005F1E53 /* DetailReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8CAA042BB44EBA005F1E53 /* DetailReviewDTO.swift */; };
 		CC9C384E2B754C240073A257 /* MyPageDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9C384D2B754C240073A257 /* MyPageDTO.swift */; };
 		CC9C38502B7550070073A257 /* MyPageAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9C384F2B7550070073A257 /* MyPageAPI.swift */; };
 		CC9C38532B75520F0073A257 /* MyPageManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9C38522B75520F0073A257 /* MyPageManager.swift */; };
@@ -486,6 +492,12 @@
 		CC2F3AC12B54361100508DA5 /* MyPageInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageInfoViewController.swift; sourceTree = "<group>"; };
 		CC2F3AC42B5436B800508DA5 /* InfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoHeaderView.swift; sourceTree = "<group>"; };
 		CC2F3AC62B54444E00508DA5 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
+		CC8CA9FA2BB44E4F005F1E53 /* AvailableReviewAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableReviewAPI.swift; sourceTree = "<group>"; };
+		CC8CA9FC2BB44E66005F1E53 /* AvailableReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableReviewManager.swift; sourceTree = "<group>"; };
+		CC8CA9FE2BB44E7D005F1E53 /* AvailableReviewDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableReviewDTO.swift; sourceTree = "<group>"; };
+		CC8CAA002BB44E90005F1E53 /* DetailReviewAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReviewAPI.swift; sourceTree = "<group>"; };
+		CC8CAA022BB44EA9005F1E53 /* DetailReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReviewManager.swift; sourceTree = "<group>"; };
+		CC8CAA042BB44EBA005F1E53 /* DetailReviewDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailReviewDTO.swift; sourceTree = "<group>"; };
 		CC9C384D2B754C240073A257 /* MyPageDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageDTO.swift; sourceTree = "<group>"; };
 		CC9C384F2B7550070073A257 /* MyPageAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageAPI.swift; sourceTree = "<group>"; };
 		CC9C38522B75520F0073A257 /* MyPageManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageManager.swift; sourceTree = "<group>"; };
@@ -1046,6 +1058,8 @@
 				2DA208142B7CF865006EB9B9 /* PortfolioAPI.swift */,
 				CCB3190B2B82A5D3003B4738 /* ArtistProfileInfoAPI.swift */,
 				2D8C20C82B82D61000CD4A90 /* ProfileAPI.swift */,
+				CC8CA9FA2BB44E4F005F1E53 /* AvailableReviewAPI.swift */,
+				CC8CAA002BB44E90005F1E53 /* DetailReviewAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1071,6 +1085,8 @@
 				2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */,
 				CCB319072B82908A003B4738 /* ArtistProfileInfoManager.swift */,
 				2D8C20C62B82D5F500CD4A90 /* ProfileManager.swift */,
+				CC8CA9FC2BB44E66005F1E53 /* AvailableReviewManager.swift */,
+				CC8CAA022BB44EA9005F1E53 /* DetailReviewManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1099,6 +1115,8 @@
 				316239642B80DE58002D9E2F /* SignUpResponseDTO.swift */,
 				316239662B80DE9B002D9E2F /* BasicResponseDTO.swift */,
 				2D8C20C42B82D5E100CD4A90 /* ProfileDTO.swift */,
+				CC8CA9FE2BB44E7D005F1E53 /* AvailableReviewDTO.swift */,
+				CC8CAA042BB44EBA005F1E53 /* DetailReviewDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -1671,6 +1689,7 @@
 				316A927E2B66895D00E4337D /* TimeSection.swift in Sources */,
 				CC2F3AC72B54444E00508DA5 /* InfoTableViewCell.swift in Sources */,
 				31B2634F2B57EE7D00304FBE /* SetProfileViewController.swift in Sources */,
+				CC8CA9FF2BB44E7D005F1E53 /* AvailableReviewDTO.swift in Sources */,
 				316A926A2B66703800E4337D /* SetBusinessLocationViewController.swift in Sources */,
 				CC9C38552B7B5CDF0073A257 /* ModelProfileAPI.swift in Sources */,
 				2D6F59B32B5C397400CA883A /* SortOptionsViewController.swift in Sources */,
@@ -1697,6 +1716,7 @@
 				317D986C2B7DF59B009BBB95 /* Region.swift in Sources */,
 				3142B9A42B4D03840066CD5A /* ModelTabBarController.swift in Sources */,
 				2DA208152B7CF865006EB9B9 /* PortfolioAPI.swift in Sources */,
+				CC8CAA032BB44EA9005F1E53 /* DetailReviewManager.swift in Sources */,
 				CCAB5A692B6DD60900067FA4 /* WrittenCollectionViewCell.swift in Sources */,
 				CC9C38912B81B3780073A257 /* ContactManager.swift in Sources */,
 				CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */,
@@ -1720,6 +1740,7 @@
 				091CCCD72B639E4800ADD21C /* ArtistData.swift in Sources */,
 				CCCE563F2B81D9FB007555A2 /* ArtistTimeHeaderSupplementaryView.swift in Sources */,
 				CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */,
+				CC8CA9FB2BB44E4F005F1E53 /* AvailableReviewAPI.swift in Sources */,
 				31B4137C2B6D295900535BB1 /* BusinessIDVerificationManager.swift in Sources */,
 				31B65E4D2B6E18BA00628C68 /* ReservationAPI.swift in Sources */,
 				31B2634C2B57EE7100304FBE /* RoleSelectionViewController.swift in Sources */,
@@ -1778,6 +1799,7 @@
 				2D6E4CEB2B61FA7D00D7F919 /* ModelReservationLastViewController.swift in Sources */,
 				31C85EED2B526B780064A6E7 /* OnBoardingViewController.swift in Sources */,
 				CC9C38502B7550070073A257 /* MyPageAPI.swift in Sources */,
+				CC8CAA012BB44E90005F1E53 /* DetailReviewAPI.swift in Sources */,
 				315FB8572B6DE1480068163C /* AuthManager.swift in Sources */,
 				2DA208052B7AB5F3006EB9B9 /* SearchCategory.swift in Sources */,
 				3142B99F2B4D02300066CD5A /* UIFont+.swift in Sources */,
@@ -1809,6 +1831,7 @@
 				CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */,
 				2DA208012B7AB514006EB9B9 /* SearchAPI.swift in Sources */,
 				316239AA2B81E3F9002D9E2F /* UserDefaultManager.swift in Sources */,
+				CC8CAA052BB44EBA005F1E53 /* DetailReviewDTO.swift in Sources */,
 				CCAB5A652B6CFDB300067FA4 /* MyReviewCollectionViewCell.swift in Sources */,
 				CC9C388D2B80F9C80073A257 /* ModelProfileInfoDTO.swift in Sources */,
 				31B413842B6D322500535BB1 /* NetworkProvider.swift in Sources */,
@@ -1836,6 +1859,7 @@
 				2DA208072B7ABB2E006EB9B9 /* SearchManager.swift in Sources */,
 				31B263452B57EDE300304FBE /* TermDetailViewController.swift in Sources */,
 				31B263542B57EE8600304FBE /* SetDetailInfoViewController.swift in Sources */,
+				CC8CA9FD2BB44E66005F1E53 /* AvailableReviewManager.swift in Sources */,
 				316239AC2B81E917002D9E2F /* TermsData.swift in Sources */,
 				3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */,
 				CCCE56232B81D9BF007555A2 /* ArtistInfoViewController.swift in Sources */,

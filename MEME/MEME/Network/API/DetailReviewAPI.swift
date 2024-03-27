@@ -1,27 +1,26 @@
 //
-//  WrittenReviewAPI.swift
+//  DetailReviewAPI.swift
 //  MEME
 //
-//  Created by 임아영 on 2/17/24.
+//  Created by 임아영 on 3/20/24.
 //
 
 import Foundation
 import Moya
 
-enum WrittenReviewAPI {
-    case getWrittenReview(modelId: Int, reviewId:Int, artistNickName: String, makeupName: String, portfolioImg: String,
-                          location: String ,createdAt: String)
+enum DetailReviewAPI {
+    case getDetailReview(reviewId: Int, artistNickName: String, makeupName: String, star: Int, comment: String, reviewImgDtoList: [DetailReviewImage])
 }
 
-extension WrittenReviewAPI: MemeAPI {
+extension DetailReviewAPI: MemeAPI {
     var domain: MemeDomain {
         return .review
     }
     
     var urlPath: String {
         switch self {
-        case .getWrittenReview(let modelId, _, _, _, _, _, _):
-            return "/me/\(modelId)"
+        case .getDetailReview(let reviewId, _, _, _, _, _):
+            return "/details/\(reviewId)"
         }
     }
     
@@ -31,30 +30,28 @@ extension WrittenReviewAPI: MemeAPI {
     
     var headerType: HTTPHeaderFields {
         switch self {
-        case .getWrittenReview:
+        case .getDetailReview:
             return .hasAccessToken
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .getWrittenReview:
+        case .getDetailReview:
             return .get
         }
     }
     
     var task: Task {
            switch self {
-           case .getWrittenReview(let modelId, let reviewId, let artistNickName, let makeupName, let portfolioImg,
-                                  let location, let createdAt):
+           case .getDetailReview(let reviewId, let artistNickName,let makeupName, let star, let comment, let reviewImgDtoList):
                let parameters: [String: Any] = [
-                   "modelId": modelId,
                    "reviewId": reviewId,
                    "artistNickName": artistNickName,
                    "makeupName": makeupName,
-                   "portfolioImg":portfolioImg,
-                   "location": location,
-                   "createdAt": createdAt
+                   "star": star,
+                   "comment": comment,
+                   "reviewImgDtoList": reviewImgDtoList.map { ["reviewImgSrc": $0.reviewImgSrc, "delete": $0.delete, "reviewImgId": $0.reviewImgId] }
                ]
                return .requestParameters(parameters: parameters, encoding: URLEncoding.default)
         }

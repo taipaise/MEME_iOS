@@ -8,13 +8,14 @@
 import UIKit
 import SnapKit
 
-class MyReviewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, MyReviewCollectionViewCellDelegate, WrittenCollectionViewCellDelegate {    
+class MyReviewViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, MyReviewCollectionViewCellDelegate, WrittenCollectionViewCellDelegate {
     
     var collectionView: UICollectionView!
     var dataSource: [String] = []
     
-    var data = [Review]()
-
+    var data = [AvailableReviewResponseData]()
+    var data2 = [WrittenReviewData]()
+    var data3 = [DetailReviewData]()
     
     private let cellId = "cellId"
     private let cellId2 = "cellId2"
@@ -58,15 +59,17 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ReviewListManager.shared.getReviews(portfolioId: 3, modelName: nameLabel.text ?? "", star: 5, comment: "Comment", reviewImgDtoList: [ReviewImage]()) { [weak self] result in
+        AvailableReviewManager.shared.getAvailableReview(modelId: 1, reservationId: 1, portfolioId: 1, artistNickName: "artistNickName", makeupName: "makeupName", reservationDate: "reservationDate", portfolioImg: "portfolioImg", shopLocation: "shopLocation") { [weak self] result in
             switch result {
             case .success(let response):
-                print("Success: \(response)")
-                
-                self?.data = response.data?.content ?? []
+                if let responseData = response.data {
+                    self?.data = [responseData]
+                } else {
+                    self?.data = []
+                }
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
-                    self?.updateSegmentedControlText() 
+                    self?.updateSegmentedControlText()
                 }
             case .failure(let error):
                 print("Failure: \(error)")
@@ -176,6 +179,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     class CustomCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
         
         weak var delegate: MyReviewCollectionViewCellDelegate?
+        var data = [AvailableReviewResponseData]()
         
         @objc func handleButtonPress() {
             delegate?.buttonPressed(in: self)
@@ -235,6 +239,23 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyReviewCell", for: indexPath) as! MyReviewCollectionViewCell
             cell.delegate = delegate
+            if indexPath.row < data.count {
+                let reviewData = data[indexPath.row]
+                cell.artistLabel.text = reviewData.artistNickName
+                cell.makeupLabel.text = reviewData.makeupName
+                cell.placeLabel.text = reviewData.shopLocation
+                if let imageUrl = URL(string: reviewData.portfolioImg) {
+                    URLSession.shared.dataTask(with: imageUrl) { data, response, error in
+                        guard let data = data, error == nil else {
+                            return
+                        }
+                        DispatchQueue.main.async {
+                            cell.imageView.image = UIImage(data: data)
+                        }
+                    }.resume()
+                }
+            }
+            
             return cell
         }
     }
@@ -243,7 +264,8 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         weak var delegate: WrittenCollectionViewCellDelegate?
         var indexPath: IndexPath?
-
+        var data2 = [WrittenReviewData]()
+        
         @objc func handleButtonPress() {
             if let indexPath = indexPath {
                 delegate?.menubuttonPressed(in: self, at: indexPath)
@@ -304,8 +326,24 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WrittenCell", for: indexPath) as!
             WrittenCollectionViewCell
-            cell.indexPath = indexPath
+            //            cell.indexPath = indexPath
             cell.delegate = delegate
+            if indexPath.row < data2.count {
+                let reviewData2 = data2[indexPath.row]
+                cell.artistLabel.text = reviewData2.artistNickName
+                cell.makeupLabel.text = reviewData2.makeupName
+                cell.placeLabel.text = reviewData2.location
+                if let imageUrl = URL(string: reviewData2.portfolioImg) {
+                    URLSession.shared.dataTask(with: imageUrl) { data, response, error in
+                        guard let data = data, error == nil else {
+                            return
+                        }
+                        DispatchQueue.main.async {
+                            cell.imageView.image = UIImage(data: data)
+                        }
+                    }.resume()
+                }
+            }
             return cell
         }
     }
@@ -328,12 +366,15 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     func ReviewWrittenView() {
         collectionView.register(CustomCell2.self, forCellWithReuseIdentifier: "CustomCell2")
-        WrittenReviewManager.shared.getReviews(modelId: 5, modelNickName: nameLabel.text ?? "", star: 5, comment: "Comment", reviewImgDtoList: [ReviewImage]()) { [weak self] result in
+        WrittenReviewManager.shared.getWrittenReview(modelId: 1, reviewId: 1, artistNickName: "artistNickName", makeupName: "makeupName", portfolioImg: "portfolioImg", location: "location", createdAt: "createdAt") { [weak self] result in
             switch result {
             case .success(let response):
-                print("Success: \(response)")
+                if let responseData = response.data {
+                    self?.data2 = [responseData]
+                } else {
+                    self?.data2 = []
+                }
                 
-                self?.data = response.data?.content ?? []
                 DispatchQueue.main.async {
                     self?.collectionView.reloadData()
                     self?.updateSegmentedControlText()
@@ -361,11 +402,19 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         case 0:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
             cell.delegate = self
+            if indexPath.row < data.count {
+                let reviewData = data[indexPath.row]
+                cell.dateLabel.text = "예약일 \(reviewData.reservationDate)"
+            }
             return cell
         case 1:
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell2", for: indexPath) as! CustomCell2
             cell.delegate = self
-            cell.indexPath = indexPath
+            //            cell.indexPath = indexPath
+            if indexPath.row < data2.count {
+                let reviewData2 = data2[indexPath.row]
+                cell.dateLabel.text = "작성일 \(reviewData2.createdAt)"
+            }
             return cell
         default:
             return UICollectionViewCell()
@@ -377,7 +426,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     }
     func menubuttonPressed(in cell: UICollectionViewCell, at indexPath: IndexPath) {
         print("menubuttonPressed at \(indexPath)")
-
+        
         self.view.viewWithTag(100)?.removeFromSuperview()
         
         let menuView = UIStackView()
@@ -389,8 +438,8 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         menuView.layer.borderColor = UIColor.gray300.cgColor
         menuView.layer.borderWidth = 1
         self.view.addSubview(menuView)
-
-                let editButton = UIButton()
+        
+        let editButton = UIButton()
         editButton.setTitle("수정하기", for: .normal)
         editButton.setTitleColor(.black, for: .normal)
         editButton.addTarget(self, action: #selector(moveToReviewEditVC), for: .touchUpInside)
@@ -399,7 +448,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         deleteButton.setTitle("삭제하기", for: .normal)
         deleteButton.setTitleColor(.black, for: .normal)
         deleteButton.addTarget(self, action: #selector(deleteCollectionViewCell), for: .touchUpInside)
-        deleteButton.tag = indexPath.row 
+        deleteButton.tag = indexPath.row // 버튼의 태그에 인덱스 저장
         
         editButton.titleLabel?.font = UIFont.pretendard(to: .regular, size: 12)
         deleteButton.titleLabel?.font = UIFont.pretendard(to: .regular, size: 12)
@@ -408,24 +457,50 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         menuView.addArrangedSubview(deleteButton)
         editButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
         deleteButton.heightAnchor.constraint(equalToConstant: 50).isActive = true
-
+        
         menuView.translatesAutoresizingMaskIntoConstraints = false
         let cellBottomRight = CGPoint(x: cell.bounds.width, y: cell.bounds.height)
         let cellPositionInSuperview = cell.convert(cellBottomRight, to: self.view)
-
+        
         NSLayoutConstraint.activate([
             menuView.rightAnchor.constraint(equalTo: self.view.leftAnchor, constant: cellPositionInSuperview.x - 10),
             menuView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: cellPositionInSuperview.y - 30),
             menuView.widthAnchor.constraint(equalToConstant: 85),
             menuView.heightAnchor.constraint(equalToConstant: 56)
         ])
-
+        
     }
     
     @objc func moveToReviewEditVC() {
-//        let reviewEditVC = ReviewEditViewController()
-//           reviewEditVC.reviewContent = "리뷰 내용" // 수정할 리뷰의 내용
-        navigationController?.pushViewController(WriteReviewViewController(), animated: true)
+        let writeReviewVC = WriteReviewViewController()
+        
+        DetailReviewManager.shared.getDetailReview(reviewId: 1, artistNickName: "String", makeupName: "String", star: 3, comment: "String", reviewImgDtoList: [DetailReviewImage]()) { [weak self] result in
+            switch result {
+            case .success(let response):
+                if let responseData = response.data {
+                    DispatchQueue.main.async {
+                        writeReviewVC.reviewLabel.text = responseData.makeupName
+                        writeReviewVC.updateReviewLabel(artistName: responseData.artistNickName, makeupName: responseData.makeupName)
+                        
+                        if let firstImageUrlString = responseData.reviewImgDtoList.first?.reviewImgSrc, let imageUrl = URL(string: firstImageUrlString) {
+                            URLSession.shared.dataTask(with: imageUrl) { data, response, error in
+                                guard let data = data, error == nil else {
+                                    return
+                                }
+                                DispatchQueue.main.async {
+                                    writeReviewVC.imageView.image = UIImage(data: data)
+                                    self?.navigationController?.pushViewController(writeReviewVC, animated: true)
+                                }
+                            }.resume()
+                        } else {
+                            self?.navigationController?.pushViewController(writeReviewVC, animated: true)
+                        }
+                    }
+                }
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
     }
     
     @objc func deleteCollectionViewCell(_ sender: UIButton) {
@@ -434,6 +509,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
           
           let yesAction = UIAlertAction(title: "예", style: .destructive) { [weak self] _ in
               let index = sender.tag
+              // 삭제 작업 수행 (예: self?.data.remove(at: index))
           }
           
           let noAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
@@ -475,7 +551,6 @@ class CustomSegmentedControl: UISegmentedControl {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
 }
 extension MyReviewViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
