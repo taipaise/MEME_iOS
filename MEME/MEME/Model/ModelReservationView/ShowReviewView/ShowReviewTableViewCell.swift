@@ -98,24 +98,42 @@ class ShowReviewTableViewCell: UITableViewCell {
         }
     }
     
+    enum Star: Int {
+        case zero = 0
+        case one = 1
+        case two = 2
+        case three = 3
+        case four = 4
+        case five = 5
+        
+        var image: UIImage {
+            switch self {
+            case .zero:
+                return UIImage.imgZeroStar
+            case .one:
+                return UIImage.imgOneStar
+            case .two:
+                return UIImage.imgTwoStar
+            case .three:
+                return UIImage.imgThreeStar
+            case .four:
+                return UIImage.imgFourStar
+            case .five:
+                return UIImage.imgFiveStar
+            }
+        }
+        
+        init(fromRawValue rawValue: Int) {
+            self = Star(rawValue: rawValue) ?? .zero
+        }
+    }
+    
     
     func configure(modelName: String, star: Int, comment: String, reviewImgDtoList: [UIImage]) {
         modelNameLabel.text = modelName
         
-        switch star {
-        case 5:
-            starRateImageView.image = UIImage(named: "img_fiveStar")
-        case 4:
-            starRateImageView.image = UIImage(named: "img_fourStar")
-        case 3:
-            starRateImageView.image = UIImage(named: "img_threeStar")
-        case 2:
-            starRateImageView.image = UIImage(named: "img_twoStar")
-        case 1:
-            starRateImageView.image = UIImage(named: "img_oneStar")
-        default:
-            starRateImageView.image = UIImage(named: "img_zeroStar")
-        }
+        let starValue = Star(fromRawValue: star)
+        starRateImageView.image = starValue.image
         
         reviewLabel.text = comment
         
@@ -123,7 +141,7 @@ class ShowReviewTableViewCell: UITableViewCell {
             $0.removeFromSuperview()
         }
         
-        for reviewImage in reviewImgDtoList {
+        reviewImgDtoList.forEach { reviewImage in
             let imageView = UIImageView(image: reviewImage)
             imageView.contentMode = .scaleAspectFill
             imageView.clipsToBounds = true

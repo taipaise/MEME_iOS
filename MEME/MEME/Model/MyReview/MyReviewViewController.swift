@@ -399,7 +399,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         deleteButton.setTitle("삭제하기", for: .normal)
         deleteButton.setTitleColor(.black, for: .normal)
         deleteButton.addTarget(self, action: #selector(deleteCollectionViewCell), for: .touchUpInside)
-        deleteButton.tag = indexPath.row // 버튼의 태그에 인덱스 저장
+        deleteButton.tag = indexPath.row 
         
         editButton.titleLabel?.font = UIFont.pretendard(to: .regular, size: 12)
         deleteButton.titleLabel?.font = UIFont.pretendard(to: .regular, size: 12)
@@ -434,7 +434,6 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
           
           let yesAction = UIAlertAction(title: "예", style: .destructive) { [weak self] _ in
               let index = sender.tag
-              // 삭제 작업 수행 (예: self?.data.remove(at: index))
           }
           
           let noAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)

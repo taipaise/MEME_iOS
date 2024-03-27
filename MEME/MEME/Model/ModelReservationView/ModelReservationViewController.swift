@@ -621,6 +621,7 @@ extension ModelReservationViewController {
         ReviewManager.shared.getReviews(portfolioId: portfolioId, page: page) { [weak self] result in
             switch result {
             case .success(let reviewResponse):
+                print("리뷰 조회 완료: \(reviewResponse)")
                 var reviewDatas: [ReviewData] = []
                 
                 let dispatchGroup = DispatchGroup()

@@ -119,11 +119,12 @@ extension ShowReviewView: UITableViewDataSource, UITableViewDelegate {
         }
         cell.selectionStyle = .none
         let review = reviews[indexPath.row]
-        cell.configure(modelName: review.modelName,
-                       star: review.star,
-                       comment: review.comment,
-                       reviewImgDtoList: review.reviewImgDtoList
-                       )
+        cell.configure(
+            modelName: review.modelName,
+            star: review.star,
+            comment: review.comment,
+            reviewImgDtoList: review.reviewImgDtoList
+        )
         return cell
     }
     
