@@ -17,7 +17,7 @@ struct CreatePortfolioDTO: Codable {
 struct GetAllPortfolioDTO: Codable {
     let result: String
     let message: String
-    let data: PortfolioData?
+    let data: PortfolioAllDTO?
     let statusCode: Int
 }
 struct PortfolioAllDTO: Codable {
@@ -28,12 +28,10 @@ struct PortfolioAllDTO: Codable {
     let totalPage: Int
 }
 struct EditPortfolioDTO: Codable {
-    struct Response: Codable {
-        let code: Int
-        let result: String
-        let message: String
-        let data: PortfolioData?
-    }
+    let statusCode: Int
+    let result: String
+    let message: String
+    let data: String
 }
 struct PortfolioAllData: Codable {
     let portfolioId: Int
@@ -41,12 +39,12 @@ struct PortfolioAllData: Codable {
     let userId: Int
     let makeupName: String
     let price: Int
-    let makeupLocation, shopLocation: String
+    let makeupLocation, shopLocation: String?
     let region: [String]
     let isBlock: Bool
     let averageStars: String
     let reviewCount: Int
-    let portfolioImgDtoList: [PortfolioImgDtoList]
+    let portfolioImgDtoList: [ImageData]
 }
 struct PortfolioImgDtoList: Codable {
     let portfolioImgId: Int

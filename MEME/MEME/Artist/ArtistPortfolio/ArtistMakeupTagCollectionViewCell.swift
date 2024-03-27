@@ -10,10 +10,9 @@ import UIKit
 class ArtistMakeupTagCollectionViewCell: UICollectionViewCell {
     @IBOutlet var makeupTagLabel: UILabel!
     @IBOutlet var makeupTagView: UIView!
-    static let identifier = "ArtistMakeupTagCollectionViewCell"
 
     static func nib() -> UINib {
-        return UINib(nibName: "ArtistMakeupTagCollectionViewCell", bundle: nil)
+        return UINib(nibName: ArtistMakeupTagCollectionViewCell.className, bundle: nil)
     }
     override func awakeFromNib() {
         super.awakeFromNib()
