@@ -51,6 +51,7 @@
 		2D669BA12BAD9069007E03A0 /* memeSecret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2D669B9F2BAD9069007E03A0 /* memeSecret.plist */; };
 		2D669BA32BAD9EBF007E03A0 /* ReviewAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D669BA22BAD9EBF007E03A0 /* ReviewAPI.swift */; };
 		2D669BA52BAD9F37007E03A0 /* ReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D669BA42BAD9F37007E03A0 /* ReviewManager.swift */; };
+		2D6D2CE32BB35013007EF440 /* ModelCancelReservationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6D2CE22BB35013007EF440 /* ModelCancelReservationViewController.swift */; };
 		2D6E4CEB2B61FA7D00D7F919 /* ModelReservationLastViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6E4CEA2B61FA7D00D7F919 /* ModelReservationLastViewController.swift */; };
 		2D6E4CEE2B6221D800D7F919 /* ModelManagementReservationsDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6E4CED2B6221D800D7F919 /* ModelManagementReservationsDateCollectionViewCell.swift */; };
 		2D6F59AB2B5BD07500CA883A /* ModelReservationChartTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D6F59A92B5BD07500CA883A /* ModelReservationChartTableViewCell.swift */; };
@@ -335,6 +336,7 @@
 		2D669B9F2BAD9069007E03A0 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
 		2D669BA22BAD9EBF007E03A0 /* ReviewAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewAPI.swift; sourceTree = "<group>"; };
 		2D669BA42BAD9F37007E03A0 /* ReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewManager.swift; sourceTree = "<group>"; };
+		2D6D2CE22BB35013007EF440 /* ModelCancelReservationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelCancelReservationViewController.swift; sourceTree = "<group>"; };
 		2D6E4CEA2B61FA7D00D7F919 /* ModelReservationLastViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationLastViewController.swift; sourceTree = "<group>"; };
 		2D6E4CED2B6221D800D7F919 /* ModelManagementReservationsDateCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelManagementReservationsDateCollectionViewCell.swift; sourceTree = "<group>"; };
 		2D6F59A92B5BD07500CA883A /* ModelReservationChartTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelReservationChartTableViewCell.swift; sourceTree = "<group>"; };
@@ -773,6 +775,7 @@
 			children = (
 				2D4B7C282B5F294A001E1B09 /* ModelManagementReservationsViewController.swift */,
 				2D6E4CED2B6221D800D7F919 /* ModelManagementReservationsDateCollectionViewCell.swift */,
+				2D6D2CE22BB35013007EF440 /* ModelCancelReservationViewController.swift */,
 			);
 			path = ModelManagementReservationsView;
 			sourceTree = "<group>";
@@ -1694,6 +1697,7 @@
 				CC9C38552B7B5CDF0073A257 /* ModelProfileAPI.swift in Sources */,
 				2D6F59B32B5C397400CA883A /* SortOptionsViewController.swift in Sources */,
 				315FB8662B6DE8900068163C /* MemeAPIAuth.swift in Sources */,
+				2D6D2CE32BB35013007EF440 /* ModelCancelReservationViewController.swift in Sources */,
 				CC9C385D2B7BCC370073A257 /* ModelProfileDTO.swift in Sources */,
 				2D6F59B82B5C4FB100CA883A /* SortOptionIconView.swift in Sources */,
 				2D5C05A42B60433000EDC69F /* ModelReservationDetailViewController.swift in Sources */,

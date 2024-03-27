@@ -78,3 +78,19 @@ struct PatchReservationDTO: Codable {
     let statusCode: Int
 }
 
+// MARK: -모델 예약 상세 조회 DTO
+struct ReservationDetailDTO: Codable {
+    let result: String
+    let message: String
+    let data: ReservationDetailData
+    let statusCode: Int
+}
+
+struct ReservationDetailData: Codable {
+    let reservationId: Int
+    let artistNickName: String
+    let artistProfileImg: String?
+    let portfolioName: String
+    let category: String
+    let location: String
+}

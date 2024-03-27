@@ -28,7 +28,7 @@ struct ReviewListData: Codable {
 }
 
 struct Review: Codable {
-    let modelName: String
+    let modelNickName: String
     let star: Int
     let comment: String
     let reviewImgDtoList: [ReviewImage]

@@ -28,7 +28,7 @@ class ModelReservationLastViewController: UIViewController {
     }()
     private var completeLabel: UILabel = {
         let label = UILabel()
-        label.text = "김리타님,\n예약이 완료되었습니다!"
+        label.text = "예약이 완료되었습니다!"
         label.font = .pretendard(to: .bold, size: 22)
         label.textColor = .black
         label.numberOfLines = 0
@@ -224,7 +224,13 @@ class ModelReservationLastViewController: UIViewController {
                 dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
                 let dateString = dateFormatter.string(from: selectedDate ?? Date())
                 
-                self.postModelReservations(modelId: KeyChainManager.loadMemberID(), portfolioId: portfolioID, date: dateString, reservationDayOfWeekAndTime: reservationDayOfWeekAndTime, location: locationText)
+                self.postModelReservations(
+                    modelId: 1,
+                    portfolioId: portfolioID,
+                    date: dateString,
+                    reservationDayOfWeekAndTime: reservationDayOfWeekAndTime,
+                    location: locationText
+                )
             }
         }
     }

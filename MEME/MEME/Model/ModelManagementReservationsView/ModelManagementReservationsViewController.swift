@@ -75,6 +75,11 @@ final class ModelManagementReservationsViewController: UIViewController {
         showReservations()
         setupImageViewGestures()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        showReservations()
+    }
     
     // MARK: - configureSubviews
     func configureSubviews() {
@@ -145,7 +150,7 @@ final class ModelManagementReservationsViewController: UIViewController {
     //MARK: -API 호출
     private func showReservations() {
         if(isModel) {
-            showModelReservations(modelId: KeyChainManager.loadMemberID())
+            showModelReservations(modelId: 1)
         }
         else{
 //            showArtistReservations(modelId: 1)-> 여기 API만 바꾸면 됩니다
@@ -176,7 +181,6 @@ final class ModelManagementReservationsViewController: UIViewController {
         reservationSections = groupedDictionary.map { (key, value) in
             ReservationSection(date: key, reservations: value)
         }.sorted(by: { $0.date < $1.date })
-        print("이거:", reservationSections)
         
         setupCollectionViewItems()
     }
@@ -257,6 +261,7 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegate, U
             return reservationCell
         }
     }
+
 }
 
 extension ModelManagementReservationsViewController: UICollectionViewDelegateFlowLayout {
@@ -275,17 +280,20 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegateFlo
         return CGFloat(12)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let item = collectionViewItems[indexPath.item]
-            switch item {
-            case .reservation(let reservationData):
-                let vc = SingleArtistReservationManageViewController()
-                vc.reservationId = reservationData.reservationId
-                navigationController?.pushViewController(vc, animated: true)
-                
-            default:
-                break
-            }
+        let item = collectionViewItems[indexPath.item]
+        switch item {
+        case .reservation(let reservationData):
+            let vc = ModelCancelReservationViewController()
+            vc.reservationId = reservationData.reservationId
+            vc.portfolioId = reservationData.portfolioId
+            vc.reservationDate = reservationData.reservationDate
+            
+            navigationController?.pushViewController(vc, animated: true)
+            
+        default:
+            break
         }
+    }
 }
 
 // MARK: -BackButtonTappedDelegate

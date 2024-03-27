@@ -55,7 +55,9 @@ class ModelReservationViewController: UIViewController {
     private var profileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "modelProfile")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.layer.cornerRadius = 52/2
         imageView.isUserInteractionEnabled = true
         
         return imageView
@@ -203,9 +205,10 @@ class ModelReservationViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "예약하기")
         
-        fetchPortfolioDetail(userId: KeyChainManager.loadMemberID(), portfolioId: portfolioID!)
+        fetchPortfolioDetail(userId: 1, portfolioId: portfolioID!)
         fetchReviews(portfolioId: portfolioID!, page: 0)
         fetchImagesFromAPI()
+
         setupSegmentedControl()
 
         configureSubviews()
@@ -221,6 +224,7 @@ class ModelReservationViewController: UIViewController {
         view.addSubview(scrollView)
         scrollView.addSubview(contentsView)
         backgroundImageScrollView.delegate = self
+        backgroundImageScrollView.tag = 100
         contentsView.addSubview(backgroundImageScrollView)
         contentsView.addSubview(pageControl)
         contentsView.addSubview(backgroundView)
@@ -467,7 +471,7 @@ class ModelReservationViewController: UIViewController {
 //MARK: - UIScrollViewDelegate
 extension ModelReservationViewController: UIScrollViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        if scrollView == backgroundImageScrollView {
+        if scrollView.tag == 100 {
             let page = Int(round(scrollView.contentOffset.x / view.frame.width))
             pageControl.currentPage = page
         } else {
@@ -634,16 +638,30 @@ extension ModelReservationViewController {
                     
                     review.reviewImgDtoList.forEach { imgDto in
                         imageDispatchGroup.enter()
-                        FirebaseStorageManager.downloadImage(urlString: imgDto.reviewImgSrc) { downloadedImage in
-                            if let image = downloadedImage {
-                                images.append(image)
+                        
+                        if let url = URL(string: imgDto.reviewImgSrc) {
+                            let task = URLSession.shared.dataTask(with: url) { data, response, error in
+                                defer { imageDispatchGroup.leave() }
+                                
+                                if let data = data,
+                                   let image = UIImage(data: data)
+                                {
+                                    images.append(image)
+                                }
                             }
+                            task.resume()
+                        } else {
                             imageDispatchGroup.leave()
                         }
                     }
                     
                     imageDispatchGroup.notify(queue: .main) {
-                        reviewDatas.append(ReviewData(modelName: review.modelName, star: review.star, comment: review.comment, reviewImgDtoList: images))
+                        reviewDatas.append(ReviewData(
+                            modelName: review.modelNickName,
+                            star: review.star,
+                            comment: review.comment,
+                            reviewImgDtoList: images
+                        ))
                         dispatchGroup.leave()
                     }
                 }
@@ -700,9 +718,10 @@ extension ModelReservationViewController {
     
     private func displayPortfolioDetail(_ portfolioDetail: PortfolioDTO) {
         if let imageDTOs = portfolioDetail.data?.portfolioImgDtoList {
-            for imageDTO in imageDTOs {
+            imageDTOs.forEach { imageDTO in
                 portfolioImageUrls.append(imageDTO.portfolioImgSrc)
             }
+            fetchImagesFromAPI()
         }
         if let profileImgURLString = portfolioDetail.data?.artistProfileImg,
            let profileImgURL = URL(string: profileImgURLString) {

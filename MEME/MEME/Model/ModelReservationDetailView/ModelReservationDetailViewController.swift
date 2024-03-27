@@ -9,7 +9,7 @@ import UIKit
 import SnapKit
 import FSCalendar
 
-class ModelReservationDetailViewController: UIViewController, ModelReservationBothLocationViewDelegate {
+final class ModelReservationDetailViewController: UIViewController {
     var portfolioID: Int? = 0
     var artistID: Int? = 0
     var makeupName: String?
@@ -107,7 +107,7 @@ class ModelReservationDetailViewController: UIViewController, ModelReservationBo
         // 날짜 설정
         calendar.appearance.titleFont = .pretendard(to: .regular, size: 18)
         calendar.appearance.selectionColor = UIColor(red: 67.0/255.0, green: 85.0/255.0, blue: 250.0/255.0, alpha: 1.0)
-        calendar.appearance.todayColor = .white
+        calendar.appearance.todayColor = nil
         calendar.appearance.titleTodayColor = .black
         calendar.calendarWeekdayView.weekdayLabels.last!.textColor = UIColor(red: 255.0/255.0, green: 48.0/255.0, blue: 48.0/255.0, alpha: 1.0)
         calendar.calendarWeekdayView.weekdayLabels[5].textColor = UIColor(red: 255.0/255.0, green: 48.0/255.0, blue: 48.0/255.0, alpha: 1.0)
@@ -205,6 +205,16 @@ class ModelReservationDetailViewController: UIViewController, ModelReservationBo
         updateWeekdayLabels()
         view.setupDismissKeyboardOnTapGesture()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if let artistID = artistID {
+            getPossibleTime(aristId: artistID)
+            getPossibleLocation(aristId: artistID)
+        }
+    }
+
     
     // MARK: - configureSubviews
     func configureSubviews() {
@@ -402,7 +412,7 @@ class ModelReservationDetailViewController: UIViewController, ModelReservationBo
         case "VISIT":
             return !(selectedVisitLocation?.isEmpty ?? true)
         case "BOTH":
-            return true
+            return !(selectedLocation?.isEmpty ?? true)
         case .none:
             return false
         case .some(_):
@@ -564,31 +574,12 @@ class ModelReservationDetailViewController: UIViewController, ModelReservationBo
         updateNextButtonState()
     }
     
-    func didSelectLocationType(_ type: String) {
-        selectedLocationType = type
-        if type == "SHOP" {
-            selectedLocation = "샵의 위치"
-        } else if type == "VISIT" {
-            selectedLocation = selectedVisitLocation
-        }
-        updateNextButtonState()
-    }
-    func didSelectShopLocation(_ location: String) {
-        selectedLocation = location
-        updateNextButtonState()
-    }
-    
-    func didSelectVisitLocation(_ location: String) {
-        selectedVisitLocation = location
-        updateNextButtonState()
-    }
     
     
     private func updateNextButtonState() {
         let isDateAndTimeSelected = selectedDate != nil && selectedTime != nil
         let isLocationValid = checkLocationValidity()
-        print(isLocationValid)
-        
+
         DispatchQueue.main.async {
             self.reservationButton.isEnabled = isDateAndTimeSelected && isLocationValid
             self.reservationButton.backgroundColor = self.reservationButton.isEnabled ? .mainBold : .gray300
@@ -607,25 +598,42 @@ extension ModelReservationDetailViewController: FSCalendarDelegate, FSCalendarDa
     }
     
     func calendar(_ calendar: FSCalendar, appearance: FSCalendarAppearance, titleDefaultColorFor date: Date) -> UIColor? {
-        let day = Calendar.current.component(.weekday, from: date) - 1
-        let today = Date()
         
-        if date < today {
+        let timeZoneKST = TimeZone(identifier: "Asia/Seoul")!
+        let calendarKST = Calendar.current
+
+           let todayKST = calendarKST.startOfDay(for: Date())
+           let dateKST = calendarKST.startOfDay(for: date)
+        
+        if dateKST < todayKST {
             return .gray400
-        } else if Calendar.current.shortWeekdaySymbols[day] == "Sun" {
-            return UIColor(red: 255.0/255.0, green: 48.0/255.0, blue: 48.0/255.0, alpha: 1.0)
-        } else if Calendar.current.shortWeekdaySymbols[day] == "Sat" {
-            return UIColor(red: 255.0/255.0, green: 48.0/255.0, blue: 48.0/255.0, alpha: 1.0)
         } else {
-            return .black
+            let weekday = calendarKST.component(.weekday, from: date)
+            switch weekday {
+            case 1, 7:
+                return .subRed
+            default:
+                return .black
+            }
         }
     }
+
     
     func calendar(_ calendar: FSCalendar, shouldSelect date: Date, at monthPosition: FSCalendarMonthPosition) -> Bool {
-        let today = Date()
+        let timeZoneKST = TimeZone(identifier: "Asia/Seoul")!
+        let calendarKST = Calendar.current
+        
+        
+        var componentsNow = calendarKST.dateComponents(in: timeZoneKST, from: Date())
+        componentsNow.hour = 0
+        componentsNow.minute = 0
+        componentsNow.second = 0
+        componentsNow.nanosecond = 0
+        let todayKST = calendarKST.date(from: componentsNow)!
+        
         selectedDate = date
-            updateAvailableTimes(for: date)
-            updateNextButtonState()
+        updateAvailableTimes(for: date)
+        updateNextButtonState()
         
         let weekday = Calendar.current.component(.weekday, from: date)
         let weekdaySymbol = Calendar.current.weekdaySymbols[weekday - 1]
@@ -651,7 +659,7 @@ extension ModelReservationDetailViewController: FSCalendarDelegate, FSCalendarDa
             selectedWeek = nil
         }
         
-        return date >= today
+        return date >= todayKST
     }
     
     enum WeekdayToSelectedWeek: String {
@@ -707,13 +715,35 @@ extension ModelReservationDetailViewController {
 
 extension ModelReservationDetailViewController: UITextFieldDelegate {
     func textFieldDidChangeSelection(_ textField: UITextField) {
-        selectedVisitLocation = textField.text
+        if textField == visitView.visitLocationTextField {
+            selectedVisitLocation = textField.text
+            updateNextButtonState()
+        }
     }
 }
 
 extension ModelReservationDetailViewController: ModelReservationVisitLocationViewDelegate {
     func didEnterVisitLocation(_ location: String) {
         selectedLocation = location
+        updateNextButtonState()
+    }
+}
+
+extension ModelReservationDetailViewController: ModelReservationBothLocationViewDelegate {
+    func didSelectLocationType(_ type: String) {
+        selectedLocationType = type
+        if type == "VISIT" {
+            selectedLocation = selectedVisitLocation
+        }
+        updateNextButtonState()
+    }
+    func didSelectShopLocation(_ location: String) {
+        selectedLocation = location
+        updateNextButtonState()
+    }
+    func didSelectVisitLocation(_ location: String) {
+        self.selectedLocation = location
+        self.selectedVisitLocation = location
         updateNextButtonState()
     }
 }
