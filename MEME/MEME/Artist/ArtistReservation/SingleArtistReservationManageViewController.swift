@@ -23,10 +23,11 @@ class SingleArtistReservationManageViewController: UIViewController {
     @IBOutlet weak var reservationDateLabel: UILabel!
     @IBOutlet weak var reservationPlaceLabel: UILabel!
     
-    private var isToday: Bool = false
+    var isToday: Bool = false
     var reservationData: ReservationData!
     var modelData: ModelProfileInfoData!
     var reservationDateString: String!
+    var reservationTimeString: String!
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -60,7 +61,7 @@ class SingleArtistReservationManageViewController: UIViewController {
             modelPersonalColorLabel.text = data.personalColor.korString
         }
         makeupNameLabel.text = reservationData.makeupName
-        reservationDateLabel.text = reservationDateString
+        reservationDateLabel.text = reservationDateString+" "+reservationTimeString+"시"
         reservationPlaceLabel.text = reservationData.shopLocation
     }
     

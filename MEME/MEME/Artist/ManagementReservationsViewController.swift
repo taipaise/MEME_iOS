@@ -278,7 +278,10 @@ extension ManagementReservationsViewController: UICollectionViewDelegateFlowLayo
             switch item {
             case .reservation(let reservationData):
                 let vc = SingleArtistReservationManageViewController()
+//                vc.isToday = 날짜구별
                 vc.reservationData = reservationData
+                vc.reservationTimeString = convertTimeString(vc.reservationData.reservationDayOfWeekAndTime.values.first!)
+                vc.reservationDateString = formatDateString(op: 3,vc.reservationData.reservationDate)
                 navigationController?.pushViewController(vc, animated: true)
                 
             default:
@@ -328,5 +331,39 @@ extension ManagementReservationsViewController {
                 }
             }
         }
+    }
+}
+
+extension ManagementReservationsViewController {
+    private func formatDateString(op: Int,_ dateString: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // 입력된 날짜의 형식에 맞게 설정
+        
+        if let date = dateFormatter.date(from: dateString) {
+            // 원하는 형식으로 날짜 문자열을 변환
+            let koreanTimeZone = TimeZone(identifier: "Asia/Seoul")!
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = koreanTimeZone
+            if op==1 {
+                dateFormatter.dateFormat = "yyyy. MM. dd EEE"
+            }else if op==2{
+                dateFormatter.dateFormat = "yyyy. MM. dd EEEE"
+            }else{
+                dateFormatter.dateFormat = "M월 d일 EEEE"
+            }
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            return dateFormatter.string(from: date)
+        } else {
+            print("날짜 구별 실패")
+            return nil
+        }
+    }
+    private func convertTimeString(_ input: String) -> String {
+        // 문자열의 처음의 "_"를 ":"로 대체하여 반환
+        var result = input
+        if let firstUnderscoreIndex = input.firstIndex(of: "_") {
+            result.replaceSubrange(firstUnderscoreIndex...firstUnderscoreIndex, with: "")
+        }
+        return result.replacingOccurrences(of: "_", with: ":")
     }
 }

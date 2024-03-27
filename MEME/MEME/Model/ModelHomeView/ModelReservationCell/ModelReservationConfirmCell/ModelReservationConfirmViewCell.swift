@@ -31,21 +31,32 @@ class ModelReservationConfirmViewCell: UICollectionViewCell {
     }
     
     func configure(with data: ReservationData) {
-        let isoFormatter = ISO8601DateFormatter()
-            isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-
-            if let date = isoFormatter.date(from: data.reservationDate) {
-                let timeFormatter = DateFormatter()
-                timeFormatter.dateFormat = "HH:mm"
-                modelReservationDateLabel.text = timeFormatter.string(from: date)
-            } else {
-                modelReservationDateLabel.text = "날짜 오류"
-            }
-        
+//        let isoFormatter = ISO8601DateFormatter()
+//            isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+//
+//            if let date = isoFormatter.date(from: data.reservationDate) {
+//                let timeFormatter = DateFormatter()
+//                timeFormatter.dateFormat = "HH:mm"
+//                modelReservationDateLabel.text = timeFormatter.string(from: date)
+//            } else {
+//                modelReservationDateLabel.text = "날짜 오류"
+//            }
+        modelReservationDateLabel.text = convertTimeString(data.reservationDayOfWeekAndTime.values.first!)
         modelReservationMakeupNameLabel.text = data.makeupName
         modelReservationArtistNameLabel.text = data.artistNickName
         modelReservationLocationLabel.text = data.shopLocation
         modelReservationPriceLabel.text = "\(data.price)원"
     }
     
+}
+
+extension ModelReservationConfirmViewCell {
+    func convertTimeString(_ input: String) -> String {
+        // 문자열의 처음의 "_"를 ":"로 대체하여 반환
+        var result = input
+        if let firstUnderscoreIndex = input.firstIndex(of: "_") {
+            result.replaceSubrange(firstUnderscoreIndex...firstUnderscoreIndex, with: "")
+        }
+        return result.replacingOccurrences(of: "_", with: ":")
+    }
 }
