@@ -34,15 +34,22 @@ class ArtistHomeViewController: UIViewController {
     
     
     //MARK: - viewDidLoad()
+    //메모리 로드
     override func viewDidLoad() {
         super.viewDidLoad()
-        uiSet()
-        getArtistReservation(artistId: artistId)
-        getArtistProfile(userId: 1, artistId: artistId)
         tableViewConfigure()
     }
+    //pop하고 오면 다시 실행 됨
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.todayCount = 0
+        self.tomorrowCount = 0
+        self.fromTomorrowCount = 0
+        getArtistReservation(artistId: artistId)
+        getArtistProfile(userId: 1, artistId: artistId)
+
+    }
     private func uiSet(){
-        print("todayCount:\(todayCount)")
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.tabBarController?.tabBar.isHidden = false
@@ -95,14 +102,11 @@ class ArtistHomeViewController: UIViewController {
     }
     
     @IBAction private func entireReservationBtnTapped(_ sender: UIButton) {
-        let vc = ManagementReservationsViewController()
-        self.tabBarController?.tabBar.isHidden = true
-        navigationController?.pushViewController(vc, animated: true)
+        self.tabBarController?.selectedIndex = 1
     }
     @objc private func reservationManagedBtnTapped(_ sender: UIButton){
         let vc = SingleArtistReservationManageViewController()
         let selectedIdx = sender.tag
-        print(selectedIdx)
         vc.reservationData = reservationData[selectedIdx]
         vc.isToday = false
         vc.reservationTimeString = convertTimeString(vc.reservationData.reservationDayOfWeekAndTime.values.first!)
@@ -137,7 +141,6 @@ class ArtistHomeViewController: UIViewController {
     
     //MARK: - distinguishDate()
     private func distinguishDate(reservationData: [ReservationData]){
-            print("reservationData.count : \(reservationData.count)")
             for i in 0..<reservationData.count {
                 let dateString: String = reservationData[i].reservationDate
                 let dateFormatter = DateFormatter()
@@ -153,37 +156,38 @@ class ArtistHomeViewController: UIViewController {
                     
                     let koreanTime = dateFormatter.string(from: now)
                     let resTime = dateFormatter.string(from: date)
-                    print("kor date : \(resTime)")
-                    print("now kor : \(koreanTime)")
-                    
-                    if String(Int(resTime)!) == koreanTime {
-                        reservationStatusData.append(0)
-                        if(todayCount<2){
-                            showReservationData[todayCount] = i
-                        }
-                        todayCount += 1
-                        print("Today\n")
-                    }else if String(Int(resTime)!-1) == koreanTime{
-                        tomorrowCount += 1
-                        reservationStatusData.append(1)
-                        if(fromTomorrowCount<2){
-                            showReservationData[fromTomorrowCount+2] = i
-                        }
-                        fromTomorrowCount += 1
-                        print("Tomorrow\n")
-                    }else if Int(resTime)! > Int(koreanTime)!{
-                        reservationStatusData.append(1)
-                        if(fromTomorrowCount<2){
-                            showReservationData[fromTomorrowCount+2] = i
-                        }
-                        fromTomorrowCount += 1
-                        print("afterTomorrow\n")
-                    }else {
+                    if(reservationData[i].status == "CANCEL"){
+                        // CANCEL
                         reservationStatusData.append(-1)
-                        print("past")
+                    }else {
+                        if String(Int(resTime)!) == koreanTime {
+                            // Today
+                            reservationStatusData.append(0)
+                            if(todayCount<2){
+                                showReservationData[todayCount] = i
+                            }
+                            todayCount += 1
+                        }else if String(Int(resTime)!-1) == koreanTime{
+                            // Tomorrow
+                            tomorrowCount += 1
+                            reservationStatusData.append(1)
+                            if(fromTomorrowCount<2){
+                                showReservationData[fromTomorrowCount+2] = i
+                            }
+                            fromTomorrowCount += 1
+                        }else if Int(resTime)! > Int(koreanTime)!{
+                            // afterTomorrow
+                            reservationStatusData.append(1)
+                            if(fromTomorrowCount<2){
+                                showReservationData[fromTomorrowCount+2] = i
+                            }
+                            fromTomorrowCount += 1
+                        }else {
+                            // past
+                            reservationStatusData.append(-1)
+                        }
                     }
                 } else {
-                    print("날짜 구별 실패1")
                 }
                 
             }
@@ -208,7 +212,6 @@ class ArtistHomeViewController: UIViewController {
             dateFormatter.locale = Locale(identifier: "ko_KR")
             return dateFormatter.string(from: date)
         } else {
-            print("날짜 구별 실패")
             return nil
         }
     }
@@ -229,10 +232,6 @@ class ArtistHomeViewController: UIViewController {
         getArtistReservation.getArtistReservation(artistId: artistId) { result in
             switch result {
             case .success(let response) :
-                print("res-success")
-                self.todayCount = 0
-                self.tomorrowCount = 0
-                self.fromTomorrowCount = 0
                 self.reservationData = response.data
                 self.distinguishDate(reservationData: self.reservationData)
                 self.artistReservationStatusTableView.reloadData()
@@ -268,8 +267,6 @@ extension ArtistHomeViewController : UITableViewDataSource {
             fromTomorrowCount = 0
             showDataCount = 0
             for i in 0..<reservationData.count {
-                print("reservationData.count\(reservationData.count)")
-                print("resStatus: \(reservationStatusData[i])")
                 self.showDataCount += 1
                 if reservationStatusData[i] == 1{
                     fromTomorrowCount += 1
@@ -286,17 +283,19 @@ extension ArtistHomeViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = artistReservationStatusTableView.dequeueReusableCell(withIdentifier: ArtistReservationStatusTableViewCell.identifier, for: indexPath) as? ArtistReservationStatusTableViewCell else { return UITableViewCell() }
-        cell.makeUpNameLabel.text = reservationData[indexPath.row].makeupName
-        cell.modelNameLabel.text = reservationData[indexPath.row].modelNickName
-        cell.reservationDateLabel.text = formatDateString(op:1, reservationData[indexPath.row].reservationDate)
-        cell.reservationTimeLabel.text = convertTimeString(reservationData[indexPath.row].reservationDayOfWeekAndTime.values.first!)
-        cell.reservationPlaceLabel.text = reservationData[indexPath.row].shopLocation
-        cell.reservationPriceLabel.text = "\(String(reservationData[indexPath.row].price))원"
+//        guard let dateCel =
+        // 날짜 셀 따로
+        guard let resCell = artistReservationStatusTableView.dequeueReusableCell(withIdentifier: ArtistReservationStatusTableViewCell.identifier, for: indexPath) as? ArtistReservationStatusTableViewCell else { return UITableViewCell() }
+        resCell.makeUpNameLabel.text = reservationData[indexPath.row].makeupName
+        resCell.modelNameLabel.text = reservationData[indexPath.row].modelNickName
+        resCell.reservationDateLabel.text = formatDateString(op:1, reservationData[indexPath.row].reservationDate)
+        resCell.reservationTimeLabel.text = convertTimeString(reservationData[indexPath.row].reservationDayOfWeekAndTime.values.first!)
+        resCell.reservationPlaceLabel.text = reservationData[indexPath.row].shopLocation
+        resCell.reservationPriceLabel.text = "\(String(reservationData[indexPath.row].price))원"
         // 버튼 태그로 index 전달
-        cell.reservationManageBtn.tag = indexPath.row
-        cell.reservationManageBtn.addTarget(self, action: #selector(reservationManagedBtnTapped), for: .touchUpInside)
-        return cell
+        resCell.reservationManageBtn.tag = indexPath.row
+        resCell.reservationManageBtn.addTarget(self, action: #selector(reservationManagedBtnTapped), for: .touchUpInside)
+        return resCell
     }
     
 }

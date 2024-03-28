@@ -53,11 +53,9 @@ extension ArtistPortfolioManageViewController : UICollectionViewDelegate, UIColl
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         guard let portfolioData = portfolioData else {
-            print("no portfolio")
             self.noPortfolioLabel.isHidden = false
             return 0
         }
-        print("portfolioData.content!.count : \(portfolioData.content?.count)")
         return portfolioData.content!.count
     }
     
@@ -76,9 +74,21 @@ extension ArtistPortfolioManageViewController : UICollectionViewDelegate, UIColl
                 cell.portfolioMainLabel.text = portfolioData.content?[indexPath.row].makeupName
                 cell.portfolioSubLabel.text = portfolioData.content?[indexPath.row].category
                 cell.portfolioPriceLabel.text = String(portfolioData.content![indexPath.row].price) + "원"
-                
-//                cell.portfolioImageView.image = UIImage(named:
-//                portfolioImageArray[indexPath.row]) // 수정 필요
+                if let url = URL(string: portfolioData.content![indexPath.row].portfolioImgDtoList[0].portfolioImgSrc) {
+                    URLSession.shared.dataTask(
+                        with: url) {
+                            data, response, error in
+                            DispatchQueue.main.async {
+                                if let data = data, error == nil {
+                                    cell.portfolioImageView.image = UIImage(data: data)
+                                } else {
+                                    cell.portfolioImageView.image = nil
+                                }
+                        }
+                    }.resume()
+                } else {
+                    cell.portfolioImageView.image = nil
+                }
             }
             return cell
         }

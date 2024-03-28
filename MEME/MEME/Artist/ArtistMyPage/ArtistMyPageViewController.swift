@@ -80,8 +80,7 @@ private let cellID = "Cell"
             self.navigationController?.pushViewController(artistPortfolioManageViewController, animated: true)
         }
         func reservationManage() {
-            let artistReservationManageViewController = ArtistReservationManageViewController()
-            self.navigationController?.pushViewController(artistReservationManageViewController, animated: true)
+            self.tabBarController?.selectedIndex = 1
         }
     }
 

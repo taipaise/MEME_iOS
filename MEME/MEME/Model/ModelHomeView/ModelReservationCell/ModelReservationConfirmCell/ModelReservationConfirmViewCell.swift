@@ -16,15 +16,15 @@ class ModelReservationConfirmViewCell: UICollectionViewCell {
     @IBOutlet weak var modelReservationLabel: UILabel!
     @IBOutlet weak var modelReservationMakeupNameLabel: UILabel!
     @IBOutlet weak var modelReservationArtistNameLabel: UILabel!
-    @IBOutlet private weak var modelReservationLocationImageView: UIImageView!
+    @IBOutlet weak var modelReservationLocationImageView: UIImageView!
     @IBOutlet weak var modelReservationLocationLabel: UILabel!
-    @IBOutlet private weak var modelReservationWonLabel: UILabel!
+    @IBOutlet weak var modelReservationWonLabel: UILabel!
     @IBOutlet weak var modelReservationPriceLabel: UILabel!
     
     // MARK: - Initialization
     override func awakeFromNib() {
         super.awakeFromNib()
-        modelReservationLocationImageView.image = UIImage(named: "icon_location")
+        modelReservationLocationImageView.image = .iconLocation
         
         self.layer.cornerRadius = 10
         self.layer.masksToBounds = true

@@ -2,9 +2,10 @@ import UIKit
 import SnapKit
 
 class ModelViewArtistProfileViewController: UIViewController {
-    private let isModel : Bool = true
+    private let isModel : Bool = false
     private var isFavoriteArtist : Bool = false
-    var artistID: Int? = 0
+    var userId: Int? = 1
+    var artistID: Int? = 2
     
     // MARK: - Properties
     private var expertiseFields: [String] = []
@@ -216,10 +217,11 @@ class ModelViewArtistProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationController?.setNavigationBarHidden(true, animated: false)
         navigationBar.delegate = self
         navigationBar.configure(title: "프로필")
         
-        getArtistProfile(userId: 6, artistId: artistID!)
+        getArtistProfile(userId: userId!, artistId: artistID!)
         setupGestureRecognizers()
         setupPortfolioCollectionView()
         configureSubviews()

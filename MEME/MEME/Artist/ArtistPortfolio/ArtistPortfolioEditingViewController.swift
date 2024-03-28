@@ -81,11 +81,6 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
         getPortfolio.getPortfolioDetail(userId: userId, portfolioId: portfolioId) { result in
             switch result {
             case .success(let response):
-                // 이미지 처리
-                //                for i in 0 ... (response.data?.portfolioImgDtoList!.count)! {
-                //                    self.imgViewList[i] = response.data?.portfolioImgDtoList[i].portfolioImgSrc
-                //                }
-                //                print(response.data?.portfolioId)
                 self.portfolioDetailData = response.data
                 self.selectedCategory = PortfolioCategories(rawValue: response.data!.category)
                 self.makeupCategoryCollectionView.reloadData()
@@ -225,7 +220,6 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
     }
     
     @objc func editButtonDidTap(_ sender: UIButton) {
-        print("hi")
         let okCreateAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
             self?.createPortfolio(completion: { result in
                 self?.navigationController?.popViewController(animated: true)
@@ -254,7 +248,6 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
         
         // HIG에 따라 Cancel이 왼쪽
         if isEdit{
-            print()
             alert.addAction(okEditAction)
         }else {
             alert.addAction(okCreateAction)
@@ -316,7 +309,6 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
             }
         }
         imgCnt-=1
-        print("deleted buttonat:"+String(self.buttonAt)+", imgCnt:"+String(self.imgCnt))
         deleteButtonAppear()
     }
     
@@ -379,7 +371,6 @@ extension ArtistPortfolioEditingViewController : UICollectionViewDelegate, UICol
 extension ArtistPortfolioEditingViewController : UIImagePickerControllerDelegate{
     func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
             // 이미지 피커 컨트롤러 창 닫기
-            print("이미지 선택하지않고 취소한 경우")
             self.dismiss(animated: false) { () in
                 // 알림 창 호출
                 let alert = UIAlertController(title: "", message: "이미지 선택이 취소되었습니다.", preferredStyle: .alert)
@@ -392,10 +383,7 @@ extension ArtistPortfolioEditingViewController : UIImagePickerControllerDelegate
             // 이미지 피커 컨트롤러 창 닫기
             picker.dismiss(animated: false) { () in
                 // 이미지를 이미지 뷰에 표시
-                let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
-                
-                print("buttonat:"+String(self.buttonAt)+", imgCnt:"+String(self.imgCnt))
-                
+                let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage                
                 if(self.buttonAt == 0) {
                     if(self.imgCnt == 0) {
                         self.imgViewList[1].image = img
