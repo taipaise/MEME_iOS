@@ -10,16 +10,14 @@ import KakaoSDKUser
 import AuthenticationServices
 
 final class LoginViewController: UIViewController {
-    let userDefaultManager = UserDefaultManager.shared
+    private let userDefaultManager = UserDefaultManager.shared
+    private let authManager = AuthManager.shared
     
     override func viewDidLoad() {
-        print(KeyChainManager.read(forkey: .accessToken))
-        print(KeyChainManager.read(forkey: .refreshToken))
         super.viewDidLoad()
     }
     
     @IBAction private func kakaoLoginButtonTapped(_ sender: Any) {
-        //임시 이동 코드
         kakaoLogin()
     }
     
@@ -31,36 +29,40 @@ final class LoginViewController: UIViewController {
 
 // MARK: - login 로직
 extension LoginViewController {
+
+    private func login(idToken: String, provider: SocialProvider) {
+        userDefaultManager.saveProvider(provider.rawValue)
+        userDefaultManager.saveIdToken(idToken)
+        
+        authManager.login(
+            idToken: idToken,
+            socialProvider: .KAKAO
+        ) { loginResult in
+            var baseVC: UIViewController
+            
+            switch loginResult {
+            case .success(let loginDTO):
+                baseVC = ArtistTabBarController()
+            case .failure(let error):
+                baseVC = TermsAgreementViewController()
+            }
+        }
+    }
     
     private func kakaoLogin() {
-        if
-            let provider = userDefaultManager.getProvider(),
-            KeyChainManager.read(forkey: .role) != "",
-            KeyChainManager.read(forkey: .accessToken) != "",
-            provider == SocialProvider.KAKAO.rawValue
-        {
-            if KeyChainManager.read(forkey: .role) == "ARTIST" {
-                let nextVC = ArtistTabBarController()
-                navigationController?.pushViewController(nextVC, animated: true)
-            } else {
-                let nextVC = ModelTabBarController()
-                navigationController?.pushViewController(nextVC, animated: true)
-            }
-            
-            return
-        }
-        
-        userDefaultManager.saveProvider(SocialProvider.KAKAO.rawValue)
         if (UserApi.isKakaoTalkLoginAvailable()) {
-            UserApi.shared.loginWithKakaoTalk {[weak self](oauthToken, error) in
-                if let error = error {
-                    print("에러 발생",error)
-                } else {
-                    self?.userDefaultManager.saveIdToken(oauthToken!.idToken!)
-                    let nextVC = TermsAgreementViewController()
-                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
+            UserApi.shared.loginWithKakaoTalk { [weak self](oauthToken, error) in
+                guard
+                    error == nil,
+                    let self = self,
+                    let idToken = oauthToken?.idToken
+                else {
+                    print("카카오톡 로그인 에러 발생",error)
+                    return
                 }
-            }
+                
+                
+                }
         } else {
             UserApi.shared.loginWithKakaoAccount {[weak self](oauthToken, error) in
                 if let error = error {
