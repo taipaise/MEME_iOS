@@ -145,4 +145,24 @@ final class AuthManager {
             }
         }
     }
+    
+    func login(
+        idToken: String,
+        socialProvider: SocialProvider,
+        completion: @escaping (Result<LoginDTO, MoyaError>) -> Void
+    ) {
+        provider.request(api: .login(idToken: idToken, provider: socialProvider)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let loginResult = try JSONDecoder().decode(LoginDTO.self, from: response.data)
+                    completion(.success(loginResult))
+                } catch let error {
+                    completion(.failure(MoyaError.jsonMapping(response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }
