@@ -153,7 +153,7 @@ final class ManagementReservationsViewController: UIViewController {
             showModelReservations(modelId: 1)
         }
         else{
-//            showArtistReservations(modelId: 1)-> 여기 API만 바꾸면 됩니다
+            showArtistReservations(artistId: 2)
         }
     }
     
@@ -261,7 +261,6 @@ extension ManagementReservationsViewController: UICollectionViewDelegate, UIColl
             return reservationCell
         }
     }
-
 }
 
 extension ManagementReservationsViewController: UICollectionViewDelegateFlowLayout {
@@ -280,26 +279,27 @@ extension ManagementReservationsViewController: UICollectionViewDelegateFlowLayo
         return CGFloat(12)
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let item = collectionViewItems[indexPath.item]
-        switch item {
-        case .reservation(let reservationData):
-            let vc = ModelCancelReservationViewController()
-            vc.reservationId = reservationData.reservationId
-            vc.portfolioId = reservationData.portfolioId
-            vc.reservationDate = reservationData.reservationDate
-            
-            navigationController?.pushViewController(vc, animated: true)
-            
-        default:
-            break
+            let item = collectionViewItems[indexPath.item]
+            switch item {
+            case .reservation(let reservationData):
+                let vc = SingleArtistReservationManageViewController()
+//                vc.isToday = 날짜구별
+                vc.reservationData = reservationData
+                vc.reservationTimeString = convertTimeString(vc.reservationData.reservationDayOfWeekAndTime.values.first!)
+                vc.reservationDateString = formatDateString(op: 3,vc.reservationData.reservationDate)
+                navigationController?.pushViewController(vc, animated: true)
+                
+            default:
+                break
+            }
         }
-    }
 }
 
 // MARK: -BackButtonTappedDelegate
 extension ManagementReservationsViewController: BackButtonTappedDelegate  {
     func backButtonTapped() {
         if let navigationController = self.navigationController {
+            self.tabBarController?.tabBar.isHidden = false
             navigationController.popViewController(animated: true)
         }
     }
@@ -321,5 +321,54 @@ extension ManagementReservationsViewController {
                 }
             }
         }
+    }
+    func showArtistReservations(artistId: Int) {
+        ReservationManager.shared.getArtistReservation(artistId: artistId) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let reservationResponse):
+                    self?.allReservations = reservationResponse.data ?? []
+                    self?.filterAndDisplayReservations(byStatus: .EXPECTED)
+                    print("아티스트 예약 정보 조회 성공: \(reservationResponse)")
+                    
+                case .failure(let error):
+                    print("아티스트 예약 정보 조회 실패: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+}
+
+extension ManagementReservationsViewController {
+    private func formatDateString(op: Int,_ dateString: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // 입력된 날짜의 형식에 맞게 설정
+        
+        if let date = dateFormatter.date(from: dateString) {
+            // 원하는 형식으로 날짜 문자열을 변환
+            let koreanTimeZone = TimeZone(identifier: "Asia/Seoul")!
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = koreanTimeZone
+            if op==1 {
+                dateFormatter.dateFormat = "yyyy. MM. dd EEE"
+            }else if op==2{
+                dateFormatter.dateFormat = "yyyy. MM. dd EEEE"
+            }else{
+                dateFormatter.dateFormat = "M월 d일 EEEE"
+            }
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            return dateFormatter.string(from: date)
+        } else {
+            print("날짜 구별 실패")
+            return nil
+        }
+    }
+    private func convertTimeString(_ input: String) -> String {
+        // 문자열의 처음의 "_"를 ":"로 대체하여 반환
+        var result = input
+        if let firstUnderscoreIndex = input.firstIndex(of: "_") {
+            result.replaceSubrange(firstUnderscoreIndex...firstUnderscoreIndex, with: "")
+        }
+        return result.replacingOccurrences(of: "_", with: ":")
     }
 }
