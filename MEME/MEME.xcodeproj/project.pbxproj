@@ -364,8 +364,8 @@
 		2DA208142B7CF865006EB9B9 /* PortfolioAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioAPI.swift; sourceTree = "<group>"; };
 		2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioManager.swift; sourceTree = "<group>"; };
 		2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDTO.swift; sourceTree = "<group>"; };
-		2DB195E82BB4FCE3008748B7 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = memeSecret.plist; path = "../../../아카이브 /memeSecret.plist"; sourceTree = "<group>"; };
-		2DB195E92BB4FCE3008748B7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../아카이브 /GoogleService-Info.plist"; sourceTree = "<group>"; };
+		2DB195E82BB4FCE3008748B7 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
+		2DB195E92BB4FCE3008748B7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2DB303DE2B827F5300D9E394 /* config.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = config.xcconfig; sourceTree = "<group>"; };
 		2DB303E22B82842E00D9E394 /* PersonalColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalColor.swift; sourceTree = "<group>"; };
 		2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLocationModel.swift; sourceTree = "<group>"; };
@@ -1078,9 +1078,8 @@
 		3156D20A2B6947EB00559820 /* Manager */ = {
 			isa = PBXGroup;
 			children = (
-				31B4137B2B6D295900535BB1 /* BusinessIDVerificationManager.swift */,
+				3162DF352BB55AAC00EB283C /* Auth */,
 				31B65E4E2B6E229000628C68 /* ReservationManager.swift */,
-				315FB8562B6DE1480068163C /* AuthManager.swift */,
 				CC9C38522B75520F0073A257 /* MyPageManager.swift */,
 				CC9C38562B7BC6200073A257 /* ModelProfileManager.swift */,
 				CC9C385A2B7BCAF30073A257 /* InterestArtistManager.swift */,
@@ -1189,6 +1188,15 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		3162DF352BB55AAC00EB283C /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				31B4137B2B6D295900535BB1 /* BusinessIDVerificationManager.swift */,
+				315FB8562B6DE1480068163C /* AuthManager.swift */,
+			);
+			path = Auth;
 			sourceTree = "<group>";
 		};
 		316A92672B66701900E4337D /* SetBusinessLocation */ = {
