@@ -100,7 +100,7 @@ class ModelReservationLastViewController: UIViewController {
     }()
     private let reservationButton: UIButton = {
         let button = UIButton()
-        button.setTitle("다음", for: .normal)
+        button.setTitle("확인", for: .normal)
         button.titleLabel?.font = .pretendard(to: .regular, size: 14)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = .mainBold
@@ -208,6 +208,7 @@ class ModelReservationLastViewController: UIViewController {
     //MARK: -Method
     private func loadData() {
         makeupNameLabel.text = makeupName
+        print(makeupName)
         reservationDateLabel.text = reservationDateText
         reservationArtistNameLabel.text = artistName
         reservationLocationLabel.text = locationText

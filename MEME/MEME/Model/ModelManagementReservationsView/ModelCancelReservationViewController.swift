@@ -30,7 +30,7 @@ class ModelCancelReservationViewController: UIViewController, BackButtonTappedDe
     private var artistNameLabel: UILabel = {
         let label = UILabel()
         label.text = "아티스트 차차"
-        label.font = .pretendard(to: .bold, size: 22)
+        label.font = .pretendard(to: .semiBold, size: 18)
         label.textColor = .black
         label.numberOfLines = 0
         
@@ -39,7 +39,7 @@ class ModelCancelReservationViewController: UIViewController, BackButtonTappedDe
     private var whatMakeupNameLabel: UILabel = {
         let label = UILabel()
         label.text = "메이크업명"
-        label.font = .pretendard(to: .semiBold, size: 18)
+        label.font = .pretendard(to: .medium, size: 16)
         label.textColor = .black
         
         return label
@@ -47,7 +47,7 @@ class ModelCancelReservationViewController: UIViewController, BackButtonTappedDe
     private var makeupNameLabel: UILabel = {
         let label = UILabel()
         label.text = "메이크업명"
-        label.font = .pretendard(to: .regular, size: 18)
+        label.font = .pretendard(to: .regular, size: 16)
         label.textColor = .black
         
         return label
@@ -55,7 +55,7 @@ class ModelCancelReservationViewController: UIViewController, BackButtonTappedDe
     private var whatCategoryLabel: UILabel = {
         let label = UILabel()
         label.text = "분야"
-        label.font = .pretendard(to: .semiBold, size: 18)
+        label.font = .pretendard(to: .medium, size: 16)
         label.textColor = .black
         
         return label
@@ -63,7 +63,7 @@ class ModelCancelReservationViewController: UIViewController, BackButtonTappedDe
     private var categoryLabel: UILabel = {
         let label = UILabel()
         label.text = "배우 메이크업"
-        label.font = .pretendard(to: .regular, size: 18)
+        label.font = .pretendard(to: .regular, size: 16)
         label.textColor = .black
         
         return label
@@ -72,7 +72,7 @@ class ModelCancelReservationViewController: UIViewController, BackButtonTappedDe
     private var whereLocationLabel: UILabel = {
         let label = UILabel()
         label.text = "장소"
-        label.font = .pretendard(to: .semiBold, size: 16)
+        label.font = .pretendard(to: .medium, size: 16)
         label.textColor = .black
         
         return label
@@ -88,7 +88,7 @@ class ModelCancelReservationViewController: UIViewController, BackButtonTappedDe
     private var showArtistPortfolioLabel: UILabel = {
         let label = UILabel()
         label.text = "관련 포트폴리오 보기"
-        label.font = .pretendard(to: .semiBold, size: 16)
+        label.font = .pretendard(to: .medium, size: 16)
         label.textColor = .black
         
         return label
@@ -179,35 +179,35 @@ class ModelCancelReservationViewController: UIViewController, BackButtonTappedDe
         }
         whatMakeupNameLabel.snp.makeConstraints { (make) in
             make.top.equalTo(artistNameLabel.snp.bottom).offset(17)
-            make.leading.equalToSuperview().offset(40)
+            make.leading.equalToSuperview().offset(50)
         }
         makeupNameLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(whatMakeupNameLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(-40)
+            make.trailing.equalToSuperview().offset(-50)
         }
         whatCategoryLabel.snp.makeConstraints { (make) in
             make.top.equalTo(whatMakeupNameLabel.snp.bottom).offset(17)
-            make.leading.equalToSuperview().offset(40)
+            make.leading.equalToSuperview().offset(50)
         }
         categoryLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(whatCategoryLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(-40)
+            make.trailing.equalToSuperview().offset(-50)
         }
         whereLocationLabel.snp.makeConstraints { (make) in
             make.top.equalTo(whatCategoryLabel.snp.bottom).offset(17)
-            make.leading.equalToSuperview().offset(40)
+            make.leading.equalToSuperview().offset(50)
         }
         locationLabel.snp.makeConstraints { (make) in
             make.centerY.equalTo(whereLocationLabel.snp.centerY)
-            make.trailing.equalToSuperview().offset(-40)
+            make.trailing.equalToSuperview().offset(-50)
         }
         showArtistPortfolioLabel.snp.makeConstraints { (make) in
             make.top.equalTo(whereLocationLabel.snp.bottom).offset(22)
-            make.leading.equalToSuperview().offset(40)
+            make.leading.equalToSuperview().offset(50)
         }
         relatedPortfolioCollectionView.snp.makeConstraints { (make) in
             make.top.equalTo(showArtistPortfolioLabel.snp.bottom).offset(17)
-            make.leading.trailing.equalToSuperview().offset(40)
+            make.leading.trailing.equalToSuperview().offset(50)
             make.height.equalTo(260)
         }
         cancelButton.snp.makeConstraints { (make) in

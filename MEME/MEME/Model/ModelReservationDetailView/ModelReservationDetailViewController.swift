@@ -385,7 +385,7 @@ final class ModelReservationDetailViewController: UIViewController {
             let reservationsVC = ModelReservationLastViewController()
             
             reservationsVC.portfolioID = self.portfolioID
-            reservationsVC.makeupName = self.selectedMakeupName
+            reservationsVC.makeupName = self.makeupName
             reservationsVC.selectedDate = self.selectedDate
             reservationsVC.selectedWeek = self.selectedWeek
             reservationsVC.selectedTime = self.selectedTime
