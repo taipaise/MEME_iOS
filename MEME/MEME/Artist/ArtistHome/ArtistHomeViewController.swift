@@ -32,22 +32,20 @@ class ArtistHomeViewController: UIViewController {
     private var reservationStatusData: [Int] = []
     private var showReservationData: [Int] = [0,0,0,0]
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        uiSet()
-//        getArtistProfile(userId: 1, artistId: artistId)
-        getArtistReservation(artistId: artistId)
-    }
     
     //MARK: - viewDidLoad()
     override func viewDidLoad() {
         super.viewDidLoad()
+        uiSet()
+        getArtistReservation(artistId: artistId)
+        getArtistProfile(userId: 1, artistId: artistId)
         tableViewConfigure()
     }
     private func uiSet(){
         print("todayCount:\(todayCount)")
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.tabBarController?.tabBar.isHidden = false
         if(todayCount == 0){
             firstArtistResLabel.text = "포트폴리오 관리하러 가기"
             firstArtistResBtnLabel.text = ">"
@@ -55,6 +53,7 @@ class ArtistHomeViewController: UIViewController {
             secondArtistHomeProfileStatusView.isHidden = true
             secondArtistResBtn.isHidden = true
         }else if(todayCount == 1){
+            firstArtistResBtnLabel.text = "예약"
             firstArtistResLabel.text = reservationData[showReservationData[0]].makeupName
             firstArtistResTimeLabel.text = convertTimeString(reservationData[showReservationData[0]].reservationDayOfWeekAndTime.values.first!)
             secondArtistHomeProfileStatusView.isHidden = true
@@ -74,14 +73,11 @@ class ArtistHomeViewController: UIViewController {
             artistHomeProfileLabel.text = "안녕하세요, \(nickname)님!\n내일 예약 \(String(self.tomorrowCount))건이 있어요."
         }
         if let profileImg = artistProfileData?.profileImg {
-//            FirebaseStorageManager.downloadImage(urlString: profileImg) { [weak self] image in
-//                guard let image = image else { return } // 성공적으로 업로드 했으면 이미지가 nil 값이 아님
-//                //이미지를 가지고 할 작업 처리 ex) 이미지 뷰에 다운 받은 이미지를 넣음
-//                self?.artistProfileImageView.image = image
-//            }
-        }
-        if todayCount == 1 {
-            
+            FirebaseStorageManager.downloadImage(urlString: profileImg) { [weak self] image in
+                guard let image = image else { return } // 성공적으로 업로드 했으면 이미지가 nil 값이 아님
+                //이미지를 가지고 할 작업 처리 ex) 이미지 뷰에 다운 받은 이미지를 넣음
+                self?.artistProfileImageView.image = image
+            }
         }
         
     }
@@ -268,22 +264,25 @@ class ArtistHomeViewController: UIViewController {
 // MARK: - UITableViewDataSource
 extension ArtistHomeViewController : UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        guard let reservationData = reservationData else {
-            return 0
-        }
-        fromTomorrowCount = 0
-        showDataCount = 0
-        for i in 0...reservationData.count-1 {
-            print("resStatus: \(reservationStatusData[i])")
-            self.showDataCount += 1
-            if reservationStatusData[i] == 1{
-                fromTomorrowCount += 1
-                if fromTomorrowCount == 2 {
-                    break
+        if let reservationData = reservationData {
+            fromTomorrowCount = 0
+            showDataCount = 0
+            for i in 0..<reservationData.count {
+                print("reservationData.count\(reservationData.count)")
+                print("resStatus: \(reservationStatusData[i])")
+                self.showDataCount += 1
+                if reservationStatusData[i] == 1{
+                    fromTomorrowCount += 1
+                    if fromTomorrowCount == 2 {
+                        break
+                    }
                 }
             }
+            return self.showDataCount
+        }else {
+            return 0
         }
-        return self.showDataCount
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

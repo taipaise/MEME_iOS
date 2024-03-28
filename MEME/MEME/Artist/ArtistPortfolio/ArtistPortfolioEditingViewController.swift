@@ -143,6 +143,7 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
     
     private func uiSet(){
         self.tabBarController?.tabBar.isHidden = true
+        infoTextView.delegate = self
         infoTextView.layer.cornerRadius = 10
         infoTextView.layer.borderWidth = 1
         infoTextView.layer.borderColor = UIColor.gray200.cgColor
