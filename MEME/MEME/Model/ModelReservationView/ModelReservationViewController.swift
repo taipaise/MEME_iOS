@@ -205,7 +205,9 @@ class ModelReservationViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "예약하기")
         
-        fetchPortfolioDetail(userId: 1, portfolioId: portfolioID!)
+        if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+            fetchPortfolioDetail(userId: userId, portfolioId: portfolioID!)
+        }
         fetchReviews(portfolioId: portfolioID!, page: 0)
         fetchImagesFromAPI()
 
@@ -395,14 +397,19 @@ class ModelReservationViewController: UIViewController {
     @objc private func likeImageTapped() {
         if isFavorite {
             if let portfolioID = portfolioID {
-                deleteFavoritePortfolio(modelId: 1, portfolioId: portfolioID)
+                if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+                    deleteFavoritePortfolio(modelId: userId, portfolioId: portfolioID)
+                }
             }
         } else {
             if let portfolioID = portfolioID {
-                postFavoritePortfolio(modelId: 1, portfolioId: portfolioID)
+                if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+                    postFavoritePortfolio(modelId: userId, portfolioId: portfolioID)
+                }
             }
         }
     }
+    
     // MARK: - API Actions
     private func fetchImagesFromAPI() {
         if portfolioImageUrls.isEmpty {

@@ -9,6 +9,7 @@ import UIKit
 
 protocol WrittenCollectionViewCellDelegate: AnyObject {
     func menubuttonPressed(in cell: UICollectionViewCell, at indexPath: IndexPath)
+    
 }
 
 class WrittenCollectionViewCell: UICollectionViewCell {
@@ -44,7 +45,7 @@ class WrittenCollectionViewCell: UICollectionViewCell {
     }()
     
     let image = UIImage.moreVertical
-    
+ 
     lazy var menubutton: UIButton = {
         let btn = UIButton(type: .custom)
         btn.setImage(image, for: .normal)
@@ -102,10 +103,15 @@ class WrittenCollectionViewCell: UICollectionViewCell {
             menubutton.heightAnchor.constraint(equalToConstant: 24)
         ])
     }
-
+    func configure(with reviewData2: WrittenReviewData) {
+            artistLabel.text = reviewData2.artistNickName
+            makeupLabel.text = reviewData2.makeupName
+            placeLabel.text = reviewData2.location
+        }
     @objc func menubuttonPressed(sender:UIButton) {
         if let indexPath = indexPath {
             delegate?.menubuttonPressed(in: self, at: indexPath)
         }
     }
+
 }

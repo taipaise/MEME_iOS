@@ -219,13 +219,20 @@ class ModelViewArtistProfileViewController: UIViewController {
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationBar.delegate = self
         navigationBar.configure(title: "프로필")
-        
-        getArtistProfile(userId: modelID, artistId: artistId!)
+        if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+            getArtistProfile(userId: userId, artistId: artistID!)
+        }
         setupGestureRecognizers()
         setupPortfolioCollectionView()
         configureSubviews()
         makeConstraints()
         setupExpertiseFieldsButtons()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+            getArtistProfile(userId: userId, artistId: artistID!)
+        }
     }
     // MARK: - configureSubviews
     func configureSubviews() {
@@ -414,9 +421,17 @@ class ModelViewArtistProfileViewController: UIViewController {
     }
     @objc private func likeImageTapped() {
         if isFavoriteArtist {
-            deleteFavoriteArtist(modelId: modelID, artistId: artistID)
+            if let artistID = artistID {
+                if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+                    deleteFavoriteArtist(modelId: userId, artistId: artistID)
+                }
+            }
         } else {
-            postFavoriteArtist(modelId: modelID, artistId: artistID)
+            if let artistID = artistID {
+                if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+                    postFavoriteArtist(modelId: userId, artistId: artistID)
+                }
+            }
         }
     }
     

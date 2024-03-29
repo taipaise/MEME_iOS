@@ -63,7 +63,7 @@ class InfoHeaderView: UIView {
             nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
             nameLabel.topAnchor.constraint(equalTo: infoprofileImage.bottomAnchor, constant: 17)
         ])
-        MyPageManager.shared.getMyPageProfile(userId: 6) { [weak self] result in
+        MyPageManager.shared.getMyPageProfile(userId: 1) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.myPageResponse = response

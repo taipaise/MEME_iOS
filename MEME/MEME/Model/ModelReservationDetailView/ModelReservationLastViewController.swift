@@ -116,6 +116,7 @@ class ModelReservationLastViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         navigationController?.setNavigationBarHidden(true, animated: false)
+        setupNickName()
         
         loadData()
         loadAPI()
@@ -191,6 +192,13 @@ class ModelReservationLastViewController: UIViewController {
     }
     
     // MARK: - Action
+    private func setupNickName() {
+        if let nickname = KeyChainManager.read(forkey: .nickName) {
+            completeLabel.text = "\(nickname),\n 예약이 완료되었습니다!"
+        } else {
+            completeLabel.text = "예약이 완료되었습니다!"
+        }
+    }
     @objc private func nextTapped() {
         guard let tabBarController = self.tabBarController else { return }
         
@@ -224,14 +232,15 @@ class ModelReservationLastViewController: UIViewController {
                 dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ss.SSSZ"
                 dateFormatter.timeZone = TimeZone(abbreviation: "UTC")
                 let dateString = dateFormatter.string(from: selectedDate ?? Date())
-                
-                self.postModelReservations(
-                    modelId: 1,
-                    portfolioId: portfolioID,
-                    date: dateString,
-                    reservationDayOfWeekAndTime: reservationDayOfWeekAndTime,
-                    location: locationText
-                )
+                if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+                    self.postModelReservations(
+                        modelId: userId,
+                        portfolioId: portfolioID,
+                        date: dateString,
+                        reservationDayOfWeekAndTime: reservationDayOfWeekAndTime,
+                        location: locationText
+                    )
+                }
             }
         }
     }

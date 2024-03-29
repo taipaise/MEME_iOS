@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct ModelProfileRequest: Codable {
+struct ModelProfileResponse: Codable {
     let userId: Int
     let profileImg: String
     let nickname: String
@@ -16,10 +16,10 @@ struct ModelProfileRequest: Codable {
     let personalColor: String
 }
 
-struct ModelProfileResponse: Codable {
+struct ModelProfileDTO: Codable {
     let result: String
     let message: String
-    let data: String?
+    let data: ModelProfileResponse?
     let statusCode: Int
 
     enum CodingKeys: String, CodingKey {

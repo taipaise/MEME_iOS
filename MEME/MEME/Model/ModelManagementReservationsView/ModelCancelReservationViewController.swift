@@ -141,7 +141,7 @@ class ModelCancelReservationViewController: UIViewController, BackButtonTappedDe
             getModelDetailReservation(reservationId: reservationId)
         }
         if let portfolioId = portfolioId {
-            getRelatedPortfolio(userId: 1, portfolioId: portfolioId)
+            getRelatedPortfolio(userId: KeyChainManager.loadMemberID(), portfolioId: portfolioId)
         }
     }
     

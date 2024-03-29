@@ -10,7 +10,7 @@ import Foundation
 struct WrittenReviewResponse: Codable {
     let result: String
     let message: String
-    let data: WrittenReviewData?
+    let data: [WrittenReviewData]?
     let statusCode: Int
     
     enum CodingKeys: String, CodingKey {
@@ -25,5 +25,5 @@ struct WrittenReviewData: Codable {
     let makeupName: String
     let portfolioImg: String
     let location: String
-    let createdAt: String
+    let createdAt: String?
 }

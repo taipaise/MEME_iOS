@@ -15,11 +15,10 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
     var selectedSkinTypeTag: Int?
     var selectedPersonalColorTag: Int?
     
-    var request: ModelProfileRequest?
-    var response: ModelProfileResponse?
+    var response: MyPageResponse?
     var getresponse: ModelProfileInfoResponse?
-
-
+    
+    
     @IBOutlet private weak var completeButton: UIButton!
     @IBOutlet private weak var womanView: ModelDetailSettingView!
     @IBOutlet private weak var manView: ModelDetailSettingView!
@@ -56,7 +55,7 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ModelProfileInfoManager.shared.getModelProfileInfo(userId: 6) { [weak self] result in
+        ModelProfileInfoManager.shared.getModelProfileInfo(userId: 1) { [weak self] result in
             switch result {
             case .success(let response):
                 print("Success: \(response)")
@@ -84,12 +83,12 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
                 } else {
                     print("data nil")
                 }
-
+                
             case .failure(let error):
                 print("Failure: \(error)")
             }
         }
-
+        
         
         navigationItem.title = "프로필 관리"
         navigationController?.navigationBar.titleTextAttributes = [
@@ -103,10 +102,10 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
         self.tabBarController?.tabBar.isHidden = true
         
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
-            modifyImageView.isUserInteractionEnabled = true
-            modifyImageView.addGestureRecognizer(tapGesture)
+        modifyImageView.isUserInteractionEnabled = true
+        modifyImageView.addGestureRecognizer(tapGesture)
         
-
+        
         setUI()
     }
     
@@ -145,11 +144,11 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
         nameTextField.layer.cornerRadius = 9
         nameTextField.layer.borderWidth = 1
         nameTextField.layer.borderColor = UIColor.gray200.cgColor
-//        nameTextField.text = "차차"
+        //        nameTextField.text = "차차"
         let leftPaddingView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: nameTextField.frame.height))
         nameTextField.leftView = leftPaddingView
         nameTextField.leftViewMode = .always
-
+        
         configureDetailSettingViews()
         
         profileImageView.image = .profile
@@ -185,115 +184,118 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
         }
     }
     
-//    func uploadImage(_ image: UIImage, completion: @escaping (String?) -> Void) {
-//        // 이미지 업로드 로직
-//        
-//        // 이미지 업로드
-//        uploadImage(selectedImage) { [weak self] imageUrl in
-//            guard let imageUrl = imageUrl else {
-//                print("Image upload failed")
-//                return
-//            }
-//        }
-//            // 이미지 URL 저장
-//            self?.uploadedImageUrl = imageUrl
-//            
-//            // 프로필 업데이트
-//            self?.completeButtonTapped(self?.completeButton ?? UIButton())
-//        }
-
+    //    func uploadImage(_ image: UIImage, completion: @escaping (String?) -> Void) {
+    //        // 이미지 업로드 로직
+    //
+    //        // 이미지 업로드
+    //        uploadImage(selectedImage) { [weak self] imageUrl in
+    //            guard let imageUrl = imageUrl else {
+    //                print("Image upload failed")
+    //                return
+    //            }
+    //        }
+    //            // 이미지 URL 저장
+    //            self?.uploadedImageUrl = imageUrl
+    //
+    //            // 프로필 업데이트
+    //            self?.completeButtonTapped(self?.completeButton ?? UIButton())
+    //        }
+    
     @IBAction func completeButtonTapped(_ sender: Any) {
         let profileImg = /*uploadedImageUrl ??*/ ""
         let nickname = nameTextField.text ?? ""
         
         let selectedGender = genderViews.first(where: { $0?.tag == selectedGenderTag })??.button.titleLabel?.text
         let gender = Gender.rawValueFrom(displayText: selectedGender ?? "")
-
+        
         let selectedSkinTypeText = skinViews.first(where: { $0?.tag == selectedSkinTypeTag })??.button.titleLabel?.text
-          let skinType = SkinType.rawValueFrom(displayText: selectedSkinTypeText ?? "")
-
-          let selectedPersonalColorText = colorViews.first(where: { $0?.tag == selectedPersonalColorTag })??.button.titleLabel?.text
-          let personalColor = PersonalColor.rawValueFrom(displayText: selectedPersonalColorText ?? "")
-
-          ModelProfileManager.shared.patchProfile(userId: 6, profileImg: profileImg, nickname: nickname, gender: gender, skinType: skinType, personalColor: personalColor) { result in
-              switch result {
-              case .success(let response):
-                  print("Profile updated successfully: \(response)")
-              case .failure(let error):
-                  print("Failed to update profile: \(error)")
-              }
-          }
-      }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[.originalImage] as? UIImage {
-            profileImageView.image = image
-        }
-        dismiss(animated: true, completion: nil)
-    }
-
-    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        dismiss(animated: true, completion: nil)
-        guard !results.isEmpty else { return }
-        results[0].itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
-            if let image = object as? UIImage {
-                DispatchQueue.main.async {
-                    self.profileImageView.image = image
+        let skinType = SkinType.rawValueFrom(displayText: selectedSkinTypeText ?? "")
+        
+        let selectedPersonalColorText = colorViews.first(where: { $0?.tag == selectedPersonalColorTag })??.button.titleLabel?.text
+        let personalColor = PersonalColor.rawValueFrom(displayText: selectedPersonalColorText ?? "")
+        
+        func patchModelProfile(userId: Int, profileImg: String, nickname: String, gender: Gender, skinYype: SkinType, personalColor: PersonalColor) {
+            MyPageManager.shared.patchModelProfile(userId: KeyChainManager.loadMemberID(), profileImg: profileImg, nickname: nickname, gender: gender, skinYype: skinYype, personalColor: personalColor) { result in
+                switch result {
+                case .success(let response):
+                    print("Profile updated successfully: \(response)")
+                case .failure(let error):
+                    print("Failed to update profile: \(error)")
                 }
             }
         }
     }
-    @objc func backButtonTapped() {
-        self.navigationController?.popViewController(animated: true)
-    }
-}
-
-extension ModelModifyViewController: DetailSetButtonTapped {
-   
-    private func setGenderView(tag: Int) {
-        genderViews.forEach {
-            $0?.deselect(tag: tag)
-        }
-    }
-    
-    private func setSkinView(tag: Int) {
-        skinViews.forEach {
-            $0?.deselect(tag: tag)
-        }
-    }
-    
-    private func setColorView(tag: Int) {
-        colorViews.forEach {
-            $0?.deselect(tag: tag)
-        }
-    }
-    
-    func detailSetButtonTapped(
-        isSelected: Bool,
-        tag: Int,
-        type: DetailSetViewType
-    ) {
-        var views: [ModelDetailSettingView?]
-        switch type {
-        case .gender:
-            views = genderViews
-        case .skinType:
-            views = skinViews
-        case .personalColor:
-            views = colorViews
-        }
-        views.forEach { $0?.deselect(tag: tag) }
         
-        if isSelected {
-               switch type {
-               case .gender:
-                   selectedGenderTag = tag
-               case .skinType:
-                   selectedSkinTypeTag = tag
-               case .personalColor:
-                   selectedPersonalColorTag = tag
-               }
+        func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+            if let image = info[.originalImage] as? UIImage {
+                profileImageView.image = image
+            }
+            dismiss(animated: true, completion: nil)
+        }
+        
+        func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+            dismiss(animated: true, completion: nil)
+            guard !results.isEmpty else { return }
+            results[0].itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
+                if let image = object as? UIImage {
+                    DispatchQueue.main.async {
+                        self.profileImageView.image = image
+                    }
+                }
+            }
+        }
+        @objc func backButtonTapped() {
+            self.navigationController?.popViewController(animated: true)
         }
     }
+    
+    extension ModelModifyViewController: DetailSetButtonTapped {
+        
+        private func setGenderView(tag: Int) {
+            genderViews.forEach {
+                $0?.deselect(tag: tag)
+            }
+        }
+        
+        private func setSkinView(tag: Int) {
+            skinViews.forEach {
+                $0?.deselect(tag: tag)
+            }
+        }
+        
+        private func setColorView(tag: Int) {
+            colorViews.forEach {
+                $0?.deselect(tag: tag)
+            }
+        }
+        
+        func detailSetButtonTapped(
+            isSelected: Bool,
+            tag: Int,
+            type: DetailSetViewType
+        ) {
+            var views: [ModelDetailSettingView?]
+            switch type {
+            case .gender:
+                views = genderViews
+            case .skinType:
+                views = skinViews
+            case .personalColor:
+                views = colorViews
+            }
+            views.forEach { $0?.deselect(tag: tag) }
+            
+            if isSelected {
+                switch type {
+                case .gender:
+                    selectedGenderTag = tag
+                case .skinType:
+                    selectedSkinTypeTag = tag
+                case .personalColor:
+                    selectedPersonalColorTag = tag
+                }
+            }
+        }
+        
+    }
 
-}

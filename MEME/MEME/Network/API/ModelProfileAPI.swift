@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum ModelProfileAPI {
-    case patchProfile(userId: Int, profileImg: String?, nickname: String?, gender: String?, skinType: String?, personalColor: String?)
+    case getProfile(userId: Int, profileImg: String?, nickname: String?, gender: String?, skinType: String?, personalColor: String?)
 }
 
 extension ModelProfileAPI: MemeAPI {
@@ -19,8 +19,8 @@ extension ModelProfileAPI: MemeAPI {
     
     var urlPath: String {
         switch self {
-        case .patchProfile:
-            return "/profile/model"
+        case .getProfile(let userId, _, _, _, _, _):
+            return "/profile/model/\(userId)"
         }
     }
     
@@ -30,21 +30,21 @@ extension ModelProfileAPI: MemeAPI {
     
     var headerType: HTTPHeaderFields {
         switch self {
-        case .patchProfile:
+        case .getProfile:
             return .hasAccessToken
         }
     }
     
     var method: Moya.Method {
         switch self {
-        case .patchProfile:
+        case .getProfile:
             return .patch
         }
     }
 
     var task: Task {
         switch self {
-        case .patchProfile(let userId, let profileImg, let nickname, let gender, let skinType, let personalColor):
+        case .getProfile(let userId, let profileImg, let nickname, let gender, let skinType, let personalColor):
             var parameters: [String: Any] = ["userId": userId]
             if let profileImg = profileImg { parameters["profileImg"] = profileImg }
             if let nickname = nickname { parameters["nickname"] = nickname }
