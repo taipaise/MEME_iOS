@@ -60,7 +60,7 @@ final class ModelHomeViewController: UIViewController {
 
     private var modelWelcomeLabel: UILabel = {
         let label = UILabel()
-        label.text = "메메님, 환영합니다!"
+        label.text = "환영합니다!"
         label.textColor = .black
         label.font = .pretendard(to: .semiBold, size: 20)
         label.numberOfLines = 0
@@ -149,7 +149,6 @@ final class ModelHomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        showModelReservations()
         setupReservationCollectionView()
         setupMakeupCardCollectionView()
         setupHastyMakeupCardCollectionView()
@@ -159,12 +158,15 @@ final class ModelHomeViewController: UIViewController {
         
         getRecommendArtistByReview()
         getRecommendArtistByRecent()
-        
-        
-//        patchArtistProfile(userId: 3, profileImg: "url_to_image", nickname: "nickname", gender: "gender", introduction: "introduction", workExperience: "experience", region: ["region1", "region2"], specialization: ["specialization1", "specialization2"], makeupLocation: "location", shopLocation: "shop_location", availableDayOfWeek: ["MON": "_09_00", "TUE": "_10_00"])
-
-        
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        showModelReservations()
+        getRecommendArtistByReview()
+        getRecommendArtistByRecent()
+    }
+
     // MARK: - configureSubviews
     func configureSubviews() {
         contentsView.addSubview(memeLogoImageView)
@@ -269,7 +271,7 @@ final class ModelHomeViewController: UIViewController {
         searchMakeup.delegate = self
     }
     @objc private func viewAllReservationsTapped() {
-        let reservationsVC = ModelManagementReservationsViewController()
+        let reservationsVC = ManagementReservationsViewController()
         reservationsVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(reservationsVC, animated: true)
     }
@@ -423,14 +425,16 @@ extension ModelHomeViewController: UISearchBarDelegate {
 //MARK: -API 통신 메소드
 extension ModelHomeViewController {
     func showModelReservations() {
-        ReservationManager.shared.getModelReservation(modelId: KeyChainManager.loadMemberID()) { [weak self] result in
+        ReservationManager.shared.getModelReservation(modelId: 1) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let reservationResponse):
                     print("모델 예약 정보 조회 성공: \(reservationResponse)")
                     let filteredReservations = reservationResponse.data?.filter { reservationData in
-                        if let date = self?.dateFromString(reservationData.reservationDate) {
-                            return self?.isToday(date) ?? false
+                        if let date = self?.dateFromString(reservationData.reservationDate),
+                           self?.isToday(date) ?? false,
+                           reservationData.status == "EXPECTED" {
+                            return true
                         }
                         return false
                     }

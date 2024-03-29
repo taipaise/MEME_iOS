@@ -85,7 +85,7 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
 
         reviewLabel.attributedText = attributedString
     }
-    
+
     var imageViewHeightConstraint: NSLayoutConstraint?
     var reviewTextViewTopConstraint: NSLayoutConstraint?
     

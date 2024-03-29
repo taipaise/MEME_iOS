@@ -32,20 +32,28 @@ class ModelReservationConfirmViewCell: UICollectionViewCell {
     
     func configure(with data: ReservationData) {
         let isoFormatter = ISO8601DateFormatter()
-            isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
-
-            if let date = isoFormatter.date(from: data.reservationDate) {
-                let timeFormatter = DateFormatter()
-                timeFormatter.dateFormat = "HH:mm"
-                modelReservationDateLabel.text = timeFormatter.string(from: date)
-            } else {
-                modelReservationDateLabel.text = "날짜 오류"
-            }
+        isoFormatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         
+        let daysOfWeek = ["MON", "TUE", "WED", "THU", "FRI", "SAT", "SUN"]
+        
+        var firstFoundReservationTime: String?
+        
+        for day in daysOfWeek {
+            if let time = data
+                .reservationDayOfWeekAndTime[day]?
+                .replacingOccurrences(of: "_", with: ":") {
+                firstFoundReservationTime = time
+                break
+            }
+        }
+        
+        let reservationTime = firstFoundReservationTime ?? "시간 오류"
+        let formattedTime = reservationTime.trimmingCharacters(in: CharacterSet(charactersIn: ":"))
+        
+        modelReservationDateLabel.text = formattedTime
         modelReservationMakeupNameLabel.text = data.makeupName
         modelReservationArtistNameLabel.text = data.artistNickName
         modelReservationLocationLabel.text = data.shopLocation
         modelReservationPriceLabel.text = "\(data.price)원"
     }
-    
 }

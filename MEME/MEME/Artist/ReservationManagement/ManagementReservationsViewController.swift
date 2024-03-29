@@ -13,7 +13,7 @@ struct ReservationSection {
     var reservations: [ReservationData]
 }
 
-final class ModelManagementReservationsViewController: UIViewController {
+final class ManagementReservationsViewController: UIViewController {
     private let isModel : Bool = true
     private var isFavoriteArtist : Bool = false
     var artistID: Int? = 0
@@ -74,6 +74,11 @@ final class ModelManagementReservationsViewController: UIViewController {
         makeConstraints()
         showReservations()
         setupImageViewGestures()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        showReservations()
     }
     
     // MARK: - configureSubviews
@@ -145,10 +150,10 @@ final class ModelManagementReservationsViewController: UIViewController {
     //MARK: -API 호출
     private func showReservations() {
         if(isModel) {
-            showModelReservations(modelId: KeyChainManager.loadMemberID())
+            showModelReservations(modelId: 1)
         }
         else{
-//            showArtistReservations(modelId: 1)-> 여기 API만 바꾸면 됩니다
+            showArtistReservations(artistId: 2)
         }
     }
     
@@ -176,7 +181,6 @@ final class ModelManagementReservationsViewController: UIViewController {
         reservationSections = groupedDictionary.map { (key, value) in
             ReservationSection(date: key, reservations: value)
         }.sorted(by: { $0.date < $1.date })
-        print("이거:", reservationSections)
         
         setupCollectionViewItems()
     }
@@ -212,7 +216,7 @@ final class ModelManagementReservationsViewController: UIViewController {
         reservationCollectionView.dataSource = self
         
         //cell 등록
-        reservationCollectionView.register(ModelManagementReservationsDateCollectionViewCell.self, forCellWithReuseIdentifier: ModelManagementReservationsDateCollectionViewCell.identifier)
+        reservationCollectionView.register(ManagementReservationsDateCollectionViewCell.self, forCellWithReuseIdentifier: ManagementReservationsDateCollectionViewCell.identifier)
 
   
         reservationCollectionView.register(UINib(nibName: "ModelReservationConfirmViewCell", bundle: nil), forCellWithReuseIdentifier: ModelReservationConfirmViewCell.identifier)
@@ -221,7 +225,7 @@ final class ModelManagementReservationsViewController: UIViewController {
 }
 
 //MARK: -UITableViewDataSource, UITableViewDelegate
-extension ModelManagementReservationsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+extension ManagementReservationsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     //섹션의 갯수
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 1
@@ -237,7 +241,7 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegate, U
         let item = collectionViewItems[indexPath.item]
         switch item {
         case .date(let date):
-            guard let dateCell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelManagementReservationsDateCollectionViewCell.identifier, for: indexPath) as? ModelManagementReservationsDateCollectionViewCell else {
+            guard let dateCell = collectionView.dequeueReusableCell(withReuseIdentifier: ManagementReservationsDateCollectionViewCell.identifier, for: indexPath) as? ManagementReservationsDateCollectionViewCell else {
                 fatalError("셀 타입 캐스팅 실패...")
             }
             dateCell.configure(with: date)
@@ -259,7 +263,7 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegate, U
     }
 }
 
-extension ModelManagementReservationsViewController: UICollectionViewDelegateFlowLayout {
+extension ManagementReservationsViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         switch collectionViewItems[indexPath.item] {
         case .date:
@@ -279,7 +283,10 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegateFlo
             switch item {
             case .reservation(let reservationData):
                 let vc = SingleArtistReservationManageViewController()
-                vc.reservationId = reservationData.reservationId
+//                vc.isToday = 날짜구별
+                vc.reservationData = reservationData
+                vc.reservationTimeString = convertTimeString(vc.reservationData.reservationDayOfWeekAndTime.values.first!)
+                vc.reservationDateString = formatDateString(op: 3,vc.reservationData.reservationDate)
                 navigationController?.pushViewController(vc, animated: true)
                 
             default:
@@ -289,16 +296,17 @@ extension ModelManagementReservationsViewController: UICollectionViewDelegateFlo
 }
 
 // MARK: -BackButtonTappedDelegate
-extension ModelManagementReservationsViewController: BackButtonTappedDelegate  {
+extension ManagementReservationsViewController: BackButtonTappedDelegate  {
     func backButtonTapped() {
         if let navigationController = self.navigationController {
+            self.tabBarController?.tabBar.isHidden = false
             navigationController.popViewController(animated: true)
         }
     }
 }
 
 //MARK: -API 통신 메소드
-extension ModelManagementReservationsViewController {
+extension ManagementReservationsViewController {
     func showModelReservations(modelId: Int) {
         ReservationManager.shared.getModelReservation(modelId: modelId) { [weak self] result in
             DispatchQueue.main.async {
@@ -313,5 +321,54 @@ extension ModelManagementReservationsViewController {
                 }
             }
         }
+    }
+    func showArtistReservations(artistId: Int) {
+        ReservationManager.shared.getArtistReservation(artistId: artistId) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let reservationResponse):
+                    self?.allReservations = reservationResponse.data ?? []
+                    self?.filterAndDisplayReservations(byStatus: .EXPECTED)
+                    print("아티스트 예약 정보 조회 성공: \(reservationResponse)")
+                    
+                case .failure(let error):
+                    print("아티스트 예약 정보 조회 실패: \(error.localizedDescription)")
+                }
+            }
+        }
+    }
+}
+
+extension ManagementReservationsViewController {
+    private func formatDateString(op: Int,_ dateString: String) -> String? {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // 입력된 날짜의 형식에 맞게 설정
+        
+        if let date = dateFormatter.date(from: dateString) {
+            // 원하는 형식으로 날짜 문자열을 변환
+            let koreanTimeZone = TimeZone(identifier: "Asia/Seoul")!
+            let dateFormatter = DateFormatter()
+            dateFormatter.timeZone = koreanTimeZone
+            if op==1 {
+                dateFormatter.dateFormat = "yyyy. MM. dd EEE"
+            }else if op==2{
+                dateFormatter.dateFormat = "yyyy. MM. dd EEEE"
+            }else{
+                dateFormatter.dateFormat = "M월 d일 EEEE"
+            }
+            dateFormatter.locale = Locale(identifier: "ko_KR")
+            return dateFormatter.string(from: date)
+        } else {
+            print("날짜 구별 실패")
+            return nil
+        }
+    }
+    private func convertTimeString(_ input: String) -> String {
+        // 문자열의 처음의 "_"를 ":"로 대체하여 반환
+        var result = input
+        if let firstUnderscoreIndex = input.firstIndex(of: "_") {
+            result.replaceSubrange(firstUnderscoreIndex...firstUnderscoreIndex, with: "")
+        }
+        return result.replacingOccurrences(of: "_", with: ":")
     }
 }

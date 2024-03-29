@@ -134,4 +134,42 @@ final class ReservationManager {
             }
         }
     }
+    // MARK: -모델 예약 상세 조회 API
+    func getModelDetailReservation(
+        reservationId: Int,
+        completion: @escaping (Result<ReservationDetailDTO, MoyaError>) -> Void
+    ) {
+        provider.request(api: .getModelDetailReservation(reservationId: reservationId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(ReservationDetailDTO.self, from: response.data)
+                    completion(.success(decodedData))
+                } catch let error {
+                    completion(.failure(MoyaError.underlying(error, response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
+    // MARK: - 아티스트 예약 조회 API
+    func getArtistReservation(
+        artistId: Int,
+        completion: @escaping (Result<ReservationDTO, MoyaError>) -> Void
+    ) {
+        provider.request(api: .getArtistReservation(aristId: artistId)) { result in
+            switch result {
+            case .success(let response):
+                do {
+                    let decodedData = try JSONDecoder().decode(ReservationDTO.self, from: response.data)
+                    completion(.success(decodedData))
+                } catch let error {
+                    completion(.failure(MoyaError.underlying(error, response)))
+                }
+            case .failure(let error):
+                completion(.failure(error))
+            }
+        }
+    }
 }

@@ -88,4 +88,7 @@ extension ModelReservationShopLocationView {
     func configureModelReservationShopLocationView(with data: MakeupLocationData) {
         shopLocationLabel.text = data.shopLocation
     }
+    func updateShopLocation(_ location: String) {
+        self.shopLocationLabel.text = location
+    }
 }

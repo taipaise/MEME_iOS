@@ -29,11 +29,16 @@
                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" translatesAutoresizingMaskIntoConstraints="NO" id="L0z-gk-ItK">
                         <rect key="frame" x="16" y="16" width="122" height="190"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SelectMakeupCardIMG" translatesAutoresizingMaskIntoConstraints="NO" id="bw5-j8-gwd">
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SelectMakeupCardIMG" translatesAutoresizingMaskIntoConstraints="NO" id="bw5-j8-gwd">
                                 <rect key="frame" x="0.0" y="0.0" width="122" height="122"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bw5-j8-gwd" secondAttribute="height" id="w3F-Is-8cA"/>
                                 </constraints>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                        <integer key="value" value="10"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="샵에 재직 중이에요" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kNF-cQ-krc">
                                 <rect key="frame" x="0.0" y="127.66666666666666" width="122" height="12"/>

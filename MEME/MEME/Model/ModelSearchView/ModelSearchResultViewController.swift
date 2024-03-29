@@ -401,19 +401,23 @@ extension ModelSearchResultViewController {
         
         let sortParameter = mapSortParameter(from: selectedSortOption)
         SearchManager.shared.getSearchCategory(category: searchCategory, page: currentPage, sort: sortParameter) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let searchResultDTO):
-                self.handleSearchResults(searchResultDTO)
-            case .failure(let error):
-                self.numLabel.text = "0"
-                if let responseData = error.response {
-                    let responseString = String(data: responseData.data, encoding: .utf8)
-                    print("카테고리 검색 실패: \(responseString ?? "no data")")
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.isLoading = false
+                
+                switch result {
+                case .success(let searchResultDTO):
+                    self.handleSearchResults(searchResultDTO)
+                case .failure(let error):
+                    self.numLabel.text = "0"
+                    if let responseData = error.response {
+                        let responseString = String(data: responseData.data, encoding: .utf8)
+                        print("카테고리 검색 실패: \(responseString ?? "no data")")
+                    }
+                    self.totalPage = 0
+                    self.isShowingEmptyState = true
+                    self.reservationChartTableView.reloadData()
                 }
-                self.totalPage = 0
-                self.isShowingEmptyState = true
-                self.reservationChartTableView.reloadData()
             }
         }
     }
@@ -430,19 +434,23 @@ extension ModelSearchResultViewController {
         
         let sortParameter = mapSortParameter(from: selectedSortOption)
         SearchManager.shared.getSearchArtist(artistId: artistId, page: currentPage, sort: sortParameter) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let searchResultDTO):
-                self.handleSearchResults(searchResultDTO)
-            case .failure(let error):
-                self.numLabel.text = "0"
-                if let responseData = error.response {
-                    let responseString = String(data: responseData.data, encoding: .utf8)
-                    print("아티스트 검색 실패: \(responseString ?? "no data")")
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.isLoading = false
+                
+                switch result {
+                case .success(let searchResultDTO):
+                    self.handleSearchResults(searchResultDTO)
+                case .failure(let error):
+                    self.numLabel.text = "0"
+                    if let responseData = error.response {
+                        let responseString = String(data: responseData.data, encoding: .utf8)
+                        print("아티스트 검색 실패: \(responseString ?? "no data")")
+                    }
+                    self.totalPage = 0
+                    self.isShowingEmptyState = true
+                    self.reservationChartTableView.reloadData()
                 }
-                self.totalPage = 0
-                self.isShowingEmptyState = true
-                self.reservationChartTableView.reloadData()
             }
         }
     }
@@ -459,19 +467,23 @@ extension ModelSearchResultViewController {
         
         let sortParameter = mapSortParameter(from: selectedSortOption)
         SearchManager.shared.getSearchText(query: query, page: currentPage, sort: sortParameter) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let searchResultDTO):
-                self.handleSearchResults(searchResultDTO)
-            case .failure(let error):
-                self.numLabel.text = "0"
-                if let responseData = error.response {
-                    let responseString = String(data: responseData.data, encoding: .utf8)
-                    print("text 검색 실패: \(responseString ?? "no data")")
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.isLoading = false
+                
+                switch result {
+                case .success(let searchResultDTO):
+                    self.handleSearchResults(searchResultDTO)
+                case .failure(let error):
+                    self.numLabel.text = "0"
+                    if let responseData = error.response {
+                        let responseString = String(data: responseData.data, encoding: .utf8)
+                        print("text 검색 실패: \(responseString ?? "no data")")
+                    }
+                    self.totalPage = 0
+                    self.isShowingEmptyState = true
+                    self.reservationChartTableView.reloadData()
                 }
-                self.totalPage = 0
-                self.isShowingEmptyState = true
-                self.reservationChartTableView.reloadData()
             }
         }
     }
@@ -488,19 +500,23 @@ extension ModelSearchResultViewController {
         
         let sortParameter = mapSortParameter(from: selectedSortOption)
         SearchManager.shared.getSearchAll(page: currentPage, sort: sortParameter) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let searchResultDTO):
-                self.handleSearchResults(searchResultDTO)
-            case .failure(let error):
-                self.numLabel.text = "0"
-                if let responseData = error.response {
-                    let responseString = String(data: responseData.data, encoding: .utf8)
-                    print("전체 검색 실패: \(responseString ?? "no data")")
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+                self.isLoading = false
+                
+                switch result {
+                case .success(let searchResultDTO):
+                    self.handleSearchResults(searchResultDTO)
+                case .failure(let error):
+                    self.numLabel.text = "0"
+                    if let responseData = error.response {
+                        let responseString = String(data: responseData.data, encoding: .utf8)
+                        print("전체 검색 실패: \(responseString ?? "no data")")
+                    }
+                    self.totalPage = 0
+                    self.isShowingEmptyState = true
+                    self.reservationChartTableView.reloadData()
                 }
-                self.totalPage = 0
-                self.isShowingEmptyState = true
-                self.reservationChartTableView.reloadData()
             }
         }
     }

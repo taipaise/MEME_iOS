@@ -18,6 +18,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     var data = [AvailableReviewResponseData]()
     var data2 = [WrittenReviewData]()
     var data3 = [DetailReviewData]()
+
     
     let ProfileImage: UIImageView = {
         let iv = UIImageView()
@@ -58,6 +59,24 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
         segmentedControl.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
+        
+        AvailableReviewManager.shared.getAvailableReview(modelId: 1, reservationId: 1, portfolioId: 1, artistNickName: "artistNickName", makeupName: "makeupName", reservationDate: "reservationDate", portfolioImg: "portfolioImg", shopLocation: "shopLocation") { [weak self] result in
+            switch result {
+            case .success(let response):
+                if let responseData = response.data {
+                    self?.data = [responseData]
+                } else {
+                    self?.data = []
+                }
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                    self?.updateSegmentedControlText()
+                }
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
+        
         self.tabBarController?.tabBar.isHidden = true
         
         let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
@@ -256,7 +275,6 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
                         cell.imageView.image = UIImage(data: data)
                     }
                 }.resume()
-                
             }
             
             return cell
@@ -281,6 +299,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         //                delegate?.menubuttonPressed(in: self, at: indexPath)
         //            }
         //        }
+
         
         let dateLabel: UILabel = {
             let dL = UILabel()
@@ -349,6 +368,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
                         cell.imageView.image = UIImage(data: data)
                     }
                 }.resume()
+
             }
             return cell
         }
@@ -406,6 +426,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
             case .success(let response):
                 if let responseData = response.data {
                     self?.data2 = responseData
+
                     self?.updateSegmentedControlText()
                 } else {
                     self?.data2 = []
@@ -436,6 +457,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
                 let reviewData = data[indexPath.row]
                 cell.dateLabel.text = "예약일 \(reviewData.reservationDate)"
                 cell.setData(reviewData)
+
             }
             return cell
         case 1:
@@ -448,6 +470,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
                 cell.dateLabel.text = "작성일 \(reviewData2.createdAt)"
                 cell.setData2(reviewData2)
                 cell.delegate = self
+
             }
             return cell
         default:
@@ -463,7 +486,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         //        self.view.viewWithTag(100)?.removeFromSuperview()
         self.menuView?.removeFromSuperview()
-        
+
         let menuView = UIStackView()
         self.menuView?.removeFromSuperview()
         
@@ -516,6 +539,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         if let menuView = self.menuView, !menuView.frame.contains(location) {
             menuView.isHidden = true
         }
+
     }
     
     @objc func moveToReviewEditVC() {
@@ -564,6 +588,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
             writeReviewVC.starRatingView.setStarsRating(rating: starRating)
         }
         self.navigationController?.pushViewController(writeReviewVC, animated: true)
+
     }
 }
 
@@ -614,6 +639,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
                 }
             }
         }
+
           
           let noAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
           

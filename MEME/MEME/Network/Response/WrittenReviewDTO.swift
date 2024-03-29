@@ -19,7 +19,7 @@ struct WrittenReviewResponse: Codable {
 }
     
 struct WrittenReviewData: Codable {
-    let modelId: Int?
+    let modelId: Int
     let reviewId: Int
     let artistNickName: String
     let makeupName: String

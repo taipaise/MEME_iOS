@@ -27,6 +27,7 @@ struct SearchResultData: Codable {
     let portfolioId: Int
     let category: String
     let artistNickName: String
+    let userId: Int
     let makeupName: String
     let price: Int
     let makeupLocation: String
