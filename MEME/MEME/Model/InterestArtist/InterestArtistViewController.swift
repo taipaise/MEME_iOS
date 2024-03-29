@@ -24,20 +24,6 @@ class InterestArtistViewController: UIViewController, UICollectionViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        InterestArtistManager.shared.getInterestArtist(modelID: 1, artistId: 12, artistNickName: "Artist NickName", profileImg: "Profile Image URL")  { [weak self] result in
-            switch result {
-            case .success(let response):
-                print("Success: \(response)")
-                self?.data = response.data?.content ?? []
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
-                    self?.totalLabel.text = "총 \(self?.data.count ?? 0)명"
-                }
-            case .failure(let error):
-                print("Failure: \(error)")
-            }
-        }
-        
         self.tabBarController?.tabBar.isHidden = true
         
 //        let artist1 = Artist(name: "아티스트1")
@@ -97,14 +83,22 @@ class InterestArtistViewController: UIViewController, UICollectionViewDelegate, 
         let artist = data[indexPath.item]
         cell.titleLabel.text = artist.artistNickName
         
+        let profileImgUrl = artist.profileImg
+        FirebaseStorageManager.downloadImage(urlString: profileImgUrl) { image in
+            DispatchQueue.main.async {
+                guard let image = image else { return }
+                cell.imageView.image = image
+            }
+        }
+        
         return cell
     }
+
     
-// 셀 클릭시 예약하기 화면의 아티스트로 이동
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let viewController = SomeViewController()
-//        self.navigationController?.pushViewController(viewController, animated: true)
-//    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let modelViewArtistProfileViewController = ModelViewArtistProfileViewController()
+        self.navigationController?.pushViewController(modelViewArtistProfileViewController, animated: true)
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -116,5 +110,24 @@ class InterestArtistViewController: UIViewController, UICollectionViewDelegate, 
     }
     @objc func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
+    }
+}
+
+//MARK: -API 통신 메소드
+extension InterestArtistViewController {
+    func getInterestArtist(modelId: Int, artistId: Int, portfolioId: Int, artistNickName: String, makeupName: String, reservationDate: String, profileImg: String) {
+        InterestArtistManager.shared.getInterestArtist(modelId: 1, artistId: artistId, artistNickName: artistNickName,  profileImg: profileImg)  { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("Success: \(response)")
+                self?.data = response.data?.content ?? []
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                    self?.totalLabel.text = "총 \(self?.data.count ?? 0)명"
+                }
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
     }
 }

@@ -23,8 +23,8 @@ final class ModelProfileManager {
     
 //    private init() {}
     
-    func patchProfile(userId: Int, profileImg: String?, nickname: String?, gender: String?, skinType: String?, personalColor: String?, completion: @escaping (Result<ModelProfileResponse, MoyaError>) -> Void) {
-        provider.request(.patchProfile(userId: userId, profileImg: profileImg, nickname: nickname, gender: gender, skinType: skinType, personalColor: personalColor)) { result in
+    func getProfile(userId: Int, profileImg: String?, nickname: String?, gender: String?, skinType: String?, personalColor: String?, completion: @escaping (Result<ModelProfileResponse, MoyaError>) -> Void) {
+        provider.request(.getProfile(userId: userId, profileImg: profileImg, nickname: nickname, gender: gender, skinType: skinType, personalColor: personalColor)) { result in
             switch result {
             case .success(let response):
                 do {
