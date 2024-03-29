@@ -30,7 +30,7 @@ enum PortfolioAPI {
         price : Int,
         info : String,
         isBlock: Bool,
-        portfolio_img_src : [String]
+        portfolio_img_src : [ImageData]
     )
     case getPortfolioDetail(
         userId: Int,

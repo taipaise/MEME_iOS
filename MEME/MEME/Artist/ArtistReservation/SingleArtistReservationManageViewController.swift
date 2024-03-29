@@ -9,8 +9,6 @@ import UIKit
 
 class SingleArtistReservationManageViewController: UIViewController {
     
-    var reservationId: Int = 0
-    
     @IBOutlet var cancelBarView: UIView!
     @IBOutlet var cancelBarLabel: UILabel!
     @IBOutlet var cancelBarButton: UIButton!
@@ -41,6 +39,7 @@ class SingleArtistReservationManageViewController: UIViewController {
     }
 
     private func uiSet(){
+        self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.isNavigationBarHidden = true
         cancelBarView.layer.cornerRadius=10
         resInfoFrameView.layer.cornerRadius=10

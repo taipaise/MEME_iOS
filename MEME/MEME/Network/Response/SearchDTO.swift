@@ -40,7 +40,7 @@ struct SearchResultData: Codable {
 }
 
 struct ImageData: Codable {
-    let portfolioImgId: Int
-    let portfolioImgSrc: String
-    let delete: Bool
+    var portfolioImgId: Int
+    var portfolioImgSrc: String
+    var delete: Bool
 }

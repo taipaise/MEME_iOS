@@ -21,28 +21,35 @@ class ArtistHomeViewController: UIViewController {
     @IBOutlet weak var secondArtistResTimeLabel: UILabel!
     
     //Properties
-    private var artistId: Int = 2
     private var todayCount: Int = 0
     private var tomorrowCount: Int = 0
     private var fromTomorrowCount: Int = 0
     private var showDataCount: Int = 0
     private var selectedIdx: Int!
     private var reservationData: [ReservationData]!
-    private var artistProfileData: ArtistProfileData?
+    private var artistProfileData: MyPageData?
     private var reservationStatusData: [Int] = []
     private var showReservationData: [Int] = [0,0,0,0]
     
     
     //MARK: - viewDidLoad()
+    //메모리 로드
     override func viewDidLoad() {
         super.viewDidLoad()
-        uiSet()
-        getArtistReservation(artistId: artistId)
-        getArtistProfile(userId: 1, artistId: artistId)
         tableViewConfigure()
     }
+    //pop하고 오면 다시 실행 됨
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.todayCount = 0
+        self.tomorrowCount = 0
+        self.fromTomorrowCount = 0
+        artistID = KeyChainManager.loadMemberID()
+        getArtistProfile(userId: artistID)
+        getArtistReservation(artistId: artistID)
+
+    }
     private func uiSet(){
-        print("todayCount:\(todayCount)")
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.tabBarController?.tabBar.isHidden = false
@@ -69,16 +76,6 @@ class ArtistHomeViewController: UIViewController {
         
         artistProfileImageView.layer.cornerRadius = artistProfileImageView.frame.height/2
         artistProfileImageView.clipsToBounds = true
-        if let nickname = artistProfileData?.nickname {
-            artistHomeProfileLabel.text = "안녕하세요, \(nickname)님!\n내일 예약 \(String(self.tomorrowCount))건이 있어요."
-        }
-        if let profileImg = artistProfileData?.profileImg {
-            FirebaseStorageManager.downloadImage(urlString: profileImg) { [weak self] image in
-                guard let image = image else { return } // 성공적으로 업로드 했으면 이미지가 nil 값이 아님
-                //이미지를 가지고 할 작업 처리 ex) 이미지 뷰에 다운 받은 이미지를 넣음
-                self?.artistProfileImageView.image = image
-            }
-        }
         
     }
     
@@ -95,14 +92,11 @@ class ArtistHomeViewController: UIViewController {
     }
     
     @IBAction private func entireReservationBtnTapped(_ sender: UIButton) {
-        let vc = ManagementReservationsViewController()
-        self.tabBarController?.tabBar.isHidden = true
-        navigationController?.pushViewController(vc, animated: true)
+        self.tabBarController?.selectedIndex = 1
     }
     @objc private func reservationManagedBtnTapped(_ sender: UIButton){
         let vc = SingleArtistReservationManageViewController()
         let selectedIdx = sender.tag
-        print(selectedIdx)
         vc.reservationData = reservationData[selectedIdx]
         vc.isToday = false
         vc.reservationTimeString = convertTimeString(vc.reservationData.reservationDayOfWeekAndTime.values.first!)
@@ -137,7 +131,6 @@ class ArtistHomeViewController: UIViewController {
     
     //MARK: - distinguishDate()
     private func distinguishDate(reservationData: [ReservationData]){
-            print("reservationData.count : \(reservationData.count)")
             for i in 0..<reservationData.count {
                 let dateString: String = reservationData[i].reservationDate
                 let dateFormatter = DateFormatter()
@@ -153,37 +146,38 @@ class ArtistHomeViewController: UIViewController {
                     
                     let koreanTime = dateFormatter.string(from: now)
                     let resTime = dateFormatter.string(from: date)
-                    print("kor date : \(resTime)")
-                    print("now kor : \(koreanTime)")
-                    
-                    if String(Int(resTime)!) == koreanTime {
-                        reservationStatusData.append(0)
-                        if(todayCount<2){
-                            showReservationData[todayCount] = i
-                        }
-                        todayCount += 1
-                        print("Today\n")
-                    }else if String(Int(resTime)!-1) == koreanTime{
-                        tomorrowCount += 1
-                        reservationStatusData.append(1)
-                        if(fromTomorrowCount<2){
-                            showReservationData[fromTomorrowCount+2] = i
-                        }
-                        fromTomorrowCount += 1
-                        print("Tomorrow\n")
-                    }else if Int(resTime)! > Int(koreanTime)!{
-                        reservationStatusData.append(1)
-                        if(fromTomorrowCount<2){
-                            showReservationData[fromTomorrowCount+2] = i
-                        }
-                        fromTomorrowCount += 1
-                        print("afterTomorrow\n")
-                    }else {
+                    if(reservationData[i].status == "CANCEL"){
+                        // CANCEL
                         reservationStatusData.append(-1)
-                        print("past")
+                    }else {
+                        if String(Int(resTime)!) == koreanTime {
+                            // Today
+                            reservationStatusData.append(0)
+                            if(todayCount<2){
+                                showReservationData[todayCount] = i
+                            }
+                            todayCount += 1
+                        }else if String(Int(resTime)!-1) == koreanTime{
+                            // Tomorrow
+                            tomorrowCount += 1
+                            reservationStatusData.append(1)
+                            if(fromTomorrowCount<2){
+                                showReservationData[fromTomorrowCount+2] = i
+                            }
+                            fromTomorrowCount += 1
+                        }else if Int(resTime)! > Int(koreanTime)!{
+                            // afterTomorrow
+                            reservationStatusData.append(1)
+                            if(fromTomorrowCount<2){
+                                showReservationData[fromTomorrowCount+2] = i
+                            }
+                            fromTomorrowCount += 1
+                        }else {
+                            // past
+                            reservationStatusData.append(-1)
+                        }
                     }
                 } else {
-                    print("날짜 구별 실패1")
                 }
                 
             }
@@ -208,7 +202,6 @@ class ArtistHomeViewController: UIViewController {
             dateFormatter.locale = Locale(identifier: "ko_KR")
             return dateFormatter.string(from: date)
         } else {
-            print("날짜 구별 실패")
             return nil
         }
     }
@@ -221,6 +214,42 @@ class ArtistHomeViewController: UIViewController {
         return result.replacingOccurrences(of: "_", with: ":")
     }
 
+    
+    func getArtistProfile(userId: Int){
+        MyPageManager.shared.getMyPageProfile(userId: userId) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let profile):
+                
+                print("Success: \(profile)")
+                print("message: "+profile.message)
+                self.artistProfileData? = profile.data!
+                
+                guard
+                    let data = profile.data,
+                    let nickName = data.nickname
+                else { return }
+                
+                if nickName.count > 6 {
+                    self.artistHomeProfileLabel.text = "안녕하세요,"+"\n"+"\(nickName)님!"+"\n"+"내일 예약 \(String(self.tomorrowCount))건이 있어요."
+                }else{
+                    print("nicknamecomplete")
+                    artistHomeProfileLabel.text = "안녕하세요, \(nickName)님!"+"\n"+"내일 예약 \(String(self.tomorrowCount))건이 있어요."
+                }
+                if let profileImg = artistProfileData?.profileImg {
+                    FirebaseStorageManager.downloadImage(urlString: profileImg) { [weak self] image in
+                        guard let image = image else { return } // 성공적으로 업로드 했으면 이미지가 nil 값이 아님
+                        //이미지를 가지고 할 작업 처리 ex) 이미지 뷰에 다운 받은 이미지를 넣음
+                        print("Imagecomplete")
+                        self?.artistProfileImageView.image = image
+                    }
+                }
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
+    }
+    
 
     
     //MARK: - 아티스트 예약 조회 API
@@ -229,33 +258,12 @@ class ArtistHomeViewController: UIViewController {
         getArtistReservation.getArtistReservation(artistId: artistId) { result in
             switch result {
             case .success(let response) :
-                print("res-success")
-                self.todayCount = 0
-                self.tomorrowCount = 0
-                self.fromTomorrowCount = 0
                 self.reservationData = response.data
                 self.distinguishDate(reservationData: self.reservationData)
                 self.artistReservationStatusTableView.reloadData()
                 self.uiSet()
             case .failure(let error):
                 print(error.localizedDescription)
-            }
-        }
-    }
-    
-    //MARK: - 아티스트 프로필 조회 API
-    func getArtistProfile(userId: Int, artistId: Int) {
-        ProfileManager.shared.getArtistProfile(userId: userId, artistId: artistId) { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.artistProfileData = response.data
-                self?.uiSet()
-                print("아티스트 프로필 조회 성공: \(self?.artistProfileData?.nickname)")
-            case .failure(let error):
-                if let responseData = error.response {
-                    let responseString = String(data: responseData.data, encoding: .utf8)
-                    print("아티스트 프로필 조회 실패: \(responseString ?? "no data")")
-                }
             }
         }
     }
@@ -268,8 +276,6 @@ extension ArtistHomeViewController : UITableViewDataSource {
             fromTomorrowCount = 0
             showDataCount = 0
             for i in 0..<reservationData.count {
-                print("reservationData.count\(reservationData.count)")
-                print("resStatus: \(reservationStatusData[i])")
                 self.showDataCount += 1
                 if reservationStatusData[i] == 1{
                     fromTomorrowCount += 1
@@ -286,17 +292,19 @@ extension ArtistHomeViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = artistReservationStatusTableView.dequeueReusableCell(withIdentifier: ArtistReservationStatusTableViewCell.identifier, for: indexPath) as? ArtistReservationStatusTableViewCell else { return UITableViewCell() }
-        cell.makeUpNameLabel.text = reservationData[indexPath.row].makeupName
-        cell.modelNameLabel.text = reservationData[indexPath.row].modelNickName
-        cell.reservationDateLabel.text = formatDateString(op:1, reservationData[indexPath.row].reservationDate)
-        cell.reservationTimeLabel.text = convertTimeString(reservationData[indexPath.row].reservationDayOfWeekAndTime.values.first!)
-        cell.reservationPlaceLabel.text = reservationData[indexPath.row].shopLocation
-        cell.reservationPriceLabel.text = "\(String(reservationData[indexPath.row].price))원"
+//        guard let dateCel =
+        // 날짜 셀 따로
+        guard let resCell = artistReservationStatusTableView.dequeueReusableCell(withIdentifier: ArtistReservationStatusTableViewCell.identifier, for: indexPath) as? ArtistReservationStatusTableViewCell else { return UITableViewCell() }
+        resCell.makeUpNameLabel.text = reservationData[indexPath.row].makeupName
+        resCell.modelNameLabel.text = reservationData[indexPath.row].modelNickName
+        resCell.reservationDateLabel.text = formatDateString(op:1, reservationData[indexPath.row].reservationDate)
+        resCell.reservationTimeLabel.text = convertTimeString(reservationData[indexPath.row].reservationDayOfWeekAndTime.values.first!)
+        resCell.reservationPlaceLabel.text = reservationData[indexPath.row].shopLocation
+        resCell.reservationPriceLabel.text = "\(String(reservationData[indexPath.row].price))원"
         // 버튼 태그로 index 전달
-        cell.reservationManageBtn.tag = indexPath.row
-        cell.reservationManageBtn.addTarget(self, action: #selector(reservationManagedBtnTapped), for: .touchUpInside)
-        return cell
+        resCell.reservationManageBtn.tag = indexPath.row
+        resCell.reservationManageBtn.addTarget(self, action: #selector(reservationManagedBtnTapped), for: .touchUpInside)
+        return resCell
     }
     
 }

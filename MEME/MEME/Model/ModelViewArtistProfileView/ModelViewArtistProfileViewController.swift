@@ -2,9 +2,9 @@ import UIKit
 import SnapKit
 
 class ModelViewArtistProfileViewController: UIViewController {
-    private let isModel : Bool = true
+    private let isModel : Bool = false
     private var isFavoriteArtist : Bool = false
-    var artistID: Int? = 0
+    var artistId: Int? = 2
     
     // MARK: - Properties
     private var expertiseFields: [String] = []
@@ -216,6 +216,7 @@ class ModelViewArtistProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationController?.setNavigationBarHidden(true, animated: false)
         navigationBar.delegate = self
         navigationBar.configure(title: "프로필")
         if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {

@@ -26,6 +26,7 @@ class ArtistPortfolioCollectionViewCell: UICollectionViewCell {
     }
     
     private func uiSet(){
+        portfolioImageView.layer.cornerRadius = 10
         portfolioView.layer.cornerRadius = 10
         portfolioView.layer.shadowOpacity = 0.125
         portfolioView.layer.shadowOffset = CGSize(width: 0, height: 0)
