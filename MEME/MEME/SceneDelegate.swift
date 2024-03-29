@@ -104,6 +104,7 @@ extension SceneDelegate {
         let navigationcontroller = NavigationController(nibName: nil, bundle: nil)
         window.rootViewController = navigationcontroller
         navigationcontroller.viewControllers = [vc]
+        navigationcontroller.navigationBar.isHidden = true
         UIView.transition(with: window, duration: 0.2, options: [.transitionCrossDissolve], animations: nil, completion: nil)
     }
 
