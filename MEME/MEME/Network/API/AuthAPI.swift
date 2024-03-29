@@ -61,7 +61,7 @@ extension AuthAPI: MemeAuthAPI {
     var urlPath: String {
         switch self {
         case .login:
-            return "/login"
+            return "/check"
         case .logout:
             return "/auth/logout"
         case .withdraw:
@@ -124,16 +124,13 @@ extension AuthAPI: MemeAuthAPI {
             let parameters: [String: Any] = [
                 "id_token": idToken,
                 "provider": provider,
-                "profileImg": profileImg,
+                "profile_img": profileImg,
                 "username": username,
                 "nickname": nickname,
                 "gender": gender,
-                "skinType": skinType,
-                "personalColor": personalColor
+                "skin_type": skinType,
+                "personal_color": personalColor
             ]
-            print("@!#!#!@#!@#!@")
-            print(parameters)
-            print("@!#!#!@#!@#!@")
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             
         case .artistSignUp(

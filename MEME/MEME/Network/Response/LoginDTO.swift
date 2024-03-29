@@ -8,14 +8,16 @@
 import Foundation
 
 struct LoginDTO: Codable {
-    let isUser: Bool
-    let id: Int
+    let code: Int
+    let result:String
+    let message: String
+    let data: IsUserDTO
+}
+
+// MARK: - DataClass
+struct IsUserDTO: Codable {
+    let userId: Int
     let accessToken: String
     let refreshToken: String
-
-    enum CodingKeys: String, CodingKey {
-        case isUser, id
-        case accessToken = "access_token"
-        case refreshToken = "refresh_token"
-    }
+    let user: Bool
 }

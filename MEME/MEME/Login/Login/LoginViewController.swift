@@ -76,8 +76,16 @@ extension LoginViewController {
             
             switch loginResult {
             case .success(let loginDTO):
-                // TODO: - 로그인 리스폰스 확정되면 수정 예정입니다! 일단 임시로 아티스트 홈으로 이동
-                baseVC = ArtistTabBarController()
+                let result = loginDTO.data
+                if result.user {
+                    KeyChainManager.save(forKey: .memberId, value: "\(result.userId)")
+                    KeyChainManager.save(forKey: .accessToken, value: result.accessToken)
+                    KeyChainManager.save(forKey: .refreshToken, value: result.refreshToken)
+                    
+                    baseVC = ModelTabBarController()
+                } else {
+                    baseVC = TermsAgreementViewController()
+                }
             case .failure(let error):
                 baseVC = TermsAgreementViewController()
             }
