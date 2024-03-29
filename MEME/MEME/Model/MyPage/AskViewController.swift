@@ -144,7 +144,7 @@ class AskViewController: UIViewController {
             return
         }
         
-        ContactManager.shared.postContact(userId: 6, inquiryTitle: title, inquiryText: content) { result in
+        ContactManager.shared.postContact(userId: 1, inquiryTitle: title, inquiryText: content) { result in
             switch result {
             case .success(let contactResponse):
                 print("요청 성공: \(contactResponse)")

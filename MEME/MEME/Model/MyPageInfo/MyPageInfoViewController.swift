@@ -19,12 +19,14 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MyPageManager.shared.getMyPageProfile(userId: 6) { [weak self] result in
+        MyPageManager.shared.getMyPageProfile(userId: 1) { [weak self] result in
             switch result {
             case .success(let profile):
                 print("Success: \(profile)")
                 self?.myPageResponse = profile
                 self?.tableView.reloadData()
+                self?.updateHeaderView()
+
             case .failure(let error):
                 print("Failure: \(error)")
             }
@@ -33,6 +35,26 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
             
             self.navigationController?.navigationBar.tintColor = UIColor.black
     }
+    
+    func updateHeaderView() {
+                guard let header = tableView.tableHeaderView as? ModelHeaderView else { return }
+                
+        if let nickname = myPageResponse?.data?.name {
+                    header.namebutton.setTitle(nickname, for: .normal)
+                }
+    //            if let profileImgUrl = data?.data?.profileImg {
+    //                header.profileImage.loadImage(from: profileImgUrl)
+    //            }
+        if let profileImgUrl = myPageResponse?.data?.profileImg {
+                        FirebaseStorageManager.downloadImage(urlString: profileImgUrl) { image in
+                            guard let image = image else { return }
+                            header.profileImage.setImage(image: image)
+                        }
+                    }
+                    
+                    tableView.layoutIfNeeded()
+                }
+
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -132,5 +154,12 @@ extension MyPageInfoViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
 }
+//
+//extension UIImageView {
+//    func setImage(image: UIImage?) {
+//        DispatchQueue.main.async {
+//            self.image = image
+//        }
+//    }
+//}

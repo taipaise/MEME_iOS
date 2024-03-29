@@ -12,13 +12,13 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     var collectionView: UICollectionView!
     var dataSource: [String] = []
-    
+    var response: MyPageResponse?
+    var menuView: UIStackView?
+    var starRating: Int?
     var data = [AvailableReviewResponseData]()
     var data2 = [WrittenReviewData]()
     var data3 = [DetailReviewData]()
-    
-    private let cellId = "cellId"
-    private let cellId2 = "cellId2"
+
     
     let ProfileImage: UIImageView = {
         let iv = UIImageView()
@@ -43,7 +43,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     private let segmentedControl: MyPageSegmentedControl = {
         let underbarInfo = UnderbarIndicator(height: 3, barColor: .mainBold, backgroundColor: .gray300)
         let control = MyPageSegmentedControl(items: ["리뷰쓰기", "작성한 리뷰"], underbarInfo: underbarInfo)
-        control.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
+        
         control.translatesAutoresizingMaskIntoConstraints = false
         return control
     }()
@@ -58,6 +58,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        segmentedControl.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
         
         AvailableReviewManager.shared.getAvailableReview(modelId: 1, reservationId: 1, portfolioId: 1, artistNickName: "artistNickName", makeupName: "makeupName", reservationDate: "reservationDate", portfolioImg: "portfolioImg", shopLocation: "shopLocation") { [weak self] result in
             switch result {
@@ -84,13 +85,12 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         collectionView = UICollectionView(frame: self.view.frame, collectionViewLayout: layout)
         collectionView.backgroundColor = UIColor.white
-        collectionView.register(MyReviewCollectionViewCell.self, forCellWithReuseIdentifier: cellId)
-        collectionView.register(WrittenCollectionViewCell.self, forCellWithReuseIdentifier: cellId2)
         collectionView.delegate = self
         collectionView.dataSource = self
         
         collectionView.contentInset = UIEdgeInsets(top: 10.5, left: 0, bottom: 0, right: 0)
-        
+        collectionView.register(CustomCell.self, forCellWithReuseIdentifier: CustomCell.className)
+        collectionView.register(CustomCell2.self, forCellWithReuseIdentifier: CustomCell2.className)
         configureUI()
         
         view.addSubview(collectionView)
@@ -104,14 +104,39 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         segmentedControl.selectedSegmentIndex = 0
         
-        handleSegmentChange()
+        MyPageManager.shared.getMyPageProfile(userId: 1) { [weak self] result in
+            switch result {
+            case .success(let response):
+                self?.response = response
+                
+                DispatchQueue.main.async {
+                    self?.nameLabel.text = response.data?.name
+                    if let profileImgUrl = response.data?.profileImg {
+                        self?.ProfileImage.loadImage(from: profileImgUrl)
+                    }
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+    //       self.getAvailableReview(userId: KeyChainManager.loadMemberID())
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+        ReviewWrittenView()
+        WriteReviewView()
     }
     
     func updateSegmentedControlText() {
         let buttonText = "리뷰쓰기(\(data.count))"
         segmentedControl.setTitle(buttonText, forSegmentAt: 0)
-        let buttonText2 = "작성한 리뷰(\(data.count))"
+        let buttonText2 = "작성한 리뷰(\(data2.count))"
         segmentedControl.setTitle(buttonText2, forSegmentAt: 1)
+        
+        collectionView.reloadData()
     }
     
     func configureUI() {
@@ -179,7 +204,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     class CustomCell: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
         
         weak var delegate: MyReviewCollectionViewCellDelegate?
-        var data = [AvailableReviewResponseData]()
+        var data: AvailableReviewResponseData?
         
         @objc func handleButtonPress() {
             delegate?.buttonPressed(in: self)
@@ -194,7 +219,6 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         lazy var innerCollectionView: UICollectionView = {
             let layout = UICollectionViewFlowLayout()
-            
             layout.scrollDirection = .horizontal
             layout.sectionInset = UIEdgeInsets(top: 0, left: 22, bottom: 0, right: 0)
             layout.itemSize = CGSize(width: 327, height: 88)
@@ -203,7 +227,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
             collectionView.backgroundColor = .clear
             collectionView.delegate = self
             collectionView.dataSource = self
-            collectionView.register(MyReviewCollectionViewCell.self, forCellWithReuseIdentifier: "MyReviewCell")
+            collectionView.register(MyReviewCollectionViewCell.self, forCellWithReuseIdentifier: MyReviewCollectionViewCell.className)
             
             return collectionView
         }()
@@ -237,40 +261,45 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         }
         
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "MyReviewCell", for: indexPath) as! MyReviewCollectionViewCell
+            guard let data = data else { return UICollectionViewCell() }
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyReviewCollectionViewCell.className, for: indexPath) as! MyReviewCollectionViewCell
             cell.delegate = delegate
-            if indexPath.row < data.count {
-                let reviewData = data[indexPath.row]
-                cell.artistLabel.text = reviewData.artistNickName
-                cell.makeupLabel.text = reviewData.makeupName
-                cell.placeLabel.text = reviewData.shopLocation
-                if let imageUrl = URL(string: reviewData.portfolioImg) {
-                    URLSession.shared.dataTask(with: imageUrl) { data, response, error in
-                        guard let data = data, error == nil else {
-                            return
-                        }
-                        DispatchQueue.main.async {
-                            cell.imageView.image = UIImage(data: data)
-                        }
-                    }.resume()
-                }
+            cell.configure(with: data)
+            
+            if let imageUrl = URL(string: data.portfolioImg) {
+                URLSession.shared.dataTask(with: imageUrl) { data, response, error in
+                    guard let data = data, error == nil else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        cell.imageView.image = UIImage(data: data)
+                    }
+                }.resume()
             }
             
             return cell
         }
+        
+        func setData(_ newdata: AvailableReviewResponseData) {
+            self.data = newdata
+            self.innerCollectionView.reloadData()
+        }
+        
+        
     }
     
     class CustomCell2: UICollectionViewCell, UICollectionViewDelegate, UICollectionViewDataSource {
         
         weak var delegate: WrittenCollectionViewCellDelegate?
         var indexPath: IndexPath?
-        var data2 = [WrittenReviewData]()
+        var data2: WrittenReviewData?
         
-        @objc func handleButtonPress() {
-            if let indexPath = indexPath {
-                delegate?.menubuttonPressed(in: self, at: indexPath)
-            }
-        }
+        //        @objc func handleButtonPress2() {
+        //            if let indexPath = indexPath {
+        //                delegate?.menubuttonPressed(in: self, at: indexPath)
+        //            }
+        //        }
+
         
         let dateLabel: UILabel = {
             let dL = UILabel()
@@ -289,9 +318,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
             collectionView.backgroundColor = .clear
             collectionView.delegate = self
             collectionView.dataSource = self
-            collectionView.register(WrittenCollectionViewCell.self, forCellWithReuseIdentifier: "WrittenCell")
-            
-            
+            collectionView.register(WrittenCollectionViewCell.self, forCellWithReuseIdentifier: WrittenCollectionViewCell.className)
             return collectionView
         }()
         
@@ -324,60 +351,60 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         }
         
         func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "WrittenCell", for: indexPath) as!
-            WrittenCollectionViewCell
-            //            cell.indexPath = indexPath
+            print("Start configuring cell at indexPath \(indexPath)")
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WrittenCollectionViewCell.className, for: indexPath) as! WrittenCollectionViewCell
             cell.delegate = delegate
-            if indexPath.row < data2.count {
-                let reviewData2 = data2[indexPath.row]
-                cell.artistLabel.text = reviewData2.artistNickName
-                cell.makeupLabel.text = reviewData2.makeupName
-                cell.placeLabel.text = reviewData2.location
-                if let imageUrl = URL(string: reviewData2.portfolioImg) {
-                    URLSession.shared.dataTask(with: imageUrl) { data, response, error in
-                        guard let data = data, error == nil else {
-                            return
-                        }
-                        DispatchQueue.main.async {
-                            cell.imageView.image = UIImage(data: data)
-                        }
-                    }.resume()
-                }
+            cell.indexPath = indexPath
+            if let unwrappedData2 = data2 {
+                cell.configure(with: unwrappedData2)
+            }
+            
+            if let portfolioImgString = data2?.portfolioImg, let imageUrl = URL(string: portfolioImgString) {
+                URLSession.shared.dataTask(with: imageUrl) { data, response, error in
+                    guard let data = data, error == nil else {
+                        return
+                    }
+                    DispatchQueue.main.async {
+                        cell.imageView.image = UIImage(data: data)
+                    }
+                }.resume()
+
             }
             return cell
         }
+        func setData2(_ newdata: WrittenReviewData) {
+            self.data2 = newdata
+            print("Before reloadData on innerCollectionView")
+            print("\(Date()) - Before reloadData on innerCollectionView")
+            self.innerCollectionView.reloadData()
+            print("After reloadData on innerCollectionView")
+        }
+        
     }
     
     @objc func handleSegmentChange() {
-        switch segmentedControl.selectedSegmentIndex {
-        case 0:
-            WriteReviewView()
-        case 1:
-            ReviewWrittenView()
-        default:
-            break
-        }
-    }
-    
-    func WriteReviewView() {
-        collectionView.register(CustomCell.self, forCellWithReuseIdentifier: "CustomCell")
         collectionView.reloadData()
     }
     
-    func ReviewWrittenView() {
-        collectionView.register(CustomCell2.self, forCellWithReuseIdentifier: "CustomCell2")
-        WrittenReviewManager.shared.getWrittenReview(modelId: 1, reviewId: 1, artistNickName: "artistNickName", makeupName: "makeupName", portfolioImg: "portfolioImg", location: "location", createdAt: "createdAt") { [weak self] result in
+    func WriteReviewView() {
+        AvailableReviewManager.shared.getAvailableReview(
+            modelId: 1,
+            reservationId: 3,
+            portfolioId: 3,
+            artistNickName: "artistNickName",
+            makeupName: "makeupName",
+            reservationDate: "reservationDate",
+            portfolioImg: "portfolioImg",
+            shopLocation: "shopLocation"
+        ) { [weak self] result in
             switch result {
             case .success(let response):
                 if let responseData = response.data {
-                    self?.data2 = [responseData]
-                } else {
-                    self?.data2 = []
-                }
-                
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
+                    print(response.data)
+                    self?.data = responseData
                     self?.updateSegmentedControlText()
+                } else {
+                    self?.data = []
                 }
             case .failure(let error):
                 print("Failure: \(error)")
@@ -385,35 +412,65 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         }
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        self.tabBarController?.tabBar.isHidden = true
+    func ReviewWrittenView() {
+        WrittenReviewManager.shared.getWrittenReview(
+            modelId: 1,
+            reviewId: 1,
+            artistNickName: "artistNickName",
+            makeupName: "makeupName",
+            portfolioImg: "portfolioImg",
+            location: "location",
+            createdAt: "createdAt"
+        ) { [weak self] result in
+            switch result {
+            case .success(let response):
+                if let responseData = response.data {
+                    self?.data2 = responseData
+
+                    self?.updateSegmentedControlText()
+                } else {
+                    self?.data2 = []
+                }
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
     }
     
     @objc func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.count
+        if segmentedControl.selectedSegmentIndex == 0 {
+            return data.count
+        } else {
+            return data2.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         switch segmentedControl.selectedSegmentIndex {
         case 0:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell", for: indexPath) as! CustomCell
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCell.className, for: indexPath) as! CustomCell
             cell.delegate = self
             if indexPath.row < data.count {
                 let reviewData = data[indexPath.row]
                 cell.dateLabel.text = "예약일 \(reviewData.reservationDate)"
+                cell.setData(reviewData)
+
             }
             return cell
         case 1:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CustomCell2", for: indexPath) as! CustomCell2
+            guard
+                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CustomCell2.className, for: indexPath) as? CustomCell2 else { return UICollectionViewCell() }
             cell.delegate = self
-            //            cell.indexPath = indexPath
+            //                        cell.indexPath = indexPath
             if indexPath.row < data2.count {
                 let reviewData2 = data2[indexPath.row]
                 cell.dateLabel.text = "작성일 \(reviewData2.createdAt)"
+                cell.setData2(reviewData2)
+                cell.delegate = self
+
             }
             return cell
         default:
@@ -427,9 +484,12 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     func menubuttonPressed(in cell: UICollectionViewCell, at indexPath: IndexPath) {
         print("menubuttonPressed at \(indexPath)")
         
-        self.view.viewWithTag(100)?.removeFromSuperview()
-        
+        //        self.view.viewWithTag(100)?.removeFromSuperview()
+        self.menuView?.removeFromSuperview()
+
         let menuView = UIStackView()
+        self.menuView?.removeFromSuperview()
+        
         menuView.tag = 100
         menuView.axis = .vertical
         menuView.distribution = .fillEqually
@@ -469,48 +529,117 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
             menuView.heightAnchor.constraint(equalToConstant: 56)
         ])
         
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(handleTapOutsideMenu(_:)))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    @objc func handleTapOutsideMenu(_ sender: UITapGestureRecognizer) {
+        let location = sender.location(in: self.view)
+        // 탭한 위치가 menuView의 frame 밖이면 메뉴를 숨깁
+        if let menuView = self.menuView, !menuView.frame.contains(location) {
+            menuView.isHidden = true
+        }
+
     }
     
     @objc func moveToReviewEditVC() {
         let writeReviewVC = WriteReviewViewController()
         
-        DetailReviewManager.shared.getDetailReview(reviewId: 1, artistNickName: "String", makeupName: "String", star: 3, comment: "String", reviewImgDtoList: [DetailReviewImage]()) { [weak self] result in
-            switch result {
-            case .success(let response):
-                if let responseData = response.data {
-                    DispatchQueue.main.async {
-                        writeReviewVC.reviewLabel.text = responseData.makeupName
-                        writeReviewVC.updateReviewLabel(artistName: responseData.artistNickName, makeupName: responseData.makeupName)
-                        
-                        if let firstImageUrlString = responseData.reviewImgDtoList.first?.reviewImgSrc, let imageUrl = URL(string: firstImageUrlString) {
-                            URLSession.shared.dataTask(with: imageUrl) { data, response, error in
-                                guard let data = data, error == nil else {
-                                    return
-                                }
+        let dispatchGroup = DispatchGroup()
+        dispatchGroup.enter()
+        DetailReviewManager.shared.getDetailReview(
+            reviewId: 1,
+            artistNickName: "String",
+            makeupName: "String",
+            star: 3,
+            comment: "String",
+            reviewImgDtoList: [DetailReviewImage]()) { [weak self] result in
+                switch result {
+                case .success(let response):
+                    if let responseData = response.data {
+                        DispatchQueue.main.async {
+                            writeReviewVC.reviewLabel.text = responseData.makeupName
+                            writeReviewVC.updateReviewLabel(artistName: responseData.artistNickName, makeupName: responseData.makeupName)
+                            
+                            var firstImageUrlString = responseData.reviewImgDtoList.first?.reviewImgSrc ?? ""
+                            if firstImageUrlString.hasPrefix("s") {
+                                firstImageUrlString = String(firstImageUrlString.dropFirst())
+                            }
+                            FirebaseStorageManager.downloadImage(urlString: firstImageUrlString) { image in
                                 DispatchQueue.main.async {
-                                    writeReviewVC.imageView.image = UIImage(data: data)
-                                    self?.navigationController?.pushViewController(writeReviewVC, animated: true)
+                                    if let image = image {
+                                        writeReviewVC.imageView.image = image
+                                    }
+                                    dispatchGroup.leave()
                                 }
-                            }.resume()
-                        } else {
-                            self?.navigationController?.pushViewController(writeReviewVC, animated: true)
+                            }
                         }
+                        self?.starRating = responseData.star
                     }
+                    
+                case .failure(let error):
+                    print("Failure: \(error)")
+                    dispatchGroup.leave()
                 }
-            case .failure(let error):
-                print("Failure: \(error)")
             }
+    
+    dispatchGroup.notify(queue: .main) {
+        if let starRating = self.starRating {
+            writeReviewVC.starRatingView.setStarsRating(rating: starRating)
         }
+        self.navigationController?.pushViewController(writeReviewVC, animated: true)
+
     }
+}
+
+    
+                        
+//                        if let imageUrl = URL(string: firstImageUrlString) {
+//                            URLSession.shared.dataTask(with: imageUrl) { data, response, error in
+//                                guard let data = data, error == nil else {
+//                                    return
+//                                }
+//                                DispatchQueue.main.async {
+//                                    writeReviewVC.imageView.image = UIImage(data: data)
+//                                    self?.navigationController?.pushViewController(writeReviewVC, animated: true)
+//                                }
+//                            }.resume()
+//                        } else {
+//                            self?.navigationController?.pushViewController(writeReviewVC, animated: true)
+//                        }
+//                    }
+//                }
+//            case .failure(let error):
+//                print("Failure: \(error)")
+//            }
+//        }
+//    }
     
     @objc func deleteCollectionViewCell(_ sender: UIButton) {
         
         let alert = UIAlertController(title: "삭제", message: "리뷰를 삭제하시겠습니까? (삭제한 리뷰는 복구할 수 없습니다.)", preferredStyle: .alert)
-          
-          let yesAction = UIAlertAction(title: "예", style: .destructive) { [weak self] _ in
-              let index = sender.tag
-              // 삭제 작업 수행 (예: self?.data.remove(at: index))
-          }
+        
+        let yesAction = UIAlertAction(title: "예", style: .destructive) { [weak self] _ in
+            guard let self = self else { return }
+            let index = sender.tag
+            let modelId = /*KeyChainManager.loadMemberID()*/1
+            
+            let reviewId = sender.tag
+            DeleteReviewManager.shared.deleteReview(modelId: 1, reviewId: 2) { result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(_):
+                        self.ReviewWrittenView()
+                        self.WriteReviewView()
+                        // 새로고침
+                        self.collectionView.reloadData()
+                    case .failure(let error):
+                        print("리뷰 삭제 실패: \(error)")
+                    }
+                }
+            }
+        }
+
           
           let noAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
           
@@ -524,11 +653,8 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         } else {
             print("Invalid index")
         }
-
-        collectionView.performBatchUpdates({
-            collectionView.deleteItems(at: [IndexPath(row: index, section: 0)])
-        }, completion: nil)
     }
+    
 }
 
 class CustomSegmentedControl: UISegmentedControl {
@@ -557,3 +683,4 @@ extension MyReviewViewController: UICollectionViewDelegateFlowLayout {
         return CGSize(width: collectionView.frame.width, height: 125)
     }
 }
+

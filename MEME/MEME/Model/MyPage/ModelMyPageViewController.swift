@@ -15,26 +15,55 @@ class ModelMyPageViewController: UIViewController, ModelHeaderViewDelegate {
     let myPageMenu = ["프로필 관리","약관 및 정책", "문의하기", "로그아웃", "탈퇴하기"]
     
     // MARK: - Lifecycle
-    var myPageResponse: MyPageResponse?
+    var data: MyPageResponse?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MyPageManager.shared.getMyPageProfile(userId: 6) { [weak self] result in
-            switch result {
-            case .success(let profile):
-                print("Success: \(profile)")
-                self?.myPageResponse = profile
-                self?.tableView.reloadData()
-            case .failure(let error):
-                print("Failure: \(error)")
-            }
-        }
-        
+        loadProfileData()
         configureUI()
         
         navigationItem.backButtonTitle = ""
     }
+
+    func loadProfileData() {
+        MyPageManager.shared.getMyPageProfile(userId: 1) { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    self?.data = response
+                    self?.updateHeaderView()
+                    
+                case .failure(let error):
+                    print(error)
+                }
+            }
+        }
+    }
+
+        func updateHeaderView() {
+            guard let header = tableView.tableHeaderView as? ModelHeaderView else { return }
+            
+            if let nickname = data?.data?.nickname {
+                header.namebutton.setTitle(nickname, for: .normal)
+            }
+//            if let profileImgUrl = data?.data?.profileImg {
+//                header.profileImage.loadImage(from: profileImgUrl)
+//            }
+            if let profileImgUrl = data?.data?.profileImg {
+                    FirebaseStorageManager.downloadImage(urlString: profileImgUrl) { image in
+                        guard let image = image else { return }
+                        header.profileImage.setImage(image: image)
+                    }
+                }
+                
+                tableView.layoutIfNeeded()
+            }
+
+//        getMyPageProfile (userId: 1)
+//        self.getMyPageProfile(userId: KeyChainManager.loadMemberID())
+        
+     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -221,3 +250,10 @@ extension ModelMyPageViewController: UITableViewDelegate {
             self.navigationController?.pushViewController(myReviewViewController, animated: true)
         }
     }
+extension UIImageView {
+    func setImage(image: UIImage?) {
+        DispatchQueue.main.async {
+            self.image = image
+        }
+    }
+}

@@ -99,14 +99,22 @@ class InterestMakeUpViewController: UIViewController, UICollectionViewDelegate, 
         cell.typeLabel.text = makeup.category
         cell.titleLabel.text = makeup.makeupName
         cell.priceLabel.text = String(makeup.price)
+        
+        let profileImgUrl = makeup.portfolioImg
+        FirebaseStorageManager.downloadImage(urlString: profileImgUrl) { image in
+            DispatchQueue.main.async {
+                guard let image = image else { return }
+                cell.imageView.image = image
+            }
+        }
 
         return cell
     }
     
-        func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-            let modelReservationViewController = ModelReservationViewController()
-            self.navigationController?.pushViewController(modelReservationViewController, animated: true)
-        }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        let modelReservationViewController = ModelReservationViewController()
+        self.navigationController?.pushViewController(modelReservationViewController, animated: true)
+    }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)

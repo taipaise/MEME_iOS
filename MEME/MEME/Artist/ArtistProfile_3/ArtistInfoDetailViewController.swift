@@ -251,10 +251,20 @@ final class ArtistInfoDetailViewController: UIViewController {
     }
 
     @IBAction private func completionButtonTapped(_ sender: Any) {
+        
+        func patchArtistProfile(userId: Int, profileImg: String, nickname: String, gender: Gender, introduction: String, workExperience: WorkExperience, region: [Region], specialization: [SearchCategory],  makeupLocation: MakeUpLocation, shopLocation: String, availableDayOfWeek: [DayOfWeek : ReservationTimes]) {
+            MyPageManager.shared.patchArtistProfile(userId: KeyChainManager.loadMemberID(), profileImg: profileImg, nickname: nickname, gender: gender, introduction: introduction, workExperience: workExperience, region: region, specialization: specialization, makeupLocation: makeupLocation, shopLocation: shopLocation, availableDayOfWeek: availableDayOfWeek) { result in
+                switch result {
+                case .success(let response):
+                    print("Profile updated successfully: \(response)")
+                case .failure(let error):
+                    print("Failed to update profile: \(error)")
+                }
+            }
+        }
         let nextVC = ArtistTabBarController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
-    
 }
 
 // MARK: - collectionView 설정

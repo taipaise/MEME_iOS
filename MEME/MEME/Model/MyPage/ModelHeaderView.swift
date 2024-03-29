@@ -10,7 +10,7 @@ import UIKit
 class ModelHeaderView: UIView {
     
     weak var delegate: ModelHeaderViewDelegate?
-    var myPageResponse: MyPageResponse?
+    var data: MyPageResponse?
 
     // MARK: - Properties
     
@@ -108,9 +108,11 @@ class ModelHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         
+        
+    //        self.getProfileManagementData(userId: KeyChainManager.loadMemberID())
         configureUI()
     }
-    
+ 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -207,10 +209,11 @@ class ModelHeaderView: UIView {
             lineView.topAnchor.constraint(equalTo: mpArtistlabel.bottomAnchor, constant: 21),
             lineView.heightAnchor.constraint(equalToConstant: 1)
         ])
-        MyPageManager.shared.getMyPageProfile(userId: 6) { [weak self] result in
+        
+        MyPageManager.shared.getMyPageProfile(userId: 1) { [weak self] result in
             switch result {
             case .success(let response):
-                self?.myPageResponse = response
+                self?.data = response
                 
                 // UI 업데이트
                 DispatchQueue.main.async {
