@@ -4,7 +4,7 @@ import SnapKit
 class ModelViewArtistProfileViewController: UIViewController {
     private let isModel : Bool = false
     private var isFavoriteArtist : Bool = false
-    var artistId: Int? = 2
+    var artistID: Int? = 2
     
     // MARK: - Properties
     private var expertiseFields: [String] = []
