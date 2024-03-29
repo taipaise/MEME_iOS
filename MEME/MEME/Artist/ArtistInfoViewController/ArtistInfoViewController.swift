@@ -41,7 +41,7 @@ final class ArtistInfoViewController: UIViewController, UIPickerViewDelegate, UI
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ArtistProfileInfoManager.shared.getArtistProfileInfo(userId: 10) { [weak self] result in
+        ArtistProfileInfoManager.shared.getArtistProfileInfo(userId: KeyChainManager.loadMemberID()) { [weak self] result in
             switch result {
             case .success(let response):
                 print("Success: \(response)")

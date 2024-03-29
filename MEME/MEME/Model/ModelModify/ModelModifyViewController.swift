@@ -55,7 +55,7 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        ModelProfileInfoManager.shared.getModelProfileInfo(userId: 1) { [weak self] result in
+        ModelProfileInfoManager.shared.getModelProfileInfo(userId: KeyChainManager.loadMemberID()) { [weak self] result in
             switch result {
             case .success(let response):
                 print("Success: \(response)")
@@ -107,6 +107,15 @@ final class ModelModifyViewController: UIViewController,  UIImagePickerControlle
         
         
         setUI()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.navigationBar.isHidden = true
     }
     
     @objc func imageTapped() {

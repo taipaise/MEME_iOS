@@ -25,7 +25,7 @@ class InterestMakeUpViewController: UIViewController, UICollectionViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        InterestMakeUpManager.shared.getInterestMakeUp(modelId: 1, portfolioId: 3,  portfolioImg: "URL", category: "Category", makeupName: "Name", artistName: "ArtistName", price: 20000, makeupLocation: "makeupLocation") { [weak self] result in
+        InterestMakeUpManager.shared.getInterestMakeUp(modelId: KeyChainManager.loadMemberID(), portfolioId: 3,  portfolioImg: "URL", category: "Category", makeupName: "Name", artistName: "ArtistName", price: 20000, makeupLocation: "makeupLocation") { [weak self] result in
             switch result {
             case .success(let response):
                 print("Success: \(response)")
@@ -39,7 +39,7 @@ class InterestMakeUpViewController: UIViewController, UICollectionViewDelegate, 
             }
         }
         
-        self.tabBarController?.tabBar.isHidden = true
+//        self.tabBarController?.tabBar.isHidden = true
         
 //        let makeup1 = MakeUp(type:"데일리 메이크업", name: "메이크업명", price: "가격")
 //        let makeup2 = MakeUp(type:"배우 메이크업", name: "메이크업명", price: "가격")
@@ -73,7 +73,7 @@ class InterestMakeUpViewController: UIViewController, UICollectionViewDelegate, 
         backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        self.tabBarController?.tabBar.isHidden = true
+//        self.tabBarController?.tabBar.isHidden = true
         
         totalLabel.translatesAutoresizingMaskIntoConstraints = false
         
@@ -100,32 +100,50 @@ class InterestMakeUpViewController: UIViewController, UICollectionViewDelegate, 
         cell.titleLabel.text = makeup.makeupName
         cell.priceLabel.text = String(makeup.price)
         
-        let profileImgUrl = makeup.portfolioImg
-        FirebaseStorageManager.downloadImage(urlString: profileImgUrl) { image in
-            DispatchQueue.main.async {
-                guard let image = image else { return }
-                cell.imageView.image = image
-            }
-        }
+//        let profileImgUrl = makeup.portfolioImg
+//        FirebaseStorageManager.downloadImage(urlString: profileImgUrl) { image in
+//            DispatchQueue.main.async {
+//                guard let image = image else { return }
+//                cell.imageView.image = image
+//            }
+//        }
 
+        if let profileImgUrl = URL(string: makeup.portfolioImg) {
+            URLSession.shared.dataTask(with: profileImgUrl) { data, response, error in
+                if let data = data {
+                    DispatchQueue.main.async {
+                        cell.imageView.image = UIImage(data: data)
+                    }
+                } else if let error = error {
+                    print(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        cell.imageView.image = UIImage(named: "ex_artist_img")
+                    }
+                }
+            }.resume()
+        } else {
+            cell.imageView.image = UIImage(named: "ex_artist_img")
+        }
+        
         return cell
     }
-    
+        
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let modelReservationViewController = ModelReservationViewController()
         self.navigationController?.pushViewController(modelReservationViewController, animated: true)
     }
-    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = true
     }
-    
     @objc func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
     }
+
 }
