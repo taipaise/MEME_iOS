@@ -27,7 +27,7 @@ class ModelMyPageViewController: UIViewController, ModelHeaderViewDelegate {
     }
 
     func loadProfileData() {
-        MyPageManager.shared.getMyPageProfile(userId: 1) { [weak self] result in
+        MyPageManager.shared.getMyPageProfile(userId: KeyChainManager.loadMemberID()) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let response):

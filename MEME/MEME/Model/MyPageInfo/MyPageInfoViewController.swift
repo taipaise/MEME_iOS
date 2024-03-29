@@ -19,7 +19,7 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        MyPageManager.shared.getMyPageProfile(userId: 1) { [weak self] result in
+        MyPageManager.shared.getMyPageProfile(userId: KeyChainManager.loadMemberID()) { [weak self] result in
             switch result {
             case .success(let profile):
                 print("Success: \(profile)")
@@ -59,8 +59,12 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
     }
-    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationController?.navigationBar.isHidden = true
+    }
 
     func configureUI() {
         
@@ -83,7 +87,7 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
         
         self.tabBarController?.tabBar.isHidden = true
         
-        navigationItem.title = "내 정보 수정"
+        navigationItem.title = "내 정보 조회"
         navigationController?.navigationBar.titleTextAttributes = [
             NSAttributedString.Key.font: UIFont.pretendard(to: .regular, size: 16)]
         
@@ -126,6 +130,7 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
             return nil
         }
     }
+    
 }
 
 

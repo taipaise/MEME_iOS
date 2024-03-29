@@ -64,7 +64,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
             switch result {
             case .success(let response):
                 if let responseData = response.data {
-                    self?.data = [responseData]
+                    self?.data = responseData
                 } else {
                     self?.data = []
                 }
@@ -104,7 +104,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
         
         segmentedControl.selectedSegmentIndex = 0
         
-        MyPageManager.shared.getMyPageProfile(userId: 1) { [weak self] result in
+        MyPageManager.shared.getMyPageProfile(userId: KeyChainManager.loadMemberID()) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.response = response
@@ -120,14 +120,20 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
             }
         }
     }
-    
+   
     
     //       self.getAvailableReview(userId: KeyChainManager.loadMemberID())
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
         ReviewWrittenView()
         WriteReviewView()
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = false
     }
     
     func updateSegmentedControlText() {
@@ -544,56 +550,103 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     @objc func moveToReviewEditVC() {
         let writeReviewVC = WriteReviewViewController()
-        
-        let dispatchGroup = DispatchGroup()
-        dispatchGroup.enter()
-        DetailReviewManager.shared.getDetailReview(
-            reviewId: 1,
-            artistNickName: "String",
-            makeupName: "String",
-            star: 3,
-            comment: "String",
-            reviewImgDtoList: [DetailReviewImage]()) { [weak self] result in
-                switch result {
-                case .success(let response):
-                    if let responseData = response.data {
-                        DispatchQueue.main.async {
-                            writeReviewVC.reviewLabel.text = responseData.makeupName
-                            writeReviewVC.updateReviewLabel(artistName: responseData.artistNickName, makeupName: responseData.makeupName)
-                            
-                            var firstImageUrlString = responseData.reviewImgDtoList.first?.reviewImgSrc ?? ""
-                            if firstImageUrlString.hasPrefix("s") {
-                                firstImageUrlString = String(firstImageUrlString.dropFirst())
-                            }
-                            FirebaseStorageManager.downloadImage(urlString: firstImageUrlString) { image in
-                                DispatchQueue.main.async {
-                                    if let image = image {
-                                        writeReviewVC.imageView.image = image
-                                    }
-                                    dispatchGroup.leave()
-                                }
-                            }
-                        }
-                        self?.starRating = responseData.star
-                    }
-                    
-                case .failure(let error):
-                    print("Failure: \(error)")
-                    dispatchGroup.leave()
-                }
-            }
-    
-    dispatchGroup.notify(queue: .main) {
-        if let starRating = self.starRating {
-            writeReviewVC.starRatingView.setStarsRating(rating: starRating)
-        }
         self.navigationController?.pushViewController(writeReviewVC, animated: true)
 
+//        DetailReviewManager.shared.getDetailReview(
+//            reviewId: 1,
+//            artistNickName: "String",
+//            makeupName: "String",
+//            star: 3,
+//            comment: "String",
+//            reviewImgDtoList: [DetailReviewImage]()) { [weak self] result in
+//                switch result {
+//                case .success(let response):
+//                    if let responseData = response.data {
+//                        DispatchQueue.main.async {
+//                            writeReviewVC.reviewLabel.text = responseData.makeupName
+//                            writeReviewVC.reviewTextView.text = responseData.comment
+//                            writeReviewVC.updateReviewLabel(artistName: responseData.artistNickName, makeupName: responseData.makeupName)
+//                            writeReviewVC.starRatingView = StarRatingView()
+//                            writeReviewVC.starRatingView.setStarsRating(rating: responseData.star)
+//                            print(responseData.star)
+//                            
+//                            if let imageUrl = URL(string: responseData.reviewImgDtoList.first?.reviewImgSrc ?? "") {
+//                                URLSession.shared.dataTask(with: imageUrl) { data, response, error in
+//                                    DispatchQueue.main.async {
+//                                        if let data = data {
+//                                            writeReviewVC.imageView.image = UIImage(data: data)
+//                                        } else {
+//                                            writeReviewVC.imageView.image = UIImage(named: "defaultImage")
+//                                        }
+//                                        self?.navigationController?.pushViewController(writeReviewVC, animated: true)
+//                                    }
+//                                }.resume()
+//                            } else {
+//                                self?.navigationController?.pushViewController(writeReviewVC, animated: true)
+//                            }
+//                        }
+//                    }
+//                case .failure(let error):
+//                    print("Failure: \(error)")
+//                    DispatchQueue.main.async {
+//                        self?.navigationController?.pushViewController(writeReviewVC, animated: true)
+//                    }
+//                }
+//        }
     }
-}
 
     
-                        
+//    @objc func moveToReviewEditVC() {
+//        let writeReviewVC = WriteReviewViewController()
+//        
+//        let dispatchGroup = DispatchGroup()
+//        dispatchGroup.enter()
+//        DetailReviewManager.shared.getDetailReview(
+//            reviewId: 1,
+//            artistNickName: "String",
+//            makeupName: "String",
+//            star: 4,
+//            comment: "String",
+//            reviewImgDtoList: [DetailReviewImage]()) { [weak self] result in
+//                switch result {
+//                case .success(let response):
+//                    if let responseData = response.data {
+//                        DispatchQueue.main.async {
+//                            writeReviewVC.reviewLabel.text = responseData.makeupName
+//                            writeReviewVC.updateReviewLabel(artistName: responseData.artistNickName, makeupName: responseData.makeupName)
+//                            writeReviewVC.starRatingView.setStarsRating(rating: responseData.star)
+//
+//                            var firstImageUrlString = responseData.reviewImgDtoList.first?.reviewImgSrc ?? ""
+////                            if firstImageUrlString.hasPrefix("s") {
+////                                firstImageUrlString = String(firstImageUrlString.dropFirst())
+////                            }
+////                            FirebaseStorageManager.downloadImage(urlString: firstImageUrlString) { image in
+////                                DispatchQueue.main.async {
+////                                    if let image = image {
+////                                        writeReviewVC.imageView.image = image
+////                                    }
+////                                    dispatchGroup.leave()
+////                                }
+////                            }
+////                        }
+////                        self?.starRating = responseData.star
+////                    }
+////                    
+////                case .failure(let error):
+////                    print("Failure: \(error)")
+////                    dispatchGroup.leave()
+////                }
+////            }
+////    
+////    dispatchGroup.notify(queue: .main) {
+////        if let starRating = self.starRating {
+////            writeReviewVC.starRatingView.setStarsRating(rating: starRating)
+////        }
+////        self.navigationController?.pushViewController(writeReviewVC, animated: true)
+////
+////    }
+////}
+//
 //                        if let imageUrl = URL(string: firstImageUrlString) {
 //                            URLSession.shared.dataTask(with: imageUrl) { data, response, error in
 //                                guard let data = data, error == nil else {

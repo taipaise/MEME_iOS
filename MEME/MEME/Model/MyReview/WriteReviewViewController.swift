@@ -7,6 +7,7 @@
 
 import UIKit
 import PhotosUI
+import SnapKit
 
 class WriteReviewViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate, UITextViewDelegate  {
     
@@ -56,18 +57,21 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
     
     let reviewTextView = UITextView()
     
-    let laterButton: UIButton = {
-        let laterbtn = UIButton(type: .system)
-        laterbtn.addTarget(WriteReviewViewController.self, action: #selector(laterButtonTapped), for: .touchUpInside)
-        
+    var laterButton: UIButton = {
+        let laterbtn = UIButton()
         return laterbtn
     }()
     
+    var stackView: UIStackView = {
+        let view = UIStackView()
+        view.axis = .horizontal
+        view.distribution = .fillEqually
+        view.spacing = 5
+        return view
+    }()
     
-    let setButton: UIButton = {
-        let setbtn = UIButton(type: .system)
-        setbtn.addTarget(WriteReviewViewController.self, action: #selector(setButtonTapped), for: .touchUpInside)
-        
+    var setButton: UIButton = {
+        let setbtn = UIButton()
         return setbtn
     }()
     
@@ -91,16 +95,7 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let laterButton = UIButton(type: .system)
-            laterButton.addTarget(self, action: #selector(laterButtonTapped), for: .touchUpInside)
-            self.view.addSubview(laterButton)
-            
-            let setButton = UIButton(type: .system)
-            setButton.addTarget(self, action: #selector(setButtonTapped), for: .touchUpInside)
-            self.view.addSubview(setButton)
-            
-        
+    
         self.tabBarController?.tabBar.isHidden = true
         
         starRatingView = StarRatingView()
@@ -113,15 +108,30 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
         
         configureUI()
         loadReviewData()
+        view.addSubview(stackView)
+        laterButton.addTarget(self, action: #selector(laterButtonTapped), for: .touchUpInside)
+        stackView.addArrangedSubview(laterButton)
+        
+        setButton.addTarget(self, action: #selector(setButtonTapped), for: .touchUpInside)
+        stackView.addArrangedSubview(setButton)
+        laterButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        setButton.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        
+        stackView.snp.makeConstraints {
+            $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(15)
+            $0.horizontalEdges.equalToSuperview().inset(24)
+            $0.height.equalTo(49)
+        }
     }
+    
     func loadReviewData() {
-        AvailableReviewManager.shared.getAvailableReview(modelId: 1, reservationId: 3, portfolioId: 3, artistNickName: "artistNickName", makeupName: "makeupName", reservationDate: "reservationDate", portfolioImg: "portfolioImg", shopLocation: "shopLocation") { [weak self] result in
+        AvailableReviewManager.shared.getAvailableReview(modelId: KeyChainManager.loadMemberID(), reservationId: 3, portfolioId: 3, artistNickName: "artistNickName", makeupName: "makeupName", reservationDate: "reservationDate", portfolioImg: "portfolioImg", shopLocation: "shopLocation") { [weak self] result in
             switch result {
             case .success(let response):
                 DispatchQueue.main.async {
                     if let firstReviewData = response.data?.first {
                         let artistNickName = firstReviewData.artistNickName
-                        let makeupName = firstReviewData.makeupName ?? ""
+                        let makeupName = firstReviewData.makeupName
                         self?.updateReviewLabel(artistName: artistNickName, makeupName: makeupName)
                     }
                     
@@ -130,6 +140,51 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
             case .failure(let error):
                 print("Failure: \(error)")
             }
+        }
+    }
+    
+     func moveToReviewEditVC() {
+        let writeReviewVC = WriteReviewViewController()
+        DetailReviewManager.shared.getDetailReview(
+            reviewId: 1,
+            artistNickName: "String",
+            makeupName: "String",
+            star: 3,
+            comment: "String",
+            reviewImgDtoList: [DetailReviewImage]()) { [weak self] result in
+                switch result {
+                case .success(let response):
+                    if let responseData = response.data {
+                        DispatchQueue.main.async {
+                            writeReviewVC.reviewLabel.text = responseData.makeupName
+                            writeReviewVC.reviewTextView.text = responseData.comment
+                            writeReviewVC.updateReviewLabel(artistName: responseData.artistNickName, makeupName: responseData.makeupName)
+                            writeReviewVC.starRatingView = StarRatingView()
+                            writeReviewVC.starRatingView.setStarsRating(rating: responseData.star)
+                            print(responseData.star)
+                            
+                            if let imageUrl = URL(string: responseData.reviewImgDtoList.first?.reviewImgSrc ?? "") {
+                                URLSession.shared.dataTask(with: imageUrl) { data, response, error in
+                                    DispatchQueue.main.async {
+                                        if let data = data {
+                                            writeReviewVC.imageView.image = UIImage(data: data)
+                                        } else {
+                                            writeReviewVC.imageView.image = UIImage(named: "defaultImage")
+                                        }
+                                        self?.navigationController?.pushViewController(writeReviewVC, animated: true)
+                                    }
+                                }.resume()
+                            } else {
+                                self?.navigationController?.pushViewController(writeReviewVC, animated: true)
+                            }
+                        }
+                    }
+                case .failure(let error):
+                    print("Failure: \(error)")
+                    DispatchQueue.main.async {
+                        self?.navigationController?.pushViewController(writeReviewVC, animated: true)
+                    }
+                }
         }
     }
     func textViewDidBeginEditing(_ textView: UITextView) {
@@ -166,8 +221,6 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
         makeUpRvLabel.translatesAutoresizingMaskIntoConstraints = false
         upLoadButton.translatesAutoresizingMaskIntoConstraints = false
         reviewTextView.translatesAutoresizingMaskIntoConstraints = false
-        laterButton.translatesAutoresizingMaskIntoConstraints = false
-        setButton.translatesAutoresizingMaskIntoConstraints = false
         imageView.translatesAutoresizingMaskIntoConstraints = false
         deleteButton.translatesAutoresizingMaskIntoConstraints = false
         warningLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -195,7 +248,7 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
             reviewLabel.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 87),
             
             starRatingView.topAnchor.constraint(equalTo: reviewLabel.bottomAnchor, constant: 23),
-            starRatingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 81),
+            starRatingView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 70),
             starRatingView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -81),
             starRatingView.heightAnchor.constraint(equalToConstant: 37)
         ])
@@ -313,17 +366,7 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
             reviewTextView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 24),
             reviewTextView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -24),
             reviewTextView.heightAnchor.constraint(equalToConstant: 200),
-            reviewTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20),
-            
-            laterButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15),
-            laterButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 24),
-            laterButton.heightAnchor.constraint(equalToConstant: 49),
-            
-            setButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -15),
-            setButton.leadingAnchor.constraint(equalTo: laterButton.trailingAnchor, constant: 5),
-            setButton.heightAnchor.constraint(equalToConstant: 49),
-            setButton.widthAnchor.constraint(equalTo: laterButton.widthAnchor),
-            setButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -24),
+            reviewTextView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -20)
         ])
         
         let contentViewHeightConstraint = contentView.heightAnchor.constraint(greaterThanOrEqualToConstant: 0)
@@ -444,6 +487,7 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
     }
     
     @objc func setButtonTapped() {
+        print("set tapped")
         setTap()
     }
     func setTap() {
@@ -456,6 +500,7 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
             }
         }
     }
+    
     @objc func deleteImage() {
         imageView.image = nil
         warningLabel.isHidden = true
@@ -466,4 +511,5 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
             self.view.layoutIfNeeded()
         }
     }
+    
 }

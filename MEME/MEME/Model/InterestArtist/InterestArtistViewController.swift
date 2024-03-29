@@ -24,8 +24,19 @@ class InterestArtistViewController: UIViewController, UICollectionViewDelegate, 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.tabBarController?.tabBar.isHidden = true
-        
+        InterestArtistManager.shared.getInterestArtist(modelID: KeyChainManager.loadMemberID(), artistId: 1, artistNickName: "artistNickName",  profileImg: "profileImg")  { [weak self] result in
+            switch result {
+            case .success(let response):
+                print("Success: \(response)")
+                self?.data = response.data?.content ?? []
+                DispatchQueue.main.async {
+                    self?.collectionView.reloadData()
+                    self?.totalLabel.text = "총 \(self?.data.count ?? 0)명"
+                }
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
 //        let artist1 = Artist(name: "아티스트1")
 //        let artist2 = Artist(name: "아티스트2")
 //        let artist3 = Artist(name: "아티스트3")
@@ -74,7 +85,6 @@ class InterestArtistViewController: UIViewController, UICollectionViewDelegate, 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
             return data.count
         }
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as? InterestArtistCollectionViewCell else {
             return UICollectionViewCell()
@@ -82,17 +92,32 @@ class InterestArtistViewController: UIViewController, UICollectionViewDelegate, 
         
         let artist = data[indexPath.item]
         cell.titleLabel.text = artist.artistNickName
-        
-        let profileImgUrl = artist.profileImg
-        FirebaseStorageManager.downloadImage(urlString: profileImgUrl) { image in
-            DispatchQueue.main.async {
-                guard let image = image else { return }
-                cell.imageView.image = image
-            }
+       // FirebaseStorageManager.downloadImage(urlString: profileImgUrl) { image in
+       //            DispatchQueue.main.async {
+       //                guard let image = image else { return }
+       //                cell.imageView.image = image
+       //            }
+       //        }
+        if let profileImgUrl = URL(string: artist.profileImg) {
+            URLSession.shared.dataTask(with: profileImgUrl) { data, response, error in
+                if let data = data {
+                    DispatchQueue.main.async {
+                        cell.imageView.image = UIImage(data: data)
+                    }
+                } else if let error = error { 
+                    print(error.localizedDescription)
+                    DispatchQueue.main.async {
+                        cell.imageView.image = UIImage(named: "ex_artist_img")
+                    }
+                }
+            }.resume()
+        } else {
+            cell.imageView.image = UIImage(named: "ex_artist_img")
         }
         
         return cell
     }
+
 
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -103,10 +128,12 @@ class InterestArtistViewController: UIViewController, UICollectionViewDelegate, 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
     }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
+        self.navigationController?.navigationBar.isHidden = true
     }
     @objc func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
@@ -114,20 +141,20 @@ class InterestArtistViewController: UIViewController, UICollectionViewDelegate, 
 }
 
 //MARK: -API 통신 메소드
-extension InterestArtistViewController {
-    func getInterestArtist(modelId: Int, artistId: Int, portfolioId: Int, artistNickName: String, makeupName: String, reservationDate: String, profileImg: String) {
-        InterestArtistManager.shared.getInterestArtist(modelId: 1, artistId: artistId, artistNickName: artistNickName,  profileImg: profileImg)  { [weak self] result in
-            switch result {
-            case .success(let response):
-                print("Success: \(response)")
-                self?.data = response.data?.content ?? []
-                DispatchQueue.main.async {
-                    self?.collectionView.reloadData()
-                    self?.totalLabel.text = "총 \(self?.data.count ?? 0)명"
-                }
-            case .failure(let error):
-                print("Failure: \(error)")
-            }
-        }
-    }
-}
+//extension InterestArtistViewController {
+//    func getInterestArtist(modelId: Int, artistId: Int, portfolioId: Int, artistNickName: String, makeupName: String, reservationDate: String, profileImg: String) {
+//        InterestArtistManager.shared.getInterestArtist(modelID: 1, artistId: artistId, artistNickName: artistNickName,  profileImg: profileImg)  { [weak self] result in
+//            switch result {
+//            case .success(let response):
+//                print("Success: \(response)")
+//                self?.data = response.data?.content ?? []
+//                DispatchQueue.main.async {
+//                    self?.collectionView.reloadData()
+//                    self?.totalLabel.text = "총 \(self?.data.count ?? 0)명"
+//                }
+//            case .failure(let error):
+//                print("Failure: \(error)")
+//            }
+//        }
+//    }
+//}
