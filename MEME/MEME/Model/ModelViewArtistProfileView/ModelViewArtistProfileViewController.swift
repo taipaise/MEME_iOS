@@ -2,9 +2,9 @@ import UIKit
 import SnapKit
 
 class ModelViewArtistProfileViewController: UIViewController {
-    private let isModel : Bool = true
+    private let isModel : Bool = false
     private var isFavoriteArtist : Bool = false
-    var artistID: Int? = 0
+    var artistID: Int? = 2
     
     // MARK: - Properties
     private var expertiseFields: [String] = []
@@ -216,15 +216,23 @@ class ModelViewArtistProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        navigationController?.setNavigationBarHidden(true, animated: false)
         navigationBar.delegate = self
         navigationBar.configure(title: "프로필")
-        
-        getArtistProfile(userId: 6, artistId: artistID!)
+        if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+            getArtistProfile(userId: userId, artistId: artistID!)
+        }
         setupGestureRecognizers()
         setupPortfolioCollectionView()
         configureSubviews()
         makeConstraints()
         setupExpertiseFieldsButtons()
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+            getArtistProfile(userId: userId, artistId: artistID!)
+        }
     }
     // MARK: - configureSubviews
     func configureSubviews() {
@@ -414,11 +422,15 @@ class ModelViewArtistProfileViewController: UIViewController {
     @objc private func likeImageTapped() {
         if isFavoriteArtist {
             if let artistID = artistID {
-                deleteFavoriteArtist(modelId: 1, artistId: artistID)
+                if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+                    deleteFavoriteArtist(modelId: userId, artistId: artistID)
+                }
             }
         } else {
             if let artistID = artistID {
-                postFavoriteArtist(modelId: 1, artistId: artistID)
+                if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+                    postFavoriteArtist(modelId: userId, artistId: artistID)
+                }
             }
         }
     }

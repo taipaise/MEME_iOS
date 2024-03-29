@@ -14,6 +14,8 @@ protocol BackButtonTappedDelegate: AnyObject {
 final class NavigationBarView: UIView {
 
     @IBOutlet weak var titleLabel: UILabel!
+    @IBOutlet weak var backButton: UIButton!
+    @IBOutlet weak var backButtonImage: UIImageView!
     weak var delegate: BackButtonTappedDelegate?
     
     override init(frame: CGRect) {
@@ -30,8 +32,10 @@ final class NavigationBarView: UIView {
         loadNib()
     }
     
-    func configure(title: String) {
+    func configure(title: String, backButtonisHidden: Bool = false) {
         titleLabel.text = title
+        backButton.isHidden = backButtonisHidden
+        backButtonImage.isHidden = backButtonisHidden
     }
     
     @IBAction func backButtonTapped(_ sender: Any) {

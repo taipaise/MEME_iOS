@@ -14,9 +14,10 @@ struct ReservationSection {
 }
 
 final class ManagementReservationsViewController: UIViewController {
-    private let isModel : Bool = true
+    private let isModel : Bool = false
     private var isFavoriteArtist : Bool = false
-    var artistID: Int? = 0
+    var modelID: Int = 1
+    var artistID: Int = 2
     
     // MARK: - Properties
     private var allReservations: [ReservationData] = []
@@ -67,7 +68,7 @@ final class ManagementReservationsViewController: UIViewController {
         view.backgroundColor = .white
         navigationController?.setNavigationBarHidden(true, animated: false)
         navigationBar.delegate = self
-        navigationBar.configure(title: "전체 예약 보기")
+        navigationBar.configure(title: "예약 관리", backButtonisHidden: !isModel)
         
         setupReservationCollectionView()
         configureSubviews()
@@ -77,7 +78,6 @@ final class ManagementReservationsViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
         showReservations()
     }
     
@@ -150,10 +150,14 @@ final class ManagementReservationsViewController: UIViewController {
     //MARK: -API 호출
     private func showReservations() {
         if(isModel) {
-            showModelReservations(modelId: 1)
+            if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+                showModelReservations(modelId: userId)
+            }
         }
         else{
-            showArtistReservations(artistId: 2)
+            if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+                showArtistReservations(artistId: userId)
+            }
         }
     }
     
@@ -251,6 +255,16 @@ extension ManagementReservationsViewController: UICollectionViewDelegate, UIColl
             guard let reservationCell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.identifier, for: indexPath) as? ModelReservationConfirmViewCell else {
                 fatalError("셀 타입 캐스팅 실패...")
             }
+            if reservation.status == "COMPLETE" {
+                reservationCell.modelReservationDateLabel.textColor = .gray500
+                reservationCell.modelReservationLocationImageView.image = .iconLocationDisabled
+                reservationCell.modelReservationWonLabel.textColor = .gray500
+            }else {
+                reservationCell.modelReservationDateLabel.textColor = .mainBold
+                reservationCell.modelReservationLocationImageView.image = .iconLocation
+                reservationCell.modelReservationWonLabel.textColor = .mainBold
+
+            }
             reservationCell.contentView.backgroundColor = .gray200
             reservationCell.modelReservationLabel.textColor = .black
             reservationCell.modelReservationMakeupNameLabel.textColor = .black
@@ -282,13 +296,25 @@ extension ManagementReservationsViewController: UICollectionViewDelegateFlowLayo
             let item = collectionViewItems[indexPath.item]
             switch item {
             case .reservation(let reservationData):
-                let vc = SingleArtistReservationManageViewController()
-//                vc.isToday = 날짜구별
-                vc.reservationData = reservationData
-                vc.reservationTimeString = convertTimeString(vc.reservationData.reservationDayOfWeekAndTime.values.first!)
-                vc.reservationDateString = formatDateString(op: 3,vc.reservationData.reservationDate)
-                navigationController?.pushViewController(vc, animated: true)
-                
+                if isModel{
+                    let vc = ModelCancelReservationViewController()
+                    vc.reservationId = reservationData.reservationId
+                    vc.portfolioId = reservationData.portfolioId
+                    vc.reservationDate = reservationData.reservationDate
+                    navigationController?.pushViewController(vc, animated: true)
+                }else{
+                    if reservationData.status == "EXPECTED" {
+                        let vc = SingleArtistReservationManageViewController()
+                        if formatDateString(op: 1, reservationData.reservationDate) == formatDateString(op: 1, DateFormatter().string(from: Date())) {
+                            // 오늘
+                            vc.isToday = true
+                        }
+                        vc.reservationData = reservationData
+                        vc.reservationTimeString = convertTimeString(vc.reservationData.reservationDayOfWeekAndTime.values.first!)
+                        vc.reservationDateString = formatDateString(op: 3,vc.reservationData.reservationDate)
+                        navigationController?.pushViewController(vc, animated: true)
+                    }
+                }
             default:
                 break
             }
@@ -359,7 +385,6 @@ extension ManagementReservationsViewController {
             dateFormatter.locale = Locale(identifier: "ko_KR")
             return dateFormatter.string(from: date)
         } else {
-            print("날짜 구별 실패")
             return nil
         }
     }
