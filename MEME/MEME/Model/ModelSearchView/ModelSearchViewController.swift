@@ -541,10 +541,9 @@ extension ModelSearchViewController: RecentSearchViewCellDelegate {
 //MARK: -API 통신 메소드
 extension ModelSearchViewController {
     func fetchFavoriteArtists() {
-        // modelId 임의 설정
-        let modelId = -1
+        var modelId = -1
         if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
-            let modelId = userId
+            modelId = userId
         }
         
         MyPageManager.shared.getFavoriteArtists(modelId: modelId) { [weak self] result in
