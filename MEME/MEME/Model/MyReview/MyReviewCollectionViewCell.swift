@@ -104,7 +104,11 @@ class MyReviewCollectionViewCell: UICollectionViewCell {
             writeButton.heightAnchor.constraint(equalToConstant: 30)
         ])
     }
-
+    func configure(with reviewData: AvailableReviewResponseData) {
+            artistLabel.text = reviewData.artistNickName
+            makeupLabel.text = reviewData.makeupName
+            placeLabel.text = reviewData.shopLocation
+        }
     @objc func buttonPressed() {
             delegate?.buttonPressed(in: self)
         }

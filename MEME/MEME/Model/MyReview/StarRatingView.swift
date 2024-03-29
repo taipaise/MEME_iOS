@@ -64,4 +64,8 @@ class StarRatingView: UIStackView {
             button.isSelected = index < starsRating
         }
     }
+    func setStarsRating(rating: Int) {
+        starsRating = rating
+        updateButtonSelectionStates()
+    }
 }

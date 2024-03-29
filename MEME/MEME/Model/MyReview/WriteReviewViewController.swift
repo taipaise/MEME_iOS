@@ -10,7 +10,8 @@ import PhotosUI
 
 class WriteReviewViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate, UITextViewDelegate  {
     
-    
+    var data = [AvailableReviewResponseData]()
+
     var starRatingView: StarRatingView!
     
     let scrollView = UIScrollView()
@@ -47,7 +48,7 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
     
     let upLoadButton: UIButton = {
         let btn = UIButton(type: .system)
-        btn.addTarget(self, action: #selector(uploadButtonTapped), for: .touchUpInside)
+//        btn.addTarget(WriteReviewViewController.self, action: #selector(uploadButtonTapped), for: .touchUpInside)
         
         return btn
     }()
@@ -57,7 +58,7 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
     
     let laterButton: UIButton = {
         let laterbtn = UIButton(type: .system)
-        laterbtn.addTarget(self, action: #selector(laterButtonTapped), for: .touchUpInside)
+        laterbtn.addTarget(WriteReviewViewController.self, action: #selector(laterButtonTapped), for: .touchUpInside)
         
         return laterbtn
     }()
@@ -65,12 +66,13 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
     
     let setButton: UIButton = {
         let setbtn = UIButton(type: .system)
-        setbtn.addTarget(self, action: #selector(setButtonTapped), for: .touchUpInside)
+        setbtn.addTarget(WriteReviewViewController.self, action: #selector(setButtonTapped), for: .touchUpInside)
         
         return setbtn
     }()
     
     func updateReviewLabel(artistName: String, makeupName: String) {
+        print("updateReviewLabel 호출됨")
         let labelText = "\(artistName)의\n\(makeupName)은 어땠나요?"
         let attributedString = NSMutableAttributedString(string: labelText)
         let boldFontAttribute = [NSAttributedString.Key.font: UIFont(name: "Pretendard-SemiBold", size: 20)!]
@@ -83,13 +85,21 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
 
         reviewLabel.attributedText = attributedString
     }
-
     
     var imageViewHeightConstraint: NSLayoutConstraint?
     var reviewTextViewTopConstraint: NSLayoutConstraint?
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let laterButton = UIButton(type: .system)
+            laterButton.addTarget(self, action: #selector(laterButtonTapped), for: .touchUpInside)
+            self.view.addSubview(laterButton)
+            
+            let setButton = UIButton(type: .system)
+            setButton.addTarget(self, action: #selector(setButtonTapped), for: .touchUpInside)
+            self.view.addSubview(setButton)
+            
         
         self.tabBarController?.tabBar.isHidden = true
         
@@ -102,6 +112,25 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
         reviewTextView.textColor = UIColor.lightGray
         
         configureUI()
+        loadReviewData()
+    }
+    func loadReviewData() {
+        AvailableReviewManager.shared.getAvailableReview(modelId: 1, reservationId: 3, portfolioId: 3, artistNickName: "artistNickName", makeupName: "makeupName", reservationDate: "reservationDate", portfolioImg: "portfolioImg", shopLocation: "shopLocation") { [weak self] result in
+            switch result {
+            case .success(let response):
+                DispatchQueue.main.async {
+                    if let firstReviewData = response.data?.first {
+                        let artistNickName = firstReviewData.artistNickName
+                        let makeupName = firstReviewData.makeupName ?? ""
+                        self?.updateReviewLabel(artistName: artistNickName, makeupName: makeupName)
+                    }
+                    
+                }
+
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
     }
     func textViewDidBeginEditing(_ textView: UITextView) {
         if textView.textColor == UIColor.lightGray {
@@ -217,6 +246,8 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
         upLoadButton.layer.cornerRadius = 7
         upLoadButton.clipsToBounds = true
         upLoadButton.configuration = configuration
+        upLoadButton.addTarget(self, action: #selector(uploadButtonTapped), for: .touchUpInside)
+        
         
         NSLayoutConstraint.activate([
             upLoadButton.centerXAnchor.constraint(equalTo: contentView.centerXAnchor),
@@ -265,7 +296,6 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
         contentView.addSubview(setButton)
         laterButton.setTitle("나중에 작성", for: .normal)
         setButton.setTitle("등록하기", for: .normal)
-        
         laterButton.layer.cornerRadius = 10
         setButton.layer.cornerRadius = 10
         
@@ -274,7 +304,7 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
         
         laterButton.setTitleColor(.white, for: .normal)
         setButton.setTitleColor(.white, for: .normal)
-        
+
         reviewTextViewTopConstraint = reviewTextView.topAnchor.constraint(equalTo: upLoadButton.bottomAnchor, constant: 10)
         
         reviewTextViewTopConstraint = reviewTextView.topAnchor.constraint(equalTo: upLoadButton.bottomAnchor, constant: 10)
@@ -404,14 +434,27 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
         self.tabBarController?.tabBar.isHidden = true
     }
     
-    @objc func laterButtonTapped(_ sender: Any) {
-        self.navigationController?.popViewController(animated: true)
-    }
-    @objc func setButtonTapped(_ sender: Any) {
-        //서버 저장 메서드
-    }
     @objc func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func laterButtonTapped() {
+        print("나중에 작성 버튼이 눌렸습니다.")
+        self.navigationController?.popViewController(animated: true)
+    }
+    
+    @objc func setButtonTapped() {
+        setTap()
+    }
+    func setTap() {
+        PostReviewManager.shared.postReview(modelId: 1, reservationId: 3, star: 5, comment: "좋아요!", reviewImgSrc: ["image_url_1", "image_url_2"]) { result in
+            switch result {
+            case .success(let response):
+                print("성공: 리뷰가 성공적으로 등록되었습니다.")
+            case .failure(let error):
+                print("요청 실패: \(error)")
+            }
+        }
     }
     @objc func deleteImage() {
         imageView.image = nil
