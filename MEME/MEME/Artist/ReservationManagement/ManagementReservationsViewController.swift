@@ -150,10 +150,14 @@ final class ManagementReservationsViewController: UIViewController {
     //MARK: -API 호출
     private func showReservations() {
         if(isModel) {
-            showModelReservations(modelId: 1)
+            if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+                showModelReservations(modelId: userId)
+            }
         }
         else{
-            showArtistReservations(artistId: 2)
+            if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+                showArtistReservations(artistId: userId)
+            }
         }
     }
     

@@ -149,6 +149,7 @@ final class ModelHomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
+        setUserNickName()
         setupReservationCollectionView()
         setupMakeupCardCollectionView()
         setupHastyMakeupCardCollectionView()
@@ -161,8 +162,10 @@ final class ModelHomeViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-
-        showModelReservations()
+        if let userIdString = KeyChainManager.read(forkey: .memberId), let userId = Int(userIdString) {
+            showModelReservations(modelId: userId)
+        }
+        
         getRecommendArtistByReview()
         getRecommendArtistByRecent()
     }
@@ -267,6 +270,13 @@ final class ModelHomeViewController: UIViewController {
         
     }
     //MARK: -Actions
+    func setUserNickName() {
+        if let nickname = KeyChainManager.read(forkey: .nickName) {
+            modelWelcomeLabel.text = "\(nickname)님, 환영합니다!"
+        } else {
+            modelWelcomeLabel.text = "환영합니다!"
+        }
+    }
     func setupSearchBar() {
         searchMakeup.delegate = self
     }
@@ -424,8 +434,8 @@ extension ModelHomeViewController: UISearchBarDelegate {
 
 //MARK: -API 통신 메소드
 extension ModelHomeViewController {
-    func showModelReservations() {
-        ReservationManager.shared.getModelReservation(modelId: 1) { [weak self] result in
+    func showModelReservations(modelId: Int) {
+        ReservationManager.shared.getModelReservation(modelId: modelId) { [weak self] result in
             DispatchQueue.main.async {
                 switch result {
                 case .success(let reservationResponse):
