@@ -13,8 +13,6 @@ class ArtistPortfolioManageViewController: UIViewController {
     @IBOutlet var noPortfolioLabel: UIStackView!
     
     private var portfolioData : PortfolioAllDTO?
-    private var artistId: Int = 2
-    private var page: Int = 0
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -105,7 +103,7 @@ extension ArtistPortfolioManageViewController : UICollectionViewDelegate, UIColl
 extension ArtistPortfolioManageViewController {
     private func getAllPortfolio() {
         let getAllPortfolio = PortfolioManager.shared
-        getAllPortfolio.getAllPortfolio(artistId: artistId, page: page) { [weak self] result in
+        getAllPortfolio.getAllPortfolio(artistId: artistID, page: 0) { [weak self] result in
             switch result{
                 case .success(let response):
                     self?.portfolioData = response.data

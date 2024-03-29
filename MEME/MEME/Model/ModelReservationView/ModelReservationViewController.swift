@@ -382,7 +382,7 @@ class ModelReservationViewController: UIViewController {
     }
     @objc private func profileImageTapped() {
         let artistProfileVC = ModelViewArtistProfileViewController()
-        artistProfileVC.artistID = artistID
+        artistProfileVC.artistId = artistID
         navigationController?.pushViewController(artistProfileVC, animated: true)
     }
     private func likeImageDecision() {

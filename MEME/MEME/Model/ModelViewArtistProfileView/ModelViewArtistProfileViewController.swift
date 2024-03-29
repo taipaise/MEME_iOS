@@ -4,8 +4,7 @@ import SnapKit
 class ModelViewArtistProfileViewController: UIViewController {
     private let isModel : Bool = false
     private var isFavoriteArtist : Bool = false
-    var userId: Int? = 1
-    var artistID: Int? = 2
+    var artistId: Int? = 2
     
     // MARK: - Properties
     private var expertiseFields: [String] = []
@@ -221,7 +220,7 @@ class ModelViewArtistProfileViewController: UIViewController {
         navigationBar.delegate = self
         navigationBar.configure(title: "프로필")
         
-        getArtistProfile(userId: userId!, artistId: artistID!)
+        getArtistProfile(userId: modelID, artistId: artistId!)
         setupGestureRecognizers()
         setupPortfolioCollectionView()
         configureSubviews()
@@ -415,13 +414,9 @@ class ModelViewArtistProfileViewController: UIViewController {
     }
     @objc private func likeImageTapped() {
         if isFavoriteArtist {
-            if let artistID = artistID {
-                deleteFavoriteArtist(modelId: 1, artistId: artistID)
-            }
+            deleteFavoriteArtist(modelId: modelID, artistId: artistID)
         } else {
-            if let artistID = artistID {
-                postFavoriteArtist(modelId: 1, artistId: artistID)
-            }
+            postFavoriteArtist(modelId: modelID, artistId: artistID)
         }
     }
     

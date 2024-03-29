@@ -38,16 +38,14 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
         fatalError("init(coder:) has not been implemented")
     }
     private var portfolioDetailData: PortfolioData!
-    private var userId = 1
-    private var artistId = 2
     private var isBlock : Bool = false
-    
     private var selectedCategory: PortfolioCategories?
     
     private var buttonAt: Int = 0
     private var imgCnt: Int = 0
     private var isEdit: Bool = portfolioIdx == -1 ? false : true
-    
+    private lazy var imgViewUrlList: [String] = []
+    private var portfolioImageData: [ImageData]?
     private lazy var imgViewList: [UIImageView] = {
         return [self.firstImgView, self.secondImgView, self.thirdImgView]
     }()
@@ -78,9 +76,27 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
     private func getPortfolioDetail() {
         let getPortfolio = PortfolioManager.shared
         self.infoTextViewPlaceHolderLabel.isHidden = true
-        getPortfolio.getPortfolioDetail(userId: userId, portfolioId: portfolioId) { result in
+        getPortfolio.getPortfolioDetail(userId: modelID, portfolioId: portfolioId) { result in
             switch result {
             case .success(let response):
+                if let url = URL(string: response.data!.portfolioImgDtoList![0].portfolioImgSrc) {
+                    URLSession.shared.dataTask(
+                        with: url) {
+                            data, response, error in
+                            DispatchQueue.main.async {
+                                if let data = data, error == nil {
+                                    self.imgCnt = 1
+                                    self.deleteButtonAppear()
+                                    self.secondImgView.image = UIImage(data: data)
+                                } else {
+                                    self.secondImgView.image = nil
+                                }
+                        }
+                    }.resume()
+                    self.portfolioImageData = response.data?.portfolioImgDtoList
+                } else {
+                    self.firstImgView.image = nil
+                }
                 self.portfolioDetailData = response.data
                 self.selectedCategory = PortfolioCategories(rawValue: response.data!.category)
                 self.makeupCategoryCollectionView.reloadData()
@@ -96,12 +112,12 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
     private func createPortfolio(completion: @escaping (Bool) -> Void) {
         let createPortfolio = PortfolioManager.shared
         createPortfolio.createPortfolio(
-            artistId: artistId,
+            artistId: artistID,
             category: selectedCategory!,
             makeup_name: makeupNameTextField.text!,
             price: Int(priceTextField.text!)!,
             info: infoTextView.text!,
-            portfolio_img_src: ["dsfjkfs","sdfjsdsdk"] // 이미지 처리 필요
+            portfolio_img_src: imgViewUrlList
         ) { result in
             switch result {
             case .success(let data):
@@ -115,16 +131,24 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
     }
     
     private func editPortfolio(completion: @escaping (Bool) -> Void) {
-        let editPortfolio = PortfolioManager.shared
-        editPortfolio.editPortfolio(
-            artistId: artistId,
-            portfolioId: portfolioId,
-            category: selectedCategory!,
-            makeup_name: makeupNameTextField.text!,
-            price: Int(priceTextField.text!)!,
-            info: infoTextView.text,
-            isBlock: isBlock,
-            portfolio_img_src: []) { result in
+        FirebaseStorageManager.uploadImage(image: imgViewList[0].image!) { [self] url in
+            guard
+                let url = url,
+                let aritstId = KeyChainManager.read(forkey: .memberId) as? Int
+            else { return } // 성공적으로 업로드 했으면 url이 nil 값이 아님
+            portfolioImageData?[0].portfolioImgSrc = url.absoluteString
+            portfolioImageData?[0].delete = false
+            let editPortfolio = PortfolioManager.shared
+            editPortfolio.editPortfolio(
+                artistId: aritstId,
+                portfolioId: portfolioId,
+                category: selectedCategory!,
+                makeup_name: makeupNameTextField.text!,
+                price: Int(priceTextField.text!)!,
+                info: infoTextView.text,
+                isBlock: isBlock,
+                portfolio_img_src: portfolioImageData!
+            ) { result in
                 switch result {
                 case .success(let response):
                     print("성공" + response.message)
@@ -134,6 +158,7 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
                     completion(false)
                 }
             }
+        }
     }
     
     private func uiSet(){
@@ -291,6 +316,7 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
             if imgCnt==1 {
                 imgViewList[buttonAt].image = nil
                 imgViewList[0].image = .icPicture
+                imgViewUrlList[0] = "string"
             }else if imgCnt==2 {
                 imgViewList[buttonAt].image = imgViewList[buttonAt+1].image
                 imgViewList[buttonAt+1].image = nil
@@ -382,32 +408,11 @@ extension ArtistPortfolioEditingViewController : UIImagePickerControllerDelegate
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
             // 이미지 피커 컨트롤러 창 닫기
             picker.dismiss(animated: false) { () in
-                // 이미지를 이미지 뷰에 표시
-                let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage                
-                if(self.buttonAt == 0) {
-                    if(self.imgCnt == 0) {
-                        self.imgViewList[1].image = img
-                        self.imgCnt+=1
-                    }else if(self.imgCnt == 1) {
-                        self.imgViewList[2].image = self.imgViewList[1].image
-                        self.imgViewList[1].image = img
-                        self.imgCnt+=1
-                    }else if(self.imgCnt == 2){
-                        self.imgViewList[0].image = img
-                        self.imgCnt+=1
-                    }else{
-                        self.firstImgView.image = img
-                    }
-                }else{
-                    if(self.buttonAt == 0) {
-                        self.firstImgView.image = img
-                    }else if(self.buttonAt == 1) {
-                        self.secondImgView.image = img
-                    }else {
-                        self.thirdImgView.image = img
-                    }
-                }
+                let img = info[UIImagePickerController.InfoKey.editedImage] as? UIImage
+                self.imgViewList[1].image = img
+                self.imgCnt += 1
                 self.deleteButtonAppear()
+
             }
         }
 }
@@ -424,11 +429,11 @@ extension ArtistPortfolioEditingViewController {
 }
 extension ArtistPortfolioEditingViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-            // textview.text가 nil인지 빈 문자열인지 검사
-            if let text = textView.text, !text.isEmpty {
-                self.infoTextViewPlaceHolderLabel.isHidden = true
-            } else {
-                self.infoTextViewPlaceHolderLabel.isHidden = false
-            }
+        // textview.text가 nil인지 빈 문자열인지 검사
+        if let text = textView.text, !text.isEmpty {
+            self.infoTextViewPlaceHolderLabel.isHidden = true
+        } else {
+            self.infoTextViewPlaceHolderLabel.isHidden = false
         }
+    }
 }

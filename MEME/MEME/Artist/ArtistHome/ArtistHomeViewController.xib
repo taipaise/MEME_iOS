@@ -159,11 +159,8 @@
                                 <action selector="entireReservationBtnTapped:" destination="-1" eventType="touchUpInside" id="JER-BC-U0c"/>
                             </connections>
                         </button>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" showsExpansionTextWhenTruncated="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfh-Hs-Rsa" userLabel="TodayStatusLabel">
-                            <rect key="frame" x="136" y="138.33333333333334" width="44" height="48"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="48" id="UZw-ms-vqo"/>
-                            </constraints>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="label" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" showsExpansionTextWhenTruncated="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xfh-Hs-Rsa" userLabel="TodayStatusLabel">
+                            <rect key="frame" x="136" y="150.33333333333334" width="44" height="24"/>
                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="20"/>
                             <nil key="textColor"/>
                             <nil key="highlightedColor"/>

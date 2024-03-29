@@ -21,14 +21,13 @@ class ArtistHomeViewController: UIViewController {
     @IBOutlet weak var secondArtistResTimeLabel: UILabel!
     
     //Properties
-    private var artistId: Int = 2
     private var todayCount: Int = 0
     private var tomorrowCount: Int = 0
     private var fromTomorrowCount: Int = 0
     private var showDataCount: Int = 0
     private var selectedIdx: Int!
     private var reservationData: [ReservationData]!
-    private var artistProfileData: ArtistProfileData?
+    private var artistProfileData: MyPageData?
     private var reservationStatusData: [Int] = []
     private var showReservationData: [Int] = [0,0,0,0]
     
@@ -45,8 +44,9 @@ class ArtistHomeViewController: UIViewController {
         self.todayCount = 0
         self.tomorrowCount = 0
         self.fromTomorrowCount = 0
-        getArtistReservation(artistId: artistId)
-        getArtistProfile(userId: 1, artistId: artistId)
+        artistID = KeyChainManager.loadMemberID()
+        getArtistProfile(userId: artistID)
+        getArtistReservation(artistId: artistID)
 
     }
     private func uiSet(){
@@ -76,16 +76,6 @@ class ArtistHomeViewController: UIViewController {
         
         artistProfileImageView.layer.cornerRadius = artistProfileImageView.frame.height/2
         artistProfileImageView.clipsToBounds = true
-        if let nickname = artistProfileData?.nickname {
-            artistHomeProfileLabel.text = "안녕하세요, \(nickname)님!\n내일 예약 \(String(self.tomorrowCount))건이 있어요."
-        }
-        if let profileImg = artistProfileData?.profileImg {
-            FirebaseStorageManager.downloadImage(urlString: profileImg) { [weak self] image in
-                guard let image = image else { return } // 성공적으로 업로드 했으면 이미지가 nil 값이 아님
-                //이미지를 가지고 할 작업 처리 ex) 이미지 뷰에 다운 받은 이미지를 넣음
-                self?.artistProfileImageView.image = image
-            }
-        }
         
     }
     
@@ -224,6 +214,42 @@ class ArtistHomeViewController: UIViewController {
         return result.replacingOccurrences(of: "_", with: ":")
     }
 
+    
+    func getArtistProfile(userId: Int){
+        MyPageManager.shared.getMyPageProfile(userId: userId) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let profile):
+                
+                print("Success: \(profile)")
+                print("message: "+profile.message)
+                self.artistProfileData? = profile.data!
+                
+                guard
+                    let data = profile.data,
+                    let nickName = data.nickname
+                else { return }
+                
+                if nickName.count > 6 {
+                    self.artistHomeProfileLabel.text = "안녕하세요,"+"\n"+"\(nickName)님!"+"\n"+"내일 예약 \(String(self.tomorrowCount))건이 있어요."
+                }else{
+                    print("nicknamecomplete")
+                    artistHomeProfileLabel.text = "안녕하세요, \(nickName)님!"+"\n"+"내일 예약 \(String(self.tomorrowCount))건이 있어요."
+                }
+                if let profileImg = artistProfileData?.profileImg {
+                    FirebaseStorageManager.downloadImage(urlString: profileImg) { [weak self] image in
+                        guard let image = image else { return } // 성공적으로 업로드 했으면 이미지가 nil 값이 아님
+                        //이미지를 가지고 할 작업 처리 ex) 이미지 뷰에 다운 받은 이미지를 넣음
+                        print("Imagecomplete")
+                        self?.artistProfileImageView.image = image
+                    }
+                }
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
+    }
+    
 
     
     //MARK: - 아티스트 예약 조회 API
@@ -238,23 +264,6 @@ class ArtistHomeViewController: UIViewController {
                 self.uiSet()
             case .failure(let error):
                 print(error.localizedDescription)
-            }
-        }
-    }
-    
-    //MARK: - 아티스트 프로필 조회 API
-    func getArtistProfile(userId: Int, artistId: Int) {
-        ProfileManager.shared.getArtistProfile(userId: userId, artistId: artistId) { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.artistProfileData = response.data
-                self?.uiSet()
-                print("아티스트 프로필 조회 성공: \(self?.artistProfileData?.nickname)")
-            case .failure(let error):
-                if let responseData = error.response {
-                    let responseString = String(data: responseData.data, encoding: .utf8)
-                    print("아티스트 프로필 조회 실패: \(responseString ?? "no data")")
-                }
             }
         }
     }

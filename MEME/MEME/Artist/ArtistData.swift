@@ -14,6 +14,8 @@ var onComingArray : [Bool] = [false,false,true]
 
 // 홈뷰컨 구성 요소
 // 예약 전적 유무
+var modelID: Int = 2
+var artistID: Int = 3
 var isReservation : Bool = true
 // 포트폴리오 카테고리
 var portfolioCategories = PortfolioCategories.allCases
