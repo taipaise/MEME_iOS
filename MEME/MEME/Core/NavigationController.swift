@@ -21,6 +21,7 @@ final class NavigationController: UINavigationController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        interactivePopGestureRecognizer?.delegate = self
         delegate = self
     }
     
@@ -46,6 +47,7 @@ extension NavigationController: UINavigationControllerDelegate {
     }
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
+        print("vc shown")
         isPushing = false
     }
 }
