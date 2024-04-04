@@ -31,7 +31,11 @@ class ArtistPortfolioManageViewController: UIViewController {
         portfolioCollectionView.delegate = self
         portfolioCollectionView.dataSource = self
         portfolioCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
-        portfolioCollectionView.register(UINib(nibName: ArtistPortfolioCollectionViewCell.className, bundle: nil), forCellWithReuseIdentifier: ArtistPortfolioCollectionViewCell.className)
+        portfolioCollectionView.register(
+            UINib(
+            nibName: ArtistPortfolioCollectionViewCell.className,
+            bundle: nil),
+            forCellWithReuseIdentifier: ArtistPortfolioCollectionViewCell.className)
 
     }
     //MARK: - @IBAction
@@ -48,7 +52,10 @@ class ArtistPortfolioManageViewController: UIViewController {
 
 //MARK: - UICollectionViewDelegate
 extension ArtistPortfolioManageViewController : UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        didSelectItemAt indexPath: IndexPath
+    ) {
         portfolioIdx = indexPath.row
         let vc = ArtistPortfolioEditingViewController(
             receivedData: Int((self.portfolioData?.content![portfolioIdx].portfolioId)!)
@@ -59,7 +66,10 @@ extension ArtistPortfolioManageViewController : UICollectionViewDelegate {
 
 //MARK: - UICollectionViewDataSource
 extension ArtistPortfolioManageViewController : UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
+    func collectionView(
+        _ collectionView: UICollectionView,
+        numberOfItemsInSection section: Int
+    ) -> Int
     {
         guard let portfolioData = portfolioData else {
             self.noPortfolioLabel.isHidden = false
@@ -67,8 +77,14 @@ extension ArtistPortfolioManageViewController : UICollectionViewDataSource {
         }
         return portfolioData.content!.count
     }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArtistPortfolioCollectionViewCell.className, for: indexPath) as? ArtistPortfolioCollectionViewCell
+    func collectionView(
+        _ collectionView: UICollectionView,
+        cellForItemAt indexPath: IndexPath
+    ) -> UICollectionViewCell {
+            guard let cell = collectionView.dequeueReusableCell(
+                withReuseIdentifier: ArtistPortfolioCollectionViewCell.className,
+                for: indexPath
+            ) as? ArtistPortfolioCollectionViewCell
             else { return UICollectionViewCell() }
             if let portfolioData = portfolioData {
                 cell.portfolioMainLabel.text = portfolioData.content?[indexPath.row].makeupName
@@ -96,10 +112,18 @@ extension ArtistPortfolioManageViewController : UICollectionViewDataSource {
 
 //MARK: - UICollectionViewDelegateFlowLayout
 extension ArtistPortfolioManageViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
         return CGSize(width: 170, height: 250)
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumInteritemSpacingForSectionAt section: Int
+    ) -> CGFloat {
         return 0
     }
     

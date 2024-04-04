@@ -54,7 +54,12 @@ class ArtistHomeViewController: UIViewController {
     //MARK: - setUI()
     private func setUI(){
         self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        self.navigationItem.backBarButtonItem = UIBarButtonItem(
+            title: "",
+            style: .plain,
+            target: nil,
+            action: nil
+        )
         self.tabBarController?.tabBar.isHidden = false
         if(todayCount == 0){
             firstArtistResLabel.text = "포트폴리오 관리하러 가기"
@@ -223,7 +228,10 @@ class ArtistHomeViewController: UIViewController {
 }
 // MARK: - UITableViewDataSource
 extension ArtistHomeViewController : UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(
+        _ tableView: UITableView,
+        numberOfRowsInSection section: Int
+    ) -> Int {
         if let reservationData = reservationData {
             fromTomorrowCount = 0
             showDataCount = 0
@@ -243,7 +251,10 @@ extension ArtistHomeViewController : UITableViewDataSource {
         
     }
     
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    func tableView(
+        _ tableView: UITableView,
+        cellForRowAt indexPath: IndexPath
+    ) -> UITableViewCell {
         // 셀 교체 필요
         guard let resCell = artistReservationStatusTableView.dequeueReusableCell(withIdentifier: ArtistReservationStatusTableViewCell.identifier, for: indexPath) as? ArtistReservationStatusTableViewCell else { return UITableViewCell() }
         resCell.makeUpNameLabel.text = reservationData[indexPath.row].makeupName
@@ -254,14 +265,21 @@ extension ArtistHomeViewController : UITableViewDataSource {
         resCell.reservationPriceLabel.text = "\(String(reservationData[indexPath.row].price))원"
         // 버튼 태그로 index 전달
         resCell.reservationManageBtn.tag = indexPath.row
-        resCell.reservationManageBtn.addTarget(self, action: #selector(reservationManagedBtnTapped), for: .touchUpInside)
+        resCell.reservationManageBtn.addTarget(
+            self,
+            action: #selector(reservationManagedBtnTapped),
+            for: .touchUpInside
+        )
         return resCell
     }
     
 }
 // MARK: - UITableViewDelegate
 extension ArtistHomeViewController : UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+    func tableView(
+        _ tableView: UITableView,
+        heightForRowAt indexPath: IndexPath
+    ) -> CGFloat {
         if reservationStatusData[indexPath.row] == 1{
             return CGFloat(192)
         }else {
@@ -295,7 +313,9 @@ extension ArtistHomeViewController {
                     artistHomeProfileLabel.text = "안녕하세요, \(nickName)님!"+"\n"+"내일 예약 \(String(self.tomorrowCount))건이 있어요."
                 }
                 if let profileImg = data.profileImg {
-                    FirebaseStorageManager.downloadImage(urlString: profileImg) { [weak self] image in
+                    FirebaseStorageManager.downloadImage(
+                        urlString: profileImg
+                    ) { [weak self] image in
                         guard let image = image else { return } // 성공적으로 업로드 했으면 이미지가 nil 값이 아님
                         //이미지를 가지고 할 작업 처리 ex) 이미지 뷰에 다운 받은 이미지를 넣음
                         print("Imagecomplete")

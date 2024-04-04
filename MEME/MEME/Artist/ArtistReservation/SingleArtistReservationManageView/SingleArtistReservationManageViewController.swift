@@ -71,14 +71,25 @@ class SingleArtistReservationManageViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     @IBAction private func reservationCancelBtnDidTap(_ sender: UIButton) {
-        let alert = UIAlertController(title: "예약 취소하기", message: "\n예약을 취소하시겠습니까? 취소 시 모델에게 취소 알림이 전송됩니다.", preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
+        let alert = UIAlertController(
+            title: "예약 취소하기",
+            message: "\n예약을 취소하시겠습니까? 취소 시 모델에게 취소 알림이 전송됩니다.",
+            preferredStyle: .alert
+        )
+        let okAction = UIAlertAction(
+            title: "예",
+            style: .default
+        ) { [weak self] _ in
             self?.patchReservation(reservationId: self?.reservationData.reservationId ?? 0)
             if let navigationController = self?.navigationController {
                 navigationController.popToRootViewController(animated: true)
             }
         }
-        let noAction = UIAlertAction(title: "아니오", style: .cancel, handler : nil )
+        let noAction = UIAlertAction(
+            title: "아니오",
+            style: .cancel,
+            handler : nil
+        )
         // HIG에 따라 Cancel이 왼쪽
         alert.addAction(okAction)
         alert.addAction(noAction)

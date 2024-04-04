@@ -156,7 +156,11 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
             message = "\n포트폴리오 등록을 취소하시겠습니까?"
         }
         
-        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        let alert = UIAlertController(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
         
         // HIG에 따라 Cancel이 왼쪽
         alert.addAction(okAction)
@@ -211,7 +215,11 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
                 self?.navigationController?.popViewController(animated: true)
             })
         }
-        let noAction = UIAlertAction(title: "아니오", style: .cancel, handler : nil )
+        let noAction = UIAlertAction(
+            title: "아니오",
+            style: .cancel,
+            handler : nil
+        )
         // HIG에 따라 Cancel이 왼쪽
         alert.addAction(okAction)
         alert.addAction(noAction)
@@ -305,7 +313,11 @@ extension ArtistPortfolioEditingViewController : UICollectionViewDelegate {
 
 //MARK: - UICollectionViewDelegateFlowLayout
 extension ArtistPortfolioEditingViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        sizeForItemAt indexPath: IndexPath
+    ) -> CGSize {
             var width = 97
             switch indexPath.row {
             case 3:
@@ -319,10 +331,18 @@ extension ArtistPortfolioEditingViewController: UICollectionViewDelegateFlowLayo
             }
             return CGSize(width: width, height: 27)
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumInteritemSpacingForSectionAt section: Int
+    ) -> CGFloat {
         return CGFloat(7)
     }
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(
+        _ collectionView: UICollectionView,
+        layout collectionViewLayout: UICollectionViewLayout,
+        minimumLineSpacingForSectionAt section: Int
+    ) -> CGFloat {
         return CGFloat(15)
     }
 }
@@ -333,8 +353,15 @@ extension ArtistPortfolioEditingViewController : UIImagePickerControllerDelegate
             // 이미지 피커 컨트롤러 창 닫기
             self.dismiss(animated: false) { () in
                 // 알림 창 호출
-                let alert = UIAlertController(title: "", message: "이미지 선택이 취소되었습니다.", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "확인", style: .cancel))
+                let alert = UIAlertController(
+                    title: "",
+                    message: "이미지 선택이 취소되었습니다.",
+                    preferredStyle: .alert
+                )
+                alert.addAction(UIAlertAction(
+                    title: "확인",
+                    style: .cancel
+                ))
                 self.present(alert, animated: false)
             }
         }
