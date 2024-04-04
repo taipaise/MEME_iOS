@@ -8,8 +8,9 @@
 import UIKit
 
 class ArtistMakeupTagCollectionViewCell: UICollectionViewCell {
-    @IBOutlet var makeupTagLabel: UILabel!
-    @IBOutlet var makeupTagView: UIView!
+    //MARK: - UI Properties
+    @IBOutlet weak var makeupTagLabel: UILabel!
+    @IBOutlet weak var makeupTagView: UIView!
 
     static func nib() -> UINib {
         return UINib(nibName: ArtistMakeupTagCollectionViewCell.className, bundle: nil)
@@ -17,15 +18,17 @@ class ArtistMakeupTagCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        uiSet()
+        setUI()
     }
-    private func uiSet(){
+    //MARK: - setUI()
+    private func setUI(){
         makeupTagView.layer.borderColor = UIColor(resource: .mainBold).cgColor
         makeupTagView.layer.cornerRadius = makeupTagView.frame.height/2
         makeupTagView.layer.borderWidth = 1
         makeupTagView.backgroundColor = .gray100
         makeupTagLabel.textColor = .gray500
     }
+    //MARK: - 셀 선택 시 UI 변화
     func selected(){
         makeupTagView.backgroundColor = .mainBold
         makeupTagLabel.textColor = .gray100

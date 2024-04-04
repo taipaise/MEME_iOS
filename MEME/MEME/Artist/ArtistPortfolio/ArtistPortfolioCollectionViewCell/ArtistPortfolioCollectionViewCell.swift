@@ -8,12 +8,13 @@
 import UIKit
 
 class ArtistPortfolioCollectionViewCell: UICollectionViewCell {
-    @IBOutlet var portfolioImageView: UIImageView!
-    @IBOutlet var portfolioSubLabel: UILabel!
-    @IBOutlet var portfolioMainLabel: UILabel!
-    @IBOutlet var portfolioPriceLabel: UILabel!
-    @IBOutlet var portfolioView: UIView!
-    @IBOutlet var fullView: UIView!
+    //MARK: - UI Properties
+    @IBOutlet weak var portfolioImageView: UIImageView!
+    @IBOutlet weak var portfolioSubLabel: UILabel!
+    @IBOutlet weak var portfolioMainLabel: UILabel!
+    @IBOutlet weak var portfolioPriceLabel: UILabel!
+    @IBOutlet weak var portfolioView: UIView!
+    @IBOutlet weak var fullView: UIView!
 
     static func nib() -> UINib {
         return UINib(nibName: ArtistPortfolioCollectionViewCell.className, bundle: nil)
@@ -22,10 +23,10 @@ class ArtistPortfolioCollectionViewCell: UICollectionViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        uiSet()
+        setUI()
     }
-    
-    private func uiSet(){
+    //MARK: - setUI()
+    private func setUI(){
         portfolioImageView.layer.cornerRadius = 10
         portfolioView.layer.cornerRadius = 10
         portfolioView.layer.shadowOpacity = 0.125

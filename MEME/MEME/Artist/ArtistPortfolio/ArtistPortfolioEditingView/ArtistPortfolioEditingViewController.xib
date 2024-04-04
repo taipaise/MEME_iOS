@@ -45,7 +45,7 @@
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="포트폴리오 관리" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mxu-le-p7w">
                             <rect key="frame" x="146" y="14.333333333333327" width="101" height="19.333333333333329"/>
                             <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
-                            <nil key="textColor"/>
+                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <nil key="highlightedColor"/>
                         </label>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1i4-qQ-BXj" userLabel="backBtn">
@@ -93,23 +93,24 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="사진 등록(최대 3장)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5qN-9M-gLf">
                                     <rect key="frame" x="24" y="24" width="110" height="17"/>
                                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="카테고리" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IVb-Ma-laL">
                                     <rect key="frame" x="23.999999999999996" y="138" width="48.666666666666657" height="17"/>
                                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="메이크업명" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kb3-ni-pgU">
                                     <rect key="frame" x="23.999999999999996" y="309" width="60.666666666666657" height="17"/>
                                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="메이크업명을 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="v05-fJ-iDa">
                                     <rect key="frame" x="24" y="331" width="345" height="34"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -117,11 +118,12 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가격" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OOM-ci-ZeT">
                                     <rect key="frame" x="24" y="386" width="24.333333333333329" height="17"/>
                                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <textField opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="248" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="가격을 입력해주세요." textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="k1u-BO-Y1r">
                                     <rect key="frame" x="24" y="408" width="345" height="34"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits"/>
@@ -155,12 +157,12 @@
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="정보" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MY3-dc-Re1">
                                     <rect key="frame" x="24" y="463" width="24.333333333333329" height="17"/>
                                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
-                                    <nil key="textColor"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="TopLeft" bounces="NO" scrollEnabled="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" bouncesZoom="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="LDs-6l-SaI" userLabel="ProTag Collection View">
                                     <rect key="frame" x="24" y="167" width="349" height="120"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="120" id="XcC-g4-8MW"/>
                                     </constraints>
@@ -244,7 +246,7 @@
                                 </button>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9i4-8e-DMd">
                                     <rect key="frame" x="24" y="488" width="345" height="181"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="181" id="FhE-QJ-bQ7"/>
                                     </constraints>
@@ -259,7 +261,7 @@
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="Kb3-ni-pgU" firstAttribute="leading" secondItem="nNY-vF-dHT" secondAttribute="leading" constant="24" id="0Ak-yt-5Ju"/>
                                 <constraint firstItem="9i4-8e-DMd" firstAttribute="top" secondItem="MY3-dc-Re1" secondAttribute="bottom" constant="8" symbolic="YES" id="1kH-8I-4Vb"/>
@@ -312,7 +314,7 @@
                 </scrollView>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="o3Y-oj-dex" secondAttribute="trailing" id="0wj-OH-bhC"/>
                 <constraint firstItem="LDs-6l-SaI" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.888041" id="40u-GT-qKE"/>
