@@ -8,11 +8,11 @@
 import UIKit
 
 class SingleArtistReservationManageViewController: UIViewController {
-    
-    @IBOutlet var cancelBarView: UIView!
-    @IBOutlet var cancelBarLabel: UILabel!
-    @IBOutlet var cancelBarButton: UIButton!
-    @IBOutlet var resInfoFrameView: UIView!
+    //MARK: - UI Properties
+    @IBOutlet weak var cancelBarView: UIView!
+    @IBOutlet weak var cancelBarLabel: UILabel!
+    @IBOutlet weak var cancelBarButton: UIButton!
+    @IBOutlet weak var resInfoFrameView: UIView!
     @IBOutlet weak var modelNicknameLabel: UILabel!
     @IBOutlet weak var modelSkinTypeLabel: UILabel!
     @IBOutlet weak var modelGenderLabel: UILabel!
@@ -21,26 +21,28 @@ class SingleArtistReservationManageViewController: UIViewController {
     @IBOutlet weak var reservationDateLabel: UILabel!
     @IBOutlet weak var reservationPlaceLabel: UILabel!
     
+    //MARK: - Properties
     var isToday: Bool = false
     var reservationData: ReservationData!
     var modelData: ModelProfileInfoData!
     var reservationDateString: String!
     var reservationTimeString: String!
     
+    //MARK: - viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setUI()
+    }
+    
+    //MARK: - viewWillAppear()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         getModelData(modelId: 1)
     }
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        uiSet()
-        // Do any additional setup after loading the view.
-    }
-
-    private func uiSet(){
+    //MARK: - setUI()
+    private func setUI(){
         self.tabBarController?.tabBar.isHidden = true
-        self.navigationController?.isNavigationBarHidden = true
         cancelBarView.layer.cornerRadius=10
         resInfoFrameView.layer.cornerRadius=10
         if isToday {
@@ -63,7 +65,7 @@ class SingleArtistReservationManageViewController: UIViewController {
         reservationDateLabel.text = reservationDateString+" "+reservationTimeString+"시"
         reservationPlaceLabel.text = reservationData.shopLocation
     }
-    
+    //MARK: - @IBAction
     @IBAction private func backBtnDidTap(_ sender: UIButton) {
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.popViewController(animated: true)
@@ -84,6 +86,8 @@ class SingleArtistReservationManageViewController: UIViewController {
         
     }
 }
+
+//MARK: - API 호출
 extension SingleArtistReservationManageViewController {
     func patchReservation(reservationId: Int) {
         ReservationManager.shared.patchReservation(
@@ -108,7 +112,7 @@ extension SingleArtistReservationManageViewController {
                 case .success(let response):
                     print("모델 정보 조회 성공: \(response)")
                     self.modelData = response.data
-                    self.uiSet()
+                    self.setUI()
                 case .failure(let error):
                     print("모델 정보 조회 실패: \(error.localizedDescription)")
                 }

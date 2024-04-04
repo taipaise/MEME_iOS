@@ -8,14 +8,14 @@
 import UIKit
 
 class ArtistReservationStatusTableViewCell: UITableViewCell {
-    @IBOutlet var reservationFrameView: UIView!
-    @IBOutlet var reservationDateLabel: UILabel!
-    @IBOutlet var makeUpNameLabel: UILabel!
-    @IBOutlet var modelNameLabel: UILabel!
-    @IBOutlet var reservationTimeLabel: UILabel!
-    @IBOutlet var reservationPlaceIconImage: UIImageView!
-    @IBOutlet var reservationPriceIconLabel: UILabel!
-    @IBOutlet var reservationManageBtn: UIButton!
+    @IBOutlet weak var reservationFrameView: UIView!
+    @IBOutlet weak var reservationDateLabel: UILabel!
+    @IBOutlet weak var makeUpNameLabel: UILabel!
+    @IBOutlet weak var modelNameLabel: UILabel!
+    @IBOutlet weak var reservationTimeLabel: UILabel!
+    @IBOutlet weak var reservationPlaceIconImage: UIImageView!
+    @IBOutlet weak var reservationPriceIconLabel: UILabel!
+    @IBOutlet weak var reservationManageBtn: UIButton!
     @IBOutlet weak var reservationPlaceLabel: UILabel!
     @IBOutlet weak var reservationPriceLabel: UILabel!
     
@@ -28,10 +28,10 @@ class ArtistReservationStatusTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
-        uiSet()
+        setUI()
     }
 
-    private func uiSet() {
+    private func setUI() {
         reservationFrameView.layer.cornerRadius = 10
         selectionStyle = .none
     }

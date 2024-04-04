@@ -8,19 +8,20 @@
 import UIKit
 
 class ArtistHomeViewController: UIViewController {
-    @IBOutlet private var artistHomeProfileStatusView: UIView!
-    @IBOutlet private var secondArtistHomeProfileStatusView: UIView!
-    @IBOutlet private var artistProfileImageView: UIImageView!
-    @IBOutlet private var artistHomeProfileLabel: UILabel!
-    @IBOutlet private var artistReservationStatusTableView: UITableView!
-    @IBOutlet weak var firstArtistResLabel: UILabel!
-    @IBOutlet weak var firstArtistResTimeLabel: UILabel!
-    @IBOutlet weak var firstArtistResBtnLabel: UILabel!
-    @IBOutlet weak var secondArtistResBtn: UIButton!
-    @IBOutlet weak var secondArtistResLabel: UILabel!
-    @IBOutlet weak var secondArtistResTimeLabel: UILabel!
+    //MARK: - UI Properties
+    @IBOutlet private weak var artistHomeProfileStatusView: UIView!
+    @IBOutlet private weak var secondArtistHomeProfileStatusView: UIView!
+    @IBOutlet private weak var artistProfileImageView: UIImageView!
+    @IBOutlet private weak var artistHomeProfileLabel: UILabel!
+    @IBOutlet private weak var artistReservationStatusTableView: UITableView!
+    @IBOutlet private weak var firstArtistResLabel: UILabel!
+    @IBOutlet private weak var firstArtistResTimeLabel: UILabel!
+    @IBOutlet private weak var firstArtistResBtnLabel: UILabel!
+    @IBOutlet private weak var secondArtistResBtn: UIButton!
+    @IBOutlet private weak var secondArtistResLabel: UILabel!
+    @IBOutlet private weak var secondArtistResTimeLabel: UILabel!
     
-    //Properties
+    //MARK: - Properties
     private var todayCount: Int = 0
     private var tomorrowCount: Int = 0
     private var fromTomorrowCount: Int = 0
@@ -33,12 +34,12 @@ class ArtistHomeViewController: UIViewController {
     
     
     //MARK: - viewDidLoad()
-    //메모리 로드
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewConfigure()
+        setUI()
     }
-    //pop하고 오면 다시 실행 됨
+    //MARK: - viewWillAppear()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.todayCount = 0
@@ -49,7 +50,9 @@ class ArtistHomeViewController: UIViewController {
         getArtistReservation(artistId: artistID)
 
     }
-    private func uiSet(){
+    
+    //MARK: - setUI()
+    private func setUI(){
         self.navigationController?.navigationBar.tintColor = .black
         self.navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.tabBarController?.tabBar.isHidden = false
@@ -79,12 +82,14 @@ class ArtistHomeViewController: UIViewController {
         
     }
     
+    //MARK: - tableViewConfigure()
     private func tableViewConfigure(){
         artistReservationStatusTableView.delegate = self
         artistReservationStatusTableView.dataSource = self
         artistReservationStatusTableView.register(ArtistReservationStatusTableViewCell.nib(), forCellReuseIdentifier: ArtistReservationStatusTableViewCell.identifier)
     }
-
+    
+    //MARK: - @IBAction
     @IBAction private func profileImageTapped(_ sender: UIButton) {
         let vc = ModelViewArtistProfileViewController()
         self.tabBarController?.tabBar.isHidden = true
@@ -182,7 +187,7 @@ class ArtistHomeViewController: UIViewController {
                 
             }
         }
-    //MARK: - formatDateString()
+    //MARK: - 날짜 형식 변환
     private func formatDateString(op: Int,_ dateString: String) -> String? {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // 입력된 날짜의 형식에 맞게 설정
@@ -205,6 +210,7 @@ class ArtistHomeViewController: UIViewController {
             return nil
         }
     }
+    //MARK: - 시간 형식 변환
     private func convertTimeString(_ input: String) -> String {
         // 문자열의 처음의 "_"를 ":"로 대체하여 반환
         var result = input
@@ -212,60 +218,6 @@ class ArtistHomeViewController: UIViewController {
             result.replaceSubrange(firstUnderscoreIndex...firstUnderscoreIndex, with: "")
         }
         return result.replacingOccurrences(of: "_", with: ":")
-    }
-
-    
-    func getArtistProfile(userId: Int){
-        MyPageManager.shared.getMyPageProfile(userId: userId) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let profile):
-                
-                print("Success: \(profile)")
-                print("message: "+profile.message)
-                self.artistProfileData? = profile.data!
-                
-                guard
-                    let data = profile.data,
-                    let nickName = data.nickname
-                else { return }
-                
-                if nickName.count > 6 {
-                    self.artistHomeProfileLabel.text = "안녕하세요,"+"\n"+"\(nickName)님!"+"\n"+"내일 예약 \(String(self.tomorrowCount))건이 있어요."
-                }else{
-                    print("nicknamecomplete")
-                    artistHomeProfileLabel.text = "안녕하세요, \(nickName)님!"+"\n"+"내일 예약 \(String(self.tomorrowCount))건이 있어요."
-                }
-                if let profileImg = artistProfileData?.profileImg {
-                    FirebaseStorageManager.downloadImage(urlString: profileImg) { [weak self] image in
-                        guard let image = image else { return } // 성공적으로 업로드 했으면 이미지가 nil 값이 아님
-                        //이미지를 가지고 할 작업 처리 ex) 이미지 뷰에 다운 받은 이미지를 넣음
-                        print("Imagecomplete")
-                        self?.artistProfileImageView.image = image
-                    }
-                }
-            case .failure(let error):
-                print("Failure: \(error)")
-            }
-        }
-    }
-    
-
-    
-    //MARK: - 아티스트 예약 조회 API
-    private func getArtistReservation(artistId: Int){
-        let getArtistReservation = ReservationManager.shared
-        getArtistReservation.getArtistReservation(artistId: artistId) { result in
-            switch result {
-            case .success(let response) :
-                self.reservationData = response.data
-                self.distinguishDate(reservationData: self.reservationData)
-                self.artistReservationStatusTableView.reloadData()
-                self.uiSet()
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
     }
     
 }
@@ -292,8 +244,7 @@ extension ArtistHomeViewController : UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        guard let dateCel =
-        // 날짜 셀 따로
+        // 셀 교체 필요
         guard let resCell = artistReservationStatusTableView.dequeueReusableCell(withIdentifier: ArtistReservationStatusTableViewCell.identifier, for: indexPath) as? ArtistReservationStatusTableViewCell else { return UITableViewCell() }
         resCell.makeUpNameLabel.text = reservationData[indexPath.row].makeupName
         resCell.modelNameLabel.text = reservationData[indexPath.row].modelNickName
@@ -315,6 +266,60 @@ extension ArtistHomeViewController : UITableViewDelegate {
             return CGFloat(192)
         }else {
             return CGFloat(0)
+        }
+    }
+}
+
+//MARK: - API 호출
+extension ArtistHomeViewController {
+    
+    func getArtistProfile(userId: Int){
+        MyPageManager.shared.getMyPageProfile(userId: userId) { [weak self] result in
+            guard let self = self else { return }
+            switch result {
+            case .success(let profile):
+                
+                print("Success: \(profile)")
+                print("message: "+profile.message)
+                self.artistProfileData? = profile.data!
+                
+                guard
+                    let data = profile.data,
+                    let nickName = data.nickname
+                else { return }
+                
+                if nickName.count > 6 {
+                    self.artistHomeProfileLabel.text = "안녕하세요,"+"\n"+"\(nickName)님!"+"\n"+"내일 예약 \(String(self.tomorrowCount))건이 있어요."
+                }else{
+                    print("nicknamecomplete")
+                    artistHomeProfileLabel.text = "안녕하세요, \(nickName)님!"+"\n"+"내일 예약 \(String(self.tomorrowCount))건이 있어요."
+                }
+                if let profileImg = data.profileImg {
+                    FirebaseStorageManager.downloadImage(urlString: profileImg) { [weak self] image in
+                        guard let image = image else { return } // 성공적으로 업로드 했으면 이미지가 nil 값이 아님
+                        //이미지를 가지고 할 작업 처리 ex) 이미지 뷰에 다운 받은 이미지를 넣음
+                        print("Imagecomplete")
+                        self?.artistProfileImageView.image = image
+                    }
+                }
+            case .failure(let error):
+                print("Failure: \(error)")
+            }
+        }
+    }
+    
+    private func getArtistReservation(artistId: Int){
+        let getArtistReservation = ReservationManager.shared
+        getArtistReservation.getArtistReservation(artistId: artistId) { result in
+            switch result {
+            case .success(let response) :
+                self.reservationData = response.data
+                self.distinguishDate(reservationData: self.reservationData)
+                self.artistReservationStatusTableView.reloadData()
+                self.setUI()
+            case .failure(let error):
+                print(error.localizedDescription)
+            }
         }
     }
 }

@@ -8,26 +8,25 @@
 import UIKit
 
 class ArtistPortfolioManageViewController: UIViewController {
-    
+    //MARK: - UI Properties
     @IBOutlet var portfolioCollectionView: UICollectionView!
     @IBOutlet var noPortfolioLabel: UIStackView!
     
+    //MARK: - Properties
     private var portfolioData : PortfolioAllDTO?
     
+    //MARK: - viewDidLoad()
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        collectionViewConfig()
+    }
+    //MARK: - viewWillAppear()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.tabBarController?.tabBar.isHidden = true
         getAllPortfolio()
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        collectionViewConfig()
-        uiSet()
-    }
-    
-    private func uiSet(){
-        self.navigationController?.isNavigationBarHidden = true
-    }
+    //MARK: - collectionViewConfig()
     private func collectionViewConfig(){
         portfolioCollectionView.delegate = self
         portfolioCollectionView.dataSource = self
@@ -35,6 +34,7 @@ class ArtistPortfolioManageViewController: UIViewController {
         portfolioCollectionView.register(UINib(nibName: ArtistPortfolioCollectionViewCell.className, bundle: nil), forCellWithReuseIdentifier: ArtistPortfolioCollectionViewCell.className)
 
     }
+    //MARK: - @IBAction
     @IBAction func backButtonDidTap(_ sender: UIButton) {
         self.tabBarController?.tabBar.isHidden = false
         navigationController?.popViewController(animated: true)
@@ -44,10 +44,21 @@ class ArtistPortfolioManageViewController: UIViewController {
         let vc = ArtistPortfolioEditingViewController(receivedData: portfolioIdx)
         navigationController?.pushViewController(vc, animated: true)
     }
-    
 }
 
-extension ArtistPortfolioManageViewController : UICollectionViewDelegate, UICollectionViewDataSource,UICollectionViewDelegateFlowLayout {
+//MARK: - UICollectionViewDelegate
+extension ArtistPortfolioManageViewController : UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        portfolioIdx = indexPath.row
+        let vc = ArtistPortfolioEditingViewController(
+            receivedData: Int((self.portfolioData?.content![portfolioIdx].portfolioId)!)
+        )
+        navigationController?.pushViewController(vc, animated: true)
+    }
+}
+
+//MARK: - UICollectionViewDataSource
+extension ArtistPortfolioManageViewController : UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int
     {
         guard let portfolioData = portfolioData else {
@@ -56,15 +67,6 @@ extension ArtistPortfolioManageViewController : UICollectionViewDelegate, UIColl
         }
         return portfolioData.content!.count
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 170, height: 250)
-    }
-
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 0
-    }
-
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArtistPortfolioCollectionViewCell.className, for: indexPath) as? ArtistPortfolioCollectionViewCell
             else { return UICollectionViewCell() }
@@ -90,16 +92,20 @@ extension ArtistPortfolioManageViewController : UICollectionViewDelegate, UIColl
             }
             return cell
         }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        portfolioIdx = indexPath.row
-        let vc = ArtistPortfolioEditingViewController(
-            receivedData: Int((self.portfolioData?.content![portfolioIdx].portfolioId)!)
-        )
-        navigationController?.pushViewController(vc, animated: true)
-    }
 }
 
+//MARK: - UICollectionViewDelegateFlowLayout
+extension ArtistPortfolioManageViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        return CGSize(width: 170, height: 250)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 0
+    }
+    
+}
+
+//MARK: - API 호출
 extension ArtistPortfolioManageViewController {
     private func getAllPortfolio() {
         let getAllPortfolio = PortfolioManager.shared
