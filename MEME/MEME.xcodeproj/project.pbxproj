@@ -190,6 +190,10 @@
 		31B65E4F2B6E229000628C68 /* ReservationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B65E4E2B6E229000628C68 /* ReservationManager.swift */; };
 		31C85EED2B526B780064A6E7 /* OnBoardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */; };
 		31C85EF62B526D200064A6E7 /* OnBoardingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */; };
+		31EA86F22BBFEC20003BCBF7 /* Moya+Wrapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F12BBFEC20003BCBF7 /* Moya+Wrapping.swift */; };
+		31EA86F42BBFEC39003BCBF7 /* MoyaAsyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F32BBFEC39003BCBF7 /* MoyaAsyncError.swift */; };
+		31EA86F62BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F52BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift */; };
+		31EA86F82BBFED30003BCBF7 /* MoyaProvider+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F72BBFED30003BCBF7 /* MoyaProvider+Async.swift */; };
 		31F6F8332B52AF8600EC621D /* OnboardingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */; };
 		31F6F8462B52C7A500EC621D /* NavigationBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F8452B52C7A500EC621D /* NavigationBarView.xib */; };
 		31F6F8482B52C7B800EC621D /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8472B52C7B800EC621D /* NavigationBarView.swift */; };
@@ -480,6 +484,10 @@
 		31BF22A02B52D7030019F476 /* RegistrationCompletionViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RegistrationCompletionViewController.xib; sourceTree = "<group>"; };
 		31C85EEC2B526B780064A6E7 /* OnBoardingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnBoardingViewController.swift; sourceTree = "<group>"; };
 		31C85EF52B526D200064A6E7 /* OnBoardingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OnBoardingViewController.xib; sourceTree = "<group>"; };
+		31EA86F12BBFEC20003BCBF7 /* Moya+Wrapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moya+Wrapping.swift"; sourceTree = "<group>"; };
+		31EA86F32BBFEC39003BCBF7 /* MoyaAsyncError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaAsyncError.swift; sourceTree = "<group>"; };
+		31EA86F52BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaAsyncRequest.swift; sourceTree = "<group>"; };
+		31EA86F72BBFED30003BCBF7 /* MoyaProvider+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+Async.swift"; sourceTree = "<group>"; };
 		31F6F8322B52AF8600EC621D /* OnboardingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingCollectionViewCell.swift; sourceTree = "<group>"; };
 		31F6F8342B52B13E00EC621D /* LoginViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		31F6F8372B52B2EE00EC621D /* TermsAgreementViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TermsAgreementViewController.xib; sourceTree = "<group>"; };
@@ -1151,6 +1159,7 @@
 		3156D1FD2B69438800559820 /* Network */ = {
 			isa = PBXGroup;
 			children = (
+				31EA86F02BBFE4F5003BCBF7 /* Moya */,
 				3156D20B2B6947F100559820 /* Response */,
 				3156D20A2B6947EB00559820 /* Manager */,
 				3156D2092B6947E600559820 /* API */,
@@ -1500,6 +1509,17 @@
 			path = RegistrationCompletion;
 			sourceTree = "<group>";
 		};
+		31EA86F02BBFE4F5003BCBF7 /* Moya */ = {
+			isa = PBXGroup;
+			children = (
+				31EA86F12BBFEC20003BCBF7 /* Moya+Wrapping.swift */,
+				31EA86F32BBFEC39003BCBF7 /* MoyaAsyncError.swift */,
+				31EA86F52BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift */,
+				31EA86F72BBFED30003BCBF7 /* MoyaProvider+Async.swift */,
+			);
+			path = Moya;
+			sourceTree = "<group>";
+		};
 		31F6F8312B52AF2800EC621D /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -1840,6 +1860,7 @@
 				316A926A2B66703800E4337D /* SetBusinessLocationViewController.swift in Sources */,
 				CC9C38552B7B5CDF0073A257 /* ModelProfileAPI.swift in Sources */,
 				3162DF382BB55B3D00EB283C /* LoginDTO.swift in Sources */,
+				31EA86F22BBFEC20003BCBF7 /* Moya+Wrapping.swift in Sources */,
 				2D6F59B32B5C397400CA883A /* SortOptionsViewController.swift in Sources */,
 				315FB8662B6DE8900068163C /* MemeAPIAuth.swift in Sources */,
 				2D6D2CE32BB35013007EF440 /* ModelCancelReservationViewController.swift in Sources */,
@@ -1890,6 +1911,7 @@
 				3162DF3A2BB562DB00EB283C /* RoleType.swift in Sources */,
 				091CCCD72B639E4800ADD21C /* ArtistData.swift in Sources */,
 				CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */,
+				31EA86F62BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift in Sources */,
 				CC8CA9FB2BB44E4F005F1E53 /* AvailableReviewAPI.swift in Sources */,
 				31B4137C2B6D295900535BB1 /* BusinessIDVerificationManager.swift in Sources */,
 				31B65E4D2B6E18BA00628C68 /* ReservationAPI.swift in Sources */,
@@ -1902,6 +1924,7 @@
 				2D3E0D152B640BCC00C49EF3 /* ModelViewArtistProfileViewController.swift in Sources */,
 				CC2F3AC02B514EE900508DA5 /* ModelHeaderView.swift in Sources */,
 				CC9C387F2B8085A60073A257 /* WrittenReviewManager.swift in Sources */,
+				31EA86F82BBFED30003BCBF7 /* MoyaProvider+Async.swift in Sources */,
 				CCAB5A472B6585F700067FA4 /* InterestMakeUpCollectionViewCell.swift in Sources */,
 				2D8C20C92B82D61000CD4A90 /* ProfileAPI.swift in Sources */,
 				3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */,
@@ -1991,6 +2014,7 @@
 				2D669BA52BAD9F37007E03A0 /* ReviewManager.swift in Sources */,
 				2DB303E82B8286EF00D9E394 /* (null) in Sources */,
 				CC9C38892B80F9AA0073A257 /* ModelProfileInfoAPI.swift in Sources */,
+				31EA86F42BBFEC39003BCBF7 /* MoyaAsyncError.swift in Sources */,
 				CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */,
 				2DA2080B2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift in Sources */,
 				316239672B80DE9B002D9E2F /* BasicResponseDTO.swift in Sources */,
