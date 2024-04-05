@@ -12,7 +12,7 @@ final class NetworkProvider<API: MemeAPI> {
     
     private let provider: MoyaProvider<API>
     
-    init(plugins: [PluginType] = []) {
+    init(plugins: [PluginType] = [NetworkLoggerPlugin()]) {
         self.provider = MoyaProvider(plugins: plugins)
     }
     
@@ -34,5 +34,16 @@ final class NetworkProvider<API: MemeAPI> {
                 completion(.failure(error))
             }
         }
+    }
+    
+    @discardableResult
+    func request(api: API, completion: @escaping Completion) -> Cancellable {
+        let cancellable = provider.request(api, completion: completion)
+        return cancellable
+    }
+    
+    func request(api: API) async -> Result<Response, MoyaError> {
+        let result = await provider.request(api)
+        return result
     }
 }
