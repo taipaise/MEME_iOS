@@ -12,7 +12,7 @@ final class AuthManager {
     typealias API = AuthAPI
     
     static let shared = AuthManager()
-    let provider = NetworkAuthProvider<API>(plugins: [NetworkLoggerPlugin()])
+    let provider = NetworkProvider<API>(plugins: [NetworkLoggerPlugin()])
     
     private init() {}
         
@@ -146,23 +146,24 @@ final class AuthManager {
         }
     }
     
-    func login(
-        idToken: String,
-        socialProvider: SocialProvider,
-        completion: @escaping (Result<LoginDTO, MoyaError>) -> Void
-    ) {
-        provider.request(api: .login(idToken: idToken, provider: socialProvider)) { result in
-            switch result {
-            case .success(let response):
-                do {
-                    let loginResult = try JSONDecoder().decode(LoginDTO.self, from: response.data)
-                    completion(.success(loginResult))
-                } catch let error {
-                    completion(.failure(MoyaError.jsonMapping(response)))
-                }
-            case .failure(let error):
-                completion(.failure(error))
+    func checkIsUser(idToken: String, socialProvider: SocialProvider) async -> Result<CheckUserDTO, Error> {
+        let result = await provider.request(
+            api: .checkIsUser(idToken: <#T##String#>, provider: <#T##SocialProvider#>)) { <#Result<Response, MoyaError>#> in
+                <#code#>
             }
-        }
+//
+//        provider.request(api: .login(idToken: idToken, provider: socialProvider)) { result in
+//            switch result {
+//            case .success(let response):
+//                do {
+//                    let loginResult = try JSONDecoder().decode(LoginDTO.self, from: response.data)
+//                    completion(.success(loginResult))
+//                } catch let error {
+//                    completion(.failure(MoyaError.jsonMapping(response)))
+//                }
+//            case .failure(let error):
+//                completion(.failure(error))
+//            }
+//        }
     }
 }

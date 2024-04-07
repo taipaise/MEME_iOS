@@ -47,9 +47,6 @@
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="kakaoLoginButton" title=""/>
-                    <connections>
-                        <action selector="kakaoLoginButtonTapped:" destination="-1" eventType="touchUpInside" id="zXw-4T-NGg"/>
-                    </connections>
                 </button>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5T-0a-Job">
                     <rect key="frame" x="24" y="634" width="345" height="45"/>
@@ -58,9 +55,6 @@
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="appleLoginButton" title=""/>
-                    <connections>
-                        <action selector="appleLoginButtonTapped:" destination="-1" eventType="touchUpInside" id="Jb3-yK-Nhy"/>
-                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="나만의 메이크업 메이트, 메메!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2w2-nz-b84">
                     <rect key="frame" x="80.333333333333329" y="341" width="232.66666666666669" height="24"/>
