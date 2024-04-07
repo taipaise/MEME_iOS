@@ -7,17 +7,18 @@
 
 import UIKit
 
-final class SetProfileDetailCoordinator: Coordinator {
+final class SetProfileDetailCoordinator {
+    private var navigationController: UINavigationController?
+    private var roleType: RoleType
     
-    var navigationController: UINavigationController?
-    
-    init(navigationController: UINavigationController?) {
+    init(navigationController: UINavigationController?, roleType: RoleType) {
         self.navigationController = navigationController
+        self.roleType = roleType
     }
     
     @MainActor func start() {
         let vc = SetProfileViewController(nibName: SetProfileViewController.className, bundle: nil)
-        
+        vc.configure(viewModel: SetProfileViewModel(roleType: roleType))
         navigationController?.pushViewController(vc, animated: true)
     }
 }

@@ -7,217 +7,130 @@
 
 import UIKit
 import PhotosUI
-import FirebaseStorage
-import Firebase
-import FirebaseAuth
+import RxSwift
+import RxCocoa
 
 final class SetProfileViewController: UIViewController {
-    
-    @IBOutlet private weak var navigationBar: NavigationBarView!
+
     @IBOutlet private weak var progressBar: RegisterProgressBar!
     @IBOutlet private weak var profileImageView: UIImageView!
-    @IBOutlet private weak var imageSelectButton: UIButton!
+    @IBOutlet private weak var imageSelectButton1: UIButton!
+    @IBOutlet private weak var imageSelectButton2: UIButton!
     @IBOutlet private weak var nameTextField: UITextField!
     @IBOutlet private weak var nickNameTextField: UITextField!
     @IBOutlet private weak var noticeLabel: UILabel!
     @IBOutlet private weak var nextButton: UIButton!
     @IBOutlet private weak var verificationButton: UIButton!
-    
-    private var phpPicker: PHPickerViewController?
-    private var imagePicker: UIImagePickerController?
-    private var profileImage = UIImage.profile
-    private var isArtist: Bool = true
-    private var isVerifiedNickName = false
-    private var builder = ProfileInfoBuilder()
+    private var viewModel: SetProfileViewModel?
+    private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        setUpPhpPicker()
-        setUpimagePicker()
         setupDismissKeyboardOnTapGesture()
+        bind()
     }
    
     private func setUI() {
-        navigationBar.delegate = self
-        navigationBar.configure(title: "회원가입")
         progressBar.configure(progress: 1)
         nextButton.layer.cornerRadius = 10
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
-        imageSelectButton.layer.cornerRadius = imageSelectButton.frame.height / 2
-        nameTextField.delegate = self
-        nickNameTextField.delegate = self
+        imageSelectButton2.layer.cornerRadius = imageSelectButton2.frame.height / 2
         verificationButton.layer.borderWidth = 1
         verificationButton.layer.borderColor = UIColor.mainBold.cgColor
         verificationButton.layer.cornerRadius = 10
-        setNextButton()
     }
     
-    func configure(isArtist: Bool) {
-        self.isArtist = isArtist
+    func configure(viewModel: SetProfileViewModel) {
+        self.viewModel = viewModel
     }
-    
-    @IBAction private func imageSelectButtonTapped(_ sender: Any) {
-        guard
-            let phpPicker = self.phpPicker,
-            let imagePicker = self.imagePicker
-        else { return }
+}
+
+// MARK: - Binding
+extension SetProfileViewController {
+    private func bind() {
+        guard let viewModel = viewModel else { return }
         
-        let alert = UIAlertController(title: "프로필 사진 설정", message: nil, preferredStyle: .actionSheet)
-        let albumAction = UIAlertAction(title: "앨범에서 사진 선택", style: .default) { _ in
-            self.present(phpPicker, animated: true)
-        }
-        let cameraAction = UIAlertAction(title: "사진 촬영", style: .default) { _ in
-            self.present(imagePicker, animated: true)
-        }
-        let cancelAction = UIAlertAction(title: "취소", style: .cancel)
-        alert.addAction(albumAction)
-        alert.addAction(cameraAction)
-        alert.addAction(cancelAction)
-        present(alert, animated: true)
-    }
-    
-    @IBAction func nextButtonTapped(_ sender: Any) {
-        FirebaseStorageManager.uploadImage(image: profileImage) { [weak self] url in
-            guard
-                let self = self,
-                let name = nameTextField.text,
-                let nickName = nickNameTextField.text
-            else { return }
-            if let url = url {
-                self.builder = self.builder.profileImg(url.absoluteString)
-                self.builder = self.builder.username(name)
-                self.builder = self.builder.nickname(nickName)
-                
-                if isArtist {
-                    builder = builder.provider(UserDefaultManager.shared.getProvider()!)
-                    builder = builder.idToken(UserDefaultManager.shared.getIdToken()!)
-                    AuthManager.shared.artistsignUp(profileInfo: builder.build()) { [weak self] result in
-                        switch result {
-                        case .success(let response):
-                            KeyChainManager.save(forKey: .role, value: "ARTIST")
-                            KeyChainManager.save(forKey: .nickName, value: nickName)
-                            let nextVC = BusinessRegistrationViewController()
-                            self?.navigationController?.pushViewController(nextVC, animated: true)
-                        case .failure(let error):
-                            print(error.response?.request?.httpBody)
-                            print(error.localizedDescription)
-                        }
-                    }
+        let input = SetProfileViewModel.Input(
+            name: nameTextField.rx.text.orEmpty.asObservable(),
+            nickname: nickNameTextField.rx.text.orEmpty.asObservable(),
+            verifyTap: verificationButton.rx.tap.asObservable()
+        )
+        
+        let output = viewModel.transform(input)
+        
+        output.profileImage
+            .observe(on: MainScheduler.instance)
+            .subscribe { [weak self] profileImage in
+                self?.profileImageView.image = profileImage
+            }
+            .disposed(by: disposeBag)
+        
+        output.nickNameStatus
+            .subscribe(onNext: { [weak self] nickNameStatus in
+                self?.setNoticeLabel(nickNameStatus)
+            })
+            .disposed(by: disposeBag)
+        
+        output.nextButtonState
+            .subscribe { [weak self] state in
+                self?.nextButton.isEnabled = state
+                if state {
+                    self?.nextButton.backgroundColor = .mainBold
                 } else {
-                    let nextVC = SetDetailInfoViewController()
-                    nextVC.configure(builder: builder)
-                    navigationController?.pushViewController(nextVC, animated: true)
+                    self?.nextButton.backgroundColor = .gray300
                 }
             }
+            .disposed(by: disposeBag)
+        
+        [imageSelectButton1, imageSelectButton2].forEach { imageSelectButton in
+            imageSelectButton.rx.tap
+                .subscribe { [weak self] _ in
+                    guard let self = self else { return }
+                    
+                    let alert = UIAlertController(title: "프로필 사진 설정", message: nil, preferredStyle: .actionSheet)
+                    let albumAction = UIAlertAction(title: "앨범에서 사진 선택", style: .default) { _ in
+                        viewModel.presentPHPicker(self)
+                    }
+                    let cameraAction = UIAlertAction(title: "사진 촬영", style: .default) { _ in
+                        viewModel.presentImagePicker(self)
+                    }
+                    let cancelAction = UIAlertAction(title: "취소", style: .cancel)
+                    alert.addAction(albumAction)
+                    alert.addAction(cameraAction)
+                    alert.addAction(cancelAction)
+                    present(alert, animated: true)
+                }
+                .disposed(by: disposeBag)
         }
+        
+        nextButton.rx.tap
+            .subscribe { [weak self] _ in
+                let role = viewModel.roleType
+                
+                switch role {
+                case .ARTIST:
+                    let coordinator = ArtistSignUpCoordinator(navigationController: self?.navigationController)
+                    coordinator.start()
+                case .MODEL:
+                    let coordinator = ModelSignUpCoordinator(navigationController: self?.navigationController)
+                    coordinator.start()
+                }
+            }
+            .disposed(by: disposeBag)
     }
-    
-    @IBAction private func verifyButtonTapped(_ sender: Any) {
-        isVerifiedNickName = true
-        noticeLabel.text = "사용 가능한 닉네임입니다."
-        noticeLabel.textColor = .blue
-        noticeLabel.isHidden = false
-        setNextButton()
-    }
-    
-    private func setNextButton() {
-        guard
-            nameTextField.text != nil,
-            nickNameTextField.text != nil,
-            isVerifiedNickName
-        else {
-            nextButton.backgroundColor = .gray300
-            nextButton.isEnabled = false
+}
+
+extension SetProfileViewController {
+    private func setNoticeLabel(_ status: NickNameStatus?) {
+        guard let status = status else {
+            noticeLabel.isHidden = true
             return
         }
-        nextButton.isEnabled = true
-        nextButton.backgroundColor = .mainBold
-    }
-}
-
-// MARK: - 사진 선택 설정
-extension SetProfileViewController: PHPickerViewControllerDelegate {
-    
-    func picker(
-        _ picker: PHPickerViewController,
-        didFinishPicking results: [PHPickerResult]
-    ) {
-        picker.dismiss(animated: true, completion: nil)
-        guard
-            let itemProvider = results.first?.itemProvider,
-            itemProvider.canLoadObject(ofClass: UIImage.self)
-        else {
-            print("sdaa")
-            return }
-        
-        itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
-            DispatchQueue.main.async {
-                guard let selectedImage = image as? UIImage else { return }
-                self?.profileImageView.image = selectedImage
-                self?.profileImage = selectedImage
-            }
-        }
-    }
-    
-    private func setUpPhpPicker() {
-        var configuration = PHPickerConfiguration()
-        configuration.filter = .images
-        phpPicker = PHPickerViewController(configuration: configuration)
-        phpPicker?.delegate = self
-    }
-}
-
-extension SetProfileViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    
-    func imagePickerController(
-        _ picker: UIImagePickerController,
-        didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]
-    ) {
-        if let image = info[.originalImage] as? UIImage {
-            profileImageView.image = image
-            profileImage = image
-        }
-        imagePicker?.dismiss(animated: true)
-    }
-    
-    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
-        imagePicker?.dismiss(animated: true)
-    }
-    
-    private func setUpimagePicker() {
-        imagePicker = UIImagePickerController()
-        imagePicker?.sourceType = .camera
-        imagePicker?.delegate = self
-    }
-}
-
-// MARK: - 뒤로가기 delegate
-extension SetProfileViewController: BackButtonTappedDelegate {
-    func backButtonTapped() {
-        navigationController?.popViewController(animated: true)
-    }
-}
-
-extension SetProfileViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        noticeLabel.isHidden = true
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if
-            textField == nickNameTextField,
-            let text = textField.text
-        {
-            if text.count > 15 {
-                noticeLabel.isHidden = false
-                noticeLabel.textColor = .red
-            } else {
-                noticeLabel.isHidden = true
-            }
-        }
-        
-        setNextButton()
+       
+        noticeLabel.isHidden = false
+        noticeLabel.text = status.message
+        noticeLabel.textColor = status.textColor
     }
 }
 
