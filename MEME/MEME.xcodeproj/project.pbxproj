@@ -156,6 +156,10 @@
 		317720E62BC27F1E00A1928A /* RxKakaoSDK in Frameworks */ = {isa = PBXBuildFile; productRef = 317720E52BC27F1E00A1928A /* RxKakaoSDK */; };
 		317720E82BC27F1F00A1928A /* RxKakaoSDKAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 317720E72BC27F1F00A1928A /* RxKakaoSDKAuth */; };
 		317720EA2BC27F1F00A1928A /* RxKakaoSDKCommon in Frameworks */ = {isa = PBXBuildFile; productRef = 317720E92BC27F1F00A1928A /* RxKakaoSDKCommon */; };
+		317720EE2BC28FED00A1928A /* CommonSignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317720ED2BC28FED00A1928A /* CommonSignUpCoordinator.swift */; };
+		317720F12BC2903400A1928A /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317720F02BC2903400A1928A /* Coordinator.swift */; };
+		317720F32BC2905100A1928A /* ModelMainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317720F22BC2905100A1928A /* ModelMainCoordinator.swift */; };
+		317720F52BC2905E00A1928A /* ArtistMainCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317720F42BC2905E00A1928A /* ArtistMainCoordinator.swift */; };
 		317D986A2B7DEDC5009BBB95 /* WorkExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D98692B7DEDC5009BBB95 /* WorkExperience.swift */; };
 		317D986C2B7DF59B009BBB95 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D986B2B7DF59B009BBB95 /* Region.swift */; };
 		317D986E2B7E0186009BBB95 /* SkinType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D986D2B7E0186009BBB95 /* SkinType.swift */; };
@@ -447,6 +451,10 @@
 		317720DD2BC26D7500A1928A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		317720E02BC2701000A1928A /* SocialProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProvider.swift; sourceTree = "<group>"; };
 		317720E22BC2734100A1928A /* MEMEError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEMEError.swift; sourceTree = "<group>"; };
+		317720ED2BC28FED00A1928A /* CommonSignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonSignUpCoordinator.swift; sourceTree = "<group>"; };
+		317720F02BC2903400A1928A /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		317720F22BC2905100A1928A /* ModelMainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMainCoordinator.swift; sourceTree = "<group>"; };
+		317720F42BC2905E00A1928A /* ArtistMainCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistMainCoordinator.swift; sourceTree = "<group>"; };
 		317D98692B7DEDC5009BBB95 /* WorkExperience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkExperience.swift; sourceTree = "<group>"; };
 		317D986B2B7DF59B009BBB95 /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		317D986D2B7E0186009BBB95 /* SkinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinType.swift; sourceTree = "<group>"; };
@@ -1063,9 +1071,9 @@
 		3142B9A02B4D036D0066CD5A /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				317720EF2BC2902000A1928A /* Coordinator */,
 				315AC1C62B70FE05003FD1A1 /* Model */,
 				3142B9A12B4D037C0066CD5A /* NavigationController.swift */,
-				3162DF392BB562DB00EB283C /* RoleType.swift */,
 				31F6F8452B52C7A500EC621D /* NavigationBarView.xib */,
 				31F6F8472B52C7B800EC621D /* NavigationBarView.swift */,
 				3142B9B22B4D086B0066CD5A /* TabBar */,
@@ -1080,6 +1088,7 @@
 		3142B9A52B4D04BD0066CD5A /* Login */ = {
 			isa = PBXGroup;
 			children = (
+				317720EB2BC28FD100A1928A /* Coordinator */,
 				315EE2C92B6656430042A082 /* Artist */,
 				31B263592B57EEBC00304FBE /* Common */,
 				31C85EF42B526C2E0064A6E7 /* RegistrationCompletion */,
@@ -1290,6 +1299,7 @@
 				317D98782B7E16B5009BBB95 /* MakeUpLocation.swift */,
 				317D987A2B7E1810009BBB95 /* MakeUpCategory.swift */,
 				317D98712B7E023E009BBB95 /* PersonalColor.swift */,
+				3162DF392BB562DB00EB283C /* RoleType.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -1404,6 +1414,24 @@
 				3142B9A62B4D04CA0066CD5A /* LoginViewController.swift */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		317720EB2BC28FD100A1928A /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				317720ED2BC28FED00A1928A /* CommonSignUpCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		317720EF2BC2902000A1928A /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				317720F02BC2903400A1928A /* Coordinator.swift */,
+				317720F22BC2905100A1928A /* ModelMainCoordinator.swift */,
+				317720F42BC2905E00A1928A /* ArtistMainCoordinator.swift */,
+			);
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		317D98732B7E0C31009BBB95 /* ArtistInfoBuilder */ = {
@@ -1954,6 +1982,7 @@
 				3145258C2B826AAE003D5CC7 /* ExtraProfileResponseDTO.swift in Sources */,
 				CC9C387D2B80859B0073A257 /* WrittenReviewAPI.swift in Sources */,
 				2DA208032B7AB577006EB9B9 /* SearchSort.swift in Sources */,
+				317720F52BC2905E00A1928A /* ArtistMainCoordinator.swift in Sources */,
 				315FB85E2B6DE57C0068163C /* KeyChainValue.swift in Sources */,
 				2D5C05A12B60269900EDC69F /* ShowReviewTableViewCell.swift in Sources */,
 				317D98752B7E0C68009BBB95 /* AtristProfileInfo.swift in Sources */,
@@ -1967,6 +1996,7 @@
 				2D6F59AB2B5BD07500CA883A /* ModelReservationChartTableViewCell.swift in Sources */,
 				CC9C385F2B7BDAF50073A257 /* InterestArtistDTO.swift in Sources */,
 				2D8C20C52B82D5E100CD4A90 /* ProfileDTO.swift in Sources */,
+				317720F12BC2903400A1928A /* Coordinator.swift in Sources */,
 				2DA208172B7CF87B006EB9B9 /* PortfolioManager.swift in Sources */,
 				315EE2CE2B66566A0042A082 /* RegisterProgressBar.swift in Sources */,
 				31B263432B57EDE300304FBE /* TermsAgreementViewController.swift in Sources */,
@@ -2042,6 +2072,7 @@
 				31B4137E2B6D29C500535BB1 /* BusinessIDVerificationAPI.swift in Sources */,
 				31F6F8482B52C7B800EC621D /* NavigationBarView.swift in Sources */,
 				CC8CAA0B2BB4FDD9005F1E53 /* PostReviewManager.swift in Sources */,
+				317720EE2BC28FED00A1928A /* CommonSignUpCoordinator.swift in Sources */,
 				2D8C20C72B82D5F500CD4A90 /* ProfileManager.swift in Sources */,
 				CC9C38812B8085B00073A257 /* WrittenReviewDTO.swift in Sources */,
 				CC9C387B2B7FEB1F0073A257 /* ReviewListDTO.swift in Sources */,
@@ -2068,6 +2099,7 @@
 				094884DB2B59915500C233E0 /* SingleArtistReservationManageViewController.swift in Sources */,
 				3156D1FF2B69440E00559820 /* MemeAPI.swift in Sources */,
 				09275E892B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift in Sources */,
+				317720F32BC2905100A1928A /* ModelMainCoordinator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -19,6 +19,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="LoginViewController" customModule="MEME" customModuleProvider="target">
             <connections>
+                <outlet property="appleLoginButton" destination="c5T-0a-Job" id="FcM-mL-aPP"/>
+                <outlet property="kakaoLoginButton" destination="Eyl-2K-fah" id="Rik-L0-qSe"/>
                 <outlet property="view" destination="iN0-l3-epB" id="esL-MW-ilC"/>
             </connections>
         </placeholder>

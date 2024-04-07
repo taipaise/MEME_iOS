@@ -22,11 +22,12 @@ final class LoginViewModel: NSObject, ViewModel {
         case signUp
         case modelHome
         case artistHome
+        case none
     }
     
     struct Input {
-        let kakaoLoginTap: PublishRelay<Void>
-        let appleLoginTap: PublishRelay<Void>
+        let kakaoLoginTap: Observable<Void>
+        let appleLoginTap: Observable<Void>
     }
     
     struct Output {
@@ -36,7 +37,7 @@ final class LoginViewModel: NSObject, ViewModel {
     private var userDTO: IsUserDTO?
     private var navigation = PublishSubject<NavigationType>()
     private var authManager = AuthManager.shared
-    var disposeBag = DisposeBag()
+    private var disposeBag = DisposeBag()
     
     func transform(_ input: Input) -> Output {
         input.appleLoginTap
@@ -66,25 +67,29 @@ extension LoginViewModel {
             return userDTO
         case .failure(let error):
             print(error.localizedDescription)
-            return nil
+            // TODO: - 서버 열릴 때까지 임시 조치
+            return IsUserDTO(userId: -1, role: "", accessToken: "", refreshToken: "", user: false)
+//            return nil
         }
     }
     
-    private func navigate(userInfo: IsUserDTO?) {
+    private func setNavigationType(userInfo: IsUserDTO?) {
         guard let userInfo = userInfo else {
-            navigateToSignUp()
+            navigation.onNext(.none)
             return
         }
         
-        navigateToHome()
-    }
-    
-    private func navigateToSignUp() {
-        
-    }
-    
-    private func navigateToHome() {
-        
+        guard userInfo.user == true else {
+            navigation.onNext(.signUp)
+            return
+        }
+       
+        let role = userInfo.role
+        if role == RoleType.ARTIST.rawValue {
+            navigation.onNext(.artistHome)
+        } else {
+            navigation.onNext(.modelHome)
+        }
     }
 }
 
@@ -102,10 +107,11 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
     }
     
     func authorizationController(controller: ASAuthorizationController, didCompleteWithError error: Error) {
+        setNavigationType(userInfo: nil)
         print("apple login failed")
     }
     
-    private func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) async {
+    func authorizationController(controller: ASAuthorizationController, didCompleteWithAuthorization authorization: ASAuthorization) {
         guard
             let credential = authorization.credential as? ASAuthorizationAppleIDCredential,
             let identityToken = credential.identityToken,
@@ -113,8 +119,10 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
         else { return }
         
         let checkDTO = CheckDTO(provider: .APPLE, idToken: idTokenString)
-        let userInfo = await checkIsUser(checkDTO: checkDTO)
-        navigate(userInfo: userInfo)
+        Task {
+            let userInfo = await checkIsUser(checkDTO: checkDTO)
+            setNavigationType(userInfo: userInfo)
+        }
     }
 }
 
@@ -146,10 +154,12 @@ extension LoginViewModel {
                 let checkDTO = checkDTO,
                 let userInfo = await checkIsUser(checkDTO: checkDTO)
             else {
-                navigate(userInfo: nil)
+                
+                setNavigationType(userInfo: nil)
                 return
             }
-            navigate(userInfo: userInfo)
+            
+            setNavigationType(userInfo: userInfo)
         }
     }
     
