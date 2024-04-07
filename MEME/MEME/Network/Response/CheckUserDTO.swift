@@ -17,6 +17,7 @@ struct CheckUserDTO: Codable {
 // MARK: - DataClass
 struct IsUserDTO: Codable {
     let userId: Int
+    let role: String
     let accessToken: String
     let refreshToken: String
     let user: Bool

@@ -155,6 +155,7 @@
 		316A927E2B66895D00E4337D /* TimeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A927D2B66895D00E4337D /* TimeSection.swift */; };
 		317720DE2BC26D7500A1928A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317720DD2BC26D7500A1928A /* LoginViewModel.swift */; };
 		317720E12BC2701000A1928A /* SocialProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317720E02BC2701000A1928A /* SocialProvider.swift */; };
+		317720E32BC2734100A1928A /* MEMEError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317720E22BC2734100A1928A /* MEMEError.swift */; };
 		317D986A2B7DEDC5009BBB95 /* WorkExperience.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D98692B7DEDC5009BBB95 /* WorkExperience.swift */; };
 		317D986C2B7DF59B009BBB95 /* Region.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D986B2B7DF59B009BBB95 /* Region.swift */; };
 		317D986E2B7E0186009BBB95 /* SkinType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D986D2B7E0186009BBB95 /* SkinType.swift */; };
@@ -445,6 +446,7 @@
 		316A927D2B66895D00E4337D /* TimeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSection.swift; sourceTree = "<group>"; };
 		317720DD2BC26D7500A1928A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		317720E02BC2701000A1928A /* SocialProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProvider.swift; sourceTree = "<group>"; };
+		317720E22BC2734100A1928A /* MEMEError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEMEError.swift; sourceTree = "<group>"; };
 		317D98692B7DEDC5009BBB95 /* WorkExperience.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkExperience.swift; sourceTree = "<group>"; };
 		317D986B2B7DF59B009BBB95 /* Region.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Region.swift; sourceTree = "<group>"; };
 		317D986D2B7E0186009BBB95 /* SkinType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SkinType.swift; sourceTree = "<group>"; };
@@ -1175,6 +1177,7 @@
 				3156D2002B69443000559820 /* HTTPHeaderFields.swift */,
 				3156D2022B69446E00559820 /* NetworkError.swift */,
 				31B413832B6D322500535BB1 /* NetworkProvider.swift */,
+				317720E22BC2734100A1928A /* MEMEError.swift */,
 			);
 			path = Foundation;
 			sourceTree = "<group>";
@@ -1967,6 +1970,7 @@
 				315EE2CE2B66566A0042A082 /* RegisterProgressBar.swift in Sources */,
 				31B263432B57EDE300304FBE /* TermsAgreementViewController.swift in Sources */,
 				CCAB5A672B6D608700067FA4 /* ArtistMyPageViewController.swift in Sources */,
+				317720E32BC2734100A1928A /* MEMEError.swift in Sources */,
 				091CCCDA2B64158B00ADD21C /* ArtistPortfolioManageViewController.swift in Sources */,
 				3142B95B2B4CFFED0066CD5A /* SceneDelegate.swift in Sources */,
 				CC8CAA0F2BB50AF1005F1E53 /* DeleteReviewAPI.swift in Sources */,
