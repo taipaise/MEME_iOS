@@ -6,7 +6,7 @@
 //
 
 import UIKit
-import KakaoSDKCommon
+import RxKakaoSDKCommon
 import FirebaseCore
 
 @main
@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Override point for customization after application launch.
         FirebaseApp.configure()
         let kakaoAppKey = SecretInfoManager.kakaoKey
-        KakaoSDK.initSDK(appKey: kakaoAppKey)
+        RxKakaoSDK.initSDK(appKey: kakaoAppKey)
         return true
     }
 

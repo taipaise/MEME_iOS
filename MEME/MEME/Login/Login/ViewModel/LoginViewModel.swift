@@ -8,10 +8,15 @@
 import Foundation
 import RxSwift
 import RxCocoa
+import RxKakaoSDKUser
 import KakaoSDKUser
 import AuthenticationServices
 
 final class LoginViewModel: NSObject, ViewModel {
+    struct CheckDTO {
+        let provider: SocialProvider
+        let idToken: String
+    }
     
     enum NavigationType {
         case signUp
@@ -28,6 +33,7 @@ final class LoginViewModel: NSObject, ViewModel {
         var navigation: Observable<NavigationType>
     }
     
+    private var userDTO: IsUserDTO?
     private var navigation = PublishSubject<NavigationType>()
     private var authManager = AuthManager.shared
     var disposeBag = DisposeBag()
@@ -49,30 +55,36 @@ final class LoginViewModel: NSObject, ViewModel {
     }
 }
 
-// MARK: - check is user
+// MARK: - 유저 체크, 화면 이동
 extension LoginViewModel {
-    private func checkIsUser(socialProvider: SocialProvider, idToken: String) async {
-        let isUser = await authManager.checkIsUser(idToken: idToken, socialProvider: socialProvider)
+    private func checkIsUser(checkDTO: CheckDTO) async -> IsUserDTO? {
+        let isUser = await authManager.checkIsUser(idToken: checkDTO.idToken, socialProvider: checkDTO.provider)
+        
         switch isUser {
         case .success(let result):
-            if result.message == "사용자 정보가 확인되었습니다." {
-                switch socialProvider {
-                case .APPLE:
-                    // TODO: - coordinator를 이용한 화면 전환 로직 추가
-                    break
-                case .KAKAO:
-                    // TODO: - coordinator를 이용한 화면 전환 로직 추가
-                    break
-                }
-            } else {
-                let userDTO = result.data
-                KeyChainManager.save(forKey: .memberId, value: "\(userDTO.userId)")
-                KeyChainManager.save(forKey: .role, value: "\(userDTO.role)")
-                // TODO: - coordinator를 이용한 화면 전환 로직 추가
-            }
+            let userDTO = result.data
+            return userDTO
         case .failure(let error):
             print(error.localizedDescription)
+            return nil
         }
+    }
+    
+    private func navigate(userInfo: IsUserDTO?) {
+        guard let userInfo = userInfo else {
+            navigateToSignUp()
+            return
+        }
+        
+        navigateToHome()
+    }
+    
+    private func navigateToSignUp() {
+        
+    }
+    
+    private func navigateToHome() {
+        
     }
 }
 
@@ -100,7 +112,9 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
             let idTokenString = String(data: identityToken, encoding: .utf8)
         else { return }
         
-        await checkIsUser(socialProvider: .APPLE, idToken: idTokenString)
+        let checkDTO = CheckDTO(provider: .APPLE, idToken: idTokenString)
+        let userInfo = await checkIsUser(checkDTO: checkDTO)
+        navigate(userInfo: userInfo)
     }
 }
 
@@ -120,38 +134,54 @@ extension LoginViewModel: ASAuthorizationControllerPresentationContextProviding 
 // MARK: - Kakao Login
 extension LoginViewModel {
     private func performKakaoLogin() {
-        if UserApi.isKakaoTalkLoginAvailable() {
-            loginWithKakaoApp()
-        } else {
-            loginWithKakaoAccount()
+        Task {
+            var checkDTO: CheckDTO?
+            if UserApi.isKakaoTalkLoginAvailable() {
+                await checkDTO = loginWithKakaoApp()
+            } else {
+                await checkDTO = loginWithKakaoAccount()
+            }
+            
+            guard
+                let checkDTO = checkDTO,
+                let userInfo = await checkIsUser(checkDTO: checkDTO)
+            else {
+                navigate(userInfo: nil)
+                return
+            }
+            navigate(userInfo: userInfo)
         }
     }
     
-    private func loginWithKakaoApp() {
-        UserApi.shared.loginWithKakaoTalk { [weak self] oauthToken, error in
-            guard
-                error == nil,
-                let idToken = oauthToken?.idToken
-            else {
-                print("kakao login error")
-                return
-            }
-            
-            self?.checkIsUser(socialProvider: .KAKAO, idToken: idToken)
+    private func loginWithKakaoApp() async -> CheckDTO? {
+        await withCheckedContinuation { continuationn in
+            UserApi.shared.rx.loginWithKakaoTalk()
+                .subscribe { oAuthToken in
+                    if let idToken = oAuthToken.idToken {
+                        continuationn.resume(returning: CheckDTO(provider: .KAKAO, idToken: idToken))
+                    } else {
+                        continuationn.resume(returning: nil)
+                    }
+                } onError: { error in
+                    continuationn.resume(returning: nil)
+                }
+                .disposed(by: disposeBag)
         }
     }
     
-    private func loginWithKakaoAccount() {
-        UserApi.shared.loginWithKakaoAccount { [weak self] oauthToken, error  in
-            guard
-                error == nil,
-                let idToken = oauthToken?.idToken
-            else {
-                print("kakao login error")
-                return
-            }
-            
-            self?.checkIsUser(socialProvider: .KAKAO, idToken: idToken)
+    private func loginWithKakaoAccount() async -> CheckDTO?  {
+        await withCheckedContinuation { continuationn in
+            UserApi.shared.rx.loginWithKakaoAccount()
+                .subscribe { oAuthToken in
+                    if let idToken = oAuthToken.idToken {
+                        continuationn.resume(returning: CheckDTO(provider: .KAKAO, idToken: idToken))
+                    } else {
+                        continuationn.resume(returning: nil)
+                    }
+                } onError: { error in
+                    continuationn.resume(returning: nil)
+                }
+                .disposed(by: disposeBag)
         }
     }
 }

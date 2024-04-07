@@ -6,12 +6,13 @@
 //
 
 import UIKit
-import KakaoSDKUser
-import AuthenticationServices
+import RxSwift
+import RxCocoa
 
 final class LoginViewController: UIViewController {
     private let userDefaultManager = UserDefaultManager.shared
     private let authManager = AuthManager.shared
+    private var viewModel = LoginViewModel()
     
     override func viewDidLoad() {
         super.viewDidLoad()
