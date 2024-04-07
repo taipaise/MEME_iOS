@@ -6,34 +6,48 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class TermDetailViewController: UIViewController {
 
     @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var contentLabel: UITextView!
-    private var state: TermsData?
+    @IBOutlet private weak var dismissButton: UIButton!
+    private var viewMoldel: TermDetailViewModel?
+    private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        bind()
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        if let state = state {
-            configureTerm(title: state.title, content: state.data)
+    func configure(termType: TermsData) {
+        viewMoldel = TermDetailViewModel(termType: termType)
+    }
+}
+
+// MARK: - Binding
+extension TermDetailViewController {
+    private func bind() {
+        guard let viewMoldel = viewMoldel else { return }
+        let output = viewMoldel.transform(TermDetailViewModel.Input())
+        
+        output.title.subscribe { [weak self] title in
+            self?.titleLabel.text = title
         }
-    }
-    
-    
-    func configure(state: TermsData) {
-        self.state = state
-    }
-    
-    private func configureTerm(title: String, content: String) {
-        titleLabel.text = title
-        contentLabel.text = content
-    }
-    @IBAction func cancelButtonTapped(_ sender: Any) {
-        navigationController?.popViewController(animated: true)
+        .disposed(by: disposeBag)
+        
+        output.content.subscribe { [weak self] content in
+            self?.contentLabel.text = content
+        }
+        .disposed(by: disposeBag)
+        
+        dismissButton.rx.tap
+            .subscribe { [weak self] _ in
+                guard let self = self else { return }
+                self.dismiss(animated: true)
+            }
+            .disposed(by: disposeBag)
     }
 }

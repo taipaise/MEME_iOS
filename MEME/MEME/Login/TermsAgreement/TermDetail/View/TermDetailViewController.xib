@@ -12,6 +12,7 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermDetailViewController" customModule="MEME" customModuleProvider="target">
             <connections>
                 <outlet property="contentLabel" destination="4jr-ya-RoE" id="OVo-h0-569"/>
+                <outlet property="dismissButton" destination="5Bn-wt-9V7" id="SVY-IP-Lhp"/>
                 <outlet property="titleLabel" destination="C2Y-at-OqA" id="IG0-FF-BBN"/>
                 <outlet property="view" destination="iN0-l3-epB" id="u2w-at-rMU"/>
             </connections>
@@ -35,9 +36,6 @@
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="ic_x" title=""/>
-                    <connections>
-                        <action selector="cancelButtonTapped:" destination="-1" eventType="touchUpInside" id="F09-4i-MnF"/>
-                    </connections>
                 </button>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="34e-43-Z82">
                     <rect key="frame" x="24" y="124" width="345" height="694"/>
