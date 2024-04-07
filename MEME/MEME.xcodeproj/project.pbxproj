@@ -144,6 +144,8 @@
 		3162DF382BB55B3D00EB283C /* CheckUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3162DF372BB55B3D00EB283C /* CheckUserDTO.swift */; };
 		3162DF3A2BB562DB00EB283C /* RoleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3162DF392BB562DB00EB283C /* RoleType.swift */; };
 		3169E3E52BC2B62100550F2E /* RoleSelectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3E42BC2B62100550F2E /* RoleSelectionCoordinator.swift */; };
+		3169E3E92BC2B8E400550F2E /* SetProfileDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3E82BC2B8E400550F2E /* SetProfileDetailCoordinator.swift */; };
+		3169E3EC2BC2B91E00550F2E /* RoleSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3EB2BC2B91E00550F2E /* RoleSelectionViewModel.swift */; };
 		316A926A2B66703800E4337D /* SetBusinessLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A92682B66703800E4337D /* SetBusinessLocationViewController.swift */; };
 		316A926B2B66703800E4337D /* SetBusinessLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316A92692B66703800E4337D /* SetBusinessLocationViewController.xib */; };
 		316A926D2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A926C2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift */; };
@@ -443,6 +445,8 @@
 		3162DF372BB55B3D00EB283C /* CheckUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckUserDTO.swift; sourceTree = "<group>"; };
 		3162DF392BB562DB00EB283C /* RoleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleType.swift; sourceTree = "<group>"; };
 		3169E3E42BC2B62100550F2E /* RoleSelectionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectionCoordinator.swift; sourceTree = "<group>"; };
+		3169E3E82BC2B8E400550F2E /* SetProfileDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileDetailCoordinator.swift; sourceTree = "<group>"; };
+		3169E3EB2BC2B91E00550F2E /* RoleSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectionViewModel.swift; sourceTree = "<group>"; };
 		316A92682B66703800E4337D /* SetBusinessLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBusinessLocationViewController.swift; sourceTree = "<group>"; };
 		316A92692B66703800E4337D /* SetBusinessLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetBusinessLocationViewController.xib; sourceTree = "<group>"; };
 		316A926C2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLocationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1366,6 +1370,23 @@
 			path = Model;
 			sourceTree = "<group>";
 		};
+		3169E3EA2BC2B90F00550F2E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				3169E3EB2BC2B91E00550F2E /* RoleSelectionViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		3169E3ED2BC2BB3200550F2E /* View */ = {
+			isa = PBXGroup;
+			children = (
+				31B2634A2B57EE7100304FBE /* RoleSelectionViewController.swift */,
+				31B263492B57EE7100304FBE /* RoleSelectionViewController.xib */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		316A92672B66701900E4337D /* SetBusinessLocation */ = {
 			isa = PBXGroup;
 			children = (
@@ -1437,6 +1458,7 @@
 				317720ED2BC28FED00A1928A /* CommonSignUpCoordinator.swift */,
 				317720FA2BC2A57D00A1928A /* TermDetailCoordinator.swift */,
 				3169E3E42BC2B62100550F2E /* RoleSelectionCoordinator.swift */,
+				3169E3E82BC2B8E400550F2E /* SetProfileDetailCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1592,8 +1614,8 @@
 		31C85EF12B526BDB0064A6E7 /* RoleSelection */ = {
 			isa = PBXGroup;
 			children = (
-				31B2634A2B57EE7100304FBE /* RoleSelectionViewController.swift */,
-				31B263492B57EE7100304FBE /* RoleSelectionViewController.xib */,
+				3169E3ED2BC2BB3200550F2E /* View */,
+				3169E3EA2BC2B90F00550F2E /* ViewModel */,
 			);
 			path = RoleSelection;
 			sourceTree = "<group>";
@@ -1948,6 +1970,7 @@
 				CCCE56372B81D9FB007555A2 /* ArtistTimeCollectionViewCell.swift in Sources */,
 				3142B9A92B4D06310066CD5A /* ArtistTabBarController.swift in Sources */,
 				2D4B7C222B5F0B44001E1B09 /* ShowInformationView.swift in Sources */,
+				3169E3EC2BC2B91E00550F2E /* RoleSelectionViewModel.swift in Sources */,
 				317D986E2B7E0186009BBB95 /* SkinType.swift in Sources */,
 				2D6F59B52B5C475800CA883A /* ModalPresentationController.swift in Sources */,
 				CC9C384E2B754C240073A257 /* MyPageDTO.swift in Sources */,
@@ -2049,6 +2072,7 @@
 				315AC1C32B70CDE9003FD1A1 /* ModelReservationViewController.swift in Sources */,
 				2D62E25B2B54A658004E8299 /* RecentSearchViewCell.swift in Sources */,
 				CC8CAA0D2BB4FDE4005F1E53 /* PostReviewDTO.swift in Sources */,
+				3169E3E92BC2B8E400550F2E /* SetProfileDetailCoordinator.swift in Sources */,
 				2D0A190E2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift in Sources */,
 				2D669BA32BAD9EBF007E03A0 /* ReviewAPI.swift in Sources */,
 				CC9C38772B7FEAF40073A257 /* ReviewListAPI.swift in Sources */,
