@@ -14,7 +14,8 @@ final class TermsAgreementViewController: UIViewController {
     @IBOutlet private weak var entireSelectButton: UIButton!
     @IBOutlet private weak var fitstAgreeButton: UIButton!
     @IBOutlet private weak var secondAgreeButton: UIButton!
-    @IBOutlet weak var nextButton: UIButton!
+    @IBOutlet private var termDetailButtons: [UIButton]!
+    @IBOutlet private weak var nextButton: UIButton!
     private lazy var requiredButtons = [fitstAgreeButton, secondAgreeButton]
     private var viewModel = TermsAgreementViewModel()
     private var disposeBag = DisposeBag()
@@ -86,5 +87,22 @@ extension TermsAgreementViewController {
                 }
             }
             .disposed(by: disposeBag)
+        
+        nextButton.rx.tap
+            .subscribe(onNext: { [weak self] _ in
+                let coordinator = RoleSelectionCoordinator(navigationController: self?.navigationController)
+                coordinator.start()
+            })
+            .disposed(by: disposeBag)
+        
+        termDetailButtons.forEach { detailButton in
+            detailButton.rx.tap
+                .subscribe { [weak self] _ in
+                    let coordinator = TermDetailCoordinator(presentingVC: self)
+                    guard let termType = TermsData(rawValue: detailButton.tag) else { return }
+                    coordinator.start(termType: termType)
+                }
+                .disposed(by: disposeBag)
+        }
     }
 }

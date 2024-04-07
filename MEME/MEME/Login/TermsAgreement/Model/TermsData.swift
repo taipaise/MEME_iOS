@@ -6,13 +6,13 @@
 //
 import Foundation
 
-enum TermsData {
-    case persnalData
+enum TermsData: Int {
+    case personalData
     case service
     
     var title: String {
         switch self {
-        case .persnalData:
+        case .personalData:
             return "개인 정보 처리 방침"
         case .service:
             return "서비스 이용 약관"
@@ -21,7 +21,7 @@ enum TermsData {
     
     var data: String {
         switch self {
-        case .persnalData:
+        case .personalData:
             return """
             개인정보처리방침
 

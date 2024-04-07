@@ -51,7 +51,7 @@ class ProvisionViewController: UIViewController {
             label.trailingAnchor.constraint(equalTo: scrollView.trailingAnchor),
             label.widthAnchor.constraint(equalTo: scrollView.widthAnchor),
         ])
-        label.text = TermsData.persnalData.data
+        label.text = TermsData.personalData.data
 //
 //        label.text = String(repeating: """서비스 이용약관 (상품, 서비스 등 이용 일반 회원용)
 //                             

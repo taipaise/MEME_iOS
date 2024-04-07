@@ -25,6 +25,8 @@
                 <outlet property="nextButton" destination="Y5O-I9-WVf" id="H67-D3-A4X"/>
                 <outlet property="secondAgreeButton" destination="7nu-yz-BOb" id="RbW-H7-1J5"/>
                 <outlet property="view" destination="iN0-l3-epB" id="6XZ-dg-VZt"/>
+                <outletCollection property="termDetailButtons" destination="8db-mj-OaG" collectionClass="NSMutableArray" id="OvT-OQ-hde"/>
+                <outletCollection property="termDetailButtons" destination="dhu-zR-iCa" collectionClass="NSMutableArray" id="G87-ct-AWG"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
