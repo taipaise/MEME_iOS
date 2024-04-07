@@ -21,10 +21,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermsAgreementViewController" customModule="MEME" customModuleProvider="target">
             <connections>
                 <outlet property="entireSelectButton" destination="aVe-el-xgE" id="eex-eX-VMK"/>
-                <outlet property="navigationBar" destination="90I-D1-vxP" id="nLC-op-hz4"/>
+                <outlet property="fitstAgreeButton" destination="rec-nu-gvq" id="czR-1x-Zeb"/>
                 <outlet property="nextButton" destination="Y5O-I9-WVf" id="H67-D3-A4X"/>
-                <outlet property="requiredButton1" destination="rec-nu-gvq" id="czR-1x-Zeb"/>
-                <outlet property="requiredButton2" destination="7nu-yz-BOb" id="RbW-H7-1J5"/>
+                <outlet property="secondAgreeButton" destination="7nu-yz-BOb" id="RbW-H7-1J5"/>
                 <outlet property="view" destination="iN0-l3-epB" id="6XZ-dg-VZt"/>
             </connections>
         </placeholder>
@@ -34,25 +33,22 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="메메를 사용하기 위해 이용 약관에 동의해주세요." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Itz-XB-i5r">
-                    <rect key="frame" x="24" y="161" width="185" height="43"/>
+                    <rect key="frame" x="24" y="113" width="185" height="43"/>
                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="18"/>
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aVe-el-xgE">
-                    <rect key="frame" x="24" y="239.66666666666666" width="16" height="16"/>
+                    <rect key="frame" x="24" y="191.66666666666666" width="16" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="16" id="QCb-en-fjh"/>
                         <constraint firstAttribute="height" constant="16" id="pzh-NG-OLp"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="ic_check_empty" title=""/>
-                    <connections>
-                        <action selector="entireSelectButtonTapped:" destination="-1" eventType="touchUpInside" id="bYL-Ya-CTO"/>
-                    </connections>
                 </button>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="전체 동의" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nZA-EA-0Yy">
-                    <rect key="frame" x="49" y="238" width="60" height="19"/>
+                    <rect key="frame" x="49" y="190" width="60" height="19"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="19" id="U19-rQ-7QI"/>
                         <constraint firstAttribute="width" constant="60" id="mAc-Wz-vmK"/>
@@ -62,26 +58,23 @@
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Rhy-Tk-sat">
-                    <rect key="frame" x="24" y="277" width="345" height="1"/>
+                    <rect key="frame" x="24" y="229" width="345" height="1"/>
                     <color key="backgroundColor" name="Gray300"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="1" id="dYj-nY-lSj"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rec-nu-gvq">
-                    <rect key="frame" x="24" y="301.66666666666669" width="16" height="16"/>
+                <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rec-nu-gvq">
+                    <rect key="frame" x="24" y="253.66666666666663" width="16" height="16"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="16" id="t8B-MQ-yfj"/>
                         <constraint firstAttribute="height" constant="16" id="tda-mW-oFn"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="ic_check_empty" title=""/>
-                    <connections>
-                        <action selector="termButtonTapped:" destination="-1" eventType="touchUpInside" id="YYY-W2-YWl"/>
-                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="GVB-9b-87v">
-                    <rect key="frame" x="49" y="300" width="320" height="19"/>
+                    <rect key="frame" x="49" y="252" width="320" height="19"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="개인정보 처리방침 (필수)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9w2-M6-u6c">
                             <rect key="frame" x="0.0" y="0.0" width="157.33333333333334" height="19"/>
@@ -100,9 +93,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="19"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain"/>
-                            <connections>
-                                <action selector="termDetailButtonTapped:" destination="-1" eventType="touchUpInside" id="pc7-7e-WA2"/>
-                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -120,20 +110,17 @@
                         <constraint firstAttribute="bottom" secondItem="7P3-aF-M51" secondAttribute="bottom" id="wTj-Z4-gfB"/>
                     </constraints>
                 </view>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nu-yz-BOb">
-                    <rect key="frame" x="24" y="340.66666666666669" width="16" height="16"/>
+                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7nu-yz-BOb">
+                    <rect key="frame" x="24" y="292.66666666666669" width="16" height="16"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="16" id="JAB-w9-dRa"/>
                         <constraint firstAttribute="width" constant="16" id="N3e-ue-Uea"/>
                     </constraints>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="ic_check_empty" title=""/>
-                    <connections>
-                        <action selector="termButtonTapped:" destination="-1" eventType="touchUpInside" id="IcU-xN-7DK"/>
-                    </connections>
                 </button>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vx7-8w-gxw">
-                    <rect key="frame" x="49" y="339" width="320" height="19"/>
+                    <rect key="frame" x="49" y="291" width="320" height="19"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="서비스 이용약관 (필수)" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tHM-1t-pCH">
                             <rect key="frame" x="0.0" y="0.0" width="143.66666666666666" height="19"/>
@@ -152,9 +139,6 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="19"/>
                             <state key="normal" title="Button"/>
                             <buttonConfiguration key="configuration" style="plain" title=""/>
-                            <connections>
-                                <action selector="termDetailButtonTapped:" destination="-1" eventType="touchUpInside" id="5f6-PB-4aj"/>
-                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -182,17 +166,7 @@
                     <buttonConfiguration key="configuration" style="plain" title="다음">
                         <fontDescription key="titleFontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
                     </buttonConfiguration>
-                    <connections>
-                        <action selector="nextButtonTapped:" destination="-1" eventType="touchUpInside" id="3Ti-Sq-Apf"/>
-                    </connections>
                 </button>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="90I-D1-vxP" customClass="NavigationBarView" customModule="MEME" customModuleProvider="target">
-                    <rect key="frame" x="0.0" y="59" width="393" height="48"/>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="48" id="aJN-5T-rSE"/>
-                    </constraints>
-                </view>
             </subviews>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -205,8 +179,6 @@
                 <constraint firstItem="Rhy-Tk-sat" firstAttribute="top" secondItem="nZA-EA-0Yy" secondAttribute="bottom" constant="20" id="Jpd-Ko-Mfa"/>
                 <constraint firstItem="vx7-8w-gxw" firstAttribute="leading" secondItem="7nu-yz-BOb" secondAttribute="trailing" constant="9" id="OYm-KK-36I"/>
                 <constraint firstItem="nZA-EA-0Yy" firstAttribute="top" secondItem="Itz-XB-i5r" secondAttribute="bottom" constant="34" id="PFd-b8-gqQ"/>
-                <constraint firstItem="90I-D1-vxP" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="T5A-Bs-mdl"/>
-                <constraint firstItem="90I-D1-vxP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Vfn-n8-JIQ"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="GVB-9b-87v" secondAttribute="trailing" constant="24" id="XHk-cF-mwG"/>
                 <constraint firstItem="Y5O-I9-WVf" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="YDx-wk-aNO"/>
                 <constraint firstItem="7nu-yz-BOb" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="cNI-bk-4Zx"/>
@@ -215,11 +187,10 @@
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Y5O-I9-WVf" secondAttribute="trailing" constant="24" id="lbd-Le-ULi"/>
                 <constraint firstItem="aVe-el-xgE" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="n4J-Cb-QDB"/>
                 <constraint firstItem="rec-nu-gvq" firstAttribute="centerY" secondItem="GVB-9b-87v" secondAttribute="centerY" id="p4M-d5-1Fq"/>
+                <constraint firstItem="Itz-XB-i5r" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="54" id="rCJ-ef-zmk"/>
                 <constraint firstItem="GVB-9b-87v" firstAttribute="top" secondItem="Rhy-Tk-sat" secondAttribute="bottom" constant="22" id="rP3-r9-pu2"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Y5O-I9-WVf" secondAttribute="bottom" constant="9" id="rh7-zs-alq"/>
-                <constraint firstItem="Itz-XB-i5r" firstAttribute="top" secondItem="90I-D1-vxP" secondAttribute="bottom" constant="54" id="s8M-pa-bJY"/>
                 <constraint firstItem="nZA-EA-0Yy" firstAttribute="leading" secondItem="aVe-el-xgE" secondAttribute="trailing" constant="9" id="wXj-YN-Sc7"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="90I-D1-vxP" secondAttribute="trailing" id="yjP-Sd-Ehd"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="vx7-8w-gxw" secondAttribute="trailing" constant="24" id="z2r-ix-yLl"/>
                 <constraint firstItem="GVB-9b-87v" firstAttribute="leading" secondItem="rec-nu-gvq" secondAttribute="trailing" constant="9" id="z3D-oh-o7B"/>
             </constraints>
