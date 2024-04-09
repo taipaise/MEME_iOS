@@ -7,19 +7,15 @@
 
 import UIKit
 import SnapKit
-import Moya
 import RxSwift
 
 final class ModelHomeViewController: UIViewController {
-    // MARK: - Properties
-    private let disposeBag = DisposeBag()
-    private var viewModel = ModelHomeViewModel()
-    
+    // MARK: - UIProperty
     private let scrollView: UIScrollView = {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
-        
+    
         return scrollView
     }()
     private let contentsView = UIView()
@@ -39,7 +35,6 @@ final class ModelHomeViewController: UIViewController {
     }()
     private let searchMakeup: UISearchBar = {
         let searchBar = UISearchBar()
-        searchBar.placeholder = "원하는 메이크업을 검색해보세요."
         searchBar.backgroundColor = .white
         searchBar.layer.cornerRadius = 20
         searchBar.layer.borderWidth = 1
@@ -91,8 +86,11 @@ final class ModelHomeViewController: UIViewController {
         
         return button
     }()
-    
     private let collectionView = UICollectionView(frame: .zero, collectionViewLayout: .init())
+    
+    // MARK: - Property
+    private let disposeBag = DisposeBag()
+    private var viewModel = ModelHomeViewModel()
     private var dataSource: UICollectionViewDiffableDataSource<ModelHomeViewControllerSection, ModelHomeViewControllerItem>?
     
     //MARK: - Lifecycle
@@ -130,7 +128,6 @@ final class ModelHomeViewController: UIViewController {
             make.edges.equalTo(scrollView)
             make.width.equalTo(scrollView)
         }
-        
         memeLogoImageView.snp.makeConstraints {make in
             make.top.equalTo(contentsView.snp.top).offset(10)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
@@ -171,15 +168,6 @@ final class ModelHomeViewController: UIViewController {
         }
     }
     
-    //MARK: -Actions
-    func setUserNickName() {
-        if let nickname = KeyChainManager.read(forkey: .nickName) {
-            modelWelcomeLabel.text = "\(nickname)님, 환영합니다!"
-        } else {
-            modelWelcomeLabel.text = "환영합니다!"
-        }
-    }
-    
     // MARK: - BindViewModel
     private func bindViewModel() {
         let memberId = KeyChainManager.loadMemberID()
@@ -197,9 +185,24 @@ final class ModelHomeViewController: UIViewController {
             output.recommendArtistByReview,
             output.recommendArtistByRecent
         ).observe(on: MainScheduler.instance)
-        .subscribe(onNext: { [weak self] modelReservations, recommendArtistByReview, recommendArtistByRecent in
-            self?.setSnapShot(modelReservations: modelReservations, recommendArtistByReview: recommendArtistByReview, recommendArtistByRecent: recommendArtistByRecent)
+        .subscribe(onNext: { [weak self] 
+            modelReservations,
+            recommendArtistByReview,
+            recommendArtistByRecent in
+            self?.setSnapShot(
+                modelReservations: modelReservations,
+                recommendArtistByReview: recommendArtistByReview,
+                recommendArtistByRecent: recommendArtistByRecent
+            )
         }).disposed(by: disposeBag)
+    }
+    //MARK: -Actions
+    func setUserNickName() {
+        if let nickname = KeyChainManager.read(forkey: .nickName) {
+            modelWelcomeLabel.text = "\(nickname)님, 환영합니다!"
+        } else {
+            modelWelcomeLabel.text = "환영합니다!"
+        }
     }
     
     func setupSearchBar() {
@@ -211,42 +214,55 @@ final class ModelHomeViewController: UIViewController {
         navigationController?.pushViewController(reservationsVC, animated: true)
     }
     
-    
-    //MARK: -Helpers
+    //MARK: -CollectionView
     private func setupCollectionView() {
         collectionView.delegate = self
         
-        collectionView.register(ModelNonReservationViewCell.self, forCellWithReuseIdentifier: ModelNonReservationViewCell.identifier)
-        collectionView.register(UINib(nibName: "ModelReservationConfirmViewCell", bundle: nil), forCellWithReuseIdentifier: ModelReservationConfirmViewCell.identifier)
-        collectionView.register(UINib(nibName: "SelectMakeupCardViewCell", bundle: nil), forCellWithReuseIdentifier: SelectMakeupCardViewCell.identifier)
-        collectionView.register(UINib(nibName: "SelectMakeupCardViewCell", bundle: nil), forCellWithReuseIdentifier: SelectMakeupCardViewCell.identifier)
+        collectionView.register(ModelNonReservationViewCell.self,
+                                forCellWithReuseIdentifier: ModelNonReservationViewCell.identifier)
+        collectionView.register(UINib(nibName: "ModelReservationConfirmViewCell", bundle: nil),
+                                forCellWithReuseIdentifier: ModelReservationConfirmViewCell.identifier)
+        collectionView.register(UINib(nibName: "SelectMakeupCardViewCell", bundle: nil),
+                                forCellWithReuseIdentifier: SelectMakeupCardViewCell.identifier)
+        collectionView.register(UINib(nibName: "SelectMakeupCardViewCell", bundle: nil),
+                                forCellWithReuseIdentifier: SelectMakeupCardViewCell.identifier)
         
-        collectionView.register(RecommendHeaderReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: RecommendHeaderReusableView.reuseIdentifier)
+        collectionView.register(RecommendHeaderReusableView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: RecommendHeaderReusableView.reuseIdentifier)
         
         collectionView.collectionViewLayout = createLayout()
         collectionView.backgroundColor = .white
         setDataSource()
     }
     private func setDataSource() {
-        collectionView.register(RecommendHeaderReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: RecommendHeaderReusableView.reuseIdentifier)
+        collectionView.register(RecommendHeaderReusableView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: RecommendHeaderReusableView.reuseIdentifier)
         
         dataSource = UICollectionViewDiffableDataSource<ModelHomeViewControllerSection, ModelHomeViewControllerItem> (collectionView: collectionView, cellProvider: { collectionView, indexPath, itemidentifier in
             
             switch itemidentifier  {
             case .modelReservations(let reservation):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.identifier, for: indexPath) as! ModelReservationConfirmViewCell
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: ModelReservationConfirmViewCell.identifier,
+                    for: indexPath) as! ModelReservationConfirmViewCell
                 cell.configure(with: reservation)
                 return cell
                 
                 
             case .recommendByReview(let portfolio), .recommendByRecent(let portfolio):
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SelectMakeupCardViewCell.identifier, for: indexPath) as? SelectMakeupCardViewCell
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: SelectMakeupCardViewCell.identifier,
+                    for: indexPath) as? SelectMakeupCardViewCell
                 cell?.configure(with: portfolio)
                 return cell
                 
                 
             case .noData:
-                let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ModelNonReservationViewCell.identifier, for: indexPath) as! ModelNonReservationViewCell
+                let cell = collectionView.dequeueReusableCell(
+                    withReuseIdentifier: ModelNonReservationViewCell.identifier,
+                    for: indexPath) as! ModelNonReservationViewCell
                 return cell
             }
         })
@@ -259,25 +275,31 @@ final class ModelHomeViewController: UIViewController {
             
             switch sectionType {
             case .recommendByReview:
-                if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: RecommendHeaderReusableView.reuseIdentifier, for: indexPath) as? RecommendHeaderReusableView {
-                    
+                if let headerView = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: RecommendHeaderReusableView.reuseIdentifier,
+                    for: indexPath) as? RecommendHeaderReusableView {
                     headerView.configure(with: "어떤 아티스트를 선택할 지 모르겠을 때", subText: "후기가 많은 아티스트를 만나봐요")
                     return headerView
                 }
             case .recommendByRecent:
-                if let headerView = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: RecommendHeaderReusableView.reuseIdentifier, for: indexPath) as? RecommendHeaderReusableView {
-                    
+                if let headerView = collectionView.dequeueReusableSupplementaryView(
+                    ofKind: kind,
+                    withReuseIdentifier: RecommendHeaderReusableView.reuseIdentifier,
+                    for: indexPath) as? RecommendHeaderReusableView {
                     headerView.configure(with: "새로운 메이크업을 찾아보고 싶을 때", subText: "가장 최근에 올라온 포트폴리오를 알아봐요")
                     return headerView
                 }
             default:
                 return nil
             }
-            
             return nil
         }
     }
-    private func setSnapShot(modelReservations: [ReservationData], recommendArtistByReview: [Portfolio], recommendArtistByRecent: [Portfolio]) {
+    private func setSnapShot(modelReservations: [ReservationData],
+                             recommendArtistByReview: [Portfolio],
+                             recommendArtistByRecent: [Portfolio]
+    ){
         var snapshot = NSDiffableDataSourceSnapshot<ModelHomeViewControllerSection, ModelHomeViewControllerItem>()
         
         snapshot.appendSections([.modelReservations])
@@ -306,30 +328,25 @@ final class ModelHomeViewController: UIViewController {
             switch sectionIndex {
             case 0:
                 return self?.createModelReservationsSection()
-            case 1:
-                return self?.createRecommendByReviewSection()
-            case 2:
-                return self?.createRecommendByRecentSection()
+            case 1, 2:
+                return self?.createRecommendSection()
             default:
                 return self?.createModelReservationsSection()
             }
         }, configuration: config)
     }
     private func createModelReservationsSection() -> NSCollectionLayoutSection {
-        //item
         let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(142))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        
-        //group
+
         let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(142))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
-        //section
         let section = NSCollectionLayoutSection(group: group)
         section.orthogonalScrollingBehavior = .groupPaging
         return section
     }
-    private func createRecommendByReviewSection() -> NSCollectionLayoutSection {
+    private func createRecommendSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(154), heightDimension: .absolute(222))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         item.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 10, bottom: 0, trailing: 0)
@@ -339,37 +356,20 @@ final class ModelHomeViewController: UIViewController {
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
         section.orthogonalScrollingBehavior = .continuous
         
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(48))
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
-        
-        section.boundarySupplementaryItems = [header]
-        return section
-    }
-    
-    private func createRecommendByRecentSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(154), heightDimension: .absolute(222))
-        let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 10, bottom: 0, trailing: 0)
-        
-        
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(164), heightDimension: .absolute(222))
-        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
-        
-        let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 15, trailing: 0)
-        section.orthogonalScrollingBehavior = .continuous
-        
-        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(48))
-        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,
+                                                                 elementKind: UICollectionView.elementKindSectionHeader,
+                                                                 alignment: .top)
         
         section.boundarySupplementaryItems = [header]
         return section
     }
 }
 
-
+//MARK: - UICollectionViewDelegate
 extension ModelHomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard (dataSource?.snapshot().sectionIdentifiers[indexPath.section]) != nil else { return }
