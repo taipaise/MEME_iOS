@@ -8,8 +8,6 @@
 import Foundation
 
 struct ProfileInfo {
-    var id_token: String
-    var provider: String
     var profileImg: String
     var username: String
     var nickname: String

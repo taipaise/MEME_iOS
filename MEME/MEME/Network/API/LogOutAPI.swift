@@ -12,8 +12,8 @@ enum LogOutAPI {
     case logOut
 }
 
-extension LogOutAPI: MemeAuthAPI {
-    var domain: MemeAuthDomain {
+extension LogOutAPI: MemeAPI {
+    var domain: MemeDomain {
         return .auth
     }
 

@@ -60,8 +60,6 @@ final class ProfileInfoBuilder {
     
     func build() -> ProfileInfo {
         return ProfileInfo(
-            id_token: idToken,
-            provider: provider,
             profileImg: profileImg,
             username: username,
             nickname: nickname,

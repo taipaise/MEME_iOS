@@ -12,7 +12,7 @@ final class LogOutManager {
     typealias API = LogOutAPI
     
     static let shared = LogOutManager()
-    let provider = NetworkAuthProvider<API>(plugins: [NetworkLoggerPlugin()])
+    let provider = NetworkProvider<API>(plugins: [NetworkLoggerPlugin()])
     
     private init() {}
     

@@ -37,7 +37,7 @@ final class NetworkProvider<API: MemeAPI> {
     }
     
     @discardableResult
-    func request(api: API, completion: @escaping Completion) -> Cancellable {
+    func requestCancellable(api: API, completion: @escaping Completion) -> Cancellable {
         let cancellable = provider.request(api, completion: completion)
         return cancellable
     }

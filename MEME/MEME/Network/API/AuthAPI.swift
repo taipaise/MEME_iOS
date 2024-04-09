@@ -8,13 +8,8 @@
 import Foundation
 import Moya
 
-enum SocialProvider: String {
-    case APPLE
-    case KAKAO
-}
-
 enum AuthAPI {
-    case login(idToken: String, provider: SocialProvider)
+    case checkIsUser(idToken: String, provider: SocialProvider)
     case logout
     case withdraw
     case modelSignUp(
@@ -53,14 +48,14 @@ enum AuthAPI {
     case reissue(accessToken: String, refreshToken: String)
 }
 
-extension AuthAPI: MemeAuthAPI {
-    var domain: MemeAuthDomain {
+extension AuthAPI: MemeAPI {
+    var domain: MemeDomain {
         return .auth
     }
 
     var urlPath: String {
         switch self {
-        case .login:
+        case .checkIsUser:
             return "/check"
         case .logout:
             return "/auth/logout"
@@ -83,7 +78,7 @@ extension AuthAPI: MemeAuthAPI {
     
     var headerType: HTTPHeaderFields {
         switch self {
-        case .login, .modelSignUp, .artistSignUp, .reissue:
+        case .checkIsUser, .modelSignUp, .artistSignUp, .reissue:
             return .plain
         case .logout, .withdraw, .artistProfile:
             return .hasAccessToken
@@ -97,7 +92,7 @@ extension AuthAPI: MemeAuthAPI {
     var task: Moya.Task {
         switch self {
             
-        case .login(idToken: let idToken, provider: let provider):
+        case .checkIsUser(idToken: let idToken, provider: let provider):
             let parameters: [String: Any] = [
                 "id_token": idToken,
                 "provider": provider.rawValue
