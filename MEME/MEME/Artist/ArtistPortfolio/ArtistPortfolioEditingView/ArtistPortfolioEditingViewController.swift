@@ -10,14 +10,12 @@ import UIKit
 class ArtistPortfolioEditingViewController: UIViewController, UINavigationControllerDelegate {
     //MARK: - UI Properties
     @IBOutlet private weak var makeupCategoryCollectionView: UICollectionView!
-    @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var imagePickerStackView: UIStackView!
     
     @IBOutlet private weak var firstImgView: UIImageView!
     @IBOutlet private weak var secondImgView: UIImageView!
     @IBOutlet private weak var thirdImgView: UIImageView!
     
-    @IBOutlet private weak var trashButton: UIButton!
     @IBOutlet private weak var firstDeleteButton: UIButton!
     @IBOutlet private weak var secondDeleteButton: UIButton!
     @IBOutlet private weak var thirdDeleteButton: UIButton!
@@ -63,7 +61,7 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
         return [self.firstImgView, self.secondImgView, self.thirdImgView]
     }()
     
-    //MARK: - viewDidLoad()
+    //MARK: - ViewController 생명 주기
     override func viewDidLoad() {
         super.viewDidLoad()
         if isEdit {
@@ -84,13 +82,13 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
         infoTextView.layer.borderWidth = 1
         infoTextView.layer.borderColor = UIColor.gray200.cgColor
         priceTextField.keyboardType = .numberPad
-        if isEdit {
-            titleLabel.text = "포트폴리오 수정"
+        if !isEdit {
             artistProfileEditingInfoBar.setTitle("수정하기", for: .normal)
+            self.navigationItem.title = "포트폴리오 수정"
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: .icTrash.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(trashButtonDidTap))
         }else {
-            titleLabel.text = "포트폴리오 추가"
+            self.navigationItem.title =  "포트폴리오 추가"
             artistProfileEditingInfoBar.setTitle("추가하기", for: .normal)
-            trashButton.isHidden = true
         }
         deleteButtonAppear()
     }
@@ -99,7 +97,7 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
     private func collectionViewConfigure(){
         makeupCategoryCollectionView.delegate = self
         makeupCategoryCollectionView.dataSource = self
-        makeupCategoryCollectionView.register(UINib(nibName: "ArtistMakeupTagCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ArtistMakeupTagCollectionViewCell")
+        makeupCategoryCollectionView.register(UINib(nibName: ArtistMakeupTagCollectionViewCell.className, bundle: nil), forCellWithReuseIdentifier: ArtistMakeupTagCollectionViewCell.className)
         
     }
     

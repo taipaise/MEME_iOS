@@ -29,8 +29,6 @@
                 <outlet property="secondImgView" destination="iVo-w9-NIz" id="8Qi-qk-Fq0"/>
                 <outlet property="thirdDeleteButton" destination="avw-ak-Jeq" id="mRy-Jd-gI7"/>
                 <outlet property="thirdImgView" destination="RSN-ud-WNR" id="FNm-45-BPC"/>
-                <outlet property="titleLabel" destination="Mxu-le-p7w" id="sHe-ua-QvU"/>
-                <outlet property="trashButton" destination="7cp-If-TQl" id="hiH-hz-nfT"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -39,53 +37,8 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="1000"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aO3-w7-bXG">
-                    <rect key="frame" x="0.0" y="59" width="393" height="48"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="포트폴리오 관리" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Mxu-le-p7w">
-                            <rect key="frame" x="146" y="14.333333333333327" width="101" height="19.333333333333329"/>
-                            <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
-                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1i4-qQ-BXj" userLabel="backBtn">
-                            <rect key="frame" x="24" y="4" width="34" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="l5q-3P-GBb"/>
-                            </constraints>
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="ic_back"/>
-                            <connections>
-                                <action selector="backButtonDidTap:" destination="-1" eventType="touchUpInside" id="eW2-VS-WkG"/>
-                            </connections>
-                        </button>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7cp-If-TQl">
-                            <rect key="frame" x="325" y="9" width="44" height="30"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="30" id="sDG-UA-Byz"/>
-                            </constraints>
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="ic_trash"/>
-                            <connections>
-                                <action selector="trashButtonDidTap:" destination="-1" eventType="touchUpInside" id="jQB-gu-2TK"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    <constraints>
-                        <constraint firstItem="1i4-qQ-BXj" firstAttribute="leading" secondItem="aO3-w7-bXG" secondAttribute="leading" constant="24" id="6Gm-Uf-EUM"/>
-                        <constraint firstItem="Mxu-le-p7w" firstAttribute="centerY" secondItem="aO3-w7-bXG" secondAttribute="centerY" id="6zj-Ie-4Oe"/>
-                        <constraint firstAttribute="trailing" secondItem="7cp-If-TQl" secondAttribute="trailing" constant="24" id="JMd-p4-yma"/>
-                        <constraint firstItem="Mxu-le-p7w" firstAttribute="centerX" secondItem="aO3-w7-bXG" secondAttribute="centerX" id="MFZ-jS-aH7"/>
-                        <constraint firstItem="7cp-If-TQl" firstAttribute="centerY" secondItem="Mxu-le-p7w" secondAttribute="centerY" id="dZE-81-iw4"/>
-                        <constraint firstAttribute="height" constant="48" id="vVc-lr-dhO"/>
-                        <constraint firstItem="1i4-qQ-BXj" firstAttribute="centerY" secondItem="aO3-w7-bXG" secondAttribute="centerY" id="wpa-6H-GmU"/>
-                    </constraints>
-                </view>
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="o3Y-oj-dex">
-                    <rect key="frame" x="0.0" y="107" width="393" height="859"/>
+                    <rect key="frame" x="0.0" y="59" width="393" height="907"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nNY-vF-dHT" userLabel="Scroll Frame View">
                             <rect key="frame" x="0.0" y="0.0" width="393" height="750"/>
@@ -255,7 +208,7 @@
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="모델들에게 보여줄 메이크업 정보를 작성해주세요." lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="COA-HT-7FP">
-                                    <rect key="frame" x="31.666666666666657" y="495.66666666666663" width="273.66666666666674" height="17"/>
+                                    <rect key="frame" x="31.666666666666657" y="495.66666666666674" width="273.66666666666674" height="17"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <color key="textColor" name="Gray400"/>
                                     <nil key="highlightedColor"/>
@@ -318,30 +271,22 @@
             <constraints>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="o3Y-oj-dex" secondAttribute="trailing" id="0wj-OH-bhC"/>
                 <constraint firstItem="LDs-6l-SaI" firstAttribute="width" secondItem="i5M-Pr-FkT" secondAttribute="width" multiplier="0.888041" id="40u-GT-qKE"/>
+                <constraint firstItem="nNY-vF-dHT" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="M3N-2P-CCT"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="o3Y-oj-dex" secondAttribute="bottom" id="QwI-ri-DZh"/>
-                <constraint firstItem="aO3-w7-bXG" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="SSY-Da-7NA"/>
-                <constraint firstItem="o3Y-oj-dex" firstAttribute="top" secondItem="aO3-w7-bXG" secondAttribute="bottom" id="Upg-hf-ogu"/>
                 <constraint firstItem="o3Y-oj-dex" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="Z6p-0j-vIQ"/>
-                <constraint firstItem="aO3-w7-bXG" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="rFF-Q8-9Es"/>
-                <constraint firstItem="aO3-w7-bXG" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="uSx-01-BeL"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <point key="canvasLocation" x="54.198473282442748" y="172.53521126760563"/>
         </view>
     </objects>
     <resources>
-        <image name="ic_back" width="10" height="17"/>
         <image name="ic_delete" width="18" height="19"/>
         <image name="ic_picture" width="80" height="82"/>
-        <image name="ic_trash" width="20" height="22"/>
         <namedColor name="Gray400">
             <color red="0.72549019607843135" green="0.72549019607843135" blue="0.72549019607843135" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
         <systemColor name="labelColor">
             <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>
     </resources>
 </document>

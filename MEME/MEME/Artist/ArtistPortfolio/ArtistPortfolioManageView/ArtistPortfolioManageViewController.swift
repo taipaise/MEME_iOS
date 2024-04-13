@@ -15,17 +15,19 @@ class ArtistPortfolioManageViewController: UIViewController {
     //MARK: - Properties
     private var portfolioData : PortfolioAllDTO?
     
-    //MARK: - viewDidLoad()
+    //MARK: - ViewController 생명 주기
     override func viewDidLoad() {
         super.viewDidLoad()
         collectionViewConfig()
-    }
-    //MARK: - viewWillAppear()
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        self.tabBarController?.tabBar.isHidden = true
         getAllPortfolio()
     }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        self.navigationItem.title = "포트폴리오 관리"
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
+    }
+    
     //MARK: - collectionViewConfig()
     private func collectionViewConfig(){
         portfolioCollectionView.delegate = self
@@ -37,11 +39,6 @@ class ArtistPortfolioManageViewController: UIViewController {
             bundle: nil),
             forCellWithReuseIdentifier: ArtistPortfolioCollectionViewCell.className)
 
-    }
-    //MARK: - @IBAction
-    @IBAction func backButtonDidTap(_ sender: UIButton) {
-        self.tabBarController?.tabBar.isHidden = false
-        navigationController?.popViewController(animated: true)
     }
     @IBAction func portfolioAddButtonDidTap(_ sender: UIButton) {
         portfolioIdx = -1
