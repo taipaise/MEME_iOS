@@ -24,11 +24,31 @@ final class AuthManager {
         
     }
     
-    func modelSignUp(
-        profileInfo: ProfileInfo,
-        completion: @escaping (Result<SignUpResponseDTO, MoyaError>) -> Void
-    ) {
-
+    func modelSignUp(profileInfo: ProfileInfo) async -> Result<SignUpResponseDTO, Error> {
+        let idToken = UserDefaultManager.shared.getIdToken()
+        guard
+            let socialProvider = UserDefaultManager.shared.getProvider(),
+            !idToken.isEmpty
+        else {
+            return .failure(MEMEError.UserDefaultError)
+        }
+        
+        let result = await provider.request(api: .modelSignUp(
+            idToken: idToken,
+            provider: socialProvider.rawValue,
+            info: profileInfo))
+        
+        switch result {
+        case .success(let response):
+            do {
+                let dto = try response.map(SignUpResponseDTO.self)
+                return .success(dto)
+            } catch {
+                return .failure(MEMEError.failedToParse)
+            }
+        case .failure(let error):
+            return .failure(error)
+        }
     }
     
     func artistsignUp(

@@ -37,6 +37,25 @@ final class SetModelDetailInfoViewModel: ViewModel {
             }
             .disposed(by: disposeBag)
         
+        input.completeTap
+            .subscribe { [weak self] _ in
+                print(self?.profileInfo)
+                // TODO: - 서버 열리면 주석 해제
+//                Task {
+//                    let result = await self?.modelSignUp()
+//                    if
+//                        let result,
+//                        result
+//                    {
+//                        self?.navigation.onNext(.success)
+//                    } else {
+//                        self?.navigation.onNext(.fail)
+//                    }
+//                }
+                self?.navigation.onNext(.success)
+            }
+            .disposed(by: disposeBag)
+        
         let cellModels = Observable.combineLatest(
             genderCellModels,
             skinCellModels,
@@ -97,6 +116,27 @@ extension SetModelDetailInfoViewModel {
                 }
             }
             colorCellModels.accept(setSelected(colorCellModels.value))
+        }
+    }
+    
+    private func modelSignUp() async -> Bool {
+        let result = await authManager.modelSignUp(profileInfo: profileInfo)
+        
+        switch result {
+        case .success(let result):
+            let userData = result.data
+            let userId = userData.userId
+            let accessToken = userData.accessToken
+            let refreshToken = userData.refreshToken
+            KeyChainManager.save(forKey: .memberId, value: "\(userId)")
+            KeyChainManager.save(forKey: .accessToken, value: accessToken)
+            KeyChainManager.save(forKey: .refreshToken, value: refreshToken)
+            KeyChainManager.save(forKey: .nickName, value: profileInfo.nickname)
+            KeyChainManager.save(forKey: .role, value: RoleType.MODEL.rawValue)
+            return true
+        case .failure(let error):
+            print(error.localizedDescription)
+            return false
         }
     }
 }

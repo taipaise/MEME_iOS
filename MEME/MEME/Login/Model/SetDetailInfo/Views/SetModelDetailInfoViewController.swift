@@ -69,7 +69,9 @@ final class SetModelDetailInfoViewController: UIViewController {
 extension SetModelDetailInfoViewController {
     private func bindViewModel() {
         let input = SetModelDetailInfoViewModel.Input(
-            cellTap: collectionView.rx.itemSelected.asObservable())
+            cellTap: collectionView.rx.itemSelected.asObservable(),
+            completeTap: completeButton.rx.tap.asObservable())
+        
         let output = viewModel.transform(input)
         
         output.cellModels
