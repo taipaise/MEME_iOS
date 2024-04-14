@@ -16,7 +16,7 @@ final class ModelSignUpCoordinator: Coordinator {
     }
     
     @MainActor func start() {
-        let vc = SetDetailInfoViewController(nibName: SetDetailInfoViewController.className, bundle: nil)
+        let vc = SetModelDetailInfoViewController(nibName: SetModelDetailInfoViewController.className, bundle: nil)
         
         navigationController?.pushViewController(vc, animated: true)
     }
