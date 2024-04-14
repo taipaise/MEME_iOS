@@ -46,6 +46,7 @@ final class SetModelDetailInfoViewController: UIViewController {
         super.viewDidLoad()
         setUI()
         configureCollectionView()
+        bindViewModel()
     }
     
     override func viewDidLayoutSubviews() {
@@ -64,6 +65,31 @@ final class SetModelDetailInfoViewController: UIViewController {
     }
 }
 
+// MARK: - Binding
+extension SetModelDetailInfoViewController {
+    private func bindViewModel() {
+        let input = SetModelDetailInfoViewModel.Input(
+            cellTap: collectionView.rx.itemSelected.asObservable())
+        let output = viewModel.transform(input)
+        
+        output.cellModels
+            .subscribe { [weak self] cellModels in
+                self?.applySnapshot(cellModels)
+            }
+            .disposed(by: disposeBag)
+        
+        output.nextButtonState
+            .subscribe { [weak self] state in
+                self?.completeButton.isEnabled = state
+                if state {
+                    self?.completeButton.backgroundColor = .mainBold
+                } else {
+                    self?.completeButton.backgroundColor = .gray300
+                }
+            }
+            .disposed(by: disposeBag)
+    }
+}
 // MARK: - collectionView Configuration
 extension SetModelDetailInfoViewController {
     private func configureCollectionView() {
