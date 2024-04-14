@@ -158,6 +158,7 @@
 		316A92782B667E7200E4337D /* SetBusinessInfoDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316A92762B667E7200E4337D /* SetBusinessInfoDetailViewController.xib */; };
 		316A927C2B6688F700E4337D /* Week.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A927B2B6688F700E4337D /* Week.swift */; };
 		316A927E2B66895D00E4337D /* TimeSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A927D2B66895D00E4337D /* TimeSection.swift */; };
+		31763AE52BCB911900C164C1 /* UIViewController+Rx.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31763AE42BCB911800C164C1 /* UIViewController+Rx.swift */; };
 		317720DE2BC26D7500A1928A /* LoginViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317720DD2BC26D7500A1928A /* LoginViewModel.swift */; };
 		317720E12BC2701000A1928A /* SocialProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317720E02BC2701000A1928A /* SocialProvider.swift */; };
 		317720E32BC2734100A1928A /* MEMEError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317720E22BC2734100A1928A /* MEMEError.swift */; };
@@ -464,6 +465,7 @@
 		316A92762B667E7200E4337D /* SetBusinessInfoDetailViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetBusinessInfoDetailViewController.xib; sourceTree = "<group>"; };
 		316A927B2B6688F700E4337D /* Week.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Week.swift; sourceTree = "<group>"; };
 		316A927D2B66895D00E4337D /* TimeSection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSection.swift; sourceTree = "<group>"; };
+		31763AE42BCB911800C164C1 /* UIViewController+Rx.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Rx.swift"; sourceTree = "<group>"; };
 		317720DD2BC26D7500A1928A /* LoginViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewModel.swift; sourceTree = "<group>"; };
 		317720E02BC2701000A1928A /* SocialProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialProvider.swift; sourceTree = "<group>"; };
 		317720E22BC2734100A1928A /* MEMEError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MEMEError.swift; sourceTree = "<group>"; };
@@ -1099,6 +1101,7 @@
 				3169E3F32BC2D92A00550F2E /* PHPickerManager.swift */,
 				316239A92B81E3F9002D9E2F /* UserDefaultManager.swift */,
 				31AB18012B9BF95A0049E02D /* ViewModel.swift */,
+				31763AE42BCB911800C164C1 /* UIViewController+Rx.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -2079,6 +2082,7 @@
 				2D3E0D152B640BCC00C49EF3 /* ModelViewArtistProfileViewController.swift in Sources */,
 				CC2F3AC02B514EE900508DA5 /* ModelHeaderView.swift in Sources */,
 				CC9C387F2B8085A60073A257 /* WrittenReviewManager.swift in Sources */,
+				31763AE52BCB911900C164C1 /* UIViewController+Rx.swift in Sources */,
 				31EA86F82BBFED30003BCBF7 /* MoyaProvider+Async.swift in Sources */,
 				CCAB5A472B6585F700067FA4 /* InterestMakeUpCollectionViewCell.swift in Sources */,
 				2D8C20C92B82D61000CD4A90 /* ProfileAPI.swift in Sources */,
