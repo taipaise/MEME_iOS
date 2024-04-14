@@ -10,12 +10,20 @@ import RxSwift
 import RxCocoa
 
 final class SetModelDetailInfoViewModel: ViewModel {
+    enum NavigationType {
+        case fail
+        case success
+        case none
+    }
+    
     struct Input {
         let cellTap: Observable<IndexPath>
+        let completeTap: Observable<Void>
     }
     struct Output{
         let cellModels: Observable<[[ModelDetailCellModel]]>
         let nextButtonState: Observable<Bool>
+        var navigation: Observable<NavigationType>
     }
     
     private var genderCellModels = BehaviorRelay<[ModelDetailCellModel]>(value: [])
@@ -24,12 +32,16 @@ final class SetModelDetailInfoViewModel: ViewModel {
     private var gender = BehaviorRelay<Gender?>(value: nil)
     private var skinType = BehaviorRelay<SkinType?>(value: nil)
     private var personalColor = BehaviorRelay<PersonalColor?>(value: nil)
+    private var navigation = PublishSubject<NavigationType>()
     private var disposeBag = DisposeBag()
+    private var profileInfo: ProfileInfo
+    private let authManager = AuthManager.shared
     
-    init() {
+    init(profileInfo: ProfileInfo) {
+        self.profileInfo = profileInfo
         makeCellModels()
     }
-    
+
     func transform(_ input: Input) -> Output {
         input.cellTap
             .subscribe { [weak self] indexPath in
@@ -74,7 +86,8 @@ final class SetModelDetailInfoViewModel: ViewModel {
         
         return Output(
             cellModels: cellModels,
-            nextButtonState: nextButtonIsEnable)
+            nextButtonState: nextButtonIsEnable,
+            navigation: navigation.asObservable())
     }
 }
 
@@ -98,6 +111,7 @@ extension SetModelDetailInfoViewModel {
         case ModelDetailInfoSection.gender.rawValue:
             Gender.allCases.forEach { gender in
                 if gender.korString == genderCellModels.value[row].title {
+                    profileInfo.gender = gender.rawValue
                     self.gender.accept(gender)
                 }
             }
@@ -105,6 +119,7 @@ extension SetModelDetailInfoViewModel {
         case ModelDetailInfoSection.skin.rawValue:
             SkinType.allCases.forEach { skinType in
                 if skinType.korString == skinCellModels.value[row].title {
+                    profileInfo.skinType = skinType.rawValue
                     self.skinType.accept(skinType)
                 }
             }
@@ -112,6 +127,7 @@ extension SetModelDetailInfoViewModel {
         default:
             PersonalColor.allCases.forEach { color in
                 if color.korString == colorCellModels.value[row].title {
+                    profileInfo.personalColor = color.rawValue
                     self.personalColor.accept(color)
                 }
             }

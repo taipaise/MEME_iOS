@@ -38,7 +38,7 @@ final class SetModelDetailInfoViewController: UIViewController {
     @IBOutlet private weak var nameLabel: UILabel!
     @IBOutlet private weak var collectionView: UICollectionView!
     @IBOutlet private weak var completeButton: UIButton!
-    private var viewModel = SetModelDetailInfoViewModel()
+    var viewModel: SetModelDetailInfoViewModel?
     private var dataSource: DataSource?
     private var disposeBag = DisposeBag()
     
@@ -68,6 +68,8 @@ final class SetModelDetailInfoViewController: UIViewController {
 // MARK: - Binding
 extension SetModelDetailInfoViewController {
     private func bindViewModel() {
+        guard let viewModel = viewModel else { return }
+        
         let input = SetModelDetailInfoViewModel.Input(
             cellTap: collectionView.rx.itemSelected.asObservable(),
             completeTap: completeButton.rx.tap.asObservable())
@@ -77,6 +79,12 @@ extension SetModelDetailInfoViewController {
         output.cellModels
             .subscribe { [weak self] cellModels in
                 self?.applySnapshot(cellModels)
+            }
+            .disposed(by: disposeBag)
+        
+        output.navigation
+            .subscribe { [weak self] navigationType in
+                self?.navigate(type: navigationType)
             }
             .disposed(by: disposeBag)
         
@@ -192,5 +200,19 @@ extension SetModelDetailInfoViewController {
             return section
         }
         return layout
+    }
+}
+
+extension SetModelDetailInfoViewController {
+    private func navigate(type: SetModelDetailInfoViewModel.NavigationType) {
+        let coordinator = SignUpCompletionCoordinator(navigationController: navigationController, roleType: .MODEL)
+        switch type {
+        case .success:
+            coordinator.start(isSuccess: true)
+        case .fail:
+            coordinator.start(isSuccess: false)
+        case .none:
+            break
+        }
     }
 }

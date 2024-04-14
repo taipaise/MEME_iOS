@@ -181,6 +181,9 @@
 		317D98792B7E16B5009BBB95 /* MakeUpLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D98782B7E16B5009BBB95 /* MakeUpLocation.swift */; };
 		317D987B2B7E1810009BBB95 /* MakeUpCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D987A2B7E1810009BBB95 /* MakeUpCategory.swift */; };
 		319F53502BCBBC82008D153E /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F534F2BCBBC82008D153E /* UICollectionView+.swift */; };
+		319F53522BCC18EB008D153E /* SignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F53512BCC18EB008D153E /* SignUpCoordinator.swift */; };
+		319F53552BCC1BDE008D153E /* SignUpCompletionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F53542BCC1BDE008D153E /* SignUpCompletionCoordinator.swift */; };
+		319F53582BCC1D6A008D153E /* RegisterCompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F53572BCC1D6A008D153E /* RegisterCompletionViewModel.swift */; };
 		31AB17FE2B9BF1CB0049E02D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 31AB17FD2B9BF1CB0049E02D /* RxCocoa */; };
 		31AB18002B9BF1CB0049E02D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 31AB17FF2B9BF1CB0049E02D /* RxRelay */; };
 		31AB18022B9BF95A0049E02D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AB18012B9BF95A0049E02D /* ViewModel.swift */; };
@@ -488,6 +491,9 @@
 		317D98782B7E16B5009BBB95 /* MakeUpLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeUpLocation.swift; sourceTree = "<group>"; };
 		317D987A2B7E1810009BBB95 /* MakeUpCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeUpCategory.swift; sourceTree = "<group>"; };
 		319F534F2BCBBC82008D153E /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
+		319F53512BCC18EB008D153E /* SignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinator.swift; sourceTree = "<group>"; };
+		319F53542BCC1BDE008D153E /* SignUpCompletionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompletionCoordinator.swift; sourceTree = "<group>"; };
+		319F53572BCC1D6A008D153E /* RegisterCompletionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCompletionViewModel.swift; sourceTree = "<group>"; };
 		31AB18012B9BF95A0049E02D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		31B2633F2B57EDE300304FBE /* TermsAgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAgreementViewController.swift; sourceTree = "<group>"; };
 		31B263402B57EDE300304FBE /* TermDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermDetailViewController.xib; sourceTree = "<group>"; };
@@ -1386,6 +1392,7 @@
 		3169E3E72BC2B89900550F2E /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				319F53532BCC1A33008D153E /* Coordinator */,
 				31C85EF32B526C200064A6E7 /* SetDetailInfo */,
 			);
 			path = Model;
@@ -1490,6 +1497,7 @@
 				3169E3E82BC2B8E400550F2E /* SetProfileDetailCoordinator.swift */,
 				3169E3F52BC2E01800550F2E /* ModelSignUpCoordinator.swift */,
 				3169E3F72BC2E02800550F2E /* ArtistSignUpCoordinator.swift */,
+				319F53512BCC18EB008D153E /* SignUpCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1571,6 +1579,22 @@
 				317D98762B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift */,
 			);
 			path = ArtistInfoBuilder;
+			sourceTree = "<group>";
+		};
+		319F53532BCC1A33008D153E /* Coordinator */ = {
+			isa = PBXGroup;
+			children = (
+				319F53542BCC1BDE008D153E /* SignUpCompletionCoordinator.swift */,
+			);
+			path = Coordinator;
+			sourceTree = "<group>";
+		};
+		319F53562BCC1D5C008D153E /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				319F53572BCC1D6A008D153E /* RegisterCompletionViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		31B2633E2B57ED1D00304FBE /* Recovered References */ = {
@@ -1700,6 +1724,7 @@
 		31C85EF42B526C2E0064A6E7 /* RegistrationCompletion */ = {
 			isa = PBXGroup;
 			children = (
+				319F53562BCC1D5C008D153E /* ViewModel */,
 				31B263562B57EE9500304FBE /* RegistrationCompletionViewController.swift */,
 				31B263552B57EE9500304FBE /* RegistrationCompletionViewController.xib */,
 			);
@@ -2049,6 +2074,7 @@
 				CC8CA9FF2BB44E7D005F1E53 /* AvailableReviewDTO.swift in Sources */,
 				316A926A2B66703800E4337D /* SetBusinessLocationViewController.swift in Sources */,
 				CC9C38552B7B5CDF0073A257 /* ModelProfileAPI.swift in Sources */,
+				319F53522BCC18EB008D153E /* SignUpCoordinator.swift in Sources */,
 				3162DF382BB55B3D00EB283C /* CheckUserDTO.swift in Sources */,
 				31EA86F22BBFEC20003BCBF7 /* Moya+Wrapping.swift in Sources */,
 				2D6F59B32B5C397400CA883A /* SortOptionsViewController.swift in Sources */,
@@ -2184,6 +2210,7 @@
 				094884C72B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.swift in Sources */,
 				31AB18022B9BF95A0049E02D /* ViewModel.swift in Sources */,
 				CC9C38832B808C760073A257 /* LogOutAPI.swift in Sources */,
+				319F53582BCC1D6A008D153E /* RegisterCompletionViewModel.swift in Sources */,
 				CC9C38872B808C8E0073A257 /* LogOutDTO.swift in Sources */,
 				315FB8622B6DE5F40068163C /* SecretInfoManager.swift in Sources */,
 				315AC1CA2B70FE60003FD1A1 /* ReservationState.swift in Sources */,
@@ -2249,6 +2276,7 @@
 				CC9C38792B7FEB0E0073A257 /* ReviewListManager.swift in Sources */,
 				2D6F59AE2B5BF3A900CA883A /* ModelReservationChartTableViewController.swift in Sources */,
 				094884DB2B59915500C233E0 /* SingleArtistReservationManageViewController.swift in Sources */,
+				319F53552BCC1BDE008D153E /* SignUpCompletionCoordinator.swift in Sources */,
 				3156D1FF2B69440E00559820 /* MemeAPI.swift in Sources */,
 				09275E892B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift in Sources */,
 				317720F32BC2905100A1928A /* ModelMainCoordinator.swift in Sources */,
