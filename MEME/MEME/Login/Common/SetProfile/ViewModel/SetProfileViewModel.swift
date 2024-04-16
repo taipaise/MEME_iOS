@@ -52,7 +52,7 @@ final class SetProfileViewModel: NSObject, ViewModel {
     private let profileImage = BehaviorRelay<UIImage>(value: .defaultProfile)
     private let isNickNameVerified = BehaviorRelay<Bool>(value: false)
     private let nickNameStatus = BehaviorRelay<NickNameStatus?>(value: nil)
-    private var profileInfo: ProfileInfo
+    private(set) var profileInfo: ProfileInfo
     private let imagePickerManager = ImagePickerManager()
     private let phPickerManager = PHPickerManager()
     private var disposeBag = DisposeBag()

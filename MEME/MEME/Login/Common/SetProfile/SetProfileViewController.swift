@@ -113,7 +113,9 @@ extension SetProfileViewController {
                     let coordinator = ArtistSignUpCoordinator(navigationController: self?.navigationController)
                     coordinator.start()
                 case .MODEL:
-                    let coordinator = ModelSignUpCoordinator(navigationController: self?.navigationController)
+                    let coordinator = ModelSignUpCoordinator(
+                        navigationController: self?.navigationController,
+                        profileInfo: viewModel.profileInfo)
                     coordinator.start()
                 }
             }

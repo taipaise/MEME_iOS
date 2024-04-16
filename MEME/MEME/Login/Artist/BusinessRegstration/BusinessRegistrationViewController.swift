@@ -63,7 +63,6 @@ final class BusinessRegistrationViewController: UIViewController {
             switch result {
             case .success(let data):
                 let nextVC = RegistrationCompletionViewController()
-                nextVC.configure(isArtist: true)
                 self?.navigationController?.pushViewController(nextVC, animated: true)
             case .failure(let error):
                 self?.present(failAlert, animated: true)

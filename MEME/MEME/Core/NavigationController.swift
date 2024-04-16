@@ -47,7 +47,6 @@ extension NavigationController: UINavigationControllerDelegate {
     }
     
     func navigationController(_ navigationController: UINavigationController, didShow viewController: UIViewController, animated: Bool) {
-        print("vc shown")
         isPushing = false
     }
 }

@@ -12,4 +12,5 @@ public enum MEMEError: Error {
     case isNotConnectedToInternet
     case unknown(underlyingError: Error)
     case KeychainError
+    case UserDefaultError
 }

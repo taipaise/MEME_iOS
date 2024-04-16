@@ -118,6 +118,8 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
             let idTokenString = String(data: identityToken, encoding: .utf8)
         else { return }
         
+        UserDefaultManager.shared.saveProvider(.APPLE)
+        UserDefaultManager.shared.saveIdToken(idTokenString)
         let checkDTO = CheckDTO(provider: .APPLE, idToken: idTokenString)
         Task {
             let userInfo = await checkIsUser(checkDTO: checkDTO)
@@ -169,6 +171,8 @@ extension LoginViewModel {
                 .subscribe { oAuthToken in
                     if let idToken = oAuthToken.idToken {
                         continuationn.resume(returning: CheckDTO(provider: .KAKAO, idToken: idToken))
+                        UserDefaultManager.shared.saveProvider(.KAKAO)
+                        UserDefaultManager.shared.saveIdToken(idToken)
                     } else {
                         continuationn.resume(returning: nil)
                     }
@@ -185,6 +189,8 @@ extension LoginViewModel {
                 .subscribe { oAuthToken in
                     if let idToken = oAuthToken.idToken {
                         continuationn.resume(returning: CheckDTO(provider: .KAKAO, idToken: idToken))
+                        UserDefaultManager.shared.saveProvider(.KAKAO)
+                        UserDefaultManager.shared.saveIdToken(idToken)
                     } else {
                         continuationn.resume(returning: nil)
                     }
