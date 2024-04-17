@@ -83,6 +83,23 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
         infoTextView.layer.cornerRadius = 10
         infoTextView.layer.borderWidth = 1
         infoTextView.layer.borderColor = UIColor.gray200.cgColor
+        firstImgView.layer.cornerRadius = 5
+        secondImgView.layer.cornerRadius = 5
+        thirdImgView.layer.cornerRadius = 5
+        
+        
+        firstDeleteButton.layer.cornerRadius = 5
+        firstDeleteButton.layer.maskedCorners = .layerMaxXMinYCorner
+        firstDeleteButton.layer.masksToBounds = true
+        
+        secondDeleteButton.layer.cornerRadius = 5
+        secondDeleteButton.layer.maskedCorners = .layerMaxXMinYCorner
+        secondDeleteButton.layer.masksToBounds = true
+        
+        thirdDeleteButton.layer.cornerRadius = 5
+        thirdDeleteButton.layer.maskedCorners = .layerMaxXMinYCorner
+        thirdDeleteButton.layer.masksToBounds = true
+        
         priceTextField.keyboardType = .numberPad
         if !isEdit {
             artistProfileEditingInfoBar.setTitle("수정하기", for: .normal)
