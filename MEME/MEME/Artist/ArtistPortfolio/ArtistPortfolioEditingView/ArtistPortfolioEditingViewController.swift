@@ -88,17 +88,11 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
         thirdImgView.layer.cornerRadius = 5
         
         
-        firstDeleteButton.layer.cornerRadius = 5
-        firstDeleteButton.layer.maskedCorners = .layerMaxXMinYCorner
-        firstDeleteButton.layer.masksToBounds = true
-        
-        secondDeleteButton.layer.cornerRadius = 5
-        secondDeleteButton.layer.maskedCorners = .layerMaxXMinYCorner
-        secondDeleteButton.layer.masksToBounds = true
-        
-        thirdDeleteButton.layer.cornerRadius = 5
-        thirdDeleteButton.layer.maskedCorners = .layerMaxXMinYCorner
-        thirdDeleteButton.layer.masksToBounds = true
+        [firstDeleteButton, secondDeleteButton, thirdDeleteButton].forEach { button in
+            button?.layer.cornerRadius = 5
+            button?.layer.maskedCorners = .layerMaxXMinYCorner
+            button?.layer.masksToBounds = true
+        }
         
         priceTextField.keyboardType = .numberPad
         if !isEdit {
