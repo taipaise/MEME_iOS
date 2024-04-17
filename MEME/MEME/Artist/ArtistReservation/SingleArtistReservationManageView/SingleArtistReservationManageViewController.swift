@@ -28,13 +28,11 @@ class SingleArtistReservationManageViewController: UIViewController {
     var reservationDateString: String!
     var reservationTimeString: String!
     
-    //MARK: - viewDidLoad()
+    //MARK: - ViewController 생명 주기
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
     }
-    
-    //MARK: - viewWillAppear()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         getModelData(modelId: 1)

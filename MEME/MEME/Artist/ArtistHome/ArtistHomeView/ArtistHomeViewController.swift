@@ -32,14 +32,12 @@ class ArtistHomeViewController: UIViewController {
     private var reservationStatusData: [Int] = []
     private var showReservationData: [Int] = [0,0,0,0]
     
-    
-    //MARK: - viewDidLoad()
+    //MARK: - ViewController 생명 주기
     override func viewDidLoad() {
         super.viewDidLoad()
         tableViewConfigure()
         setUI()
     }
-    //MARK: - viewWillAppear()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.todayCount = 0
@@ -53,14 +51,7 @@ class ArtistHomeViewController: UIViewController {
     
     //MARK: - setUI()
     private func setUI(){
-        self.navigationController?.navigationBar.tintColor = .black
-        self.navigationItem.backBarButtonItem = UIBarButtonItem(
-            title: "",
-            style: .plain,
-            target: nil,
-            action: nil
-        )
-        self.tabBarController?.tabBar.isHidden = false
+        artistReservationStatusTableView.backgroundColor = .white
         if(todayCount == 0){
             firstArtistResLabel.text = "포트폴리오 관리하러 가기"
             firstArtistResBtnLabel.text = ">"

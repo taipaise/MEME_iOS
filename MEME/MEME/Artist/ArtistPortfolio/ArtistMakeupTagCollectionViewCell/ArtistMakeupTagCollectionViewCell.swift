@@ -9,6 +9,7 @@ import UIKit
 
 class ArtistMakeupTagCollectionViewCell: UICollectionViewCell {
     //MARK: - UI Properties
+    //TODO: - cellConfigure() 만든 후 private 처리
     @IBOutlet weak var makeupTagLabel: UILabel!
     @IBOutlet weak var makeupTagView: UIView!
 

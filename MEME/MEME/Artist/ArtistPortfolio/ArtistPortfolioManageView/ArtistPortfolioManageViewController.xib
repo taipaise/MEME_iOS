@@ -28,39 +28,8 @@
             <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4f5-3e-X7y">
-                    <rect key="frame" x="0.0" y="59" width="393" height="48"/>
-                    <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="포트폴리오 관리" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="p3h-BD-xjo">
-                            <rect key="frame" x="146" y="14.333333333333327" width="101" height="19.333333333333329"/>
-                            <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
-                            <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Apg-Z4-GdG" userLabel="backBtn">
-                            <rect key="frame" x="23.999999999999996" y="4" width="39.666666666666657" height="40"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="40" id="72l-ee-70T"/>
-                            </constraints>
-                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            <state key="normal" title="Button"/>
-                            <buttonConfiguration key="configuration" style="plain" image="chevron.backward" catalog="system"/>
-                            <connections>
-                                <action selector="backButtonDidTap:" destination="-1" eventType="touchUpInside" id="Jan-uH-6ag"/>
-                            </connections>
-                        </button>
-                    </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    <constraints>
-                        <constraint firstItem="Apg-Z4-GdG" firstAttribute="leading" secondItem="4f5-3e-X7y" secondAttribute="leading" constant="24" id="SgP-S9-1cY"/>
-                        <constraint firstItem="p3h-BD-xjo" firstAttribute="centerY" secondItem="4f5-3e-X7y" secondAttribute="centerY" id="Vit-Bg-yHb"/>
-                        <constraint firstAttribute="height" constant="48" id="bz6-qk-nx2"/>
-                        <constraint firstItem="Apg-Z4-GdG" firstAttribute="centerY" secondItem="4f5-3e-X7y" secondAttribute="centerY" id="eKC-YX-U4Y"/>
-                        <constraint firstItem="p3h-BD-xjo" firstAttribute="centerX" secondItem="4f5-3e-X7y" secondAttribute="centerX" id="lRi-Dx-PgM"/>
-                    </constraints>
-                </view>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="s3h-1v-L6y">
-                    <rect key="frame" x="15" y="107" width="363" height="711"/>
+                    <rect key="frame" x="15" y="59" width="363" height="759"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="I0U-NO-YOz">
                         <size key="itemSize" width="170" height="250"/>
@@ -70,7 +39,7 @@
                     </collectionViewFlowLayout>
                 </collectionView>
                 <stackView opaque="NO" contentMode="center" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="1eY-Gr-d2u">
-                    <rect key="frame" x="76.666666666666686" y="420.66666666666669" width="240" height="84"/>
+                    <rect key="frame" x="76.666666666666686" y="396.66666666666669" width="240" height="84"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="등록된 포트폴리오가 없어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOJ-dI-eSU">
                             <rect key="frame" x="8.3333333333333286" y="0.0" width="223" height="24"/>
@@ -101,23 +70,19 @@
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="s3h-1v-L6y" firstAttribute="top" secondItem="4f5-3e-X7y" secondAttribute="bottom" id="7RP-9t-P2K"/>
-                <constraint firstItem="4f5-3e-X7y" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="C3r-Xh-edP"/>
                 <constraint firstItem="s3h-1v-L6y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="Jft-1t-uSW"/>
-                <constraint firstItem="4f5-3e-X7y" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" id="Tf7-m4-sTB"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="s3h-1v-L6y" secondAttribute="bottom" id="Vde-rI-kXv"/>
+                <constraint firstItem="s3h-1v-L6y" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="hFD-eB-MGA"/>
                 <constraint firstItem="1eY-Gr-d2u" firstAttribute="centerX" secondItem="s3h-1v-L6y" secondAttribute="centerX" id="hm5-mb-ayz"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="s3h-1v-L6y" secondAttribute="trailing" constant="15" id="jzP-hB-rXb"/>
                 <constraint firstItem="1eY-Gr-d2u" firstAttribute="centerY" secondItem="s3h-1v-L6y" secondAttribute="centerY" id="o8h-ad-6Uu"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iQh-tF-aDU" secondAttribute="trailing" constant="23" id="qbf-Ot-B2k"/>
-                <constraint firstItem="4f5-3e-X7y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="sit-UD-0rQ"/>
                 <constraint firstAttribute="bottom" secondItem="iQh-tF-aDU" secondAttribute="bottom" constant="52" id="teG-B2-Hed"/>
             </constraints>
             <point key="canvasLocation" x="51" y="-11"/>
         </view>
     </objects>
     <resources>
-        <image name="chevron.backward" catalog="system" width="97" height="128"/>
         <image name="portfolioAddButton" width="75" height="75"/>
     </resources>
 </document>
