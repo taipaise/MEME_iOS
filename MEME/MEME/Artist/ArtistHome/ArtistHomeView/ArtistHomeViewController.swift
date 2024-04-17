@@ -40,7 +40,6 @@ class ArtistHomeViewController: UIViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
-        self.tabBarController?.tabBar.isHidden = false
         self.todayCount = 0
         self.tomorrowCount = 0
         self.fromTomorrowCount = 0
