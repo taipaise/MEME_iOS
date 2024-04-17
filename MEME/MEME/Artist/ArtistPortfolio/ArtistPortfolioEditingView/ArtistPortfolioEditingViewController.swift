@@ -76,6 +76,8 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
     
     //MARK: - setUI()
     private func setUI(){
+        makeupCategoryCollectionView.backgroundColor = .white
+        infoTextView.backgroundColor = .white
         self.tabBarController?.tabBar.isHidden = true
         infoTextView.delegate = self
         infoTextView.layer.cornerRadius = 10
@@ -85,7 +87,7 @@ class ArtistPortfolioEditingViewController: UIViewController, UINavigationContro
         if !isEdit {
             artistProfileEditingInfoBar.setTitle("수정하기", for: .normal)
             self.navigationItem.title = "포트폴리오 수정"
-            navigationItem.rightBarButtonItem = UIBarButtonItem(image: .icTrash.withRenderingMode(.alwaysTemplate), style: .plain, target: self, action: #selector(trashButtonDidTap))
+            navigationItem.rightBarButtonItem = UIBarButtonItem(image: .icTrash.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(trashButtonDidTap))
         }else {
             self.navigationItem.title =  "포트폴리오 추가"
             artistProfileEditingInfoBar.setTitle("추가하기", for: .normal)

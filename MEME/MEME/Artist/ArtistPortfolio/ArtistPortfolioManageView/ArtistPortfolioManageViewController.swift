@@ -18,6 +18,7 @@ class ArtistPortfolioManageViewController: UIViewController {
     //MARK: - ViewController 생명 주기
     override func viewDidLoad() {
         super.viewDidLoad()
+        portfolioCollectionView.backgroundColor = .white
         collectionViewConfig()
         getAllPortfolio()
     }

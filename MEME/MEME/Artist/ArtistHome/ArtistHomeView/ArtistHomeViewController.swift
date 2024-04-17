@@ -52,6 +52,7 @@ class ArtistHomeViewController: UIViewController {
     
     //MARK: - setUI()
     private func setUI(){
+        artistReservationStatusTableView.backgroundColor = .white
         if(todayCount == 0){
             firstArtistResLabel.text = "포트폴리오 관리하러 가기"
             firstArtistResBtnLabel.text = ">"
