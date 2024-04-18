@@ -74,6 +74,9 @@
 		2DB303F32B829EF200D9E394 /* BusinessLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */; };
 		2DC54B542BB7487100464DB2 /* memeSecret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DC54B522BB7487100464DB2 /* memeSecret.plist */; };
 		2DC54B552BB749A800464DB2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DC54B512BB7487100464DB2 /* GoogleService-Info.plist */; };
+		2DD60FFB2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD60FFA2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift */; };
+		2DD60FFF2BC5AE5A00B362F1 /* ModelHomeViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD60FFE2BC5AE5A00B362F1 /* ModelHomeViewItem.swift */; };
+		2DD610022BC5AE7400B362F1 /* ModelHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD610012BC5AE7400B362F1 /* ModelHomeViewModel.swift */; };
 		3101C72A2B81F77200460689 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C7292B81F77200460689 /* ProfileInfo.swift */; };
 		3101C72C2B81F80600460689 /* ProfileInfoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */; };
 		312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */; };
@@ -395,6 +398,9 @@
 		2DC54B512BB7487100464DB2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2DC54B522BB7487100464DB2 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
 		2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
+		2DD60FFA2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendHeaderReusableView.swift; sourceTree = "<group>"; };
+		2DD60FFE2BC5AE5A00B362F1 /* ModelHomeViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHomeViewItem.swift; sourceTree = "<group>"; };
+		2DD610012BC5AE7400B362F1 /* ModelHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHomeViewModel.swift; sourceTree = "<group>"; };
 		3101C7292B81F77200460689 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
 		3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoBuilder.swift; sourceTree = "<group>"; };
 		312DF7612B669CC30060BDF0 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -845,9 +851,8 @@
 		2D0A19082B4ED53600C1CECA /* ModelHomeView */ = {
 			isa = PBXGroup;
 			children = (
-				315AC1C42B70CE02003FD1A1 /* ModelHomeViewController.swift */,
-				2D62E2352B541798004E8299 /* SelectMakeupCardCell */,
-				2D62E2382B541818004E8299 /* ModelReservationCell */,
+				2DD610002BC5AE6600B362F1 /* ViewModel */,
+				2DD60FFD2BC5AE3300B362F1 /* View */,
 			);
 			path = ModelHomeView;
 			sourceTree = "<group>";
@@ -1026,6 +1031,34 @@
 				2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		2DD60FF92BC5AE0B00B362F1 /* RecommendHeaderReusableView */ = {
+			isa = PBXGroup;
+			children = (
+				2DD60FFA2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift */,
+			);
+			path = RecommendHeaderReusableView;
+			sourceTree = "<group>";
+		};
+		2DD60FFD2BC5AE3300B362F1 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				315AC1C42B70CE02003FD1A1 /* ModelHomeViewController.swift */,
+				2DD60FFE2BC5AE5A00B362F1 /* ModelHomeViewItem.swift */,
+				2DD60FF92BC5AE0B00B362F1 /* RecommendHeaderReusableView */,
+				2D62E2352B541798004E8299 /* SelectMakeupCardCell */,
+				2D62E2382B541818004E8299 /* ModelReservationCell */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		2DD610002BC5AE6600B362F1 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2DD610012BC5AE7400B362F1 /* ModelHomeViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		3142B94C2B4CFFED0066CD5A = {
@@ -2068,6 +2101,7 @@
 				CC8CAA092BB4E6DB005F1E53 /* PostReviewAPI.swift in Sources */,
 				316A926D2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift in Sources */,
 				2D62E24A2B5462B0004E8299 /* SelectMakeupCardViewCell.swift in Sources */,
+				2DD60FFF2BC5AE5A00B362F1 /* ModelHomeViewItem.swift in Sources */,
 				CC9C38652B7BE3A10073A257 /* InterestMakeUpDTO.swift in Sources */,
 				2D62E2552B549407004E8299 /* CategorySearchViewCell.swift in Sources */,
 				315EE2D52B6658B50042A082 /* SetBusinessInfoViewController.swift in Sources */,
@@ -2094,6 +2128,7 @@
 				2D6F59B32B5C397400CA883A /* SortOptionsViewController.swift in Sources */,
 				09A6B0A02B9B0EE6007DCC0A /* PortfolioCategories.swift in Sources */,
 				CC9C385B2B7BCAF30073A257 /* InterestArtistManager.swift in Sources */,
+				2DD610022BC5AE7400B362F1 /* ModelHomeViewModel.swift in Sources */,
 				CC9C38852B808C810073A257 /* LogOutManager.swift in Sources */,
 				2D6F59B82B5C4FB100CA883A /* SortOptionIconView.swift in Sources */,
 				CC9C38572B7BC6200073A257 /* ModelProfileManager.swift in Sources */,
@@ -2169,6 +2204,7 @@
 				2D669BA32BAD9EBF007E03A0 /* ReviewAPI.swift in Sources */,
 				CC9C38772B7FEAF40073A257 /* ReviewListAPI.swift in Sources */,
 				2D6F59AB2B5BD07500CA883A /* ModelReservationChartTableViewCell.swift in Sources */,
+				2DD60FFB2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift in Sources */,
 				3169E3F62BC2E01800550F2E /* ModelSignUpCoordinator.swift in Sources */,
 				CC9C385F2B7BDAF50073A257 /* InterestArtistDTO.swift in Sources */,
 				2D8C20C52B82D5E100CD4A90 /* ProfileDTO.swift in Sources */,
