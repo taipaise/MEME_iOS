@@ -5,10 +5,10 @@
 //  Created by 정민지 on 4/3/24.
 //
 
-enum ModelHomeViewControllerSection {
-    case modelReservations
-    case recommendByReview
-    case recommendByRecent
+enum ModelHomeViewControllerSection: Int {
+    case modelReservations = 0
+    case recommendByReview = 1
+    case recommendByRecent = 2
 }
 
 enum ModelHomeViewControllerItem: Hashable {

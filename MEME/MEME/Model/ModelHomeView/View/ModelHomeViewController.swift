@@ -15,20 +15,20 @@ final class ModelHomeViewController: UIViewController {
         let scrollView = UIScrollView()
         scrollView.showsHorizontalScrollIndicator = false
         scrollView.showsVerticalScrollIndicator = false
-    
+        
         return scrollView
     }()
     private let contentsView = UIView()
     private var memeLogoImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "logo")
+        imageView.image = .logo
         imageView.contentMode = .scaleAspectFit
         
         return imageView
     }()
     private var alarmImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = UIImage(named: "icon _bell")
+        imageView.image = .iconBell
         imageView.contentMode = .scaleAspectFit
         
         return imageView
@@ -98,7 +98,6 @@ final class ModelHomeViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         
-        setUserNickName()
         setupCollectionView()
         addSubViews()
         makeConstraints()
@@ -106,7 +105,53 @@ final class ModelHomeViewController: UIViewController {
         bindViewModel()
     }
     
-    // MARK: - addSubviews
+    // MARK: - BindViewModel
+    private func bindViewModel() {
+        let memberId = KeyChainManager.loadMemberID()
+        
+        let input = ModelHomeViewModel.Input(
+            modelReservationsTrigger: Observable.just(memberId),
+            getRecommendArtistByReviewTrigger: .just(()),
+            getRecommendArtistByRecentTrigger: .just(()),
+            userNicknameTrigger: .just(()))
+        
+        let output = viewModel.transform(input)
+        
+        output.userNickname
+            .observe(on: MainScheduler.instance)
+            .subscribe(onNext: { [weak self] nickname in
+                self?.modelWelcomeLabel.text = "\(nickname)님, 환영합니다!"
+            })
+            .disposed(by: disposeBag)
+        
+        Observable.combineLatest(
+            output.modelReservations,
+            output.recommendArtistByReview,
+            output.recommendArtistByRecent)
+        .observe(on: MainScheduler.instance)
+        .subscribe(onNext: { [weak self]
+            modelReservations,
+            recommendArtistByReview,
+            recommendArtistByRecent in
+            self?.setSnapShot(
+                modelReservations: modelReservations,
+                recommendArtistByReview: recommendArtistByReview,
+                recommendArtistByRecent: recommendArtistByRecent)
+        }).disposed(by: disposeBag)
+    }
+    //MARK: -Actions
+    func setupSearchBar() {
+        searchMakeup.delegate = self
+    }
+    @objc private func viewAllReservationsTapped() {
+        let reservationsVC = ManagementReservationsViewController()
+        reservationsVC.hidesBottomBarWhenPushed = true
+        navigationController?.pushViewController(reservationsVC, animated: true)
+    }
+}
+
+// MARK: - addSubviews
+extension ModelHomeViewController {
     func addSubViews() {
         contentsView.addSubview(memeLogoImageView)
         contentsView.addSubview(alarmImageView)
@@ -118,128 +163,81 @@ final class ModelHomeViewController: UIViewController {
         scrollView.addSubview(contentsView)
         view.addSubview(scrollView)
     }
-    
-    // MARK: - makeConstraints
+}
+
+// MARK: - makeConstraints
+extension ModelHomeViewController {
     func makeConstraints() {
-        scrollView.snp.makeConstraints { (make) in
+        scrollView.snp.makeConstraints { make in
             make.edges.equalTo(view.safeAreaLayoutGuide)
         }
-        contentsView.snp.makeConstraints { (make) in
+        contentsView.snp.makeConstraints { make in
             make.edges.equalTo(scrollView)
             make.width.equalTo(scrollView)
         }
-        memeLogoImageView.snp.makeConstraints {make in
+        memeLogoImageView.snp.makeConstraints { make in
             make.top.equalTo(contentsView.snp.top).offset(10)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
             make.height.equalTo(42)
             make.width.equalTo(memeLogoImageView.snp.height).multipliedBy(67.0/42.0)
         }
-        alarmImageView.snp.makeConstraints {make in
+        alarmImageView.snp.makeConstraints { make in
             make.centerY.equalTo(memeLogoImageView.snp.centerY)
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
             make.height.equalTo(22)
             make.width.equalTo(memeLogoImageView.snp.height).multipliedBy(6.0/7.0)
         }
-        searchMakeup.snp.makeConstraints {make in
+        searchMakeup.snp.makeConstraints { make in
             make.top.equalTo(memeLogoImageView.snp.bottom).offset(27)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
             make.height.equalTo(41)
         }
-        modelWelcomeLabel.snp.makeConstraints {make in
+        modelWelcomeLabel.snp.makeConstraints { make in
             make.top.equalTo(searchMakeup.snp.bottom).offset(33)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
-        modelWelcomeGuideLabel.snp.makeConstraints {make in
+        modelWelcomeGuideLabel.snp.makeConstraints { make in
             make.top.equalTo(modelWelcomeLabel.snp.bottom)
             make.leading.equalTo(contentsView.snp.leading).offset(24)
         }
-        viewAllReservationsButton.snp.makeConstraints {make in
+        viewAllReservationsButton.snp.makeConstraints { make in
             make.top.equalTo(modelWelcomeGuideLabel.snp.bottom).offset(17)
             make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
         }
-        collectionView.snp.makeConstraints {make in
+        collectionView.snp.makeConstraints { make in
             make.top.equalTo(viewAllReservationsButton.snp.bottom).offset(13)
             make.height.equalTo(800)
-            make.leading.equalTo(contentsView.snp.leading).offset(24)
-            make.trailing.equalTo(contentsView.snp.trailing).offset(-24)
+            make.leading.trailing.equalToSuperview()
             make.bottom.equalTo(contentsView.snp.bottom)
-    
+            
         }
     }
-    
-    // MARK: - BindViewModel
-    private func bindViewModel() {
-        let memberId = KeyChainManager.loadMemberID()
-        
-        let input = ModelHomeViewModel.Input(
-            modelReservationsTrigger: Observable.just(memberId),
-            getRecommendArtistByReviewTrigger: .just(()),
-            getRecommendArtistByRecentTrigger: .just(())
-        )
-        
-        let output = viewModel.transform(input: input)
-        
-        Observable.combineLatest(
-            output.modelReservations,
-            output.recommendArtistByReview,
-            output.recommendArtistByRecent
-        ).observe(on: MainScheduler.instance)
-        .subscribe(onNext: { [weak self] 
-            modelReservations,
-            recommendArtistByReview,
-            recommendArtistByRecent in
-            self?.setSnapShot(
-                modelReservations: modelReservations,
-                recommendArtistByReview: recommendArtistByReview,
-                recommendArtistByRecent: recommendArtistByRecent
-            )
-        }).disposed(by: disposeBag)
-    }
-    //MARK: -Actions
-    func setUserNickName() {
-        if let nickname = KeyChainManager.read(forkey: .nickName) {
-            modelWelcomeLabel.text = "\(nickname)님, 환영합니다!"
-        } else {
-            modelWelcomeLabel.text = "환영합니다!"
-        }
-    }
-    
-    func setupSearchBar() {
-        searchMakeup.delegate = self
-    }
-    @objc private func viewAllReservationsTapped() {
-        let reservationsVC = ManagementReservationsViewController()
-        reservationsVC.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(reservationsVC, animated: true)
-    }
-    
-    //MARK: -CollectionView
+}
+
+//MARK: -CollectionView
+extension ModelHomeViewController {
     private func setupCollectionView() {
         collectionView.delegate = self
         
         collectionView.register(ModelNonReservationViewCell.self,
                                 forCellWithReuseIdentifier: ModelNonReservationViewCell.identifier)
-        collectionView.register(UINib(nibName: "ModelReservationConfirmViewCell", bundle: nil),
+        collectionView.register(UINib(nibName: ModelReservationConfirmViewCell.className, bundle: nil),
                                 forCellWithReuseIdentifier: ModelReservationConfirmViewCell.identifier)
-        collectionView.register(UINib(nibName: "SelectMakeupCardViewCell", bundle: nil),
+        collectionView.register(UINib(nibName: SelectMakeupCardViewCell.className, bundle: nil),
                                 forCellWithReuseIdentifier: SelectMakeupCardViewCell.identifier)
-        collectionView.register(UINib(nibName: "SelectMakeupCardViewCell", bundle: nil),
+        collectionView.register(UINib(nibName: SelectMakeupCardViewCell.className, bundle: nil),
                                 forCellWithReuseIdentifier: SelectMakeupCardViewCell.identifier)
         
         collectionView.register(RecommendHeaderReusableView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: RecommendHeaderReusableView.reuseIdentifier)
+                                withReuseIdentifier: RecommendHeaderReusableView.className)
         
         collectionView.collectionViewLayout = createLayout()
         collectionView.backgroundColor = .white
         setDataSource()
     }
     private func setDataSource() {
-        collectionView.register(RecommendHeaderReusableView.self,
-                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
-                                withReuseIdentifier: RecommendHeaderReusableView.reuseIdentifier)
-        
         dataSource = UICollectionViewDiffableDataSource<ModelHomeViewControllerSection, ModelHomeViewControllerItem> (collectionView: collectionView, cellProvider: { collectionView, indexPath, itemidentifier in
             
             switch itemidentifier  {
@@ -277,7 +275,7 @@ final class ModelHomeViewController: UIViewController {
             case .recommendByReview:
                 if let headerView = collectionView.dequeueReusableSupplementaryView(
                     ofKind: kind,
-                    withReuseIdentifier: RecommendHeaderReusableView.reuseIdentifier,
+                    withReuseIdentifier: RecommendHeaderReusableView.className,
                     for: indexPath) as? RecommendHeaderReusableView {
                     headerView.configure(with: "어떤 아티스트를 선택할 지 모르겠을 때", subText: "후기가 많은 아티스트를 만나봐요")
                     return headerView
@@ -285,7 +283,7 @@ final class ModelHomeViewController: UIViewController {
             case .recommendByRecent:
                 if let headerView = collectionView.dequeueReusableSupplementaryView(
                     ofKind: kind,
-                    withReuseIdentifier: RecommendHeaderReusableView.reuseIdentifier,
+                    withReuseIdentifier: RecommendHeaderReusableView.className,
                     for: indexPath) as? RecommendHeaderReusableView {
                     headerView.configure(with: "새로운 메이크업을 찾아보고 싶을 때", subText: "가장 최근에 올라온 포트폴리오를 알아봐요")
                     return headerView
@@ -324,40 +322,50 @@ final class ModelHomeViewController: UIViewController {
     private func createLayout() -> UICollectionViewCompositionalLayout {
         let config = UICollectionViewCompositionalLayoutConfiguration()
         config.interSectionSpacing = 30
-        return UICollectionViewCompositionalLayout(sectionProvider: {[weak self] sectionIndex, _ in
-            switch sectionIndex {
-            case 0:
-                return self?.createModelReservationsSection()
-            case 1, 2:
+        return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+            guard let section = ModelHomeViewControllerSection(rawValue: sectionIndex) else { return nil }
+            switch section {
+            case .modelReservations:
+                return self?.createModelReservationsSection(using: layoutEnvironment)
+            case .recommendByReview, .recommendByRecent:
                 return self?.createRecommendSection()
-            default:
-                return self?.createModelReservationsSection()
             }
         }, configuration: config)
     }
-    private func createModelReservationsSection() -> NSCollectionLayoutSection {
-        let itemSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(142))
+    private func createModelReservationsSection(using environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let width = environment.container.effectiveContentSize.width - 48
+        
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(width),
+            heightDimension: .absolute(142)
+        )
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-
-        let groupSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(142))
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(width),
+            heightDimension: .absolute(142)
+        )
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 24
         section.orthogonalScrollingBehavior = .groupPaging
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+        
         return section
     }
     private func createRecommendSection() -> NSCollectionLayoutSection {
         let itemSize = NSCollectionLayoutSize(widthDimension: .absolute(154), heightDimension: .absolute(222))
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
-        item.contentInsets = NSDirectionalEdgeInsets(top: 15, leading: 10, bottom: 0, trailing: 0)
         
         
-        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(164), heightDimension: .absolute(222))
+        let groupSize = NSCollectionLayoutSize(widthDimension: .absolute(154), heightDimension: .absolute(222))
         let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
         
         let section = NSCollectionLayoutSection(group: group)
-        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 0, bottom: 10, trailing: 0)
         section.orthogonalScrollingBehavior = .continuous
+        section.interGroupSpacing = 10
+        section.contentInsets = NSDirectionalEdgeInsets(top: 13, leading: 24, bottom: 0, trailing: 24)
         
         let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .estimated(48))
         let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize,

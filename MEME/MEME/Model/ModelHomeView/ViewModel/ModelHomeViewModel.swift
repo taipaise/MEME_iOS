@@ -17,16 +17,24 @@ class ModelHomeViewModel: ViewModel {
             let modelReservationsTrigger: Observable<Int>
             let getRecommendArtistByReviewTrigger: Observable<Void>
             let getRecommendArtistByRecentTrigger: Observable<Void>
+            let userNicknameTrigger: Observable<Void>
         }
         
         struct Output {
             let modelReservations: Observable<[ReservationData]>
             let recommendArtistByReview: Observable<[Portfolio]>
             let recommendArtistByRecent: Observable<[Portfolio]>
+            let userNickname: Observable<String>
         }
     
     //MARK: - transform
     func transform(_ input: Input) -> Output {
+        let userNickname = input.userNicknameTrigger
+            .flatMapLatest { _ -> Observable<String> in
+                return Observable.just(KeyChainManager.read(forkey: .nickName) ?? "환영합니다!")
+            }
+            .startWith("환영합니다!")
+        
         let modelReservations = input.modelReservationsTrigger
             .flatMapLatest { modelId -> Observable<[ReservationData]> in
                 return self.fetchModelReservations(modelId: modelId)
@@ -48,7 +56,8 @@ class ModelHomeViewModel: ViewModel {
         return Output(
             modelReservations: modelReservations,
             recommendArtistByReview: recommendArtistByReview,
-            recommendArtistByRecent: recommendArtistByRecent
+            recommendArtistByRecent: recommendArtistByRecent,
+            userNickname: userNickname
         )
     }
     
@@ -61,7 +70,7 @@ class ModelHomeViewModel: ViewModel {
                     let filteredData = reservationDTO.data?.filter { reservationData in
                         if let date = self.dateFromString(reservationData.reservationDate),
                            self.isToday(date),
-                           reservationData.status == "EXPECTED" {
+                           reservationData.status == ReservationState.EXPECTED.rawValue {
                             return true
                         }
                         return false

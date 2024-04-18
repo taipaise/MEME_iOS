@@ -8,9 +8,7 @@
 import UIKit
 import SnapKit
 
-class RecommendHeaderReusableView: UICollectionReusableView {
-    static let reuseIdentifier = "RecommendHeaderReusableView"
-    
+final class RecommendHeaderReusableView: UICollectionReusableView {    
     private let recomandMainLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
@@ -40,10 +38,10 @@ class RecommendHeaderReusableView: UICollectionReusableView {
         addSubview(recomandMainLabel)
         addSubview(recomandSubLabel)
         
-        recomandMainLabel.snp.makeConstraints {make in
+        recomandMainLabel.snp.makeConstraints { make in
             make.top.leading.trailing.equalToSuperview()
         }
-        recomandSubLabel.snp.makeConstraints {make in
+        recomandSubLabel.snp.makeConstraints { make in
             make.top.equalTo(recomandMainLabel.snp.bottom).offset(7)
             make.leading.trailing.bottom.equalToSuperview()
         }
