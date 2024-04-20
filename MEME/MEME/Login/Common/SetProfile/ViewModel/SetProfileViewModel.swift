@@ -10,62 +10,69 @@ import RxSwift
 import RxCocoa
 
 final class SetProfileViewModel: NSObject, ViewModel {
+    enum NavigationType {
+        case fail
+        case success
+        case none
+    }
+    
     struct Input {
-        let name: Observable<String>
-        let nickname: Observable<String>
-        let verifyTap: Observable<Void>
+        let skipTap: Observable<Void>
+        let nextTap: Observable<Void>
     }
     
     struct Output {
         let profileImage: Observable<UIImage>
-        let nickNameStatus: Observable<NickNameStatus?>
         let nextButtonState: Observable<Bool>
+        var navigation: Observable<NavigationType>
     }
     
-    private(set) var roleType: RoleType
-    private let profileImage = BehaviorRelay<UIImage>(value: .defaultProfile)
-    private let isNickNameVerified = BehaviorRelay<Bool>(value: false)
-    private let nickNameStatus = BehaviorRelay<NickNameStatus?>(value: nil)
     private(set) var profileInfo: SignUpProfileInfo
+    private let profileImage = BehaviorRelay<UIImage>(value: .defaultProfile)
+    private let skipState = BehaviorRelay<Bool>(value: false)
+    private var navigation = PublishSubject<NavigationType>()
     private let imagePickerManager = ImagePickerManager()
     private let phPickerManager = PHPickerManager()
     private var disposeBag = DisposeBag()
+    private let authManager = AuthManager.shared
     
-    init(roleType: RoleType) {
-        self.roleType = roleType
-        profileInfo = SignUpProfileInfo(profileImg: "", username: "", nickname: "")
+    init(profileInfo: SignUpProfileInfo) {
+        self.profileInfo = profileInfo
         super.init()
         bindPicker()
     }
     
     func transform(_ input: Input) -> Output {
-        input.name.subscribe { [weak self] name in
-            self?.setName(name)
-        }
-        .disposed(by: disposeBag)
-        
-        input.nickname.subscribe { [weak self] nickname in
-            self?.setNickname(nickname)
-        }
-        .disposed(by: disposeBag)
-        
-        input.verifyTap.subscribe { [weak self] _ in
-            self?.verifyNickName()
-        }
-        .disposed(by: disposeBag)
-        
-        let nameAndNicknameFilled = Observable.combineLatest(input.name, input.nickname)
-            .map { name, nickname in
-                !name.isEmpty && !nickname.isEmpty
+        input.skipTap
+            .subscribe { [weak self] _ in
+                self?.toggleSkip()
             }
+            .disposed(by: disposeBag)
+        
+        input.nextTap
+            .subscribe { [weak self] _ in
+                print(self?.profileInfo)
+                // TODO: - 서버 열리면 주석 해제
+//                Task {
+//                    let result = await self?.modelSignUp()
+//                    if
+//                        let result,
+//                        result
+//                    {
+//                        self?.navigation.onNext(.success)
+//                    } else {
+//                        self?.navigation.onNext(.fail)
+//                    }
+//                }
+                self?.navigation.onNext(.success)
+            }
+            .disposed(by: disposeBag)
         
         return Output(
             profileImage: profileImage.asObservable(),
-            nickNameStatus: nickNameStatus.asObservable(),
-            nextButtonState: Observable.combineLatest(nameAndNicknameFilled, isNickNameVerified)
-                .map { nameAndNicknameFilled, isNickNameVerified in
-                    return nameAndNicknameFilled && isNickNameVerified
-                }
+            nextButtonState: Observable.combineLatest(skipState, profileImage)
+                .map { return $0 || $1 != .defaultProfile },
+            navigation: navigation.asObservable()
             )
     }
 }
@@ -91,29 +98,9 @@ extension SetProfileViewModel {
 
 // MARK: - action
 extension SetProfileViewModel {
-    private func setName(_ name: String) {
-        profileInfo.username = name
-    }
-    
-    private func setNickname(_ nickname: String) {
-        guard nickname != profileInfo.nickname else { return }
-        
-        profileInfo.nickname = nickname
-        isNickNameVerified.accept(false)
-        if nickname.count > 15 {
-            nickNameStatus.accept(.lengthLimit)
-        } else {
-            nickNameStatus.accept(.none)
-        }
-    }
-    
-    private func verifyNickName() {
-        let nickname = profileInfo.nickname
-        if nickname.count > 15 { return }
-        
-        // TODO: - 닉네임 중복 여부 체크
-        isNickNameVerified.accept(true)
-        nickNameStatus.accept(.valid)
+    private func toggleSkip() {
+        var state = skipState.value
+        skipState.accept(!state)
     }
     
     func presentImagePicker(_ viewController: UIViewController) {
@@ -124,5 +111,25 @@ extension SetProfileViewModel {
         phPickerManager.present(from: viewController)
     }
     
+    private func modelSignUp() async -> Bool {
+        let result = await authManager.modelSignUp(profileInfo: profileInfo)
+        
+        switch result {
+        case .success(let result):
+            let userData = result.data
+            let userId = userData.userId
+            let accessToken = userData.accessToken
+            let refreshToken = userData.refreshToken
+            KeyChainManager.save(forKey: .memberId, value: "\(userId)")
+            KeyChainManager.save(forKey: .accessToken, value: accessToken)
+            KeyChainManager.save(forKey: .refreshToken, value: refreshToken)
+            KeyChainManager.save(forKey: .nickName, value: profileInfo.nickname)
+            KeyChainManager.save(forKey: .role, value: RoleType.MODEL.rawValue)
+            return true
+        case .failure(let error):
+            print(error.localizedDescription)
+            return false
+        }
+    }
 }
 

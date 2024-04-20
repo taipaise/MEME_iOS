@@ -18,7 +18,7 @@ final class SetNameCoordinator: SignupCoordinator {
     }
 
     @MainActor func start() {
-        let vc = SetNameViewController(nibName: SetNameViewController.className, bundle: nil)
+        let vc = SetNameViewController()
         let viewModel = SetNameViewModel(profileInfo: profileInfo)
         vc.configure(viewModel: viewModel)
         navigationController?.pushViewController(vc, animated: true)
