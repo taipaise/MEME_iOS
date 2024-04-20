@@ -20,7 +20,7 @@ final class SetProfileImageViewController: UIViewController {
     @IBOutlet private weak var skipButton: UIButton!
     @IBOutlet private weak var nextButton: UIButton!
 
-    private var viewModel: SetProfileViewModel?
+    private var viewModel: SetProfileImageViewModel?
     private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
@@ -49,7 +49,7 @@ final class SetProfileImageViewController: UIViewController {
         titleLabel.attributedText = titleString
     }
     
-    func configure(viewModel: SetProfileViewModel) {
+    func configure(viewModel: SetProfileImageViewModel) {
         self.viewModel = viewModel
     }
 }
@@ -59,7 +59,7 @@ extension SetProfileImageViewController {
     private func bind() {
         guard let viewModel = viewModel else { return }
         
-        let input = SetProfileViewModel.Input(
+        let input = SetProfileImageViewModel.Input(
             skipTap: skipButton.rx.tap.asObservable(),
             nextTap: nextButton.rx.tap.asObservable()
         )
@@ -115,7 +115,7 @@ extension SetProfileImageViewController {
 }
 
 extension SetProfileImageViewController {
-        private func navigate(type: SetProfileViewModel.NavigationType) {
+        private func navigate(type: SetProfileImageViewModel.NavigationType) {
             guard let viewModel = viewModel else { return }
             let coordinator = SignUpCompletionCoordinator(navigationController: self.navigationController, profileInfo: viewModel.profileInfo)
             switch type {

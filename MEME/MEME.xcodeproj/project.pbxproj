@@ -151,7 +151,7 @@
 		3169E3E52BC2B62100550F2E /* RoleSelectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3E42BC2B62100550F2E /* RoleSelectionCoordinator.swift */; };
 		3169E3E92BC2B8E400550F2E /* SetNameCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3E82BC2B8E400550F2E /* SetNameCoordinator.swift */; };
 		3169E3EC2BC2B91E00550F2E /* RoleSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3EB2BC2B91E00550F2E /* RoleSelectionViewModel.swift */; };
-		3169E3F02BC2C0D400550F2E /* SetProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3EF2BC2C0D400550F2E /* SetProfileViewModel.swift */; };
+		3169E3F02BC2C0D400550F2E /* SetProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3EF2BC2C0D400550F2E /* SetProfileImageViewModel.swift */; };
 		3169E3F22BC2D7B700550F2E /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3F12BC2D7B700550F2E /* ImagePickerManager.swift */; };
 		3169E3F42BC2D92A00550F2E /* PHPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3F32BC2D92A00550F2E /* PHPickerManager.swift */; };
 		316A926A2B66703800E4337D /* SetBusinessLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A92682B66703800E4337D /* SetBusinessLocationViewController.swift */; };
@@ -464,7 +464,7 @@
 		3169E3E42BC2B62100550F2E /* RoleSelectionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectionCoordinator.swift; sourceTree = "<group>"; };
 		3169E3E82BC2B8E400550F2E /* SetNameCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameCoordinator.swift; sourceTree = "<group>"; };
 		3169E3EB2BC2B91E00550F2E /* RoleSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectionViewModel.swift; sourceTree = "<group>"; };
-		3169E3EF2BC2C0D400550F2E /* SetProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewModel.swift; sourceTree = "<group>"; };
+		3169E3EF2BC2C0D400550F2E /* SetProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileImageViewModel.swift; sourceTree = "<group>"; };
 		3169E3F12BC2D7B700550F2E /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		3169E3F32BC2D92A00550F2E /* PHPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPickerManager.swift; sourceTree = "<group>"; };
 		316A92682B66703800E4337D /* SetBusinessLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBusinessLocationViewController.swift; sourceTree = "<group>"; };
@@ -1473,7 +1473,7 @@
 		3169E3EE2BC2C08400550F2E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				3169E3EF2BC2C0D400550F2E /* SetProfileViewModel.swift */,
+				3169E3EF2BC2C0D400550F2E /* SetProfileImageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -2304,7 +2304,7 @@
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,
 				3142B99D2B4D021A0066CD5A /* UIView+.swift in Sources */,
 				317721032BC2A6B100A1928A /* TermDetailViewModel.swift in Sources */,
-				3169E3F02BC2C0D400550F2E /* SetProfileViewModel.swift in Sources */,
+				3169E3F02BC2C0D400550F2E /* SetProfileImageViewModel.swift in Sources */,
 				CC9C38692B7C79240073A257 /* ArtistProfileAPI.swift in Sources */,
 				31B413862B6D338F00535BB1 /* BusinessVerificationDTO.swift in Sources */,
 				315AC1C82B70FE35003FD1A1 /* ReservationTimes.swift in Sources */,

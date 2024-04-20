@@ -18,7 +18,7 @@ final class SetProfileImageCoordinator: SignupCoordinator {
     
     @MainActor func start() {
         let vc = SetProfileImageViewController(nibName: SetProfileImageViewController.className, bundle: nil)
-        let viewModel = SetProfileViewModel(profileInfo: profileInfo)
+        let viewModel = SetProfileImageViewModel(profileInfo: profileInfo)
         vc.configure(viewModel: viewModel)
         navigationController?.pushViewController(vc, animated: true)
     }

@@ -115,6 +115,9 @@ final class SetNameViewController: UIViewController {
         nextButton.layer.cornerRadius = 10
     }
 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        view.endEditing(true)
+    }
 }
 
 // MARK: - Set Layout

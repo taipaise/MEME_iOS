@@ -9,7 +9,7 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-final class SetProfileViewModel: NSObject, ViewModel {
+final class SetProfileImageViewModel: NSObject, ViewModel {
     enum NavigationType {
         case fail
         case success
@@ -78,7 +78,7 @@ final class SetProfileViewModel: NSObject, ViewModel {
 }
 
 // MARK: - binding
-extension SetProfileViewModel {
+extension SetProfileImageViewModel {
     private func bindPicker() {
         imagePickerManager.selectedImage
             .subscribe { [weak self] image in
@@ -97,7 +97,7 @@ extension SetProfileViewModel {
 }
 
 // MARK: - action
-extension SetProfileViewModel {
+extension SetProfileImageViewModel {
     private func toggleSkip() {
         var state = skipState.value
         skipState.accept(!state)
