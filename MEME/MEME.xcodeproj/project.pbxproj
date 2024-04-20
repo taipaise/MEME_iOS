@@ -210,6 +210,7 @@
 		31B65E4F2B6E229000628C68 /* ReservationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B65E4E2B6E229000628C68 /* ReservationManager.swift */; };
 		31C0B5402BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C0B53F2BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift */; };
 		31C0B5422BCBAB8900758EE9 /* ModelDetailInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C0B5412BCBAB8900758EE9 /* ModelDetailInfoCollectionViewCell.swift */; };
+		31CC0DF42BD4221B00B8FCA9 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CC0DF32BD4221B00B8FCA9 /* CALayer+.swift */; };
 		31EA86F22BBFEC20003BCBF7 /* Moya+Wrapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F12BBFEC20003BCBF7 /* Moya+Wrapping.swift */; };
 		31EA86F42BBFEC39003BCBF7 /* MoyaAsyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F32BBFEC39003BCBF7 /* MoyaAsyncError.swift */; };
 		31EA86F62BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F52BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift */; };
@@ -526,6 +527,7 @@
 		31C0B53C2BCBA79100758EE9 /* SetModelDetailInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetModelDetailInfoViewModel.swift; sourceTree = "<group>"; };
 		31C0B53F2BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDetailInfoHeaderView.swift; sourceTree = "<group>"; };
 		31C0B5412BCBAB8900758EE9 /* ModelDetailInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDetailInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		31CC0DF32BD4221B00B8FCA9 /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
 		31EA86F12BBFEC20003BCBF7 /* Moya+Wrapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moya+Wrapping.swift"; sourceTree = "<group>"; };
 		31EA86F32BBFEC39003BCBF7 /* MoyaAsyncError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaAsyncError.swift; sourceTree = "<group>"; };
 		31EA86F52BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaAsyncRequest.swift; sourceTree = "<group>"; };
@@ -1122,6 +1124,7 @@
 				3142B99A2B4D020E0066CD5A /* NSObject+.swift */,
 				3142B99C2B4D021A0066CD5A /* UIView+.swift */,
 				319F534F2BCBBC82008D153E /* UICollectionView+.swift */,
+				31CC0DF32BD4221B00B8FCA9 /* CALayer+.swift */,
 				3142B99E2B4D02300066CD5A /* UIFont+.swift */,
 			);
 			path = extenstions;
@@ -1683,8 +1686,8 @@
 				31C85EEE2B526B8F0064A6E7 /* TermsAgreement */,
 				3169E3E62BC2B7C300550F2E /* Components */,
 				31C85EF12B526BDB0064A6E7 /* RoleSelection */,
-				31C85EF22B526C140064A6E7 /* SetProfile */,
 				31640D5F2BD3FF1700D7287B /* SetName */,
+				31C85EF22B526C140064A6E7 /* SetProfileImage */,
 				31C85EF42B526C2E0064A6E7 /* RegistrationCompletion */,
 			);
 			path = Common;
@@ -1745,14 +1748,14 @@
 			path = RoleSelection;
 			sourceTree = "<group>";
 		};
-		31C85EF22B526C140064A6E7 /* SetProfile */ = {
+		31C85EF22B526C140064A6E7 /* SetProfileImage */ = {
 			isa = PBXGroup;
 			children = (
 				3169E3EE2BC2C08400550F2E /* ViewModel */,
 				31B2634D2B57EE7D00304FBE /* SetProfileImageViewController.swift */,
 				31B2634E2B57EE7D00304FBE /* SetProfileImageViewController.xib */,
 			);
-			path = SetProfile;
+			path = SetProfileImage;
 			sourceTree = "<group>";
 		};
 		31C85EF32B526C200064A6E7 /* SetDetailInfo */ = {
@@ -2103,6 +2106,7 @@
 				CC9C384E2B754C240073A257 /* MyPageDTO.swift in Sources */,
 				CCB319082B82908A003B4738 /* ArtistProfileInfoManager.swift in Sources */,
 				2D62E23E2B5428CC004E8299 /* ModelNonReservationViewCell.swift in Sources */,
+				31CC0DF42BD4221B00B8FCA9 /* CALayer+.swift in Sources */,
 				CC8CAA112BB50B01005F1E53 /* DeleteReviewManager.swift in Sources */,
 				CC8CAA092BB4E6DB005F1E53 /* PostReviewAPI.swift in Sources */,
 				316A926D2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift in Sources */,

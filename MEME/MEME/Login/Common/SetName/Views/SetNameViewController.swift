@@ -27,15 +27,19 @@ final class SetNameViewController: UIViewController {
     private lazy var nameTextField: UITextField = {
         let tf = UITextField()
         tf.borderStyle = .none
-        tf.placeholder = "실명만 입력 가능합니다."
         tf.font = .pretendard(to: .regular, size: 14)
         tf.textColor = .black
+        tf.attributedPlaceholder = NSAttributedString(
+            string: "실명만 입력 가능합니다.",
+            attributes: [.foregroundColor: UIColor.gray400])
         return tf
     }()
     private lazy var nickNameTextField: UITextField = {
         let tf = UITextField()
         tf.borderStyle = .none
-        tf.placeholder = "닉네임은 최대 15자 작성 가능합니다."
+        tf.attributedPlaceholder = NSAttributedString(
+            string: "닉네임은 최대 15자 작성 가능합니다.",
+            attributes: [.foregroundColor: UIColor.gray400])
         tf.font = .pretendard(to: .regular, size: 14)
         tf.textColor = .black
         return tf
@@ -61,6 +65,16 @@ final class SetNameViewController: UIViewController {
         button.backgroundColor = .mainBold
         return button
     }()
+    private lazy var divideLine1: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray500
+        return view
+    }()
+    private lazy var divideLine2: UIView = {
+        let view = UIView()
+        view.backgroundColor = .gray500
+        return view
+    }()
     private var viewModel: SetNameViewModel?
     private var disposeBag = DisposeBag()
     
@@ -69,6 +83,7 @@ final class SetNameViewController: UIViewController {
         addSubViews()
         makeConstraints()
         setUI()
+        bind()
     }
     
     func configure(viewModel: SetNameViewModel) {
@@ -76,18 +91,28 @@ final class SetNameViewController: UIViewController {
     }
     
     private func setUI() {
+        view.backgroundColor = .white
+        navigationItem.title = "회원가입"
         progressBar.configure(progress: 1)
         
-        [nameTextField, nickNameTextField].forEach {
-            let bottomLayer = CALayer()
-            bottomLayer.frame = CGRect(
-                x: 0,
-                y: $0.frame.size.height - 1,
-                width: $0.frame.size.width,
-                height: 1)
-            bottomLayer.backgroundColor = UIColor.gray500.cgColor
-            $0.layer.addSublayer(bottomLayer)
-        }
+        let boldAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.pretendard(to: .semiBold, size: 16),
+            .foregroundColor: UIColor.black
+        ]
+        let regularAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.pretendard(to: .medium, size: 16),
+            .foregroundColor: UIColor.black
+        ]
+        
+        let nameString = NSMutableAttributedString(string: "이름을 입력해주세요", attributes: regularAttributes)
+        let nickNameString = NSMutableAttributedString(string: "닉네임을 입력해주세요", attributes: regularAttributes)
+        nameString.addAttributes(boldAttributes, range: NSRange(location: 0, length: 2))
+        nickNameString.addAttributes(boldAttributes, range: NSRange(location: 0, length: 3))
+        
+        nameLabel.attributedText = nameString
+        nickNameLabel.attributedText = nickNameString
+        
+        nextButton.layer.cornerRadius = 10
     }
 
 }
@@ -103,7 +128,9 @@ extension SetNameViewController {
             nickNameTextField,
             nickNameNoticeLabel,
             nickNameVerifyButton,
-            nextButton
+            nextButton,
+            divideLine1,
+            divideLine2
         ]
         
         view.addSubViews(subViews)
@@ -112,7 +139,7 @@ extension SetNameViewController {
     private func makeConstraints() {
         progressBar.snp.makeConstraints {
             $0.horizontalEdges.equalToSuperview().inset(20)
-            $0.top.equalToSuperview().offset(2)
+            $0.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(2)
             $0.height.equalTo(3)
         }
         
@@ -156,6 +183,18 @@ extension SetNameViewController {
             $0.horizontalEdges.equalToSuperview().inset(24)
             $0.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).inset(9)
             $0.height.equalTo(49)
+        }
+        
+        divideLine1.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(24)
+            $0.top.equalTo(nameTextField.snp.bottom)
+            $0.height.equalTo(1)
+        }
+        
+        divideLine2.snp.makeConstraints {
+            $0.horizontalEdges.equalToSuperview().inset(24)
+            $0.top.equalTo(nickNameTextField.snp.bottom)
+            $0.height.equalTo(1)
         }
     }
 }

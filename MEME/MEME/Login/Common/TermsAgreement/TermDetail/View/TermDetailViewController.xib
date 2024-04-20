@@ -5,13 +5,12 @@
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
-        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="TermDetailViewController" customModule="MEME" customModuleProvider="target">
             <connections>
-                <outlet property="contentLabel" destination="4jr-ya-RoE" id="OVo-h0-569"/>
+                <outlet property="contentTextView" destination="4jr-ya-RoE" id="OVo-h0-569"/>
                 <outlet property="dismissButton" destination="5Bn-wt-9V7" id="SVY-IP-Lhp"/>
                 <outlet property="titleLabel" destination="C2Y-at-OqA" id="IG0-FF-BBN"/>
                 <outlet property="view" destination="iN0-l3-epB" id="u2w-at-rMU"/>
@@ -25,7 +24,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="제목" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C2Y-at-OqA">
                     <rect key="frame" x="181.66666666666666" y="67" width="30" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="5Bn-wt-9V7">
@@ -45,13 +44,13 @@
                             <subviews>
                                 <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" editable="NO" text="content" textAlignment="natural" selectable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4jr-ya-RoE">
                                     <rect key="frame" x="0.0" y="0.0" width="345" height="694"/>
-                                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                                    <color key="textColor" systemColor="labelColor"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                     <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 </textView>
                             </subviews>
-                            <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <constraints>
                                 <constraint firstItem="4jr-ya-RoE" firstAttribute="top" secondItem="q6q-T7-gE7" secondAttribute="top" id="aTh-j2-bP1"/>
                                 <constraint firstAttribute="trailing" secondItem="4jr-ya-RoE" secondAttribute="trailing" id="cjd-Qx-PeB"/>
@@ -60,6 +59,7 @@
                             </constraints>
                         </view>
                     </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstItem="q6q-T7-gE7" firstAttribute="top" secondItem="gHy-eo-P3e" secondAttribute="top" id="0JH-Zo-97D"/>
                         <constraint firstItem="q6q-T7-gE7" firstAttribute="height" secondItem="f4O-if-7ng" secondAttribute="height" priority="250" id="3GC-lg-zaq"/>
@@ -89,11 +89,5 @@
     </objects>
     <resources>
         <image name="ic_x" width="25" height="25"/>
-        <systemColor name="labelColor">
-            <color white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
-        <systemColor name="systemBackgroundColor">
-            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-        </systemColor>
     </resources>
 </document>

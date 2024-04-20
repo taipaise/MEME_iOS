@@ -12,6 +12,7 @@ import RxCocoa
 
 final class SetProfileImageViewController: UIViewController {
 
+    @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var progressBar: RegisterProgressBar!
     @IBOutlet private weak var profileImageView: UIImageView!
     @IBOutlet private weak var imageSelectButton1: UIButton!
@@ -33,6 +34,19 @@ final class SetProfileImageViewController: UIViewController {
         nextButton.layer.cornerRadius = 10
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
         imageSelectButton2.layer.cornerRadius = imageSelectButton2.frame.height / 2
+        
+        let boldAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.pretendard(to: .semiBold, size: 16),
+            .foregroundColor: UIColor.black
+        ]
+        let regularAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.pretendard(to: .medium, size: 16),
+            .foregroundColor: UIColor.black
+        ]
+        
+        let titleString = NSMutableAttributedString(string: "프로필 사진을 추가해주세요", attributes: regularAttributes)
+        titleString.addAttributes(boldAttributes, range: NSRange(location: 0, length: 6))
+        titleLabel.attributedText = titleString
     }
     
     func configure(viewModel: SetProfileViewModel) {
@@ -50,7 +64,6 @@ extension SetProfileImageViewController {
             nextTap: nextButton.rx.tap.asObservable()
         )
         
-        
         let output = viewModel.transform(input)
         
         output.profileImage
@@ -67,6 +80,7 @@ extension SetProfileImageViewController {
             .disposed(by: disposeBag)
         
         output.nextButtonState
+            .observe(on: MainScheduler.instance)
             .subscribe { [weak self] state in
                 self?.nextButton.isEnabled = state
                 if state {

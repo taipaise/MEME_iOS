@@ -26,6 +26,7 @@
                 <outlet property="profileImageView" destination="kuf-qn-9bu" id="fZq-g6-xlZ"/>
                 <outlet property="progressBar" destination="O9J-WN-vdv" id="C3l-bx-Otu"/>
                 <outlet property="skipButton" destination="EIe-Js-pyc" id="b3T-sl-nBm"/>
+                <outlet property="titleLabel" destination="KTr-Cx-Fqv" id="M8H-h7-5Pq"/>
                 <outlet property="view" destination="iN0-l3-epB" id="HwO-qy-53R"/>
             </connections>
         </placeholder>
@@ -44,13 +45,13 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="프로필을 설정해주세요." textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KTr-Cx-Fqv">
                     <rect key="frame" x="24" y="109" width="165" height="21"/>
                     <fontDescription key="fontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="18"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="프로필 사진을 추가하시면 홍보효과가 커질지도 몰라요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Uff-RR-8J5">
                     <rect key="frame" x="27" y="137" width="214" height="12"/>
                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="10"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uWe-oO-Cet">
@@ -101,7 +102,7 @@
                             <buttonConfiguration key="configuration" style="plain" image="plus" catalog="system" title=""/>
                         </button>
                     </subviews>
-                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="184" id="8Y2-Jo-YFS"/>
                         <constraint firstItem="kuf-qn-9bu" firstAttribute="top" secondItem="pXH-U7-Myp" secondAttribute="top" id="Eno-j8-ymu"/>
@@ -119,7 +120,7 @@
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="건너뛰기" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BID-BZ-e6l">
                     <rect key="frame" x="179" y="733" width="35" height="12"/>
                     <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="10"/>
-                    <nil key="textColor"/>
+                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <nil key="highlightedColor"/>
                 </label>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Jm2-3l-VNa">

@@ -78,14 +78,14 @@ final class SetNameViewModel: ViewModel {
                 !name.isEmpty && !nickname.isEmpty
             }
         
-        let nextButtonState = Observable.combineLatest(nameAndNicknameFilled, isNickNameVerified)
+        let buttonState = Observable.combineLatest(nameAndNicknameFilled, isNickNameVerified)
             .map { nameAndNicknameFilled, isNickNameVerified in
                 return nameAndNicknameFilled && isNickNameVerified
             }
         
         return Output(
             nickNameStatus: nickNameStatus.asObservable(),
-            nextButtonState: nextButtonState)
+            nextButtonState: buttonState)
     }
 }
 
