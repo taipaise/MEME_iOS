@@ -15,7 +15,7 @@ enum AuthAPI {
     case modelSignUp(
         idToken: String,
         provider: String,
-        info: ProfileInfo
+        info: SignUpProfileInfo
     )
 
     case artistSignUp(

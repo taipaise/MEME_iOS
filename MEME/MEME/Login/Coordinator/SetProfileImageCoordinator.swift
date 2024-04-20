@@ -1,13 +1,13 @@
 //
-//  ModelSignUpCoordinator.swift
+//  SetProfileImageCoordinator.swift
 //  MEME
 //
-//  Created by 이동현 on 4/7/24.
+//  Created by 이동현 on 4/20/24.
 //
 
 import UIKit
 
-final class ModelSignUpCoordinator: SignupCoordinator {
+final class SetProfileImageCoordinator: SignupCoordinator {
     var navigationController: UINavigationController?
     var profileInfo: SignUpProfileInfo
     
@@ -17,8 +17,9 @@ final class ModelSignUpCoordinator: SignupCoordinator {
     }
     
     @MainActor func start() {
-        let vc = SetModelDetailInfoViewController(nibName: SetModelDetailInfoViewController.className, bundle: nil)
-        vc.viewModel = SetModelDetailInfoViewModel(profileInfo: profileInfo)
+        let vc = SetProfileViewController(nibName: SetProfileViewController.className, bundle: nil)
+        let viewModel = SetProfileViewModel(roleType: .MODEL)
+        vc.configure(viewModel: viewModel)
         navigationController?.pushViewController(vc, animated: true)
     }
 }

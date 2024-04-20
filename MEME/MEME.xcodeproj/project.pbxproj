@@ -77,7 +77,7 @@
 		2DD60FFB2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD60FFA2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift */; };
 		2DD60FFF2BC5AE5A00B362F1 /* ModelHomeViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD60FFE2BC5AE5A00B362F1 /* ModelHomeViewItem.swift */; };
 		2DD610022BC5AE7400B362F1 /* ModelHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD610012BC5AE7400B362F1 /* ModelHomeViewModel.swift */; };
-		3101C72A2B81F77200460689 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C7292B81F77200460689 /* ProfileInfo.swift */; };
+		3101C72A2B81F77200460689 /* SignUpProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C7292B81F77200460689 /* SignUpProfileInfo.swift */; };
 		3101C72C2B81F80600460689 /* ProfileInfoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */; };
 		312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */; };
 		312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EE2B52DE1900CACF20 /* Pretendard-Light.otf */; };
@@ -146,8 +146,11 @@
 		316239AC2B81E917002D9E2F /* TermsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316239AB2B81E917002D9E2F /* TermsData.swift */; };
 		3162DF382BB55B3D00EB283C /* CheckUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3162DF372BB55B3D00EB283C /* CheckUserDTO.swift */; };
 		3162DF3A2BB562DB00EB283C /* RoleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3162DF392BB562DB00EB283C /* RoleType.swift */; };
+		31640D622BD3FFFF00D7287B /* SetNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31640D612BD3FFFF00D7287B /* SetNameViewController.swift */; };
+		31640D672BD406AF00D7287B /* SetNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31640D662BD406AF00D7287B /* SetNameViewModel.swift */; };
+		31640D692BD40A6000D7287B /* SetProfileImageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31640D682BD40A6000D7287B /* SetProfileImageCoordinator.swift */; };
 		3169E3E52BC2B62100550F2E /* RoleSelectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3E42BC2B62100550F2E /* RoleSelectionCoordinator.swift */; };
-		3169E3E92BC2B8E400550F2E /* SetProfileDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3E82BC2B8E400550F2E /* SetProfileDetailCoordinator.swift */; };
+		3169E3E92BC2B8E400550F2E /* SetNameCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3E82BC2B8E400550F2E /* SetNameCoordinator.swift */; };
 		3169E3EC2BC2B91E00550F2E /* RoleSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3EB2BC2B91E00550F2E /* RoleSelectionViewModel.swift */; };
 		3169E3F02BC2C0D400550F2E /* SetProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3EF2BC2C0D400550F2E /* SetProfileViewModel.swift */; };
 		3169E3F22BC2D7B700550F2E /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3F12BC2D7B700550F2E /* ImagePickerManager.swift */; };
@@ -401,7 +404,7 @@
 		2DD60FFA2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendHeaderReusableView.swift; sourceTree = "<group>"; };
 		2DD60FFE2BC5AE5A00B362F1 /* ModelHomeViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHomeViewItem.swift; sourceTree = "<group>"; };
 		2DD610012BC5AE7400B362F1 /* ModelHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHomeViewModel.swift; sourceTree = "<group>"; };
-		3101C7292B81F77200460689 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
+		3101C7292B81F77200460689 /* SignUpProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileInfo.swift; sourceTree = "<group>"; };
 		3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoBuilder.swift; sourceTree = "<group>"; };
 		312DF7612B669CC30060BDF0 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		312DF7632B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHeaderSupplementaryView.swift; sourceTree = "<group>"; };
@@ -463,8 +466,11 @@
 		316239AB2B81E917002D9E2F /* TermsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsData.swift; sourceTree = "<group>"; };
 		3162DF372BB55B3D00EB283C /* CheckUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckUserDTO.swift; sourceTree = "<group>"; };
 		3162DF392BB562DB00EB283C /* RoleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleType.swift; sourceTree = "<group>"; };
+		31640D612BD3FFFF00D7287B /* SetNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameViewController.swift; sourceTree = "<group>"; };
+		31640D662BD406AF00D7287B /* SetNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameViewModel.swift; sourceTree = "<group>"; };
+		31640D682BD40A6000D7287B /* SetProfileImageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileImageCoordinator.swift; sourceTree = "<group>"; };
 		3169E3E42BC2B62100550F2E /* RoleSelectionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectionCoordinator.swift; sourceTree = "<group>"; };
-		3169E3E82BC2B8E400550F2E /* SetProfileDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileDetailCoordinator.swift; sourceTree = "<group>"; };
+		3169E3E82BC2B8E400550F2E /* SetNameCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameCoordinator.swift; sourceTree = "<group>"; };
 		3169E3EB2BC2B91E00550F2E /* RoleSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectionViewModel.swift; sourceTree = "<group>"; };
 		3169E3EF2BC2C0D400550F2E /* SetProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewModel.swift; sourceTree = "<group>"; };
 		3169E3F12BC2D7B700550F2E /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
@@ -1161,7 +1167,7 @@
 				31B263592B57EEBC00304FBE /* Common */,
 				315EE2C92B6656430042A082 /* Artist */,
 				3169E3E72BC2B89900550F2E /* Model */,
-				3101C7292B81F77200460689 /* ProfileInfo.swift */,
+				3101C7292B81F77200460689 /* SignUpProfileInfo.swift */,
 				3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */,
 			);
 			path = Login;
@@ -1414,6 +1420,31 @@
 			path = Auth;
 			sourceTree = "<group>";
 		};
+		31640D5F2BD3FF1700D7287B /* SetName */ = {
+			isa = PBXGroup;
+			children = (
+				31640D652BD406A200D7287B /* ViewModel */,
+				31640D602BD3FF2900D7287B /* Views */,
+			);
+			path = SetName;
+			sourceTree = "<group>";
+		};
+		31640D602BD3FF2900D7287B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				31640D612BD3FFFF00D7287B /* SetNameViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		31640D652BD406A200D7287B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				31640D662BD406AF00D7287B /* SetNameViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		3169E3E62BC2B7C300550F2E /* Components */ = {
 			isa = PBXGroup;
 			children = (
@@ -1530,10 +1561,11 @@
 				317720ED2BC28FED00A1928A /* CommonSignUpCoordinator.swift */,
 				317720FA2BC2A57D00A1928A /* TermDetailCoordinator.swift */,
 				3169E3E42BC2B62100550F2E /* RoleSelectionCoordinator.swift */,
-				3169E3E82BC2B8E400550F2E /* SetProfileDetailCoordinator.swift */,
+				3169E3E82BC2B8E400550F2E /* SetNameCoordinator.swift */,
 				3169E3F52BC2E01800550F2E /* ModelSignUpCoordinator.swift */,
 				3169E3F72BC2E02800550F2E /* ArtistSignUpCoordinator.swift */,
 				319F53512BCC18EB008D153E /* SignUpCoordinator.swift */,
+				31640D682BD40A6000D7287B /* SetProfileImageCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1669,6 +1701,7 @@
 				3169E3E62BC2B7C300550F2E /* Components */,
 				31C85EF12B526BDB0064A6E7 /* RoleSelection */,
 				31C85EF22B526C140064A6E7 /* SetProfile */,
+				31640D5F2BD3FF1700D7287B /* SetName */,
 				31C85EF42B526C2E0064A6E7 /* RegistrationCompletion */,
 			);
 			path = Common;
@@ -2093,6 +2126,7 @@
 				2D4B7C222B5F0B44001E1B09 /* ShowInformationView.swift in Sources */,
 				3169E3EC2BC2B91E00550F2E /* RoleSelectionViewModel.swift in Sources */,
 				317D986E2B7E0186009BBB95 /* SkinType.swift in Sources */,
+				31640D692BD40A6000D7287B /* SetProfileImageCoordinator.swift in Sources */,
 				2D6F59B52B5C475800CA883A /* ModalPresentationController.swift in Sources */,
 				CC9C384E2B754C240073A257 /* MyPageDTO.swift in Sources */,
 				CCB319082B82908A003B4738 /* ArtistProfileInfoManager.swift in Sources */,
@@ -2139,6 +2173,7 @@
 				CCFC31E62B5C4EAC00C0673A /* InterestArtistViewController.swift in Sources */,
 				317D986C2B7DF59B009BBB95 /* Region.swift in Sources */,
 				317720FB2BC2A57D00A1928A /* TermDetailCoordinator.swift in Sources */,
+				31640D622BD3FFFF00D7287B /* SetNameViewController.swift in Sources */,
 				3142B9A42B4D03840066CD5A /* ModelTabBarController.swift in Sources */,
 				2DA208152B7CF865006EB9B9 /* PortfolioAPI.swift in Sources */,
 				CC8CAA032BB44EA9005F1E53 /* DetailReviewManager.swift in Sources */,
@@ -2175,6 +2210,7 @@
 				095742512B66153E0011B580 /* ArtistPortfolioEditingViewController.swift in Sources */,
 				CC9C388B2B80F9BA0073A257 /* ModelProfileInfoManager.swift in Sources */,
 				3142B99B2B4D020E0066CD5A /* NSObject+.swift in Sources */,
+				31640D672BD406AF00D7287B /* SetNameViewModel.swift in Sources */,
 				317D987B2B7E1810009BBB95 /* MakeUpCategory.swift in Sources */,
 				31C0B5402BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift in Sources */,
 				2D3E0D152B640BCC00C49EF3 /* ModelViewArtistProfileViewController.swift in Sources */,
@@ -2195,11 +2231,11 @@
 				315FB85E2B6DE57C0068163C /* KeyChainValue.swift in Sources */,
 				2D5C05A12B60269900EDC69F /* ShowReviewTableViewCell.swift in Sources */,
 				317D98752B7E0C68009BBB95 /* AtristProfileInfo.swift in Sources */,
-				3101C72A2B81F77200460689 /* ProfileInfo.swift in Sources */,
+				3101C72A2B81F77200460689 /* SignUpProfileInfo.swift in Sources */,
 				315AC1C32B70CDE9003FD1A1 /* ModelReservationViewController.swift in Sources */,
 				2D62E25B2B54A658004E8299 /* RecentSearchViewCell.swift in Sources */,
 				CC8CAA0D2BB4FDE4005F1E53 /* PostReviewDTO.swift in Sources */,
-				3169E3E92BC2B8E400550F2E /* SetProfileDetailCoordinator.swift in Sources */,
+				3169E3E92BC2B8E400550F2E /* SetNameCoordinator.swift in Sources */,
 				2D0A190E2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift in Sources */,
 				2D669BA32BAD9EBF007E03A0 /* ReviewAPI.swift in Sources */,
 				CC9C38772B7FEAF40073A257 /* ReviewListAPI.swift in Sources */,

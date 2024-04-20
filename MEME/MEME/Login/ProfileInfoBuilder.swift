@@ -58,8 +58,8 @@ final class ProfileInfoBuilder {
         return self
     }
     
-    func build() -> ProfileInfo {
-        return ProfileInfo(
+    func build() -> SignUpProfileInfo {
+        return SignUpProfileInfo(
             profileImg: profileImg,
             username: username,
             nickname: nickname,

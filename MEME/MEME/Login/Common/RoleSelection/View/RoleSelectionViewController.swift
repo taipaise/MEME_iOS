@@ -63,8 +63,8 @@ extension RoleSelectionViewController {
         
         nextButton.rx.tap
             .subscribe { [weak self] _ in
-                let roleType = self?.viewModel.roleType.value ?? .ARTIST
-                let coordinator = SetProfileDetailCoordinator(navigationController: self?.navigationController, roleType: roleType)
+                guard let viewModel = self?.viewModel else { return }
+                let coordinator = SetNameCoordinator(navigationController: self?.navigationController, profileInfo: viewModel.profileInfo)
                 coordinator.start()
             }
             .disposed(by: disposeBag)

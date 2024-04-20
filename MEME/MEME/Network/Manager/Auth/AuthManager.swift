@@ -24,7 +24,7 @@ final class AuthManager {
         
     }
     
-    func modelSignUp(profileInfo: ProfileInfo) async -> Result<SignUpResponseDTO, Error> {
+    func modelSignUp(profileInfo: SignUpProfileInfo) async -> Result<SignUpResponseDTO, Error> {
         let idToken = UserDefaultManager.shared.getIdToken()
         guard
             let socialProvider = UserDefaultManager.shared.getProvider(),
@@ -52,7 +52,7 @@ final class AuthManager {
     }
     
     func artistsignUp(
-        profileInfo: ProfileInfo,
+        profileInfo: SignUpProfileInfo,
         completion: @escaping (Result<SignUpResponseDTO, MoyaError>) -> Void
     ) {
        

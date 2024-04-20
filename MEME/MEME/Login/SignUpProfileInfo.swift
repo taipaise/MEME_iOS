@@ -7,11 +7,9 @@
 
 import Foundation
 
-struct ProfileInfo {
+struct SignUpProfileInfo {
     var profileImg: String
     var username: String
     var nickname: String
-    var gender: String?
-    var skinType: String?
-    var personalColor: String?
+    var roleType: RoleType
 }

@@ -9,32 +9,6 @@ import UIKit
 import RxSwift
 import RxCocoa
 
-enum NickNameStatus {
-    case lengthLimit
-    case valid
-    case duplicate
-    
-    var message: String {
-        switch self {
-        case .lengthLimit:
-            "닉네임은 최대 15자 작성 가능합니다."
-        case .valid:
-            "사용 가능한 닉네임입니다."
-        case .duplicate:
-            "이미 사용중인 닉네임입니다."
-        }
-    }
-    
-    var textColor: UIColor {
-        switch self {
-        case .lengthLimit, .duplicate:
-            return .red
-        case .valid:
-            return .blue
-        }
-    }
-}
-
 final class SetProfileViewModel: NSObject, ViewModel {
     struct Input {
         let name: Observable<String>
@@ -52,14 +26,14 @@ final class SetProfileViewModel: NSObject, ViewModel {
     private let profileImage = BehaviorRelay<UIImage>(value: .defaultProfile)
     private let isNickNameVerified = BehaviorRelay<Bool>(value: false)
     private let nickNameStatus = BehaviorRelay<NickNameStatus?>(value: nil)
-    private(set) var profileInfo: ProfileInfo
+    private(set) var profileInfo: SignUpProfileInfo
     private let imagePickerManager = ImagePickerManager()
     private let phPickerManager = PHPickerManager()
     private var disposeBag = DisposeBag()
     
     init(roleType: RoleType) {
         self.roleType = roleType
-        profileInfo = ProfileInfo(profileImg: "", username: "", nickname: "")
+        profileInfo = SignUpProfileInfo(profileImg: "", username: "", nickname: "")
         super.init()
         bindPicker()
     }
