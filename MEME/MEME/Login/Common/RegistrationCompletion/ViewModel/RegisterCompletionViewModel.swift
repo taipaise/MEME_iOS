@@ -11,12 +11,11 @@ import RxCocoa
 
 final class RegisterCompletionViewModel {
     
-    private(set) var role: RoleType
+    private(set) var profileInfo: SignUpProfileInfo
     private(set) var nickName = BehaviorRelay<String>(value: "")
     
-    init(role: RoleType) {
-        self.role = role
-        let name = KeyChainManager.read(forkey: .nickName) ?? ""
-        nickName.accept(name)
+    init(profileInfo: SignUpProfileInfo) {
+        self.profileInfo = profileInfo
+        nickName.accept(profileInfo.nickname)
     }
 }

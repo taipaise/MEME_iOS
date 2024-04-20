@@ -19,7 +19,8 @@ final class SignUpCompletionCoordinator: SignupCoordinator {
     
     @MainActor func start() {
         let vc = RegistrationCompletionViewController(nibName: RegistrationCompletionViewController.className, bundle: nil)
-        vc.viewModel = RegisterCompletionViewModel(role: profileInfo.roleType)
+        let viewModel = RegisterCompletionViewModel(profileInfo: profileInfo)
+        vc.configure(viewModel)
         navigationController?.pushViewController(vc, animated: true)
     }
     
