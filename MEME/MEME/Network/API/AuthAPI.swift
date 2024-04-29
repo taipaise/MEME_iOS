@@ -15,7 +15,7 @@ enum AuthAPI {
     case modelSignUp(
         idToken: String,
         provider: String,
-        info: ProfileInfo
+        info: SignUpProfileInfo
     )
 
     case artistSignUp(
@@ -105,21 +105,13 @@ extension AuthAPI: MemeAPI {
             provider: let provider,
             info: let info
         ):
-            guard
-                let gender = info.gender,
-                let skinType = info.skinType,
-                let personalColor = info.personalColor
-            else { return .requestPlain }
-                
             let parameters: [String: Any] = [
                 "id_token": idToken,
                 "provider": provider,
                 "profile_img": info.profileImg,
                 "username": info.username,
                 "nickname": info.nickname,
-                "gender": gender,
-                "skin_type": skinType,
-                "personal_color": personalColor]
+                ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             
         case .artistSignUp(

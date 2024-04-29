@@ -10,24 +10,22 @@ import PhotosUI
 import RxSwift
 import RxCocoa
 
-final class SetProfileViewController: UIViewController {
+final class SetProfileImageViewController: UIViewController {
 
+    @IBOutlet private weak var titleLabel: UILabel!
     @IBOutlet private weak var progressBar: RegisterProgressBar!
     @IBOutlet private weak var profileImageView: UIImageView!
     @IBOutlet private weak var imageSelectButton1: UIButton!
     @IBOutlet private weak var imageSelectButton2: UIButton!
-    @IBOutlet private weak var nameTextField: UITextField!
-    @IBOutlet private weak var nickNameTextField: UITextField!
-    @IBOutlet private weak var noticeLabel: UILabel!
+    @IBOutlet private weak var skipButton: UIButton!
     @IBOutlet private weak var nextButton: UIButton!
-    @IBOutlet private weak var verificationButton: UIButton!
-    private var viewModel: SetProfileViewModel?
+
+    private var viewModel: SetProfileImageViewModel?
     private var disposeBag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
-        setupDismissKeyboardOnTapGesture()
         bind()
     }
    
@@ -36,25 +34,34 @@ final class SetProfileViewController: UIViewController {
         nextButton.layer.cornerRadius = 10
         profileImageView.layer.cornerRadius = profileImageView.frame.height / 2
         imageSelectButton2.layer.cornerRadius = imageSelectButton2.frame.height / 2
-        verificationButton.layer.borderWidth = 1
-        verificationButton.layer.borderColor = UIColor.mainBold.cgColor
-        verificationButton.layer.cornerRadius = 10
+        
+        let boldAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.pretendard(to: .semiBold, size: 16),
+            .foregroundColor: UIColor.black
+        ]
+        let regularAttributes: [NSAttributedString.Key: Any] = [
+            .font: UIFont.pretendard(to: .medium, size: 16),
+            .foregroundColor: UIColor.black
+        ]
+        
+        let titleString = NSMutableAttributedString(string: "프로필 사진을 추가해주세요", attributes: regularAttributes)
+        titleString.addAttributes(boldAttributes, range: NSRange(location: 0, length: 6))
+        titleLabel.attributedText = titleString
     }
     
-    func configure(viewModel: SetProfileViewModel) {
+    func configure(viewModel: SetProfileImageViewModel) {
         self.viewModel = viewModel
     }
 }
 
 // MARK: - Binding
-extension SetProfileViewController {
+extension SetProfileImageViewController {
     private func bind() {
         guard let viewModel = viewModel else { return }
         
-        let input = SetProfileViewModel.Input(
-            name: nameTextField.rx.text.orEmpty.asObservable(),
-            nickname: nickNameTextField.rx.text.orEmpty.asObservable(),
-            verifyTap: verificationButton.rx.tap.asObservable()
+        let input = SetProfileImageViewModel.Input(
+            skipTap: skipButton.rx.tap.asObservable(),
+            nextTap: nextButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input)
@@ -66,13 +73,14 @@ extension SetProfileViewController {
             }
             .disposed(by: disposeBag)
         
-        output.nickNameStatus
-            .subscribe(onNext: { [weak self] nickNameStatus in
-                self?.setNoticeLabel(nickNameStatus)
-            })
+        output.navigation
+            .subscribe { [weak self] navigationType in
+                self?.navigate(type: navigationType)
+            }
             .disposed(by: disposeBag)
         
         output.nextButtonState
+            .observe(on: MainScheduler.instance)
             .subscribe { [weak self] state in
                 self?.nextButton.isEnabled = state
                 if state {
@@ -103,47 +111,20 @@ extension SetProfileViewController {
                 }
                 .disposed(by: disposeBag)
         }
-        
-        nextButton.rx.tap
-            .subscribe { [weak self] _ in
-                let role = viewModel.roleType
-                
-                switch role {
-                case .ARTIST:
-                    let coordinator = ArtistSignUpCoordinator(navigationController: self?.navigationController)
-                    coordinator.start()
-                case .MODEL:
-                    let coordinator = ModelSignUpCoordinator(
-                        navigationController: self?.navigationController,
-                        profileInfo: viewModel.profileInfo)
-                    coordinator.start()
-                }
+    }
+}
+
+extension SetProfileImageViewController {
+        private func navigate(type: SetProfileImageViewModel.NavigationType) {
+            guard let viewModel = viewModel else { return }
+            let coordinator = SignUpCompletionCoordinator(navigationController: self.navigationController, profileInfo: viewModel.profileInfo)
+            switch type {
+            case .success:
+                coordinator.start(isSuccess: true)
+            case .fail:
+                coordinator.start(isSuccess: false)
+            case .none:
+                break
             }
-            .disposed(by: disposeBag)
-    }
-}
-
-extension SetProfileViewController {
-    private func setNoticeLabel(_ status: NickNameStatus?) {
-        guard let status = status else {
-            noticeLabel.isHidden = true
-            return
         }
-       
-        noticeLabel.isHidden = false
-        noticeLabel.text = status.message
-        noticeLabel.textColor = status.textColor
     }
-}
-
-extension SetProfileViewController {
-    func setupDismissKeyboardOnTapGesture() {
-        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
-        tapGesture.cancelsTouchesInView = false
-        view.addGestureRecognizer(tapGesture)
-    }
-    
-    @objc func dismissKeyboard() {
-        view.endEditing(true)
-    }
-}

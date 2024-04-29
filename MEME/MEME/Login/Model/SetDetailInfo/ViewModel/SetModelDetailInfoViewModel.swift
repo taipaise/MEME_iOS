@@ -34,10 +34,10 @@ final class SetModelDetailInfoViewModel: ViewModel {
     private var personalColor = BehaviorRelay<PersonalColor?>(value: nil)
     private var navigation = PublishSubject<NavigationType>()
     private var disposeBag = DisposeBag()
-    private var profileInfo: ProfileInfo
+    private var profileInfo: SignUpProfileInfo
     private let authManager = AuthManager.shared
     
-    init(profileInfo: ProfileInfo) {
+    init(profileInfo: SignUpProfileInfo) {
         self.profileInfo = profileInfo
         makeCellModels()
     }

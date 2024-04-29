@@ -1,8 +1,8 @@
 //
-//  SetProfileViewModel.swift
+//  SetNameViewModel.swift
 //  MEME
 //
-//  Created by 이동현 on 4/7/24.
+//  Created by 이동현 on 4/20/24.
 //
 
 import UIKit
@@ -35,7 +35,7 @@ enum NickNameStatus {
     }
 }
 
-final class SetProfileViewModel: NSObject, ViewModel {
+final class SetNameViewModel: ViewModel {
     struct Input {
         let name: Observable<String>
         let nickname: Observable<String>
@@ -43,35 +43,28 @@ final class SetProfileViewModel: NSObject, ViewModel {
     }
     
     struct Output {
-        let profileImage: Observable<UIImage>
         let nickNameStatus: Observable<NickNameStatus?>
         let nextButtonState: Observable<Bool>
     }
     
-    private(set) var roleType: RoleType
-    private let profileImage = BehaviorRelay<UIImage>(value: .defaultProfile)
     private let isNickNameVerified = BehaviorRelay<Bool>(value: false)
     private let nickNameStatus = BehaviorRelay<NickNameStatus?>(value: nil)
-    private(set) var profileInfo: ProfileInfo
-    private let imagePickerManager = ImagePickerManager()
-    private let phPickerManager = PHPickerManager()
+    private(set) var profileInfo: SignUpProfileInfo
     private var disposeBag = DisposeBag()
     
-    init(roleType: RoleType) {
-        self.roleType = roleType
-        profileInfo = ProfileInfo(profileImg: "", username: "", nickname: "")
-        super.init()
-        bindPicker()
+    // TODO: - 추후 바뀔 api에 따라 profile info도 수정될 수 있음
+    init(profileInfo: SignUpProfileInfo) {
+        self.profileInfo = profileInfo
     }
     
     func transform(_ input: Input) -> Output {
-        input.name.subscribe { [weak self] name in
-            self?.setName(name)
+        input.name.subscribe { [weak self] in
+            self?.setName($0)
         }
         .disposed(by: disposeBag)
         
-        input.nickname.subscribe { [weak self] nickname in
-            self?.setNickname(nickname)
+        input.nickname.subscribe { [weak self] in
+            self?.setNickname($0)
         }
         .disposed(by: disposeBag)
         
@@ -85,38 +78,19 @@ final class SetProfileViewModel: NSObject, ViewModel {
                 !name.isEmpty && !nickname.isEmpty
             }
         
-        return Output(
-            profileImage: profileImage.asObservable(),
-            nickNameStatus: nickNameStatus.asObservable(),
-            nextButtonState: Observable.combineLatest(nameAndNicknameFilled, isNickNameVerified)
-                .map { nameAndNicknameFilled, isNickNameVerified in
-                    return nameAndNicknameFilled && isNickNameVerified
-                }
-            )
-    }
-}
-
-// MARK: - binding
-extension SetProfileViewModel {
-    private func bindPicker() {
-        imagePickerManager.selectedImage
-            .subscribe { [weak self] image in
-                self?.profileImage.accept(image ?? UIImage.defaultProfile)
-                // TODO: - 이미지 업로드 처리
+        let buttonState = Observable.combineLatest(nameAndNicknameFilled, isNickNameVerified)
+            .map { nameAndNicknameFilled, isNickNameVerified in
+                return nameAndNicknameFilled && isNickNameVerified
             }
-            .disposed(by: disposeBag)
         
-        phPickerManager.selectedImage
-            .subscribe { [weak self] image in
-                self?.profileImage.accept(image ?? UIImage.defaultProfile)
-                // TODO: - 이미지 업로드 처리
-            }
-            .disposed(by: disposeBag)
+        return Output(
+            nickNameStatus: nickNameStatus.asObservable(),
+            nextButtonState: buttonState)
     }
 }
 
 // MARK: - action
-extension SetProfileViewModel {
+extension SetNameViewModel {
     private func setName(_ name: String) {
         profileInfo.username = name
     }
@@ -141,14 +115,4 @@ extension SetProfileViewModel {
         isNickNameVerified.accept(true)
         nickNameStatus.accept(.valid)
     }
-    
-    func presentImagePicker(_ viewController: UIViewController) {
-        imagePickerManager.present(from: viewController)
-    }
-    
-    func presentPHPicker(_ viewController: UIViewController) {
-        phPickerManager.present(from: viewController)
-    }
-    
 }
-

@@ -24,6 +24,12 @@ public extension UIView {
         addSubview(nib)
     }
     
+    func addSubViews(_ views: [UIView]) {
+        views.forEach {
+            addSubview($0)
+        }
+    }
+    
     func setGradient(
         color1: UIColor,
         color2: UIColor,

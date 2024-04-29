@@ -77,8 +77,7 @@
 		2DD60FFB2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD60FFA2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift */; };
 		2DD60FFF2BC5AE5A00B362F1 /* ModelHomeViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD60FFE2BC5AE5A00B362F1 /* ModelHomeViewItem.swift */; };
 		2DD610022BC5AE7400B362F1 /* ModelHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD610012BC5AE7400B362F1 /* ModelHomeViewModel.swift */; };
-		3101C72A2B81F77200460689 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C7292B81F77200460689 /* ProfileInfo.swift */; };
-		3101C72C2B81F80600460689 /* ProfileInfoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */; };
+		3101C72A2B81F77200460689 /* SignUpProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C7292B81F77200460689 /* SignUpProfileInfo.swift */; };
 		312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */; };
 		312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EE2B52DE1900CACF20 /* Pretendard-Light.otf */; };
 		312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EB2B52DE1900CACF20 /* Pretendard-Medium.otf */; };
@@ -146,14 +145,15 @@
 		316239AC2B81E917002D9E2F /* TermsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316239AB2B81E917002D9E2F /* TermsData.swift */; };
 		3162DF382BB55B3D00EB283C /* CheckUserDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3162DF372BB55B3D00EB283C /* CheckUserDTO.swift */; };
 		3162DF3A2BB562DB00EB283C /* RoleType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3162DF392BB562DB00EB283C /* RoleType.swift */; };
+		31640D622BD3FFFF00D7287B /* SetNameViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31640D612BD3FFFF00D7287B /* SetNameViewController.swift */; };
+		31640D672BD406AF00D7287B /* SetNameViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31640D662BD406AF00D7287B /* SetNameViewModel.swift */; };
+		31640D692BD40A6000D7287B /* SetProfileImageCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31640D682BD40A6000D7287B /* SetProfileImageCoordinator.swift */; };
 		3169E3E52BC2B62100550F2E /* RoleSelectionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3E42BC2B62100550F2E /* RoleSelectionCoordinator.swift */; };
-		3169E3E92BC2B8E400550F2E /* SetProfileDetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3E82BC2B8E400550F2E /* SetProfileDetailCoordinator.swift */; };
+		3169E3E92BC2B8E400550F2E /* SetNameCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3E82BC2B8E400550F2E /* SetNameCoordinator.swift */; };
 		3169E3EC2BC2B91E00550F2E /* RoleSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3EB2BC2B91E00550F2E /* RoleSelectionViewModel.swift */; };
-		3169E3F02BC2C0D400550F2E /* SetProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3EF2BC2C0D400550F2E /* SetProfileViewModel.swift */; };
+		3169E3F02BC2C0D400550F2E /* SetProfileImageViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3EF2BC2C0D400550F2E /* SetProfileImageViewModel.swift */; };
 		3169E3F22BC2D7B700550F2E /* ImagePickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3F12BC2D7B700550F2E /* ImagePickerManager.swift */; };
 		3169E3F42BC2D92A00550F2E /* PHPickerManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3F32BC2D92A00550F2E /* PHPickerManager.swift */; };
-		3169E3F62BC2E01800550F2E /* ModelSignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3F52BC2E01800550F2E /* ModelSignUpCoordinator.swift */; };
-		3169E3F82BC2E02800550F2E /* ArtistSignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3169E3F72BC2E02800550F2E /* ArtistSignUpCoordinator.swift */; };
 		316A926A2B66703800E4337D /* SetBusinessLocationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A92682B66703800E4337D /* SetBusinessLocationViewController.swift */; };
 		316A926B2B66703800E4337D /* SetBusinessLocationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 316A92692B66703800E4337D /* SetBusinessLocationViewController.xib */; };
 		316A926D2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 316A926C2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift */; };
@@ -198,23 +198,19 @@
 		31B263482B57EE4800304FBE /* LoginViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B263472B57EE4800304FBE /* LoginViewController.xib */; };
 		31B2634B2B57EE7100304FBE /* RoleSelectionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B263492B57EE7100304FBE /* RoleSelectionViewController.xib */; };
 		31B2634C2B57EE7100304FBE /* RoleSelectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2634A2B57EE7100304FBE /* RoleSelectionViewController.swift */; };
-		31B2634F2B57EE7D00304FBE /* SetProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2634D2B57EE7D00304FBE /* SetProfileViewController.swift */; };
-		31B263502B57EE7D00304FBE /* SetProfileViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B2634E2B57EE7D00304FBE /* SetProfileViewController.xib */; };
-		31B263532B57EE8600304FBE /* SetModelDetailInfoViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B263512B57EE8600304FBE /* SetModelDetailInfoViewController.xib */; };
-		31B263542B57EE8600304FBE /* SetModelDetailInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B263522B57EE8600304FBE /* SetModelDetailInfoViewController.swift */; };
+		31B2634F2B57EE7D00304FBE /* SetProfileImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2634D2B57EE7D00304FBE /* SetProfileImageViewController.swift */; };
+		31B263502B57EE7D00304FBE /* SetProfileImageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B2634E2B57EE7D00304FBE /* SetProfileImageViewController.xib */; };
 		31B263572B57EE9500304FBE /* RegistrationCompletionViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B263552B57EE9500304FBE /* RegistrationCompletionViewController.xib */; };
 		31B263582B57EE9500304FBE /* RegistrationCompletionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B263562B57EE9500304FBE /* RegistrationCompletionViewController.swift */; };
-		31B2636D2B57EECB00304FBE /* BusinessRegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2636B2B57EECB00304FBE /* BusinessRegistrationViewController.swift */; };
-		31B2636E2B57EECB00304FBE /* BusinessRegistrationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B2636C2B57EECB00304FBE /* BusinessRegistrationViewController.xib */; };
 		31B4137C2B6D295900535BB1 /* BusinessIDVerificationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B4137B2B6D295900535BB1 /* BusinessIDVerificationManager.swift */; };
 		31B4137E2B6D29C500535BB1 /* BusinessIDVerificationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B4137D2B6D29C500535BB1 /* BusinessIDVerificationAPI.swift */; };
 		31B413842B6D322500535BB1 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B413832B6D322500535BB1 /* NetworkProvider.swift */; };
 		31B413862B6D338F00535BB1 /* BusinessVerificationDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B413852B6D338F00535BB1 /* BusinessVerificationDTO.swift */; };
 		31B65E4D2B6E18BA00628C68 /* ReservationAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B65E4C2B6E18BA00628C68 /* ReservationAPI.swift */; };
 		31B65E4F2B6E229000628C68 /* ReservationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B65E4E2B6E229000628C68 /* ReservationManager.swift */; };
-		31C0B53D2BCBA79100758EE9 /* SetModelDetailInfoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C0B53C2BCBA79100758EE9 /* SetModelDetailInfoViewModel.swift */; };
 		31C0B5402BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C0B53F2BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift */; };
 		31C0B5422BCBAB8900758EE9 /* ModelDetailInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C0B5412BCBAB8900758EE9 /* ModelDetailInfoCollectionViewCell.swift */; };
+		31CC0DF42BD4221B00B8FCA9 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CC0DF32BD4221B00B8FCA9 /* CALayer+.swift */; };
 		31EA86F22BBFEC20003BCBF7 /* Moya+Wrapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F12BBFEC20003BCBF7 /* Moya+Wrapping.swift */; };
 		31EA86F42BBFEC39003BCBF7 /* MoyaAsyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F32BBFEC39003BCBF7 /* MoyaAsyncError.swift */; };
 		31EA86F62BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F52BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift */; };
@@ -401,8 +397,7 @@
 		2DD60FFA2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendHeaderReusableView.swift; sourceTree = "<group>"; };
 		2DD60FFE2BC5AE5A00B362F1 /* ModelHomeViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHomeViewItem.swift; sourceTree = "<group>"; };
 		2DD610012BC5AE7400B362F1 /* ModelHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHomeViewModel.swift; sourceTree = "<group>"; };
-		3101C7292B81F77200460689 /* ProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
-		3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileInfoBuilder.swift; sourceTree = "<group>"; };
+		3101C7292B81F77200460689 /* SignUpProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileInfo.swift; sourceTree = "<group>"; };
 		312DF7612B669CC30060BDF0 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		312DF7632B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHeaderSupplementaryView.swift; sourceTree = "<group>"; };
 		3142B9552B4CFFED0066CD5A /* MEME.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MEME.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -463,14 +458,15 @@
 		316239AB2B81E917002D9E2F /* TermsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TermsData.swift; sourceTree = "<group>"; };
 		3162DF372BB55B3D00EB283C /* CheckUserDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CheckUserDTO.swift; sourceTree = "<group>"; };
 		3162DF392BB562DB00EB283C /* RoleType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleType.swift; sourceTree = "<group>"; };
+		31640D612BD3FFFF00D7287B /* SetNameViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameViewController.swift; sourceTree = "<group>"; };
+		31640D662BD406AF00D7287B /* SetNameViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameViewModel.swift; sourceTree = "<group>"; };
+		31640D682BD40A6000D7287B /* SetProfileImageCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileImageCoordinator.swift; sourceTree = "<group>"; };
 		3169E3E42BC2B62100550F2E /* RoleSelectionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectionCoordinator.swift; sourceTree = "<group>"; };
-		3169E3E82BC2B8E400550F2E /* SetProfileDetailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileDetailCoordinator.swift; sourceTree = "<group>"; };
+		3169E3E82BC2B8E400550F2E /* SetNameCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetNameCoordinator.swift; sourceTree = "<group>"; };
 		3169E3EB2BC2B91E00550F2E /* RoleSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoleSelectionViewModel.swift; sourceTree = "<group>"; };
-		3169E3EF2BC2C0D400550F2E /* SetProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileViewModel.swift; sourceTree = "<group>"; };
+		3169E3EF2BC2C0D400550F2E /* SetProfileImageViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetProfileImageViewModel.swift; sourceTree = "<group>"; };
 		3169E3F12BC2D7B700550F2E /* ImagePickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePickerManager.swift; sourceTree = "<group>"; };
 		3169E3F32BC2D92A00550F2E /* PHPickerManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PHPickerManager.swift; sourceTree = "<group>"; };
-		3169E3F52BC2E01800550F2E /* ModelSignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelSignUpCoordinator.swift; sourceTree = "<group>"; };
-		3169E3F72BC2E02800550F2E /* ArtistSignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistSignUpCoordinator.swift; sourceTree = "<group>"; };
 		316A92682B66703800E4337D /* SetBusinessLocationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetBusinessLocationViewController.swift; sourceTree = "<group>"; };
 		316A92692B66703800E4337D /* SetBusinessLocationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SetBusinessLocationViewController.xib; sourceTree = "<group>"; };
 		316A926C2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLocationCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -510,14 +506,12 @@
 		31B263472B57EE4800304FBE /* LoginViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = LoginViewController.xib; sourceTree = "<group>"; };
 		31B263492B57EE7100304FBE /* RoleSelectionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RoleSelectionViewController.xib; sourceTree = "<group>"; };
 		31B2634A2B57EE7100304FBE /* RoleSelectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoleSelectionViewController.swift; sourceTree = "<group>"; };
-		31B2634D2B57EE7D00304FBE /* SetProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetProfileViewController.swift; sourceTree = "<group>"; };
-		31B2634E2B57EE7D00304FBE /* SetProfileViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetProfileViewController.xib; sourceTree = "<group>"; };
+		31B2634D2B57EE7D00304FBE /* SetProfileImageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetProfileImageViewController.swift; sourceTree = "<group>"; };
+		31B2634E2B57EE7D00304FBE /* SetProfileImageViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetProfileImageViewController.xib; sourceTree = "<group>"; };
 		31B263512B57EE8600304FBE /* SetModelDetailInfoViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SetModelDetailInfoViewController.xib; sourceTree = "<group>"; };
 		31B263522B57EE8600304FBE /* SetModelDetailInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SetModelDetailInfoViewController.swift; sourceTree = "<group>"; };
 		31B263552B57EE9500304FBE /* RegistrationCompletionViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RegistrationCompletionViewController.xib; sourceTree = "<group>"; };
 		31B263562B57EE9500304FBE /* RegistrationCompletionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegistrationCompletionViewController.swift; sourceTree = "<group>"; };
-		31B2636B2B57EECB00304FBE /* BusinessRegistrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BusinessRegistrationViewController.swift; sourceTree = "<group>"; };
-		31B2636C2B57EECB00304FBE /* BusinessRegistrationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BusinessRegistrationViewController.xib; sourceTree = "<group>"; };
 		31B4137B2B6D295900535BB1 /* BusinessIDVerificationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessIDVerificationManager.swift; sourceTree = "<group>"; };
 		31B4137D2B6D29C500535BB1 /* BusinessIDVerificationAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessIDVerificationAPI.swift; sourceTree = "<group>"; };
 		31B413832B6D322500535BB1 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
@@ -533,6 +527,7 @@
 		31C0B53C2BCBA79100758EE9 /* SetModelDetailInfoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SetModelDetailInfoViewModel.swift; sourceTree = "<group>"; };
 		31C0B53F2BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDetailInfoHeaderView.swift; sourceTree = "<group>"; };
 		31C0B5412BCBAB8900758EE9 /* ModelDetailInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDetailInfoCollectionViewCell.swift; sourceTree = "<group>"; };
+		31CC0DF32BD4221B00B8FCA9 /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
 		31EA86F12BBFEC20003BCBF7 /* Moya+Wrapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moya+Wrapping.swift"; sourceTree = "<group>"; };
 		31EA86F32BBFEC39003BCBF7 /* MoyaAsyncError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaAsyncError.swift; sourceTree = "<group>"; };
 		31EA86F52BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaAsyncRequest.swift; sourceTree = "<group>"; };
@@ -1129,6 +1124,7 @@
 				3142B99A2B4D020E0066CD5A /* NSObject+.swift */,
 				3142B99C2B4D021A0066CD5A /* UIView+.swift */,
 				319F534F2BCBBC82008D153E /* UICollectionView+.swift */,
+				31CC0DF32BD4221B00B8FCA9 /* CALayer+.swift */,
 				3142B99E2B4D02300066CD5A /* UIFont+.swift */,
 			);
 			path = extenstions;
@@ -1161,8 +1157,7 @@
 				31B263592B57EEBC00304FBE /* Common */,
 				315EE2C92B6656430042A082 /* Artist */,
 				3169E3E72BC2B89900550F2E /* Model */,
-				3101C7292B81F77200460689 /* ProfileInfo.swift */,
-				3101C72B2B81F80600460689 /* ProfileInfoBuilder.swift */,
+				3101C7292B81F77200460689 /* SignUpProfileInfo.swift */,
 			);
 			path = Login;
 			sourceTree = "<group>";
@@ -1374,7 +1369,6 @@
 				316A92722B667E4400E4337D /* SetBusinessInfoDetail */,
 				316A92672B66701900E4337D /* SetBusinessLocation */,
 				315EE2D22B6658770042A082 /* SetBusinessProfileInfo */,
-				31B2636A2B57EECB00304FBE /* BusinessRegstration */,
 			);
 			path = Artist;
 			sourceTree = "<group>";
@@ -1412,6 +1406,31 @@
 				315FB8562B6DE1480068163C /* AuthManager.swift */,
 			);
 			path = Auth;
+			sourceTree = "<group>";
+		};
+		31640D5F2BD3FF1700D7287B /* SetName */ = {
+			isa = PBXGroup;
+			children = (
+				31640D652BD406A200D7287B /* ViewModel */,
+				31640D602BD3FF2900D7287B /* Views */,
+			);
+			path = SetName;
+			sourceTree = "<group>";
+		};
+		31640D602BD3FF2900D7287B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				31640D612BD3FFFF00D7287B /* SetNameViewController.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		31640D652BD406A200D7287B /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				31640D662BD406AF00D7287B /* SetNameViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		3169E3E62BC2B7C300550F2E /* Components */ = {
@@ -1454,7 +1473,7 @@
 		3169E3EE2BC2C08400550F2E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				3169E3EF2BC2C0D400550F2E /* SetProfileViewModel.swift */,
+				3169E3EF2BC2C0D400550F2E /* SetProfileImageViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -1530,10 +1549,10 @@
 				317720ED2BC28FED00A1928A /* CommonSignUpCoordinator.swift */,
 				317720FA2BC2A57D00A1928A /* TermDetailCoordinator.swift */,
 				3169E3E42BC2B62100550F2E /* RoleSelectionCoordinator.swift */,
-				3169E3E82BC2B8E400550F2E /* SetProfileDetailCoordinator.swift */,
-				3169E3F52BC2E01800550F2E /* ModelSignUpCoordinator.swift */,
-				3169E3F72BC2E02800550F2E /* ArtistSignUpCoordinator.swift */,
+				3169E3E82BC2B8E400550F2E /* SetNameCoordinator.swift */,
 				319F53512BCC18EB008D153E /* SignUpCoordinator.swift */,
+				31640D682BD40A6000D7287B /* SetProfileImageCoordinator.swift */,
+				319F53542BCC1BDE008D153E /* SignUpCompletionCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1620,7 +1639,6 @@
 		319F53532BCC1A33008D153E /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				319F53542BCC1BDE008D153E /* SignUpCompletionCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -1668,19 +1686,11 @@
 				31C85EEE2B526B8F0064A6E7 /* TermsAgreement */,
 				3169E3E62BC2B7C300550F2E /* Components */,
 				31C85EF12B526BDB0064A6E7 /* RoleSelection */,
-				31C85EF22B526C140064A6E7 /* SetProfile */,
+				31640D5F2BD3FF1700D7287B /* SetName */,
+				31C85EF22B526C140064A6E7 /* SetProfileImage */,
 				31C85EF42B526C2E0064A6E7 /* RegistrationCompletion */,
 			);
 			path = Common;
-			sourceTree = "<group>";
-		};
-		31B2636A2B57EECB00304FBE /* BusinessRegstration */ = {
-			isa = PBXGroup;
-			children = (
-				31B2636B2B57EECB00304FBE /* BusinessRegistrationViewController.swift */,
-				31B2636C2B57EECB00304FBE /* BusinessRegistrationViewController.xib */,
-			);
-			path = BusinessRegstration;
 			sourceTree = "<group>";
 		};
 		31C0B53A2BCBA72700758EE9 /* ViewModel */ = {
@@ -1738,14 +1748,14 @@
 			path = RoleSelection;
 			sourceTree = "<group>";
 		};
-		31C85EF22B526C140064A6E7 /* SetProfile */ = {
+		31C85EF22B526C140064A6E7 /* SetProfileImage */ = {
 			isa = PBXGroup;
 			children = (
 				3169E3EE2BC2C08400550F2E /* ViewModel */,
-				31B2634D2B57EE7D00304FBE /* SetProfileViewController.swift */,
-				31B2634E2B57EE7D00304FBE /* SetProfileViewController.xib */,
+				31B2634D2B57EE7D00304FBE /* SetProfileImageViewController.swift */,
+				31B2634E2B57EE7D00304FBE /* SetProfileImageViewController.xib */,
 			);
-			path = SetProfile;
+			path = SetProfileImage;
 			sourceTree = "<group>";
 		};
 		31C85EF32B526C200064A6E7 /* SetDetailInfo */ = {
@@ -2026,12 +2036,10 @@
 				CCAB5A5F2B67AEB200067FA4 /* ModelModifyViewController.xib in Resources */,
 				312B304F2B550FF9008D17FC /* Pretendard-Bold.otf in Resources */,
 				312B30502B550FF9008D17FC /* Pretendard-ExtraLight.otf in Resources */,
-				31B2636E2B57EECB00304FBE /* BusinessRegistrationViewController.xib in Resources */,
 				312B30532B550FF9008D17FC /* Pretendard-ExtraBold.otf in Resources */,
 				312B30522B550FF9008D17FC /* Pretendard-Thin.otf in Resources */,
 				CCCE563C2B81D9FB007555A2 /* ArtistLocationViewController.xib in Resources */,
 				2DC54B542BB7487100464DB2 /* memeSecret.plist in Resources */,
-				31B263532B57EE8600304FBE /* SetModelDetailInfoViewController.xib in Resources */,
 				3142B9652B4CFFED0066CD5A /* LaunchScreen.storyboard in Resources */,
 				CCCE56362B81D9FB007555A2 /* ArtistInfoDetailViewController.xib in Resources */,
 				2D0A19052B4ED07B00C1CECA /* SelectMakeupCardViewCell.xib in Resources */,
@@ -2046,7 +2054,7 @@
 				315EE2D12B66566A0042A082 /* DetailSettingView.xib in Resources */,
 				312B304E2B550FF9008D17FC /* Pretendard-Medium.otf in Resources */,
 				091CCCDB2B64158B00ADD21C /* ArtistPortfolioManageViewController.xib in Resources */,
-				31B263502B57EE7D00304FBE /* SetProfileViewController.xib in Resources */,
+				31B263502B57EE7D00304FBE /* SetProfileImageViewController.xib in Resources */,
 				31B263572B57EE9500304FBE /* RegistrationCompletionViewController.xib in Resources */,
 				312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */,
 				312B30542B550FF9008D17FC /* Pretendard-Regular.otf in Resources */,
@@ -2093,10 +2101,12 @@
 				2D4B7C222B5F0B44001E1B09 /* ShowInformationView.swift in Sources */,
 				3169E3EC2BC2B91E00550F2E /* RoleSelectionViewModel.swift in Sources */,
 				317D986E2B7E0186009BBB95 /* SkinType.swift in Sources */,
+				31640D692BD40A6000D7287B /* SetProfileImageCoordinator.swift in Sources */,
 				2D6F59B52B5C475800CA883A /* ModalPresentationController.swift in Sources */,
 				CC9C384E2B754C240073A257 /* MyPageDTO.swift in Sources */,
 				CCB319082B82908A003B4738 /* ArtistProfileInfoManager.swift in Sources */,
 				2D62E23E2B5428CC004E8299 /* ModelNonReservationViewCell.swift in Sources */,
+				31CC0DF42BD4221B00B8FCA9 /* CALayer+.swift in Sources */,
 				CC8CAA112BB50B01005F1E53 /* DeleteReviewManager.swift in Sources */,
 				CC8CAA092BB4E6DB005F1E53 /* PostReviewAPI.swift in Sources */,
 				316A926D2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift in Sources */,
@@ -2107,7 +2117,7 @@
 				315EE2D52B6658B50042A082 /* SetBusinessInfoViewController.swift in Sources */,
 				316A927E2B66895D00E4337D /* TimeSection.swift in Sources */,
 				CC2F3AC72B54444E00508DA5 /* InfoTableViewCell.swift in Sources */,
-				31B2634F2B57EE7D00304FBE /* SetProfileViewController.swift in Sources */,
+				31B2634F2B57EE7D00304FBE /* SetProfileImageViewController.swift in Sources */,
 				CC8CA9FF2BB44E7D005F1E53 /* AvailableReviewDTO.swift in Sources */,
 				316A926A2B66703800E4337D /* SetBusinessLocationViewController.swift in Sources */,
 				CC9C38552B7B5CDF0073A257 /* ModelProfileAPI.swift in Sources */,
@@ -2124,7 +2134,7 @@
 				CCAB5A5B2B6740CE00067FA4 /* AskViewController.swift in Sources */,
 				CCAB5A492B65861600067FA4 /* InterestMakeUpViewController.swift in Sources */,
 				3156D2012B69443000559820 /* HTTPHeaderFields.swift in Sources */,
-				31B2634F2B57EE7D00304FBE /* SetProfileViewController.swift in Sources */,
+				31B2634F2B57EE7D00304FBE /* SetProfileImageViewController.swift in Sources */,
 				2D6F59B32B5C397400CA883A /* SortOptionsViewController.swift in Sources */,
 				09A6B0A02B9B0EE6007DCC0A /* PortfolioCategories.swift in Sources */,
 				CC9C385B2B7BCAF30073A257 /* InterestArtistManager.swift in Sources */,
@@ -2139,6 +2149,7 @@
 				CCFC31E62B5C4EAC00C0673A /* InterestArtistViewController.swift in Sources */,
 				317D986C2B7DF59B009BBB95 /* Region.swift in Sources */,
 				317720FB2BC2A57D00A1928A /* TermDetailCoordinator.swift in Sources */,
+				31640D622BD3FFFF00D7287B /* SetNameViewController.swift in Sources */,
 				3142B9A42B4D03840066CD5A /* ModelTabBarController.swift in Sources */,
 				2DA208152B7CF865006EB9B9 /* PortfolioAPI.swift in Sources */,
 				CC8CAA032BB44EA9005F1E53 /* DetailReviewManager.swift in Sources */,
@@ -2154,7 +2165,6 @@
 				CCAB5A612B67B6C100067FA4 /* ModelDetailSettingView.swift in Sources */,
 				2DA208092B7ABE43006EB9B9 /* SearchDTO.swift in Sources */,
 				2D106F472B7025DB00F3C253 /* ModelReservationVisitLocationView.swift in Sources */,
-				3101C72C2B81F80600460689 /* ProfileInfoBuilder.swift in Sources */,
 				316A927C2B6688F700E4337D /* Week.swift in Sources */,
 				CCB3190C2B82A5D3003B4738 /* ArtistProfileInfoAPI.swift in Sources */,
 				316239802B81B399002D9E2F /* ImageManager.swift in Sources */,
@@ -2175,6 +2185,7 @@
 				095742512B66153E0011B580 /* ArtistPortfolioEditingViewController.swift in Sources */,
 				CC9C388B2B80F9BA0073A257 /* ModelProfileInfoManager.swift in Sources */,
 				3142B99B2B4D020E0066CD5A /* NSObject+.swift in Sources */,
+				31640D672BD406AF00D7287B /* SetNameViewModel.swift in Sources */,
 				317D987B2B7E1810009BBB95 /* MakeUpCategory.swift in Sources */,
 				31C0B5402BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift in Sources */,
 				2D3E0D152B640BCC00C49EF3 /* ModelViewArtistProfileViewController.swift in Sources */,
@@ -2195,17 +2206,16 @@
 				315FB85E2B6DE57C0068163C /* KeyChainValue.swift in Sources */,
 				2D5C05A12B60269900EDC69F /* ShowReviewTableViewCell.swift in Sources */,
 				317D98752B7E0C68009BBB95 /* AtristProfileInfo.swift in Sources */,
-				3101C72A2B81F77200460689 /* ProfileInfo.swift in Sources */,
+				3101C72A2B81F77200460689 /* SignUpProfileInfo.swift in Sources */,
 				315AC1C32B70CDE9003FD1A1 /* ModelReservationViewController.swift in Sources */,
 				2D62E25B2B54A658004E8299 /* RecentSearchViewCell.swift in Sources */,
 				CC8CAA0D2BB4FDE4005F1E53 /* PostReviewDTO.swift in Sources */,
-				3169E3E92BC2B8E400550F2E /* SetProfileDetailCoordinator.swift in Sources */,
+				3169E3E92BC2B8E400550F2E /* SetNameCoordinator.swift in Sources */,
 				2D0A190E2B4EF39200C1CECA /* ModelReservationConfirmViewCell.swift in Sources */,
 				2D669BA32BAD9EBF007E03A0 /* ReviewAPI.swift in Sources */,
 				CC9C38772B7FEAF40073A257 /* ReviewListAPI.swift in Sources */,
 				2D6F59AB2B5BD07500CA883A /* ModelReservationChartTableViewCell.swift in Sources */,
 				2DD60FFB2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift in Sources */,
-				3169E3F62BC2E01800550F2E /* ModelSignUpCoordinator.swift in Sources */,
 				CC9C385F2B7BDAF50073A257 /* InterestArtistDTO.swift in Sources */,
 				2D8C20C52B82D5E100CD4A90 /* ProfileDTO.swift in Sources */,
 				317720F12BC2903400A1928A /* Coordinator.swift in Sources */,
@@ -2223,7 +2233,6 @@
 				2DA208192B7CF9EE006EB9B9 /* PortfolioDTO.swift in Sources */,
 				2D62E2512B548BAB004E8299 /* ModelSearchViewController.swift in Sources */,
 				312DF7642B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift in Sources */,
-				3169E3F82BC2E02800550F2E /* ArtistSignUpCoordinator.swift in Sources */,
 				315FB8592B6DE1B00068163C /* AuthAPI.swift in Sources */,
 				3142B9AF2B4D08380066CD5A /* ArtistHomeViewController.swift in Sources */,
 				317D98702B7E01F7009BBB95 /* Gender.swift in Sources */,
@@ -2240,7 +2249,6 @@
 				CC8CAA012BB44E90005F1E53 /* DetailReviewAPI.swift in Sources */,
 				315FB8572B6DE1480068163C /* AuthManager.swift in Sources */,
 				2DA208052B7AB5F3006EB9B9 /* SearchCategory.swift in Sources */,
-				31C0B53D2BCBA79100758EE9 /* SetModelDetailInfoViewModel.swift in Sources */,
 				3142B99F2B4D02300066CD5A /* UIFont+.swift in Sources */,
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,
 				3142B99D2B4D021A0066CD5A /* UIView+.swift in Sources */,
@@ -2284,7 +2292,6 @@
 				CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */,
 				2DA2080B2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift in Sources */,
 				316239672B80DE9B002D9E2F /* BasicResponseDTO.swift in Sources */,
-				31B2636D2B57EECB00304FBE /* BusinessRegistrationViewController.swift in Sources */,
 				31B4137E2B6D29C500535BB1 /* BusinessIDVerificationAPI.swift in Sources */,
 				31F6F8482B52C7B800EC621D /* NavigationBarView.swift in Sources */,
 				CC8CAA0B2BB4FDD9005F1E53 /* PostReviewManager.swift in Sources */,
@@ -2297,14 +2304,13 @@
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,
 				3142B99D2B4D021A0066CD5A /* UIView+.swift in Sources */,
 				317721032BC2A6B100A1928A /* TermDetailViewModel.swift in Sources */,
-				3169E3F02BC2C0D400550F2E /* SetProfileViewModel.swift in Sources */,
+				3169E3F02BC2C0D400550F2E /* SetProfileImageViewModel.swift in Sources */,
 				CC9C38692B7C79240073A257 /* ArtistProfileAPI.swift in Sources */,
 				31B413862B6D338F00535BB1 /* BusinessVerificationDTO.swift in Sources */,
 				315AC1C82B70FE35003FD1A1 /* ReservationTimes.swift in Sources */,
 				31B263582B57EE9500304FBE /* RegistrationCompletionViewController.swift in Sources */,
 				2DA208072B7ABB2E006EB9B9 /* SearchManager.swift in Sources */,
 				31B263452B57EDE300304FBE /* TermDetailViewController.swift in Sources */,
-				31B263542B57EE8600304FBE /* SetModelDetailInfoViewController.swift in Sources */,
 				CC8CA9FD2BB44E66005F1E53 /* AvailableReviewManager.swift in Sources */,
 				316239AC2B81E917002D9E2F /* TermsData.swift in Sources */,
 				3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */,

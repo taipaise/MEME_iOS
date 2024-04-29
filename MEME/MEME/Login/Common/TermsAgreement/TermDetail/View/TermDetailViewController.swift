@@ -12,7 +12,7 @@ import RxCocoa
 final class TermDetailViewController: UIViewController {
 
     @IBOutlet private weak var titleLabel: UILabel!
-    @IBOutlet private weak var contentLabel: UITextView!
+    @IBOutlet private weak var contentTextView: UITextView!
     @IBOutlet private weak var dismissButton: UIButton!
     private var viewMoldel: TermDetailViewModel?
     private var disposeBag = DisposeBag()
@@ -20,6 +20,11 @@ final class TermDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         bind()
+        setUI()
+    }
+    
+    private func setUI() {
+        contentTextView.backgroundColor = .white
     }
     
     func configure(termType: TermsData) {
@@ -39,7 +44,7 @@ extension TermDetailViewController {
         .disposed(by: disposeBag)
         
         output.content.subscribe { [weak self] content in
-            self?.contentLabel.text = content
+            self?.contentTextView.text = content
         }
         .disposed(by: disposeBag)
         

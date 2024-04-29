@@ -9,9 +9,9 @@ import UIKit
 protocol SignupCoordinator {
     
     var navigationController: UINavigationController? { get }
-    var profileInfo: ProfileInfo { get set }
+    var profileInfo: SignUpProfileInfo { get set }
     
-    init(navigationController: UINavigationController?, profileInfo: ProfileInfo)
+    init(navigationController: UINavigationController?, profileInfo: SignUpProfileInfo)
     
     func start()
 }

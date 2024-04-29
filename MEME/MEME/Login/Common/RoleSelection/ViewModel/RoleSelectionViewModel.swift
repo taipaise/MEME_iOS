@@ -21,14 +21,20 @@ final class RoleSelectionViewModel: ViewModel {
     }
     
     private(set) var roleType = BehaviorRelay<RoleType?>(value: nil)
+    private(set) var profileInfo: SignUpProfileInfo
     private let nextButtonState = BehaviorRelay<Bool>(value: false)
     private var disposeBag = DisposeBag()
+    
+    init() {
+        profileInfo = .init(profileImg: "", username: "", nickname: "", roleType: .ARTIST)
+    }
     
     func transform(_ input: Input) -> Output {
         input.modelTap
             .subscribe { [weak self] _ in
                 self?.roleType.accept(.MODEL)
                 self?.nextButtonState.accept(true)
+                self?.profileInfo.roleType = .MODEL
             }
             .disposed(by: disposeBag)
         
@@ -36,6 +42,7 @@ final class RoleSelectionViewModel: ViewModel {
             .subscribe { [weak self] _ in
                 self?.roleType.accept(.ARTIST)
                 self?.nextButtonState.accept(true)
+                self?.profileInfo.roleType = .ARTIST
             }
             .disposed(by: disposeBag)
         

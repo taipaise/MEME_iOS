@@ -7,14 +7,21 @@
 
 import UIKit
 
-final class SignUpCompletionCoordinator {
-    
+final class SignUpCompletionCoordinator: SignupCoordinator {
     var navigationController: UINavigationController?
-    var role: RoleType
     
-    init(navigationController: UINavigationController?, roleType: RoleType) {
+    var profileInfo: SignUpProfileInfo
+    
+    init(navigationController: UINavigationController?, profileInfo: SignUpProfileInfo) {
         self.navigationController = navigationController
-        role = roleType
+        self.profileInfo = profileInfo
+    }
+    
+    @MainActor func start() {
+        let vc = RegistrationCompletionViewController(nibName: RegistrationCompletionViewController.className, bundle: nil)
+        let viewModel = RegisterCompletionViewModel(profileInfo: profileInfo)
+        vc.configure(viewModel)
+        navigationController?.pushViewController(vc, animated: true)
     }
     
     @MainActor func start(isSuccess: Bool) {
@@ -23,12 +30,9 @@ final class SignUpCompletionCoordinator {
         alert.addAction(confirm)
         
         if isSuccess {
-            let vc = RegistrationCompletionViewController(nibName: RegistrationCompletionViewController.className, bundle: nil)
-            vc.viewModel = RegisterCompletionViewModel(role: role)
-            navigationController?.pushViewController(vc, animated: true)
+            start()
         } else {
             navigationController?.present(alert, animated: true)
         }
-        
     }
 }
