@@ -37,8 +37,8 @@ final class NavigationController: UINavigationController {
     }
     
     private func setFont() {
-        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.font:
-                                                            UIFont.pretendard(to: .regular, size: 16)]
+        let font = UIFont.pretendard(to: .regular, size: 16)
+        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font]
     }
     
     private func setAppearance() {
