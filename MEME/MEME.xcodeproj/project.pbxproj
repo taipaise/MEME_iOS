@@ -13,12 +13,13 @@
 		09275E822B518D150033EF34 /* ArtistHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09275E812B518D150033EF34 /* ArtistHomeViewController.xib */; };
 		09275E892B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09275E872B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift */; };
 		09275E8A2B528A610033EF34 /* ArtistReservationStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09275E882B528A610033EF34 /* ArtistReservationStatusTableViewCell.xib */; };
+		093CE0812BE1602E0043F36F /* memeSecret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 093CE07F2BE1602E0043F36F /* memeSecret.plist */; };
 		094884C72B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094884C52B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.swift */; };
 		094884C82B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094884C62B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.xib */; };
 		094884CB2B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094884C92B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.swift */; };
 		094884CC2B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094884CA2B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.xib */; };
-		094884DB2B59915500C233E0 /* SingleArtistReservationManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094884D92B59915400C233E0 /* SingleArtistReservationManageViewController.swift */; };
-		094884DC2B59915500C233E0 /* SingleArtistReservationManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094884DA2B59915400C233E0 /* SingleArtistReservationManageViewController.xib */; };
+		094884DB2B59915500C233E0 /* SingleReservationManageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094884D92B59915400C233E0 /* SingleReservationManageViewController.swift */; };
+		094884DC2B59915500C233E0 /* SingleReservationManageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094884DA2B59915400C233E0 /* SingleReservationManageViewController.xib */; };
 		095742512B66153E0011B580 /* ArtistPortfolioEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0957424F2B66153E0011B580 /* ArtistPortfolioEditingViewController.swift */; };
 		095742522B66153E0011B580 /* ArtistPortfolioEditingViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 095742502B66153E0011B580 /* ArtistPortfolioEditingViewController.xib */; };
 		09A6B0A02B9B0EE6007DCC0A /* PortfolioCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09A6B09F2B9B0EE6007DCC0A /* PortfolioCategories.swift */; };
@@ -72,7 +73,6 @@
 		2DA208192B7CF9EE006EB9B9 /* PortfolioDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */; };
 		2DB303E82B8286EF00D9E394 /* (null) in Sources */ = {isa = PBXBuildFile; };
 		2DB303F32B829EF200D9E394 /* BusinessLocationModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */; };
-		2DC54B542BB7487100464DB2 /* memeSecret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DC54B522BB7487100464DB2 /* memeSecret.plist */; };
 		2DC54B552BB749A800464DB2 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2DC54B512BB7487100464DB2 /* GoogleService-Info.plist */; };
 		2DD60FFB2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD60FFA2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift */; };
 		2DD60FFF2BC5AE5A00B362F1 /* ModelHomeViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD60FFE2BC5AE5A00B362F1 /* ModelHomeViewItem.swift */; };
@@ -324,12 +324,13 @@
 		09275E812B518D150033EF34 /* ArtistHomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtistHomeViewController.xib; sourceTree = "<group>"; };
 		09275E872B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistReservationStatusTableViewCell.swift; sourceTree = "<group>"; };
 		09275E882B528A610033EF34 /* ArtistReservationStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtistReservationStatusTableViewCell.xib; sourceTree = "<group>"; };
+		093CE07F2BE1602E0043F36F /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
 		094884C52B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistMakeupTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		094884C62B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtistMakeupTagCollectionViewCell.xib; sourceTree = "<group>"; };
 		094884C92B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistPortfolioCollectionViewCell.swift; sourceTree = "<group>"; };
 		094884CA2B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtistPortfolioCollectionViewCell.xib; sourceTree = "<group>"; };
-		094884D92B59915400C233E0 /* SingleArtistReservationManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleArtistReservationManageViewController.swift; sourceTree = "<group>"; };
-		094884DA2B59915400C233E0 /* SingleArtistReservationManageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleArtistReservationManageViewController.xib; sourceTree = "<group>"; };
+		094884D92B59915400C233E0 /* SingleReservationManageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SingleReservationManageViewController.swift; sourceTree = "<group>"; };
+		094884DA2B59915400C233E0 /* SingleReservationManageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SingleReservationManageViewController.xib; sourceTree = "<group>"; };
 		0957424F2B66153E0011B580 /* ArtistPortfolioEditingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistPortfolioEditingViewController.swift; sourceTree = "<group>"; };
 		095742502B66153E0011B580 /* ArtistPortfolioEditingViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtistPortfolioEditingViewController.xib; sourceTree = "<group>"; };
 		098C48CA2BB5C69800756C55 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -392,7 +393,6 @@
 		2DB303E22B82842E00D9E394 /* PersonalColor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonalColor.swift; sourceTree = "<group>"; };
 		2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLocationModel.swift; sourceTree = "<group>"; };
 		2DC54B512BB7487100464DB2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
-		2DC54B522BB7487100464DB2 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
 		2DCB3CCC2B7E041600BFCDA1 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
 		2DD60FFA2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendHeaderReusableView.swift; sourceTree = "<group>"; };
 		2DD60FFE2BC5AE5A00B362F1 /* ModelHomeViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHomeViewItem.swift; sourceTree = "<group>"; };
@@ -787,13 +787,13 @@
 			path = ArtistReservationStatusTableViewCell;
 			sourceTree = "<group>";
 		};
-		093F9F022BBD426B009074B2 /* SingleArtistReservationManageView */ = {
+		093F9F022BBD426B009074B2 /* SingleReservationManageView */ = {
 			isa = PBXGroup;
 			children = (
-				094884D92B59915400C233E0 /* SingleArtistReservationManageViewController.swift */,
-				094884DA2B59915400C233E0 /* SingleArtistReservationManageViewController.xib */,
+				094884D92B59915400C233E0 /* SingleReservationManageViewController.swift */,
+				094884DA2B59915400C233E0 /* SingleReservationManageViewController.xib */,
 			);
-			path = SingleArtistReservationManageView;
+			path = SingleReservationManageView;
 			sourceTree = "<group>";
 		};
 		098C48C52BB4ADE600756C55 /* ManagementReservation */ = {
@@ -817,7 +817,6 @@
 			isa = PBXGroup;
 			children = (
 				093F9F012BBD4256009074B2 /* ArtistReservationStatusTableViewCell */,
-				093F9F022BBD426B009074B2 /* SingleArtistReservationManageView */,
 			);
 			path = ArtistReservation;
 			sourceTree = "<group>";
@@ -1089,7 +1088,7 @@
 				314F74E92B52DDF200CACF20 /* Font */,
 				3142B9662B4CFFED0066CD5A /* Info.plist */,
 				2DC54B512BB7487100464DB2 /* GoogleService-Info.plist */,
-				2DC54B522BB7487100464DB2 /* memeSecret.plist */,
+				093CE07F2BE1602E0043F36F /* memeSecret.plist */,
 				3142B9632B4CFFED0066CD5A /* LaunchScreen.storyboard */,
 				3156D1FD2B69438800559820 /* Network */,
 				3142B9992B4D01FB0066CD5A /* extenstions */,
@@ -1185,6 +1184,7 @@
 		3142B9AB2B4D071E0066CD5A /* Artist */ = {
 			isa = PBXGroup;
 			children = (
+				093F9F022BBD426B009074B2 /* SingleReservationManageView */,
 				091CCCD62B639E4800ADD21C /* ArtistData.swift */,
 				098C48C52BB4ADE600756C55 /* ManagementReservation */,
 				CCCE562C2B81D9FA007555A2 /* ArtistLocation */,
@@ -2023,7 +2023,7 @@
 				2DC54B552BB749A800464DB2 /* GoogleService-Info.plist in Resources */,
 				CCAB5A632B67B6CA00067FA4 /* ModelDetailSettingView.xib in Resources */,
 				094884CC2B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.xib in Resources */,
-				094884DC2B59915500C233E0 /* SingleArtistReservationManageViewController.xib in Resources */,
+				094884DC2B59915500C233E0 /* SingleReservationManageViewController.xib in Resources */,
 				3142B9652B4CFFED0066CD5A /* LaunchScreen.storyboard in Resources */,
 				095742522B66153E0011B580 /* ArtistPortfolioEditingViewController.xib in Resources */,
 				09275E8A2B528A610033EF34 /* ArtistReservationStatusTableViewCell.xib in Resources */,
@@ -2039,7 +2039,6 @@
 				312B30532B550FF9008D17FC /* Pretendard-ExtraBold.otf in Resources */,
 				312B30522B550FF9008D17FC /* Pretendard-Thin.otf in Resources */,
 				CCCE563C2B81D9FB007555A2 /* ArtistLocationViewController.xib in Resources */,
-				2DC54B542BB7487100464DB2 /* memeSecret.plist in Resources */,
 				3142B9652B4CFFED0066CD5A /* LaunchScreen.storyboard in Resources */,
 				CCCE56362B81D9FB007555A2 /* ArtistInfoDetailViewController.xib in Resources */,
 				2D0A19052B4ED07B00C1CECA /* SelectMakeupCardViewCell.xib in Resources */,
@@ -2056,6 +2055,7 @@
 				091CCCDB2B64158B00ADD21C /* ArtistPortfolioManageViewController.xib in Resources */,
 				31B263502B57EE7D00304FBE /* SetProfileImageViewController.xib in Resources */,
 				31B263572B57EE9500304FBE /* RegistrationCompletionViewController.xib in Resources */,
+				093CE0812BE1602E0043F36F /* memeSecret.plist in Resources */,
 				312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */,
 				312B30542B550FF9008D17FC /* Pretendard-Regular.otf in Resources */,
 				31F6F8462B52C7A500EC621D /* NavigationBarView.xib in Resources */,
@@ -2321,7 +2321,7 @@
 				2D4B7C262B5F17E7001E1B09 /* TotalStarRatingView.swift in Sources */,
 				CC9C38792B7FEB0E0073A257 /* ReviewListManager.swift in Sources */,
 				2D6F59AE2B5BF3A900CA883A /* ModelReservationChartTableViewController.swift in Sources */,
-				094884DB2B59915500C233E0 /* SingleArtistReservationManageViewController.swift in Sources */,
+				094884DB2B59915500C233E0 /* SingleReservationManageViewController.swift in Sources */,
 				319F53552BCC1BDE008D153E /* SignUpCompletionCoordinator.swift in Sources */,
 				3156D1FF2B69440E00559820 /* MemeAPI.swift in Sources */,
 				09275E892B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift in Sources */,

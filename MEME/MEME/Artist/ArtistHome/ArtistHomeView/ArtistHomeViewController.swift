@@ -96,7 +96,7 @@ class ArtistHomeViewController: UIViewController {
         self.tabBarController?.selectedIndex = 1
     }
     @objc private func reservationManagedBtnTapped(_ sender: UIButton){
-        let vc = SingleArtistReservationManageViewController()
+        let vc = SingleReservationManageViewController()
         let selectedIdx = sender.tag
         vc.reservationData = reservationData[selectedIdx]
         vc.isToday = false
@@ -107,7 +107,7 @@ class ArtistHomeViewController: UIViewController {
     }
     @IBAction func firstTodayResBtnDidTap(_ sender: UIButton) {
         if(todayCount != 0) {
-            let vc = SingleArtistReservationManageViewController()
+            let vc = SingleReservationManageViewController()
             vc.reservationData = reservationData[self.showReservationData[0]]
             vc.isToday = true
             vc.reservationTimeString = convertTimeString(vc.reservationData.reservationDayOfWeekAndTime.values.first!)
@@ -121,7 +121,7 @@ class ArtistHomeViewController: UIViewController {
         }
     }
     @IBAction func secondTodayResBtnDidTap(_ sender: UIButton) {
-        let vc = SingleArtistReservationManageViewController()
+        let vc = SingleReservationManageViewController()
         vc.reservationData = reservationData[self.showReservationData[1]]
         vc.isToday = true
         vc.reservationTimeString = convertTimeString(vc.reservationData.reservationDayOfWeekAndTime.values.first!)
