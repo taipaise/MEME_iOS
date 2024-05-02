@@ -8,24 +8,14 @@
 import Foundation
 import Moya
 
-enum SocialProvider: String {
-    case APPLE
-    case KAKAO
-}
-
 enum AuthAPI {
-    case login(idToken: String, provider: SocialProvider)
+    case checkIsUser(idToken: String, provider: SocialProvider)
     case logout
     case withdraw
     case modelSignUp(
         idToken: String,
         provider: String,
-        profileImg: String,
-        username: String,
-        nickname: String,
-        gender: String,
-        skinType: String,
-        personalColor: String
+        info: SignUpProfileInfo
     )
 
     case artistSignUp(
@@ -53,14 +43,14 @@ enum AuthAPI {
     case reissue(accessToken: String, refreshToken: String)
 }
 
-extension AuthAPI: MemeAuthAPI {
-    var domain: MemeAuthDomain {
+extension AuthAPI: MemeAPI {
+    var domain: MemeDomain {
         return .auth
     }
 
     var urlPath: String {
         switch self {
-        case .login:
+        case .checkIsUser:
             return "/check"
         case .logout:
             return "/auth/logout"
@@ -83,7 +73,7 @@ extension AuthAPI: MemeAuthAPI {
     
     var headerType: HTTPHeaderFields {
         switch self {
-        case .login, .modelSignUp, .artistSignUp, .reissue:
+        case .checkIsUser, .modelSignUp, .artistSignUp, .reissue:
             return .plain
         case .logout, .withdraw, .artistProfile:
             return .hasAccessToken
@@ -97,7 +87,7 @@ extension AuthAPI: MemeAuthAPI {
     var task: Moya.Task {
         switch self {
             
-        case .login(idToken: let idToken, provider: let provider):
+        case .checkIsUser(idToken: let idToken, provider: let provider):
             let parameters: [String: Any] = [
                 "id_token": idToken,
                 "provider": provider.rawValue
@@ -113,24 +103,15 @@ extension AuthAPI: MemeAuthAPI {
         case .modelSignUp(
             idToken: let idToken,
             provider: let provider,
-            profileImg: let profileImg,
-            username: let username,
-            nickname: let nickname,
-            gender: let gender,
-            skinType: let skinType,
-            personalColor: let personalColor
+            info: let info
         ):
-
             let parameters: [String: Any] = [
                 "id_token": idToken,
                 "provider": provider,
-                "profile_img": profileImg,
-                "username": username,
-                "nickname": nickname,
-                "gender": gender,
-                "skin_type": skinType,
-                "personal_color": personalColor
-            ]
+                "profile_img": info.profileImg,
+                "username": info.username,
+                "nickname": info.nickname,
+                ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             
         case .artistSignUp(

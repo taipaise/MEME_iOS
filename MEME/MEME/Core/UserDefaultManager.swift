@@ -13,22 +13,30 @@ final class UserDefaultManager {
     private let userDefaults = UserDefaults.standard
     private let socialProvider = "Provider"
     private let idToken = "IdToken"
-    private let isLogin = "isLogin"
     
-    func getProvider() -> String? {
-        return userDefaults.string(forKey: socialProvider)
+    func getProvider() -> SocialProvider? {
+        let provider = userDefaults.string(forKey: socialProvider) ?? ""
+        
+        switch provider {
+        case SocialProvider.APPLE.rawValue:
+            return SocialProvider.APPLE
+        case SocialProvider.KAKAO.rawValue:
+            return SocialProvider.KAKAO
+        default:
+            return nil
+        }
     }
     
-    func saveProvider(_ provider: String) {
-        userDefaults.set(provider, forKey: socialProvider)
+    func saveProvider(_ provider: SocialProvider) {
+        userDefaults.set(provider.rawValue, forKey: socialProvider)
     }
     
     func removeProvider() {
         userDefaults.removeObject(forKey: socialProvider)
     }
     
-    func getIdToken() -> String? {
-        return userDefaults.string(forKey: idToken)
+    func getIdToken() -> String {
+        return userDefaults.string(forKey: idToken) ?? ""
     }
     
     func saveIdToken(_ id: String) {
@@ -39,16 +47,8 @@ final class UserDefaultManager {
         userDefaults.removeObject(forKey: idToken)
     }
     
-    func getIsLogin() -> Bool? {
-        let state = userDefaults.string(forKey: isLogin)
-        return state == "TRUE"
-    }
-    
-    func saveIsLogin(_ isLogin: String) {
-        userDefaults.set(isLogin, forKey: isLogin)
-    }
-    
-    func removeIsLogin() {
-        userDefaults.removeObject(forKey: isLogin)
+    func removeAll() {
+        removeProvider()
+        removeIdToken()
     }
 }

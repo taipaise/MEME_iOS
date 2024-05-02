@@ -8,11 +8,10 @@
 import Foundation
 import RxSwift
 
+@MainActor
 protocol ViewModel {
     associatedtype Input
     associatedtype Output
-    
-    var disposeBag: DisposeBag { get set }
     
     func transform(_ input: Input) -> Output
 }

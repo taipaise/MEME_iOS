@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22155" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22131"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pretendard-Regular.otf">
+            <string>Pretendard-Regular</string>
+        </array>
+        <array key="Pretendard-SemiBold.otf">
+            <string>Pretendard-SemiBold</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="ArtistPortfolioCollectionViewCell" id="gTV-IL-0wX" customClass="ArtistPortfolioCollectionViewCell" customModule="MEME" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="180" height="240"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="180" height="240"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EyW-NF-GGN">
+                        <rect key="frame" x="5" y="-5" width="170" height="250"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rTi-Ft-GxS">
+                                <rect key="frame" x="10" y="16" width="150" height="218"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Mou-Es-3WO">
+                                        <rect key="frame" x="14" y="13.666666666666671" width="122" height="190.66666666666663"/>
+                                        <subviews>
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="JTc-te-oBJ">
+                                                <rect key="frame" x="0.0" y="0.0" width="122" height="122"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="122" id="11n-9p-aoq"/>
+                                                    <constraint firstAttribute="width" secondItem="JTc-te-oBJ" secondAttribute="height" multiplier="1:1" id="bTo-sC-8QQ"/>
+                                                </constraints>
+                                            </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="데일리 메이크업" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MK5-Fw-nVt">
+                                                <rect key="frame" x="0.0" y="128" width="63.333333333333336" height="12"/>
+                                                <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="10"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="메이크업명" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qwA-tP-ZRI">
+                                                <rect key="frame" x="0.0" y="146" width="69.333333333333329" height="19.333333333333343"/>
+                                                <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
+                                                <color key="textColor" name="MainBold"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="가격" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="asv-aK-TqD">
+                                                <rect key="frame" x="0.0" y="171.33333333333334" width="27.666666666666668" height="19.333333333333343"/>
+                                                <fontDescription key="fontDescription" name="Pretendard-SemiBold" family="Pretendard" pointSize="16"/>
+                                                <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" relation="lessThanOrEqual" constant="191" id="omr-kk-Y1J"/>
+                                        </constraints>
+                                    </stackView>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstItem="Mou-Es-3WO" firstAttribute="centerY" secondItem="rTi-Ft-GxS" secondAttribute="centerY" id="Cva-8c-oym"/>
+                                    <constraint firstAttribute="height" constant="218" id="l19-4r-DYy"/>
+                                    <constraint firstItem="Mou-Es-3WO" firstAttribute="centerX" secondItem="rTi-Ft-GxS" secondAttribute="centerX" id="rAQ-wC-jCD"/>
+                                    <constraint firstAttribute="width" constant="150" id="yoQ-ic-hdO"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="rTi-Ft-GxS" firstAttribute="centerY" secondItem="EyW-NF-GGN" secondAttribute="centerY" id="7Zt-EZ-Vxe"/>
+                            <constraint firstAttribute="width" constant="170" id="eYK-pG-TDV"/>
+                            <constraint firstItem="rTi-Ft-GxS" firstAttribute="centerX" secondItem="EyW-NF-GGN" secondAttribute="centerX" id="rIQ-yj-iVk"/>
+                            <constraint firstAttribute="height" constant="250" id="uXq-4M-H5K"/>
+                        </constraints>
+                    </view>
+                </subviews>
+            </view>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="EyW-NF-GGN" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="6Ir-AV-byc"/>
+                <constraint firstItem="EyW-NF-GGN" firstAttribute="centerX" secondItem="gTV-IL-0wX" secondAttribute="centerX" id="wzt-Lt-qZH"/>
+            </constraints>
+            <size key="customSize" width="182" height="254"/>
+            <connections>
+                <outlet property="fullView" destination="EyW-NF-GGN" id="foP-hf-UMl"/>
+                <outlet property="portfolioImageView" destination="JTc-te-oBJ" id="a3j-SK-IVs"/>
+                <outlet property="portfolioMainLabel" destination="qwA-tP-ZRI" id="jf6-Rf-53g"/>
+                <outlet property="portfolioPriceLabel" destination="asv-aK-TqD" id="je9-Jv-yT3"/>
+                <outlet property="portfolioSubLabel" destination="MK5-Fw-nVt" id="TiG-xP-tE3"/>
+                <outlet property="portfolioView" destination="rTi-Ft-GxS" id="SFA-Pb-5ca"/>
+            </connections>
+            <point key="canvasLocation" x="32.061068702290072" y="0.70422535211267612"/>
+        </collectionViewCell>
+    </objects>
+    <resources>
+        <namedColor name="MainBold">
+            <color red="0.98431372549019602" green="0.3843137254901961" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+    </resources>
+</document>

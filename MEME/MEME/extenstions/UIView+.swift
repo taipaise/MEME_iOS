@@ -8,6 +8,9 @@
 import UIKit
 
 public extension UIView {
+    class var nib: UINib {
+        return .init(nibName: self.className, bundle: self.bundle)
+    }
     
     func loadNib() {
         let bundle = type(of: self).bundle
@@ -19,6 +22,12 @@ public extension UIView {
         nib.frame = bounds
         nib.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(nib)
+    }
+    
+    func addSubViews(_ views: [UIView]) {
+        views.forEach {
+            addSubview($0)
+        }
     }
     
     func setGradient(

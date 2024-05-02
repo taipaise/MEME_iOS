@@ -11,18 +11,14 @@ import KakaoSDKAuth
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
-
+    
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         
         guard let windowScene = (scene as? UIWindowScene) else { return }
-        
-        getRootViewController { rootViewController in
-            let window = UIWindow(windowScene: windowScene)
-            window.rootViewController = rootViewController
-            window.makeKeyAndVisible()
-            self.window = window
-        }
+        let window = UIWindow(windowScene: windowScene)
+        window.rootViewController = getRootViewController()
+        window.makeKeyAndVisible()
+        self.window = window
     }
 
     func scene(_ scene: UIScene, openURLContexts URLContexts: Set<UIOpenURLContext>) {
@@ -63,40 +59,49 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 }
 
 extension SceneDelegate {
-    func getRootViewController(completion: @escaping (UIViewController) -> Void) {
+    func getRootViewController() -> UIViewController {
         let vc = NavigationController(nibName: nil, bundle: nil)
         vc.navigationBar.isHidden = true
-        AuthManager.shared.reissue { result in
-            switch result {
-            case .success(let tokens):
-                KeyChainManager.save(forKey: .accessToken, value: tokens.accessToken)
-                KeyChainManager.save(forKey: .refreshToken, value: tokens.refreshToken)
-                
-                let role = KeyChainManager.read(forkey: .role) ?? RoleType.ARTIST.rawValue
-                if role == RoleType.ARTIST.rawValue {
-                    let mainVC = ArtistTabBarController(
-                        nibName: ArtistTabBarController.className,
-                        bundle: ArtistTabBarController.bundle
-                    )
-                    vc.viewControllers = [mainVC]
+        
+        Task {
+            let reissueResult = await AuthManager.shared.reissue()
+            switch reissueResult {
+            case .success(let result):
+                if result {
+                    let role = KeyChainManager.read(forkey: .role) ?? RoleType.ARTIST.rawValue
+                    
+                    if role == RoleType.ARTIST.rawValue {
+                        let mainVC = ArtistTabBarController(
+                            nibName: ArtistTabBarController.className,
+                            bundle: ArtistTabBarController.bundle
+                        )
+                        vc.viewControllers = [mainVC]
+                    } else {
+                        let mainVC = ModelTabBarController(
+                            nibName: ModelTabBarController.className,
+                            bundle: ModelTabBarController.bundle
+                        )
+                        vc.viewControllers = [mainVC]
+                    }
                 } else {
-                    let mainVC = ModelTabBarController(
-                        nibName: ModelTabBarController.className,
-                        bundle: ModelTabBarController.bundle
+                    KeyChainManager.removeAllKeychain()
+                    let loginVC = LoginViewController(
+                        nibName: LoginViewController.className,
+                        bundle: LoginViewController.bundle
                     )
-                    vc.viewControllers = [mainVC]
+                    vc.viewControllers = [loginVC]
                 }
-                completion(vc)
-            case .failure(let error):
+            case .failure(_):
                 KeyChainManager.removeAllKeychain()
                 let loginVC = LoginViewController(
                     nibName: LoginViewController.className,
                     bundle: LoginViewController.bundle
                 )
                 vc.viewControllers = [loginVC]
-                completion(vc)
             }
         }
+
+        return vc
     }
     
     func changeRootVC(_ vc:UIViewController, animated: Bool) {
