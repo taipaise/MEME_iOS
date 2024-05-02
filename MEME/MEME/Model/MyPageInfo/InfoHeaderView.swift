@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class InfoHeaderView: UIView {
     
@@ -32,9 +33,7 @@ class InfoHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        
-        
+                
         configureUI()
     }
     
@@ -46,29 +45,25 @@ class InfoHeaderView: UIView {
     
     func configureUI() {
         
-        infoprofileImage.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         addSubview(infoprofileImage)
-        NSLayoutConstraint.activate([
-            infoprofileImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-            infoprofileImage.widthAnchor.constraint(equalToConstant: 90),
-            infoprofileImage.heightAnchor.constraint(equalToConstant: 90),
-            infoprofileImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50)
-        ])
-        
+        infoprofileImage.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.height.equalTo(90)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(50)
+        }
+           
         addSubview(nameLabel)
-        nameLabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 18)
-        NSLayoutConstraint.activate([
-            nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            nameLabel.topAnchor.constraint(equalTo: infoprofileImage.bottomAnchor, constant: 17)
-        ])
+        nameLabel.font = .pretendard(to: .semiBold, size: 18)
+        nameLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(infoprofileImage.snp.bottom).offset(17)
+        }
+        
         MyPageManager.shared.getMyPageProfile(userId: KeyChainManager.loadMemberID()) { [weak self] result in
             switch result {
             case .success(let response):
                 self?.myPageResponse = response
                 
-                // UI 업데이트
                 DispatchQueue.main.async {
                     self?.nameLabel.text = response.data?.name
                     if let profileImgUrl = response.data?.profileImg {

@@ -25,5 +25,5 @@ struct WrittenReviewData: Codable {
     let makeupName: String
     let portfolioImg: String
     let location: String
-    let createdAt: String?
+    let createdAt: String
 }

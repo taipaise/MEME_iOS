@@ -6,12 +6,13 @@
 //
 
 import UIKit
+import SnapKit
 
 class InfoTableViewCell: UITableViewCell {
     
     let infomenuLabel = UILabel()
     let rightLabel = UILabel()
-
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier )
         
@@ -25,7 +26,7 @@ class InfoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -36,27 +37,21 @@ class InfoTableViewCell: UITableViewCell {
     
     func configureUI() {
         
-        infomenuLabel.translatesAutoresizingMaskIntoConstraints = false
-        rightLabel.translatesAutoresizingMaskIntoConstraints = false
-        
         addSubview(infomenuLabel)
-    
-        infomenuLabel.font = UIFont.pretendard(to: .medium, size: 14)
-        
-        NSLayoutConstraint.activate([
-            infomenuLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            infomenuLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 24)
-        ])
+        infomenuLabel.font = .pretendard(to: .medium, size: 14)
+        infomenuLabel.textColor = .black
+        infomenuLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(24)
+        }
         
         addSubview(rightLabel)
         rightLabel.textAlignment = .right
-        rightLabel.font = UIFont.pretendard(to: .regular, size: 14)
-        NSLayoutConstraint.activate([
-            rightLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -24),
-            rightLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
-      
+        rightLabel.font = .pretendard(to: .regular, size: 14)
+        rightLabel.textColor = .black
+        rightLabel.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-24)
+            make.centerY.equalToSuperview()
+        }
     }
-
 }
-

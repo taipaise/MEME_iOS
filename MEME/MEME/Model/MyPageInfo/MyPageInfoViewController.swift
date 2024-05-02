@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 private let cellID2 = "Cell2"
 
@@ -37,23 +38,23 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
     }
     
     func updateHeaderView() {
-                guard let header = tableView.tableHeaderView as? ModelHeaderView else { return }
-                
+        guard let header = tableView.tableHeaderView as? ModelHeaderView else { return }
+        
         if let nickname = myPageResponse?.data?.name {
-                    header.namebutton.setTitle(nickname, for: .normal)
-                }
-    //            if let profileImgUrl = data?.data?.profileImg {
-    //                header.profileImage.loadImage(from: profileImgUrl)
-    //            }
+            header.namebutton.setTitle(nickname, for: .normal)
+        }
         if let profileImgUrl = myPageResponse?.data?.profileImg {
-                        FirebaseStorageManager.downloadImage(urlString: profileImgUrl) { image in
-                            guard let image = image else { return }
-                            header.profileImage.setImage(image: image)
-                        }
-                    }
-                    
-                    tableView.layoutIfNeeded()
-                }
+            header.profileImage.loadImage(from: profileImgUrl)
+        }
+        if let profileImgUrl = myPageResponse?.data?.profileImg {
+            FirebaseStorageManager.downloadImage(urlString: profileImgUrl) { image in
+                guard let image = image else { return }
+                header.profileImage.setImage(image: image)
+            }
+        }
+        
+        tableView.layoutIfNeeded()
+    }
 
     
     override func viewWillAppear(_ animated: Bool) {
@@ -71,20 +72,18 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
         tableView.backgroundColor = .white
         
         view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(view.snp.top)
+            make.left.equalTo(view.snp.left)
+            make.bottom.equalTo(view.snp.bottom)
+            make.right.equalTo(view.snp.right)
+        }
         
         tableView.dataSource = self
         tableView.delegate = self
         
         tableView.register(InfoTableViewCell.self, forCellReuseIdentifier: cellID2)
 
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
-        ])
-        
         self.tabBarController?.tabBar.isHidden = true
         
         navigationItem.title = "내 정보 조회"
@@ -133,11 +132,6 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
     
 }
 
-
-//var myPageResponse: MyPageResponse?
-//
-//extension MyPageInfoViewController: UITableViewDataSource {}
-
 extension MyPageInfoViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
@@ -160,11 +154,3 @@ extension MyPageInfoViewController: UITableViewDelegate {
         tableView.deselectRow(at: indexPath, animated: true)
     }
 }
-//
-//extension UIImageView {
-//    func setImage(image: UIImage?) {
-//        DispatchQueue.main.async {
-//            self.image = image
-//        }
-//    }
-//}

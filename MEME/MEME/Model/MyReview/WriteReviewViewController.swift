@@ -12,13 +12,19 @@ import SnapKit
 class WriteReviewViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate, PHPickerViewControllerDelegate, UITextViewDelegate  {
     
     var data = [AvailableReviewResponseData]()
-
     var starRatingView: StarRatingView!
     
-    let scrollView = UIScrollView()
-    let contentView = UIView()
-    
-    let reviewLabel: UILabel = {
+    private lazy var scrollView: UIScrollView = {
+        let scrollView = UIScrollView()
+        return scrollView
+    }()
+
+    private lazy var contentView: UIView = {
+        let contentView = UIView()
+        return contentView
+    }()
+
+    private lazy var reviewLabel: UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = UIFont(name: "Pretendard-Regular", size: 20)
@@ -37,32 +43,32 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
     
     let image = UIImage.delete
     
-    lazy var deleteButton: UIButton = {
+    private lazy var deleteButton: UIButton = {
         let deletebtn = UIButton(type: .custom)
         deletebtn.setImage(image, for: .normal)
         deletebtn.addTarget(self, action: #selector(deleteImage), for: .touchUpInside)
-        
         return deletebtn
     }()
     
     let warningLabel = UILabel()
     
-    let upLoadButton: UIButton = {
+    private lazy var upLoadButton: UIButton = {
         let btn = UIButton(type: .system)
-//        btn.addTarget(WriteReviewViewController.self, action: #selector(uploadButtonTapped), for: .touchUpInside)
-        
+        // btn.addTarget(WriteReviewViewController.self, action: #selector(uploadButtonTapped), for: .touchUpInside)
         return btn
     }()
     
-    
-    let reviewTextView = UITextView()
-    
+    private lazy var reviewTextView: UITextView = {
+        let reviewTextView = UITextView()
+        return reviewTextView
+    }()
+
     var laterButton: UIButton = {
         let laterbtn = UIButton()
         return laterbtn
     }()
     
-    var stackView: UIStackView = {
+    private lazy var stackView: UIStackView = {
         let view = UIStackView()
         view.axis = .horizontal
         view.distribution = .fillEqually
@@ -73,6 +79,16 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
     var setButton: UIButton = {
         let setbtn = UIButton()
         return setbtn
+    }()
+    
+    private lazy var imagesStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .horizontal
+        stackView.distribution = .fillEqually
+        stackView.alignment = .fill
+        stackView.spacing = 10
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
     }()
     
     func updateReviewLabel(artistName: String, makeupName: String) {
@@ -357,7 +373,7 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
         
         laterButton.setTitleColor(.white, for: .normal)
         setButton.setTitleColor(.white, for: .normal)
-
+        
         reviewTextViewTopConstraint = reviewTextView.topAnchor.constraint(equalTo: upLoadButton.bottomAnchor, constant: 10)
         
         reviewTextViewTopConstraint = reviewTextView.topAnchor.constraint(equalTo: upLoadButton.bottomAnchor, constant: 10)
@@ -374,6 +390,13 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
         NSLayoutConstraint.activate([
             contentViewHeightConstraint,
             contentView.bottomAnchor.constraint(greaterThanOrEqualTo: reviewTextView.bottomAnchor, constant: 40)
+        ])
+        
+        NSLayoutConstraint.activate([
+            imagesStackView.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor, constant: 20),
+            imagesStackView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor, constant: 20),
+            imagesStackView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor, constant: -20),
+            imagesStackView.heightAnchor.constraint(equalToConstant: 131)
         ])
     }
     
@@ -402,7 +425,7 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
     
     func presentPhotoPicker() {
         var configuration = PHPickerConfiguration()
-        configuration.selectionLimit = 1
+        configuration.selectionLimit = 3
         configuration.filter = .images
         let picker = PHPickerViewController(configuration: configuration)
         picker.delegate = self
@@ -432,20 +455,26 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
     
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
         picker.dismiss(animated: true, completion: nil)
+        imagesStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
         
         let itemProvider = results.first?.itemProvider
         if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { (object, error) in
+            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] (object, error) in
                 if let image = object as? UIImage {
-                    DispatchQueue.main.async { [self] in
-                        self.imageView.image = image
-                        //                        self.imageViewTopConstraint?.constant += self.imageView.frame.height
-                        //                        UIView.animate(withDuration: 0.3) {
-                        //                            self.view.layoutIfNeeded()
-                        self.imageViewHeightConstraint?.constant = 100  // 이미지 뷰의 높이를 업데이트
+                    DispatchQueue.main.async {
+                        guard let self = self else { return }
+                        let imageView = UIImageView(image: image)
+                        imageView.contentMode = .scaleAspectFit
+                        self.imagesStackView.addArrangedSubview(imageView)
+                        
+                        self.imageViewHeightConstraint?.isActive = false
+                        self.imageViewHeightConstraint = imageView.heightAnchor.constraint(equalToConstant: 100)
+                        self.imageViewHeightConstraint?.isActive = true
+                        
                         self.reviewTextViewTopConstraint?.isActive = false
-                        reviewTextViewTopConstraint = reviewTextView.topAnchor.constraint(equalTo: self.imageView.bottomAnchor, constant: 10)
-                        reviewTextViewTopConstraint?.isActive = true
+                        self.reviewTextViewTopConstraint = self.reviewTextView.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: 10)
+                        self.reviewTextViewTopConstraint?.isActive = true
+                        
                         UIView.animate(withDuration: 0.3) {
                             self.view.layoutIfNeeded()
                         }
@@ -454,6 +483,8 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
             }
         }
     }
+
+    
     func loadImageFromUrl(imageUrl: String) {
         guard let url = URL(string: imageUrl) else {
             print("Invalid URL")

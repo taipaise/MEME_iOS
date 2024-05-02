@@ -6,15 +6,12 @@
 //
 
 import UIKit
+import SnapKit
 
 class ModelMyPageTableViewCell: UITableViewCell {
-    
-    //MARK: - Properties
-    
+        
     let menuLabel = UILabel()
-    
-    //MARK: - Lifecycles
-    
+        
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier )
         
@@ -32,20 +29,15 @@ class ModelMyPageTableViewCell: UITableViewCell {
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
-    
-    //MARK: - Helpers
-    
+        
     func configureUI() {
         
         addSubview(menuLabel)
-        menuLabel.translatesAutoresizingMaskIntoConstraints = false
-        
-        menuLabel.font = UIFont(name: "Pretendard-Medium", size: 14)
-
-        NSLayoutConstraint.activate([
-            menuLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            menuLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 24)
-        ])
+        menuLabel.font = .pretendard(to: .medium, size: 14)
+        menuLabel.textColor = .black
+        menuLabel.snp.makeConstraints { make in
+            make.centerY.equalTo(self.snp.centerY)
+            make.left.equalTo(self.snp.left).offset(24)
+        }
     }
-
 }

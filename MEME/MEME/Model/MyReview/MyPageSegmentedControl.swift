@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 struct UnderbarIndicator{
   var height: CGFloat
@@ -113,32 +114,32 @@ private extension MyPageSegmentedControl {
             }
         
         for (index, title) in titles.enumerated() {
-            if let segmentLabel = segmentedTitleLabels.first(where: { $0.text == title }) {          
+            if let segmentLabel = segmentedTitleLabels.first(where: { $0.text == title }) {
                 
                 segmentLabel.addSubview(reviewNumLabel)
-                NSLayoutConstraint.activate([
-                    reviewNumLabel.centerYAnchor.constraint(equalTo: segmentLabel.centerYAnchor),
-                    reviewNumLabel.leadingAnchor.constraint(equalTo: segmentLabel.trailingAnchor, constant: 5)
-                ])
+                reviewNumLabel.snp.makeConstraints { make in
+                    make.centerY.equalTo(segmentLabel.snp.centerY)
+                    make.leading.equalTo(segmentLabel.snp.trailing).offset(5)
+                }
             }
         }
     }
     
     func makeUnderbar() -> UIView {
-        return {
-            $0.translatesAutoresizingMaskIntoConstraints = false
-            $0.backgroundColor = underbarInfo.barColor
-            $0.layer.cornerRadius = underbarInfo.height/2
-            addSubview($0)
-            NSLayoutConstraint.activate([
-                $0.leadingAnchor.constraint(equalTo: leadingAnchor),
-                $0.bottomAnchor.constraint(equalTo: bottomAnchor),
-                $0.widthAnchor.constraint(equalToConstant: underbarWidth ?? 50),
-                $0.heightAnchor.constraint(equalToConstant: underbarInfo.height)])
-            return $0
-        }(UIView(frame: .zero))
+        let underbar = UIView(frame: .zero)
+        underbar.translatesAutoresizingMaskIntoConstraints = false
+        underbar.backgroundColor = underbarInfo.barColor
+        underbar.layer.cornerRadius = underbarInfo.height/2
+        addSubview(underbar)
+        underbar.snp.makeConstraints { make in // SnapKit을 사용한 제약 조건 설정
+            make.leading.equalTo(self.snp.leading)
+            make.bottom.equalTo(self.snp.bottom)
+            make.width.equalTo(underbarWidth ?? 50)
+            make.height.equalTo(underbarInfo.height)
+        }
+        return underbar
     }
-
+    
     func removeBorders() {
         let image = UIImage()
         setBackgroundImage(image, for: .normal, barMetrics: .default)
