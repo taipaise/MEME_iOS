@@ -10,13 +10,26 @@ import SnapKit
 
 class InfoTableViewCell: UITableViewCell {
     
-    let infomenuLabel = UILabel()
-    let rightLabel = UILabel()
+    let infomenuLabel = UILabel() {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = .pretendard(to: .medium, size: 14)
+        return label
+    }()
+    
+    let rightLabel = UILabel() {
+        let label = UILabel()
+        label.textAlignment = .right
+        label.font = .pretendard(to: .regular, size: 14)
+        label.textColor = .black
+        return label
+    }()
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier )
         
-        configureUI()
+        addSubViews()
+        makeConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -35,20 +48,17 @@ class InfoTableViewCell: UITableViewCell {
         super.layoutSubviews()
     }
     
-    func configureUI() {
-        
+    func addSubViews() {
         addSubview(infomenuLabel)
-        infomenuLabel.font = .pretendard(to: .medium, size: 14)
-        infomenuLabel.textColor = .black
+        addSubview(rightLabel)
+    }
+    
+    func makeConstraints() {
         infomenuLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.equalToSuperview().offset(24)
         }
         
-        addSubview(rightLabel)
-        rightLabel.textAlignment = .right
-        rightLabel.font = .pretendard(to: .regular, size: 14)
-        rightLabel.textColor = .black
         rightLabel.snp.makeConstraints { make in
             make.right.equalToSuperview().offset(-24)
             make.centerY.equalToSuperview()

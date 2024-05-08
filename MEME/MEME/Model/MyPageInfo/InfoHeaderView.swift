@@ -10,7 +10,7 @@ import SnapKit
 
 class InfoHeaderView: UIView {
     
-    let infoprofileImage: UIImageView = {
+    private lazy var infoprofileImage: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage.profile
         iv.layer.cornerRadius = 90 / 2
@@ -19,10 +19,11 @@ class InfoHeaderView: UIView {
         return iv
     }()
     
-    let nameLabel: UILabel = {
+    private lazy var nameLabel: UILabel = {
         let label = UILabel()
         label.text = "차차"
         label.textColor = .black
+        label.font = .pretendard(to: .semiBold, size: 18)
         
         return label
     }()
@@ -34,7 +35,9 @@ class InfoHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
                 
-        configureUI()
+        addSubViews()
+        makeConstraints()
+        loadProfileInformation()
     }
     
     required init?(coder: NSCoder) {
@@ -43,22 +46,25 @@ class InfoHeaderView: UIView {
     
     // MARK: - Helpers
     
-    func configureUI() {
-        
+    private func addSubViews() {
         addSubview(infoprofileImage)
+        addSubview(nameLabel)
+    }
+    
+    private func makeConstraints() {
         infoprofileImage.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.width.height.equalTo(90)
             make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(50)
         }
            
-        addSubview(nameLabel)
-        nameLabel.font = .pretendard(to: .semiBold, size: 18)
         nameLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.top.equalTo(infoprofileImage.snp.bottom).offset(17)
         }
-        
+    }
+    
+    private func loadProfileInformation() {
         MyPageManager.shared.getMyPageProfile(userId: KeyChainManager.loadMemberID()) { [weak self] result in
             switch result {
             case .success(let response):
@@ -75,7 +81,12 @@ class InfoHeaderView: UIView {
             }
         }
     }
+    
+    func configure(name: String) {
+        nameLabel.text = name
+    }
 }
+
 extension UIImageView {
     func loadImage(from url: String) {
         guard let imageUrl = URL(string: url) else { return }

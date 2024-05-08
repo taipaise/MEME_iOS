@@ -8,94 +8,108 @@
 import UIKit
 import SnapKit
 
-class AskViewController: UIViewController {
-    
-    let askLabel = UILabel()
-    
-    let emailLabel = UILabel()
-    
-    let emailTextField: UITextField = {
+class AskViewController: UIViewController, UITextViewDelegate {
+        
+    private lazy var askLabel: UILabel = {
+        let label = UILabel()
+        label.font = .pretendard(to: .semiBold, size: 18)
+        label.text = "문의할 내용을 남겨주세요."
+        label.textColor = .black
+        return label
+    }()
+
+    private lazy var emailLabel: UILabel = {
+        let label = UILabel()
+        label.font = .pretendard(to: .regular, size: 14)
+        label.text = "문의 제목"
+        label.textColor = .black
+        return label
+    }()
+
+    private lazy var emailTextField: UITextField = {
         let tf = UITextField()
         tf.backgroundColor = .white
+        tf.font = .pretendard(to: .medium, size: 14)
         tf.borderStyle = .none
         tf.layer.cornerRadius = 9
         tf.layer.borderWidth = 1
         tf.layer.borderColor = UIColor.gray300.cgColor
         tf.placeholder = "제목을 입력해주세요."
-        
         tf.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 13, height: tf.frame.height))
         tf.leftViewMode = .always
-        
         return tf
     }()
-    
-    let contentLabel = UILabel()
-    
-    let askTextView = UITextView()
-    
-    let sendButton: UIButton = {
+
+    private lazy var contentLabel: UILabel = {
+        let label = UILabel()
+        label.font = .pretendard(to: .regular, size: 14)
+        label.text = "문의 내용"
+        label.textColor = .black
+        return label
+    }()
+
+    private lazy var askTextView: UITextView = {
+        let textview = UITextView()
+        textview.backgroundColor = .white
+        textview.font = .pretendard(to: .medium, size: 14)
+        textview.layer.cornerRadius = 9
+        textview.layer.borderWidth = 1
+        textview.layer.borderColor = UIColor.gray300.cgColor
+        textview.placeholder = "여기에 내용을 작성해주세요."
+        return textview
+    }()
+
+    private lazy var sendButton: UIButton = {
         let btn = UIButton(type: .system)
+        btn.setTitle("전송하기", for: .normal)
+        btn.backgroundColor = .mainBold
+        btn.setTitleColor(.white, for: .normal)
+        btn.layer.cornerRadius = 10
         btn.addTarget(self, action: #selector(sendButtonTapped(_:)), for: .touchUpInside)
-        
         return btn
     }()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         askTextView.delegate = self
-        
-        configureUI()
-                
+        addSubviews()
+        makeConstraints()
         navigationItem.backButtonTitle = ""
     }
     
     override func viewWillAppear(_ animated: Bool) {
-            super.viewWillAppear(animated)
-            self.tabBarController?.tabBar.isHidden = true
-            self.navigationController?.navigationBar.isHidden = false
-        }
+        super.viewWillAppear(animated)
+        self.tabBarController?.tabBar.isHidden = true
+        self.navigationController?.navigationBar.isHidden = false
+    }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         self.tabBarController?.tabBar.isHidden = false
         self.navigationController?.navigationBar.isHidden = true
     }
-        
     
-    func configureUI() {
-        view.backgroundColor = .white
-        
-        navigationItem.title = "문의하기"
-        navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.pretendard(to: .regular, size: 16)]
-        let backButton = UIButton(type: .custom)
-        backButton.setImage(UIImage.icBack, for: .normal)
-        backButton.configuration?.imagePadding = 25
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-        
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-        
-        askLabel.text = "문의할 내용을 남겨주세요."
-        askLabel.font = .pretendard(to: .semiBold, size: 18)
-        askLabel.textColor = .black
+    func addSubviews() {
         view.addSubview(askLabel)
+        view.addSubview(emailLabel)
+        view.addSubview(emailTextField)
+        view.addSubview(contentLabel)
+        view.addSubview(askTextView)
+        view.addSubview(sendButton)
+    }
+    
+    func makeConstraints() {
         askLabel.snp.makeConstraints { make in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(26)
             make.leading.equalTo(view.snp.leading).offset(24)
         }
         
-        emailLabel.text = "문의 제목"
-        emailLabel.font = .pretendard(to: .regular, size: 14)
-        emailLabel.textColor = .black
-        view.addSubview(emailLabel)
         emailLabel.snp.makeConstraints { make in
             make.top.equalTo(askLabel.snp.bottom).offset(24)
             make.leading.equalTo(view.snp.leading).offset(24)
         }
         
-        emailTextField.font = .pretendard(to: .medium, size: 14)
-        view.addSubview(emailTextField)
         emailTextField.snp.makeConstraints { make in
             make.trailing.equalTo(view.snp.trailing).offset(-24)
             make.centerY.equalTo(emailLabel.snp.centerY)
@@ -103,20 +117,11 @@ class AskViewController: UIViewController {
             make.height.equalTo(41)
         }
         
-        contentLabel.text = "문의내용"
-        contentLabel.font = .pretendard(to: .regular, size: 14)
-        contentLabel.textColor = .black
-        view.addSubview(contentLabel)
         contentLabel.snp.makeConstraints { make in
             make.top.equalTo(emailLabel.snp.bottom).offset(26)
             make.leading.equalTo(view.snp.leading).offset(24)
         }
-
-        askTextView.font = .pretendard(to: .medium, size: 14)
-        askTextView.layer.cornerRadius = 9
-        askTextView.layer.borderColor = UIColor.gray300.cgColor
-        askTextView.layer.borderWidth = 1
-        view.addSubview(askTextView)
+        
         askTextView.snp.makeConstraints { make in
             make.top.equalTo(contentLabel.snp.bottom).offset(10)
             make.leading.equalTo(view.snp.leading).offset(24)
@@ -124,17 +129,16 @@ class AskViewController: UIViewController {
             make.height.equalTo(269)
         }
         
-        sendButton.setTitle("전송하기", for: .normal)
-        sendButton.backgroundColor = .mainBold
-        sendButton.setTitleColor(UIColor.white, for: .normal)
-        sendButton.layer.cornerRadius = 10
-        view.addSubview(sendButton)
         sendButton.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(-8)
-            make.centerX.equalTo(view.snp.centerX)
+            make.centerX.equalTo(view)
             make.height.equalTo(49)
             make.width.equalTo(view.snp.width).multipliedBy(0.8)
         }
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        textView.updatePlaceholderVisibility()
     }
     
     @objc func backButtonTapped() {
@@ -161,18 +165,48 @@ class AskViewController: UIViewController {
     }
 }
 
-extension AskViewController: UITextViewDelegate {
-    func textViewDidBeginEditing(_ textView: UITextView) {
-        if textView.text == "   여기에 내용을 작성해주세요." {
-            textView.text = nil
-            textView.textColor = .black
+extension UITextView {
+    
+    private static var placeholderLabelAssocKey: UInt8 = 0
+
+    private var placeholderLabel: UILabel? {
+        get {
+            return objc_getAssociatedObject(self, &placeholderLabelAssocKey) as? UILabel
+        }
+        set {
+            objc_setAssociatedObject(self, &placeholderLabelAssocKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
-    
-    func textViewDidEndEditing(_ textView: UITextView) {
-        if textView.text.isEmpty {
-            textView.text = "여기에 내용을 작성해주세요."
-            textView.textColor = .gray300
+
+    @IBInspectable var placeholder: String? {
+        get {
+            return placeholderLabel?.text
         }
+        set {
+            if placeholderLabel == nil {
+                let label = UILabel()
+                label.text = newValue
+                label.numberOfLines = 0
+                label.textColor = .gray300
+                label.font = self.font
+                label.translatesAutoresizingMaskIntoConstraints = false
+                self.addSubview(label)
+                self.placeholderLabel = label
+
+                label.snp.makeConstraints { make in
+                    make.top.equalTo(self).offset(8)
+                    make.left.equalTo(self).offset(5)
+                    make.right.equalTo(self).offset(-5)
+                }
+            } else {
+                placeholderLabel?.text = newValue
+            }
+
+            placeholderLabel?.isHidden = !self.text.isEmpty
+        }
+    }
+
+    func updatePlaceholderVisibility() {
+        placeholderLabel?.isHidden = !self.text.isEmpty
     }
 }

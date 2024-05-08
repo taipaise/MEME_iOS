@@ -8,40 +8,62 @@
 import UIKit
 import SnapKit
 
-private let cellID2 = "Cell2"
 
 class MyPageInfoViewController: UIViewController, UITableViewDataSource {
     
-    let tableView = UITableView(frame: .zero, style: .plain)
+    private lazy var tableView: UITableView = {
+            let tableView = UITableView(frame: .zero, style: .plain)
+            tableView.backgroundColor = .white
+            tableView.dataSource = self
+            tableView.delegate = selfㄹ
+        tableView.register(InfoTableViewCell.self, forCellReuseIdentifier: InfoTableViewCell.className)
+            return tableView
+        }()
+    
     let infoMenu = ["닉네임","이름", "성별", "이메일"]
     
     var myPageResponse: MyPageResponse?
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        addSubViews()
+        makeConstraints()
         
-        MyPageManager.shared.getMyPageProfile(userId: KeyChainManager.loadMemberID()) { [weak self] result in
-            switch result {
-            case .success(let profile):
-                print("Success: \(profile)")
-                self?.myPageResponse = profile
-                self?.tableView.reloadData()
-                self?.updateHeaderView()
+        self.tabBarController?.tabBar.isHidden = true
+        
+        navigationItem.title = "내 정보 조회"
+        navigationController?.navigationBar.titleTextAttributes = [
+            NSAttributedString.Key.font: UIFont.pretendard(to: .regular, size: 16)]
+        
+        let backButton = UIButton(type: .custom)
+        backButton.setImage(UIImage.icBack, for: .normal)
+        backButton.configuration?.imagePadding = 25
+        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
 
-            case .failure(let error):
-                print("Failure: \(error)")
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
+        
+    }
+    
+    private func loadProfile() {
+            MyPageManager.shared.getMyPageProfile(userId: KeyChainManager.loadMemberID()) { [weak self] result in
+                switch result {
+                case .success(let profile):
+                    print("Success: \(profile)")
+                    self?.myPageResponse = profile
+                    self?.tableView.reloadData()
+                    self?.updateHeaderView()
+
+                case .failure(let error):
+                    print("Failure: \(error)")
+                }
             }
         }
-            configureUI()
-            
-            self.navigationController?.navigationBar.tintColor = UIColor.black
-    }
     
     func updateHeaderView() {
         guard let header = tableView.tableHeaderView as? ModelHeaderView else { return }
         
         if let nickname = myPageResponse?.data?.name {
-            header.namebutton.setTitle(nickname, for: .normal)
+            header.namebutton.configure(name: name)
         }
         if let profileImgUrl = myPageResponse?.data?.profileImg {
             header.profileImage.loadImage(from: profileImgUrl)
@@ -52,7 +74,6 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
                 header.profileImage.setImage(image: image)
             }
         }
-        
         tableView.layoutIfNeeded()
     }
 
@@ -66,38 +87,16 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
         super.viewWillAppear(true)
         self.navigationController?.navigationBar.isHidden = true
     }
-
-    func configureUI() {
-        
-        tableView.backgroundColor = .white
-        
-        view.addSubview(tableView)
-        tableView.snp.makeConstraints { make in
-            make.top.equalTo(view.snp.top)
-            make.left.equalTo(view.snp.left)
-            make.bottom.equalTo(view.snp.bottom)
-            make.right.equalTo(view.snp.right)
-        }
-        
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        tableView.register(InfoTableViewCell.self, forCellReuseIdentifier: cellID2)
-
-        self.tabBarController?.tabBar.isHidden = true
-        
-        navigationItem.title = "내 정보 조회"
-        navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.pretendard(to: .regular, size: 16)]
-        
-        let backButton = UIButton(type: .custom)
-        backButton.setImage(UIImage.icBack, for: .normal)
-        backButton.configuration?.imagePadding = 25
-        backButton.addTarget(self, action: #selector(backButtonTapped), for: .touchUpInside)
-
-        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: backButton)
-       }
     
+    private func addSubViews() {
+        view.addSubview(tableView)
+    }
+       
+    private func makeConstraints() {
+        tableView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+    }
 
     @objc private func backButtonTapped() {
         self.navigationController?.popViewController(animated: true)
