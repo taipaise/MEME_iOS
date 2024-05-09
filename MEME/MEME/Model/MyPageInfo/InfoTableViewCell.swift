@@ -10,14 +10,14 @@ import SnapKit
 
 class InfoTableViewCell: UITableViewCell {
     
-    let infomenuLabel = UILabel() {
+    let infomenuLabel : UILabel = {
         let label = UILabel()
         label.textColor = .black
         label.font = .pretendard(to: .medium, size: 14)
         return label
     }()
     
-    let rightLabel = UILabel() {
+    let rightLabel : UILabel = {
         let label = UILabel()
         label.textAlignment = .right
         label.font = .pretendard(to: .regular, size: 14)

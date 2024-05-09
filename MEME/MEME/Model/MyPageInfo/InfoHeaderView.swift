@@ -1,5 +1,5 @@
 //
-//  ModelInfoHeaderView.swift
+//  InfoHeaderView.swift
 //  MEME
 //
 //  Created by 임아영 on 1/15/24.
@@ -10,7 +10,10 @@ import SnapKit
 
 class InfoHeaderView: UIView {
     
-    private lazy var infoprofileImage: UIImageView = {
+    weak var delegate: InfoHeaderViewDelegate?
+
+    
+    let infoprofileImage: UIImageView = {
         let iv = UIImageView()
         iv.image = UIImage.profile
         iv.layer.cornerRadius = 90 / 2
@@ -19,7 +22,7 @@ class InfoHeaderView: UIView {
         return iv
     }()
     
-    private lazy var nameLabel: UILabel = {
+    let nameLabel: UILabel = {
         let label = UILabel()
         label.text = "차차"
         label.textColor = .black
@@ -37,7 +40,6 @@ class InfoHeaderView: UIView {
                 
         addSubViews()
         makeConstraints()
-        loadProfileInformation()
     }
     
     required init?(coder: NSCoder) {
@@ -64,28 +66,15 @@ class InfoHeaderView: UIView {
         }
     }
     
-    private func loadProfileInformation() {
-        MyPageManager.shared.getMyPageProfile(userId: KeyChainManager.loadMemberID()) { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.myPageResponse = response
-                
-                DispatchQueue.main.async {
-                    self?.nameLabel.text = response.data?.name
-                    if let profileImgUrl = response.data?.profileImg {
-                        self?.infoprofileImage.loadImage(from: profileImgUrl)
-                    }
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    func configure(name: String) {
+    func configure(name: String, profileImage: UIImage?) {
         nameLabel.text = name
+        infoprofileImage.image = profileImage
     }
+
 }
+
+protocol InfoHeaderViewDelegate: AnyObject {
+  }
 
 extension UIImageView {
     func loadImage(from url: String) {

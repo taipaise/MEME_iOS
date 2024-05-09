@@ -15,7 +15,7 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
             let tableView = UITableView(frame: .zero, style: .plain)
             tableView.backgroundColor = .white
             tableView.dataSource = self
-            tableView.delegate = selfㄹ
+            tableView.delegate = self
         tableView.register(InfoTableViewCell.self, forCellReuseIdentifier: InfoTableViewCell.className)
             return tableView
         }()
@@ -28,6 +28,7 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
         super.viewDidLoad()
         addSubViews()
         makeConstraints()
+        loadProfile()
         
         self.tabBarController?.tabBar.isHidden = true
         
@@ -45,34 +46,32 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
     }
     
     private func loadProfile() {
-            MyPageManager.shared.getMyPageProfile(userId: KeyChainManager.loadMemberID()) { [weak self] result in
-                switch result {
-                case .success(let profile):
-                    print("Success: \(profile)")
-                    self?.myPageResponse = profile
-                    self?.tableView.reloadData()
-                    self?.updateHeaderView()
+        MyPageManager.shared.getMyPageProfile(userId: KeyChainManager.loadMemberID()) { [weak self] result in
+            switch result {
+            case .success(let profile):
+                print("Success: \(profile)")
+                self?.myPageResponse = profile
+                self?.tableView.reloadData()
+                self?.updateHeaderView()
 
-                case .failure(let error):
-                    print("Failure: \(error)")
-                }
+            case .failure(let error):
+                print("Failure: \(error)")
             }
         }
+    }
     
     func updateHeaderView() {
-        guard let header = tableView.tableHeaderView as? ModelHeaderView else { return }
+        guard let header = tableView.tableHeaderView as? InfoHeaderView, let profile = myPageResponse?.data else { return }
         
-        if let nickname = myPageResponse?.data?.name {
-            header.namebutton.configure(name: name)
-        }
-        if let profileImgUrl = myPageResponse?.data?.profileImg {
-            header.profileImage.loadImage(from: profileImgUrl)
-        }
-        if let profileImgUrl = myPageResponse?.data?.profileImg {
+        if let profileImgUrl = profile.profileImg {
             FirebaseStorageManager.downloadImage(urlString: profileImgUrl) { image in
                 guard let image = image else { return }
-                header.profileImage.setImage(image: image)
+                DispatchQueue.main.async {
+                    header.configure(name: profile.nickname ?? "", profileImage: image)
+                }
             }
+        } else {
+            header.configure(name: profile.nickname ?? "", profileImage: nil)
         }
         tableView.layoutIfNeeded()
     }
@@ -106,7 +105,7 @@ class MyPageInfoViewController: UIViewController, UITableViewDataSource {
     }
     
     @objc(tableView:cellForRowAtIndexPath:) func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID2, for: indexPath) as! InfoTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: InfoTableViewCell.className, for: indexPath) as! InfoTableViewCell
 
         cell.infomenuLabel.text = infoMenu[indexPath.row]
         cell.rightLabel.text = profileValue(for: indexPath.row)

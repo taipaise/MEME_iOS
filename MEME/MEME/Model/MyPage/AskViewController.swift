@@ -72,6 +72,7 @@ class AskViewController: UIViewController, UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = .white
         askTextView.delegate = self
         addSubviews()
         makeConstraints()
@@ -171,10 +172,10 @@ extension UITextView {
 
     private var placeholderLabel: UILabel? {
         get {
-            return objc_getAssociatedObject(self, &placeholderLabelAssocKey) as? UILabel
+            return objc_getAssociatedObject(self, &UITextView.placeholderLabelAssocKey) as? UILabel
         }
         set {
-            objc_setAssociatedObject(self, &placeholderLabelAssocKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
+            objc_setAssociatedObject(self, &UITextView.placeholderLabelAssocKey, newValue, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
         }
     }
 

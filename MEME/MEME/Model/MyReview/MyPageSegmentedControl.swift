@@ -8,18 +8,20 @@
 import UIKit
 import SnapKit
 
-struct UnderbarIndicator{
-  var height: CGFloat
-  var barColor: UIColor
-  var backgroundColor: UIColor
+struct UnderbarIndicator {
+    var height: CGFloat
+    var barColor: UIColor
+    var backgroundColor: UIColor
 }
 
 final class MyPageSegmentedControl: UISegmentedControl {
 
     // MARK: - Properties
-    private lazy var underbar: UIView = makeUnderbar()
+    private var underbar: UIView!
 
-    private lazy var underbarWidth: CGFloat? = bounds.size.width / CGFloat(numberOfSegments)
+    private var underbarWidth: CGFloat? {
+        return bounds.size.width / CGFloat(numberOfSegments)
+    }
 
     private var underbarInfo: UnderbarIndicator
     
@@ -30,9 +32,8 @@ final class MyPageSegmentedControl: UISegmentedControl {
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
         label.font = .pretendard(to: .regular, size: 14)
-
         return label
-      }()
+    }()
 
     // MARK: - Lifecycle
     init(frame: CGRect, underbarInfo info: UnderbarIndicator) {
@@ -49,25 +50,23 @@ final class MyPageSegmentedControl: UISegmentedControl {
     }
 
     required init?(coder: NSCoder) {
-        fatalError()
+        fatalError("init(coder:) has not been implemented")
     }
 
     override func layoutSubviews() {
         super.layoutSubviews()
         if !isFirstSettingDone {
             isFirstSettingDone.toggle()
+            setupUnderbar()
             setUnderbarMovableBackgroundLayer()
             setReviewNumLabelInSegmentedViews()
             layer.cornerRadius = 0
             layer.masksToBounds = false
         }
-        let underBarLeadingSpacing = CGFloat(selectedSegmentIndex) * (underbarWidth ?? 50)
-        UIView.animate(withDuration: 0.27, delay: 0, options: .curveEaseOut, animations: {
-            self.underbar.transform = .init(translationX: underBarLeadingSpacing, y: 0)
-        })
+
+        updateUnderbarPosition()
     }
 }
-
 
 // MARK: - Private Helpers
 private extension MyPageSegmentedControl {
@@ -83,15 +82,35 @@ private extension MyPageSegmentedControl {
         selectedSegmentTintColor = .clear
     }
 
+    func setupUnderbar() {
+        underbar = UIView(frame: .zero)
+        underbar.backgroundColor = underbarInfo.barColor
+        underbar.layer.cornerRadius = underbarInfo.height / 2
+        addSubview(underbar)
+        underbar.snp.makeConstraints { make in
+            make.leading.equalTo(self.snp.leading)
+            make.bottom.equalTo(self.snp.bottom)
+            make.width.equalTo(self.underbarWidth ?? 50)
+            make.height.equalTo(underbarInfo.height)
+        }
+    }
+
+    func updateUnderbarPosition() {
+        let underBarLeadingSpacing = CGFloat(selectedSegmentIndex) * (underbarWidth ?? 50)
+        UIView.animate(withDuration: 0.27, delay: 0, options: .curveEaseOut, animations: {
+            self.underbar.transform = CGAffineTransform(translationX: underBarLeadingSpacing, y: 0)
+        })
+    }
+
     func setUnderbarMovableBackgroundLayer() {
         let backgroundLayer = CALayer()
-        backgroundLayer.frame = .init(
+        backgroundLayer.frame = CGRect(
             x: 0,
             y: bounds.height - underbarInfo.height,
             width: bounds.width,
             height: underbarInfo.height)
         backgroundLayer.backgroundColor = underbarInfo.backgroundColor.cgColor
-        backgroundLayer.cornerRadius = underbarInfo.height/2
+        backgroundLayer.cornerRadius = underbarInfo.height / 2
         layer.addSublayer(backgroundLayer)
     }
     
@@ -123,21 +142,6 @@ private extension MyPageSegmentedControl {
                 }
             }
         }
-    }
-    
-    func makeUnderbar() -> UIView {
-        let underbar = UIView(frame: .zero)
-        underbar.translatesAutoresizingMaskIntoConstraints = false
-        underbar.backgroundColor = underbarInfo.barColor
-        underbar.layer.cornerRadius = underbarInfo.height/2
-        addSubview(underbar)
-        underbar.snp.makeConstraints { make in // SnapKit을 사용한 제약 조건 설정
-            make.leading.equalTo(self.snp.leading)
-            make.bottom.equalTo(self.snp.bottom)
-            make.width.equalTo(underbarWidth ?? 50)
-            make.height.equalTo(underbarInfo.height)
-        }
-        return underbar
     }
     
     func removeBorders() {
