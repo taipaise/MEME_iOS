@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import SnapKit
 
 private let cellID = "Cell"
 
@@ -21,7 +22,8 @@ class ModelMyPageViewController: UIViewController, ModelHeaderViewDelegate {
         super.viewDidLoad()
         
         loadProfileData()
-        configureUI()
+        setupViews()
+        setupConstraints()
         
         navigationItem.backButtonTitle = ""
     }
@@ -47,9 +49,9 @@ class ModelMyPageViewController: UIViewController, ModelHeaderViewDelegate {
             if let nickname = data?.data?.nickname {
                 header.namebutton.setTitle(nickname, for: .normal)
             }
-//            if let profileImgUrl = data?.data?.profileImg {
-//                header.profileImage.loadImage(from: profileImgUrl)
-//            }
+            if let profileImgUrl = data?.data?.profileImg {
+                header.profileImage.loadImage(from: profileImgUrl)
+            }
             if let profileImgUrl = data?.data?.profileImg {
                     FirebaseStorageManager.downloadImage(urlString: profileImgUrl) { image in
                         guard let image = image else { return }
@@ -59,44 +61,35 @@ class ModelMyPageViewController: UIViewController, ModelHeaderViewDelegate {
                 
                 tableView.layoutIfNeeded()
             }
-
-//        getMyPageProfile (userId: 1)
-//        self.getMyPageProfile(userId: KeyChainManager.loadMemberID())
-        
-     
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
         self.tabBarController?.tabBar.isHidden = false
     }
-    // MARK: - Helpers
     
-    func configureUI() {
-        
-        tableView.backgroundColor = .white
-        
+    // MARK: - Helpers
+    func setupViews() {
         view.addSubview(tableView)
-        tableView.translatesAutoresizingMaskIntoConstraints = false
         
         tableView.dataSource = self
         tableView.delegate = self
         tableView.separatorStyle = .none
-        
         tableView.register(ModelMyPageTableViewCell.self, forCellReuseIdentifier: cellID)
-        
-        NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: view.topAnchor),
-            tableView.leftAnchor.constraint(equalTo: view.leftAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-            tableView.rightAnchor.constraint(equalTo: view.rightAnchor)
-        ])
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 1))
         
         navigationItem.title = "마이 페이지"
         navigationController?.navigationBar.titleTextAttributes = [
-            NSAttributedString.Key.font: UIFont.pretendard(to: .regular, size: 16)]
-        
-        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.bounds.size.width, height: 1))
-        
+            NSAttributedString.Key.font: UIFont.pretendard(to: .regular, size: 16)
+        ]
+    }
+
+    func setupConstraints() {
+        tableView.snp.makeConstraints { make in
+            make.top.equalTo(view.snp.top)
+            make.left.equalTo(view.snp.left)
+            make.bottom.equalTo(view.snp.bottom)
+            make.right.equalTo(view.snp.right)
+        }
     }
 }
 
@@ -107,7 +100,7 @@ extension ModelMyPageViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as? ModelMyPageTableViewCell else {
-            fatalError("The dequeued cell is not an instance of ModelMyPageTableViewCell.") //앱 종료 - 다른 예외처리가 필요할까요..
+            fatalError("The dequeued cell is not an instance of ModelMyPageTableViewCell.")
         }
         
         cell.menuLabel.text = myPageMenu[indexPath.row]
@@ -116,15 +109,13 @@ extension ModelMyPageViewController: UITableViewDataSource {
         let separatorView = UIView()
         separatorView.backgroundColor = tableView.separatorColor
         cell.contentView.addSubview(separatorView)
-           
-        separatorView.translatesAutoresizingMaskIntoConstraints = false
 
-        NSLayoutConstraint.activate([
-            separatorView.bottomAnchor.constraint(equalTo: cell.contentView.bottomAnchor),
-            separatorView.leadingAnchor.constraint(equalTo: cell.contentView.leadingAnchor, constant: 24),
-            separatorView.trailingAnchor.constraint(equalTo: cell.contentView.trailingAnchor),
-            separatorView.heightAnchor.constraint(equalToConstant: 1)
-        ])
+        separatorView.snp.makeConstraints { make in
+            make.bottom.equalTo(cell.contentView.snp.bottom)
+            make.leading.equalTo(cell.contentView.snp.leading).offset(24)
+            make.trailing.equalTo(cell.contentView.snp.trailing)
+            make.height.equalTo(1)
+        }
         return cell
     }
 }
@@ -202,8 +193,8 @@ extension ModelMyPageViewController: UITableViewDelegate {
             let versionLabel = UILabel()
             versionLabel.text = "앱 버전"
             versionLabel.textAlignment = .left
-            versionLabel.textColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.0)
-            versionLabel.font = UIFont.systemFont(ofSize: 12)
+            versionLabel.textColor = .gray400
+            versionLabel.font = .pretendard(to: .regular, size: 12)
             
             let versionNumberLabel = UILabel()
             versionNumberLabel.text = "1.0.0"
@@ -214,16 +205,14 @@ extension ModelMyPageViewController: UITableViewDelegate {
             footerView.addSubview(versionLabel)
             footerView.addSubview(versionNumberLabel)
             
-            versionLabel.translatesAutoresizingMaskIntoConstraints = false
-            versionNumberLabel.translatesAutoresizingMaskIntoConstraints = false
-            
-            NSLayoutConstraint.activate([
-                versionLabel.leadingAnchor.constraint(equalTo: footerView.leadingAnchor, constant: 24),
-                versionLabel.centerYAnchor.constraint(equalTo: footerView.centerYAnchor),
-                versionNumberLabel.trailingAnchor.constraint(equalTo: footerView.trailingAnchor, constant: -20),
-                versionNumberLabel.centerYAnchor.constraint(equalTo: footerView.centerYAnchor)
-            ])
-            
+            versionLabel.snp.makeConstraints { make in
+                make.leading.equalTo(footerView.snp.leading).offset(24)
+                make.centerY.equalTo(footerView.snp.centerY)
+            }
+            versionNumberLabel.snp.makeConstraints { make in
+                make.trailing.equalTo(footerView.snp.trailing).offset(-20)
+                make.centerY.equalTo(footerView.snp.centerY)
+            }
             return footerView
         }
         
@@ -246,7 +235,7 @@ extension ModelMyPageViewController: UITableViewDelegate {
             self.navigationController?.pushViewController(interestMakeUpViewController, animated: true)
         }
         func myReviewClicked() {
-            let myReviewViewController = MyReviewViewController()
+            let myReviewViewController = ReviewViewController()
             self.navigationController?.pushViewController(myReviewViewController, animated: true)
         }
     }

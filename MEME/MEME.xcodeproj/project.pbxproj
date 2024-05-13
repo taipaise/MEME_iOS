@@ -225,6 +225,8 @@
 		CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3AC12B54361100508DA5 /* MyPageInfoViewController.swift */; };
 		CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3AC42B5436B800508DA5 /* InfoHeaderView.swift */; };
 		CC2F3AC72B54444E00508DA5 /* InfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3AC62B54444E00508DA5 /* InfoTableViewCell.swift */; };
+		CC513CD62BBE526B007DAF0F /* ReviewDateHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC513CD52BBE526B007DAF0F /* ReviewDateHeaderView.swift */; };
+		CC513CD82BBE5C8A007DAF0F /* ReviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC513CD72BBE5C8A007DAF0F /* ReviewViewController.swift */; };
 		CC8CA9FB2BB44E4F005F1E53 /* AvailableReviewAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8CA9FA2BB44E4F005F1E53 /* AvailableReviewAPI.swift */; };
 		CC8CA9FD2BB44E66005F1E53 /* AvailableReviewManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8CA9FC2BB44E66005F1E53 /* AvailableReviewManager.swift */; };
 		CC8CA9FF2BB44E7D005F1E53 /* AvailableReviewDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC8CA9FE2BB44E7D005F1E53 /* AvailableReviewDTO.swift */; };
@@ -530,6 +532,8 @@
 		CC2F3AC12B54361100508DA5 /* MyPageInfoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyPageInfoViewController.swift; sourceTree = "<group>"; };
 		CC2F3AC42B5436B800508DA5 /* InfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoHeaderView.swift; sourceTree = "<group>"; };
 		CC2F3AC62B54444E00508DA5 /* InfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoTableViewCell.swift; sourceTree = "<group>"; };
+		CC513CD52BBE526B007DAF0F /* ReviewDateHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewDateHeaderView.swift; sourceTree = "<group>"; };
+		CC513CD72BBE5C8A007DAF0F /* ReviewViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewViewController.swift; sourceTree = "<group>"; };
 		CC8CA9FA2BB44E4F005F1E53 /* AvailableReviewAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableReviewAPI.swift; sourceTree = "<group>"; };
 		CC8CA9FC2BB44E66005F1E53 /* AvailableReviewManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableReviewManager.swift; sourceTree = "<group>"; };
 		CC8CA9FE2BB44E7D005F1E53 /* AvailableReviewDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableReviewDTO.swift; sourceTree = "<group>"; };
@@ -1810,6 +1814,8 @@
 				CCAB5A582B66FD0000067FA4 /* StarRatingView.swift */,
 				CCAB5A642B6CFDB300067FA4 /* MyReviewCollectionViewCell.swift */,
 				CCAB5A682B6DD60900067FA4 /* WrittenCollectionViewCell.swift */,
+				CC513CD52BBE526B007DAF0F /* ReviewDateHeaderView.swift */,
+				CC513CD72BBE5C8A007DAF0F /* ReviewViewController.swift */,
 			);
 			path = MyReview;
 			sourceTree = "<group>";
@@ -2205,11 +2211,13 @@
 				CCAB5A532B66CD9F00067FA4 /* MyReviewViewController.swift in Sources */,
 				CC9C38672B7C760B0073A257 /* ArtistProfileDTO.swift in Sources */,
 				315EE2D02B66566A0042A082 /* DetailSettingView.swift in Sources */,
+				CC513CD82BBE5C8A007DAF0F /* ReviewViewController.swift in Sources */,
 				CC9C38592B7BC8D10073A257 /* InterestArtistAPI.swift in Sources */,
 				315EE2D02B66566A0042A082 /* DetailSettingView.swift in Sources */,
 				2DA208112B7CB476006EB9B9 /* ReservationDTO.swift in Sources */,
 				2D6F59BF2B5C7D3300CA883A /* ModelReservationTypeButton.swift in Sources */,
 				2D6E4CEE2B6221D800D7F919 /* ManagementReservationsDateCollectionViewCell.swift in Sources */,
+				CC513CD62BBE526B007DAF0F /* ReviewDateHeaderView.swift in Sources */,
 				2D6E4CEB2B61FA7D00D7F919 /* ModelReservationLastViewController.swift in Sources */,
 				CC9C38502B7550070073A257 /* MyPageAPI.swift in Sources */,
 				CC8CAA012BB44E90005F1E53 /* DetailReviewAPI.swift in Sources */,

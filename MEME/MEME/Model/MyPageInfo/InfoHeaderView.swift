@@ -1,13 +1,17 @@
 //
-//  ModelInfoHeaderView.swift
+//  InfoHeaderView.swift
 //  MEME
 //
 //  Created by 임아영 on 1/15/24.
 //
 
 import UIKit
+import SnapKit
 
 class InfoHeaderView: UIView {
+    
+    weak var delegate: InfoHeaderViewDelegate?
+
     
     let infoprofileImage: UIImageView = {
         let iv = UIImageView()
@@ -22,6 +26,7 @@ class InfoHeaderView: UIView {
         let label = UILabel()
         label.text = "차차"
         label.textColor = .black
+        label.font = .pretendard(to: .semiBold, size: 18)
         
         return label
     }()
@@ -32,10 +37,9 @@ class InfoHeaderView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        
-        
-        configureUI()
+                
+        addSubViews()
+        makeConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -44,43 +48,34 @@ class InfoHeaderView: UIView {
     
     // MARK: - Helpers
     
-    func configureUI() {
-        
-        infoprofileImage.translatesAutoresizingMaskIntoConstraints = false
-        nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+    private func addSubViews() {
         addSubview(infoprofileImage)
-        NSLayoutConstraint.activate([
-            infoprofileImage.centerXAnchor.constraint(equalTo: centerXAnchor),
-            infoprofileImage.widthAnchor.constraint(equalToConstant: 90),
-            infoprofileImage.heightAnchor.constraint(equalToConstant: 90),
-            infoprofileImage.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 50)
-        ])
-        
         addSubview(nameLabel)
-        nameLabel.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 18)
-        NSLayoutConstraint.activate([
-            nameLabel.centerXAnchor.constraint(equalTo: centerXAnchor),
-            nameLabel.topAnchor.constraint(equalTo: infoprofileImage.bottomAnchor, constant: 17)
-        ])
-        MyPageManager.shared.getMyPageProfile(userId: KeyChainManager.loadMemberID()) { [weak self] result in
-            switch result {
-            case .success(let response):
-                self?.myPageResponse = response
-                
-                // UI 업데이트
-                DispatchQueue.main.async {
-                    self?.nameLabel.text = response.data?.name
-                    if let profileImgUrl = response.data?.profileImg {
-                        self?.infoprofileImage.loadImage(from: profileImgUrl)
-                    }
-                }
-            case .failure(let error):
-                print(error)
-            }
+    }
+    
+    private func makeConstraints() {
+        infoprofileImage.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.width.height.equalTo(90)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(50)
+        }
+           
+        nameLabel.snp.makeConstraints { make in
+            make.centerX.equalToSuperview()
+            make.top.equalTo(infoprofileImage.snp.bottom).offset(17)
         }
     }
+    
+    func configure(name: String, profileImage: UIImage?) {
+        nameLabel.text = name
+        infoprofileImage.image = profileImage
+    }
+
 }
+
+protocol InfoHeaderViewDelegate: AnyObject {
+  }
+
 extension UIImageView {
     func loadImage(from url: String) {
         guard let imageUrl = URL(string: url) else { return }

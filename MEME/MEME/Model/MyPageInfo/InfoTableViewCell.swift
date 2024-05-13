@@ -6,16 +6,30 @@
 //
 
 import UIKit
+import SnapKit
 
 class InfoTableViewCell: UITableViewCell {
     
-    let infomenuLabel = UILabel()
-    let rightLabel = UILabel()
-
+    let infomenuLabel : UILabel = {
+        let label = UILabel()
+        label.textColor = .black
+        label.font = .pretendard(to: .medium, size: 14)
+        return label
+    }()
+    
+    let rightLabel : UILabel = {
+        let label = UILabel()
+        label.textAlignment = .right
+        label.font = .pretendard(to: .regular, size: 14)
+        label.textColor = .black
+        return label
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier )
         
-        configureUI()
+        addSubViews()
+        makeConstraints()
     }
     
     required init?(coder: NSCoder) {
@@ -25,7 +39,7 @@ class InfoTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
     }
@@ -34,29 +48,20 @@ class InfoTableViewCell: UITableViewCell {
         super.layoutSubviews()
     }
     
-    func configureUI() {
-        
-        infomenuLabel.translatesAutoresizingMaskIntoConstraints = false
-        rightLabel.translatesAutoresizingMaskIntoConstraints = false
-        
+    func addSubViews() {
         addSubview(infomenuLabel)
-    
-        infomenuLabel.font = UIFont.pretendard(to: .medium, size: 14)
-        
-        NSLayoutConstraint.activate([
-            infomenuLabel.centerYAnchor.constraint(equalTo: centerYAnchor),
-            infomenuLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 24)
-        ])
-        
         addSubview(rightLabel)
-        rightLabel.textAlignment = .right
-        rightLabel.font = UIFont.pretendard(to: .regular, size: 14)
-        NSLayoutConstraint.activate([
-            rightLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -24),
-            rightLabel.centerYAnchor.constraint(equalTo: centerYAnchor)
-        ])
-      
     }
-
+    
+    func makeConstraints() {
+        infomenuLabel.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.left.equalToSuperview().offset(24)
+        }
+        
+        rightLabel.snp.makeConstraints { make in
+            make.right.equalToSuperview().offset(-24)
+            make.centerY.equalToSuperview()
+        }
+    }
 }
-

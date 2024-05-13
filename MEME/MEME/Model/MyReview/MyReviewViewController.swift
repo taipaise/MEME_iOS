@@ -59,6 +59,8 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     override func viewDidLoad() {
         super.viewDidLoad()
         segmentedControl.addTarget(self, action: #selector(handleSegmentChange), for: .valueChanged)
+        collectionView.register(ReviewDateHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReviewDateHeaderView.reuseIdentifier)
+
         
         AvailableReviewManager.shared.getAvailableReview(modelId: 1, reservationId: 1, portfolioId: 1, artistNickName: "artistNickName", makeupName: "makeupName", reservationDate: "reservationDate", portfolioImg: "portfolioImg", shopLocation: "shopLocation") { [weak self] result in
             switch result {
@@ -270,7 +272,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
             guard let data = data else { return UICollectionViewCell() }
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: MyReviewCollectionViewCell.className, for: indexPath) as! MyReviewCollectionViewCell
             cell.delegate = delegate
-            cell.configure(with: data)
+//            cell.configure(with: data)
             
             if let imageUrl = URL(string: data.portfolioImg) {
                 URLSession.shared.dataTask(with: imageUrl) { data, response, error in
@@ -541,7 +543,7 @@ class MyReviewViewController: UIViewController, UICollectionViewDelegate, UIColl
     
     @objc func handleTapOutsideMenu(_ sender: UITapGestureRecognizer) {
         let location = sender.location(in: self.view)
-        // 탭한 위치가 menuView의 frame 밖이면 메뉴를 숨깁
+        // 탭한 위치가 menuView의 frame 밖이면 메뉴를 숨김
         if let menuView = self.menuView, !menuView.frame.contains(location) {
             menuView.isHidden = true
         }
