@@ -16,8 +16,8 @@ final class ArtistProfileManager {
     
     private init() {}
     
-    func patchProfile(artistId: Int, profileImg: String?, nickname: String?, gender: Gender?, introduction: String?, workExperience: WorkExperience?, region: [Region]?, specialization: [Category]?, makeupLocation: MakeupLocation?, shopLocation: String?, availableDayOfWeek: [DayOfWeek: Times]?, completion: @escaping (Result<Response, MoyaError>) -> Void) {
-        provider.request(api: .patchProfile(artistId: artistId, profileImg: profileImg, nickname: nickname, gender: gender, introduction: introduction, workExperience: workExperience, region: region, specialization: specialization, makeupLocation: makeupLocation, shopLocation: shopLocation, availableDayOfWeek: availableDayOfWeek)) { result in
+    func patchProfile(artistId: Int, profileImg: String?, nickname: String?, gender: Gender?, introduction: String?, workExperience: WorkExperience?, region: [Region]?, specialization: [Category]?, makeupLocation: MakeupLocation?, shopLocation: String?, completion: @escaping (Result<Response, MoyaError>) -> Void) {
+        provider.request(api: .patchProfile(artistId: artistId, profileImg: profileImg, nickname: nickname, gender: gender, introduction: introduction, workExperience: workExperience, region: region, specialization: specialization, makeupLocation: makeupLocation, shopLocation: shopLocation)) { result in
         }
     }
 }

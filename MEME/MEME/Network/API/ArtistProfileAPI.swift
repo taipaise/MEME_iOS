@@ -9,7 +9,7 @@ import Foundation
 import Moya
 
 enum ArtistProfileAPI {
-    case patchProfile(artistId: Int, profileImg: String?, nickname: String?, gender: Gender?, introduction: String?, workExperience: WorkExperience?, region: [Region]?, specialization: [Category]?, makeupLocation: MakeupLocation?, shopLocation: String?, availableDayOfWeek: [DayOfWeek: Times]?)
+    case patchProfile(artistId: Int, profileImg: String?, nickname: String?, gender: Gender?, introduction: String?, workExperience: WorkExperience?, region: [Region]?, specialization: [Category]?, makeupLocation: MakeupLocation?, shopLocation: String?)
 }
 
 extension ArtistProfileAPI: MemeAPI {
@@ -44,7 +44,7 @@ extension ArtistProfileAPI: MemeAPI {
     
     var task: Moya.Task {
         switch self {
-        case .patchProfile(let artistId, let profileImg, let nickname, let gender, let introduction, let workExperience, let region, let specialization, let makeupLocation, let shopLocation, let availableDayOfWeek):
+        case .patchProfile(let artistId, let profileImg, let nickname, let gender, let introduction, let workExperience, let region, let specialization, let makeupLocation, let shopLocation):
             var parameters: [String: Any] = ["artist_id": artistId]
             if let profileImg = profileImg { parameters["profile_img"] = profileImg }
             if let nickname = nickname { parameters["nickname"] = nickname }
@@ -55,7 +55,6 @@ extension ArtistProfileAPI: MemeAPI {
             if let specialization = specialization { parameters["specialization"] = specialization.map { $0.rawValue } }
             if let makeupLocation = makeupLocation { parameters["makeup_location"] = makeupLocation.rawValue }
             if let shopLocation = shopLocation { parameters["shop_location"] = shopLocation }
-            if let availableDayOfWeek = availableDayOfWeek { parameters["available_day_of_week"] = availableDayOfWeek.mapValues { try? JSONEncoder().encode($0) } }
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
         }
     }
