@@ -18,6 +18,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         let window = UIWindow(windowScene: windowScene)
         window.rootViewController = getRootViewController()
         window.makeKeyAndVisible()
+        window.overrideUserInterfaceStyle = .light
         self.window = window
     }
 
@@ -61,7 +62,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate {
     func getRootViewController() -> UIViewController {
         let vc = NavigationController(nibName: nil, bundle: nil)
-        vc.navigationBar.isHidden = true
         
         Task {
             let reissueResult = await AuthManager.shared.reissue()
@@ -109,7 +109,6 @@ extension SceneDelegate {
         let navigationcontroller = NavigationController(nibName: nil, bundle: nil)
         window.rootViewController = navigationcontroller
         navigationcontroller.viewControllers = [vc]
-        navigationcontroller.navigationBar.isHidden = true
         UIView.transition(with: window, duration: 0.2, options: [.transitionCrossDissolve], animations: nil, completion: nil)
     }
 

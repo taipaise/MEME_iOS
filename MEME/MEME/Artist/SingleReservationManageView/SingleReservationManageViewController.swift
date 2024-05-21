@@ -12,8 +12,8 @@ class SingleReservationManageViewController: UIViewController {
     @IBOutlet weak var cancelBarView: UIView!
     @IBOutlet weak var cancelBarLabel: UILabel!
     @IBOutlet weak var cancelBarButton: UIButton!
-    @IBOutlet weak var portfolioBarView: UIView!
-    @IBOutlet weak var portfolioBarButton: UIButton!
+    @IBOutlet weak var confirmReservationBarView: UIView!
+    @IBOutlet weak var confirmReservationBarButton: UIButton!
     @IBOutlet weak var modelInfoFrameView: UIView!
     @IBOutlet weak var modelInfoView: UIView!
     @IBOutlet weak var makeupCategoryLabel: UILabel!
@@ -29,7 +29,6 @@ class SingleReservationManageViewController: UIViewController {
     //MARK: - Properties
     var isToday: Bool = false
     var reservationData: ReservationData!
-    var modelData: ModelProfileInfoData!
     var reservationDateString: String!
     var reservationTimeString: String!
     
@@ -43,7 +42,7 @@ class SingleReservationManageViewController: UIViewController {
     private func setUI(){
         navigationItem.title = "예약 관리"
         cancelBarView.layer.cornerRadius=10
-        portfolioBarView.layer.cornerRadius=10
+        confirmReservationBarView.layer.cornerRadius=10
         
         modelInfoFrameView.layer.borderColor = UIColor.mainBold.cgColor
         modelInfoFrameView.layer.borderWidth = 1.3
@@ -111,20 +110,9 @@ extension SingleReservationManageViewController {
             }
         }
     }
-    func getModelData(modelId: Int) {
-        let getModelData = ModelProfileInfoManager.shared
-        getModelData.getModelProfileInfo(userId: modelId) { result in
-            DispatchQueue.main.async{
-                switch result {
-                case .success(let response):
-                    print("모델 정보 조회 성공: \(response)")
-                    self.modelData = response.data
-                    self.setUI()
-                case .failure(let error):
-                    print("모델 정보 조회 실패: \(error.localizedDescription)")
-                }
-            }
-        }
+    //TODO: - 예약 확정 API 호출
+    func confirmReservation(){
+        
     }
 }
 

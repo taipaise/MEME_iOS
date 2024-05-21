@@ -23,6 +23,8 @@ final class NavigationController: UINavigationController {
         super.viewDidLoad()
         interactivePopGestureRecognizer?.delegate = self
         delegate = self
+        setFont()
+        setAppearance()
     }
     
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
@@ -32,6 +34,23 @@ final class NavigationController: UINavigationController {
     
     @objc private func didTapBackButton() {
         super.popViewController(animated: true)
+    }
+    
+    private func setFont() {
+        let font = UIFont.pretendard(to: .regular, size: 16)
+        self.navigationBar.titleTextAttributes = [NSAttributedString.Key.font: font]
+    }
+    
+    private func setAppearance() {
+        let appearance = UINavigationBarAppearance()
+        appearance.configureWithTransparentBackground()
+        self.navigationBar.standardAppearance = appearance
+        self.navigationBar.compactAppearance = appearance
+        self.navigationBar.scrollEdgeAppearance = appearance
+    }
+    
+    func setTitle(title: String) {
+        self.visibleViewController?.title = title
     }
 }
 

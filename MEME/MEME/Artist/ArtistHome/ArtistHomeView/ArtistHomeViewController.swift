@@ -115,7 +115,7 @@ class ArtistHomeViewController: UIViewController {
             self.tabBarController?.tabBar.isHidden = true
             navigationController?.pushViewController(vc, animated: true)
         }else{
-            let vc = ArtistPortfolioManageViewController()
+            let vc = SingleReservationManageViewController()
             self.tabBarController?.tabBar.isHidden = true
             navigationController?.pushViewController(vc, animated: true)
         }
