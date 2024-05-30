@@ -196,7 +196,6 @@ final class MyPageManager {
         specialization: [SearchCategory],
         makeupLocation: MakeUpLocation,
         shopLocation: String,
-        availableDayOfWeek: [DayOfWeek: ReservationTimes],
         completion: @escaping (Result<PatchProfileDTO, MoyaError>) -> Void
     ) {
         provider.request(api: .patchArtistProfile(
@@ -209,8 +208,7 @@ final class MyPageManager {
             region: region,
             specialization: specialization,
             makeupLocation: makeupLocation,
-            shopLocation: shopLocation,
-            availableDayOfWeek: availableDayOfWeek
+            shopLocation: shopLocation
         )){ result in
             switch result {
             case .success(let response):

@@ -271,6 +271,9 @@
 		CC9C388F2B81B3530073A257 /* ContactAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9C388E2B81B3530073A257 /* ContactAPI.swift */; };
 		CC9C38912B81B3780073A257 /* ContactManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9C38902B81B3780073A257 /* ContactManager.swift */; };
 		CC9C38932B81B3830073A257 /* ContactDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC9C38922B81B3830073A257 /* ContactDTO.swift */; };
+		CCA8AC172BFB2973007313D4 /* AvailabletimeAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8AC162BFB2973007313D4 /* AvailabletimeAPI.swift */; };
+		CCA8AC192BFB2D2B007313D4 /* AvailableTimeManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8AC182BFB2D2B007313D4 /* AvailableTimeManager.swift */; };
+		CCA8AC1B2BFB2D3A007313D4 /* AvailableTimeDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCA8AC1A2BFB2D3A007313D4 /* AvailableTimeDTO.swift */; };
 		CCAB5A472B6585F700067FA4 /* InterestMakeUpCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A462B6585F700067FA4 /* InterestMakeUpCollectionViewCell.swift */; };
 		CCAB5A492B65861600067FA4 /* InterestMakeUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A482B65861600067FA4 /* InterestMakeUpViewController.swift */; };
 		CCAB5A4D2B65938F00067FA4 /* InterestArtistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCAB5A4C2B65938F00067FA4 /* InterestArtistCollectionViewCell.swift */; };
@@ -578,6 +581,9 @@
 		CC9C388E2B81B3530073A257 /* ContactAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactAPI.swift; sourceTree = "<group>"; };
 		CC9C38902B81B3780073A257 /* ContactManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactManager.swift; sourceTree = "<group>"; };
 		CC9C38922B81B3830073A257 /* ContactDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactDTO.swift; sourceTree = "<group>"; };
+		CCA8AC162BFB2973007313D4 /* AvailabletimeAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabletimeAPI.swift; sourceTree = "<group>"; };
+		CCA8AC182BFB2D2B007313D4 /* AvailableTimeManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableTimeManager.swift; sourceTree = "<group>"; };
+		CCA8AC1A2BFB2D3A007313D4 /* AvailableTimeDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableTimeDTO.swift; sourceTree = "<group>"; };
 		CCAB5A462B6585F700067FA4 /* InterestMakeUpCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestMakeUpCollectionViewCell.swift; sourceTree = "<group>"; };
 		CCAB5A482B65861600067FA4 /* InterestMakeUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InterestMakeUpViewController.swift; sourceTree = "<group>"; };
 		CCAB5A4C2B65938F00067FA4 /* InterestArtistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = InterestArtistCollectionViewCell.swift; path = MEME/Model/InterestArtist/InterestArtistCollectionViewCell.swift; sourceTree = SOURCE_ROOT; };
@@ -1261,6 +1267,7 @@
 				CC8CAA002BB44E90005F1E53 /* DetailReviewAPI.swift */,
 				CC8CAA082BB4E6DB005F1E53 /* PostReviewAPI.swift */,
 				CC8CAA0E2BB50AF1005F1E53 /* DeleteReviewAPI.swift */,
+				CCA8AC162BFB2973007313D4 /* AvailabletimeAPI.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -1289,6 +1296,7 @@
 				CC8CAA022BB44EA9005F1E53 /* DetailReviewManager.swift */,
 				CC8CAA0A2BB4FDD9005F1E53 /* PostReviewManager.swift */,
 				CC8CAA102BB50B01005F1E53 /* DeleteReviewManager.swift */,
+				CCA8AC182BFB2D2B007313D4 /* AvailableTimeManager.swift */,
 			);
 			path = Manager;
 			sourceTree = "<group>";
@@ -1322,6 +1330,7 @@
 				CC8CAA0C2BB4FDE4005F1E53 /* PostReviewDTO.swift */,
 				CC8CAA122BB50B16005F1E53 /* DeleteReviewDTO.swift */,
 				3162DF372BB55B3D00EB283C /* CheckUserDTO.swift */,
+				CCA8AC1A2BFB2D3A007313D4 /* AvailableTimeDTO.swift */,
 			);
 			path = Response;
 			sourceTree = "<group>";
@@ -2059,6 +2068,7 @@
 			files = (
 				CCCE56392B81D9FB007555A2 /* ArtistInfoDetailViewController.swift in Sources */,
 				CCCE563D2B81D9FB007555A2 /* ArtistLocationCollectionViewCell.swift in Sources */,
+				CCA8AC1B2BFB2D3A007313D4 /* AvailableTimeDTO.swift in Sources */,
 				CCFC31E12B5C41E500C0673A /* ModelModifyViewController.swift in Sources */,
 				094884CB2B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.swift in Sources */,
 				312DF7622B669CC30060BDF0 /* TimeCollectionViewCell.swift in Sources */,
@@ -2160,6 +2170,7 @@
 				317D987B2B7E1810009BBB95 /* MakeUpCategory.swift in Sources */,
 				31C0B5402BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift in Sources */,
 				2D3E0D152B640BCC00C49EF3 /* ModelViewArtistProfileViewController.swift in Sources */,
+				CCA8AC172BFB2973007313D4 /* AvailabletimeAPI.swift in Sources */,
 				CC2F3AC02B514EE900508DA5 /* ModelHeaderView.swift in Sources */,
 				CC9C387F2B8085A60073A257 /* WrittenReviewManager.swift in Sources */,
 				31FD2C742BE29B1D003DCB7C /* ArtistCollectionViewCell.swift in Sources */,
@@ -2289,6 +2300,7 @@
 				316239AC2B81E917002D9E2F /* TermsData.swift in Sources */,
 				3142B9B42B4D089D0066CD5A /* TabBarItemType.swift in Sources */,
 				CCCE56232B81D9BF007555A2 /* ArtistInfoViewController.swift in Sources */,
+				CCA8AC192BFB2D2B007313D4 /* AvailableTimeManager.swift in Sources */,
 				CC9C38932B81B3830073A257 /* ContactDTO.swift in Sources */,
 				31C0B5422BCBAB8900758EE9 /* ModelDetailInfoCollectionViewCell.swift in Sources */,
 				31B65E4F2B6E229000628C68 /* ReservationManager.swift in Sources */,

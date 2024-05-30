@@ -9,7 +9,8 @@ import UIKit
 import PhotosUI
 
 final class ArtistInfoViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
-
+    weak var delegate: ArtistInfoUpdateDelegate?
+    var artistProfileData: ArtistProfileData?
     
     @IBOutlet private weak var scrollView: UIScrollView!
     @IBOutlet private weak var navigationBar: NavigationBarView!

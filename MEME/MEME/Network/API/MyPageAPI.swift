@@ -59,8 +59,7 @@ enum MyPageAPI {
         region: [Region],
         specialization: [SearchCategory],
         makeupLocation: MakeUpLocation,
-        shopLocation: String,
-        availableDayOfWeek: [DayOfWeek: ReservationTimes]
+        shopLocation: String
     )
     case getProfileManagementData(userId: Int)
 }
@@ -209,8 +208,7 @@ extension MyPageAPI: MemeAPI {
             region: let region,
             specialization: let specialization,
             makeupLocation: let makeupLocation,
-            shopLocation: let shopLocation,
-            availableDayOfWeek: let availableDayOfWeek):
+            shopLocation: let shopLocation):
             var parameters: [String: Any] = [
                 "userId": userId,
                 "profileImg": profileImg,
@@ -222,7 +220,6 @@ extension MyPageAPI: MemeAPI {
                 "specialization": specialization,
                 "makeupLocation": makeupLocation,
                 "shopLocation": shopLocation,
-                "availableDayOfWeek": availableDayOfWeek
             ]
             return .requestParameters(parameters: parameters, encoding: JSONEncoding.default)
             

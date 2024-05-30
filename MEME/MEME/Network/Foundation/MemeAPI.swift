@@ -19,6 +19,7 @@ enum MemeDomain {
     case review
     case recommend
     case auth
+    case availabletime
 }
 
 extension MemeDomain {
@@ -41,6 +42,8 @@ extension MemeDomain {
         case .recommend:
             return "/recommend"
         case .auth:
+            return ""
+        case .availabletime:
             return ""
         }
     }
