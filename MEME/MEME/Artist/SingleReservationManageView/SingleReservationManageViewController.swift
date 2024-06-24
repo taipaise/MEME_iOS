@@ -7,24 +7,28 @@
 
 import UIKit
 
-class SingleArtistReservationManageViewController: UIViewController {
+class SingleReservationManageViewController: UIViewController {
     //MARK: - UI Properties
     @IBOutlet weak var cancelBarView: UIView!
     @IBOutlet weak var cancelBarLabel: UILabel!
     @IBOutlet weak var cancelBarButton: UIButton!
-    @IBOutlet weak var resInfoFrameView: UIView!
+    @IBOutlet weak var confirmReservationBarView: UIView!
+    @IBOutlet weak var confirmReservationBarButton: UIButton!
+    @IBOutlet weak var modelInfoFrameView: UIView!
+    @IBOutlet weak var modelInfoView: UIView!
+    @IBOutlet weak var makeupCategoryLabel: UILabel!
     @IBOutlet weak var modelNicknameLabel: UILabel!
     @IBOutlet weak var modelSkinTypeLabel: UILabel!
     @IBOutlet weak var modelGenderLabel: UILabel!
     @IBOutlet weak var modelPersonalColorLabel: UILabel!
     @IBOutlet weak var makeupNameLabel: UILabel!
     @IBOutlet weak var reservationDateLabel: UILabel!
+    @IBOutlet weak var reservationTimeLabel: UILabel!
     @IBOutlet weak var reservationPlaceLabel: UILabel!
     
     //MARK: - Properties
     var isToday: Bool = false
     var reservationData: ReservationData!
-    var modelData: ModelProfileInfoData!
     var reservationDateString: String!
     var reservationTimeString: String!
     
@@ -33,16 +37,24 @@ class SingleArtistReservationManageViewController: UIViewController {
         super.viewDidLoad()
         setUI()
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        getModelData(modelId: 1)
-    }
     
     //MARK: - setUI()
     private func setUI(){
-        self.tabBarController?.tabBar.isHidden = true
+        navigationItem.title = "예약 관리"
         cancelBarView.layer.cornerRadius=10
-        resInfoFrameView.layer.cornerRadius=10
+        confirmReservationBarView.layer.cornerRadius=10
+        
+        modelInfoFrameView.layer.borderColor = UIColor.mainBold.cgColor
+        modelInfoFrameView.layer.borderWidth = 1.3
+        
+        modelInfoView.layer.cornerRadius=10
+        modelInfoView.layer.shadowColor = UIColor.gray500.cgColor
+        modelInfoView.layer.shadowOpacity = 0.25
+        modelInfoView.layer.shadowRadius = 4
+        modelInfoView.layer.shadowPath = UIBezierPath(rect: CGRect(x: 5, y: 7, width: modelInfoView.bounds.width-22, height: modelInfoView.bounds.height)).cgPath
+        modelInfoView.layer.masksToBounds = false
+        
+        modelInfoFrameView.layer.cornerRadius=10
         if isToday {
             cancelBarView.backgroundColor = .gray500
             cancelBarLabel.text = "당일 예약은 취소가 불가능합니다"
@@ -52,21 +64,6 @@ class SingleArtistReservationManageViewController: UIViewController {
             cancelBarLabel.text = "예약 취소하기"
             cancelBarButton.isHidden = false
         }
-        if let data = modelData {
-            //        modelProfileImageView.image = 이미지처리
-            modelNicknameLabel.text = data.nickname
-            modelGenderLabel.text = data.gender.korString
-            modelSkinTypeLabel.text = data.skinType.korString
-            modelPersonalColorLabel.text = data.personalColor.korString
-        }
-        makeupNameLabel.text = reservationData.makeupName
-        reservationDateLabel.text = reservationDateString+" "+reservationTimeString+"시"
-        reservationPlaceLabel.text = reservationData.shopLocation
-    }
-    //MARK: - @IBAction
-    @IBAction private func backBtnDidTap(_ sender: UIButton) {
-        self.tabBarController?.tabBar.isHidden = false
-        self.navigationController?.popViewController(animated: true)
     }
     @IBAction private func reservationCancelBtnDidTap(_ sender: UIButton) {
         let alert = UIAlertController(
@@ -97,7 +94,7 @@ class SingleArtistReservationManageViewController: UIViewController {
 }
 
 //MARK: - API 호출
-extension SingleArtistReservationManageViewController {
+extension SingleReservationManageViewController {
     func patchReservation(reservationId: Int) {
         ReservationManager.shared.patchReservation(
             reservationId: reservationId,
@@ -113,20 +110,9 @@ extension SingleArtistReservationManageViewController {
             }
         }
     }
-    func getModelData(modelId: Int) {
-        let getModelData = ModelProfileInfoManager.shared
-        getModelData.getModelProfileInfo(userId: modelId) { result in
-            DispatchQueue.main.async{
-                switch result {
-                case .success(let response):
-                    print("모델 정보 조회 성공: \(response)")
-                    self.modelData = response.data
-                    self.setUI()
-                case .failure(let error):
-                    print("모델 정보 조회 실패: \(error.localizedDescription)")
-                }
-            }
-        }
+    //TODO: - 예약 확정 API 호출
+    func confirmReservation(){
+        
     }
 }
 

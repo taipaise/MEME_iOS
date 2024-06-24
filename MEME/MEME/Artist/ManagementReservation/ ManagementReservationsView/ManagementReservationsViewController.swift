@@ -304,7 +304,7 @@ extension ManagementReservationsViewController: UICollectionViewDelegateFlowLayo
                     navigationController?.pushViewController(vc, animated: true)
                 }else{
                     if reservationData.status == "EXPECTED" {
-                        let vc = SingleArtistReservationManageViewController()
+                        let vc = SingleReservationManageViewController()
                         if formatDateString(op: 1, reservationData.reservationDate) == formatDateString(op: 1, DateFormatter().string(from: Date())) {
                             // 오늘
                             vc.isToday = true
