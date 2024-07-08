@@ -394,7 +394,6 @@
 		2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioManager.swift; sourceTree = "<group>"; };
 		2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDTO.swift; sourceTree = "<group>"; };
 		2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLocationModel.swift; sourceTree = "<group>"; };
-		2DC54B512BB7487100464DB2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2DD60FFA2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendHeaderReusableView.swift; sourceTree = "<group>"; };
 		2DD60FFE2BC5AE5A00B362F1 /* ModelHomeViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHomeViewItem.swift; sourceTree = "<group>"; };
 		2DD610012BC5AE7400B362F1 /* ModelHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHomeViewModel.swift; sourceTree = "<group>"; };

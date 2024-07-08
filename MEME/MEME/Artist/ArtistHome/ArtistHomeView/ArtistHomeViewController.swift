@@ -281,7 +281,6 @@ extension ArtistHomeViewController: UICollectionViewDataSource{
     
 }
 
-
 //MARK: API 호출
 extension ArtistHomeViewController{
     private func getArtistID() -> Int{
