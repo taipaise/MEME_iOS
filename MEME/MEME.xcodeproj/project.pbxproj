@@ -192,6 +192,8 @@
 		31AB17FE2B9BF1CB0049E02D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 31AB17FD2B9BF1CB0049E02D /* RxCocoa */; };
 		31AB18002B9BF1CB0049E02D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 31AB17FF2B9BF1CB0049E02D /* RxRelay */; };
 		31AB18022B9BF95A0049E02D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AB18012B9BF95A0049E02D /* ViewModel.swift */; };
+		31AD6B952C3D7CB400329636 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 31AD6B942C3D7CB400329636 /* FirebaseMessaging */; };
+		31AD6B972C3D7DA600329636 /* AppDelegate+Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AD6B962C3D7DA600329636 /* AppDelegate+Notification.swift */; };
 		31B263432B57EDE300304FBE /* TermsAgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B2633F2B57EDE300304FBE /* TermsAgreementViewController.swift */; };
 		31B263442B57EDE300304FBE /* TermDetailViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31B263402B57EDE300304FBE /* TermDetailViewController.xib */; };
 		31B263452B57EDE300304FBE /* TermDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31B263412B57EDE300304FBE /* TermDetailViewController.swift */; };
@@ -392,6 +394,7 @@
 		2DA208162B7CF87B006EB9B9 /* PortfolioManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioManager.swift; sourceTree = "<group>"; };
 		2DA208182B7CF9EE006EB9B9 /* PortfolioDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioDTO.swift; sourceTree = "<group>"; };
 		2DB303F22B829EF200D9E394 /* BusinessLocationModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusinessLocationModel.swift; sourceTree = "<group>"; };
+		2DC54B512BB7487100464DB2 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		2DD60FFA2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendHeaderReusableView.swift; sourceTree = "<group>"; };
 		2DD60FFE2BC5AE5A00B362F1 /* ModelHomeViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHomeViewItem.swift; sourceTree = "<group>"; };
 		2DD610012BC5AE7400B362F1 /* ModelHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHomeViewModel.swift; sourceTree = "<group>"; };
@@ -497,6 +500,8 @@
 		319F53542BCC1BDE008D153E /* SignUpCompletionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompletionCoordinator.swift; sourceTree = "<group>"; };
 		319F53572BCC1D6A008D153E /* RegisterCompletionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCompletionViewModel.swift; sourceTree = "<group>"; };
 		31AB18012B9BF95A0049E02D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		31AD6B962C3D7DA600329636 /* AppDelegate+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Notification.swift"; sourceTree = "<group>"; };
+		31AD6B982C3D7F0C00329636 /* MEMEDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MEMEDebug.entitlements; sourceTree = "<group>"; };
 		31B2633F2B57EDE300304FBE /* TermsAgreementViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermsAgreementViewController.swift; sourceTree = "<group>"; };
 		31B263402B57EDE300304FBE /* TermDetailViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = TermDetailViewController.xib; sourceTree = "<group>"; };
 		31B263412B57EDE300304FBE /* TermDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TermDetailViewController.swift; sourceTree = "<group>"; };
@@ -618,6 +623,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				31AD6B952C3D7CB400329636 /* FirebaseMessaging in Frameworks */,
 				3162398F2B81C9A8002D9E2F /* FirebaseAnalyticsSwift in Frameworks */,
 				316239982B81CF37002D9E2F /* FirebaseFirestore in Frameworks */,
 				316239912B81C9A8002D9E2F /* FirebaseAnalyticsWithoutAdIdSupport in Frameworks */,
@@ -1077,9 +1083,11 @@
 		3142B9572B4CFFED0066CD5A /* MEME */ = {
 			isa = PBXGroup;
 			children = (
+				31AD6B982C3D7F0C00329636 /* MEMEDebug.entitlements */,
 				3162397E2B81B34C002D9E2F /* MEME.entitlements */,
 				315FB85C2B6DE5710068163C /* Foundation */,
 				3142B9582B4CFFED0066CD5A /* AppDelegate.swift */,
+				31AD6B962C3D7DA600329636 /* AppDelegate+Notification.swift */,
 				3142B95A2B4CFFED0066CD5A /* SceneDelegate.swift */,
 				3142B9612B4CFFED0066CD5A /* Assets.xcassets */,
 				314F74E92B52DDF200CACF20 /* Font */,
@@ -1903,6 +1911,7 @@
 				317720E52BC27F1E00A1928A /* RxKakaoSDK */,
 				317720E72BC27F1F00A1928A /* RxKakaoSDKAuth */,
 				317720E92BC27F1F00A1928A /* RxKakaoSDKCommon */,
+				31AD6B942C3D7CB400329636 /* FirebaseMessaging */,
 			);
 			productName = MEME;
 			productReference = 3142B9552B4CFFED0066CD5A /* MEME.app */;
@@ -2091,6 +2100,7 @@
 				CC8CAA112BB50B01005F1E53 /* DeleteReviewManager.swift in Sources */,
 				CC8CAA092BB4E6DB005F1E53 /* PostReviewAPI.swift in Sources */,
 				316A926D2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift in Sources */,
+				31AD6B972C3D7DA600329636 /* AppDelegate+Notification.swift in Sources */,
 				2D62E24A2B5462B0004E8299 /* SelectMakeupCardViewCell.swift in Sources */,
 				2DD60FFF2BC5AE5A00B362F1 /* ModelHomeViewItem.swift in Sources */,
 				CC9C38652B7BE3A10073A257 /* InterestMakeUpDTO.swift in Sources */,
@@ -2483,7 +2493,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = MEME/MEME.entitlements;
+				CODE_SIGN_ENTITLEMENTS = MEME/MEMEDebug.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Manual;
@@ -2811,6 +2821,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 31AB17FC2B9BF1CB0049E02D /* XCRemoteSwiftPackageReference "RxSwift" */;
 			productName = RxRelay;
+		};
+		31AD6B942C3D7CB400329636 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 316239892B81C9A8002D9E2F /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
