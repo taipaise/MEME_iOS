@@ -7,7 +7,6 @@
 
 import UIKit
 import RxKakaoSDKCommon
-import FirebaseCore
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -15,9 +14,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        FirebaseApp.configure()
         let kakaoAppKey = SecretInfoManager.kakaoKey
         RxKakaoSDK.initSDK(appKey: kakaoAppKey)
+        requestNotificationAuth()
         return true
     }
 
