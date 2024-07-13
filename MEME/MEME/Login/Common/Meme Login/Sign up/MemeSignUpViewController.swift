@@ -84,6 +84,7 @@ final class MemeSignUpViewController: UIViewController {
     
     private lazy var passwordTextField: UITextField = {
         let view = UITextField()
+        view.isSecureTextEntry = true
         view.placeholder = "비밀번호를 입력해주세요"
         view.font = .pretendard(to: .medium, size: 14)
         return view
@@ -92,6 +93,7 @@ final class MemeSignUpViewController: UIViewController {
     private lazy var passwordVerificationTextField: UITextField = {
         let view = UITextField()
         view.placeholder = "비밀번호를 한 번 더 입력해주세요"
+        view.isSecureTextEntry = true
         view.font = .pretendard(to: .medium, size: 14)
         
         return view
