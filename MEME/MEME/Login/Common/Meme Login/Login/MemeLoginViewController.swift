@@ -7,6 +7,8 @@
 
 import UIKit
 import SnapKit
+import RxSwift
+import RxCocoa
 
 final class MemeLoginViewController: UIViewController {
     
@@ -109,12 +111,15 @@ final class MemeLoginViewController: UIViewController {
         button.setImage(.appleRound, for: .normal)
         return button
     }()
+    
+    private var disposeBag = DisposeBag()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         addSubViews()
         makeConstraints()
         setUI()
+        bindView()
     }
     
     private func setUI() {
@@ -221,6 +226,39 @@ extension MemeLoginViewController {
             $0.top.equalTo(snsLabel.snp.bottom).offset(38)
             $0.size.equalTo(46)
         }
+    }
+}
+
+// MARK: - binding
+extension MemeLoginViewController {
+    private func bindView() {
+        findEmailButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                let coordinator = InputEmailCoordinator(
+                    navigationController: self.navigationController,
+                    mode: .findEmail
+                )
+                coordinator.start()
+            })
+            .disposed(by: disposeBag)
         
+        findPasswordButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+                let coordinator = InputEmailCoordinator(
+                    navigationController: self.navigationController,
+                    mode: .findPassword
+                )
+                coordinator.start()
+            })
+            .disposed(by: disposeBag)
+        
+        signUpButton.rx.tap
+            .withUnretained(self)
+            .subscribe(onNext: { (self, _) in
+
+            })
+            .disposed(by: disposeBag)
     }
 }

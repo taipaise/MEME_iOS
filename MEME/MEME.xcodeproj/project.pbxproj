@@ -222,6 +222,9 @@
 		31F95FDE2C426F79002EE00B /* MemeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FDD2C426F79002EE00B /* MemeLoginViewController.swift */; };
 		31F95FE12C427697002EE00B /* MemeLoginCoordiantor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FE02C427697002EE00B /* MemeLoginCoordiantor.swift */; };
 		31F95FE32C427ECB002EE00B /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FE22C427ECB002EE00B /* UITextField+.swift */; };
+		31F95FE92C428611002EE00B /* InputEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FE82C428611002EE00B /* InputEmailViewController.swift */; };
+		31F95FEB2C428B10002EE00B /* InputEmailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FEA2C428B10002EE00B /* InputEmailCoordinator.swift */; };
+		31F95FED2C429154002EE00B /* InputEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FEC2C429154002EE00B /* InputEmailViewModel.swift */; };
 		31FD2C742BE29B1D003DCB7C /* ArtistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FD2C732BE29B1D003DCB7C /* ArtistCollectionViewCell.swift */; };
 		31FD2C782BE2A347003DCB7C /* PortfolioCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FD2C772BE2A347003DCB7C /* PortfolioCollectionViewCell.swift */; };
 		CC2F3ABC2B5143FF00508DA5 /* ModelMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3ABB2B5143FF00508DA5 /* ModelMyPageViewController.swift */; };
@@ -534,6 +537,9 @@
 		31F95FDD2C426F79002EE00B /* MemeLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeLoginViewController.swift; sourceTree = "<group>"; };
 		31F95FE02C427697002EE00B /* MemeLoginCoordiantor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeLoginCoordiantor.swift; sourceTree = "<group>"; };
 		31F95FE22C427ECB002EE00B /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
+		31F95FE82C428611002EE00B /* InputEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEmailViewController.swift; sourceTree = "<group>"; };
+		31F95FEA2C428B10002EE00B /* InputEmailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEmailCoordinator.swift; sourceTree = "<group>"; };
+		31F95FEC2C429154002EE00B /* InputEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEmailViewModel.swift; sourceTree = "<group>"; };
 		31FD2C732BE29B1D003DCB7C /* ArtistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCollectionViewCell.swift; sourceTree = "<group>"; };
 		31FD2C772BE2A347003DCB7C /* PortfolioCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC2F3ABB2B5143FF00508DA5 /* ModelMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMyPageViewController.swift; sourceTree = "<group>"; };
@@ -1757,10 +1763,29 @@
 		31F95FDC2C426F62002EE00B /* Meme Login */ = {
 			isa = PBXGroup;
 			children = (
+				31F95FE72C4285D8002EE00B /* Login */,
+				31F95FE52C428077002EE00B /* Input Email */,
+			);
+			path = "Meme Login";
+			sourceTree = "<group>";
+		};
+		31F95FE52C428077002EE00B /* Input Email */ = {
+			isa = PBXGroup;
+			children = (
+				31F95FE82C428611002EE00B /* InputEmailViewController.swift */,
+				31F95FEC2C429154002EE00B /* InputEmailViewModel.swift */,
+				31F95FEA2C428B10002EE00B /* InputEmailCoordinator.swift */,
+			);
+			path = "Input Email";
+			sourceTree = "<group>";
+		};
+		31F95FE72C4285D8002EE00B /* Login */ = {
+			isa = PBXGroup;
+			children = (
 				31F95FDD2C426F79002EE00B /* MemeLoginViewController.swift */,
 				31F95FE02C427697002EE00B /* MemeLoginCoordiantor.swift */,
 			);
-			path = "Meme Login";
+			path = Login;
 			sourceTree = "<group>";
 		};
 		31FD2C712BE29AF6003DCB7C /* Views */ = {
@@ -2117,6 +2142,7 @@
 				31B2634F2B57EE7D00304FBE /* SetProfileImageViewController.swift in Sources */,
 				CC8CA9FF2BB44E7D005F1E53 /* AvailableReviewDTO.swift in Sources */,
 				316A926A2B66703800E4337D /* SetBusinessLocationViewController.swift in Sources */,
+				31F95FED2C429154002EE00B /* InputEmailViewModel.swift in Sources */,
 				CC9C38552B7B5CDF0073A257 /* ModelProfileAPI.swift in Sources */,
 				319F53522BCC18EB008D153E /* SignUpCoordinator.swift in Sources */,
 				3162DF382BB55B3D00EB283C /* CheckUserDTO.swift in Sources */,
@@ -2148,6 +2174,7 @@
 				317D986C2B7DF59B009BBB95 /* Region.swift in Sources */,
 				317720FB2BC2A57D00A1928A /* TermDetailCoordinator.swift in Sources */,
 				31640D622BD3FFFF00D7287B /* SetNameViewController.swift in Sources */,
+				31F95FEB2C428B10002EE00B /* InputEmailCoordinator.swift in Sources */,
 				3142B9A42B4D03840066CD5A /* ModelTabBarController.swift in Sources */,
 				2DA208152B7CF865006EB9B9 /* PortfolioAPI.swift in Sources */,
 				CC8CAA032BB44EA9005F1E53 /* DetailReviewManager.swift in Sources */,
@@ -2306,6 +2333,7 @@
 				317720E12BC2701000A1928A /* SocialProvider.swift in Sources */,
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,
 				3142B99D2B4D021A0066CD5A /* UIView+.swift in Sources */,
+				31F95FE92C428611002EE00B /* InputEmailViewController.swift in Sources */,
 				317721032BC2A6B100A1928A /* TermDetailViewModel.swift in Sources */,
 				3169E3F02BC2C0D400550F2E /* SetProfileImageViewModel.swift in Sources */,
 				CC9C38692B7C79240073A257 /* ArtistProfileAPI.swift in Sources */,
