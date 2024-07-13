@@ -225,6 +225,9 @@
 		31F95FE92C428611002EE00B /* InputEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FE82C428611002EE00B /* InputEmailViewController.swift */; };
 		31F95FEB2C428B10002EE00B /* InputEmailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FEA2C428B10002EE00B /* InputEmailCoordinator.swift */; };
 		31F95FED2C429154002EE00B /* InputEmailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FEC2C429154002EE00B /* InputEmailViewModel.swift */; };
+		31F95FF02C42AAEE002EE00B /* InputVerificationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FEF2C42AAEE002EE00B /* InputVerificationCodeViewController.swift */; };
+		31F95FF22C42AB21002EE00B /* InputVerificationCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FF12C42AB21002EE00B /* InputVerificationCodeViewModel.swift */; };
+		31F95FF42C42AB2F002EE00B /* InputVerificationCodeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FF32C42AB2F002EE00B /* InputVerificationCodeCoordinator.swift */; };
 		31FD2C742BE29B1D003DCB7C /* ArtistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FD2C732BE29B1D003DCB7C /* ArtistCollectionViewCell.swift */; };
 		31FD2C782BE2A347003DCB7C /* PortfolioCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FD2C772BE2A347003DCB7C /* PortfolioCollectionViewCell.swift */; };
 		CC2F3ABC2B5143FF00508DA5 /* ModelMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3ABB2B5143FF00508DA5 /* ModelMyPageViewController.swift */; };
@@ -540,6 +543,9 @@
 		31F95FE82C428611002EE00B /* InputEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEmailViewController.swift; sourceTree = "<group>"; };
 		31F95FEA2C428B10002EE00B /* InputEmailCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEmailCoordinator.swift; sourceTree = "<group>"; };
 		31F95FEC2C429154002EE00B /* InputEmailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputEmailViewModel.swift; sourceTree = "<group>"; };
+		31F95FEF2C42AAEE002EE00B /* InputVerificationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputVerificationCodeViewController.swift; sourceTree = "<group>"; };
+		31F95FF12C42AB21002EE00B /* InputVerificationCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputVerificationCodeViewModel.swift; sourceTree = "<group>"; };
+		31F95FF32C42AB2F002EE00B /* InputVerificationCodeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputVerificationCodeCoordinator.swift; sourceTree = "<group>"; };
 		31FD2C732BE29B1D003DCB7C /* ArtistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCollectionViewCell.swift; sourceTree = "<group>"; };
 		31FD2C772BE2A347003DCB7C /* PortfolioCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC2F3ABB2B5143FF00508DA5 /* ModelMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMyPageViewController.swift; sourceTree = "<group>"; };
@@ -1765,6 +1771,7 @@
 			children = (
 				31F95FE72C4285D8002EE00B /* Login */,
 				31F95FE52C428077002EE00B /* Input Email */,
+				31F95FEE2C42AACE002EE00B /* Input Verification Code */,
 			);
 			path = "Meme Login";
 			sourceTree = "<group>";
@@ -1786,6 +1793,16 @@
 				31F95FE02C427697002EE00B /* MemeLoginCoordiantor.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		31F95FEE2C42AACE002EE00B /* Input Verification Code */ = {
+			isa = PBXGroup;
+			children = (
+				31F95FEF2C42AAEE002EE00B /* InputVerificationCodeViewController.swift */,
+				31F95FF12C42AB21002EE00B /* InputVerificationCodeViewModel.swift */,
+				31F95FF32C42AB2F002EE00B /* InputVerificationCodeCoordinator.swift */,
+			);
+			path = "Input Verification Code";
 			sourceTree = "<group>";
 		};
 		31FD2C712BE29AF6003DCB7C /* Views */ = {
@@ -2264,6 +2281,7 @@
 				317D98702B7E01F7009BBB95 /* Gender.swift in Sources */,
 				CCAB5A532B66CD9F00067FA4 /* MyReviewViewController.swift in Sources */,
 				CC9C38672B7C760B0073A257 /* ArtistProfileDTO.swift in Sources */,
+				31F95FF02C42AAEE002EE00B /* InputVerificationCodeViewController.swift in Sources */,
 				315EE2D02B66566A0042A082 /* DetailSettingView.swift in Sources */,
 				CC513CD82BBE5C8A007DAF0F /* ReviewViewController.swift in Sources */,
 				CC9C38592B7BC8D10073A257 /* InterestArtistAPI.swift in Sources */,
@@ -2287,6 +2305,7 @@
 				31AB18022B9BF95A0049E02D /* ViewModel.swift in Sources */,
 				CC9C38832B808C760073A257 /* LogOutAPI.swift in Sources */,
 				319F53582BCC1D6A008D153E /* RegisterCompletionViewModel.swift in Sources */,
+				31F95FF22C42AB21002EE00B /* InputVerificationCodeViewModel.swift in Sources */,
 				CC9C38872B808C8E0073A257 /* LogOutDTO.swift in Sources */,
 				315FB8622B6DE5F40068163C /* SecretInfoManager.swift in Sources */,
 				31F95FDE2C426F79002EE00B /* MemeLoginViewController.swift in Sources */,
@@ -2327,6 +2346,7 @@
 				CC8CAA0B2BB4FDD9005F1E53 /* PostReviewManager.swift in Sources */,
 				317720EE2BC28FED00A1928A /* CommonSignUpCoordinator.swift in Sources */,
 				2D8C20C72B82D5F500CD4A90 /* ProfileManager.swift in Sources */,
+				31F95FF42C42AB2F002EE00B /* InputVerificationCodeCoordinator.swift in Sources */,
 				CC9C38812B8085B00073A257 /* WrittenReviewDTO.swift in Sources */,
 				CC9C387B2B7FEB1F0073A257 /* ReviewListDTO.swift in Sources */,
 				2D106F4C2B702B5100F3C253 /* ModelReservationBothLocationView.swift in Sources */,

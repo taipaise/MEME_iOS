@@ -257,7 +257,7 @@ extension MemeLoginViewController {
         signUpButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
-
+            
             })
             .disposed(by: disposeBag)
     }

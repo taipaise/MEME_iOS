@@ -66,6 +66,7 @@ final class InputEmailViewController: UIViewController {
         setUI()
         addSubviews()
         makeConstraints()
+        bindView()
         bindViewModel()
     }
     
@@ -117,6 +118,20 @@ extension InputEmailViewController {
 
 // MARK: - binding
 extension InputEmailViewController {
+    private func bindView() {
+        nextButton.rx.tap
+            .withUnretained(self)
+            .subscribe { (self, _) in
+                // TODO: - 임시 인증 코드
+                let coordinator = InputVerificationCodeCoordinator(
+                    navigationController: self.navigationController,
+                    code: "0000"
+                )
+                coordinator.start()
+            }
+            .disposed(by: disposeBag)
+    }
+    
     private func bindViewModel() {
         let input = InputEmailViewModel.Input(
             inputInfo: textField.rx.text.asObservable(),
