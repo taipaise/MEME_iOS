@@ -206,7 +206,7 @@ extension MemeSignUpViewController {
         
         checkImageView.snp.makeConstraints {
             $0.centerY.equalTo(verificationCodeResultLabel)
-            $0.leading.equalTo(verificationCodeResultLabel.snp.trailing).offset(24)
+            $0.leading.equalTo(verificationCodeResultLabel.snp.trailing).offset(4)
             $0.width.equalTo(16)
             $0.height.equalTo(11)
         }
