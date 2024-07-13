@@ -216,6 +216,9 @@
 		31C0B5402BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C0B53F2BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift */; };
 		31C0B5422BCBAB8900758EE9 /* ModelDetailInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C0B5412BCBAB8900758EE9 /* ModelDetailInfoCollectionViewCell.swift */; };
 		31CC0DF42BD4221B00B8FCA9 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CC0DF32BD4221B00B8FCA9 /* CALayer+.swift */; };
+		31CC852E2C42ED080030E7C9 /* FindEmailResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CC852D2C42ED080030E7C9 /* FindEmailResultViewController.swift */; };
+		31CC85302C42ED1E0030E7C9 /* FindEmailResultViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CC852F2C42ED1E0030E7C9 /* FindEmailResultViewModel.swift */; };
+		31CC85322C42ED290030E7C9 /* FindEmailResultCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CC85312C42ED290030E7C9 /* FindEmailResultCoordinator.swift */; };
 		31EA86F22BBFEC20003BCBF7 /* Moya+Wrapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F12BBFEC20003BCBF7 /* Moya+Wrapping.swift */; };
 		31EA86F42BBFEC39003BCBF7 /* MoyaAsyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F32BBFEC39003BCBF7 /* MoyaAsyncError.swift */; };
 		31EA86F62BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F52BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift */; };
@@ -540,6 +543,9 @@
 		31C0B53F2BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDetailInfoHeaderView.swift; sourceTree = "<group>"; };
 		31C0B5412BCBAB8900758EE9 /* ModelDetailInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDetailInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		31CC0DF32BD4221B00B8FCA9 /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
+		31CC852D2C42ED080030E7C9 /* FindEmailResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailResultViewController.swift; sourceTree = "<group>"; };
+		31CC852F2C42ED1E0030E7C9 /* FindEmailResultViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailResultViewModel.swift; sourceTree = "<group>"; };
+		31CC85312C42ED290030E7C9 /* FindEmailResultCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FindEmailResultCoordinator.swift; sourceTree = "<group>"; };
 		31EA86F12BBFEC20003BCBF7 /* Moya+Wrapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moya+Wrapping.swift"; sourceTree = "<group>"; };
 		31EA86F32BBFEC39003BCBF7 /* MoyaAsyncError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaAsyncError.swift; sourceTree = "<group>"; };
 		31EA86F52BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaAsyncRequest.swift; sourceTree = "<group>"; };
@@ -1777,6 +1783,16 @@
 			path = RegistrationCompletion;
 			sourceTree = "<group>";
 		};
+		31CC852C2C42ECDD0030E7C9 /* Find Email Result */ = {
+			isa = PBXGroup;
+			children = (
+				31CC852D2C42ED080030E7C9 /* FindEmailResultViewController.swift */,
+				31CC852F2C42ED1E0030E7C9 /* FindEmailResultViewModel.swift */,
+				31CC85312C42ED290030E7C9 /* FindEmailResultCoordinator.swift */,
+			);
+			path = "Find Email Result";
+			sourceTree = "<group>";
+		};
 		31EA86F02BBFE4F5003BCBF7 /* Moya */ = {
 			isa = PBXGroup;
 			children = (
@@ -1795,6 +1811,7 @@
 				31A8C84D2C42D2BC00A8D0F3 /* Sign up */,
 				31F95FE52C428077002EE00B /* Input Email */,
 				31F95FEE2C42AACE002EE00B /* Input Verification Code */,
+				31CC852C2C42ECDD0030E7C9 /* Find Email Result */,
 				31F95FF52C42C519002EE00B /* Reset password */,
 			);
 			path = "Meme Login";
@@ -2283,6 +2300,7 @@
 				CC9C387D2B80859B0073A257 /* WrittenReviewAPI.swift in Sources */,
 				2DA208032B7AB577006EB9B9 /* SearchSort.swift in Sources */,
 				317720F52BC2905E00A1928A /* ArtistMainCoordinator.swift in Sources */,
+				31CC852E2C42ED080030E7C9 /* FindEmailResultViewController.swift in Sources */,
 				315FB85E2B6DE57C0068163C /* KeyChainValue.swift in Sources */,
 				2D5C05A12B60269900EDC69F /* ShowReviewTableViewCell.swift in Sources */,
 				317D98752B7E0C68009BBB95 /* AtristProfileInfo.swift in Sources */,
@@ -2333,11 +2351,13 @@
 				CC8CAA012BB44E90005F1E53 /* DetailReviewAPI.swift in Sources */,
 				315FB8572B6DE1480068163C /* AuthManager.swift in Sources */,
 				2DA208052B7AB5F3006EB9B9 /* SearchCategory.swift in Sources */,
+				31CC85322C42ED290030E7C9 /* FindEmailResultCoordinator.swift in Sources */,
 				3142B99F2B4D02300066CD5A /* UIFont+.swift in Sources */,
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,
 				3142B99D2B4D021A0066CD5A /* UIView+.swift in Sources */,
 				CC9C38702B7C7F9C0073A257 /* ArtistID.swift in Sources */,
 				CC9C386E2B7C7D940073A257 /* ArtistProfileManager.swift in Sources */,
+				31CC85302C42ED1E0030E7C9 /* FindEmailResultViewModel.swift in Sources */,
 				317D98722B7E023E009BBB95 /* PersonalColor.swift in Sources */,
 				094884C72B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.swift in Sources */,
 				31AB18022B9BF95A0049E02D /* ViewModel.swift in Sources */,

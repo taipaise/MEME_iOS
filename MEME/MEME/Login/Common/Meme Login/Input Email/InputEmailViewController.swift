@@ -122,12 +122,22 @@ extension InputEmailViewController {
         nextButton.rx.tap
             .withUnretained(self)
             .subscribe { (self, _) in
-                // TODO: - 임시 인증 코드
-                let coordinator = InputVerificationCodeCoordinator(
-                    navigationController: self.navigationController,
-                    code: "0000"
-                )
-                coordinator.start()
+                switch self.viewModel.mode {
+                case .findEmail:
+                    // TODO: - 임시 이메일
+                    let coordinator = FindEmailResultCoordinator(
+                        navigationController: self.navigationController,
+                        email: "taipaise@gmail.com"
+                    )
+                    coordinator.start()
+                case .findPassword:
+                    // TODO: - 임시 인증 코드
+                    let coordinator = InputVerificationCodeCoordinator(
+                        navigationController: self.navigationController,
+                        code: "0000"
+                    )
+                    coordinator.start()
+                }
             }
             .disposed(by: disposeBag)
     }
