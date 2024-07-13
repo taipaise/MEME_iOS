@@ -188,6 +188,9 @@
 		319F53522BCC18EB008D153E /* SignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F53512BCC18EB008D153E /* SignUpCoordinator.swift */; };
 		319F53552BCC1BDE008D153E /* SignUpCompletionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F53542BCC1BDE008D153E /* SignUpCompletionCoordinator.swift */; };
 		319F53582BCC1D6A008D153E /* RegisterCompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F53572BCC1D6A008D153E /* RegisterCompletionViewModel.swift */; };
+		31A8C84F2C42D31C00A8D0F3 /* MemeSignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A8C84E2C42D31C00A8D0F3 /* MemeSignUpViewController.swift */; };
+		31A8C8512C42D8D700A8D0F3 /* MemeSignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A8C8502C42D8D700A8D0F3 /* MemeSignUpCoordinator.swift */; };
+		31A8C8532C42D93900A8D0F3 /* MemeSignUpViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A8C8522C42D93900A8D0F3 /* MemeSignUpViewModel.swift */; };
 		31AB17FE2B9BF1CB0049E02D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 31AB17FD2B9BF1CB0049E02D /* RxCocoa */; };
 		31AB18002B9BF1CB0049E02D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 31AB17FF2B9BF1CB0049E02D /* RxRelay */; };
 		31AB18022B9BF95A0049E02D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AB18012B9BF95A0049E02D /* ViewModel.swift */; };
@@ -508,6 +511,9 @@
 		319F53512BCC18EB008D153E /* SignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinator.swift; sourceTree = "<group>"; };
 		319F53542BCC1BDE008D153E /* SignUpCompletionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompletionCoordinator.swift; sourceTree = "<group>"; };
 		319F53572BCC1D6A008D153E /* RegisterCompletionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCompletionViewModel.swift; sourceTree = "<group>"; };
+		31A8C84E2C42D31C00A8D0F3 /* MemeSignUpViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeSignUpViewController.swift; sourceTree = "<group>"; };
+		31A8C8502C42D8D700A8D0F3 /* MemeSignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeSignUpCoordinator.swift; sourceTree = "<group>"; };
+		31A8C8522C42D93900A8D0F3 /* MemeSignUpViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeSignUpViewModel.swift; sourceTree = "<group>"; };
 		31AB18012B9BF95A0049E02D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		31AD6B962C3D7DA600329636 /* AppDelegate+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Notification.swift"; sourceTree = "<group>"; };
 		31AD6B982C3D7F0C00329636 /* MEMEDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MEMEDebug.entitlements; sourceTree = "<group>"; };
@@ -1662,6 +1668,16 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		31A8C84D2C42D2BC00A8D0F3 /* Sign up */ = {
+			isa = PBXGroup;
+			children = (
+				31A8C84E2C42D31C00A8D0F3 /* MemeSignUpViewController.swift */,
+				31A8C8522C42D93900A8D0F3 /* MemeSignUpViewModel.swift */,
+				31A8C8502C42D8D700A8D0F3 /* MemeSignUpCoordinator.swift */,
+			);
+			path = "Sign up";
+			sourceTree = "<group>";
+		};
 		31B263592B57EEBC00304FBE /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -1776,6 +1792,7 @@
 			isa = PBXGroup;
 			children = (
 				31F95FE72C4285D8002EE00B /* Login */,
+				31A8C84D2C42D2BC00A8D0F3 /* Sign up */,
 				31F95FE52C428077002EE00B /* Input Email */,
 				31F95FEE2C42AACE002EE00B /* Input Verification Code */,
 				31F95FF52C42C519002EE00B /* Reset password */,
@@ -2217,6 +2234,7 @@
 				CC2F3AC52B5436B800508DA5 /* InfoHeaderView.swift in Sources */,
 				2DB303F32B829EF200D9E394 /* BusinessLocationModel.swift in Sources */,
 				CCAB5A572B66F44D00067FA4 /* WriteReviewViewController.swift in Sources */,
+				31A8C8532C42D93900A8D0F3 /* MemeSignUpViewModel.swift in Sources */,
 				2D7D747E2B769C9E005BDFD5 /* ReservationDTO.swift in Sources */,
 				CCAB5A6D2B6E011800067FA4 /* ArtistHeaderView.swift in Sources */,
 				CC9C38612B7BDF9D0073A257 /* InterestMakeUpAPI.swift in Sources */,
@@ -2259,6 +2277,7 @@
 				3142B9592B4CFFED0066CD5A /* AppDelegate.swift in Sources */,
 				2D106F4A2B7028C200F3C253 /* ModelReservationShopLocationView.swift in Sources */,
 				317D98772B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift in Sources */,
+				31A8C84F2C42D31C00A8D0F3 /* MemeSignUpViewController.swift in Sources */,
 				315AC1C52B70D186003FD1A1 /* ModelHomeViewController.swift in Sources */,
 				3145258C2B826AAE003D5CC7 /* ExtraProfileResponseDTO.swift in Sources */,
 				CC9C387D2B80859B0073A257 /* WrittenReviewAPI.swift in Sources */,
@@ -2356,6 +2375,7 @@
 				2D669BA52BAD9F37007E03A0 /* ReviewManager.swift in Sources */,
 				2DB303E82B8286EF00D9E394 /* (null) in Sources */,
 				CC9C38892B80F9AA0073A257 /* ModelProfileInfoAPI.swift in Sources */,
+				31A8C8512C42D8D700A8D0F3 /* MemeSignUpCoordinator.swift in Sources */,
 				31EA86F42BBFEC39003BCBF7 /* MoyaAsyncError.swift in Sources */,
 				CC2F3AC22B54361100508DA5 /* MyPageInfoViewController.swift in Sources */,
 				2DA2080B2B7AFC36006EB9B9 /* ModelSearchResultViewController.swift in Sources */,

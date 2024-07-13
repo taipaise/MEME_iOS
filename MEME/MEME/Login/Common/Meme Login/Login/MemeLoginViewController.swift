@@ -257,7 +257,9 @@ extension MemeLoginViewController {
         signUpButton.rx.tap
             .withUnretained(self)
             .subscribe(onNext: { (self, _) in
-            
+                // TODO: - 임시 이동 코드
+                let coordinator = MemeSignUpCoordinator(navigationController: self.navigationController)
+                coordinator.start()
             })
             .disposed(by: disposeBag)
     }
