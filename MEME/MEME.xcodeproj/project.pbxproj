@@ -219,6 +219,9 @@
 		31EA86F82BBFED30003BCBF7 /* MoyaProvider+Async.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F72BBFED30003BCBF7 /* MoyaProvider+Async.swift */; };
 		31F6F8462B52C7A500EC621D /* NavigationBarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31F6F8452B52C7A500EC621D /* NavigationBarView.xib */; };
 		31F6F8482B52C7B800EC621D /* NavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F6F8472B52C7B800EC621D /* NavigationBarView.swift */; };
+		31F95FDE2C426F79002EE00B /* MemeLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FDD2C426F79002EE00B /* MemeLoginViewController.swift */; };
+		31F95FE12C427697002EE00B /* MemeLoginCoordiantor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FE02C427697002EE00B /* MemeLoginCoordiantor.swift */; };
+		31F95FE32C427ECB002EE00B /* UITextField+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FE22C427ECB002EE00B /* UITextField+.swift */; };
 		31FD2C742BE29B1D003DCB7C /* ArtistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FD2C732BE29B1D003DCB7C /* ArtistCollectionViewCell.swift */; };
 		31FD2C782BE2A347003DCB7C /* PortfolioCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FD2C772BE2A347003DCB7C /* PortfolioCollectionViewCell.swift */; };
 		CC2F3ABC2B5143FF00508DA5 /* ModelMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3ABB2B5143FF00508DA5 /* ModelMyPageViewController.swift */; };
@@ -528,6 +531,9 @@
 		31EA86F72BBFED30003BCBF7 /* MoyaProvider+Async.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MoyaProvider+Async.swift"; sourceTree = "<group>"; };
 		31F6F8452B52C7A500EC621D /* NavigationBarView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = NavigationBarView.xib; sourceTree = "<group>"; };
 		31F6F8472B52C7B800EC621D /* NavigationBarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationBarView.swift; sourceTree = "<group>"; };
+		31F95FDD2C426F79002EE00B /* MemeLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeLoginViewController.swift; sourceTree = "<group>"; };
+		31F95FE02C427697002EE00B /* MemeLoginCoordiantor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MemeLoginCoordiantor.swift; sourceTree = "<group>"; };
+		31F95FE22C427ECB002EE00B /* UITextField+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITextField+.swift"; sourceTree = "<group>"; };
 		31FD2C732BE29B1D003DCB7C /* ArtistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCollectionViewCell.swift; sourceTree = "<group>"; };
 		31FD2C772BE2A347003DCB7C /* PortfolioCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC2F3ABB2B5143FF00508DA5 /* ModelMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMyPageViewController.swift; sourceTree = "<group>"; };
@@ -1118,6 +1124,7 @@
 				319F534F2BCBBC82008D153E /* UICollectionView+.swift */,
 				31CC0DF32BD4221B00B8FCA9 /* CALayer+.swift */,
 				3142B99E2B4D02300066CD5A /* UIFont+.swift */,
+				31F95FE22C427ECB002EE00B /* UITextField+.swift */,
 			);
 			path = extenstions;
 			sourceTree = "<group>";
@@ -1641,6 +1648,7 @@
 			isa = PBXGroup;
 			children = (
 				31C85EEF2B526B930064A6E7 /* Login */,
+				31F95FDC2C426F62002EE00B /* Meme Login */,
 				31C85EEE2B526B8F0064A6E7 /* TermsAgreement */,
 				3169E3E62BC2B7C300550F2E /* Components */,
 				31C85EF12B526BDB0064A6E7 /* RoleSelection */,
@@ -1744,6 +1752,15 @@
 				31EA86F72BBFED30003BCBF7 /* MoyaProvider+Async.swift */,
 			);
 			path = Moya;
+			sourceTree = "<group>";
+		};
+		31F95FDC2C426F62002EE00B /* Meme Login */ = {
+			isa = PBXGroup;
+			children = (
+				31F95FDD2C426F79002EE00B /* MemeLoginViewController.swift */,
+				31F95FE02C427697002EE00B /* MemeLoginCoordiantor.swift */,
+			);
+			path = "Meme Login";
 			sourceTree = "<group>";
 		};
 		31FD2C712BE29AF6003DCB7C /* Views */ = {
@@ -2073,6 +2090,7 @@
 				316A92772B667E7200E4337D /* SetBusinessInfoDetailViewController.swift in Sources */,
 				315FB8602B6DE5860068163C /* KeyChainManager.swift in Sources */,
 				3169E3E52BC2B62100550F2E /* RoleSelectionCoordinator.swift in Sources */,
+				31F95FE12C427697002EE00B /* MemeLoginCoordiantor.swift in Sources */,
 				CCCE56372B81D9FB007555A2 /* ArtistTimeCollectionViewCell.swift in Sources */,
 				3169E3F22BC2D7B700550F2E /* ImagePickerManager.swift in Sources */,
 				3142B9A92B4D06310066CD5A /* ArtistTabBarController.swift in Sources */,
@@ -2244,6 +2262,7 @@
 				319F53582BCC1D6A008D153E /* RegisterCompletionViewModel.swift in Sources */,
 				CC9C38872B808C8E0073A257 /* LogOutDTO.swift in Sources */,
 				315FB8622B6DE5F40068163C /* SecretInfoManager.swift in Sources */,
+				31F95FDE2C426F79002EE00B /* MemeLoginViewController.swift in Sources */,
 				315AC1CA2B70FE60003FD1A1 /* ReservationState.swift in Sources */,
 				CC2F3ABE2B514CDB00508DA5 /* ModelMyPageTableViewCell.swift in Sources */,
 				CCAB5A6B2B6E00A500067FA4 /* ArtistMyPageTableViewCell.swift in Sources */,
@@ -2263,6 +2282,7 @@
 				2DA208012B7AB514006EB9B9 /* SearchAPI.swift in Sources */,
 				316239AA2B81E3F9002D9E2F /* UserDefaultManager.swift in Sources */,
 				CC8CAA052BB44EBA005F1E53 /* DetailReviewDTO.swift in Sources */,
+				31F95FE32C427ECB002EE00B /* UITextField+.swift in Sources */,
 				CCAB5A652B6CFDB300067FA4 /* MyReviewCollectionViewCell.swift in Sources */,
 				CC9C388D2B80F9C80073A257 /* ModelProfileInfoDTO.swift in Sources */,
 				31B413842B6D322500535BB1 /* NetworkProvider.swift in Sources */,
