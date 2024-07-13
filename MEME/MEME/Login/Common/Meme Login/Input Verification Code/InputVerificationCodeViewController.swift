@@ -193,6 +193,14 @@ extension InputVerificationCodeViewController {
                 self.startTimer()
             }
             .disposed(by: disposeBag)
+        
+        nextButton.rx.tap
+            .withUnretained(self)
+            .subscribe { (self, _) in
+                let coordinator = ResetPasswordCoordinator(navigationController: self.navigationController)
+                coordinator.start()
+            }
+            .disposed(by: disposeBag)
     }
     
     private func bindViewModel() {

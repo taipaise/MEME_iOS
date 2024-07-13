@@ -228,6 +228,9 @@
 		31F95FF02C42AAEE002EE00B /* InputVerificationCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FEF2C42AAEE002EE00B /* InputVerificationCodeViewController.swift */; };
 		31F95FF22C42AB21002EE00B /* InputVerificationCodeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FF12C42AB21002EE00B /* InputVerificationCodeViewModel.swift */; };
 		31F95FF42C42AB2F002EE00B /* InputVerificationCodeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FF32C42AB2F002EE00B /* InputVerificationCodeCoordinator.swift */; };
+		31F95FF72C42C52F002EE00B /* ResetPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FF62C42C52F002EE00B /* ResetPasswordViewController.swift */; };
+		31F95FF92C42C74C002EE00B /* ResetPasswordViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FF82C42C74C002EE00B /* ResetPasswordViewModel.swift */; };
+		31F95FFB2C42C758002EE00B /* ResetPasswordCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31F95FFA2C42C758002EE00B /* ResetPasswordCoordinator.swift */; };
 		31FD2C742BE29B1D003DCB7C /* ArtistCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FD2C732BE29B1D003DCB7C /* ArtistCollectionViewCell.swift */; };
 		31FD2C782BE2A347003DCB7C /* PortfolioCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31FD2C772BE2A347003DCB7C /* PortfolioCollectionViewCell.swift */; };
 		CC2F3ABC2B5143FF00508DA5 /* ModelMyPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CC2F3ABB2B5143FF00508DA5 /* ModelMyPageViewController.swift */; };
@@ -546,6 +549,9 @@
 		31F95FEF2C42AAEE002EE00B /* InputVerificationCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputVerificationCodeViewController.swift; sourceTree = "<group>"; };
 		31F95FF12C42AB21002EE00B /* InputVerificationCodeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputVerificationCodeViewModel.swift; sourceTree = "<group>"; };
 		31F95FF32C42AB2F002EE00B /* InputVerificationCodeCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InputVerificationCodeCoordinator.swift; sourceTree = "<group>"; };
+		31F95FF62C42C52F002EE00B /* ResetPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewController.swift; sourceTree = "<group>"; };
+		31F95FF82C42C74C002EE00B /* ResetPasswordViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordViewModel.swift; sourceTree = "<group>"; };
+		31F95FFA2C42C758002EE00B /* ResetPasswordCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResetPasswordCoordinator.swift; sourceTree = "<group>"; };
 		31FD2C732BE29B1D003DCB7C /* ArtistCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistCollectionViewCell.swift; sourceTree = "<group>"; };
 		31FD2C772BE2A347003DCB7C /* PortfolioCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PortfolioCollectionViewCell.swift; sourceTree = "<group>"; };
 		CC2F3ABB2B5143FF00508DA5 /* ModelMyPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelMyPageViewController.swift; sourceTree = "<group>"; };
@@ -1772,6 +1778,7 @@
 				31F95FE72C4285D8002EE00B /* Login */,
 				31F95FE52C428077002EE00B /* Input Email */,
 				31F95FEE2C42AACE002EE00B /* Input Verification Code */,
+				31F95FF52C42C519002EE00B /* Reset password */,
 			);
 			path = "Meme Login";
 			sourceTree = "<group>";
@@ -1803,6 +1810,16 @@
 				31F95FF32C42AB2F002EE00B /* InputVerificationCodeCoordinator.swift */,
 			);
 			path = "Input Verification Code";
+			sourceTree = "<group>";
+		};
+		31F95FF52C42C519002EE00B /* Reset password */ = {
+			isa = PBXGroup;
+			children = (
+				31F95FF62C42C52F002EE00B /* ResetPasswordViewController.swift */,
+				31F95FF82C42C74C002EE00B /* ResetPasswordViewModel.swift */,
+				31F95FFA2C42C758002EE00B /* ResetPasswordCoordinator.swift */,
+			);
+			path = "Reset password";
 			sourceTree = "<group>";
 		};
 		31FD2C712BE29AF6003DCB7C /* Views */ = {
@@ -2207,6 +2224,7 @@
 				CCAB5A612B67B6C100067FA4 /* ModelDetailSettingView.swift in Sources */,
 				2DA208092B7ABE43006EB9B9 /* SearchDTO.swift in Sources */,
 				2D106F472B7025DB00F3C253 /* ModelReservationVisitLocationView.swift in Sources */,
+				31F95FFB2C42C758002EE00B /* ResetPasswordCoordinator.swift in Sources */,
 				316A927C2B6688F700E4337D /* Week.swift in Sources */,
 				CCB3190C2B82A5D3003B4738 /* ArtistProfileInfoAPI.swift in Sources */,
 				316239802B81B399002D9E2F /* ImageManager.swift in Sources */,
@@ -2251,6 +2269,7 @@
 				317D98752B7E0C68009BBB95 /* AtristProfileInfo.swift in Sources */,
 				3101C72A2B81F77200460689 /* SignUpProfileInfo.swift in Sources */,
 				315AC1C32B70CDE9003FD1A1 /* ModelReservationViewController.swift in Sources */,
+				31F95FF72C42C52F002EE00B /* ResetPasswordViewController.swift in Sources */,
 				2D62E25B2B54A658004E8299 /* RecentSearchViewCell.swift in Sources */,
 				CC8CAA0D2BB4FDE4005F1E53 /* PostReviewDTO.swift in Sources */,
 				3169E3E92BC2B8E400550F2E /* SetNameCoordinator.swift in Sources */,
@@ -2368,6 +2387,7 @@
 				CCCE56232B81D9BF007555A2 /* ArtistInfoViewController.swift in Sources */,
 				CC9C38932B81B3830073A257 /* ContactDTO.swift in Sources */,
 				31C0B5422BCBAB8900758EE9 /* ModelDetailInfoCollectionViewCell.swift in Sources */,
+				31F95FF92C42C74C002EE00B /* ResetPasswordViewModel.swift in Sources */,
 				31B65E4F2B6E229000628C68 /* ReservationManager.swift in Sources */,
 				2D4B7C262B5F17E7001E1B09 /* TotalStarRatingView.swift in Sources */,
 				CC9C38792B7FEB0E0073A257 /* ReviewListManager.swift in Sources */,
