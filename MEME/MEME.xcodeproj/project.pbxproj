@@ -77,6 +77,10 @@
 		2DD60FFB2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD60FFA2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift */; };
 		2DD60FFF2BC5AE5A00B362F1 /* ModelHomeViewItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD60FFE2BC5AE5A00B362F1 /* ModelHomeViewItem.swift */; };
 		2DD610022BC5AE7400B362F1 /* ModelHomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2DD610012BC5AE7400B362F1 /* ModelHomeViewModel.swift */; };
+		3100D06E2C43995C00A2802D /* ScheduleHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3100D06D2C43995C00A2802D /* ScheduleHeaderView.swift */; };
+		3100D0702C4399A300A2802D /* ScheduleTimeTableCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3100D06F2C4399A300A2802D /* ScheduleTimeTableCollectionViewCell.swift */; };
+		3100D0732C439C6100A2802D /* ScheduleManagementViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3100D0722C439C6100A2802D /* ScheduleManagementViewModel.swift */; };
+		3100D0762C439D4600A2802D /* ReservationOfWeek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3100D0752C439D4600A2802D /* ReservationOfWeek.swift */; };
 		3101C72A2B81F77200460689 /* SignUpProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3101C7292B81F77200460689 /* SignUpProfileInfo.swift */; };
 		312B304C2B550FF9008D17FC /* Pretendard-Black.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74F02B52DE1900CACF20 /* Pretendard-Black.otf */; };
 		312B304D2B550FF9008D17FC /* Pretendard-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = 314F74EE2B52DE1900CACF20 /* Pretendard-Light.otf */; };
@@ -184,6 +188,7 @@
 		317D98772B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D98762B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift */; };
 		317D98792B7E16B5009BBB95 /* MakeUpLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D98782B7E16B5009BBB95 /* MakeUpLocation.swift */; };
 		317D987B2B7E1810009BBB95 /* MakeUpCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 317D987A2B7E1810009BBB95 /* MakeUpCategory.swift */; };
+		319BEBFC2C43B31D00E831BC /* Collection+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319BEBFB2C43B31D00E831BC /* Collection+.swift */; };
 		319F53502BCBBC82008D153E /* UICollectionView+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F534F2BCBBC82008D153E /* UICollectionView+.swift */; };
 		319F53522BCC18EB008D153E /* SignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F53512BCC18EB008D153E /* SignUpCoordinator.swift */; };
 		319F53552BCC1BDE008D153E /* SignUpCompletionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F53542BCC1BDE008D153E /* SignUpCompletionCoordinator.swift */; };
@@ -213,6 +218,9 @@
 		31C0B5402BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C0B53F2BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift */; };
 		31C0B5422BCBAB8900758EE9 /* ModelDetailInfoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31C0B5412BCBAB8900758EE9 /* ModelDetailInfoCollectionViewCell.swift */; };
 		31CC0DF42BD4221B00B8FCA9 /* CALayer+.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CC0DF32BD4221B00B8FCA9 /* CALayer+.swift */; };
+		31CC85362C438E880030E7C9 /* ScheduleManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CC85342C438E880030E7C9 /* ScheduleManagementViewController.swift */; };
+		31CC85372C438E880030E7C9 /* ScheduleManagementViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 31CC85352C438E880030E7C9 /* ScheduleManagementViewController.xib */; };
+		31CC853A2C438F7B0030E7C9 /* ScheduleSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31CC85392C438F7B0030E7C9 /* ScheduleSegmentedControl.swift */; };
 		31EA86F22BBFEC20003BCBF7 /* Moya+Wrapping.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F12BBFEC20003BCBF7 /* Moya+Wrapping.swift */; };
 		31EA86F42BBFEC39003BCBF7 /* MoyaAsyncError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F32BBFEC39003BCBF7 /* MoyaAsyncError.swift */; };
 		31EA86F62BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31EA86F52BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift */; };
@@ -395,6 +403,10 @@
 		2DD60FFA2BC5AE1700B362F1 /* RecommendHeaderReusableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecommendHeaderReusableView.swift; sourceTree = "<group>"; };
 		2DD60FFE2BC5AE5A00B362F1 /* ModelHomeViewItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHomeViewItem.swift; sourceTree = "<group>"; };
 		2DD610012BC5AE7400B362F1 /* ModelHomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelHomeViewModel.swift; sourceTree = "<group>"; };
+		3100D06D2C43995C00A2802D /* ScheduleHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleHeaderView.swift; sourceTree = "<group>"; };
+		3100D06F2C4399A300A2802D /* ScheduleTimeTableCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleTimeTableCollectionViewCell.swift; sourceTree = "<group>"; };
+		3100D0722C439C6100A2802D /* ScheduleManagementViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleManagementViewModel.swift; sourceTree = "<group>"; };
+		3100D0752C439D4600A2802D /* ReservationOfWeek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationOfWeek.swift; sourceTree = "<group>"; };
 		3101C7292B81F77200460689 /* SignUpProfileInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpProfileInfo.swift; sourceTree = "<group>"; };
 		312DF7612B669CC30060BDF0 /* TimeCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeCollectionViewCell.swift; sourceTree = "<group>"; };
 		312DF7632B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeHeaderSupplementaryView.swift; sourceTree = "<group>"; };
@@ -492,6 +504,7 @@
 		317D98762B7E0C9A009BBB95 /* ArtistProfileInfoBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistProfileInfoBuilder.swift; sourceTree = "<group>"; };
 		317D98782B7E16B5009BBB95 /* MakeUpLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeUpLocation.swift; sourceTree = "<group>"; };
 		317D987A2B7E1810009BBB95 /* MakeUpCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MakeUpCategory.swift; sourceTree = "<group>"; };
+		319BEBFB2C43B31D00E831BC /* Collection+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Collection+.swift"; sourceTree = "<group>"; };
 		319F534F2BCBBC82008D153E /* UICollectionView+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UICollectionView+.swift"; sourceTree = "<group>"; };
 		319F53512BCC18EB008D153E /* SignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinator.swift; sourceTree = "<group>"; };
 		319F53542BCC1BDE008D153E /* SignUpCompletionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompletionCoordinator.swift; sourceTree = "<group>"; };
@@ -522,6 +535,9 @@
 		31C0B53F2BCBAB7900758EE9 /* ModelDetailInfoHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDetailInfoHeaderView.swift; sourceTree = "<group>"; };
 		31C0B5412BCBAB8900758EE9 /* ModelDetailInfoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelDetailInfoCollectionViewCell.swift; sourceTree = "<group>"; };
 		31CC0DF32BD4221B00B8FCA9 /* CALayer+.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CALayer+.swift"; sourceTree = "<group>"; };
+		31CC85342C438E880030E7C9 /* ScheduleManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleManagementViewController.swift; sourceTree = "<group>"; };
+		31CC85352C438E880030E7C9 /* ScheduleManagementViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ScheduleManagementViewController.xib; sourceTree = "<group>"; };
+		31CC85392C438F7B0030E7C9 /* ScheduleSegmentedControl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScheduleSegmentedControl.swift; sourceTree = "<group>"; };
 		31EA86F12BBFEC20003BCBF7 /* Moya+Wrapping.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Moya+Wrapping.swift"; sourceTree = "<group>"; };
 		31EA86F32BBFEC39003BCBF7 /* MoyaAsyncError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaAsyncError.swift; sourceTree = "<group>"; };
 		31EA86F52BBFEC5A003BCBF7 /* MoyaAsyncRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MoyaAsyncRequest.swift; sourceTree = "<group>"; };
@@ -1047,6 +1063,24 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		3100D06C2C43994200A2802D /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				31CC85392C438F7B0030E7C9 /* ScheduleSegmentedControl.swift */,
+				3100D06D2C43995C00A2802D /* ScheduleHeaderView.swift */,
+				3100D06F2C4399A300A2802D /* ScheduleTimeTableCollectionViewCell.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		3100D0742C439D1400A2802D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				3100D0752C439D4600A2802D /* ReservationOfWeek.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		3142B94C2B4CFFED0066CD5A = {
 			isa = PBXGroup;
 			children = (
@@ -1118,6 +1152,7 @@
 				319F534F2BCBBC82008D153E /* UICollectionView+.swift */,
 				31CC0DF32BD4221B00B8FCA9 /* CALayer+.swift */,
 				3142B99E2B4D02300066CD5A /* UIFont+.swift */,
+				319BEBFB2C43B31D00E831BC /* Collection+.swift */,
 			);
 			path = extenstions;
 			sourceTree = "<group>";
@@ -1178,6 +1213,7 @@
 		3142B9AB2B4D071E0066CD5A /* Artist */ = {
 			isa = PBXGroup;
 			children = (
+				31CC85332C438DCA0030E7C9 /* Schedule Management */,
 				093F9F022BBD426B009074B2 /* SingleReservationManageView */,
 				091CCCD62B639E4800ADD21C /* ArtistData.swift */,
 				098C48C52BB4ADE600756C55 /* ManagementReservation */,
@@ -1735,6 +1771,26 @@
 			path = RegistrationCompletion;
 			sourceTree = "<group>";
 		};
+		31CC85332C438DCA0030E7C9 /* Schedule Management */ = {
+			isa = PBXGroup;
+			children = (
+				31CC85382C438F3D0030E7C9 /* Views */,
+			);
+			path = "Schedule Management";
+			sourceTree = "<group>";
+		};
+		31CC85382C438F3D0030E7C9 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				31CC85342C438E880030E7C9 /* ScheduleManagementViewController.swift */,
+				31CC85352C438E880030E7C9 /* ScheduleManagementViewController.xib */,
+				3100D06C2C43994200A2802D /* Subviews */,
+				3100D0722C439C6100A2802D /* ScheduleManagementViewModel.swift */,
+				3100D0742C439D1400A2802D /* Models */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
 		31EA86F02BBFE4F5003BCBF7 /* Moya */ = {
 			isa = PBXGroup;
 			children = (
@@ -2004,6 +2060,7 @@
 				094884DC2B59915500C233E0 /* SingleReservationManageViewController.xib in Resources */,
 				3142B9652B4CFFED0066CD5A /* LaunchScreen.storyboard in Resources */,
 				095742522B66153E0011B580 /* ArtistPortfolioEditingViewController.xib in Resources */,
+				31CC85372C438E880030E7C9 /* ScheduleManagementViewController.xib in Resources */,
 				09275E8A2B528A610033EF34 /* ArtistReservationStatusTableViewCell.xib in Resources */,
 				3142B9622B4CFFED0066CD5A /* Assets.xcassets in Resources */,
 				09275E822B518D150033EF34 /* ArtistHomeViewController.xib in Resources */,
@@ -2104,7 +2161,10 @@
 				3162DF382BB55B3D00EB283C /* CheckUserDTO.swift in Sources */,
 				31EA86F22BBFEC20003BCBF7 /* Moya+Wrapping.swift in Sources */,
 				2D6F59B32B5C397400CA883A /* SortOptionsViewController.swift in Sources */,
+				3100D0762C439D4600A2802D /* ReservationOfWeek.swift in Sources */,
+				3100D0702C4399A300A2802D /* ScheduleTimeTableCollectionViewCell.swift in Sources */,
 				2D6D2CE32BB35013007EF440 /* ModelCancelReservationViewController.swift in Sources */,
+				31CC85362C438E880030E7C9 /* ScheduleManagementViewController.swift in Sources */,
 				CC9C385D2B7BCC370073A257 /* ModelProfileDTO.swift in Sources */,
 				2D6F59B82B5C4FB100CA883A /* SortOptionIconView.swift in Sources */,
 				2D5C05A42B60433000EDC69F /* ModelReservationDetailViewController.swift in Sources */,
@@ -2215,6 +2275,7 @@
 				2D62E2512B548BAB004E8299 /* ModelSearchViewController.swift in Sources */,
 				312DF7642B66AF590060BDF0 /* TimeHeaderSupplementaryView.swift in Sources */,
 				315FB8592B6DE1B00068163C /* AuthAPI.swift in Sources */,
+				31CC853A2C438F7B0030E7C9 /* ScheduleSegmentedControl.swift in Sources */,
 				3142B9AF2B4D08380066CD5A /* ArtistHomeViewController.swift in Sources */,
 				317D98702B7E01F7009BBB95 /* Gender.swift in Sources */,
 				CCAB5A532B66CD9F00067FA4 /* MyReviewViewController.swift in Sources */,
@@ -2246,7 +2307,9 @@
 				315FB8622B6DE5F40068163C /* SecretInfoManager.swift in Sources */,
 				315AC1CA2B70FE60003FD1A1 /* ReservationState.swift in Sources */,
 				CC2F3ABE2B514CDB00508DA5 /* ModelMyPageTableViewCell.swift in Sources */,
+				3100D0732C439C6100A2802D /* ScheduleManagementViewModel.swift in Sources */,
 				CCAB5A6B2B6E00A500067FA4 /* ArtistMyPageTableViewCell.swift in Sources */,
+				319BEBFC2C43B31D00E831BC /* Collection+.swift in Sources */,
 				CC9C38532B75520F0073A257 /* MyPageManager.swift in Sources */,
 				CC2F3ABC2B5143FF00508DA5 /* ModelMyPageViewController.swift in Sources */,
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,
@@ -2254,6 +2317,7 @@
 				3156D2032B69446E00559820 /* NetworkError.swift in Sources */,
 				2D4B7C242B5F1026001E1B09 /* ShowReviewView.swift in Sources */,
 				2D4B7C202B5EFA38001E1B09 /* ModelReservationSegmentedControl.swift in Sources */,
+				3100D06E2C43995C00A2802D /* ScheduleHeaderView.swift in Sources */,
 				317720F82BC298CE00A1928A /* TermsAgreementViewModel.swift in Sources */,
 				3142B99D2B4D021A0066CD5A /* UIView+.swift in Sources */,
 				CC9C388F2B81B3530073A257 /* ContactAPI.swift in Sources */,

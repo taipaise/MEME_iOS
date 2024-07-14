@@ -13,6 +13,7 @@ enum TabBarItemType: Int, CaseIterable {
     case modelMypage //추후 아티스트 마이페이지와 같다면 수정될 수 있음
     case artistHome
     case artistReservation
+    case artistSchedule
     case artistMypage
 }
 
@@ -25,6 +26,8 @@ extension TabBarItemType {
             return "홈"
         case .artistReservation, .modelReservation:
             return "예약"
+        case .artistSchedule:
+            return "일정"
         case .artistMypage, .modelMypage:
             return "MY"
         }
@@ -33,22 +36,27 @@ extension TabBarItemType {
     var unselectedImage: UIImage? {
         switch self {
         case .modelHome, .artistHome:
-            return UIImage(named: "Home")
+            return .home
         case .modelReservation, .artistReservation:
-            return UIImage(named: "Reservation")
+            return .reservation
+        case .artistSchedule:
+            return .schedule
         case .modelMypage, .artistMypage:
-            return UIImage(named: "My")
+            return .my
+        
         }
     }
         
     var selectedImage: UIImage? {
         switch self {
         case .modelHome, .artistHome:
-            return UIImage(named: "selectedHome")
+            return .selectedHome
         case .modelReservation, .artistReservation:
-            return UIImage(named: "selectedReservation")
+            return .selectedReservation
         case .modelMypage, .artistMypage:
-            return UIImage(named: "selectedMy")
+            return .selectedMy
+        case .artistSchedule:
+            return .selectedSchedule
         }
     }
     
