@@ -188,6 +188,10 @@
 		319F53522BCC18EB008D153E /* SignUpCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F53512BCC18EB008D153E /* SignUpCoordinator.swift */; };
 		319F53552BCC1BDE008D153E /* SignUpCompletionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F53542BCC1BDE008D153E /* SignUpCompletionCoordinator.swift */; };
 		319F53582BCC1D6A008D153E /* RegisterCompletionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 319F53572BCC1D6A008D153E /* RegisterCompletionViewModel.swift */; };
+		31A399B92C4562B7005D7FE8 /* NotificationType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A399B22C456282005D7FE8 /* NotificationType.swift */; };
+		31A399BA2C4562BE005D7FE8 /* NotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A399B62C456282005D7FE8 /* NotificationViewController.swift */; };
+		31A399BB2C4562C2005D7FE8 /* NotificationCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A399B42C456282005D7FE8 /* NotificationCollectionViewCell.swift */; };
+		31A399BF2C456500005D7FE8 /* NotificationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31A399BE2C456500005D7FE8 /* NotificationViewModel.swift */; };
 		31AB17FE2B9BF1CB0049E02D /* RxCocoa in Frameworks */ = {isa = PBXBuildFile; productRef = 31AB17FD2B9BF1CB0049E02D /* RxCocoa */; };
 		31AB18002B9BF1CB0049E02D /* RxRelay in Frameworks */ = {isa = PBXBuildFile; productRef = 31AB17FF2B9BF1CB0049E02D /* RxRelay */; };
 		31AB18022B9BF95A0049E02D /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 31AB18012B9BF95A0049E02D /* ViewModel.swift */; };
@@ -496,6 +500,10 @@
 		319F53512BCC18EB008D153E /* SignUpCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCoordinator.swift; sourceTree = "<group>"; };
 		319F53542BCC1BDE008D153E /* SignUpCompletionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpCompletionCoordinator.swift; sourceTree = "<group>"; };
 		319F53572BCC1D6A008D153E /* RegisterCompletionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterCompletionViewModel.swift; sourceTree = "<group>"; };
+		31A399B22C456282005D7FE8 /* NotificationType.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationType.swift; sourceTree = "<group>"; };
+		31A399B42C456282005D7FE8 /* NotificationCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationCollectionViewCell.swift; sourceTree = "<group>"; };
+		31A399B62C456282005D7FE8 /* NotificationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewController.swift; sourceTree = "<group>"; };
+		31A399BE2C456500005D7FE8 /* NotificationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationViewModel.swift; sourceTree = "<group>"; };
 		31AB18012B9BF95A0049E02D /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		31AD6B962C3D7DA600329636 /* AppDelegate+Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AppDelegate+Notification.swift"; sourceTree = "<group>"; };
 		31AD6B982C3D7F0C00329636 /* MEMEDebug.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = MEMEDebug.entitlements; sourceTree = "<group>"; };
@@ -1087,6 +1095,7 @@
 				3142B9992B4D01FB0066CD5A /* extenstions */,
 				3142B9A02B4D036D0066CD5A /* Core */,
 				3142B9A52B4D04BD0066CD5A /* Login */,
+				31A399B82C456282005D7FE8 /* Common */,
 				3142B9AB2B4D071E0066CD5A /* Artist */,
 				3142B9AA2B4D07170066CD5A /* Model */,
 			);
@@ -1637,6 +1646,57 @@
 			path = ViewModel;
 			sourceTree = "<group>";
 		};
+		31A399B32C456282005D7FE8 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				31A399B22C456282005D7FE8 /* NotificationType.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		31A399B52C456282005D7FE8 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				31A399B42C456282005D7FE8 /* NotificationCollectionViewCell.swift */,
+			);
+			path = Subviews;
+			sourceTree = "<group>";
+		};
+		31A399B72C456282005D7FE8 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				31A399BC2C4564BE005D7FE8 /* Views */,
+				31A399BD2C4564F0005D7FE8 /* ViewModel */,
+				31A399B32C456282005D7FE8 /* Model */,
+			);
+			path = Notification;
+			sourceTree = "<group>";
+		};
+		31A399B82C456282005D7FE8 /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				31A399B72C456282005D7FE8 /* Notification */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		31A399BC2C4564BE005D7FE8 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				31A399B62C456282005D7FE8 /* NotificationViewController.swift */,
+				31A399B52C456282005D7FE8 /* Subviews */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		31A399BD2C4564F0005D7FE8 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				31A399BE2C456500005D7FE8 /* NotificationViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		31B263592B57EEBC00304FBE /* Common */ = {
 			isa = PBXGroup;
 			children = (
@@ -2085,6 +2145,7 @@
 				CCB319082B82908A003B4738 /* ArtistProfileInfoManager.swift in Sources */,
 				2D62E23E2B5428CC004E8299 /* ModelNonReservationViewCell.swift in Sources */,
 				31CC0DF42BD4221B00B8FCA9 /* CALayer+.swift in Sources */,
+				31A399BB2C4562C2005D7FE8 /* NotificationCollectionViewCell.swift in Sources */,
 				CC8CAA112BB50B01005F1E53 /* DeleteReviewManager.swift in Sources */,
 				CC8CAA092BB4E6DB005F1E53 /* PostReviewAPI.swift in Sources */,
 				316A926D2B66705B00E4337D /* BusinessLocationCollectionViewCell.swift in Sources */,
@@ -2149,6 +2210,7 @@
 				CCB3190C2B82A5D3003B4738 /* ArtistProfileInfoAPI.swift in Sources */,
 				316239802B81B399002D9E2F /* ImageManager.swift in Sources */,
 				315AC1CC2B70FE76003FD1A1 /* DayOfWeek.swift in Sources */,
+				31A399B92C4562B7005D7FE8 /* NotificationType.swift in Sources */,
 				317D98792B7E16B5009BBB95 /* MakeUpLocation.swift in Sources */,
 				317D986A2B7DEDC5009BBB95 /* WorkExperience.swift in Sources */,
 				2D6F59B12B5BF92600CA883A /* ModelReservationTypeViewCell.swift in Sources */,
@@ -2222,6 +2284,7 @@
 				315EE2D02B66566A0042A082 /* DetailSettingView.swift in Sources */,
 				CC513CD82BBE5C8A007DAF0F /* ReviewViewController.swift in Sources */,
 				CC9C38592B7BC8D10073A257 /* InterestArtistAPI.swift in Sources */,
+				31A399BA2C4562BE005D7FE8 /* NotificationViewController.swift in Sources */,
 				315EE2D02B66566A0042A082 /* DetailSettingView.swift in Sources */,
 				2DA208112B7CB476006EB9B9 /* ReservationDTO.swift in Sources */,
 				2D6F59BF2B5C7D3300CA883A /* ModelReservationTypeButton.swift in Sources */,
@@ -2231,6 +2294,7 @@
 				CC9C38502B7550070073A257 /* MyPageAPI.swift in Sources */,
 				CC8CAA012BB44E90005F1E53 /* DetailReviewAPI.swift in Sources */,
 				315FB8572B6DE1480068163C /* AuthManager.swift in Sources */,
+				31A399BF2C456500005D7FE8 /* NotificationViewModel.swift in Sources */,
 				2DA208052B7AB5F3006EB9B9 /* SearchCategory.swift in Sources */,
 				3142B99F2B4D02300066CD5A /* UIFont+.swift in Sources */,
 				3142B9A22B4D037C0066CD5A /* NavigationController.swift in Sources */,
