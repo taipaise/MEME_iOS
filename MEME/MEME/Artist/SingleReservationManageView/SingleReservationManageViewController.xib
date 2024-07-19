@@ -36,7 +36,9 @@
                 <outlet property="modelPersonalColorLabel" destination="Hmo-qP-gHG" id="HwX-tI-eHl"/>
                 <outlet property="modelSkinTypeLabel" destination="DYp-kl-T2i" id="EeK-Cj-9Un"/>
                 <outlet property="reservationDateLabel" destination="XZn-AB-GXd" id="3tj-Yb-zga"/>
+                <outlet property="reservationEmailLabel" destination="Q2H-2i-PhJ" id="UFV-pk-m6o"/>
                 <outlet property="reservationPlaceLabel" destination="XYn-bu-WIS" id="wAf-ki-Cmz"/>
+                <outlet property="reservationPriceLabel" destination="cCs-ap-i52" id="0wZ-IY-FBF"/>
                 <outlet property="reservationTimeLabel" destination="esg-qF-MPf" id="caU-pM-HFI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
