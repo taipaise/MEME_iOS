@@ -304,15 +304,15 @@ extension ManagementReservationsViewController: UICollectionViewDelegateFlowLayo
                     navigationController?.pushViewController(vc, animated: true)
                 }else{
                     if reservationData.status == "EXPECTED" {
-                        let vc = SingleReservationManageViewController()
-                        if formatDateString(op: 1, reservationData.reservationDate) == formatDateString(op: 1, DateFormatter().string(from: Date())) {
-                            // 오늘
-                            vc.isToday = true
-                        }
-                        vc.reservationData = reservationData
-                        vc.reservationTimeString = convertTimeString(vc.reservationData.reservationDayOfWeekAndTime.values.first!)
-                        vc.reservationDateString = formatDateString(op: 3,vc.reservationData.reservationDate)
-                        navigationController?.pushViewController(vc, animated: true)
+//                        let vc = SingleReservationManageViewController()
+//                        if formatDateString(op: 1, reservationData.reservationDate) == formatDateString(op: 1, DateFormatter().string(from: Date())) {
+//                            // 오늘
+//                            vc.isToday = true
+//                        }
+//                        vc.reservationData = reservationData
+//                        vc.reservationTimeString = convertTimeString(vc.reservationData.reservationDayOfWeekAndTime.values.first!)
+//                        vc.reservationDateString = formatDateString(op: 3,vc.reservationData.reservationDate)
+//                        navigationController?.pushViewController(vc, animated: true)
                     }
                 }
             default:
