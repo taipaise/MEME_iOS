@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
         <capability name="Named colors" minToolsVersion="9.0"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -21,6 +21,7 @@
             <connections>
                 <outlet property="appleLoginButton" destination="c5T-0a-Job" id="FcM-mL-aPP"/>
                 <outlet property="kakaoLoginButton" destination="Eyl-2K-fah" id="Rik-L0-qSe"/>
+                <outlet property="memeLoginButton" destination="vCa-UF-kzQ" id="2ID-W8-Cf4"/>
                 <outlet property="view" destination="iN0-l3-epB" id="esL-MW-ilC"/>
             </connections>
         </placeholder>
@@ -42,19 +43,21 @@
                     <nil key="textColor"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eyl-2K-fah">
-                    <rect key="frame" x="24" y="581" width="345" height="45"/>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vCa-UF-kzQ" userLabel="meme login button">
+                    <rect key="frame" x="24" y="511" width="345" height="45"/>
                     <constraints>
-                        <constraint firstAttribute="height" constant="45" id="T2P-cC-2VK"/>
+                        <constraint firstAttribute="height" constant="45" id="XdD-UH-1oM"/>
                     </constraints>
+                    <state key="normal" title="Button"/>
+                    <buttonConfiguration key="configuration" style="plain" image="memeLoginButton" title=""/>
+                </button>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Eyl-2K-fah" userLabel="kakao login button">
+                    <rect key="frame" x="24" y="566" width="345" height="59"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="kakaoLoginButton" title=""/>
                 </button>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5T-0a-Job">
-                    <rect key="frame" x="24" y="634" width="345" height="45"/>
-                    <constraints>
-                        <constraint firstAttribute="height" constant="45" id="yPn-iA-9bb"/>
-                    </constraints>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="c5T-0a-Job" userLabel="apple login button">
+                    <rect key="frame" x="24" y="635" width="345" height="59"/>
                     <state key="normal" title="Button"/>
                     <buttonConfiguration key="configuration" style="plain" image="appleLoginButton" title=""/>
                 </button>
@@ -68,19 +71,21 @@
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="Eyl-2K-fah" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="02n-h9-a4R"/>
-                <constraint firstItem="c5T-0a-Job" firstAttribute="top" secondItem="Eyl-2K-fah" secondAttribute="bottom" constant="8" symbolic="YES" id="7iY-9V-Dc3"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="c5T-0a-Job" secondAttribute="bottom" constant="124" id="2uY-Sh-wMr"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="vCa-UF-kzQ" secondAttribute="trailing" constant="24" id="4ZK-la-Qj8"/>
+                <constraint firstItem="c5T-0a-Job" firstAttribute="top" secondItem="Eyl-2K-fah" secondAttribute="bottom" constant="10" id="7iY-9V-Dc3"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="c5T-0a-Job" secondAttribute="trailing" constant="24" id="8WP-Cg-mOl"/>
                 <constraint firstItem="2w2-nz-b84" firstAttribute="top" secondItem="cb4-Gw-KaC" secondAttribute="bottom" constant="15" id="8fz-ZL-sPw"/>
                 <constraint firstItem="Gef-Aq-XcI" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="9Mq-3x-kU0"/>
                 <constraint firstItem="cb4-Gw-KaC" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="166" id="CeB-rN-8oW"/>
                 <constraint firstItem="Eyl-2K-fah" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="JnD-M9-70v"/>
                 <constraint firstItem="2w2-nz-b84" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="WkR-s6-E4F"/>
+                <constraint firstItem="Eyl-2K-fah" firstAttribute="top" secondItem="vCa-UF-kzQ" secondAttribute="bottom" constant="10" id="WsP-mr-hJu"/>
                 <constraint firstItem="Gef-Aq-XcI" firstAttribute="top" secondItem="2w2-nz-b84" secondAttribute="bottom" constant="15" id="X3b-ZS-rCR"/>
+                <constraint firstItem="vCa-UF-kzQ" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="aeN-Td-sbi"/>
                 <constraint firstItem="c5T-0a-Job" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="hlU-6H-lBg"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="Eyl-2K-fah" secondAttribute="trailing" constant="24" id="jw9-KC-ojS"/>
                 <constraint firstItem="cb4-Gw-KaC" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="p8f-vM-FxF"/>
-                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="c5T-0a-Job" secondAttribute="bottom" constant="139" id="ue7-Kr-kqJ"/>
                 <constraint firstItem="c5T-0a-Job" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" constant="24" id="x4a-Zp-1Gh"/>
             </constraints>
             <point key="canvasLocation" x="130.53435114503816" y="-11.267605633802818"/>
@@ -90,6 +95,7 @@
         <image name="appleLoginButton" width="300" height="45"/>
         <image name="kakaoLoginButton" width="300" height="45"/>
         <image name="logo" width="161.66667175292969" height="100.66666412353516"/>
+        <image name="memeLoginButton" width="300" height="46"/>
         <namedColor name="MainBold">
             <color red="0.98431372549019602" green="0.3843137254901961" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
