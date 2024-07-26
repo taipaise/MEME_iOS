@@ -27,6 +27,7 @@ class SingleReservationManageViewController: UIViewController {
     @IBOutlet weak var reservationPlaceLabel: UILabel!
     @IBOutlet weak var reservationPriceLabel: UILabel!
     @IBOutlet weak var reservationEmailLabel: UILabel!
+    @IBOutlet weak var modelInfoLabel: UILabel!
     
     //MARK: - Properties
     private var reservationData: ReservationDetailData!
@@ -53,6 +54,7 @@ class SingleReservationManageViewController: UIViewController {
         cancelBarView.layer.cornerRadius=10
         confirmReservationBarView.layer.cornerRadius=10
         
+        modelInfoLabel.text = KeyChainManager.read(forkey: .role) == RoleType.ARTIST.rawValue ? "모델 정보" : "나의 정보"
         modelInfoFrameView.layer.borderColor = UIColor.mainBold.cgColor
         modelInfoFrameView.layer.borderWidth = 1.3
         

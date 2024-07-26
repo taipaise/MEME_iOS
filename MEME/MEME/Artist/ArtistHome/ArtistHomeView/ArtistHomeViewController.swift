@@ -30,6 +30,7 @@ class ArtistHomeViewController: UIViewController {
         artistID = getArtistID()
         profileUISet()
         reservationUISet()
+        filterReservations(reservationData: dummyReservations)
     }
     override func viewWillAppear(_ animated: Bool) {
         getArtistProfile(artistID)
@@ -37,9 +38,9 @@ class ArtistHomeViewController: UIViewController {
     }
     //MARK: UI Setting functions
     private func profileUISet(){
-        profileComplete = artistProfileData?.region != nil && artistProfileData?.shopLocation != nil && artistProfileData?.specialization != nil
+//        profileComplete = artistProfileData?.region != nil && artistProfileData?.shopLocation != nil && artistProfileData?.specialization != nil
         // 프로필 완성하러 가기 뷰
-        noProfileView.isHidden = !profileComplete
+        noProfileView.isHidden = profileComplete
         if profileComplete{
             // 프로필 정보 라벨
             artistHomeProfileLabel.text = "안녕하세요,\n\(artistProfileData?.nickname) 님!\n오늘 예약 \("예약 건수")건이 있어요."
@@ -67,7 +68,8 @@ class ArtistHomeViewController: UIViewController {
     
     // 프로필 완성하러 가기 버튼
     @IBAction func showAllReservationButtonTapped(_ sender: UIButton) {
-        //TODO: 화면 전환
+        let nextVC = SetBusinessInfoViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
     }
     @IBAction func notificationButtonTapped(_ sender: UIButton) {
         //        let nextVC = NotificationViewController()
