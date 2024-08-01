@@ -45,4 +45,8 @@ class PortfolioImageCollectionViewCell: UICollectionViewCell {
     @objc func deleteButtonTapped(_ sender: UIButton){
         delegate?.deleteButtonTapped()
     }
+    
+    func configure(image: UIImage){
+        portfolioImageView.image = image
+    }
 }

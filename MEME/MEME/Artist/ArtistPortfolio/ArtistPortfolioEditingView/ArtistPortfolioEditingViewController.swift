@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import PhotosUI
 
 class ArtistPortfolioEditingViewController: UIViewController {
     //MARK: - UI Properties
@@ -42,6 +43,9 @@ class ArtistPortfolioEditingViewController: UIViewController {
     private var portfolioDetailData: PortfolioData!
     private var isBlock : Bool = false
     private var selectedCategory: PortfolioCategories?
+    private var portfolioImage: [UIImage] = []
+    private var configuration = PHPickerConfiguration()
+    private var imageCount: Int = 0
     
     //MARK: - ViewController 생명 주기
     override func viewDidLoad() {
@@ -54,6 +58,7 @@ class ArtistPortfolioEditingViewController: UIViewController {
         collectionViewConfigure()
         setUI()
         setupDismissKeyboardOnTapGesture()
+        imagePickerConfigure()
     }
     
     //MARK: - setUI()
@@ -100,6 +105,11 @@ class ArtistPortfolioEditingViewController: UIViewController {
             make.trailing.equalTo(view.snp.trailing).offset(-24)
             make.height.equalTo(49)
         }
+    }
+    
+    private func imagePickerConfigure(){
+        configuration.selectionLimit = 1
+        configuration.filter = .images
     }
     
     //MARK: - @IBAction
@@ -186,7 +196,7 @@ extension ArtistPortfolioEditingViewController : UICollectionViewDataSource {
         if collectionView == makeupCategoryCollectionView{
             return portfolioCategories.count
         }else {
-            return 4
+            return imageCount == 3 ? 3 : imageCount + 1
         }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -205,7 +215,14 @@ extension ArtistPortfolioEditingViewController : UICollectionViewDataSource {
             return cell
         }else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PortfolioImageCollectionViewCell.className, for: indexPath) as? PortfolioImageCollectionViewCell else { return UICollectionViewCell() }
-            // 이미지 설정
+            // 이미지 3개 미만일 경우 첫 셀은 기본 이미지
+            if imageCount == 3 {
+                cell.configure(image: portfolioImage[imageCount-1 - indexPath.row])
+            }else {
+                if indexPath.row != 0 {
+                    cell.configure(image: portfolioImage[imageCount - indexPath.row])
+                }
+            }
             cell.delegate = self
             return cell
         }
@@ -233,11 +250,18 @@ extension ArtistPortfolioEditingViewController : UICollectionViewDelegate {
             }
         } else {
             //TODO: 이미지 변경 혹은 추가
-            if indexPath.row == 0 {
+            let picker = PHPickerViewController(configuration: configuration)
+            picker.delegate = self
+            self.present(picker, animated: true, completion: nil)
+            if indexPath.row == 0 && portfolioImage.count < 3 {
+                // 추가 후 데이터 리로드
                 
             }else {
+                // 변경
                 
             }
+            imageCount += 1
+            portfolioImageCollectionView.reloadData()
         }
     }
 }
@@ -323,5 +347,24 @@ extension ArtistPortfolioEditingViewController: UITextViewDelegate {
 extension ArtistPortfolioEditingViewController: PortfolioImageCollectionViewCellDelegate {
     func deleteButtonTapped() {
         //TODO: 삭제 후 콜렉션 뷰 새로고침
+    }
+}
+
+extension ArtistPortfolioEditingViewController: PHPickerViewControllerDelegate {
+    
+    func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
+        picker.dismiss(animated: true, completion: nil)
+        let itemProvider = results.first?.itemProvider
+        if let itemProvider = itemProvider,
+           itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+                DispatchQueue.main.async {
+                    guard let selectedImage = image as? UIImage else { return }
+                    // TODO: 선택 indexPath.row에 따라 변경 필요
+                    self.portfolioImage.append(selectedImage)
+                    self.portfolioImageCollectionView.reloadData()
+                }
+            }
+        }
     }
 }
