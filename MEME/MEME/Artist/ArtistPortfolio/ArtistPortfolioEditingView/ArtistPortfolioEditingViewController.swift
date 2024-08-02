@@ -9,7 +9,8 @@ import UIKit
 import PhotosUI
 
 class ArtistPortfolioEditingViewController: UIViewController {
-    //MARK: - UI Properties
+    
+    // MARK: - UI Properties
     @IBOutlet private weak var portfolioImageCollectionView: UICollectionView!
     @IBOutlet private weak var makeupCategoryCollectionView: UICollectionView!
     @IBOutlet private weak var makeupNameTextField: UITextField!
@@ -29,25 +30,27 @@ class ArtistPortfolioEditingViewController: UIViewController {
         return button
     }()
     
-    //MARK: - init
+    // MARK: - Properties
+    let portfolioId: Int
+    private var portfolioDetailData: PortfolioData!
+    private var isBlock = false
+    private var selectedCategory: PortfolioCategories?
+    private var portfolioImage = [UIImage(), UIImage(), UIImage()]
+    private var configuration = PHPickerConfiguration()
+    private var imageCount = 0
+    private var selectedImageIndexPath = 0
+    
+    // MARK: - Initialization
     init(receivedData: Int) {
         self.portfolioId = receivedData
         super.init(nibName: nil, bundle: nil)
     }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    //MARK: - Properties
-    let portfolioId: Int
-    private var portfolioDetailData: PortfolioData!
-    private var isBlock : Bool = false
-    private var selectedCategory: PortfolioCategories?
-    private var portfolioImage: [UIImage] = []
-    private var configuration = PHPickerConfiguration()
-    private var imageCount: Int = 0
-    
-    //MARK: - ViewController 생명 주기
+    // MARK: - View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
         if portfolioId == -1 {
@@ -61,8 +64,8 @@ class ArtistPortfolioEditingViewController: UIViewController {
         imagePickerConfigure()
     }
     
-    //MARK: - setUI()
-    private func setUI(){
+    // MARK: - UI Setup
+    private func setUI() {
         makeupCategoryCollectionView.backgroundColor = .white
         infoTextView.backgroundColor = .white
         self.tabBarController?.tabBar.isHidden = true
@@ -72,201 +75,152 @@ class ArtistPortfolioEditingViewController: UIViewController {
         infoTextView.layer.borderColor = UIColor.gray200.cgColor
         
         priceTextField.keyboardType = .numberPad
-        if portfolioId == -1 {
+        
+        if portfolioId != -1 {
             artistProfileEditingInfoBar.setTitle("수정하기", for: .normal)
             self.navigationItem.title = "포트폴리오 수정"
             navigationItem.rightBarButtonItem = UIBarButtonItem(image: .icTrash.withRenderingMode(.alwaysOriginal), style: .plain, target: self, action: #selector(trashButtonDidTap))
-        }else {
-            self.navigationItem.title =  "포트폴리오 추가"
+        } else {
+            self.navigationItem.title = "포트폴리오 추가"
             artistProfileEditingInfoBar.setTitle("추가하기", for: .normal)
         }
     }
     
-    //MARK: - collectionViewConfigure()
-    private func collectionViewConfigure(){
+    // MARK: - CollectionView Configuration
+    private func collectionViewConfigure() {
         makeupCategoryCollectionView.delegate = self
         makeupCategoryCollectionView.dataSource = self
         makeupCategoryCollectionView.register(UINib(nibName: ArtistMakeupTagCollectionViewCell.className, bundle: nil), forCellWithReuseIdentifier: ArtistMakeupTagCollectionViewCell.className)
+        
         portfolioImageCollectionView.delegate = self
         portfolioImageCollectionView.dataSource = self
         portfolioImageCollectionView.register(PortfolioImageCollectionViewCell.self, forCellWithReuseIdentifier: PortfolioImageCollectionViewCell.className)
     }
     
-    //MARK: - codebase UI config
+    // MARK: - UI Configuration
     private func configureSubviews() {
         view.addSubview(artistProfileEditingInfoBar)
     }
     
-    //MARK: - codebase UI constraints
     private func makeConstraints() {
-        artistProfileEditingInfoBar.snp.makeConstraints {make in
-            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom).offset(0)
+        artistProfileEditingInfoBar.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide.snp.bottom)
             make.leading.equalTo(view.snp.leading).offset(24)
             make.trailing.equalTo(view.snp.trailing).offset(-24)
             make.height.equalTo(49)
         }
     }
     
-    private func imagePickerConfigure(){
+    private func imagePickerConfigure() {
         configuration.selectionLimit = 1
         configuration.filter = .images
     }
     
-    //MARK: - @IBAction
+    // MARK: - Actions
     @IBAction func backButtonDidTap(_ sender: UIButton) {
         let okAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
             self?.navigationController?.popViewController(animated: true)
         }
-        let noAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
+        let noAction = UIAlertAction(title: "아니오", style: .cancel)
         
-        var title = ""
-        var message = ""
-        
-        if portfolioId == -1 {
-            title = "포트폴리오 수정하기"
-            message = "\n포트폴리오 수정을 취소하시겠습니까?"
-        } else {
-            title = "포트폴리오 등록하기"
-            message = "\n포트폴리오 등록을 취소하시겠습니까?"
-        }
-        
-        let alert = UIAlertController(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-        
-        // HIG에 따라 Cancel이 왼쪽
-        alert.addAction(okAction)
-        alert.addAction(noAction)
-        
-        present(alert, animated: true, completion: nil)
-    }
-    
-    @objc func editButtonDidTap(_ sender: UIButton) {
-        let okAction: UIAlertAction
-        var title = ""
-        var message = ""
-        
-        if portfolioId == -1 {
-            title = "포트폴리오 수정하기"
-            message = "\n포트폴리오를 수정하시겠습니까?"
-            okAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
-                // TODO: 포트폴리오 수정
-            }
-        } else {
-            title = "포트폴리오 등록하기"
-            message = "\n포트폴리오를 등록하시겠습니까?"
-            okAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
-                // TODO: 포트폴리오 생성
-            }
-        }
-        
-        let noAction = UIAlertAction(title: "아니오", style: .cancel, handler: nil)
+        let title = portfolioId == -1 ? "포트폴리오 수정하기" : "포트폴리오 등록하기"
+        let message = portfolioId == -1 ? "\n포트폴리오 수정을 취소하시겠습니까?" : "\n포트폴리오 등록을 취소하시겠습니까?"
         
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(okAction)
         alert.addAction(noAction)
         
-        present(alert, animated: true, completion: nil)
+        present(alert, animated: true)
     }
-
-    @IBAction func trashButtonDidTap(_ sender: UIButton) {
+    
+    @objc func editButtonDidTap(_ sender: UIButton) {
+        let title = portfolioId == -1 ? "포트폴리오 수정하기" : "포트폴리오 등록하기"
+        let message = portfolioId == -1 ? "\n포트폴리오를 수정하시겠습니까?" : "\n포트폴리오를 등록하시겠습니까?"
         
-        let alert = UIAlertController(title: "포트폴리오 삭제하기", message: "\n포트폴리오를 삭제하시겠습니까?", preferredStyle: .alert)
         let okAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
-            self?.isBlock=true
-            // TODO: 포트폴리오 삭제
+            // TODO: 포트폴리오 수정/등록
         }
-        let noAction = UIAlertAction(
-            title: "아니오",
-            style: .cancel,
-            handler : nil
-        )
-        // HIG에 따라 Cancel이 왼쪽
+        let noAction = UIAlertAction(title: "아니오", style: .cancel)
+        
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         alert.addAction(okAction)
         alert.addAction(noAction)
-        present(alert, animated: true, completion: nil)
+        
+        present(alert, animated: true)
+    }
+    
+    @IBAction func trashButtonDidTap(_ sender: UIButton) {
+        let alert = UIAlertController(title: "포트폴리오 삭제하기", message: "\n포트폴리오를 삭제하시겠습니까?", preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "예", style: .default) { [weak self] _ in
+            self?.isBlock = true
+            // TODO: 포트폴리오 삭제
+        }
+        let noAction = UIAlertAction(title: "아니오", style: .cancel)
+        
+        alert.addAction(okAction)
+        alert.addAction(noAction)
+        
+        present(alert, animated: true)
     }
 }
 
-//MARK: - UICollectionViewDataSource
-extension ArtistPortfolioEditingViewController : UICollectionViewDataSource {
+// MARK: - UICollectionViewDataSource
+extension ArtistPortfolioEditingViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if collectionView == makeupCategoryCollectionView{
+        if collectionView == makeupCategoryCollectionView {
             return portfolioCategories.count
-        }else {
+        } else {
             return imageCount == 3 ? 3 : imageCount + 1
         }
     }
+    
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if collectionView == makeupCategoryCollectionView {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ArtistMakeupTagCollectionViewCell.className, for: indexPath) as? ArtistMakeupTagCollectionViewCell else { return UICollectionViewCell() }
             let tagName = portfolioCategories[indexPath.row].korName
             cell.makeupTagLabel.text = tagName
             
-            if let selectedCategory = selectedCategory {
-                if selectedCategory == portfolioCategories[indexPath.row] {
-                    cell.selected()
-                } else {
-                }
+            if let selectedCategory = selectedCategory, selectedCategory == portfolioCategories[indexPath.row] {
+                cell.selected()
             } else {
+                cell.deSelected()
             }
             return cell
-        }else {
+        } else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PortfolioImageCollectionViewCell.className, for: indexPath) as? PortfolioImageCollectionViewCell else { return UICollectionViewCell() }
-            // 이미지 3개 미만일 경우 첫 셀은 기본 이미지
-            if imageCount == 3 {
-                cell.configure(image: portfolioImage[imageCount-1 - indexPath.row])
-            }else {
-                if indexPath.row != 0 {
-                    cell.configure(image: portfolioImage[imageCount - indexPath.row])
-                }
-            }
+            cell.hideDeleteButton(imageCount != 3 && indexPath.row == 0)
+            cell.configure(image: imageCount == 3 ? portfolioImage[imageCount - 1 - indexPath.row] : (indexPath.row != 0 ? portfolioImage[imageCount - indexPath.row] : UIImage(named: "portfolio_image") ?? UIImage()))
             cell.delegate = self
             return cell
         }
     }
 }
 
-//MARK: - UICollectionViewDelegate
-extension ArtistPortfolioEditingViewController : UICollectionViewDelegate {
+// MARK: - UICollectionViewDelegate
+extension ArtistPortfolioEditingViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         if collectionView == makeupCategoryCollectionView {
-            // 선택된 indexPath에 대한 셀을 가져오기
             if let selectedCell = collectionView.cellForItem(at: indexPath) as? ArtistMakeupTagCollectionViewCell {
-                // 선택된 셀에 대한 작업 수행
                 selectedCell.selected()
                 selectedCategory = portfolioCategories[indexPath.row]
             }
             
-            // 나머지 indexPath에 대한 셀을 가져와서 작업 수행
             for visibleIndexPath in collectionView.indexPathsForVisibleItems {
-                if visibleIndexPath != indexPath,
-                   let deselectedCell = collectionView.cellForItem(at: visibleIndexPath) as? ArtistMakeupTagCollectionViewCell {
-                    // 선택되지 않은 셀에 대한 작업 수행
+                if visibleIndexPath != indexPath, let deselectedCell = collectionView.cellForItem(at: visibleIndexPath) as? ArtistMakeupTagCollectionViewCell {
                     deselectedCell.deSelected()
                 }
             }
         } else {
-            //TODO: 이미지 변경 혹은 추가
+            selectedImageIndexPath = indexPath.row
             let picker = PHPickerViewController(configuration: configuration)
             picker.delegate = self
-            self.present(picker, animated: true, completion: nil)
-            if indexPath.row == 0 && portfolioImage.count < 3 {
-                // 추가 후 데이터 리로드
-                
-            }else {
-                // 변경
-                
-            }
-            imageCount += 1
+            self.present(picker, animated: true)
             portfolioImageCollectionView.reloadData()
         }
     }
 }
 
-//MARK: - UICollectionViewDelegateFlowLayout
+// MARK: - UICollectionViewDelegateFlowLayout
 extension ArtistPortfolioEditingViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(
         _ collectionView: UICollectionView,
@@ -286,41 +240,44 @@ extension ArtistPortfolioEditingViewController: UICollectionViewDelegateFlowLayo
                 break
             }
             return CGSize(width: width, height: 27)
-        }else {
-            return CGSize(width: collectionView.bounds.height, height: collectionView.bounds.height)
+        } else {
+            return CGSize(width: 80, height: 82)
         }
     }
+    
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         minimumInteritemSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return CGFloat(7)
+        return 7
     }
+    
     func collectionView(
         _ collectionView: UICollectionView,
         layout collectionViewLayout: UICollectionViewLayout,
         minimumLineSpacingForSectionAt section: Int
     ) -> CGFloat {
-        return CGFloat(15)
+        return 15
     }
 }
 
-//MARK: - API 호출
+// MARK: - API Calls
 extension ArtistPortfolioEditingViewController {
     private func getPortfolioDetail() {
-        
+        // TODO: 포트폴리오 세부조회 API
     }
     
-    private func createPortfolio(){
-        
+    private func createPortfolio() {
+        // TODO: 포트폴리오 추가 API
     }
     
     private func editPortfolio() {
+        // TODO: 포트폴리오 수정 API
     }
 }
 
-// MARK: - keyboard tabGesture
+// MARK: - Keyboard Handling
 extension ArtistPortfolioEditingViewController {
     func setupDismissKeyboardOnTapGesture() {
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(dismissKeyboard))
@@ -333,35 +290,55 @@ extension ArtistPortfolioEditingViewController {
     }
 }
 
-// MARK: - textView PlaceHolder
+// MARK: - UITextViewDelegate
 extension ArtistPortfolioEditingViewController: UITextViewDelegate {
     func textViewDidChange(_ textView: UITextView) {
-        if let text = textView.text, !text.isEmpty {
-            self.infoTextViewPlaceHolderLabel.isHidden = true
-        } else {
-            self.infoTextViewPlaceHolderLabel.isHidden = false
+        infoTextViewPlaceHolderLabel.isHidden = !textView.text.isEmpty
+    }
+}
+
+// MARK: - PortfolioImageCollectionViewCellDelegate
+extension ArtistPortfolioEditingViewController: PortfolioImageCollectionViewCellDelegate {
+    func deleteButtonTapped(_ cell: PortfolioImageCollectionViewCell) {
+        guard let indexPath = portfolioImageCollectionView.indexPath(for: cell) else { return }
+        portfolioImage[2 - indexPath.row] = UIImage()
+        moveEmptyImagesToEnd()
+        imageCount -= 1
+        if imageCount == 2 {
+            let temp = portfolioImage[0]
+            portfolioImage[0] = portfolioImage[1]
+            portfolioImage[1] = temp
+        }
+        portfolioImageCollectionView.reloadData()
+    }
+    
+    private func moveEmptyImagesToEnd() {
+        portfolioImage.sort { (first, second) -> Bool in
+            if first == UIImage() && second == UIImage() { return false }
+            if first == UIImage() { return false }
+            if second == UIImage() { return true }
+            return true
         }
     }
 }
 
-extension ArtistPortfolioEditingViewController: PortfolioImageCollectionViewCellDelegate {
-    func deleteButtonTapped() {
-        //TODO: 삭제 후 콜렉션 뷰 새로고침
-    }
-}
-
+// MARK: - PHPickerViewControllerDelegate
 extension ArtistPortfolioEditingViewController: PHPickerViewControllerDelegate {
-    
     func picker(_ picker: PHPickerViewController, didFinishPicking results: [PHPickerResult]) {
-        picker.dismiss(animated: true, completion: nil)
+        picker.dismiss(animated: true)
         let itemProvider = results.first?.itemProvider
-        if let itemProvider = itemProvider,
-           itemProvider.canLoadObject(ofClass: UIImage.self) {
-            itemProvider.loadObject(ofClass: UIImage.self) { image, error in
+        if let itemProvider = itemProvider, itemProvider.canLoadObject(ofClass: UIImage.self) {
+            itemProvider.loadObject(ofClass: UIImage.self) { [weak self] image, error in
                 DispatchQueue.main.async {
-                    guard let selectedImage = image as? UIImage else { return }
-                    // TODO: 선택 indexPath.row에 따라 변경 필요
-                    self.portfolioImage.append(selectedImage)
+                    guard let self = self, let selectedImage = image as? UIImage else { return }
+                    if self.imageCount == 3 {
+                        self.portfolioImage[2 - self.selectedImageIndexPath] = selectedImage
+                    } else {
+                        self.portfolioImage[self.imageCount - self.selectedImageIndexPath] = selectedImage
+                        if self.selectedImageIndexPath == 0 {
+                            self.imageCount += 1
+                        }
+                    }
                     self.portfolioImageCollectionView.reloadData()
                 }
             }
