@@ -14,6 +14,7 @@ class SingleReservationManageViewController: UIViewController {
     @IBOutlet weak var cancelBarButton: UIButton!
     @IBOutlet weak var confirmReservationBarView: UIView!
     @IBOutlet weak var confirmReservationBarButton: UIButton!
+    @IBOutlet weak var confirmReservationBarLabel: UILabel!
     @IBOutlet weak var modelInfoFrameView: UIView!
     @IBOutlet weak var modelInfoView: UIView!
     @IBOutlet weak var makeupCategoryLabel: UILabel!
@@ -70,6 +71,10 @@ class SingleReservationManageViewController: UIViewController {
     
     func configure(){
         //TODO: API Response DTO 수정 후 재작성
+        if isToday(Date()){
+            cancelBarView.isHidden = true
+            confirmReservationBarLabel.text = "당일 예약은 취소 불가합니다"
+        }
     }
     
     @IBAction private func reservationCancelBtnDidTap(_ sender: UIButton) {
@@ -111,6 +116,10 @@ extension SingleReservationManageViewController{
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
         return formatter.date(from: dateString)
+    }
+    private func isToday(_ date: Date?) -> Bool {
+        guard let date = date else { return false }
+        return Calendar.current.isDateInToday(date)
     }
 }
 

@@ -13,6 +13,8 @@
 		09275E822B518D150033EF34 /* ArtistHomeViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09275E812B518D150033EF34 /* ArtistHomeViewController.xib */; };
 		09275E892B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09275E872B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift */; };
 		09275E8A2B528A610033EF34 /* ArtistReservationStatusTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 09275E882B528A610033EF34 /* ArtistReservationStatusTableViewCell.xib */; };
+		0936EDDD2C5D11D300212AF0 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0936EDDB2C5D11D300212AF0 /* GoogleService-Info.plist */; };
+		0936EDDE2C5D11D300212AF0 /* memeSecret.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0936EDDC2C5D11D300212AF0 /* memeSecret.plist */; };
 		094884C72B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094884C52B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.swift */; };
 		094884C82B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 094884C62B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.xib */; };
 		094884CB2B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 094884C92B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.swift */; };
@@ -349,6 +351,8 @@
 		09275E812B518D150033EF34 /* ArtistHomeViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtistHomeViewController.xib; sourceTree = "<group>"; };
 		09275E872B528A610033EF34 /* ArtistReservationStatusTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistReservationStatusTableViewCell.swift; sourceTree = "<group>"; };
 		09275E882B528A610033EF34 /* ArtistReservationStatusTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtistReservationStatusTableViewCell.xib; sourceTree = "<group>"; };
+		0936EDDB2C5D11D300212AF0 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		0936EDDC2C5D11D300212AF0 /* memeSecret.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = memeSecret.plist; sourceTree = "<group>"; };
 		094884C52B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistMakeupTagCollectionViewCell.swift; sourceTree = "<group>"; };
 		094884C62B584B7000C233E0 /* ArtistMakeupTagCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ArtistMakeupTagCollectionViewCell.xib; sourceTree = "<group>"; };
 		094884C92B584B8F00C233E0 /* ArtistPortfolioCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistPortfolioCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -1129,6 +1133,8 @@
 				3142B9662B4CFFED0066CD5A /* Info.plist */,
 				09919FBA2C2AB7F900894119 /* GoogleService-Info.plist */,
 				09919FBB2C2AB7F900894119 /* memeSecret.plist */,
+				0936EDDB2C5D11D300212AF0 /* GoogleService-Info.plist */,
+				0936EDDC2C5D11D300212AF0 /* memeSecret.plist */,
 				3142B9632B4CFFED0066CD5A /* LaunchScreen.storyboard */,
 				3156D1FD2B69438800559820 /* Network */,
 				3142B9992B4D01FB0066CD5A /* extenstions */,
@@ -2160,6 +2166,8 @@
 				312B30512B550FF9008D17FC /* Pretendard-SemiBold.otf in Resources */,
 				09919FBD2C2AB7F900894119 /* memeSecret.plist in Resources */,
 				09919FBC2C2AB7F900894119 /* GoogleService-Info.plist in Resources */,
+				0936EDDE2C5D11D300212AF0 /* memeSecret.plist in Resources */,
+				0936EDDD2C5D11D300212AF0 /* GoogleService-Info.plist in Resources */,
 				31B263442B57EDE300304FBE /* TermDetailViewController.xib in Resources */,
 				315EE2D62B6658B50042A082 /* SetBusinessInfoViewController.xib in Resources */,
 			);
