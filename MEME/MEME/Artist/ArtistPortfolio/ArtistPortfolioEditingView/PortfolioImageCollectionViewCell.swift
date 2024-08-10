@@ -8,7 +8,7 @@ protocol PortfolioImageCollectionViewCellDelegate: AnyObject {
 class PortfolioImageCollectionViewCell: UICollectionViewCell {
     private lazy var deleteButton: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "ic_delete"), for: .normal)
+        button.setImage(.icDelete, for: .normal)
         button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -16,7 +16,6 @@ class PortfolioImageCollectionViewCell: UICollectionViewCell {
     private lazy var portfolioImageView: UIImageView = {
         let imageView = UIImageView(image: UIImage(named: "portfolio_image"))
         imageView.contentMode = .scaleAspectFill
-        imageView.clipsToBounds = true
         return imageView
     }()
     
@@ -26,17 +25,19 @@ class PortfolioImageCollectionViewCell: UICollectionViewCell {
         super.init(frame: frame)
         contentView.addSubview(portfolioImageView)
         contentView.addSubview(deleteButton)
-        
+        makeConstraints()
+        contentView.layer.cornerRadius = 5
+        contentView.layer.masksToBounds = true
+    }
+    
+    private func makeConstraints(){
         portfolioImageView.snp.makeConstraints { make in
-            make.leading.trailing.top.bottom.equalToSuperview()
+            make.edges.equalToSuperview()
         }
         deleteButton.snp.makeConstraints { make in
             make.trailing.top.equalToSuperview()
             make.height.width.equalTo(18)
         }
-        
-        contentView.layer.cornerRadius = 5
-        contentView.layer.masksToBounds = true
     }
     
     required init?(coder: NSCoder) {
