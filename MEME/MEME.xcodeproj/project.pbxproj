@@ -1132,6 +1132,8 @@
 				3142B9662B4CFFED0066CD5A /* Info.plist */,
 				09919FBA2C2AB7F900894119 /* GoogleService-Info.plist */,
 				09919FBB2C2AB7F900894119 /* memeSecret.plist */,
+				0936EDDB2C5D11D300212AF0 /* GoogleService-Info.plist */,
+				0936EDDC2C5D11D300212AF0 /* memeSecret.plist */,
 				3142B9632B4CFFED0066CD5A /* LaunchScreen.storyboard */,
 				3156D1FD2B69438800559820 /* Network */,
 				3142B9992B4D01FB0066CD5A /* extenstions */,
@@ -2163,6 +2165,8 @@
 				312B30512B550FF9008D17FC /* Pretendard-SemiBold.otf in Resources */,
 				09919FBD2C2AB7F900894119 /* memeSecret.plist in Resources */,
 				09919FBC2C2AB7F900894119 /* GoogleService-Info.plist in Resources */,
+				0936EDDE2C5D11D300212AF0 /* memeSecret.plist in Resources */,
+				0936EDDD2C5D11D300212AF0 /* GoogleService-Info.plist in Resources */,
 				31B263442B57EDE300304FBE /* TermDetailViewController.xib in Resources */,
 				315EE2D62B6658B50042A082 /* SetBusinessInfoViewController.xib in Resources */,
 			);

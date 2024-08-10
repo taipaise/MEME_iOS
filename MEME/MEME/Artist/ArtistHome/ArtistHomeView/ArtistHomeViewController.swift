@@ -30,7 +30,7 @@ class ArtistHomeViewController: UIViewController {
         artistID = getArtistID()
         profileUISet()
         reservationUISet()
-        filterReservations(reservationData: dummyReservations)
+//        filterReservations(reservationData: dummyReservations)
     }
     override func viewWillAppear(_ animated: Bool) {
         getArtistProfile(artistID)
@@ -66,11 +66,19 @@ class ArtistHomeViewController: UIViewController {
         reservationCollectionView.collectionViewLayout = self.createReservationLayout()
     }
     
-    // 프로필 완성하러 가기 버튼
+    // 전체 예약 보기 버튼
     @IBAction func showAllReservationButtonTapped(_ sender: UIButton) {
+        let nextVC = ManagementReservationsViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    // 프로필 완성하러 가기 버튼
+    @IBAction func profileSettingButtonTapped(_ sender: UIButton) {
         let nextVC = SetBusinessInfoViewController()
         navigationController?.pushViewController(nextVC, animated: true)
     }
+    
+    // 프로필 완성하러 가기 버튼
     @IBAction func notificationButtonTapped(_ sender: UIButton) {
         //        let nextVC = NotificationViewController()
         //        navigationController?.pushViewController(nextVC, animated: true)

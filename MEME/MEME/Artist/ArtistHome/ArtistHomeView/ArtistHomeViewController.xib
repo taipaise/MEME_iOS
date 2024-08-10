@@ -102,7 +102,6 @@
                                 <color key="baseForegroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </buttonConfiguration>
                             <connections>
-                                <action selector="entireReservationBtnTapped:" destination="-1" eventType="touchUpInside" id="JER-BC-U0c"/>
                                 <action selector="showAllReservationButtonTapped:" destination="-1" eventType="touchUpInside" id="0Wm-7d-PCT"/>
                             </connections>
                         </button>
@@ -182,6 +181,9 @@
                                 <fontDescription key="titleFontDescription" name="Pretendard-Medium" family="Pretendard" pointSize="14"/>
                                 <color key="baseForegroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </buttonConfiguration>
+                            <connections>
+                                <action selector="profileSettingButtonTapped:" destination="-1" eventType="touchUpInside" id="rSt-jn-haH"/>
+                            </connections>
                         </button>
                     </subviews>
                     <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -214,7 +216,7 @@
         </view>
     </objects>
     <resources>
-        <image name="chevron.right" catalog="system" width="32" height="32"/>
+        <image name="chevron.right" catalog="system" width="97" height="128"/>
         <image name="icon _bell" width="18" height="21.666666030883789"/>
         <image name="logo" width="161.66667175292969" height="100.66666412353516"/>
         <systemColor name="systemBackgroundColor">
