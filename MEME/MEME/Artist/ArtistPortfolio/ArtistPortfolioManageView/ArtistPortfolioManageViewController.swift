@@ -11,6 +11,7 @@ class ArtistPortfolioManageViewController: UIViewController {
     //MARK: - UI Properties
     @IBOutlet var portfolioCollectionView: UICollectionView!
     @IBOutlet var noPortfolioLabel: UIStackView!
+    @IBOutlet weak var portfolioCountLabel: UILabel!
     
     //MARK: - Properties
     private var portfolioData : PortfolioAllDTO?
@@ -23,6 +24,7 @@ class ArtistPortfolioManageViewController: UIViewController {
         getAllPortfolio()
     }
     override func viewWillAppear(_ animated: Bool) {
+        self.portfolioCountLabel.text = "총 " + String(portfolioData?.content?.count ?? 0) + "개"
         super.viewWillAppear(true)
         self.navigationItem.title = "포트폴리오 관리"
         self.tabBarController?.tabBar.isHidden = true
@@ -34,12 +36,7 @@ class ArtistPortfolioManageViewController: UIViewController {
         portfolioCollectionView.delegate = self
         portfolioCollectionView.dataSource = self
         portfolioCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
-        portfolioCollectionView.register(
-            UINib(
-            nibName: ArtistPortfolioCollectionViewCell.className,
-            bundle: nil),
-            forCellWithReuseIdentifier: ArtistPortfolioCollectionViewCell.className)
-
+        portfolioCollectionView.register(PortfolioCollectionViewCell.self, forCellWithReuseIdentifier: PortfolioCollectionViewCell.className)
     }
     @IBAction func portfolioAddButtonDidTap(_ sender: UIButton) {
         portfolioIdx = -1
@@ -73,39 +70,27 @@ extension ArtistPortfolioManageViewController : UICollectionViewDataSource {
             self.noPortfolioLabel.isHidden = false
             return 0
         }
-        return portfolioData.content!.count
+        return portfolioData.content?.count ?? 0
     }
     func collectionView(
         _ collectionView: UICollectionView,
         cellForItemAt indexPath: IndexPath
     ) -> UICollectionViewCell {
-            guard let cell = collectionView.dequeueReusableCell(
-                withReuseIdentifier: ArtistPortfolioCollectionViewCell.className,
-                for: indexPath
-            ) as? ArtistPortfolioCollectionViewCell
-            else { return UICollectionViewCell() }
-            if let portfolioData = portfolioData {
-                cell.portfolioMainLabel.text = portfolioData.content?[indexPath.row].makeupName
-                cell.portfolioSubLabel.text = portfolioData.content?[indexPath.row].category
-                cell.portfolioPriceLabel.text = String(portfolioData.content![indexPath.row].price) + "원"
-                if let url = URL(string: portfolioData.content![indexPath.row].portfolioImgDtoList[0].portfolioImgSrc) {
-                    URLSession.shared.dataTask(
-                        with: url) {
-                            data, response, error in
-                            DispatchQueue.main.async {
-                                if let data = data, error == nil {
-                                    cell.portfolioImageView.image = UIImage(data: data)
-                                } else {
-                                    cell.portfolioImageView.image = nil
-                                }
-                        }
-                    }.resume()
-                } else {
-                    cell.portfolioImageView.image = nil
-                }
-            }
-            return cell
+        guard let cell = collectionView.dequeueReusableCell(
+            withReuseIdentifier: PortfolioCollectionViewCell.className,
+            for: indexPath
+        ) as? PortfolioCollectionViewCell
+        else { return UICollectionViewCell() }
+        if let portfolioData = dummyData.content?[indexPath.row] {
+            cell.configure(PortfolioCellModel(imageURL: portfolioData.portfolioImgDtoList[0].portfolioImgSrc,
+                                              makeUpCategoty: MakeUpCategory(rawValue: portfolioData.category) ?? MakeUpCategory.ACTOR,
+                                              name: portfolioData.makeupName,
+                                              rate: Double(portfolioData.averageStars) ?? 5.0,
+                                              artistName: portfolioData.artistNickName,
+                                              price: Double(portfolioData.price)), true)
         }
+        return cell
+    }
 }
 
 //MARK: - UICollectionViewDelegateFlowLayout
@@ -115,14 +100,15 @@ extension ArtistPortfolioManageViewController: UICollectionViewDelegateFlowLayou
         layout collectionViewLayout: UICollectionViewLayout,
         sizeForItemAt indexPath: IndexPath
     ) -> CGSize {
-        return CGSize(width: 170, height: 250)
+        return CGSize(width: collectionView.bounds.width-30, height: 232)
     }
-    func collectionView(
-        _ collectionView: UICollectionView,
-        layout collectionViewLayout: UICollectionViewLayout,
-        minimumInteritemSpacingForSectionAt section: Int
-    ) -> CGFloat {
-        return 0
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        return UIEdgeInsets(top: 10, left: 0, bottom: 10, right: 0)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 20
     }
     
 }
