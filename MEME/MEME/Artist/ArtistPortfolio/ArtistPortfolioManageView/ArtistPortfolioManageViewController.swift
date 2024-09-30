@@ -7,11 +7,11 @@
 
 import UIKit
 
-class ArtistPortfolioManageViewController: UIViewController {
+final class ArtistPortfolioManageViewController: UIViewController {
     //MARK: - UI Properties
-    @IBOutlet var portfolioCollectionView: UICollectionView!
-    @IBOutlet var noPortfolioLabel: UIStackView!
-    @IBOutlet weak var portfolioCountLabel: UILabel!
+    @IBOutlet private var portfolioCollectionView: UICollectionView!
+    @IBOutlet private var noPortfolioLabel: UIStackView!
+    @IBOutlet private weak var portfolioCountLabel: UILabel!
     
     //MARK: - Properties
     private var portfolioData : PortfolioAllDTO?
@@ -21,11 +21,11 @@ class ArtistPortfolioManageViewController: UIViewController {
         super.viewDidLoad()
         portfolioCollectionView.backgroundColor = .white
         collectionViewConfig()
-        getAllPortfolio()
     }
     override func viewWillAppear(_ animated: Bool) {
-        self.portfolioCountLabel.text = "총 " + String(portfolioData?.content?.count ?? 0) + "개"
         super.viewWillAppear(true)
+        getAllPortfolio()
+        self.portfolioCountLabel.text = "총 " + String(portfolioData?.content?.count ?? 0) + "개"
         self.navigationItem.title = "포트폴리오 관리"
         self.tabBarController?.tabBar.isHidden = true
         self.navigationController?.navigationBar.isHidden = false
@@ -38,7 +38,7 @@ class ArtistPortfolioManageViewController: UIViewController {
         portfolioCollectionView.collectionViewLayout = UICollectionViewFlowLayout()
         portfolioCollectionView.register(PortfolioCollectionViewCell.self, forCellWithReuseIdentifier: PortfolioCollectionViewCell.className)
     }
-    @IBAction func portfolioAddButtonDidTap(_ sender: UIButton) {
+    @IBAction private func portfolioAddButtonDidTap(_ sender: UIButton) {
         portfolioIdx = -1
         let vc = ArtistPortfolioEditingViewController(receivedData: portfolioIdx)
         navigationController?.pushViewController(vc, animated: true)
@@ -81,7 +81,7 @@ extension ArtistPortfolioManageViewController : UICollectionViewDataSource {
             for: indexPath
         ) as? PortfolioCollectionViewCell
         else { return UICollectionViewCell() }
-        if let portfolioData = dummyData.content?[indexPath.row] {
+        if let portfolioData = portfolioData?.content?[indexPath.row] {
             cell.configure(PortfolioCellModel(imageURL: portfolioData.portfolioImgDtoList[0].portfolioImgSrc,
                                               makeUpCategoty: MakeUpCategory(rawValue: portfolioData.category) ?? MakeUpCategory.ACTOR,
                                               name: portfolioData.makeupName,

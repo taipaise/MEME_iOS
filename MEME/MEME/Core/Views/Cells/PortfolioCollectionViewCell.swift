@@ -66,7 +66,7 @@ final class PortfolioCollectionViewCell: UICollectionViewCell {
     private func initialize() {
         addSubViews()
         makeConstraints()
-        setUpLayout()
+        uiSet()
     }
     
     override func awakeFromNib() {
@@ -78,14 +78,14 @@ final class PortfolioCollectionViewCell: UICollectionViewCell {
         imageView.image = nil
     }
     
-    func configure(_ cellModel: PortfolioCellModel,_ wide: Bool? = false) {
+    func configure(_ cellModel: PortfolioCellModel,_ wide: Bool = false) {
         self.cellModel = cellModel
         configureImage()
         categoryLabel.text = cellModel.makeUpCategoty.rawValue
         nameLabel.text = cellModel.name
         rateLabel.text = "\(cellModel.rate)"
         
-        if wide ?? false{
+        if wide{
             nameLabel.font = .pretendard(to: .semiBold, size: 16)
             rateLabel.font = .pretendard(to: .semiBold, size: 12)
             categoryLabel.font = .pretendard(to: .semiBold, size: 12)
@@ -116,7 +116,7 @@ extension PortfolioCollectionViewCell {
         insertSubview(backgroundView, belowSubview: contentView)
     }
     
-    private func setUpLayout() {
+    private func uiSet() {
         contentView.layer.cornerRadius = 10
         contentView.layer.masksToBounds = true
 
