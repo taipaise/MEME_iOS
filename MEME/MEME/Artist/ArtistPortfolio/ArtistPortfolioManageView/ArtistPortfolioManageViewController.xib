@@ -20,6 +20,7 @@
             <connections>
                 <outlet property="noPortfolioLabel" destination="1eY-Gr-d2u" id="qlb-vj-ci0"/>
                 <outlet property="portfolioCollectionView" destination="s3h-1v-L6y" id="k2Y-bG-qXn"/>
+                <outlet property="portfolioCountLabel" destination="pHk-Jg-FU4" id="elW-AL-UbO"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -29,17 +30,17 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="s3h-1v-L6y">
-                    <rect key="frame" x="15" y="59" width="363" height="759"/>
+                    <rect key="frame" x="0.0" y="114.33333333333331" width="393" height="737.66666666666674"/>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                     <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="0.0" id="I0U-NO-YOz">
                         <size key="itemSize" width="170" height="250"/>
                         <size key="headerReferenceSize" width="0.0" height="0.0"/>
                         <size key="footerReferenceSize" width="0.0" height="0.0"/>
-                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="15" maxX="0.0" maxY="15"/>
                     </collectionViewFlowLayout>
                 </collectionView>
                 <stackView opaque="NO" contentMode="center" axis="vertical" alignment="center" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="1eY-Gr-d2u">
-                    <rect key="frame" x="76.666666666666686" y="396.66666666666669" width="240" height="84"/>
+                    <rect key="frame" x="76.666666666666686" y="441.33333333333331" width="240" height="83.999999999999943"/>
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="등록된 포트폴리오가 없어요!" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xOJ-dI-eSU">
                             <rect key="frame" x="8.3333333333333286" y="0.0" width="223" height="24"/>
@@ -66,20 +67,28 @@
                         <action selector="portfolioAddButtonDidTap:" destination="-1" eventType="touchUpInside" id="zaX-oz-9uU"/>
                     </connections>
                 </button>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="총 개" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pHk-Jg-FU4">
+                    <rect key="frame" x="15" y="77" width="32" height="19.333333333333329"/>
+                    <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="16"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
             </subviews>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
-                <constraint firstItem="s3h-1v-L6y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="Jft-1t-uSW"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="s3h-1v-L6y" secondAttribute="bottom" id="Vde-rI-kXv"/>
-                <constraint firstItem="s3h-1v-L6y" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="hFD-eB-MGA"/>
+                <constraint firstItem="s3h-1v-L6y" firstAttribute="top" secondItem="pHk-Jg-FU4" secondAttribute="bottom" constant="18" id="0J8-SR-9eZ"/>
+                <constraint firstAttribute="bottom" secondItem="s3h-1v-L6y" secondAttribute="bottom" id="Vde-rI-kXv"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="s3h-1v-L6y" secondAttribute="trailing" id="Z6U-2w-H8M"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="top" secondItem="pHk-Jg-FU4" secondAttribute="top" constant="-18" id="d6W-R0-gs7"/>
+                <constraint firstItem="pHk-Jg-FU4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="15" id="ggp-1n-uOg"/>
+                <constraint firstItem="s3h-1v-L6y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="gnY-D9-Txd"/>
                 <constraint firstItem="1eY-Gr-d2u" firstAttribute="centerX" secondItem="s3h-1v-L6y" secondAttribute="centerX" id="hm5-mb-ayz"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="s3h-1v-L6y" secondAttribute="trailing" constant="15" id="jzP-hB-rXb"/>
                 <constraint firstItem="1eY-Gr-d2u" firstAttribute="centerY" secondItem="s3h-1v-L6y" secondAttribute="centerY" id="o8h-ad-6Uu"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="iQh-tF-aDU" secondAttribute="trailing" constant="23" id="qbf-Ot-B2k"/>
                 <constraint firstAttribute="bottom" secondItem="iQh-tF-aDU" secondAttribute="bottom" constant="52" id="teG-B2-Hed"/>
             </constraints>
-            <point key="canvasLocation" x="51" y="-11"/>
+            <point key="canvasLocation" x="49.618320610687022" y="-11.267605633802818"/>
         </view>
     </objects>
     <resources>

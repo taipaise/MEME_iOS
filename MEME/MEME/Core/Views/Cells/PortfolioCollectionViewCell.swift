@@ -66,6 +66,7 @@ final class PortfolioCollectionViewCell: UICollectionViewCell {
     private func initialize() {
         addSubViews()
         makeConstraints()
+        uiSet()
     }
     
     override func awakeFromNib() {
@@ -77,16 +78,23 @@ final class PortfolioCollectionViewCell: UICollectionViewCell {
         imageView.image = nil
     }
     
-    func configure(_ cellModel: PortfolioCellModel) {
+    func configure(_ cellModel: PortfolioCellModel,_ wide: Bool = false) {
         self.cellModel = cellModel
         configureImage()
         categoryLabel.text = cellModel.makeUpCategoty.rawValue
         nameLabel.text = cellModel.name
         rateLabel.text = "\(cellModel.rate)"
         
+        if wide{
+            nameLabel.font = .pretendard(to: .semiBold, size: 16)
+            rateLabel.font = .pretendard(to: .semiBold, size: 12)
+            categoryLabel.font = .pretendard(to: .semiBold, size: 12)
+            artistPriceLabel.font = .pretendard(to: .semiBold, size: 12)
+        }
+        
         let artistName = cellModel.artistName
         let price = getPriceString(price: cellModel.price)
-        artistPriceLabel.text = "아티스트 \(artistName)/₩\(price)"
+        artistPriceLabel.text = "아티스트 \(artistName) / ₩\(price)"
     }
 }
 
@@ -100,12 +108,31 @@ extension PortfolioCollectionViewCell {
             rateLabel,
             artistPriceLabel
         ])
+        let backgroundView = UIView(frame: bounds)
+        backgroundView.layer.cornerRadius = 10
+        backgroundView.backgroundColor = .white
+        backgroundView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+        insertSubview(backgroundView, belowSubview: contentView)
     }
+    
+    private func uiSet() {
+        contentView.layer.cornerRadius = 10
+        contentView.layer.masksToBounds = true
+
+        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowOpacity = 0.15
+        layer.shadowRadius = 10
+        layer.shadowOffset = CGSize(width: 0, height: 4)
+        layer.masksToBounds = false
+    }
+
+
     
     private func makeConstraints() {
         imageView.snp.makeConstraints {
             $0.top.horizontalEdges.equalToSuperview()
-            $0.height.equalTo(imageView.snp.width)
+            $0.height.equalTo(142)
         }
         
         categoryLabel.snp.makeConstraints {
