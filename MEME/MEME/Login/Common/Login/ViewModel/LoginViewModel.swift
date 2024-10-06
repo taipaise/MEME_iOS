@@ -19,15 +19,16 @@ final class LoginViewModel: NSObject, ViewModel {
     }
     
     enum NavigationType {
-        case signUp
+        case memeLogin
+        case snsSignUp
         case modelHome
         case artistHome
         case none
     }
     
     struct Input {
-        let kakaoLoginTap: Observable<Void>
-        let appleLoginTap: Observable<Void>
+        let socialLogin: Observable<SocialProvider>
+        let memeLogin: Observable<Void>
     }
     
     struct Output {
@@ -40,18 +41,24 @@ final class LoginViewModel: NSObject, ViewModel {
     private var disposeBag = DisposeBag()
     
     func transform(_ input: Input) -> Output {
-        input.appleLoginTap
-            .subscribe { [weak self] _ in
-                self?.perfromAppleLogin()
+        
+        input.socialLogin
+            .subscribe { [weak self] provider in
+                switch provider {
+                case .APPLE:
+                    self?.perfromAppleLogin()
+                case .KAKAO:
+                    self?.performKakaoLogin()
+                }
             }
             .disposed(by: disposeBag)
         
-        input.kakaoLoginTap
+        input.memeLogin
             .subscribe { [weak self] _ in
-                self?.performKakaoLogin()
+                self?.navigation.onNext(.memeLogin)
             }
             .disposed(by: disposeBag)
-        
+
         return Output(navigation: navigation.asObservable())
     }
 }
@@ -80,7 +87,7 @@ extension LoginViewModel {
         }
         
         guard userInfo.user == true else {
-            navigation.onNext(.signUp)
+            navigation.onNext(.snsSignUp)
             return
         }
        

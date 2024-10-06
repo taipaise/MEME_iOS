@@ -8,329 +8,322 @@
 import UIKit
 
 class ArtistHomeViewController: UIViewController {
-    //MARK: - UI Properties
-    @IBOutlet private weak var artistHomeProfileStatusView: UIView!
-    @IBOutlet private weak var secondArtistHomeProfileStatusView: UIView!
+    //MARK: UI Properties
     @IBOutlet private weak var artistProfileImageView: UIImageView!
     @IBOutlet private weak var artistHomeProfileLabel: UILabel!
-    @IBOutlet private weak var artistReservationStatusTableView: UITableView!
-    @IBOutlet private weak var firstArtistResLabel: UILabel!
-    @IBOutlet private weak var firstArtistResTimeLabel: UILabel!
-    @IBOutlet private weak var firstArtistResBtnLabel: UILabel!
-    @IBOutlet private weak var secondArtistResBtn: UIButton!
-    @IBOutlet private weak var secondArtistResLabel: UILabel!
-    @IBOutlet private weak var secondArtistResTimeLabel: UILabel!
+    @IBOutlet private weak var todayReservationCollectionView: UICollectionView!
+    @IBOutlet private weak var reservationCollectionView: UICollectionView!
+    @IBOutlet weak var noProfileView: UIView!
+    @IBOutlet private weak var noProfileLabel: UILabel!
+    @IBOutlet weak var profileSettingButton: UIButton!
     
-    //MARK: - Properties
-    private var todayCount: Int = 0
-    private var tomorrowCount: Int = 0
-    private var fromTomorrowCount: Int = 0
-    private var showDataCount: Int = 0
-    private var selectedIdx: Int!
-    private var reservationData: [ReservationData]!
-    private var artistProfileData: MyPageData?
-    private var reservationStatusData: [Int] = []
-    private var showReservationData: [Int] = [0,0,0,0]
+    //MARK: Properties
+    private var profileComplete : Bool = false
+    private var artistProfileData: ArtistProfileInfoData?
+    private var artistID: Int = -1
+    private var todayReservationData: [ReservationData] = []
+    private var pendingReservationData: [ReservationData] = []
+    private var groupedReservations: [String: [ReservationData]] = [:]
     
-    //MARK: - ViewController 생명 주기
+    //MARK: View LifeCycle
     override func viewDidLoad() {
-        super.viewDidLoad()
-        tableViewConfigure()
-        setUI()
+        artistID = getArtistID()
+        profileUISet()
+        reservationUISet()
+//        filterReservations(reservationData: dummyReservations)
     }
     override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        self.todayCount = 0
-        self.tomorrowCount = 0
-        self.fromTomorrowCount = 0
-        artistID = KeyChainManager.loadMemberID()
-        getArtistProfile(userId: artistID)
-        getArtistReservation(artistId: artistID)
+        getArtistProfile(artistID)
+        getArtistReservationData(artistID)
+    }
+    //MARK: UI Setting functions
+    private func profileUISet(){
+//        profileComplete = artistProfileData?.region != nil && artistProfileData?.shopLocation != nil && artistProfileData?.specialization != nil
+        // 프로필 완성하러 가기 뷰
+        noProfileView.isHidden = profileComplete
+        if profileComplete{
+            // 프로필 정보 라벨
+            artistHomeProfileLabel.text = "안녕하세요,\n\(artistProfileData?.nickname) 님!\n오늘 예약 \("예약 건수")건이 있어요."
+        }else {
+            // 프로필 정보 라벨
+            artistHomeProfileLabel.text = "안녕하세요,\n\(artistProfileData?.nickname) 님!"
+            // 프로필 완성하러 가기 버튼
+            profileSettingButton.layer.cornerRadius = 10
+            // 라벨 텍스트
+            noProfileLabel.text = "프로필을 완성하고\n 모델과의 예약을 잡아보세요!"
+        }
+    }
+    
+    private func reservationUISet(){
+        todayReservationCollectionView.delegate = self
+        todayReservationCollectionView.dataSource = self
+        todayReservationCollectionView.register(ModelReservationConfirmViewCell.nib, forCellWithReuseIdentifier: ModelReservationConfirmViewCell.className)
+        todayReservationCollectionView.collectionViewLayout = self.createTodayReservationLayout()
+        reservationCollectionView.delegate = self
+        reservationCollectionView.dataSource = self
+        reservationCollectionView.register(ModelReservationConfirmViewCell.nib, forCellWithReuseIdentifier: ModelReservationConfirmViewCell.className)
+        reservationCollectionView.register(ReservationHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReservationHeaderView.className)
+        reservationCollectionView.collectionViewLayout = self.createReservationLayout()
+    }
+    
+    // 전체 예약 보기 버튼
+    @IBAction func showAllReservationButtonTapped(_ sender: UIButton) {
+        let nextVC = ManagementReservationsViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    // 프로필 완성하러 가기 버튼
+    @IBAction func profileSettingButtonTapped(_ sender: UIButton) {
+        let nextVC = SetBusinessInfoViewController()
+        navigationController?.pushViewController(nextVC, animated: true)
+    }
+    
+    // 프로필 완성하러 가기 버튼
+    @IBAction func notificationButtonTapped(_ sender: UIButton) {
+        //        let nextVC = NotificationViewController()
+        //        navigationController?.pushViewController(nextVC, animated: true)
+    }
+}
 
-    }
-    
-    //MARK: - setUI()
-    private func setUI(){
-        artistReservationStatusTableView.backgroundColor = .white
-        if(todayCount == 0){
-            firstArtistResLabel.text = "포트폴리오 관리하러 가기"
-            firstArtistResBtnLabel.text = ">"
-            firstArtistResTimeLabel.text = nil
-            secondArtistHomeProfileStatusView.isHidden = true
-            secondArtistResBtn.isHidden = true
-        }else if(todayCount == 1){
-            firstArtistResBtnLabel.text = "예약"
-            firstArtistResLabel.text = reservationData[showReservationData[0]].makeupName
-            firstArtistResTimeLabel.text = convertTimeString(reservationData[showReservationData[0]].reservationDayOfWeekAndTime.values.first!)
-            secondArtistHomeProfileStatusView.isHidden = true
-            secondArtistResBtn.isHidden = true
-        }else{
-            firstArtistResLabel.text = reservationData[showReservationData[0]].makeupName
-            firstArtistResTimeLabel.text = convertTimeString(reservationData[showReservationData[0]].reservationDayOfWeekAndTime.values.first!)
-            secondArtistResLabel.text = reservationData[showReservationData[1]].makeupName
-            secondArtistResTimeLabel.text = convertTimeString(reservationData[showReservationData[1]].reservationDayOfWeekAndTime.values.first!)
-        }
-        artistHomeProfileStatusView.layer.cornerRadius = 10
-        secondArtistHomeProfileStatusView.layer.cornerRadius = 10
-        
-        artistProfileImageView.layer.cornerRadius = artistProfileImageView.frame.height/2
-        artistProfileImageView.clipsToBounds = true
-        
-    }
-    
-    //MARK: - tableViewConfigure()
-    private func tableViewConfigure(){
-        artistReservationStatusTableView.delegate = self
-        artistReservationStatusTableView.dataSource = self
-        artistReservationStatusTableView.register(ArtistReservationStatusTableViewCell.nib(), forCellReuseIdentifier: ArtistReservationStatusTableViewCell.identifier)
-    }
-    
-    //MARK: - @IBAction
-    @IBAction private func profileImageTapped(_ sender: UIButton) {
-        let vc = ModelViewArtistProfileViewController()
-        self.tabBarController?.tabBar.isHidden = true
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    @IBAction private func entireReservationBtnTapped(_ sender: UIButton) {
-        self.tabBarController?.selectedIndex = 1
-    }
-    @objc private func reservationManagedBtnTapped(_ sender: UIButton){
-        let vc = SingleReservationManageViewController()
-        let selectedIdx = sender.tag
-        vc.reservationData = reservationData[selectedIdx]
-        vc.isToday = false
-        vc.reservationTimeString = convertTimeString(vc.reservationData.reservationDayOfWeekAndTime.values.first!)
-        vc.reservationDateString = formatDateString(op: 3,vc.reservationData.reservationDate)
-        self.tabBarController?.tabBar.isHidden = true
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    @IBAction func firstTodayResBtnDidTap(_ sender: UIButton) {
-        if(todayCount != 0) {
-            let vc = SingleReservationManageViewController()
-            vc.reservationData = reservationData[self.showReservationData[0]]
-            vc.isToday = true
-            vc.reservationTimeString = convertTimeString(vc.reservationData.reservationDayOfWeekAndTime.values.first!)
-            vc.reservationDateString = formatDateString(op: 3,vc.reservationData.reservationDate)
-            self.tabBarController?.tabBar.isHidden = true
-            navigationController?.pushViewController(vc, animated: true)
-        }else{
-            let vc = SingleReservationManageViewController()
-            self.tabBarController?.tabBar.isHidden = true
-            navigationController?.pushViewController(vc, animated: true)
-        }
-    }
-    @IBAction func secondTodayResBtnDidTap(_ sender: UIButton) {
-        let vc = SingleReservationManageViewController()
-        vc.reservationData = reservationData[self.showReservationData[1]]
-        vc.isToday = true
-        vc.reservationTimeString = convertTimeString(vc.reservationData.reservationDayOfWeekAndTime.values.first!)
-        vc.reservationDateString = formatDateString(op: 3,vc.reservationData.reservationDate)
-        self.tabBarController?.tabBar.isHidden = true
-        navigationController?.pushViewController(vc, animated: true)
-    }
-    
-    //MARK: - distinguishDate()
-    private func distinguishDate(reservationData: [ReservationData]){
-            for i in 0..<reservationData.count {
-                let dateString: String = reservationData[i].reservationDate
-                let dateFormatter = DateFormatter()
-                dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // input 날짜 형식 설정
-                if let date = dateFormatter.date(from: dateString) {
-                    
-                    let koreanTimeZone = TimeZone(identifier: "Asia/Seoul")!
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.timeZone = koreanTimeZone
-                    dateFormatter.dateFormat = "yyyyMMdd"
-                    
-                    let now = Date()
-                    
-                    let koreanTime = dateFormatter.string(from: now)
-                    let resTime = dateFormatter.string(from: date)
-                    if(reservationData[i].status == "CANCEL"){
-                        // CANCEL
-                        reservationStatusData.append(-1)
-                    }else {
-                        if String(Int(resTime)!) == koreanTime {
-                            // Today
-                            reservationStatusData.append(0)
-                            if(todayCount<2){
-                                showReservationData[todayCount] = i
-                            }
-                            todayCount += 1
-                        }else if String(Int(resTime)!-1) == koreanTime{
-                            // Tomorrow
-                            tomorrowCount += 1
-                            reservationStatusData.append(1)
-                            if(fromTomorrowCount<2){
-                                showReservationData[fromTomorrowCount+2] = i
-                            }
-                            fromTomorrowCount += 1
-                        }else if Int(resTime)! > Int(koreanTime)!{
-                            // afterTomorrow
-                            reservationStatusData.append(1)
-                            if(fromTomorrowCount<2){
-                                showReservationData[fromTomorrowCount+2] = i
-                            }
-                            fromTomorrowCount += 1
-                        }else {
-                            // past
-                            reservationStatusData.append(-1)
-                        }
-                    }
-                } else {
-                }
-                
-            }
-        }
-    //MARK: - 날짜 형식 변환
-    private func formatDateString(op: Int,_ dateString: String) -> String? {
+extension ArtistHomeViewController{
+    func dateString(from date: Date) -> String {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ" // 입력된 날짜의 형식에 맞게 설정
-        
-        if let date = dateFormatter.date(from: dateString) {
-            // 원하는 형식으로 날짜 문자열을 변환
-            let koreanTimeZone = TimeZone(identifier: "Asia/Seoul")!
-            let dateFormatter = DateFormatter()
-            dateFormatter.timeZone = koreanTimeZone
-            if op==1 {
-                dateFormatter.dateFormat = "yyyy. MM. dd EEE"
-            }else if op==2{
-                dateFormatter.dateFormat = "yyyy. MM. dd EEEE"
-            }else{
-                dateFormatter.dateFormat = "M월 d일 EEEE"
-            }
-            dateFormatter.locale = Locale(identifier: "ko_KR")
-            return dateFormatter.string(from: date)
-        } else {
-            return nil
-        }
+        dateFormatter.dateFormat = "yyyy. MM. dd E"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        return dateFormatter.string(from: date)
     }
-    //MARK: - 시간 형식 변환
-    private func convertTimeString(_ input: String) -> String {
-        // 문자열의 처음의 "_"를 ":"로 대체하여 반환
-        var result = input
-        if let firstUnderscoreIndex = input.firstIndex(of: "_") {
-            result.replaceSubrange(firstUnderscoreIndex...firstUnderscoreIndex, with: "")
+    private func dateFromString(_ dateString: String) -> Date? {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return formatter.date(from: dateString)
+    }
+    
+    private func isToday(_ date: Date?) -> Bool {
+        guard let date = date else { return false }
+        return Calendar.current.isDateInToday(date)
+    }
+    
+    private func filterReservations(reservationData: [ReservationData]) {
+        reservationData.forEach { reservation in
+            if let date = dateFromString(reservation.reservationDate) {
+                switch reservation.status {
+                case ReservationState.EXPECTED.rawValue:
+                    if isToday(date) {
+                        todayReservationData.append(reservation)
+                    }
+                case ReservationState.PENDING.rawValue:
+                    pendingReservationData.append(reservation)
+                    
+                    let dateString = self.dateString(from: date)
+                    if var reservations = groupedReservations[dateString] {
+                        reservations.append(reservation)
+                        groupedReservations[dateString] = reservations
+                    } else {
+                        groupedReservations[dateString] = [reservation]
+                    }
+                default:
+                    break
+                }
+            }
         }
-        return result.replacingOccurrences(of: "_", with: ":")
     }
     
 }
-// MARK: - UITableViewDataSource
-extension ArtistHomeViewController : UITableViewDataSource {
-    func tableView(
-        _ tableView: UITableView,
-        numberOfRowsInSection section: Int
-    ) -> Int {
-        if let reservationData = reservationData {
-            fromTomorrowCount = 0
-            showDataCount = 0
-            for i in 0..<reservationData.count {
-                self.showDataCount += 1
-                if reservationStatusData[i] == 1{
-                    fromTomorrowCount += 1
-                    if fromTomorrowCount == 2 {
-                        break
-                    }
-                }
-            }
-            return self.showDataCount
+
+//MARK: UICollectionViewDelegate
+extension ArtistHomeViewController: UICollectionViewDelegate{
+    //TODO: 화면 전환
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if collectionView == todayReservationCollectionView{
+            let nextVC = SingleReservationManageViewController(reservationId: todayReservationData[indexPath.row].reservationId)
+            navigationController?.pushViewController(nextVC, animated: true)
         }else {
+            let sortedKeys = groupedReservations.keys.sorted()
+            let dateKey = sortedKeys[indexPath.section]
+            if let reservation = groupedReservations[dateKey]?[indexPath.row] {
+                let nextVC = SingleReservationManageViewController(reservationId: reservation.reservationId)
+                navigationController?.pushViewController(nextVC, animated: true)
+            }
+        }
+    }
+}
+
+//MARK: UICollectionViewDelegate
+extension ArtistHomeViewController: UICollectionViewDelegateFlowLayout{
+    // todayReservationCollectionView Paging 구현
+    private func createTodayReservationsSection(using environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let width = environment.container.effectiveContentSize.width - 48
+        
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(width),
+            heightDimension: .absolute(142)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(width),
+            heightDimension: .absolute(142)
+        )
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 24
+        section.orthogonalScrollingBehavior = .groupPaging
+        section.contentInsets = NSDirectionalEdgeInsets(top: 0, leading: 24, bottom: 0, trailing: 24)
+        
+        return section
+    }
+    private func createTodayReservationLayout() -> UICollectionViewCompositionalLayout {
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 30
+        return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+            return self?.createTodayReservationsSection(using: layoutEnvironment)
+        }, configuration: config)
+    }
+    private func createReservationsSection(using environment: NSCollectionLayoutEnvironment) -> NSCollectionLayoutSection {
+        let width = environment.container.effectiveContentSize.width
+        
+        let itemSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(width),
+            heightDimension: .absolute(142)
+        )
+        let item = NSCollectionLayoutItem(layoutSize: itemSize)
+        
+        let groupSize = NSCollectionLayoutSize(
+            widthDimension: .absolute(width),
+            heightDimension: .estimated(142)
+        )
+        let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitems: [item])
+        
+        let section = NSCollectionLayoutSection(group: group)
+        section.interGroupSpacing = 12
+        section.contentInsets = NSDirectionalEdgeInsets(top: 12, leading: 0, bottom: 0, trailing: 0)
+        
+        let headerSize = NSCollectionLayoutSize(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(19))
+        let header = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
+        section.boundarySupplementaryItems = [header]
+        
+        return section
+    }
+    
+    private func createReservationLayout() -> UICollectionViewCompositionalLayout {
+        let config = UICollectionViewCompositionalLayoutConfiguration()
+        config.interSectionSpacing = 12
+        return UICollectionViewCompositionalLayout(sectionProvider: { [weak self] (sectionIndex, layoutEnvironment) -> NSCollectionLayoutSection? in
+            return self?.createReservationsSection(using: layoutEnvironment)
+        }, configuration: config)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: 19)
+    }
+}
+
+
+//MARK: UICollectionViewDataSource
+extension ArtistHomeViewController: UICollectionViewDataSource{
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        // 날짜별로 묶은 데이터.count
+        switch collectionView{
+        case todayReservationCollectionView:
+            return 1
+        case reservationCollectionView:
+            return groupedReservations.keys.count
+        default:
             return 0
         }
-        
     }
-    
-    func tableView(
-        _ tableView: UITableView,
-        cellForRowAt indexPath: IndexPath
-    ) -> UITableViewCell {
-        // 셀 교체 필요
-        guard let resCell = artistReservationStatusTableView.dequeueReusableCell(withIdentifier: ArtistReservationStatusTableViewCell.identifier, for: indexPath) as? ArtistReservationStatusTableViewCell else { return UITableViewCell() }
-        resCell.makeUpNameLabel.text = reservationData[indexPath.row].makeupName
-        resCell.modelNameLabel.text = reservationData[indexPath.row].modelNickName
-        resCell.reservationDateLabel.text = formatDateString(op:1, reservationData[indexPath.row].reservationDate)
-        resCell.reservationTimeLabel.text = convertTimeString(reservationData[indexPath.row].reservationDayOfWeekAndTime.values.first!)
-        resCell.reservationPlaceLabel.text = reservationData[indexPath.row].shopLocation
-        resCell.reservationPriceLabel.text = "\(String(reservationData[indexPath.row].price))원"
-        // 버튼 태그로 index 전달
-        resCell.reservationManageBtn.tag = indexPath.row
-        resCell.reservationManageBtn.addTarget(
-            self,
-            action: #selector(reservationManagedBtnTapped),
-            for: .touchUpInside
-        )
-        return resCell
-    }
-    
-}
-// MARK: - UITableViewDelegate
-extension ArtistHomeViewController : UITableViewDelegate {
-    func tableView(
-        _ tableView: UITableView,
-        heightForRowAt indexPath: IndexPath
-    ) -> CGFloat {
-        if reservationStatusData[indexPath.row] == 1{
-            return CGFloat(192)
-        }else {
-            return CGFloat(0)
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        switch collectionView{
+        case todayReservationCollectionView:
+            return todayReservationData.count
+        case reservationCollectionView:
+            let dateKey = Array(groupedReservations.keys)[section]
+            return groupedReservations[dateKey]?.count ?? 0
+        default:
+            return 0
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        switch collectionView{
+        case todayReservationCollectionView:
+            guard let todayCell = todayReservationCollectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.className, for: indexPath) as? ModelReservationConfirmViewCell else {
+                return UICollectionViewCell()
+            }
+            todayCell.configure(with: todayReservationData[indexPath.row])
+            todayCell.backgroundColor = .gray400
+            return todayCell
+        case reservationCollectionView:
+            guard let cell = reservationCollectionView.dequeueReusableCell(withReuseIdentifier: ModelReservationConfirmViewCell.className, for: indexPath) as? ModelReservationConfirmViewCell else {
+                return UICollectionViewCell()
+            }
+            let sortedKeys = groupedReservations.keys.sorted()
+            let dateKey = sortedKeys[indexPath.section]
+            if let reservation = groupedReservations[dateKey]?[indexPath.row] {
+                cell.configure(with: reservation)
+                cell.contentView.backgroundColor = .gray300
+                cell.modelReservationLabel.text = "예약 대기 중"
+                cell.modelReservationLabel.textColor = .black
+                cell.modelReservationPriceLabel.textColor = .black
+                cell.modelReservationArtistNameLabel.textColor = .black
+                cell.modelReservationMakeupNameLabel.textColor = .black
+                cell.modelReservationLocationLabel.textColor = .black
+            }
+            return cell
+        default:
+            return UICollectionViewCell()
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        if kind == UICollectionView.elementKindSectionHeader {
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: ReservationHeaderView.className, for: indexPath) as? ReservationHeaderView else {
+                return UICollectionReusableView()
+            }
+            let dateKey = Array(groupedReservations.keys)[indexPath.section]
+            header.configure(with: dateKey)
+            return header
+        } else {
+            return UICollectionReusableView()
+        }
+    }
+    
 }
 
-//MARK: - API 호출
-extension ArtistHomeViewController {
+//MARK: API 호출
+extension ArtistHomeViewController{
+    private func getArtistID() -> Int{
+        return KeyChainManager.loadMemberID()
+    }
     
-    func getArtistProfile(userId: Int){
-        MyPageManager.shared.getMyPageProfile(userId: userId) { [weak self] result in
-            guard let self = self else { return }
-            switch result {
-            case .success(let profile):
-                
-                print("Success: \(profile)")
-                print("message: "+profile.message)
-                self.artistProfileData? = profile.data!
-                
-                guard
-                    let data = profile.data,
-                    let nickName = data.nickname
-                else { return }
-                
-                if nickName.count > 6 {
-                    self.artistHomeProfileLabel.text = "안녕하세요,"+"\n"+"\(nickName)님!"+"\n"+"내일 예약 \(String(self.tomorrowCount))건이 있어요."
-                }else{
-                    print("nicknamecomplete")
-                    artistHomeProfileLabel.text = "안녕하세요, \(nickName)님!"+"\n"+"내일 예약 \(String(self.tomorrowCount))건이 있어요."
+    private func getArtistProfile(_ userId: Int){
+        ArtistProfileInfoManager.shared.getArtistProfileInfo(userId: userId) { result in
+            DispatchQueue.main.async {
+                switch result{
+                case .success(let response):
+                    self.artistProfileData = response.data
+                    self.profileUISet()
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
-                if let profileImg = data.profileImg {
-                    FirebaseStorageManager.downloadImage(
-                        urlString: profileImg
-                    ) { [weak self] image in
-                        guard let image = image else { return } // 성공적으로 업로드 했으면 이미지가 nil 값이 아님
-                        //이미지를 가지고 할 작업 처리 ex) 이미지 뷰에 다운 받은 이미지를 넣음
-                        print("Imagecomplete")
-                        self?.artistProfileImageView.image = image
+            }
+        }
+    }
+    private func getArtistReservationData(_ artistId: Int){
+        ReservationManager.shared.getArtistReservation(artistId: artistId) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    if let reservationData = response.data{
+                        self.filterReservations(reservationData: reservationData)
+                        self.reservationUISet()
                     }
+                case .failure(let error):
+                    print(error.localizedDescription)
                 }
-            case .failure(let error):
-                print("Failure: \(error)")
             }
         }
     }
     
-    private func getArtistReservation(artistId: Int){
-        let getArtistReservation = ReservationManager.shared
-        getArtistReservation.getArtistReservation(artistId: artistId) { result in
-            switch result {
-            case .success(let response) :
-                self.reservationData = response.data
-                self.distinguishDate(reservationData: self.reservationData)
-                self.artistReservationStatusTableView.reloadData()
-                self.setUI()
-            case .failure(let error):
-                print(error.localizedDescription)
-            }
-        }
-    }
 }

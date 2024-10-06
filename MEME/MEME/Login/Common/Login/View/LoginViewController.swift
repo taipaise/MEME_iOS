@@ -12,6 +12,7 @@ import RxCocoa
 final class LoginViewController: UIViewController {
     @IBOutlet private weak var kakaoLoginButton: UIButton!
     @IBOutlet private weak var appleLoginButton: UIButton!
+    @IBOutlet private weak var memeLoginButton: UIButton!
     private let userDefaultManager = UserDefaultManager.shared
     private let authManager = AuthManager.shared
     private var viewModel = LoginViewModel()
@@ -27,8 +28,11 @@ final class LoginViewController: UIViewController {
 extension LoginViewController {
     private func bind() {
         let input = LoginViewModel.Input(
-            kakaoLoginTap: kakaoLoginButton.rx.tap.asObservable(),
-            appleLoginTap: appleLoginButton.rx.tap.asObservable()
+            socialLogin: .merge(
+                kakaoLoginButton.rx.tap.asObservable().map { .KAKAO },
+                appleLoginButton.rx.tap.asObservable().map { .APPLE }
+            ),
+            memeLogin: memeLoginButton.rx.tap.asObservable()
         )
         
         let output = viewModel.transform(input)
@@ -43,7 +47,7 @@ extension LoginViewController {
 extension LoginViewController {
     private func navigate(type: LoginViewModel.NavigationType) {
         switch type {
-        case .signUp:
+        case .snsSignUp:
             let coordinator = CommonSignUpCoordinator(navigationController: navigationController)
             coordinator.start()
         case .modelHome:
@@ -51,6 +55,9 @@ extension LoginViewController {
             coordinator.start()
         case .artistHome:
             let coordinator = ArtistMainCoordinator(navigationController: navigationController)
+            coordinator.start()
+        case .memeLogin:
+            let coordinator = MemeLoginCoordiantor(navigationController: navigationController)
             coordinator.start()
         case .none:
             break

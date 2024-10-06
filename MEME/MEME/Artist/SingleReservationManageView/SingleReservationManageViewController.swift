@@ -14,6 +14,7 @@ class SingleReservationManageViewController: UIViewController {
     @IBOutlet weak var cancelBarButton: UIButton!
     @IBOutlet weak var confirmReservationBarView: UIView!
     @IBOutlet weak var confirmReservationBarButton: UIButton!
+    @IBOutlet weak var confirmReservationBarLabel: UILabel!
     @IBOutlet weak var modelInfoFrameView: UIView!
     @IBOutlet weak var modelInfoView: UIView!
     @IBOutlet weak var makeupCategoryLabel: UILabel!
@@ -25,17 +26,27 @@ class SingleReservationManageViewController: UIViewController {
     @IBOutlet weak var reservationDateLabel: UILabel!
     @IBOutlet weak var reservationTimeLabel: UILabel!
     @IBOutlet weak var reservationPlaceLabel: UILabel!
+    @IBOutlet weak var reservationPriceLabel: UILabel!
+    @IBOutlet weak var reservationEmailLabel: UILabel!
+    @IBOutlet weak var modelInfoLabel: UILabel!
     
     //MARK: - Properties
-    var isToday: Bool = false
-    var reservationData: ReservationData!
-    var reservationDateString: String!
-    var reservationTimeString: String!
+    private var reservationData: ReservationDetailData!
+    private var reservationId: Int!
     
     //MARK: - ViewController 생명 주기
     override func viewDidLoad() {
         super.viewDidLoad()
         setUI()
+        configure()
+    }
+    required init(reservationId: Int) {
+        self.reservationId = reservationId
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     //MARK: - setUI()
@@ -44,6 +55,7 @@ class SingleReservationManageViewController: UIViewController {
         cancelBarView.layer.cornerRadius=10
         confirmReservationBarView.layer.cornerRadius=10
         
+        modelInfoLabel.text = KeyChainManager.read(forkey: .role) == RoleType.ARTIST.rawValue ? "모델 정보" : "나의 정보"
         modelInfoFrameView.layer.borderColor = UIColor.mainBold.cgColor
         modelInfoFrameView.layer.borderWidth = 1.3
         
@@ -55,16 +67,16 @@ class SingleReservationManageViewController: UIViewController {
         modelInfoView.layer.masksToBounds = false
         
         modelInfoFrameView.layer.cornerRadius=10
-        if isToday {
-            cancelBarView.backgroundColor = .gray500
-            cancelBarLabel.text = "당일 예약은 취소가 불가능합니다"
-            cancelBarButton.isHidden = true
-        }else{
-            cancelBarView.backgroundColor = .systemRed
-            cancelBarLabel.text = "예약 취소하기"
-            cancelBarButton.isHidden = false
+    }
+    
+    func configure(){
+        //TODO: API Response DTO 수정 후 재작성
+        if isToday(Date()){
+            cancelBarView.isHidden = true
+            confirmReservationBarLabel.text = "당일 예약은 취소 불가합니다"
         }
     }
+    
     @IBAction private func reservationCancelBtnDidTap(_ sender: UIButton) {
         let alert = UIAlertController(
             title: "예약 취소하기",
@@ -93,6 +105,24 @@ class SingleReservationManageViewController: UIViewController {
     }
 }
 
+extension SingleReservationManageViewController{
+    func dateString(from date: Date) -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MM월 dd일 (E)"
+        dateFormatter.locale = Locale(identifier: "ko_KR")
+        return dateFormatter.string(from: date)
+    }
+    private func dateFromString(_ dateString: String) -> Date? {
+        let formatter = ISO8601DateFormatter()
+        formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]
+        return formatter.date(from: dateString)
+    }
+    private func isToday(_ date: Date?) -> Bool {
+        guard let date = date else { return false }
+        return Calendar.current.isDateInToday(date)
+    }
+}
+
 //MARK: - API 호출
 extension SingleReservationManageViewController {
     func patchReservation(reservationId: Int) {
@@ -112,6 +142,10 @@ extension SingleReservationManageViewController {
     }
     //TODO: - 예약 확정 API 호출
     func confirmReservation(){
+        
+    }
+    //TODO: - 예약 상세 조회 API 호출
+    func getReservationDetail(){
         
     }
 }
