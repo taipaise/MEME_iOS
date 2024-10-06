@@ -1,0 +1,233 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="32700.99.1234" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22685"/>
+        <capability name="Named colors" minToolsVersion="9.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <customFonts key="customFonts">
+        <array key="Pretendard-Regular.otf">
+            <string>Pretendard-Regular</string>
+        </array>
+    </customFonts>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ScheduleManagementViewController" customModule="MEME" customModuleProvider="target">
+            <connections>
+                <outlet property="myScheduleContentView" destination="zH1-RJ-a7h" id="SfY-lR-Lnc"/>
+                <outlet property="noneButton" destination="a8e-uU-0oO" id="Vco-zb-t6i"/>
+                <outlet property="scheduleRegisteButton" destination="EPO-hZ-XX5" id="Cjv-gJ-6Th"/>
+                <outlet property="segmentedControl" destination="DZO-Wd-Di4" id="q7r-P5-GrA"/>
+                <outlet property="timeTableCollectionView" destination="ZOP-56-BLG" id="Bw4-VD-Nvo"/>
+                <outlet property="timeTableContentView" destination="dSw-l9-W2M" id="ncv-yM-Az9"/>
+                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outletCollection property="dayOfWeekButtons" destination="6vv-Ia-O2U" collectionClass="NSMutableArray" id="oSp-M3-SDy"/>
+                <outletCollection property="dayOfWeekButtons" destination="3Iw-UB-0EI" collectionClass="NSMutableArray" id="r0y-Y7-Gbd"/>
+                <outletCollection property="dayOfWeekButtons" destination="OIz-rx-5PC" collectionClass="NSMutableArray" id="W7c-bN-y6g"/>
+                <outletCollection property="dayOfWeekButtons" destination="VID-r9-F3a" collectionClass="NSMutableArray" id="ixR-sC-50e"/>
+                <outletCollection property="dayOfWeekButtons" destination="ufT-M6-b1o" collectionClass="NSMutableArray" id="Dvm-4R-6bO"/>
+                <outletCollection property="dayOfWeekButtons" destination="sDP-Vo-RR3" collectionClass="NSMutableArray" id="wtD-qq-u26"/>
+                <outletCollection property="dayOfWeekButtons" destination="57H-pS-y2M" collectionClass="NSMutableArray" id="yRN-7K-yy8"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+            <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DZO-Wd-Di4" customClass="ScheduleSegmentedControl" customModule="MEME" customModuleProvider="target">
+                    <rect key="frame" x="24" y="119" width="345" height="43"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="43" id="Q8Z-Ce-MqF"/>
+                    </constraints>
+                </view>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FQU-T9-Zg9">
+                    <rect key="frame" x="0.0" y="162" width="393" height="656"/>
+                    <subviews>
+                        <view hidden="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zH1-RJ-a7h" userLabel="My Schedule ContentView">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="656"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dSw-l9-W2M" userLabel="Time Table Content View">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="656"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="예약 가능 시간을 입력해주세요" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ziR-v9-GmA">
+                                    <rect key="frame" x="24" y="15" width="168" height="17"/>
+                                    <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="요일" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qpO-Oc-7Z3">
+                                    <rect key="frame" x="24" y="57" width="24.333333333333329" height="17"/>
+                                    <fontDescription key="fontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
+                                    <color key="textColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="bRX-jh-mQX">
+                                    <rect key="frame" x="24" y="84" width="345" height="27"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6vv-Ia-O2U">
+                                            <rect key="frame" x="0.0" y="0.0" width="46.666666666666664" height="27"/>
+                                            <color key="backgroundColor" name="MainBold"/>
+                                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="월">
+                                                <fontDescription key="titleFontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="10"/>
+                                            </buttonConfiguration>
+                                        </button>
+                                        <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3Iw-UB-0EI">
+                                            <rect key="frame" x="49.666666666666671" y="0.0" width="46.666666666666671" height="27"/>
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="화">
+                                                <fontDescription key="titleFontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="10"/>
+                                            </buttonConfiguration>
+                                        </button>
+                                        <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="OIz-rx-5PC">
+                                            <rect key="frame" x="99.333333333333329" y="0.0" width="46.666666666666671" height="27"/>
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="수">
+                                                <fontDescription key="titleFontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="10"/>
+                                            </buttonConfiguration>
+                                        </button>
+                                        <button opaque="NO" tag="3" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VID-r9-F3a">
+                                            <rect key="frame" x="149" y="0.0" width="47" height="27"/>
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="목">
+                                                <fontDescription key="titleFontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="10"/>
+                                            </buttonConfiguration>
+                                        </button>
+                                        <button opaque="NO" tag="4" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ufT-M6-b1o">
+                                            <rect key="frame" x="199" y="0.0" width="46.666666666666657" height="27"/>
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="금">
+                                                <fontDescription key="titleFontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="10"/>
+                                            </buttonConfiguration>
+                                        </button>
+                                        <button opaque="NO" tag="5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="sDP-Vo-RR3">
+                                            <rect key="frame" x="248.66666666666666" y="0.0" width="46.666666666666657" height="27"/>
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="토">
+                                                <fontDescription key="titleFontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="10"/>
+                                            </buttonConfiguration>
+                                        </button>
+                                        <button opaque="NO" tag="6" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="57H-pS-y2M">
+                                            <rect key="frame" x="298.33333333333331" y="0.0" width="46.666666666666686" height="27"/>
+                                            <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                            <state key="normal" title="Button"/>
+                                            <buttonConfiguration key="configuration" style="plain" title="일">
+                                                <fontDescription key="titleFontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="10"/>
+                                            </buttonConfiguration>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="27" id="p1Q-VQ-kID"/>
+                                    </constraints>
+                                </stackView>
+                                <button opaque="NO" tag="2" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="a8e-uU-0oO">
+                                    <rect key="frame" x="24" y="138" width="55" height="31"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="31" id="SQ6-xR-q3I"/>
+                                        <constraint firstAttribute="width" constant="55" id="lVb-LG-8Mr"/>
+                                    </constraints>
+                                    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="없음">
+                                        <fontDescription key="titleFontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
+                                    </buttonConfiguration>
+                                </button>
+                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EPO-hZ-XX5">
+                                    <rect key="frame" x="24" y="598" width="345" height="49"/>
+                                    <color key="backgroundColor" name="MainBold"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="49" id="zhj-0u-3oY"/>
+                                    </constraints>
+                                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <state key="normal" title="Button"/>
+                                    <buttonConfiguration key="configuration" style="plain" title="일정 등록하기">
+                                        <fontDescription key="titleFontDescription" name="Pretendard-Regular" family="Pretendard" pointSize="14"/>
+                                    </buttonConfiguration>
+                                </button>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" scrollEnabled="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="ZOP-56-BLG">
+                                    <rect key="frame" x="21.666666666666657" y="190" width="350" height="351"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="KB3-JK-FpQ">
+                                        <size key="itemSize" width="128" height="128"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </collectionViewFlowLayout>
+                                </collectionView>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            <constraints>
+                                <constraint firstItem="EPO-hZ-XX5" firstAttribute="top" secondItem="ZOP-56-BLG" secondAttribute="bottom" constant="57" id="6va-V3-xoz"/>
+                                <constraint firstAttribute="trailing" secondItem="bRX-jh-mQX" secondAttribute="trailing" constant="24" id="8zT-84-Awt"/>
+                                <constraint firstItem="bRX-jh-mQX" firstAttribute="top" secondItem="qpO-Oc-7Z3" secondAttribute="bottom" constant="10" id="9cX-Mv-SyL"/>
+                                <constraint firstItem="a8e-uU-0oO" firstAttribute="top" secondItem="bRX-jh-mQX" secondAttribute="bottom" constant="27" id="AZF-2G-xsm"/>
+                                <constraint firstItem="ZOP-56-BLG" firstAttribute="top" secondItem="a8e-uU-0oO" secondAttribute="bottom" constant="21" id="G6z-og-ogC"/>
+                                <constraint firstItem="ziR-v9-GmA" firstAttribute="top" secondItem="dSw-l9-W2M" secondAttribute="top" constant="15" id="H7W-mk-nUy"/>
+                                <constraint firstItem="a8e-uU-0oO" firstAttribute="leading" secondItem="dSw-l9-W2M" secondAttribute="leading" constant="24" id="P8m-pO-ffo"/>
+                                <constraint firstAttribute="trailing" secondItem="EPO-hZ-XX5" secondAttribute="trailing" constant="24" id="R71-9G-BGc"/>
+                                <constraint firstItem="ziR-v9-GmA" firstAttribute="leading" secondItem="dSw-l9-W2M" secondAttribute="leading" constant="24" id="RUs-wi-UGl"/>
+                                <constraint firstItem="EPO-hZ-XX5" firstAttribute="leading" secondItem="dSw-l9-W2M" secondAttribute="leading" constant="24" id="TRo-Ra-Fnv"/>
+                                <constraint firstAttribute="trailing" secondItem="ZOP-56-BLG" secondAttribute="trailing" constant="21.5" id="WJ3-hc-lMQ"/>
+                                <constraint firstAttribute="bottom" secondItem="EPO-hZ-XX5" secondAttribute="bottom" constant="9" id="YnA-IV-Xnq"/>
+                                <constraint firstItem="bRX-jh-mQX" firstAttribute="leading" secondItem="dSw-l9-W2M" secondAttribute="leading" constant="24" id="dLG-mz-goK"/>
+                                <constraint firstItem="qpO-Oc-7Z3" firstAttribute="leading" secondItem="dSw-l9-W2M" secondAttribute="leading" constant="24" id="dLJ-ga-sfS"/>
+                                <constraint firstItem="qpO-Oc-7Z3" firstAttribute="top" secondItem="ziR-v9-GmA" secondAttribute="bottom" constant="25" id="ft3-0D-gvL"/>
+                                <constraint firstItem="ZOP-56-BLG" firstAttribute="leading" secondItem="dSw-l9-W2M" secondAttribute="leading" constant="21.5" id="gq1-m5-0ct"/>
+                            </constraints>
+                        </view>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <constraints>
+                        <constraint firstItem="dSw-l9-W2M" firstAttribute="bottom" secondItem="dkb-WK-7SE" secondAttribute="bottom" id="8ad-8t-ALG"/>
+                        <constraint firstItem="dSw-l9-W2M" firstAttribute="leading" secondItem="dkb-WK-7SE" secondAttribute="leading" id="9Jo-5P-3BA"/>
+                        <constraint firstItem="dSw-l9-W2M" firstAttribute="height" secondItem="q97-mh-lT3" secondAttribute="height" priority="250" id="CRl-Mx-cNg"/>
+                        <constraint firstItem="zH1-RJ-a7h" firstAttribute="width" secondItem="q97-mh-lT3" secondAttribute="width" id="HDz-wW-7g4"/>
+                        <constraint firstItem="dSw-l9-W2M" firstAttribute="top" secondItem="dkb-WK-7SE" secondAttribute="top" id="KAG-ir-hUc"/>
+                        <constraint firstItem="zH1-RJ-a7h" firstAttribute="leading" secondItem="dkb-WK-7SE" secondAttribute="leading" id="YDB-O7-LQ8"/>
+                        <constraint firstItem="zH1-RJ-a7h" firstAttribute="height" secondItem="q97-mh-lT3" secondAttribute="height" priority="250" id="bbz-bX-zFI"/>
+                        <constraint firstItem="dkb-WK-7SE" firstAttribute="trailing" secondItem="zH1-RJ-a7h" secondAttribute="trailing" id="fBZ-O4-c9R"/>
+                        <constraint firstItem="dSw-l9-W2M" firstAttribute="trailing" secondItem="dkb-WK-7SE" secondAttribute="trailing" id="gkH-jA-e8Q"/>
+                        <constraint firstItem="dkb-WK-7SE" firstAttribute="bottom" secondItem="zH1-RJ-a7h" secondAttribute="bottom" id="rk0-W2-OED"/>
+                        <constraint firstItem="dSw-l9-W2M" firstAttribute="width" secondItem="q97-mh-lT3" secondAttribute="width" id="sno-C3-SJw"/>
+                        <constraint firstItem="dSw-l9-W2M" firstAttribute="leading" secondItem="q97-mh-lT3" secondAttribute="leading" id="tM8-5p-BSM"/>
+                        <constraint firstItem="zH1-RJ-a7h" firstAttribute="top" secondItem="dkb-WK-7SE" secondAttribute="top" id="ueV-jv-VEF"/>
+                    </constraints>
+                    <viewLayoutGuide key="contentLayoutGuide" id="dkb-WK-7SE"/>
+                    <viewLayoutGuide key="frameLayoutGuide" id="q97-mh-lT3"/>
+                </scrollView>
+            </subviews>
+            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="FQU-T9-Zg9" secondAttribute="bottom" id="aKZ-QE-0P9"/>
+                <constraint firstItem="DZO-Wd-Di4" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="cf1-Uq-ho2"/>
+                <constraint firstItem="FQU-T9-Zg9" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="hbs-b1-woc"/>
+                <constraint firstItem="DZO-Wd-Di4" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="60" id="juM-fB-sMk"/>
+                <constraint firstItem="FQU-T9-Zg9" firstAttribute="top" secondItem="DZO-Wd-Di4" secondAttribute="bottom" id="pTi-r6-gZf"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="FQU-T9-Zg9" secondAttribute="trailing" id="rbX-BY-nM6"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="DZO-Wd-Di4" secondAttribute="trailing" constant="24" id="uwJ-j0-kOF"/>
+            </constraints>
+            <point key="canvasLocation" x="132" y="-11"/>
+        </view>
+    </objects>
+    <resources>
+        <namedColor name="MainBold">
+            <color red="0.98431372549019602" green="0.3843137254901961" blue="0.24313725490196078" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+    </resources>
+</document>

@@ -23,6 +23,7 @@ final class ArtistTabBarController: UITabBarController {
         tabs = [
             TabBarItemType.artistHome: ArtistHomeViewController(),
             TabBarItemType.artistReservation: ManagementReservationsViewController(),
+            TabBarItemType.artistSchedule: ScheduleManagementViewController(),
             TabBarItemType.artistMypage: ArtistMyPageViewController()
         ]
 

@@ -26,17 +26,21 @@
                 <outlet property="cancelBarLabel" destination="2Om-41-ScY" id="3AG-ZJ-5GI"/>
                 <outlet property="cancelBarView" destination="Gyk-ma-98k" id="sIn-G6-Xfl"/>
                 <outlet property="confirmReservationBarButton" destination="jRZ-hu-H9D" id="Amf-5n-hxp"/>
+                <outlet property="confirmReservationBarLabel" destination="13l-e8-kJZ" id="Omx-01-ncw"/>
                 <outlet property="confirmReservationBarView" destination="MW6-ag-qcv" id="2Hz-hb-kUO"/>
                 <outlet property="makeupCategoryLabel" destination="9ut-d9-pXx" id="p9M-fp-mTf"/>
                 <outlet property="makeupNameLabel" destination="VX9-mn-11l" id="59p-zR-G1s"/>
                 <outlet property="modelGenderLabel" destination="KbF-gC-fyy" id="xG7-X5-1yP"/>
                 <outlet property="modelInfoFrameView" destination="Izv-p7-VnY" id="qOs-Ox-uih"/>
+                <outlet property="modelInfoLabel" destination="6oP-Ma-Lil" id="ReW-mO-C95"/>
                 <outlet property="modelInfoView" destination="qhv-Vo-nLy" id="bKc-aD-LTl"/>
                 <outlet property="modelNicknameLabel" destination="e36-9N-IA0" id="Eep-BJ-ILR"/>
                 <outlet property="modelPersonalColorLabel" destination="Hmo-qP-gHG" id="HwX-tI-eHl"/>
                 <outlet property="modelSkinTypeLabel" destination="DYp-kl-T2i" id="EeK-Cj-9Un"/>
                 <outlet property="reservationDateLabel" destination="XZn-AB-GXd" id="3tj-Yb-zga"/>
+                <outlet property="reservationEmailLabel" destination="Q2H-2i-PhJ" id="UFV-pk-m6o"/>
                 <outlet property="reservationPlaceLabel" destination="XYn-bu-WIS" id="wAf-ki-Cmz"/>
+                <outlet property="reservationPriceLabel" destination="cCs-ap-i52" id="0wZ-IY-FBF"/>
                 <outlet property="reservationTimeLabel" destination="esg-qF-MPf" id="caU-pM-HFI"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -432,7 +436,7 @@
                         <constraint firstItem="lcc-nq-0Er" firstAttribute="centerX" secondItem="uek-xo-dya" secondAttribute="centerX" priority="250" id="l94-LD-5xi"/>
                     </constraints>
                 </scrollView>
-                <stackView opaque="NO" contentMode="center" distribution="fillProportionally" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="x4Z-nA-hNU">
+                <stackView opaque="NO" contentMode="center" distribution="fillProportionally" spacing="10" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x4Z-nA-hNU">
                     <rect key="frame" x="27" y="760" width="339" height="49"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Gyk-ma-98k">
@@ -499,10 +503,10 @@
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
             <constraints>
                 <constraint firstItem="uek-xo-dya" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="ESj-bi-hmt"/>
-                <constraint firstItem="x4Z-nA-hNU" firstAttribute="trailing" secondItem="fnl-2z-Ty3" secondAttribute="trailing" constant="-27" id="U6p-7r-UCy"/>
-                <constraint firstItem="fnl-2z-Ty3" firstAttribute="leading" secondItem="x4Z-nA-hNU" secondAttribute="leading" constant="-27" id="a8M-WP-G47"/>
+                <constraint firstItem="x4Z-nA-hNU" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="27" id="W4h-Fm-C38"/>
                 <constraint firstItem="uek-xo-dya" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="axm-4M-2oK"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="uek-xo-dya" secondAttribute="bottom" id="fNP-mn-BjH"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="x4Z-nA-hNU" secondAttribute="trailing" constant="27" id="hzc-e2-jYs"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="uek-xo-dya" secondAttribute="trailing" id="pI5-5L-Xc2"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="x4Z-nA-hNU" secondAttribute="bottom" constant="9" id="wGP-IZ-0QM"/>
             </constraints>
