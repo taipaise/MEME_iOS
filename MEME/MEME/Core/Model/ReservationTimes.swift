@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum ReservationTimes: String {
+enum ReservationTimes: String, CaseIterable {
     case _04_00 = "04:00"
     case _04_30 = "04:30"
     case _05_00 = "05:00"

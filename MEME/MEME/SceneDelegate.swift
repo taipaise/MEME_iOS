@@ -62,44 +62,48 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 extension SceneDelegate {
     func getRootViewController() -> UIViewController {
         let vc = NavigationController(nibName: nil, bundle: nil)
-        
-        Task {
-            let reissueResult = await AuthManager.shared.reissue()
-            switch reissueResult {
-            case .success(let result):
-                if result {
-                    let role = KeyChainManager.read(forkey: .role) ?? RoleType.ARTIST.rawValue
-                    
-                    if role == RoleType.ARTIST.rawValue {
-                        let mainVC = ArtistTabBarController(
-                            nibName: ArtistTabBarController.className,
-                            bundle: ArtistTabBarController.bundle
-                        )
-                        vc.viewControllers = [mainVC]
-                    } else {
-                        let mainVC = ModelTabBarController(
-                            nibName: ModelTabBarController.className,
-                            bundle: ModelTabBarController.bundle
-                        )
-                        vc.viewControllers = [mainVC]
-                    }
-                } else {
-                    KeyChainManager.removeAllKeychain()
-                    let loginVC = LoginViewController(
-                        nibName: LoginViewController.className,
-                        bundle: LoginViewController.bundle
-                    )
-                    vc.viewControllers = [loginVC]
-                }
-            case .failure(_):
-                KeyChainManager.removeAllKeychain()
-                let loginVC = LoginViewController(
-                    nibName: LoginViewController.className,
-                    bundle: LoginViewController.bundle
-                )
-                vc.viewControllers = [loginVC]
-            }
-        }
+        let mainVC = ArtistTabBarController(
+            nibName: ArtistTabBarController.className,
+            bundle: ArtistTabBarController.bundle
+        )
+        vc.viewControllers = [mainVC]
+//        Task {
+//            let reissueResult = await AuthManager.shared.reissue()
+//            switch reissueResult {
+//            case .success(let result):
+//                if result {
+//                    let role = KeyChainManager.read(forkey: .role) ?? RoleType.ARTIST.rawValue
+//                    
+//                    if role == RoleType.ARTIST.rawValue {
+//                        let mainVC = ArtistTabBarController(
+//                            nibName: ArtistTabBarController.className,
+//                            bundle: ArtistTabBarController.bundle
+//                        )
+//                        vc.viewControllers = [mainVC]
+//                    } else {
+//                        let mainVC = ModelTabBarController(
+//                            nibName: ModelTabBarController.className,
+//                            bundle: ModelTabBarController.bundle
+//                        )
+//                        vc.viewControllers = [mainVC]
+//                    }
+//                } else {
+//                    KeyChainManager.removeAllKeychain()
+//                    let loginVC = LoginViewController(
+//                        nibName: LoginViewController.className,
+//                        bundle: LoginViewController.bundle
+//                    )
+//                    vc.viewControllers = [loginVC]
+//                }
+//            case .failure(_):
+//                KeyChainManager.removeAllKeychain()
+//                let loginVC = LoginViewController(
+//                    nibName: LoginViewController.className,
+//                    bundle: LoginViewController.bundle
+//                )
+//                vc.viewControllers = [loginVC]
+//            }
+//        }
 
         return vc
     }
