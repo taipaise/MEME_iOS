@@ -1774,6 +1774,8 @@
 				31A399BE2C456500005D7FE8 /* NotificationViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
 		31A8C84D2C42D2BC00A8D0F3 /* Sign up */ = {
 			isa = PBXGroup;
 			children = (
@@ -1901,6 +1903,8 @@
 				3100D0742C439D1400A2802D /* Models */,
 			);
 			path = Views;
+			sourceTree = "<group>";
+		};
 		31CC852C2C42ECDD0030E7C9 /* Find Email Result */ = {
 			isa = PBXGroup;
 			children = (
