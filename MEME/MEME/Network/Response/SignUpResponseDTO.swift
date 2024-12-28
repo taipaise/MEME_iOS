@@ -20,12 +20,13 @@ struct SignUpResponseDTO: Codable {
 }
 
 struct UserIdResponseDTO: Codable {
-    let userId: Int
     let accessToken: String
     let refreshToken: String
+    let userId: Int
     let details: Bool
+    let role: RoleType
     
     enum CodingKeys: String, CodingKey {
-        case userId, accessToken, refreshToken, details
+        case accessToken, refreshToken, userId, details, role
     }
 }

@@ -11,5 +11,5 @@ struct ContactResponse: Codable {
     let result: String
     let message: String
     let data: String
-    let statusCode: Int
+    let code: Int
 }

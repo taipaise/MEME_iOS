@@ -8,10 +8,10 @@
 import Foundation
 
 struct TokenResponseDTO: Codable {
-    let accessToken: String
-    let refreshToken: String
+    let access_token: String
+    let refresh_token: String
     
     enum CodingKeys: String, CodingKey {
-        case accessToken, refreshToken
+        case access_token, refresh_token
     }
 }

@@ -20,11 +20,11 @@ struct ModelProfileDTO: Codable {
     let result: String
     let message: String
     let data: ModelProfileResponse?
-    let statusCode: Int
+    let code: Int
 
     enum CodingKeys: String, CodingKey {
         case result, message, data
-        case statusCode = "statusCode"
+        case code = "code"
     }
 }
 
@@ -51,11 +51,11 @@ struct ModelProfileDTO: Codable {
 //    let result: String
 //    let message: String
 //    let data: ModelProfileData?
-//    let statusCode: Int
+//    let code: Int
 //
 //    enum CodingKeys: String, CodingKey {
 //        case result, message, data
-//        case statusCode = "statusCode"
+//        case code = "code"
 //    }
 //}
 
@@ -70,6 +70,6 @@ struct ModelProfileDTO: Codable {
 //    
 //    enum CodingKeys: String, CodingKey {
 //        case result, message, data
-//        case status = "statusCode"
+//        case status = "code"
 //    }
 //}

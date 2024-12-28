@@ -12,7 +12,7 @@ struct ArtistProfileDTO: Codable {
     let result: String
     let message: String
     let data: ArtistProfileData?
-    let statusCode: Int
+    let code: Int
 }
 
 struct ArtistProfileData: Codable {

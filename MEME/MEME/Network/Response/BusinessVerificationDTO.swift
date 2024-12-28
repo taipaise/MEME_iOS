@@ -10,12 +10,12 @@ import Foundation
 // MARK: - BusinessVerificationDTO
 struct BusinessVerificationDTO: Codable {
     let requestCnt: Int
-    let statusCode: String
+    let code: String
     let data: [BusinessVerificationData]
 
     enum CodingKeys: String, CodingKey {
         case requestCnt = "request_cnt"
-        case statusCode = "status_code"
+        case code = "status_code"
         case data
     }
 }

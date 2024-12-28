@@ -8,7 +8,7 @@
 import Foundation
 
 struct CreatePortfolioDTO: Codable {
-    let statusCode: Int
+    let code: Int
     let result: String
     let message: String
     let data: Int
@@ -18,7 +18,7 @@ struct GetAllPortfolioDTO: Codable {
     let result: String
     let message: String
     let data: PortfolioAllDTO?
-    let statusCode: Int
+    let code: Int
 }
 struct PortfolioAllDTO: Codable {
     let content: [PortfolioAllData]?
@@ -28,7 +28,7 @@ struct PortfolioAllDTO: Codable {
     let totalPage: Int
 }
 struct EditPortfolioDTO: Codable {
-    let statusCode: Int
+    let code: Int
     let result: String
     let message: String
     let data: String
@@ -56,7 +56,7 @@ struct RecommendDTO: Codable {
     let result: String
     let message: String
     let data: [Portfolio]
-    let statusCode: Int
+    let code: Int
 }
 
 struct Portfolio: Codable {
@@ -74,7 +74,7 @@ struct PortfolioDTO: Codable {
     let result: String
     let message: String
     let data: PortfolioData?
-    let statusCode: Int
+    let code: Int
 }
 
 struct PortfolioData: Codable {
