@@ -9,7 +9,7 @@ import UIKit
 
 final class ModelTabBarController: UITabBarController {
     
-    private var tabs: [TabBarItemType: UIViewController] = [:]
+    private var customTabs: [TabBarItemType: UIViewController] = [:]
 //    private var tabs: [TabBarItemType: UIViewController] = [:]
 
     
@@ -20,19 +20,19 @@ final class ModelTabBarController: UITabBarController {
     }
     
     private func setTabBarItems() {
-        tabs = [
+        customTabs = [
             TabBarItemType.modelHome: ModelHomeViewController(),
             TabBarItemType.modelReservation: ModelReservationChartViewController(),
             TabBarItemType.modelMypage: ModelMyPageViewController()
         ]
         
-        tabs.forEach { tabType, navigationController in
+        customTabs.forEach { tabType, navigationController in
             navigationController.tabBarItem = tabType.setTabBarItem()
         }
         
-        let sortedKeys = tabs.sorted { $0.key.rawValue < $1.key.rawValue }
+        let sortedKeys = customTabs.sorted { $0.key.rawValue < $1.key.rawValue }
         
-        let tabNavigationControllers = sortedKeys.map { tabs[$0.key] ?? UINavigationController() }
+        let tabNavigationControllers = sortedKeys.map { customTabs[$0.key] ?? UINavigationController() }
         setViewControllers(tabNavigationControllers, animated: false)
     }
     

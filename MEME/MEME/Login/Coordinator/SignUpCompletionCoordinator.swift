@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class SignUpCompletionCoordinator: SignupCoordinator {
+final class SignUpCompletionCoordinator: @preconcurrency SignupCoordinator {
     var navigationController: UINavigationController?
     
     var profileInfo: SignUpProfileInfo

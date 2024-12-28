@@ -247,18 +247,6 @@ final class SetBusinessInfoDetailViewController: UIViewController {
         {
             builder = builder.shopLocation(text)
         }
-
-        AuthManager.shared.setArtistProfile(extraInfo: builder.build()) { [weak self] result in
-            switch result {
-            case .success(let response):
-                let nextVC = ArtistTabBarController()
-                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
-            case .failure(let error):
-                //
-                let nextVC = ArtistTabBarController()
-                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
-            }
-        }
     }
 }
 

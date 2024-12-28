@@ -9,7 +9,7 @@ import UIKit
 
 final class ArtistTabBarController: UITabBarController {
     
-    private var tabs: [TabBarItemType: UIViewController] = [:]
+    private var customTabs: [TabBarItemType: UIViewController] = [:]
 //    private var tabs: [TabBarItemType: UINavigationController] = [:]
 
     
@@ -20,19 +20,19 @@ final class ArtistTabBarController: UITabBarController {
     }
 
     private func setTabBarItems() {
-        tabs = [
+        customTabs = [
             TabBarItemType.artistHome: ArtistHomeViewController(),
             TabBarItemType.artistReservation: ManagementReservationsViewController(),
             TabBarItemType.artistSchedule: ScheduleManagementViewController(),
             TabBarItemType.artistMypage: ArtistMyPageViewController()
         ]
 
-        tabs.forEach { tabType, navigationController in
+        customTabs.forEach { tabType, navigationController in
             navigationController.tabBarItem = tabType.setTabBarItem()
         }
-        let sortedKeys = tabs.sorted { $0.key.rawValue < $1.key.rawValue }
+        let sortedKeys = customTabs.sorted { $0.key.rawValue < $1.key.rawValue }
         
-        let tabViewControllers = sortedKeys.map { tabs[$0.key] ?? UIViewController() }
+        let tabViewControllers = sortedKeys.map { customTabs[$0.key] ?? UIViewController() }
         setViewControllers(tabViewControllers, animated: false)
     }
     

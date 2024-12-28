@@ -51,19 +51,17 @@ final class SetProfileImageViewModel: NSObject, ViewModel {
         
         input.nextTap
             .subscribe { [weak self] _ in
-                print(self?.profileInfo)
-                // TODO: - 서버 열리면 주석 해제
-//                Task {
-//                    let result = await self?.modelSignUp()
-//                    if
-//                        let result,
-//                        result
-//                    {
-//                        self?.navigation.onNext(.success)
-//                    } else {
-//                        self?.navigation.onNext(.fail)
-//                    }
-//                }
+                Task {
+                    let result = await self?.socialSingUp()
+                    if
+                        let result,
+                        result
+                    {
+                        self?.navigation.onNext(.success)
+                    } else {
+                        self?.navigation.onNext(.fail)
+                    }
+                }
                 self?.navigation.onNext(.success)
             }
             .disposed(by: disposeBag)
@@ -99,7 +97,7 @@ extension SetProfileImageViewModel {
 // MARK: - action
 extension SetProfileImageViewModel {
     private func toggleSkip() {
-        var state = skipState.value
+        let state = skipState.value
         skipState.accept(!state)
     }
     
@@ -111,8 +109,8 @@ extension SetProfileImageViewModel {
         phPickerManager.present(from: viewController)
     }
     
-    private func modelSignUp() async -> Bool {
-        let result = await authManager.modelSignUp(profileInfo: profileInfo)
+    private func socialSingUp() async -> Bool {
+        let result = await authManager.socialSingUp(profileInfo: profileInfo)
         
         switch result {
         case .success(let result):
