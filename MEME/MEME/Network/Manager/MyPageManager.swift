@@ -243,23 +243,5 @@ final class MyPageManager {
                 completion(.failure(error))
             }
         }
-    }
-    //위에 API 호출하는 함수 -> 그냥 쓰는 컨트롤러에 가져다 쓰세요
-//    func getProfileManagementData(userId: Int) {
-//        MyPageManager.shared.getProfileManagementData(userId: userId) { [weak self] result in
-//            switch result {
-//            case .success(let response):
-//                // 데이터 처리 여기 추가하세용
-//                print("프로필 관리 데이터 가져오기 성공: \(response)")
-//
-//            case .failure(let error):
-//                if let responseData = error.response {
-//                    let responseString = String(data: responseData.data, encoding: .utf8)
-//                    print("프로필 관리 데이터 가져오기 실패: \(responseString ?? "no data")")
-//                }
-//                print("프로필 관리 데이터 가져오기 실패: \(error.localizedDescription)")
-//            }
-//        }
-//    }
-    
+    }    
 }
