@@ -16,8 +16,8 @@ enum NetworkError: Int {
 struct HandleNetworkError {
     static func handleNetworkError(_ error: Error) {
         if let moyaError = error as? MoyaError {
-            if let statusCode = moyaError.response?.statusCode {
-                let networkError = NetworkError(rawValue: statusCode)
+            if let code = moyaError.response?.statusCode {
+                let networkError = NetworkError(rawValue: code)
                 switch networkError {
                 case .invalidRequest:
                     print("invalidRequest")
