@@ -12,6 +12,7 @@ enum SecretInfoKeys {
     static let callbackURLScheme = "CallbackURLScheme"
     static let baseURL = "BaseURL"
     static let baseURLAuth = "BaseURLAuth"
+    static let baseURLReservation = "BaseURLReservation"
     static let imageBaseURL = "ImageBaseURL"
     static let s3Secret = "S3SecretKey"
     static let s3Access = "S3AccessKey"
@@ -39,6 +40,11 @@ final class SecretInfoManager {
     
     class var baseURLAuth: String {
         guard let url = shared.info[SecretInfoKeys.baseURLAuth] else { fatalError("BaseURL: Base-Info Plist error")}
+        return url
+    }
+    
+    class var baseURLReservation: String {
+        guard let url = shared.info[SecretInfoKeys.baseURLReservation] else { fatalError("BaseURL: Base-Info Plist error")}
         return url
     }
     

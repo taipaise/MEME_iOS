@@ -8,7 +8,6 @@
 import Foundation
 
 enum KeyChainValue: String, CaseIterable {
-    
     case accessToken = "accessToken"
     case refreshToken = "refreshToken"
     case memberId = "id"

@@ -12,7 +12,7 @@ struct ReservationDTO: Codable {
     let result: String
     let message: String
     let data: [ReservationData]?
-    let statusCode: Int
+    let code: Int
 }
 
 struct ReservationData: Codable {
@@ -33,7 +33,7 @@ struct PossibleLocationsDTO: Codable {
     let result: String
     let message: String
     let data: MakeupLocationData
-    let statusCode: Int
+    let code: Int
 }
 
 struct MakeupLocationData: Codable {
@@ -47,7 +47,7 @@ struct PossibleTimesDTO: Codable {
     let result: String
     let message: String
     let data: [TimeSlot]
-    let statusCode: Int
+    let code: Int
 }
 
 struct TimeSlot: Codable {
@@ -60,7 +60,7 @@ struct PostReservationDTO: Codable {
     let result: String
     let message: String
     let data: PostReservationData?
-    let statusCode: Int
+    let code: Int
 }
 
 struct PostReservationData: Codable {
@@ -75,7 +75,7 @@ struct PatchReservationDTO: Codable {
     let result: String
     let message: String
     let data: String?
-    let statusCode: Int
+    let code: Int
 }
 
 // MARK: -모델 예약 상세 조회 DTO
@@ -83,7 +83,7 @@ struct ReservationDetailDTO: Codable {
     let result: String
     let message: String
     let data: ReservationDetailData
-    let statusCode: Int
+    let code: Int
 }
 
 struct ReservationDetailData: Codable {

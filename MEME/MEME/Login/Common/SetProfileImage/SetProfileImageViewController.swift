@@ -115,16 +115,16 @@ extension SetProfileImageViewController {
 }
 
 extension SetProfileImageViewController {
-        private func navigate(type: SetProfileImageViewModel.NavigationType) {
-            guard let viewModel = viewModel else { return }
-            let coordinator = SignUpCompletionCoordinator(navigationController: self.navigationController, profileInfo: viewModel.profileInfo)
-            switch type {
-            case .success:
-                coordinator.start(isSuccess: true)
-            case .fail:
-                coordinator.start(isSuccess: false)
-            case .none:
-                break
-            }
+    private func navigate(type: SetProfileImageViewModel.NavigationType) {
+        guard let viewModel = viewModel else { return }
+        let coordinator = SignUpCompletionCoordinator(navigationController: self.navigationController, profileInfo: viewModel.profileInfo)
+        switch type {
+        case .success:
+            coordinator.start(isSuccess: true)
+        case .fail:
+            coordinator.start(isSuccess: false)
+        case .none:
+            break
         }
     }
+}

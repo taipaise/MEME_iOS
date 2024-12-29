@@ -15,53 +15,46 @@ final class AuthManager {
     private let provider = NetworkProvider<API>(plugins: [NetworkLoggerPlugin()])
     
     private init() {}
-        
-    func logout(completion: @escaping (Result<Response, MoyaError>) -> Void) {
-        
-    }
     
-    func withdraw(completion: @escaping (Result<Response, MoyaError>) -> Void) {
-        
-    }
-    
-    func modelSignUp(profileInfo: SignUpProfileInfo) async -> Result<SignUpResponseDTO, Error> {
-        let idToken = UserDefaultManager.shared.getIdToken()
-        guard
-            let socialProvider = UserDefaultManager.shared.getProvider(),
-            !idToken.isEmpty
-        else {
-            return .failure(MEMEError.UserDefaultError)
-        }
-        
-        let result = await provider.request(api: .modelSignUp(
-            idToken: idToken,
-            provider: socialProvider.rawValue,
-            info: profileInfo))
+    func validateUser(
+        idToken: String,
+        socialProvider: SocialProvider
+    ) async -> Result<CheckUserDTO, Error> {
+        let result = await provider.request(
+            api: .validateUser(
+                idToken: idToken,
+                provider: socialProvider
+            )
+        )
         
         switch result {
         case .success(let response):
             do {
-                let dto = try response.map(SignUpResponseDTO.self)
+                let dto = try response.map(CheckUserDTO.self)
                 return .success(dto)
             } catch {
-                return .failure(MEMEError.failedToParse)
+                return .failure(error)
             }
         case .failure(let error):
             return .failure(error)
         }
     }
     
-    func artistsignUp(
-        profileInfo: SignUpProfileInfo,
-        completion: @escaping (Result<SignUpResponseDTO, MoyaError>) -> Void
-    ) {
-       
-    }
-    
-    func setArtistProfile(
-        extraInfo: AtristProfileInfo,
-        completion: @escaping (Result<ExtraProfileResponseDTO, MoyaError>) -> Void
-    ) {
+    func validateNickname( nickname: String ) async -> Result<Bool, Error> {
+        let result = await provider.request( api: .validateNickname( nickname: nickname )
+        )
+        
+        switch result {
+        case .success(let response):
+            do {
+                let dto = try response.map(ValidateNickNameDTO.self)
+                return .success(dto.data)
+            } catch {
+                return .failure(error)
+            }
+        case .failure(let error):
+            return .failure(error)
+        }
     }
     
     func reissue() async -> Result<Bool, Error> {
@@ -77,9 +70,9 @@ final class AuthManager {
         switch result {
         case .success(let response):
             do {
-                let tokenDTO = try response.map(TokenResponseDTO.self)
-                KeyChainManager.save(forKey: .accessToken, value: tokenDTO.accessToken)
-                KeyChainManager.save(forKey: .refreshToken, value: tokenDTO.refreshToken)
+                let tokenDTO = try response.map(BasicResponseDTO<TokenResponseDTO>.self)
+                KeyChainManager.save(forKey: .accessToken, value: tokenDTO.data.access_token)
+                KeyChainManager.save(forKey: .refreshToken, value: tokenDTO.data.refresh_token)
                 return .success(true)
             } catch {
                 return .failure(MEMEError.failedToParse)
@@ -89,17 +82,56 @@ final class AuthManager {
         }
 
     }
+        
+    func logout() async -> Result<Bool, Error> {
+        let result = await provider.request(api: .logout)
+        switch result {
+        case .success:
+            KeyChainManager.removeAllKeychain()
+            return .success(true)
+        case .failure(let error):
+            return .failure(error)
+        }
+    }
+
+    func leave() async -> Result<Bool, Error> {
+        let result = await provider.request(api: .leave)
+        switch result {
+        case .success:
+            KeyChainManager.removeAllKeychain()
+            return .success(true)
+        case .failure(let error):
+            return .failure(error)
+        }
+    }
     
-    func checkIsUser(idToken: String, socialProvider: SocialProvider) async -> Result<CheckUserDTO, Error> {
-        let result = await provider.request(api: .checkIsUser(idToken: idToken, provider: socialProvider))
+    func socialSingUp(profileInfo: SignUpProfileInfo) async -> Result<SignUpResponseDTO, Error> {
+        let idToken = UserDefaultManager.shared.getIdToken()
+        guard
+            let socialProvider = UserDefaultManager.shared.getProvider(),
+            !idToken.isEmpty
+        else {
+            return .failure(MEMEError.UserDefaultError)
+        }
+        
+        let result = await provider.request(
+            api: .socialSingUp(
+                idToken: idToken,
+                provider: socialProvider,
+                role: profileInfo.roleType,
+                username: profileInfo.username,
+                nickname: profileInfo.username,
+                profileImg: profileInfo.profileImg
+            )
+        )
         
         switch result {
         case .success(let response):
             do {
-                let dto = try response.map(CheckUserDTO.self)
+                let dto = try response.map(SignUpResponseDTO.self)
                 return .success(dto)
             } catch {
-                return .failure(error)
+                return .failure(MEMEError.failedToParse)
             }
         case .failure(let error):
             return .failure(error)

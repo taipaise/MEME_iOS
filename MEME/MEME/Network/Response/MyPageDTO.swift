@@ -8,10 +8,10 @@
 import Foundation
 
 struct MyPageResponse: Codable {
+    let code: Int
     let result: String
     let message: String
     let data: MyPageData?
-    let statusCode: Int
 }
 
 struct MyPageData: Codable {
@@ -27,7 +27,7 @@ struct FavoriteArtistsDTO: Codable {
     let result: String
     let message: String
     let data: FavoriteArtistsData?
-    let statusCode: Int
+    let code: Int
 }
 
 struct FavoriteArtistsData: Codable {
@@ -49,7 +49,7 @@ struct FavoriteDTO: Codable {
     let result: String
     let message: String
     let data: String?
-    let statusCode: Int
+    let code: Int
 }
 
 // MARK: -프로필 관리 DTO
@@ -57,7 +57,7 @@ struct PatchProfileDTO: Codable {
     let result: String
     let message: String
     let data: String?
-    let statusCode: Int
+    let code: Int
 }
 
 // MARK: -프로필 조회(관리 정보 불러오기) DTO
@@ -65,7 +65,7 @@ struct ProfileManagementDataDTO: Codable {
     let result: String
     let message: String
     let data: ProfileManagementData?
-    let statusCode: Int
+    let code: Int
 }
 
 struct ProfileManagementData: Codable {

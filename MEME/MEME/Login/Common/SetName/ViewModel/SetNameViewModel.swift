@@ -111,8 +111,24 @@ extension SetNameViewModel {
         let nickname = profileInfo.nickname
         if nickname.count > 15 { return }
         
-        // TODO: - 닉네임 중복 여부 체크
-        isNickNameVerified.accept(true)
-        nickNameStatus.accept(.valid)
+        Task {
+            let result = await AuthManager.shared.validateNickname(nickname: nickname)
+            
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let isDuplicate):
+                    if isDuplicate {
+                        self.isNickNameVerified.accept(false)
+                        self.nickNameStatus.accept(.duplicate)
+                    } else {
+                        self.isNickNameVerified.accept(true)
+                        self.nickNameStatus.accept(.valid)
+                    }
+                case .failure(let error):
+                    print("Nickname validation failed: \(error.localizedDescription)")
+                    self.isNickNameVerified.accept(false)
+                }
+            }
+        }
     }
 }

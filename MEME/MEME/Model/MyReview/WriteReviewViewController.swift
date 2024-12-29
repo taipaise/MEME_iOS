@@ -524,7 +524,7 @@ class WriteReviewViewController: UIViewController, UIImagePickerControllerDelega
     func setTap() {
         PostReviewManager.shared.postReview(modelId: 1, reservationId: 3, star: 5, comment: "좋아요!", reviewImgSrc: ["image_url_1", "image_url_2"]) { result in
             switch result {
-            case .success(let response):
+            case .success(_):
                 print("성공: 리뷰가 성공적으로 등록되었습니다.")
             case .failure(let error):
                 print("요청 실패: \(error)")

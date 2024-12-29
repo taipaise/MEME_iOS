@@ -78,8 +78,8 @@ struct KeyChainManager {
         #endif
         
         if status == errSecSuccess, let data = dataTypeRef as? Data {
-            if let token = String(data: data, encoding: .utf8) {
-                return token
+            if let stringValue = String(data: data, encoding: .utf8) {
+                return stringValue.trimmingCharacters(in: .whitespacesAndNewlines)
             }
         }
         
@@ -140,9 +140,9 @@ extension KeyChainManager {
             Self.delete(forKey: value)
         }
     }
-
+    
     static func loadMemberID() -> Int {
-        var idString = Self.read(forkey: .memberId) ?? "-1"
+        let idString = Self.read(forkey: .memberId) ?? "-1"
         return Int(idString) ?? -1
     }
 }

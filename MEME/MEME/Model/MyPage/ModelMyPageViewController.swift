@@ -35,7 +35,6 @@ class ModelMyPageViewController: UIViewController, ModelHeaderViewDelegate {
                 case .success(let response):
                     self?.data = response
                     self?.updateHeaderView()
-                    
                 case .failure(let error):
                     print(error)
                 }
@@ -143,102 +142,124 @@ extension ModelMyPageViewController: UITableViewDelegate {
         }
     }
     
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-            tableView.deselectRow(at: indexPath, animated: true)
-            
-            if indexPath.row == 0 {
-                let modelModifyViewController = ModelModifyViewController()
-                self.navigationController?.pushViewController(modelModifyViewController, animated: true)
-            }
-            if indexPath.row == 1 {
-                let provisionViewController = ProvisionViewController()
-                self.navigationController?.pushViewController(provisionViewController, animated: true)
-            }
-            if indexPath.row == 2 {
-                let askViewController = AskViewController()
-                self.navigationController?.pushViewController(askViewController, animated: true)
-            }
-            if indexPath.row == 3 {
-                let alert = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
-                    let nextVC = LoginViewController()
-                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
-                }))
-                alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
-                present(alert, animated: true, completion: nil)
-            }
-        if indexPath.row == 4 {
-                let alert = UIAlertController(title: "탈퇴", message: "정말 탈퇴 하시겠습니까?", preferredStyle: .alert)
-                alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
-                    let nextVC = LoginViewController()
-                    (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
-                }))
-                alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
-                present(alert, animated: true, completion: nil)
-            }
-            if indexPath.row == 4 {
-                    let alert = UIAlertController(title: "탈퇴", message: "정말 탈퇴 하시겠습니까?", preferredStyle: .alert)
-                    alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
-                        // 탈퇴 처리 코드
-                    }))
-                    alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
-                    present(alert, animated: true, completion: nil)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableView.deselectRow(at: indexPath, animated: true)
+        
+        if indexPath.row == 0 {
+            let modelModifyViewController = ModelModifyViewController()
+            self.navigationController?.pushViewController(modelModifyViewController, animated: true)
+        }
+        if indexPath.row == 1 {
+            let provisionViewController = ProvisionViewController()
+            self.navigationController?.pushViewController(provisionViewController, animated: true)
+        }
+        if indexPath.row == 2 {
+            let askViewController = AskViewController()
+            self.navigationController?.pushViewController(askViewController, animated: true)
+        }
+        if indexPath.row == 3 {
+            let alert = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
+                Task {
+                    let result = await AuthManager.shared.logout()
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success:
+                            let nextVC = LoginViewController()
+                            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
+                        case .failure(let error):
+                            self.showErrorAlert(message: "로그아웃 실패: \(error.localizedDescription)")
+                        }
+                    }
                 }
+            }))
+            alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
         }
-        
-        func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-            let footerView = UIView()
-            footerView.backgroundColor = .white
-            
-            let versionLabel = UILabel()
-            versionLabel.text = "앱 버전"
-            versionLabel.textAlignment = .left
-            versionLabel.textColor = .gray400
-            versionLabel.font = .pretendard(to: .regular, size: 12)
-            
-            let versionNumberLabel = UILabel()
-            versionNumberLabel.text = "1.0.0"
-            versionNumberLabel.textAlignment = .right
-            versionNumberLabel.textColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.0)
-            versionNumberLabel.font = UIFont.systemFont(ofSize: 12)
-            
-            footerView.addSubview(versionLabel)
-            footerView.addSubview(versionNumberLabel)
-            
-            versionLabel.snp.makeConstraints { make in
-                make.leading.equalTo(footerView.snp.leading).offset(24)
-                make.centerY.equalTo(footerView.snp.centerY)
-            }
-            versionNumberLabel.snp.makeConstraints { make in
-                make.trailing.equalTo(footerView.snp.trailing).offset(-20)
-                make.centerY.equalTo(footerView.snp.centerY)
-            }
-            return footerView
-        }
-        
-        func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-            return 37
-        }
-        
-        func buttonClicked() {
-            let myPageInfoViewController = MyPageInfoViewController()
-            self.navigationController?.pushViewController(myPageInfoViewController, animated: true)
-        }
-        
-        func mpArtistClicked() {
-            let interestArtistViewController = InterestArtistViewController()
-            self.navigationController?.pushViewController(interestArtistViewController, animated: true)
-        }
-        
-        func mpMakeUpClicked() {
-            let interestMakeUpViewController = InterestMakeUpViewController()
-            self.navigationController?.pushViewController(interestMakeUpViewController, animated: true)
-        }
-        func myReviewClicked() {
-            let myReviewViewController = ReviewViewController()
-            self.navigationController?.pushViewController(myReviewViewController, animated: true)
+        if indexPath.row == 4 {
+            let alert = UIAlertController(title: "탈퇴", message: "정말 탈퇴 하시겠습니까?", preferredStyle: .alert)
+            alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
+                Task {
+                    let result = await AuthManager.shared.leave()
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success:
+                            let nextVC = LoginViewController()
+                            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
+                        case .failure(let error):
+                            self.showErrorAlert(message: "탈퇴 실패: \(error.localizedDescription)")
+                        }
+                    }
+                }
+            }))
+            alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
+            present(alert, animated: true, completion: nil)
         }
     }
+    
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        let footerView = UIView()
+        footerView.backgroundColor = .white
+        
+        let versionLabel = UILabel()
+        versionLabel.text = "앱 버전"
+        versionLabel.textAlignment = .left
+        versionLabel.textColor = .gray400
+        versionLabel.font = .pretendard(to: .regular, size: 12)
+        
+        let versionNumberLabel = UILabel()
+        versionNumberLabel.text = "1.0.0"
+        versionNumberLabel.textAlignment = .right
+        versionNumberLabel.textColor = UIColor(red: 0.6, green: 0.6, blue: 0.6, alpha: 1.0)
+        versionNumberLabel.font = UIFont.systemFont(ofSize: 12)
+        
+        footerView.addSubview(versionLabel)
+        footerView.addSubview(versionNumberLabel)
+        
+        versionLabel.snp.makeConstraints { make in
+            make.leading.equalTo(footerView.snp.leading).offset(24)
+            make.centerY.equalTo(footerView.snp.centerY)
+        }
+        versionNumberLabel.snp.makeConstraints { make in
+            make.trailing.equalTo(footerView.snp.trailing).offset(-20)
+            make.centerY.equalTo(footerView.snp.centerY)
+        }
+        return footerView
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 37
+    }
+    
+    func buttonClicked() {
+        let myPageInfoViewController = MyPageInfoViewController()
+        self.navigationController?.pushViewController(myPageInfoViewController, animated: true)
+    }
+    
+    func mpArtistClicked() {
+        let interestArtistViewController = InterestArtistViewController()
+        self.navigationController?.pushViewController(interestArtistViewController, animated: true)
+    }
+    
+    func mpMakeUpClicked() {
+        let interestMakeUpViewController = InterestMakeUpViewController()
+        self.navigationController?.pushViewController(interestMakeUpViewController, animated: true)
+    }
+    func myReviewClicked() {
+        let myReviewViewController = ReviewViewController()
+        self.navigationController?.pushViewController(myReviewViewController, animated: true)
+    }
+}
+
+extension ModelMyPageViewController {
+    func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "오류", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+
 extension UIImageView {
     func setImage(image: UIImage?) {
         DispatchQueue.main.async {
@@ -246,3 +267,4 @@ extension UIImageView {
         }
     }
 }
+

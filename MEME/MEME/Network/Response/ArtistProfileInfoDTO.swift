@@ -10,7 +10,7 @@ struct ArtistProfileInfoResponse: Codable {
     let result: String
     let message: String
     let data: ArtistProfileInfoData?
-    let statusCode: Int
+    let code: Int
 }
 
 struct ArtistProfileInfoData: Codable {

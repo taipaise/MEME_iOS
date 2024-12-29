@@ -8,30 +8,47 @@
 import RxSwift
 import Foundation
 
-class ModelHomeViewModel: ViewModel {
+final class ModelHomeViewModel: ViewModel {
+    
+    // MARK: - Properties
+    
     private let disposeBag = DisposeBag()
     private let reservationManager = ReservationManager.shared
     
     //MARK: - Input
+    
     struct Input {
-            let modelReservationsTrigger: Observable<Int>
-            let getRecommendArtistByReviewTrigger: Observable<Void>
-            let getRecommendArtistByRecentTrigger: Observable<Void>
-            let userNicknameTrigger: Observable<Void>
-        }
-        
-        struct Output {
-            let modelReservations: Observable<[ReservationData]>
-            let recommendArtistByReview: Observable<[Portfolio]>
-            let recommendArtistByRecent: Observable<[Portfolio]>
-            let userNickname: Observable<String>
-        }
+        let modelReservationsTrigger: Observable<Int>
+        let getRecommendArtistByReviewTrigger: Observable<Void>
+        let getRecommendArtistByRecentTrigger: Observable<Void>
+        let userNicknameTrigger: Observable<Void>
+    }
+    
+    //MARK: - Output
+    
+    struct Output {
+        let modelReservations: Observable<[ReservationData]>
+        let recommendArtistByReview: Observable<[Portfolio]>
+        let recommendArtistByRecent: Observable<[Portfolio]>
+        let userNickname: Observable<String>
+    }
     
     //MARK: - transform
+    
     func transform(_ input: Input) -> Output {
         let userNickname = input.userNicknameTrigger
             .flatMapLatest { _ -> Observable<String> in
-                return Observable.just(KeyChainManager.read(forkey: .nickName) ?? "환영합니다!")
+                if let nickname = KeyChainManager.read(forkey: .nickName), !nickname.isEmpty {
+                    return Observable.just(nickname)
+                } else {
+                    return Observable<String>.create { observer in
+                        self.fetchUserNicknameFromAPI { nickname in
+                            observer.onNext(nickname)
+                            observer.onCompleted()
+                        }
+                        return Disposables.create()
+                    }
+                }
             }
             .startWith("환영합니다!")
         
@@ -60,8 +77,11 @@ class ModelHomeViewModel: ViewModel {
             userNickname: userNickname
         )
     }
-    
-    //MARK: - API
+}
+
+//MARK: - API
+
+extension ModelHomeViewModel {
     private func fetchModelReservations(modelId: Int) -> Observable<[ReservationData]> {
         return Observable.create { observer in
             self.reservationManager.getModelReservation(modelId: modelId) { result in
@@ -113,8 +133,25 @@ class ModelHomeViewModel: ViewModel {
             return Disposables.create()
         }
     }
+    private func fetchUserNicknameFromAPI(completion: @escaping (String) -> Void) {
+        MyPageManager.shared.getMyPageProfile(userId: KeyChainManager.loadMemberID()) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let response):
+                    let nickname = response.data?.nickname
+                    KeyChainManager.save(forKey: .nickName, value: nickname ?? "")
+                    completion(nickname ?? "")
+                case .failure(let error):
+                    print("Error fetching profile: \(error)")
+                    completion("환영합니다!")
+                }
+            }
+        }
+    }
+
     
     //MARK: - Method
+    
     private func dateFromString(_ dateString: String) -> Date? {
         let formatter = ISO8601DateFormatter()
         formatter.formatOptions = [.withInternetDateTime, .withFractionalSeconds]

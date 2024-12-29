@@ -150,17 +150,18 @@ extension ArtistMyPageViewController: UITableViewDelegate {
         if indexPath.row == 2 {
             let alert = UIAlertController(title: "로그아웃", message: "정말 로그아웃 하시겠습니까?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
-                let nextVC = LoginViewController()
-//                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
-            }))
-            alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
-            present(alert, animated: true, completion: nil)
-        }
-    if indexPath.row == 4 {
-            let alert = UIAlertController(title: "탈퇴", message: "정말 탈퇴 하시겠습니까?", preferredStyle: .alert)
-            alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
-                let nextVC = LoginViewController()
-//                (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
+                Task {
+                    let result = await AuthManager.shared.logout()
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success:
+                            let nextVC = LoginViewController()
+                            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
+                        case .failure(let error):
+                            self.showErrorAlert(message: "로그아웃 실패: \(error.localizedDescription)")
+                        }
+                    }
+                }
             }))
             alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
@@ -168,7 +169,18 @@ extension ArtistMyPageViewController: UITableViewDelegate {
         if indexPath.row == 3 {
             let alert = UIAlertController(title: "탈퇴", message: "정말 탈퇴 하시겠습니까?", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: "예", style: .default, handler: { _ in
-                // 탈퇴 처리 코드
+                Task {
+                    let result = await AuthManager.shared.leave()
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success:
+                            let nextVC = LoginViewController()
+                            (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.changeRootVC(nextVC, animated: false)
+                        case .failure(let error):
+                            self.showErrorAlert(message: "탈퇴 실패: \(error.localizedDescription)")
+                        }
+                    }
+                }
             }))
             alert.addAction(UIAlertAction(title: "아니오", style: .cancel, handler: nil))
             present(alert, animated: true, completion: nil)
@@ -210,6 +222,13 @@ extension ArtistMyPageViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 37
     }
-    
+}
+
+extension ArtistMyPageViewController {
+    func showErrorAlert(message: String) {
+        let alert = UIAlertController(title: "오류", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "확인", style: .default, handler: nil))
+        present(alert, animated: true, completion: nil)
+    }
 }
 

@@ -8,8 +8,8 @@
 import Foundation
 
 struct SignUpProfileInfo {
-    var profileImg: String
+    var roleType: RoleType
     var username: String
     var nickname: String
-    var roleType: RoleType
+    var profileImg: String
 }

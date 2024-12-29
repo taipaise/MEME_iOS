@@ -11,7 +11,7 @@ struct ModelProfileInfoResponse: Codable {
     let result: String
     let message: String
     let data: ModelProfileInfoData?
-    let statusCode: Int
+    let code: Int
 }
     
 struct ModelProfileInfoData: Codable {

@@ -7,7 +7,7 @@
 
 import Foundation
 
-enum RoleType: String {
+enum RoleType: String, Codable {
     case ARTIST
     case MODEL
 }

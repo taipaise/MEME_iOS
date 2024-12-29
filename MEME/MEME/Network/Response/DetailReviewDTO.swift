@@ -11,10 +11,10 @@ struct DetailReviewResponse: Codable {
     let result: String
     let message: String
     let data: DetailReviewData?
-    let statusCode: Int
+    let code: Int
     
     enum CodingKeys: String, CodingKey {
-        case result, message, data, statusCode
+        case result, message, data, code
     }
 }
 

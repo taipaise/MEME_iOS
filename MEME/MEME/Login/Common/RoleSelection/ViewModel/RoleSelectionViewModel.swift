@@ -26,7 +26,7 @@ final class RoleSelectionViewModel: ViewModel {
     private var disposeBag = DisposeBag()
     
     init() {
-        profileInfo = .init(profileImg: "", username: "", nickname: "", roleType: .ARTIST)
+        profileInfo = .init(roleType: .ARTIST, username: "", nickname: "", profileImg: "")
     }
     
     func transform(_ input: Input) -> Output {

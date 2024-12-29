@@ -64,19 +64,31 @@ final class LoginViewModel: NSObject, ViewModel {
 }
 
 // MARK: - 유저 체크, 화면 이동
+
 extension LoginViewModel {
-    private func checkIsUser(checkDTO: CheckDTO) async -> IsUserDTO? {
-        let isUser = await authManager.checkIsUser(idToken: checkDTO.idToken, socialProvider: checkDTO.provider)
+    private func validateUser(checkDTO: CheckDTO) async -> IsUserDTO? {
+        let isUser = await authManager.validateUser(
+            idToken: checkDTO.idToken,
+            socialProvider: checkDTO.provider
+        )
         
         switch isUser {
         case .success(let result):
             let userDTO = result.data
+            KeyChainManager.save(forKey: .memberId, value: "\(String(userDTO.user_id ?? -1))")
+            KeyChainManager.save(forKey: .accessToken, value: userDTO.access_token ??  "")
+            KeyChainManager.save(forKey: .refreshToken, value: userDTO.refresh_token ?? "")
+            KeyChainManager.save(forKey: .role, value: userDTO.role ?? "")
             return userDTO
         case .failure(let error):
             print(error.localizedDescription)
-            // TODO: - 서버 열릴 때까지 임시 조치
-            return IsUserDTO(userId: -1, role: "", accessToken: "", refreshToken: "", user: false)
-//            return nil
+            return IsUserDTO(
+                access_token: nil,
+                refresh_token: nil,
+                user_status: false,
+                user_id: nil,
+                role: nil
+            )
         }
     }
     
@@ -86,7 +98,7 @@ extension LoginViewModel {
             return
         }
         
-        guard userInfo.user == true else {
+        guard userInfo.user_status == true else {
             navigation.onNext(.snsSignUp)
             return
         }
@@ -129,7 +141,7 @@ extension LoginViewModel: ASAuthorizationControllerDelegate {
         UserDefaultManager.shared.saveIdToken(idTokenString)
         let checkDTO = CheckDTO(provider: .APPLE, idToken: idTokenString)
         Task {
-            let userInfo = await checkIsUser(checkDTO: checkDTO)
+            let userInfo = await validateUser(checkDTO: checkDTO)
             setNavigationType(userInfo: userInfo)
         }
     }
@@ -161,7 +173,7 @@ extension LoginViewModel {
             
             guard
                 let checkDTO = checkDTO,
-                let userInfo = await checkIsUser(checkDTO: checkDTO)
+                let userInfo = await validateUser(checkDTO: checkDTO)
             else {
                 
                 setNavigationType(userInfo: nil)

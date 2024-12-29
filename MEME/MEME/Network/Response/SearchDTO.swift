@@ -12,7 +12,7 @@ struct SearchResultDTO: Codable {
     let result: String
     let message: String
     let data: SearchData?
-    let statusCode: Int
+    let code: Int
 }
 
 struct SearchData: Codable {
